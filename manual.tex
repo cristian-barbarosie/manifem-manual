@@ -1,0 +1,458 @@
+
+%\documentclass{report}
+\documentclass[a4paper]{scrreprt}
+\usepackage{typearea}
+\areaset[1cm]{158mm}{234mm}
+
+\def\manifemrelease{21.06}
+\def\manualversion{21.**}
+\let\production 0
+\includeonly{manual-cap-09}
+% \usepackage{showkeys}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{psfrag}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{fancybox}
+\usepackage{fancyvrb}
+% \renewcommand\VerbatimFont{\tiny\tt}
+
+\usepackage{amssymb}
+\usepackage{indentfirst}
+
+% \usepackage{geometry}
+% \geometry { a4paper  }
+
+% \usepackage{lmodern}
+% \ttfamily\fontseries{l}\selectfont light text
+% \ttfamily\fontseries{m}\selectfont normal text
+% \fontseries{b}\selectfont bold text
+
+% \def\numb #1 {}
+\def\numb{}
+\usepackage{tocbasic}
+\DeclareTOCStyleEntry[dynindent=on]{default}{section}
+
+\newcommand\ManiFEM{\leavevmode\hbox{\includegraphics[width=13mm]{manifem-large}}}
+\newcommand\maniFEM{\leavevmode\hbox{\includegraphics[width=13mm]{manifem-small}}}
+
+\definecolor{manif}{rgb}{0., 0., 0.38}
+\definecolor{coment}{rgb}{0.3, 0.3, 0.3}
+\definecolor{nova}{rgb}{0.38, 0., 0.15}
+\definecolor{incl}{rgb}{0.3, 0.2, 0.1}
+\definecolor{string}{rgb}{0.1, 0.25, 0.}
+\definecolor{textindraw}{rgb}{0., 0.37, 0.}
+% \definecolor{nova}{rgb}{0., 0., 0.8}
+% \definecolor{coment}{rgb}{0.5, 0.5, 0.5}
+% \definecolor{manif}{rgb}{0.6, 0.1, 0.1}
+\newcommand\azul[1]{\textcolor{nova}{#1}}
+\newcommand\cinza[1]{\textcolor{coment}{#1}}
+\newcommand\verm[1]{\textcolor{manif}{#1}}
+\newcommand\verde[1]{\textcolor{string}{#1}}
+
+\renewcommand\tt{\normalfont\ttfamily}
+
+
+
+\title{\includegraphics[width=12cm]{manifem-grey-capital.eps}}
+\subtitle{USER MANUAL}
+\author{Cristian Barbarosie and Anca-Maria Toader}
+\date{\small version of this manual: \manualversion\\ documents \maniFEM\ release \manifemrelease}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{}
+
+This document describes \maniFEM, a {\tt C++} library for solving partial differential equations
+through the finite element method.
+The name comes from ``finite elements on manifolds''. 
+{\ManiFEM} has been designed with the goal of coping with very general meshes,
+in particular meshes on Riemannian manifolds, even manifolds which cannot be embedded
+in $ {\mathbb R}^3 $, like the torus $ {\mathbb R}^2/{\mathbb Z}^2 $.
+Also, {\maniFEM} has been written with the goal of being conceptually clear
+and easy to read.
+We hope it will prove particularly useful for people who want fine control on the mesh,
+e.g.\ for implementing their own meshing or remeshing algorithms.
+
+{\ManiFEM} \ uses \ {\tt Eigen} \ for \ storing matrices \ and \ solving \ systems \ of
+\ linear \ equations, \ see {\small\tt http://eigen.tuxfamily.org/index.php?title=Main\_Page}.
+Many drawings in this manual have been produced by {\tt gmsh}, see
+{\small\tt http://gmsh.info/}
+
+{\ManiFEM} is just a collection of {\tt C++} classes.
+It has no user-friendly interface nor graphic capabilities.
+The user should have some understanding of programming and of {\tt C++}.
+However, {\maniFEM} can be used at a basic level by people with no deep knowledge of
+{\tt C++}.
+
+In its current version, release \manifemrelease, {\maniFEM} works quite well for mesh generation.
+Quotient manifolds (section \ref{\numb section 7}) and anisotropic meshing (paragraph
+\ref{\numb section 3.\numb parag 24}) are not yet implemented.
+Variational formulations (section \ref{\numb section 5}) are not yet implemented.
+Finite elements (section \ref{\numb section 6}) work in a rather rudimentary manner for now.
+To check which version of {\maniFEM} is installed in your computer,
+see at the beginning of the file {\small\tt maniFEM.h}.
+
+A component of \maniFEM, {\small\tt MetricTree}, can be used independently.
+It is a generalization of quad-trees for metric spaces.
+See paragraph \ref{\numb section 12.\numb parag 10}.
+
+{\ManiFEM} is being developed by Cristian Barbarosie,%
+\footnote {\small\tt cristian.barbarosie@gmail.com}
+S\'ergio Lopes and Anca-Maria Toader.
+Their work is supported by National Funding from FCT -- Funda\c c\~ao para a Ci\^encia e a
+Tecnologia (Portugal), through Faculdade de Ci\^encias da Universidade de Lisboa and
+Centro de Matem\'atica, Aplica\c c\~oes Fundamentais e Investiga\c c\~ao Operacional.%
+\footnote{project UID/MAT/04561/2020}
+
+{\ManiFEM} is free software; it is copyrighted by Cristian Barbarosie
+under the GNU Lesser General Public Licence.
+
+The home page of {\maniFEM} is
+{\small\tt http://manifem.rd.ciencias.ulisboa.pt}
+(where this manual can be found).
+
+To use \maniFEM, visit {\small\tt https://github.com/cristian-barbarosie/manifem},
+choose a release and download all files to some directory in your computer.
+Latest code may be unstable, releases are stable.
+You can then run the examples in this manual :
+just {\small\tt make run-\ref{\numb section 1.\numb parag 1}}
+for the example in paragraph \ref{\numb section 1.\numb parag 1},
+{\small\tt make run-\ref{\numb section 2.\numb parag 5}}
+for the example in paragraph \ref{\numb section 2.\numb parag 5}, and so on.
+You will need a recent {\tt C++} compiler (we use {\tt g++}) and the {\tt make} utility.
+Under linux it should be easy to install them.
+It is not that easy to install and use them under Windows, but it is certainly possible,
+for instance \hbox{by using {\small\tt cygwin}}, available at {\small\tt https://www.cygwin.com/}.
+For some examples, the {\small\tt Eigen} library is necessary; just copy its source tree
+from {\small\tt http://eigen.tuxfamily.org/index.php?title=Main\_Page}
+to $\;$some $\;$place $\;$in $\;$your $\;$computer $\;$and $\;$be $\;$sure $\;$that
+$\;$path $\;$is $\;$mentioned in your {\small\tt Makefile}
+under the {\small\tt -I} flag of your compiler.
+You may also want to use {\tt gmsh}, available at {\small\tt http://gmsh.info/},
+for visualization purposes.
+
+\section*{Structure of this manual}
+
+This manual is divided in sections describing {\maniFEM} with increasing degree of technical
+detail.
+Sections \ref{\numb section 1} to \ref{\numb section 8} should be accessible to readers
+who have some knowledge of {\tt C++} but are not necessarily experts in {\tt C++} programming.
+Sections \ref{\numb section 9} and \ref{\numb section 10} should be useful for people
+for users who want finer control on the mesh,
+e.g.\ for implementing their own remeshing algorithms
+Sections \ref{\numb section 11} and \ref{\numb section 12} give technical details,
+mainly for those interested in developing and extending \maniFEM.
+
+\subparagraph*{\ref{\numb section 1} \ General description}
+A quick overview of \maniFEM's capabilities.
+
+\subparagraph*{\ref{\numb section 2} \ Meshes and manifolds}
+Shows how to build meshes by joining simple shapes, like patches, some of them on manifolds.
+
+\subparagraph*{\ref{\numb section 3} \ Progressive mesh generation}
+Shows how to build meshes starting from their boundary alone, some of them on manifolds.
+
+\subparagraph*{\ref{\numb section 4} \ \cinza{Meshing three-dimensional domains}}
+Work in progress.
+
+\subparagraph*{\ref{\numb section 5} \ Field, functions and variational formulations}
+Some details about functions, a lot of work to do.
+
+\subparagraph*{\ref{\numb section 6} \ Finite elements and integrators}
+Shows two examples of finite element computations, still rudimentary.
+
+\subparagraph*{\ref{\numb section 7} \ \cinza{Quotient manifolds and periodic boundary conditions}}
+Describes meshes on quotient manifolds (code not working).
+
+\subparagraph*{\ref{\numb section 8} \ More on manifolds}
+Describes manifolds, particularly the projection algorithm on implicitly defined manifolds.
+
+\subparagraph*{\ref{\numb section 9} \ A closer look at cells and meshes}
+Gives details about neighbourhood relations between cells in a mesh, orientation and iterators.
+
+\subparagraph*{\ref{\numb section 10} \ Remeshing}
+Some simple examples showing how to manipulate a mesh.
+
+\subparagraph*{\ref{\numb section 11} \ Technical details}
+Various implementation detais, programming style, compilation options, frequent errors.
+
+\subparagraph*{\ref{\numb section 12} \ Internal details}
+Mainly drawings intended to support the developer in understanding the source code.
+
+
+\section*{Aknowledgements}
+
+Development of {\maniFEM} is supported by National Funding from FCT -- Funda\c c\~ao
+para a Ci\^encia e a Tecnologia (Portugal), through Faculdade de Ci\^encias da Universidade
+de Lisboa and Centro de Matem\'atica, Aplica\c c\~oes Fundamentais e Investiga\c c\~ao
+Operacional, project UID/MAT/04561/2020.
+
+Anabela Silva contributed with drawings and source text coloring.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% \vfil\eject\vglue 5cm
+
+%  first edition  February 2021  ISBN 978-972-8394-30-1
+
+% \includegraphics[width=35mm]{ISBN-code-3.eps}
+% \hskip 10mm\raise 17mm\hbox{\vtop{\hsize 90mm\noindent
+% Universidade de Lisboa
+% \hfil\break Faculdade de Ci\^encias
+% \hfil\break Departamento de Matem\'atica
+% \hfil\break %\phantom{$\displaystyle\int$}
+% \hfil\break first edition, February 2021}}
+
+% \vfil
+\vskip 80mm
+
+\noindent
+Copyright 2020, 2021 Cristian Barbarosie {\small\tt cristian.barbarosie@gmail.com}
+\bigskip
+
+\noindent
+\includegraphics[width=35mm]{common-creatives-by.eps}\hskip5mm
+\raise 9mm\hbox{\vtop{\hsize 110mm\noindent
+This manual is licensed under the
+\hfil\break Creative Commons Attribution 4.0 International License :
+\hfil\break{\tt https://creativecommons.org/licenses/by/4.0/}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\include{manual-cap-01}
+\include{manual-cap-02}
+\include{manual-cap-03}
+\include{manual-cap-04}
+\include{manual-cap-05}
+\include{manual-cap-06}
+\include{manual-cap-07}
+\include{manual-cap-08}
+\include{manual-cap-09}
+\include{manual-cap-10}
+\include{manual-cap-11}
+\include{manual-cap-12}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\addchap{Changelog}
+
+
+\section*{21.04}
+
+\noindent Finite elements, rudimentary use.
+
+
+\section*{21.06}
+
+\noindent Changed syntax of iterators.
+
+\noindent Introduced different types of meshes :
+{\small\tt\verm{Mesh}::Fuzzy} keep lists of cells,
+{\small\tt\verm{Mesh}::Connected::OneDim} only keep first and last vertices,
+paragraph \ref{\numb section 11.\numb parag 6}.
+
+\noindent Introduced garbage collectors (not fully working for cells and meshes).
+
+
+\section*{\manifemrelease}
+
+\noindent Garbage collectors for cells and meshes work,
+paragraph \ref{\numb section 11.\numb parag 5}.
+
+\noindent Introduced iterators centered at a cell,
+paragraph \ref{\numb section 9.\numb parag 12}.
+
+\noindent Some examples about remeshing, section \ref{\numb section 10}.
+
+
+\section*{To do}
+
+\noindent Garbage collector for cells and meshes is buggy.
+
+\noindent 3D meshing
+
+\noindent Quotient manifolds
+
+\noindent High-dimensional connected meshes; the implementation of the iterators depends
+on STSI (self-touching or self-intersecting) meshes
+
+\noindent Progressive mesh generation : the algorithm can be simplified by using
+a STSI interface instead of a list of connected interfaces
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\addchap{Index}
+
+\noindent
+boundary of a cell : \ref{\numb section 1.\numb parag 2}, \ref{\numb section 9.\numb parag 3}
+
+\noindent
+cell : \ref{\numb section 1.\numb parag 2}, \ref{\numb section 9.\numb parag 1}
+
+\noindent
+cloud : see {\small\tt \verm{MetricTree}}
+
+\noindent
+compilation process : \ref{\numb section 11.\numb parag 14},
+\ref{\numb section 11.\numb parag 15}
+
+\noindent
+dimension of a cell or mesh : \ref{\numb section 1.\numb parag 2},
+\ref{\numb section 11.\numb parag 4}, \ref{\numb section 11.\numb parag 7}
+
+\noindent
+docking (of a finite element on a cell) : \ref{\numb section 6.\numb parag 1}
+
+\noindent
+errors : \ref{\numb section 11.\numb parag 13}, \ref{\numb section 11.\numb parag 14}
+
+\noindent
+{\small\tt \verm{Field}} : \ref{\numb section 5.\numb parag 1}
+
+\noindent
+finite element : section \ref{\numb section 6}
+
+\noindent
+{\small\tt \verm{Function}} : \ref{\numb section 1.\numb parag 6},
+\ref{\numb section 5.\numb parag 1}
+
+\noindent
+garbage collector : \ref{\numb section 11.\numb parag 5}
+
+\noindent
+interpolation of coordinates :
+\ref{\numb section 2.\numb parag 3} -- \ref{\numb section 2.\numb parag 9},
+\ref{\numb section 12.\numb parag 2} -- \ref{\numb section 12.\numb parag 4}
+
+\noindent
+iterators over cells : \ref{\numb section 9.\numb parag 5}, \ref{\numb section 9.\numb parag 7}
+
+\noindent
+{\small\tt init\_cell} : \ref{\numb section 11.\numb parag 10}
+
+\noindent
+{\small\tt join}ing meshes : \ref{\numb section 1.\numb parag 3},
+\ref{\numb section 1.\numb parag 4}, \ref{\numb section 1.\numb parag 5},
+\ref{\numb section 2.\numb parag 1}, \ref{\numb section 2.\numb parag 2},
+\ref{\numb section 2.\numb parag 4}, \ref{\numb section 2.\numb parag 5},
+\ref{\numb section 2.\numb parag 6}, \ref{\numb section 9.\numb parag 2}
+
+\noindent
+level set : see manifold, defined by an implicit equation
+
+\noindent
+m-tree : \ref{\numb section 12.\numb parag 10}
+
+\noindent
+manifold, Euclidian : all over the place\hfil\break
+\hglue 15mm (any code using {\maniFEM} must begin by declaring a Euclidian manifold)
+
+\noindent
+manifold, defined by an implicit equation :
+\ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb parag 9},
+section \ref{\numb section 3}
+
+\noindent
+manifold, parametric : \ref{\numb section 2.\numb parag 13},
+\ref{\numb section 2.\numb parag 14}
+
+\noindent
+manifold, quotient : section \ref{\numb section 7}
+
+\noindent
+memory management : \ref{\numb section 11.\numb parag 5}
+
+\noindent
+mesh : all over the place, esp.\ \ref{\numb section 1.\numb parag 2},
+\ref{\numb section 1.\numb parag 3}, \ref{\numb section 9.\numb parag 1},
+\ref{\numb section 9.\numb parag 3},
+\ref{\numb section 9.\numb parag 7} -- \ref{\numb section 9.\numb parag 10}
+
+\noindent
+{\small\tt \verm{MetricTree}} : \ref{\numb section 12.\numb parag 10},
+\ref{\numb section 12.\numb parag 11}
+
+\noindent
+negative {\small\tt \verm{Cell}} or {\small\tt \verm{Mesh}} :
+see orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es
+
+\noindent
+oct-tree : \ref{\numb section 12.\numb parag 10}
+
+\noindent
+orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es :
+\ref{\numb section 1.\numb parag 2},
+\ref{\numb section 1.\numb parag 3}, \ref{\numb section 9.\numb parag 1},
+\ref{\numb section 9.\numb parag 7}, \ref{\numb section 11.\numb parag 8}
+
+\noindent
+orientation of a {\small\tt \verm{Manifold}} : \ref{\numb section 3.\numb parag 10}
+
+\noindent
+parametric manifold : see manifold, parametric
+
+\noindent
+progressive mesh generation : section \ref{\numb section 3},
+\ref{\numb section 12.\numb parag 11},
+\ref{\numb section 12.\numb parag 5} -- \ref{\numb section 12.\numb parag 8}
+
+\noindent
+projection, onto a manifold :
+\ref{\numb section 8.\numb parag 1}
+
+\noindent
+quad-tree : \ref{\numb section 12.\numb parag 10}
+
+\noindent
+quotient manifold : see manifold, quotient
+
+\noindent
+reverse cell or mesh : see orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es
+
+\noindent
+segment {\small\tt \verm{Cell}}s : \ref{\numb section 1.\numb parag 2}
+
+\noindent
+segment {\small\tt \verm{Mesh}}es :
+\ref{\numb section 1.\numb parag 1} -- \ref{\numb section 1.\numb parag 3},
+\ref{\numb section 9.\numb parag 1}, \ref{\numb section 9.\numb parag 7} --
+\ref{\numb section 9.\numb parag 9}, \ref{\numb section 11.\numb parag 4},
+\ref{\numb section 11.\numb parag 6}
+
+\noindent
+{\small\tt set\_as\_working\_manifold} :
+\ref{\numb section 2.\numb parag 8} -- \ref{\numb section 2.\numb parag 10},
+\ref{\numb section 2.\numb parag 12}, \ref{\numb section 3.\numb parag 1},
+\ref{\numb section 3.\numb parag 2}, \ref{\numb section 3.\numb parag 3},
+\ref{\numb section 3.\numb parag 9},
+\ref{\numb section 3.\numb parag 14} -- \ref{\numb section 3.\numb parag 24}
+
+\noindent
+{\small\tt\verm{tag}}s : \ref{\numb section 11.\numb parag 3}
+
+\noindent
+wrapper : \ref{\numb section 9.\numb parag 1}, \ref{\numb section 9.\numb parag 10},
+\ref{\numb section 11.\numb parag 4}
+
+
+\end{document}

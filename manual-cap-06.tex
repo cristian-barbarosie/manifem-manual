@@ -1,0 +1,268 @@
+
+          %-------------------------------%
+\chapter{~~Finite elements and integrators}\label{\numb section 6}
+          %-------------------------------%
+
+
+Finite elments are still incipient in \maniFEM.
+Paragraph \ref{\numb section 6.\numb parag 1} discusses the concept of finite element
+and paragraph \ref{\numb section 6.\numb parag 2} gives an example of rudimentary use.
+There is a lot of ongoing work on this subject.
+
+
+          %---------------%
+\section{~~Finite elements}\label{\numb section 6.\numb parag 1}
+          %---------------%
+
+The notion of a finite element is quite complex.
+The purpose of a {\small\tt \verm{FiniteElement}} is to build a list of functions, say, $ \psi $,
+defined on our mesh.
+The linear span of these functions will be a discretized Hilbert space.
+It is the {\small\tt \verm{FiniteElement}}'s job to replace, in the variational formulation,
+the unknown function by one $ \psi $, the test function by another $ \psi $ and,
+by evaluating the integrals, obtain the coefficients of a system of linear equations.
+Some external solver will then solve the system, and it is the job of the finite element
+to transform back the vector produced by the solver into a function defined on our mesh.
+
+Computing each integral is a somewhat separate process; it's the job of an
+{\small\tt \verm{Integrator}}
+which could be a Gauss quadrature or some other procedure like symbolic integration.
+When a Gauss quadrature is used, the separation between a {\small\tt \verm{FiniteElement}}'s job
+and the {\small\tt \verm{Itegrator}}'s job is not very sharp because often the Gauss quadrature is
+perfomed not on the physical cell but rather on a master element which is built and
+handled by the {\small\tt \verm{FiniteElement}}.
+The authors of {\maniFEM} have tried to separate these two concepts
+as much as possible, especially because some users may want to use a {\small\tt \verm{FiniteElement}}
+with no master element, or an {\small\tt \verm{Integrator}} acting directly on the physical cell.
+
+Thus, there is a base class {\small\tt \verm{FiniteElement}} and a derived class
+{\small\tt \verm{FiniteElement}::withMaster} which keeps, as an extra attribute, the map transforming
+the master element to the current physical cell.
+This map depends of course on the geometry of the cell and thus it must be computed from
+scratch each time we begin integrating on a new cell.
+We say that the {\small\tt \verm{FiniteElement}} is docked on a new {\small\tt \verm{Cell}};
+the method {\small\tt dock\_on} performs this operation.
+This method is element-specific, each type of finite element having its own class.
+
+For instance, the class {\small\tt \verm{FiniteElement}::Lagrange\_Q1} is a class derived from
+{\small\tt \verm{FiniteElement}:: ::withMaster}.
+It will only {\small\tt dock\_on} quadrilaterals (two-dimensional {\small\tt \verm{Cell}}s
+with four sides).
+% Recall that in {\maniFEM} the vertices do not have necessarily any number attached.
+% When we create a {\small\tt \verm{FiniteElement}::Lagrange\_Q1} object, it will enumerate vertices
+% of the mesh if a mesh exists already, and it will prepare the ground for vertices created
+% in the future to be enumerated, too.
+% This enumeration is useful to identify a vector of real numbers with the values
+% (at each vertex) of a function defined on the mesh.
+When docking on a cell, the {\small\tt \verm{FiniteElement}::Lagrange\_Q1} object will build four
+``shape functions'' and a transformation map (a diffeomorphism between a master element
+occuppying the square $ [-1, 1]^2 $ and the current cell).
+It will also build the jacobian of this transformation map.
+The four shape functions can be accessed through the method {\small\tt basis\_function},
+as shown in paragraph \ref{\numb section 6.\numb parag 2}.
+
+
+          %------------------------------------------------%
+\section{~~Laplace operator, Dicrichlet boundary conditions}\label{\numb section 6.\numb parag 2}
+          %------------------------------------------------%
+
+Let's look at an example about the Laplace operator with non-homogeneous Dirichlet
+boundary conditions.
+
+It should be stressed that the approach presented in this paragraph is rather low-level.
+We are working hard to make {\maniFEM} understand statements describing variational
+formulations given as {\tt C++} objects.
+When this part of the code is done, the programming style will become much more elegant
+and compact.
+
+Note also that this example makes use of the {\small\tt Eigen} library.
+Because of this, the compilation process will produce a lot of warnings,
+unless you remove the {\small\tt -W} options from the compilation command in your
+{\small\tt Makefile}.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=main-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
+
+   \cinza{// build a 10x12 mesh on a square domain}
+   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0.;   y(A) = 0.;
+   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) = 1.;   y(B) = 0.;
+   \verm{Cell} \azul{C} ( \verm{tag}::vertex );  x(C) = 1.;   y(C) = 1.;
+   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  x(D) = 0.;   y(D) = 1.;
+   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{BC} ( \verm{tag}::segment, B.reverse(), C, \verm{tag}::divided_in, 12 );
+   \verm{Mesh} \azul{CD} ( \verm{tag}::segment, C.reverse(), D, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{DA} ( \verm{tag}::segment, D.reverse(), A, \verm{tag}::divided_in, 12 );
+   \verm{Mesh} \azul{ABCD} ( \verm{tag}::rectangle, AB, BC, CD, DA );
+
+   \cinza{// declare the type of finite element}
+   \verm{FiniteElement} \azul{fe}
+      ( \verm{tag}::with_master, \verm{tag}::quadrangle, \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Integrator} \azul{integ} = fe.set_integrator ( \verm{tag}::Gauss, \verm{tag}::quad_4 );
+\end{Verbatim}
+
+Vertices are not numbered. In the future, a more elegant solution for automatic numbering
+of vertices will be implemented; for now, we build a map {\small\tt numbering} (see the source
+code in file {\small\tt main-\ref{\numb section 6.\numb parag 2}.cpp} in the distribution tree),
+to be used as shown below.
+The matrix of the linear system and the vector holding the free coefficients
+are declared as objects of the {\small\tt Eigen} library.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=main-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   size_t \azul{size_matrix} = ABCD.number_of ( \verm{tag}::vertices );
+   assert ( size_matrix == numbering.size() );
+   Eigen::SparseMatrix <double> \azul{matrix_A} ( size_matrix, size_matrix );
+   Eigen::VectorXd \azul{vector_b} ( size_matrix );  vector_b.setZero();
+\end{Verbatim}
+
+We now run over all rectangular cells of {\small\tt ABCD}, dock the finite element
+on the current cell,
+compute integrals of the form $ \displaystyle \int\!\!\!\int {\partial \psi_i \over
+\partial x_\alpha} {\partial \psi_j \over \partial x_\beta} dx $ and add the obtained
+values to the global matrix:
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=main-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   // run over all square cells composing ABCD
+   \verm{CellIterator} \azul{it} = ABCD.iterator ( \verm{tag}::over_cells_of_dim, 2 );
+   for ( it.reset(); it.in_range(); it++ )
+   \{  \verm{Cell} \azul{small_square} = *it;
+      fe.dock_on ( small_square );
+      // run twice over the four vertices of 'small_square'
+      \verm{CellIterator} \azul{it1} = small_square.boundary().iterator ( \verm{tag}::over_vertices );
+      \verm{CellIterator} \azul{it2} = small_square.boundary().iterator ( \verm{tag}::over_vertices );
+      for ( it1.reset(); it1.in_range(); it1++ )
+      for ( it2.reset(); it2.in_range(); it2++ )
+      \{  \verm{Cell} \azul{V} = *it1, \azul{W} = *it2;
+         \cinza{// V may be the same as W, no problem about that}
+         \verm{Function} \azul{psiV} = fe.basis_function(V),
+                  \azul{psiW} = fe.basis_function(W),
+                  \azul{d_psiV_dx} = psiV.deriv(x),
+                  \azul{d_psiV_dy} = psiV.deriv(y),
+                  \azul{d_psiW_dx} = psiW.deriv(x),
+                  \azul{d_psiW_dy} = psiW.deriv(y);
+                  
+         \cinza{// 'fe' is already docked on 'small_square'}
+         \cinza{// so this will be the domain of integration}
+         matrix_A.coeffRef ( numbering[V.core]-1, numbering[W.core]-1 ) +=
+            fe.integrate ( d_psiV_dx * d_psiW_dx + d_psiV_dy * d_psiW_dy );      \}  \}
+\end{Verbatim}
+
+In the above, {\small\tt coeffRef} is the method used by {\small\tt Eigen} to access elements of
+a sparse matrix.
+
+We impose Dirichlet boundary conditions $ u(x,y) = xy $ (this way, we know beforehand
+the exact solution will be $ u(x,y) = xy $).
+We use a function {\small\tt impose\_value\_of\_unknown} which changes the {\small\tt matrix\_A}
+and the {\small\tt vector\_b} in order to impose the Dirichlet condition {\small\tt u(i) = 
+some\_value}.
+See the source code in file {\small\tt main-\ref{\numb section 6.\numb parag 2}.cpp}
+in the distribution tree for the definition of the {\small\tt impose\_value\_of\_unknown}
+function.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=main-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   \verm{CellIterator} \azul{it} = BC.iterator ( \verm{tag}::over_vertices );
+   for ( it.reset(); it.in_range(); it++ )
+   \{   \verm{Cell} \azul{P} = *it;
+       size_t \azul{i} = numbering[P.core]-1;
+       impose_value_of_unknown ( matrix_A, vector_b, i, y(P) );  \}
+\end{Verbatim}
+
+We then use {\small\tt Eigen} to solve the system of linear equations :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=main-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   Eigen::ConjugateGradient < Eigen::SparseMatrix<double>,
+                              Eigen::Lower|Eigen::Upper    > \azul{cg};
+   cg.compute ( matrix_A );
+   Eigen::VectorXd \azul{u} = cg.solve ( vector_b );
+\end{Verbatim}
+
+And obtain the expected solution, shown in figure \ref{\numb section 6.\numb fig 1}.
+
+\begin{figure} \centering
+  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \includegraphics[width=60mm]{square-Dirichlet}
+  \caption{Level lines}
+  \label{\numb section 6.\numb fig 1}
+\end{figure}
+
+We stress again that this example shows a rather rudimentary way of using finite elements in
+\maniFEM.
+We are working hard to reach a more elegant, compact and high-level style.
+For instance, the numbering of vertices should be automated.
+Also, the user should have the possibility to declare the partial differential equation
+through a compact declaration of the corresponding variational formulation.
+
+Another limitation of {\maniFEM} is that, at present, finite element computations
+are rather slow.
+This is so because each docking operation implies a lot of symbolic calculations;
+the same happens when we differentiate and then integrate functions.
+There are three ways of circumventing this limitation.
+The first one is : if your mesh is made of identical finite elements
+(like the example in the present paragraph), you can compute the elementary matrix
+just once and then assembly the global matrix from it.
+It will surely be much faster.
+A second way to speed up the code is to add the option {\small\tt -dNDEBUG} to the compilation
+command in your {\small\tt Makefile} (see also paragraph \ref{\numb section 11.\numb parag 15}).
+The third (and soundest) solution is a deep optimization of the {\maniFEM} library,
+object of on-going work.
+A significant part of the symbolic calculations should be done just once,
+when the finite element is declared.
+Only a small chunk of symbolic computation will be performed at docking and
+later, when we build the elementary matrix.
+
+
+          %---------------------------%
+\section{~~Neumann boundary conditions}\label{\numb section 6.\numb parag 3}
+          %---------------------------%
+
+Implementing zero Neumann boundary conditions does not imply any programming effort
+(we don't have to do anything).
+However, for imposing non-zero Neumann boundary conditions we need to compute one-dimensional
+integrals.
+We do this by declaring a 1D finite element which we then dock on each segment of the
+part of the boundary where we need to integrate.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=main-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   \verm{FiniteElement} \azul{fe_bdry} ( \verm{tag}::with_master, \verm{tag}::segment,
+                           \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Integrator} \azul{integ_bdry} = fe_bdry.set_integrator ( \verm{tag}::Gauss, \verm{tag}::seg_3 );
+
+   \cinza{// ... assemble the matrix ...}
+
+   \verm{Function} \azul{heat_source} = x+y;
+   \cinza{// impose Neumann boundary conditions du/dn = heat_source :}
+   \verm{CellIterator} \azul{it} = DA.iter_over ( \verm{tag}::segments );
+   for ( it.reset(); it.in_range(); it++ )
+   \{  \verm{Cell} \azul{seg} = *it;
+      fe_bdry.dock_on ( seg );
+      \verm{Cell} \azul{V} = seg.base().reverse();
+      assert ( V.is_positive() );
+      size_t \azul{i} = numbering[V.core]-1;
+      \verm{Function} \azul{psiV} = fe_bdry.basis_function(V);
+      vector_b[i] += fe_bdry.integrate ( heat_source * psiV );
+      \verm{Cell} \azul{W} = seg.tip();
+      assert ( W.is_positive() );
+      size_t \azul{j} = numbering[W.core]-1;
+      \verm{Function} \azul{psiW} = fe_bdry.basis_function(W);
+      vector_b[j] += fe_bdry.integrate ( heat_source * psiW );  \}
+\end{Verbatim}
+
+One may object that there is no need for a 1D finite element, a 1D integrator should be enough.
+We agree; the user should have the possibility to attach a 1D integrator to a 2D finite element.
+This is object of on-going work.

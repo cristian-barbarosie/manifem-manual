@@ -1,0 +1,233 @@
+
+                 %---------------------------------------------------%
+\chapter{~~\cinza{Quotient manifolds and periodic boundary conditions}}
+                 %---------------------------------------------------%
+\label{\numb section 7}
+
+
+{\normalfont\bfseries The code described in this section does not work yet.
+It should be regarded as a mere declaration of intentions.}
+\medskip
+
+The roots of {\maniFEM} go back to a PhD thesis in 2002
+% (or even earlier, to a Master thesis in 1997)
+where finite elements on a torus were implemented in {\small\tt FORTRAN}.%
+\footnote{See % C.~Barbarosie, Optimization of perforated domains through homogenization,
+% Structural Optimization 14, 1997
+C.~Barbarosie, Shape optimization of periodic structures,
+Computers \& Structures 30, 2003}
+The torus is meant as a mere quotient manifold between $ \mathbb{R}^2 $ and a group of
+translations of $ \mathbb{R}^2 $ with two generators;
+you may think of it as $ {\mathbb R}^2/{\mathbb Z}^2 $.
+It should be stressed that this manifold is not the usual ``donut'' built in paragraph
+\ref{\numb section 2.\numb parag 15}.
+The quotient torus is a Riemann manifold with no curvature; it is locally Euclidian
+(that is, locally isometric to open sets of $ \mathbb{R}^2 $); we may call it ``flat torus''.
+It cannot be embedded in $ \mathbb{R}^3 $, much less be represented graphically.
+An unfolded mesh in $ \mathbb{R}^2 $ can be represented graphically, where vertices and segments
+from the torus are drawn more than once.
+
+One of the goals of {\maniFEM} is to deal with meshes on quotient manifolds.
+Different quotient operations can be used, with groups of translations of $ \mathbb{R}^2 $ but also
+with other groups of transformations.
+
+
+                 %--------------------------%
+\section{~~\cinza{A circle with no curvature}}\label{\numb section 7.\numb parag 1}
+                 %--------------------------%
+
+{\normalfont\bfseries The code described in this paragraph does not work yet.
+It should be regarded as a mere declaration of intentions.}
+
+Here is the closed curve $ \mathbb{R}/{\mathbb Z} $.
+We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified {\small\tt jump}.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \cinza{// begin with the one-dimensional line}
+   \verm{Manifold} \azul{RR} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 1 );
+   \verm{Function} \azul{x} = RR.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+
+   \cinza{// define an action on RR2 (a translation)}
+   \verm{Manifold}::Action \azul{g};  g(x) = x+1;
+   \verm{Manifold} \azul{circle} = RR.quotient ( g );
+
+   \cinza{// one vertex is enough to start the process}
+   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0.02;
+   \cinza{// with this vertex, we build a segment}
+   \verm{Mesh} \azul{seg} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::jump, g );
+\end{Verbatim}
+
+We do not bother with the graphical representation of this one-dimensional mesh.
+
+
+                 %------------%
+\section{~~\cinza{A flat torus}}\label{\numb section 7.\numb parag 2}
+                 %------------%
+
+{\normalfont\bfseries The code described in this paragraph does not work yet.
+It should be regarded as a mere declaration of intentions.}
+
+Here is the classical example of $ \mathbb{R}^2/{\mathbb Z}^2 $.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \cinza{// begin with the usual two-dimensional space}
+   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
+
+   \cinza{// define two actions on RR2 (translations)}
+   \verm{Manifold}::Action \azul{g1}, \azul{g2};
+   g1(x,y) = (x+1) && y;
+   g2(x,y) = x && (y+1);
+   \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
+
+   \cinza{// one vertex is enough to start the process}
+   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0.02;  y(A) = 0.02;
+   \cinza{// with this vertex, we build two segments}
+   \verm{Mesh} \azul{seg_horiz} ( \verm{tag}::segment, A.reverse(), A,
+                    \verm{tag}::divided_in, 10, \verm{tag}::jump, g1 );
+   \verm{Mesh} \azul{seg_vert}  ( \verm{tag}::segment, A.reverse(), A,
+                    \verm{tag}::divided_in, 10, \verm{tag}::jump, g2 );
+   \cinza{// and a rectangle}
+   \verm{Mesh} \azul{torus} ( \verm{tag}::rectangle, seg_horiz, seg_vert,
+                seg_horiz.reverse(), seg_vert.reverse() );
+
+   \cinza{// it would be meaningless to export 'square' as a msh file}
+   \cinza{// we can however export an unfolded mesh :}
+   torus.unfold(-0.5,-0.2,0.5,0.2).export_msh (\verde{"unfolded-torus.msh"});
+\end{Verbatim}
+
+We have added a shadow representing the periodicity cell $ [0,1]^2 $.
+This gives a hint about the segments being repeated by the unfolding.
+
+
+                 %-----------------%
+\section{~~\cinza{A skew flat torus}}\label{\numb section 7.\numb parag 3}
+                 %-----------------%
+
+{\normalfont\bfseries The code described in this paragraph does not work yet.
+It should be regarded as a mere declaration of intentions.}
+
+We can build a skew torus by simply choosing other actions on {\small\tt RR2}.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{Manifold}::Action \azul{g1}, \azul{g2};
+   g1(x,y) = (x+1)   && (y+0.1);
+   g2(x,y) = (x+0.1) && (y+1);
+   \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
+\end{Verbatim}
+
+Again, we have added a shadow representing the periodicity cell, this time a parallelogram.
+
+
+                 %---------------%
+\section{~~\cinza{A curved circle}}\label{\numb section 7.\numb parag 4}
+                 %---------------%
+
+{\normalfont\bfseries The code described in this paragraph does not work yet.
+It should be regarded as a mere declaration of intentions.}
+
+We are now in a position to resume the example in paragraph \ref{\numb section 2.\numb parag 14},
+this time in a less cumbersome manner.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{Manifold} \azul{RR} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 1 );
+   \verm{Function} \azul{theta} = RR.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   const double \azul{pi} = 3.1415926536;
+   \verm{Manifold}::Action \azul{g};  g(theta) = theta + 2*pi;
+   \verm{Manifold} \azul{circle} = RR.quotient ( g );
+
+   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  theta(A) = 0.;
+   \verm{Mesh} \azul{seg} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::jump, g );
+
+   \cinza{// define new coordinates x and y as arithmetic expressions of theta}
+   \verm{Function} \azul{x} = \verm{cos}(theta), \azul{y} = \verm{sin}(theta);
+   \cinza{// forget about theta; in future statements, x and y will be used}
+   circle.set_coordinates ( x && y );
+   seg.export_msh (\verde{"circle.msh"});
+\end{Verbatim}
+
+
+                 %----------%
+\section{~~\cinza{A cylinder}}\label{\numb section 7.\numb parag 5}
+                 %----------%
+
+{\normalfont\bfseries The code described in this paragraph does not work yet.
+It should be regarded as a mere declaration of intentions.}
+
+Here is how to build a cylinder in $ \mathbb{R}^3 $ :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
+   \verm{Function} \azul{theta_z} =
+      RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Function} \azul{theta} = theta_z[0], \azul{z} = theta_z[1];
+   const double \azul{pi} = 3.1415926536;
+   \verm{Manifold}::Action \azul{g};  g ( theta, z ) = (theta+2*pi) && z;
+   \verm{Manifold} \azul{cylinder_manif} = RR2.quotient ( g );
+
+   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  theta(A) = 0.; z(A) = -1.;
+   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  theta(B) = 0.; z(B) =  1.;
+   \verm{Mesh} \azul{AA} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::jump,  g );
+   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 10 );  \cinza{// no jump}
+   \verm{Mesh} \azul{BB} ( \verm{tag}::segment, B.reverse(), B, \verm{tag}::divided_in, 10, \verm{tag}::jump, -g );
+   \verm{Mesh} \azul{cylinder} ( \verm{tag}::rectangle, AA, AB, BB, AB.reverse() );
+
+   \cinza{// define new coordinates x and y as arithmetic expressions of theta}
+   \verm{Function} \azul{x} = \verm{cos}(theta), \azul{y} = \verm{sin}(theta);
+   \cinza{// forget about theta; in future statements, x, y and z will be used}
+   cylinder_manif.set_coordinates ( x && y & z );
+   cylinder.export_msh (\verde{"circle.msh"});
+\end{Verbatim}
+
+
+                 %--------------%
+\section{~~\cinza{A curved torus}}\label{\numb section 7.\numb parag 6}
+                 %--------------%
+
+{\normalfont\bfseries The code described in this paragraph does not work yet.
+It should be regarded as a mere declaration of intentions.}
+
+We are now in a position to resume the example in paragraph \ref{\numb section 2.\numb parag 15},
+this time by using the quotient manifold $ \mathbb{R}^2/{\mathbb Z}^2 $ introduced in paragraph
+\ref{\numb section 7.\numb parag 2}.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
+   \verm{Function} \azul{ab} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Function} \azul{alpha} = ab[0], \azul{beta} = ab[1];
+   const double \azul{pi} = 3.1415926536;
+   \verm{Manifold}::Action \azul{g1}, \azul{g2};
+   g1(alpha,beta) = (alpha+2.*pi) && beta;
+   g2(alpha,beta) = alpha && (beta+2.*pi);
+   \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
+
+   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  alpha(A) = 0.;  beta(A) = 0.;
+   \verm{Mesh} \azul{seg_horiz} ( \verm{tag}::segment, A.reverse(), A,
+                    \verm{tag}::divided_in, 10, \verm{tag}::jump, g1 );
+   \verm{Mesh} \azul{seg_vert}  ( \verm{tag}::segment, A.reverse(), A,
+                    \verm{tag}::divided_in, 10, \verm{tag}::jump, g2 );
+   \verm{Mesh} \azul{torus} ( \verm{tag}::rectangle, seg_horiz, seg_vert,
+                seg_horiz.reverse(), seg_vert.reverse() );
+
+   \cinza{// parametrize the donut}
+   const double \azul{big_radius} = 3., \azul{small_radius} = 1.;
+   \cinza{// define x, y and z as functions of alpha and beta}
+   \verm{Function} \azul{x} = ( big_radius + small_radius*\verm{cos}(beta) ) * \verm{cos}(alpha),
+            \azul{y} = ( big_radius + small_radius*\verm{cos}(beta) ) * \verm{sin}(alpha),
+            \azul{z} = small_radius*\verm{sin}(beta);
+
+   \cinza{// forget about alpha and beta :}
+   torus.set_coordinates ( x && y && z );
+   \cinza{// in future statements (e.g. for graphical representation)}
+   \cinza{// x, y and z will be used, not alpha nor beta :}
+   torus.export_msh (\verde{"torus.msh"});
+\end{Verbatim}
+
+

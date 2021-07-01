@@ -1,0 +1,51 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title:                     fill_angle_120
+%%BoundingBox:     35   20   158   80
+%%EndComments
+
+
+1 setlinecap
+
+1.2 setlinewidth
+1 0.5 0 setrgbcolor
+40 60 moveto
+66 60 lineto  % A
+85 35 lineto  % point120
+120 35 lineto  % B
+150 40 lineto
+stroke
+
+0.7 setlinewidth
+
+120 35 moveto 127 25 lineto stroke
+66 60 moveto 57 40 lineto stroke
+65 35 moveto 85 35 lineto stroke
+85 35 moveto 77 25 lineto stroke
+85 35 moveto 93 25 lineto stroke
+120 35 moveto 112 25 lineto stroke
+
+gsave
+[3 3] 0 setdash
+0.8 setlinewidth
+0.9 0.4 0.4 setrgbcolor
+66 60 moveto 105 65 lineto  % P
+85 35 lineto stroke
+105 65 moveto 120 35 lineto stroke
+grestore
+
+0.5 setgray 0.5 setlinewidth
+132 58 moveto 100 35 110 50 85 35 curveto stroke
+% 2 -10 -5 rArrowHead
+0 setgray 85 35 moveto
+85 35 1.6 0 360 arc fill
+
+/Helvetica findfont 10 scalefont setfont	
+60 65 moveto (A) show
+120 64 moveto (point120) show
+125 40 moveto (B) show
+105 68 moveto (P) show
+
+
+showpage
+%%Trailer
+%EOF

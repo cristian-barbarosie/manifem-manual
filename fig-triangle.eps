@@ -1,0 +1,221 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title:                     fig-triangle
+%%BoundingBox:     15   15   294   207
+%%EndComments
+
+% these procedures have been posted in comp.lang.postscript
+% by Bill Lee, bill@leeweyr.sccsi.com, on Apr 19 1995
+% subject: arc with arrow head
+% changes by Cristian Barbarosie in 2018 cristian.barbarosie@gmail.com
+
+
+%* _____________________________ Arrows ____________________________________ 
+
+%* Procedure to draw the path for an arrow head. Note: the arrowhead will be 
+%* added to the current path. The arrowhead will also be drawn and filled. 
+%* 
+%* Usage: Linewidth deltaX deltaY ArrowHead 
+%* 
+%* where: LineWidth is the width in points of the arrow head lines 
+%* 
+%* deltaX and deltaY define the direction that the arrow points 
+%* 
+%* Note: If Linewidth is zero, a value of 1 will be substituted 
+%*
+/rArrowHead { 
+exch atan matrix currentmatrix exch rotate exch 
+dup 0 eq 
+{ pop 1 } if 
+dup scale 
+-7 2 rlineto 
+1 -2 rlineto 
+-1 -2 rlineto 
+% closepath
+% with closepath we get a sharp arrow
+7 2 rlineto
+% with rlineto we get a pointless arrow (not ugly)
+currentpoint 
+gsave
+newpath moveto 
+-7 2 rlineto 
+1 -2 rlineto 
+-1 -2 rlineto 
+closepath 
+fill 
+grestore 
+setmatrix 
+} def 
+
+%* Procedure to draw the path for an arrow head. Note: the arrowhead will be 
+%* added to the current path. The arrowhead will also be drawn and filled. 
+%* 
+%* Usage: Linewidth PreviousX PreviousY ArrowHead 
+%* 
+%* where: LineWidth is the width in points of the arrow head lines 
+%* 
+%* PreviousX and PreviousY along with the currentpoint 
+%* define the direction that the arrow points 
+%* 
+%* Note: If Linewidth is zero, a value of 1 will be substituted 
+%*
+/ArrowHead { 
+currentpoint 
+4 2 roll exch 4 -1 roll exch 
+sub 3 1 roll sub
+rArrowHead
+} def 
+
+%* _____________________________ RLineto^ ____________________________________ 
+%* Procedure to add a relative line to the current path and then add the 
+%* path for an arrow on its end. 
+%* 
+%* Usage: x y RLineto^ 
+%* 
+%* where: x and y are the offsets from the current point 
+%* 
+/RLineto^ { 
+currentlinewidth currentpoint 5 3 roll 
+rlineto 
+ArrowHead 
+} def 
+
+%* _____________________________ Lineto^ ____________________________________ 
+%* Procedure to add a line to the current path and then add the 
+%* path for an arrow on its end. 
+%* 
+%* Usage: x y Lineto^ 
+%* 
+%* where: x and y are the new points for the path 
+%* 
+/Lineto^ { 
+currentlinewidth currentpoint 5 3 roll 
+lineto 
+ArrowHead 
+} def 
+
+%* _____________________________ Arc^ ____________________________________ 
+%* Procedure to add an arc to the current path and then add the 
+%* path for arrow on its end. 
+%* 
+%* Usage: x y r ang1 ang2 Arc^ 
+%* 
+%* where: x, y, ang1, ang2, and r are the normal parameters 
+%* for drawing an arc. 
+%* 
+/Arc^ { 
+5 copy arc 
+exch pop 2 sub 
+dup cos 2 index mul 4 index add 
+exch sin 2 index mul 3 index add 
+currentlinewidth 3 1 roll 
+ArrowHead pop pop pop 
+} def 
+
+%* _____________________________ Arcn^ ____________________________________ 
+%* Procedure to add an arc to the current path and then add the 
+%* path for arrow on its end. 
+%* 
+%* Usage: x y r ang1 ang2 Arcn^ 
+%* 
+%* where: x, y, ang1, ang2, and r are the normal parameters 
+%* for drawing an arcn. 
+%* 
+/Arcn^ { 
+5 copy arcn 
+exch pop 2 add 
+dup cos 2 index mul 4 index add 
+exch sin 2 index mul 3 index add 
+currentlinewidth 3 1 roll 
+ArrowHead pop pop pop 
+} def 
+
+% from xfig :
+/DrawEllipse {
+	/endangle exch def
+	/startangle exch def
+	/yrad exch def
+	/xrad exch def
+	/y exch def
+	/x exch def
+	/savematrix matrix currentmatrix def
+	x y translate xrad yrad scale 0 0 1 startangle endangle arc
+	closepath
+	savematrix setmatrix
+} def
+
+
+
+1 setlinecap
+
+0.8 setgray 0.8 setlinewidth
+50 50 moveto 260 50 lineto stroke
+90 90 moveto 240 90 lineto stroke
+110 110 moveto 230 110 lineto stroke
+130 130 moveto 220 130 lineto stroke
+150 150 moveto 210 150 lineto stroke
+170 170 moveto 200 170 lineto stroke
+
+50 50 moveto 60 30 lineto stroke
+70 70 moveto 90 30 lineto stroke
+90 90 moveto 120 30 lineto stroke
+130 130 moveto 180 30 lineto stroke
+150 150 moveto 210 30 lineto stroke
+170 170 moveto 240 30 lineto stroke
+
+60 30 moveto 200 170 lineto stroke
+120 30 moveto 220 130 lineto stroke
+150 30 moveto 230 110 lineto stroke
+180 30 moveto 240 90 lineto stroke
+210 30 moveto 250 70 lineto stroke
+240 30 moveto 260 50 lineto stroke
+
+0.65 setgray 1.5 setlinewidth
+70 70 moveto 250 70 lineto stroke
+73 70 moveto 1.2 -1 0 rArrowHead
+247 70 moveto 1.2 1 0 rArrowHead
+110 110 moveto 150 30 lineto stroke
+111 108 moveto 1.2 -10 20 rArrowHead
+149 32 moveto 1.2 10 -20 rArrowHead
+90 30 moveto 210 150 lineto stroke
+92 32 moveto 1.2 -10 -10 rArrowHead
+208 148 moveto 1.2 10 10 rArrowHead stroke
+130 70 moveto 130 70 3 0 360 arc fill
+
+1 0.5 0 setrgbcolor 1. setlinewidth
+50 50 moveto 260 50 lineto stroke
+70 70 moveto 100 70 lineto stroke
+
+50 50 moveto 60 30 lineto stroke
+70 70 moveto 90 30 lineto stroke
+100 70 moveto 120 30 lineto stroke
+140 50 moveto 150 30 lineto stroke
+170 50 moveto 180 30 lineto stroke
+200 50 moveto 210 30 lineto stroke
+230 50 moveto 240 30 lineto stroke
+
+60 30 moveto 100 70 lineto stroke
+90 30 moveto 110 50 lineto stroke
+120 30 moveto 140 50 lineto stroke
+150 30 moveto 170 50 lineto stroke
+180 30 moveto 200 50 lineto stroke
+210 30 moveto 230 50 lineto stroke
+240 30 moveto 260 50 lineto stroke
+
+1.6 setlinewidth
+30 30 moveto 190 190 lineto 270 30 lineto closepath stroke
+
+/Courier findfont 15 scalefont setfont
+20 20 moveto (A) show
+275 20 moveto (B) show
+190 195 moveto (C) show
+128 79 moveto (S) show
+70 18 moveto (P_AB) show
+130 18 moveto (Q_AB) show
+255 67 moveto (P_BC) show
+219 144 moveto (Q_BC) show
+79 110 moveto (P_CA) show
+38 70 moveto (Q_CA) show
+
+showpage
+%%Trailer
+%EOF

@@ -1,0 +1,2501 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title: oriented-annulus-2
+%%Creator: GL2PS 1.4.3, (C) 1999-2020 C. Geuzaine
+%%For: Gmsh
+%%CreationDate: Sat May 08 09:49:25 2021
+%%LanguageLevel: 3
+%%DocumentData: Clean7Bit
+%%Pages: 1
+%%BoundingBox: 130 60 500 420
+%%EndComments
+%%BeginProlog
+/gl2psdict 64 dict def gl2psdict begin
+/tryPS3shading false def % set to false to force subdivision
+/rThreshold 0.0666667 def % red component subdivision threshold
+/gThreshold 0.05 def % green component subdivision threshold
+/bThreshold 0.1 def % blue component subdivision threshold
+/BD { bind def } bind def
+/C  { setrgbcolor } BD
+/G  { 0.082 mul exch 0.6094 mul add exch 0.3086 mul add neg 1.0 add setgray } BD
+/W  { setlinewidth } BD
+/LC  { setlinecap } BD
+/LJ  { setlinejoin } BD
+/FC { findfont exch /SH exch def SH scalefont setfont } BD
+/SW { dup stringwidth pop } BD
+/S  { FC moveto show } BD
+/SBC{ FC moveto SW -2 div 0 rmoveto show } BD
+/SBR{ FC moveto SW neg 0 rmoveto show } BD
+/SCL{ FC moveto 0 SH -2 div rmoveto show } BD
+/SCC{ FC moveto SW -2 div SH -2 div rmoveto show } BD
+/SCR{ FC moveto SW neg SH -2 div rmoveto show } BD
+/STL{ FC moveto 0 SH neg rmoveto show } BD
+/STC{ FC moveto SW -2 div SH neg rmoveto show } BD
+/STR{ FC moveto SW neg SH neg rmoveto show } BD
+/FCT { FC translate 0 0 } BD
+/SR  { gsave FCT moveto rotate show grestore } BD
+/SBCR{ gsave FCT moveto rotate SW -2 div 0 rmoveto show grestore } BD
+/SBRR{ gsave FCT moveto rotate SW neg 0 rmoveto show grestore } BD
+/SCLR{ gsave FCT moveto rotate 0 SH -2 div rmoveto show grestore} BD
+/SCCR{ gsave FCT moveto rotate SW -2 div SH -2 div rmoveto show grestore} BD
+/SCRR{ gsave FCT moveto rotate SW neg SH -2 div rmoveto show grestore} BD
+/STLR{ gsave FCT moveto rotate 0 SH neg rmoveto show grestore } BD
+/STCR{ gsave FCT moveto rotate SW -2 div SH neg rmoveto show grestore } BD
+/STRR{ gsave FCT moveto rotate SW neg SH neg rmoveto show grestore } BD
+/P  { newpath 0.0 360.0 arc closepath fill } BD
+/LS { newpath moveto } BD
+/L  { lineto } BD
+/LE { lineto stroke } BD
+/T  { newpath moveto lineto lineto closepath fill } BD
+/STshfill {
+      /b1 exch def /g1 exch def /r1 exch def /y1 exch def /x1 exch def
+      /b2 exch def /g2 exch def /r2 exch def /y2 exch def /x2 exch def
+      /b3 exch def /g3 exch def /r3 exch def /y3 exch def /x3 exch def
+      gsave << /ShadingType 4 /ColorSpace [/DeviceRGB]
+      /DataSource [ 0 x1 y1 r1 g1 b1 0 x2 y2 r2 g2 b2 0 x3 y3 r3 g3 b3 ] >>
+      shfill grestore } BD
+/Tm { 3 -1 roll 8 -1 roll 13 -1 roll add add 3 div
+      3 -1 roll 7 -1 roll 11 -1 roll add add 3 div
+      3 -1 roll 6 -1 roll 9 -1 roll add add 3 div C T } BD
+/STsplit {
+      4 index 15 index add 0.5 mul
+      4 index 15 index add 0.5 mul
+      4 index 15 index add 0.5 mul
+      4 index 15 index add 0.5 mul
+      4 index 15 index add 0.5 mul
+      5 copy 5 copy 25 15 roll
+      9 index 30 index add 0.5 mul
+      9 index 30 index add 0.5 mul
+      9 index 30 index add 0.5 mul
+      9 index 30 index add 0.5 mul
+      9 index 30 index add 0.5 mul
+      5 copy 5 copy 35 5 roll 25 5 roll 15 5 roll
+      4 index 10 index add 0.5 mul
+      4 index 10 index add 0.5 mul
+      4 index 10 index add 0.5 mul
+      4 index 10 index add 0.5 mul
+      4 index 10 index add 0.5 mul
+      5 copy 5 copy 40 5 roll 25 5 roll 15 5 roll 25 5 roll
+      STnoshfill STnoshfill STnoshfill STnoshfill } BD
+/STnoshfill {
+      2 index 8 index sub abs rThreshold gt
+      { STsplit }
+      { 1 index 7 index sub abs gThreshold gt
+        { STsplit }
+        { dup 6 index sub abs bThreshold gt
+          { STsplit }
+          { 2 index 13 index sub abs rThreshold gt
+            { STsplit }
+            { 1 index 12 index sub abs gThreshold gt
+              { STsplit }
+              { dup 11 index sub abs bThreshold gt
+                { STsplit }
+                { 7 index 13 index sub abs rThreshold gt
+                  { STsplit }
+                  { 6 index 12 index sub abs gThreshold gt
+                    { STsplit }
+                    { 5 index 11 index sub abs bThreshold gt
+                      { STsplit }
+                      { Tm }
+                      ifelse }
+                    ifelse }
+                  ifelse }
+                ifelse }
+              ifelse }
+            ifelse }
+          ifelse }
+        ifelse }
+      ifelse } BD
+tryPS3shading
+{ /shfill where
+  { /ST { STshfill } BD }
+  { /ST { STnoshfill } BD }
+  ifelse }
+{ /ST { STnoshfill } BD }
+ifelse
+end
+%%EndProlog
+%%BeginSetup
+/DeviceRGB setcolorspace
+gl2psdict begin
+%%EndSetup
+%%Page: 1 1
+%%BeginPageSetup
+%%EndPageSetup
+mark
+gsave
+1.0 1.0 scale
+1 W
+1 0.510338 0.0236323 C
+261.043 373.551 LS
+290.663 377.277 L
+265.268 402.86 L
+261.043 373.551 L
+265.268 402.86 L
+235.094 389.393 L
+261.043 373.551 L
+235.094 389.393 L
+240.869 357.036 L
+261.043 373.551 L
+273.321 341.187 L
+290.663 377.277 L
+261.043 373.551 L
+240.869 357.036 L
+273.321 341.187 L
+261.043 373.551 LE
+265.268 402.86 LS
+290.663 377.277 L
+297.463 410.297 L
+265.268 402.86 LE
+297.463 410.297 LS
+290.663 377.277 L
+310.016 391.801 L
+297.463 410.297 LE
+290.663 377.277 LS
+273.321 341.187 L
+303.383 348.31 L
+290.663 377.277 L
+323.355 374.199 L
+310.016 391.801 L
+290.663 377.277 L
+303.383 348.31 L
+323.355 374.199 L
+290.663 377.277 LE
+310.016 391.801 LS
+330.486 411.429 L
+297.463 410.297 L
+310.016 391.801 L
+323.355 374.199 L
+330.486 411.429 L
+310.016 391.801 LE
+330.486 411.429 LS
+323.355 374.199 L
+347.321 388.332 L
+330.486 411.429 L
+347.321 388.332 L
+363.114 406.214 L
+330.486 411.429 LE
+363.114 406.214 LS
+347.321 388.332 L
+367.181 383.206 L
+363.114 406.214 LE
+347.321 388.332 LS
+352.551 364.526 L
+367.181 383.206 L
+347.321 388.332 L
+323.355 374.199 L
+352.551 364.526 L
+347.321 388.332 LE
+363.114 406.214 LS
+367.181 383.206 L
+394.14 394.845 L
+363.114 406.214 LE
+367.181 383.206 LS
+385.41 361.999 L
+394.14 394.845 L
+367.181 383.206 L
+352.551 364.526 L
+385.41 361.999 L
+367.181 383.206 LE
+394.14 394.845 LS
+385.41 361.999 L
+403.256 371.705 L
+394.14 394.845 L
+403.256 371.705 L
+422.413 377.744 L
+394.14 394.845 LE
+403.256 371.705 LS
+413.602 355.028 L
+422.413 377.744 L
+403.256 371.705 L
+385.41 361.999 L
+413.602 355.028 L
+403.256 371.705 LE
+323.355 374.199 LS
+334.618 345.031 L
+352.551 364.526 L
+323.355 374.199 L
+303.383 348.31 L
+334.618 345.031 L
+323.355 374.199 LE
+352.551 364.526 LS
+363.662 332.192 L
+385.41 361.999 L
+352.551 364.526 L
+334.618 345.031 L
+363.662 332.192 L
+352.551 364.526 LE
+385.41 361.999 LS
+400.454 332.642 L
+413.602 355.028 L
+385.41 361.999 L
+363.662 332.192 L
+400.454 332.642 L
+385.41 361.999 LE
+422.413 377.744 LS
+413.602 355.028 L
+446.887 355.544 L
+422.413 377.744 LE
+413.602 355.028 LS
+433.69 330.593 L
+446.887 355.544 L
+413.602 355.028 L
+400.454 332.642 L
+433.69 330.593 L
+413.602 355.028 LE
+400.454 332.642 LS
+363.662 332.192 L
+387.801 311.418 L
+400.454 332.642 L
+418.993 306.691 L
+433.69 330.593 L
+400.454 332.642 L
+387.801 311.418 L
+418.993 306.691 L
+400.454 332.642 LE
+446.887 355.544 LS
+433.69 330.593 L
+466.654 329.067 L
+446.887 355.544 LE
+433.69 330.593 LS
+450.179 303.737 L
+466.654 329.067 L
+433.69 330.593 L
+418.993 306.691 L
+450.179 303.737 L
+433.69 330.593 LE
+418.993 306.691 LS
+387.801 311.418 L
+404.907 284.741 L
+418.993 306.691 L
+436.049 275.257 L
+450.179 303.737 L
+418.993 306.691 L
+404.907 284.741 L
+436.049 275.257 L
+418.993 306.691 LE
+450.179 303.737 LS
+436.049 275.257 L
+464.112 280.406 L
+450.179 303.737 L
+480.984 299.293 L
+466.654 329.067 L
+450.179 303.737 L
+464.112 280.406 L
+480.984 299.293 L
+450.179 303.737 LE
+480.984 299.293 LS
+464.112 280.406 L
+489.345 267.326 L
+480.984 299.293 LE
+464.112 280.406 LS
+464.081 253.728 L
+489.345 267.326 L
+464.112 280.406 L
+436.049 275.257 L
+464.081 253.728 L
+464.112 280.406 LE
+489.345 267.326 LS
+464.081 253.728 L
+491.428 234.349 L
+489.345 267.326 LE
+491.428 234.349 LS
+464.081 253.728 L
+462.472 222.123 L
+491.428 234.349 LE
+464.081 253.728 LS
+438.014 240.181 L
+462.472 222.123 L
+464.081 253.728 L
+436.049 275.257 L
+438.014 240.181 L
+464.081 253.728 LE
+491.428 234.349 LS
+462.472 222.123 L
+487.156 201.584 L
+491.428 234.349 LE
+487.156 201.584 LS
+462.472 222.123 L
+456.838 192.495 L
+487.156 201.584 LE
+462.472 222.123 LS
+433.896 210.157 L
+456.838 192.495 L
+462.472 222.123 L
+438.014 240.181 L
+433.896 210.157 L
+462.472 222.123 LE
+487.156 201.584 LS
+456.838 192.495 L
+476.686 170.244 L
+487.156 201.584 LE
+476.686 170.244 LS
+456.838 192.495 L
+451.745 168.282 L
+476.686 170.244 LE
+456.838 192.495 LS
+430.124 180.687 L
+451.745 168.282 L
+456.838 192.495 L
+433.896 210.157 L
+430.124 180.687 L
+456.838 192.495 LE
+476.686 170.244 LS
+451.745 168.282 L
+460.413 141.5 L
+476.686 170.244 LE
+451.745 168.282 LS
+432.992 149.859 L
+460.413 141.5 L
+451.745 168.282 L
+430.124 180.687 L
+432.992 149.859 L
+451.745 168.282 LE
+436.049 275.257 LS
+413.296 254.553 L
+438.014 240.181 L
+436.049 275.257 L
+404.907 284.741 L
+413.296 254.553 L
+436.049 275.257 LE
+438.014 240.181 LS
+411.787 223.724 L
+433.896 210.157 L
+438.014 240.181 L
+413.296 254.553 L
+411.787 223.724 L
+438.014 240.181 LE
+433.896 210.157 LS
+400.06 195.622 L
+430.124 180.687 L
+433.896 210.157 L
+411.787 223.724 L
+400.06 195.622 L
+433.896 210.157 LE
+430.124 180.687 LS
+405.323 161.018 L
+432.992 149.859 L
+430.124 180.687 L
+400.06 195.622 L
+405.323 161.018 L
+430.124 180.687 LE
+460.413 141.5 LS
+432.992 149.859 L
+437.99 115.498 L
+460.413 141.5 LE
+432.992 149.859 LS
+409.34 127.331 L
+437.99 115.498 L
+432.992 149.859 L
+405.323 161.018 L
+409.34 127.331 L
+432.992 149.859 LE
+405.323 161.018 LS
+400.06 195.622 L
+379.17 173.724 L
+405.323 161.018 L
+377.47 137.742 L
+409.34 127.331 L
+405.323 161.018 L
+379.17 173.724 L
+377.47 137.742 L
+405.323 161.018 LE
+409.34 127.331 LS
+377.47 137.742 L
+388.469 108.64 L
+409.34 127.331 L
+410.234 94.0998 L
+437.99 115.498 L
+409.34 127.331 L
+388.469 108.64 L
+410.234 94.0998 L
+409.34 127.331 LE
+410.234 94.0998 LS
+388.469 108.64 L
+378.711 78.7835 L
+410.234 94.0998 LE
+388.469 108.64 LS
+363.51 106.779 L
+378.711 78.7835 L
+388.469 108.64 L
+377.47 137.742 L
+363.51 106.779 L
+388.469 108.64 LE
+378.711 78.7835 LS
+363.51 106.779 L
+357.059 88.5982 L
+378.711 78.7835 L
+357.059 88.5982 L
+345.633 70.321 L
+378.711 78.7835 LE
+357.059 88.5982 LS
+338.442 95.799 L
+345.633 70.321 L
+357.059 88.5982 L
+363.51 106.779 L
+338.442 95.799 L
+357.059 88.5982 LE
+363.51 106.779 LS
+338.039 129.194 L
+338.442 95.799 L
+363.51 106.779 L
+377.47 137.742 L
+338.039 129.194 L
+363.51 106.779 LE
+345.633 70.321 LS
+338.442 95.799 L
+311.533 68.5714 L
+345.633 70.321 LE
+338.442 95.799 LS
+307.135 106.635 L
+311.533 68.5714 L
+338.442 95.799 L
+338.039 129.194 L
+307.135 106.635 L
+338.442 95.799 LE
+311.533 68.5714 LS
+307.135 106.635 L
+293.932 86.7712 L
+311.533 68.5714 L
+293.932 86.7712 L
+277.76 73.6046 L
+311.533 68.5714 LE
+293.932 86.7712 LS
+277.693 99.5255 L
+277.76 73.6046 L
+293.932 86.7712 L
+307.135 106.635 L
+277.693 99.5255 L
+293.932 86.7712 LE
+307.135 106.635 LS
+338.039 129.194 L
+308.477 137.564 L
+307.135 106.635 L
+282.053 128.691 L
+277.693 99.5255 L
+307.135 106.635 L
+308.477 137.564 L
+282.053 128.691 L
+307.135 106.635 LE
+277.76 73.6046 LS
+277.693 99.5255 L
+245.65 85.2218 L
+277.76 73.6046 LE
+277.693 99.5255 LS
+251.061 116.675 L
+245.65 85.2218 L
+277.693 99.5255 L
+282.053 128.691 L
+251.061 116.675 L
+277.693 99.5255 LE
+377.47 137.742 LS
+351.708 160.753 L
+338.039 129.194 L
+377.47 137.742 L
+379.17 173.724 L
+351.708 160.753 L
+377.47 137.742 LE
+338.039 129.194 LS
+321.169 157.917 L
+308.477 137.564 L
+338.039 129.194 L
+351.708 160.753 L
+321.169 157.917 L
+338.039 129.194 LE
+308.477 137.564 LS
+290.808 165.013 L
+282.053 128.691 L
+308.477 137.564 L
+321.169 157.917 L
+290.808 165.013 L
+308.477 137.564 LE
+282.053 128.691 LS
+258.142 148.884 L
+251.061 116.675 L
+282.053 128.691 L
+290.808 165.013 L
+258.142 148.884 L
+282.053 128.691 LE
+245.65 85.2218 LS
+251.061 116.675 L
+216.474 102.965 L
+245.65 85.2218 LE
+251.061 116.675 LS
+225.592 136.554 L
+216.474 102.965 L
+251.061 116.675 L
+258.142 148.884 L
+225.592 136.554 L
+251.061 116.675 LE
+216.474 102.965 LS
+225.592 136.554 L
+191.385 126.131 L
+216.474 102.965 LE
+191.385 126.131 LS
+225.592 136.554 L
+204.444 159.086 L
+191.385 126.131 LE
+225.592 136.554 LS
+234.511 168.864 L
+204.444 159.086 L
+225.592 136.554 L
+258.142 148.884 L
+234.511 168.864 L
+225.592 136.554 LE
+191.385 126.131 LS
+204.444 159.086 L
+171.376 153.806 L
+191.385 126.131 LE
+171.376 153.806 LS
+204.444 159.086 L
+188.877 183.842 L
+171.376 153.806 LE
+204.444 159.086 LS
+214.141 185.814 L
+188.877 183.842 L
+204.444 159.086 L
+234.511 168.864 L
+214.141 185.814 L
+204.444 159.086 LE
+171.376 153.806 LS
+188.877 183.842 L
+157.24 184.894 L
+171.376 153.806 LE
+157.24 184.894 LS
+188.877 183.842 L
+178.845 212.29 L
+157.24 184.894 LE
+188.877 183.842 LS
+207.197 209.648 L
+178.845 212.29 L
+188.877 183.842 L
+214.141 185.814 L
+207.197 209.648 L
+188.877 183.842 LE
+157.24 184.894 LS
+178.845 212.29 L
+149.537 218.167 L
+157.24 184.894 LE
+178.845 212.29 LS
+207.197 209.648 L
+197.021 231.334 L
+178.845 212.29 L
+173.778 246.496 L
+149.537 218.167 L
+178.845 212.29 L
+197.021 231.334 L
+173.778 246.496 L
+178.845 212.29 LE
+149.537 218.167 LS
+173.778 246.496 L
+148.572 252.307 L
+149.537 218.167 LE
+148.572 252.307 LS
+173.778 246.496 L
+154.384 285.964 L
+148.572 252.307 LE
+173.778 246.496 LS
+197.021 231.334 L
+201.507 252.395 L
+173.778 246.496 L
+189.981 276.152 L
+154.384 285.964 L
+173.778 246.496 L
+201.507 252.395 L
+189.981 276.152 L
+173.778 246.496 LE
+154.384 285.964 LS
+189.981 276.152 L
+186.36 305.804 L
+154.384 285.964 L
+186.36 305.804 L
+166.743 317.806 L
+154.384 285.964 LE
+166.743 317.806 LS
+186.36 305.804 L
+185.162 346.572 L
+166.743 317.806 LE
+186.36 305.804 LS
+189.981 276.152 L
+208.785 293.869 L
+186.36 305.804 L
+211.299 319.388 L
+185.162 346.572 L
+186.36 305.804 L
+208.785 293.869 L
+211.299 319.388 L
+186.36 305.804 LE
+240.869 357.036 LS
+235.094 389.393 L
+208.058 370.396 L
+240.869 357.036 LE
+185.162 346.572 LS
+211.299 319.388 L
+218.818 344.81 L
+185.162 346.572 L
+218.818 344.81 L
+208.058 370.396 L
+185.162 346.572 LE
+208.058 370.396 LS
+218.818 344.81 L
+240.869 357.036 L
+208.058 370.396 LE
+218.818 344.81 LS
+248.091 324.142 L
+240.869 357.036 L
+218.818 344.81 L
+211.299 319.388 L
+248.091 324.142 L
+218.818 344.81 LE
+240.869 357.036 LS
+248.091 324.142 L
+273.321 341.187 L
+240.869 357.036 LE
+211.299 319.388 LS
+230.829 299.218 L
+248.091 324.142 L
+211.299 319.388 L
+208.785 293.869 L
+230.829 299.218 L
+211.299 319.388 LE
+189.981 276.152 LS
+223.382 269.577 L
+208.785 293.869 L
+189.981 276.152 L
+201.507 252.395 L
+223.382 269.577 L
+189.981 276.152 LE
+208.785 293.869 LS
+223.382 269.577 L
+230.829 299.218 L
+208.785 293.869 LE
+197.021 231.334 LS
+226.713 236.46 L
+201.507 252.395 L
+197.021 231.334 L
+207.197 209.648 L
+226.713 236.46 L
+197.021 231.334 LE
+201.507 252.395 LS
+226.713 236.46 L
+223.382 269.577 L
+201.507 252.395 LE
+214.141 185.814 LS
+240.545 206.185 L
+207.197 209.648 L
+214.141 185.814 L
+234.511 168.864 L
+240.545 206.185 L
+214.141 185.814 LE
+207.197 209.648 LS
+240.545 206.185 L
+226.713 236.46 L
+207.197 209.648 LE
+258.142 148.884 LS
+263.728 180.847 L
+234.511 168.864 L
+258.142 148.884 L
+290.808 165.013 L
+263.728 180.847 L
+258.142 148.884 LE
+234.511 168.864 LS
+263.728 180.847 L
+240.545 206.185 L
+234.511 168.864 LE
+grestore
+
+
+%* _____________________________ Arrows ____________________________________ 
+
+%* Procedure to draw the path for an arrow head. Note: the arrowhead will be 
+%* added to the current path. The arrowhead will also be drawn and filled. 
+%* 
+%* Usage: Linewidth deltaX deltaY ArrowHead 
+%* 
+%* where: LineWidth is the width in points of the arrow head lines 
+%* 
+%* deltaX and deltaY define the direction that the arrow points 
+%* 
+%* Note: If Linewidth is zero, a value of 1 will be substituted 
+%*
+/rArrowHead { 
+exch atan matrix currentmatrix exch rotate exch 
+dup 0 eq 
+{ pop 1 } if 
+dup scale 
+-7 2 rlineto 
+1 -2 rlineto 
+-1 -2 rlineto 
+7 2 rlineto 
+currentpoint 
+gsave 
+newpath moveto 
+-7 2 rlineto 
+1 -2 rlineto 
+-1 -2 rlineto 
+closepath 
+fill 
+grestore 
+setmatrix 
+} def 
+
+%* Procedure to draw the path for an arrow head. Note: the arrowhead will be 
+%* added to the current path. The arrowhead will also be drawn and filled. 
+%* 
+%* Usage: Linewidth PreviousX PreviousY ArrowHead 
+%* 
+%* where: LineWidth is the width in points of the arrow head lines 
+%* 
+%* PreviousX and PreviousY along with the currentpoint 
+%* define the direction that the arrow points 
+%* 
+%* Note: If Linewidth is zero, a value of 1 will be substituted 
+%*
+/ArrowHead { 
+currentpoint 
+4 2 roll exch 4 -1 roll exch 
+sub 3 1 roll sub
+rArrowHead
+} def 
+
+%* _____________________________ RLineto^ ____________________________________ 
+%* Procedure to add a relative line to the current path and then add the 
+%* path for an arrow on its end. 
+%* 
+%* Usage: x y RLineto^ 
+%* 
+%* where: x and y are the offsets from the current point 
+%* 
+/RLineto^ { 
+currentlinewidth currentpoint 5 3 roll 
+rlineto 
+ArrowHead 
+} def 
+
+%* _____________________________ Lineto^ ____________________________________ 
+%* Procedure to add a line to the current path and then add the 
+%* path for an arrow on its end. 
+%* 
+%* Usage: x y Lineto^ 
+%* 
+%* where: x and y are the new points for the path 
+%* 
+/Lineto^ { 
+currentlinewidth currentpoint 5 3 roll 
+lineto 
+ArrowHead 
+} def 
+
+%* _____________________________ Arc^ ____________________________________ 
+%* Procedure to add an arc to the current path and then add the 
+%* path for arrow on its end. 
+%* 
+%* Usage: x y r ang1 ang2 Arc^ 
+%* 
+%* where: x, y, ang1, ang2, and r are the normal parameters 
+%* for drawing an arc. 
+%* 
+/Arc^ { 
+5 copy arc 
+exch pop 2 sub 
+dup cos 2 index mul 4 index add 
+exch sin 2 index mul 3 index add 
+currentlinewidth 3 1 roll 
+ArrowHead pop pop pop 
+} def 
+
+%* _____________________________ Arcn^ ____________________________________ 
+%* Procedure to add an arc to the current path and then add the 
+%* path for arrow on its end. 
+%* 
+%* Usage: x y r ang1 ang2 Arcn^ 
+%* 
+%* where: x, y, ang1, ang2, and r are the normal parameters 
+%* for drawing an arcn. 
+%* 
+/Arcn^ { 
+5 copy arcn 
+exch pop 2 add 
+dup cos 2 index mul 4 index add 
+exch sin 2 index mul 3 index add 
+currentlinewidth 3 1 roll 
+ArrowHead pop pop pop 
+} def
+
+
+1 0.5 0 setrgbcolor
+150 219 moveto 1.2 -2 20 rArrowHead stroke
+157 184 moveto 1.2 -9 20 rArrowHead stroke
+173 152 moveto 1.2 -12 20 rArrowHead stroke
+192 127 moveto 1.2 -15 20 rArrowHead stroke
+216 103 moveto 1.2 -20 16 rArrowHead stroke
+245 85 moveto 1.2 -20 9 rArrowHead stroke
+278 74 moveto 1.2 -20 3 rArrowHead stroke
+310 69 moveto 1.2 -20 0 rArrowHead stroke
+345 70.5 moveto 1.2 -20 -3 rArrowHead stroke
+378 78 moveto 1.2 -20 -9 rArrowHead stroke
+410 94 moveto 1.2 -20 -12 rArrowHead stroke
+438 116 moveto 1.2 -20 -17 rArrowHead stroke
+460 142 moveto 1.2 -15 -20 rArrowHead stroke
+477 170 moveto 1.2 -10 -20 rArrowHead stroke
+486 200 moveto 1.2 -5 -20 rArrowHead stroke
+491 233 moveto 1.2 -1 -20 rArrowHead stroke
+489 266 moveto 1.2 2 -20 rArrowHead stroke
+481 298 moveto 1.2 8 -20 rArrowHead stroke
+467 327 moveto 1.2 11 -20 rArrowHead stroke
+446 356 moveto 1.2 16 -20 rArrowHead stroke
+422.5 377 moveto 1.2 20 -20 rArrowHead stroke
+394 395 moveto 1.2 20 -10 rArrowHead stroke
+364 406 moveto 1.2 20 -3 rArrowHead stroke
+332 411 moveto 1.2 20 -1 rArrowHead stroke
+298 410 moveto 1.2 20 3 rArrowHead stroke
+267 403 moveto 1.2 20 8 rArrowHead stroke
+236 390 moveto 1.2 20 11 rArrowHead stroke
+210 372 moveto 1.2 20 16 rArrowHead stroke
+186 347 moveto 1.2 18 20 rArrowHead stroke
+167 317 moveto 1.2 13 20 rArrowHead stroke
+155 285 moveto 1.2 7 20 rArrowHead stroke
+149 252 moveto 1.2 3 20 rArrowHead stroke
+
+248 324 moveto 1.2 -20 -18 rArrowHead stroke
+272 340 moveto 1.2 -20 -8 rArrowHead stroke
+302 348 moveto 1.2 -20 1 rArrowHead stroke
+333 345 moveto 1.2 -20 7 rArrowHead stroke
+365 330 moveto 1.2 -20 15 rArrowHead stroke
+388 311 moveto 1.2 -16 20 rArrowHead stroke
+406 284 moveto 1.2 -5 20 rArrowHead stroke
+413 255 moveto 1.2 0 20 rArrowHead stroke
+411 224 moveto 1.2 5 20 rArrowHead stroke
+400 195 moveto 1.2 15 20 rArrowHead stroke
+379 174 moveto 1.2 20 12 rArrowHead stroke
+351 160.5 moveto 1.2 20 2 rArrowHead stroke
+322 158 moveto 1.2 20 -4 rArrowHead stroke
+292 164.5 moveto 1.2 20 -9 rArrowHead stroke
+265 180 moveto 1.2 20 -15 rArrowHead stroke
+241 206 moveto 1.2 12 -20 rArrowHead stroke
+227 237 moveto 1.2 6 -20 rArrowHead stroke
+224 269 moveto 1.2 -4 -20 rArrowHead stroke
+230 299 moveto 1.2 -11 -20 rArrowHead stroke
+
+
+gsave 130 93 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 142 108 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 111 96 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 135 75 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 154 73 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 160 107 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 167 88 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 184 84 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 189 66 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 178 52 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 161 55 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 148 42 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 128 42 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 121 61 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 101 63 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 97 83 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 79 87 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 79 108 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 93 117 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 62 116 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 118 127 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 137 126 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 115 159 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 52 147 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 58 166 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 65 135 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 80 143 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 65 210 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 68 230 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 85 264 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 97 277 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 95 296 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 119 313 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 115 271 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 120 254 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 144 281 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 144 329 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 165 307 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 162 325.5 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 175 338 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 180 296 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 195 308 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 211 297 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 257 295 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 274 283 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 305 282 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 209 32 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 219 51 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 246 84 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 249 64 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 226.5 90.5 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 208 66 translate 0.45 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 171 33.5 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 235 26 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 250 58 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 210 100 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 223 90 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 271 105 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 279 47 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 279 65 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 295 43 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 304 58 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 294 72 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 299 90 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 296 125 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 289 105 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 322 60 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 329 78 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 319 94 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 325 112 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 314 126 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 324 142 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 318 159 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 330 172 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 323 188 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 321 219 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 331 204 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 321 238 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 307 248 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 304 266 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 287 272 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 320 270 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 336 261.5 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 337 242 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 352.5 234.5 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 358 218 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 348 202 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+% Anabela Silva drew all arrows below
+
+gsave 356 186.5 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 374 185 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 382 167 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 347 172 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 353 156 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 370 154 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+
+gsave 375 135 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 343 142 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 348 128 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 363 125 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 364 108 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 350 102 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 345 85 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 340 115 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 367 241 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 379 230 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 375 215 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 383 200 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 367 259 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 352 268 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 350 287 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 334 294 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 303 297 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 283 328 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 269 319 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 276 342 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 252 298 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 328 312 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 240 309 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 339 329 translate 0.3 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 328 325 translate 0.3 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 333 341 translate 0.3 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 322 336 translate 0.3 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 282 340 translate 0.3 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 286 353 translate 0.3 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 250 349 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 237 340 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 244 324 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 223 337 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 222 339 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 215 351 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 215 348 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 149 320 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 160 306 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 125 304 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 138 290 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 109 229 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 104 254 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 119 251 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 106 213 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 118 201 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 92 207 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 121 195 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 106 197 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 123 179 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 109 173 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 98 185 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 119 147 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 133 154 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 132 127 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 59 188 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 60 209 translate 0.4 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 85 260 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 93 275 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 109 247 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 134 243 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 210 48 translate 0.3 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 217 43 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 219 57 translate 0.3 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 287 52 translate 0.25 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 208 32 translate 0.35 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 287 41 translate 0.3 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 303 59 translate 0.25 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+gsave 292 63 translate 0.25 dup scale
+2 setlinewidth
+0 0.3 1 setrgbcolor
+-130 0 translate
+360 130 moveto
+375 130 15 180 500 arc
+currentpoint stroke moveto -5 -10 rmoveto
+2 -7 10 rArrowHead stroke
+grestore
+
+
+
+
+showpage
+cleartomark
+%%PageTrailer
+%%Trailer
+end
+%%EOF

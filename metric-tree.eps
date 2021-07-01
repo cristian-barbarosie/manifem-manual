@@ -1,0 +1,284 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title:                     maniFEM
+%%BoundingBox:  0 0  620   320
+%%EndComments
+%%BeginSetup
+<< /PageSize [620 320] >> setpagedevice
+%%EndSetup
+
+%* _____________________________ Arrows ____________________________________ 
+
+%* Procedure to draw the path for an arrow head. Note: the arrowhead will be 
+%* added to the current path. The arrowhead will also be drawn and filled. 
+%* 
+%* Usage: Linewidth deltaX deltaY ArrowHead 
+%* 
+%* where: LineWidth is the width in points of the arrow head lines 
+%* 
+%* deltaX and deltaY define the direction that the arrow points 
+%* 
+%* Note: If Linewidth is zero, a value of 1 will be substituted 
+%*
+/rArrowHead { 
+exch atan matrix currentmatrix exch rotate exch 
+dup 0 eq 
+{ pop 1 } if 
+dup scale 
+-7 2 rlineto 
+1 -2 rlineto 
+-1 -2 rlineto 
+7 2 rlineto 
+currentpoint 
+gsave 
+newpath moveto 
+-7 2 rlineto 
+1 -2 rlineto 
+-1 -2 rlineto 
+closepath 
+fill 
+grestore 
+setmatrix 
+} def 
+
+%* Procedure to draw the path for an arrow head. Note: the arrowhead will be 
+%* added to the current path. The arrowhead will also be drawn and filled. 
+%* 
+%* Usage: Linewidth PreviousX PreviousY ArrowHead 
+%* 
+%* where: LineWidth is the width in points of the arrow head lines 
+%* 
+%* PreviousX and PreviousY along with the currentpoint 
+%* define the direction that the arrow points 
+%* 
+%* Note: If Linewidth is zero, a value of 1 will be substituted 
+%*
+/ArrowHead { 
+currentpoint 
+4 2 roll exch 4 -1 roll exch 
+sub 3 1 roll sub
+rArrowHead
+} def 
+
+%* _____________________________ RLineto^ ____________________________________ 
+%* Procedure to add a relative line to the current path and then add the 
+%* path for an arrow on its end. 
+%* 
+%* Usage: x y RLineto^ 
+%* 
+%* where: x and y are the offsets from the current point 
+%* 
+/RLineto^ { 
+currentlinewidth currentpoint 5 3 roll 
+rlineto 
+ArrowHead 
+} def 
+
+%* _____________________________ Lineto^ ____________________________________ 
+%* Procedure to add a line to the current path and then add the 
+%* path for an arrow on its end. 
+%* 
+%* Usage: x y Lineto^ 
+%* 
+%* where: x and y are the new points for the path 
+%* 
+/Lineto^ { 
+currentlinewidth currentpoint 5 3 roll 
+lineto 
+ArrowHead 
+} def 
+
+gsave
+10 10 translate
+10 dup scale
+
+gsave 0.09 setlinewidth
+0.5 setgray
+31.6157 19.6176 moveto 52.8908 6.34334 lineto stroke
+52.8908 6.34334 moveto 57.1459 3.68849 lineto stroke
+31.6157 19.6176 moveto 40.1191 15.4408 lineto stroke
+40.1191 15.4408 moveto 41.8197 14.6055 lineto stroke
+31.6157 19.6176 moveto 46.0396 17.5898 lineto stroke
+46.0396 17.5898 moveto 48.9244 17.1842 lineto stroke
+48.9244 17.1842 moveto 49.7169 17.905 lineto stroke
+49.7169 17.905 moveto 49.8754 18.0491 lineto stroke
+31.6157 19.6176 moveto 28.2574 23.1534 lineto stroke
+28.2574 23.1534 moveto 27.5858 23.8606 lineto stroke
+27.5858 23.8606 moveto 31.169 20.653 lineto stroke
+31.169 20.653 moveto 31.8856 20.0115 lineto stroke
+31.6157 19.6176 moveto 5.48198 5.26752 lineto stroke
+5.48198 5.26752 moveto 0.255235 2.39751 lineto stroke
+0.255235 2.39751 moveto 4.86945 0.95971 lineto stroke
+4.86945 0.95971 moveto 5.7923 0.672151 lineto stroke
+0.255235 2.39751 moveto 1.86092 5.94127 lineto stroke
+1.86092 5.94127 moveto 2.18206 6.65002 lineto stroke
+0.255235 2.39751 moveto 0.12541 1.13347 lineto stroke
+0.12541 1.13347 moveto 0.099445 0.880664 lineto stroke
+0.255235 2.39751 moveto 2.80648 4.40643 lineto stroke
+2.80648 4.40643 moveto 3.31673 4.80822 lineto stroke
+31.6157 19.6176 moveto 12.789 11.865 lineto stroke
+12.789 11.865 moveto 9.02363 10.3145 lineto stroke
+9.02363 10.3145 moveto 11.1031 10.3659 lineto stroke
+11.1031 10.3659 moveto 11.519 10.3762 lineto stroke
+9.02363 10.3145 moveto 9.80032 5.71303 lineto stroke
+9.80032 5.71303 moveto 9.95565 4.79273 lineto stroke
+9.02363 10.3145 moveto 7.62928 6.42598 lineto stroke
+7.62928 6.42598 moveto 7.35041 5.64827 lineto stroke
+31.6157 19.6176 moveto 52.5069 26.7737 lineto stroke
+52.5069 26.7737 moveto 56.6852 28.2049 lineto stroke
+56.6852 28.2049 moveto 57.793 26.3887 lineto stroke
+57.793 26.3887 moveto 58.0146 26.0254 lineto stroke
+56.6852 28.2049 moveto 55.3399 28.953 lineto stroke
+55.3399 28.953 moveto 55.0709 29.1026 lineto stroke
+31.6157 19.6176 moveto 31.6967 17.9726 lineto stroke
+31.6967 17.9726 moveto 31.7129 17.6436 lineto stroke
+31.7129 17.6436 moveto 27.3511 15.4975 lineto stroke
+27.3511 15.4975 moveto 26.4788 15.0682 lineto stroke
+31.7129 17.6436 moveto 27.878 19.5782 lineto stroke
+27.878 19.5782 moveto 27.1111 19.9651 lineto stroke
+31.7129 17.6436 moveto 31.2094 16.5412 lineto stroke
+31.2094 16.5412 moveto 31.1087 16.3207 lineto stroke
+31.6157 19.6176 moveto 35.1801 11.239 lineto stroke
+35.1801 11.239 moveto 35.893 9.56334 lineto stroke
+35.893 9.56334 moveto 31.9473 7.10678 lineto stroke
+31.9473 7.10678 moveto 31.1582 6.61547 lineto stroke
+% 31.1582 6.61547 moveto 31.7175 6.98765 lineto stroke
+% 31.7175 6.98765 moveto 31.8294 7.06208 lineto stroke
+31.6157 19.6176 moveto 10.3512 19.1375 lineto stroke
+10.3512 19.1375 moveto 6.09824 19.0415 lineto stroke
+6.09824 19.0415 moveto 6.3754 16.9693 lineto stroke
+6.3754 16.9693 moveto 6.43083 16.5549 lineto stroke
+6.09824 19.0415 moveto 2.33336 22.2322 lineto stroke
+2.33336 22.2322 moveto 1.58038 22.8703 lineto stroke
+6.09824 19.0415 moveto 2.59831 17.9633 lineto stroke
+2.59831 17.9633 moveto 1.89833 17.7476 lineto stroke
+6.09824 19.0415 moveto 1.9136 21.2204 lineto stroke
+1.9136 21.2204 moveto 1.07667 21.6561 lineto stroke
+31.6157 19.6176 moveto 15.8452 7.10971 lineto stroke
+15.8452 7.10971 moveto 12.6911 4.60813 lineto stroke
+12.6911 4.60813 moveto 14.8631 3.86424 lineto stroke
+14.8631 3.86424 moveto 15.2974 3.71546 lineto stroke
+31.6157 19.6176 moveto 54.7374 14.4202 lineto stroke
+54.7374 14.4202 moveto 59.3617 13.3807 lineto stroke
+59.3617 13.3807 moveto 58.7526 10.4565 lineto stroke
+58.7526 10.4565 moveto 58.6308 9.87168 lineto stroke
+31.6157 19.6176 moveto 19.7351 16.1305 lineto stroke
+19.7351 16.1305 moveto 17.359 15.433 lineto stroke
+17.359 15.433 moveto 13.7125 15.7582 lineto stroke
+13.7125 15.7582 moveto 12.9832 15.8232 lineto stroke
+17.359 15.433 moveto 20.9973 13.949 lineto stroke
+20.9973 13.949 moveto 21.725 13.6522 lineto stroke
+17.359 15.433 moveto 19.2545 16.9916 lineto stroke
+19.2545 16.9916 moveto 19.6337 17.3033 lineto stroke
+17.359 15.433 moveto 16.9076 11.8699 lineto stroke
+16.9076 11.8699 moveto 16.8173 11.1573 lineto stroke
+31.6157 19.6176 moveto 16.0317 25.9926 lineto stroke
+16.0317 25.9926 moveto 12.9149 27.2677 lineto stroke
+% 12.9149 27.2677 moveto 13.666 27.0326 lineto stroke
+% 13.666 27.0326 moveto 13.8162 26.9856 lineto stroke
+12.9149 27.2677 moveto 8.85444 28.1957 lineto stroke
+8.85444 28.1957 moveto 8.04235 28.3813 lineto stroke
+12.9149 27.2677 moveto 9.66806 25.3867 lineto stroke
+9.66806 25.3867 moveto 9.01869 25.0105 lineto stroke
+12.9149 27.2677 moveto 16.3542 24.1412 lineto stroke
+16.3542 24.1412 moveto 17.0421 23.516 lineto stroke
+31.6157 19.6176 moveto 25.7076 17.3921 lineto stroke
+25.7076 17.3921 moveto 24.526 16.947 lineto stroke
+24.526 16.947 moveto 24.9739 19.8385 lineto stroke
+24.9739 19.8385 moveto 25.0634 20.4169 lineto stroke
+25.0634 20.4169 moveto 25.7727 20.5882 lineto stroke
+25.7727 20.5882 moveto 25.9145 20.6224 lineto stroke
+24.526 16.947 moveto 28.5348 19.8757 lineto stroke
+28.5348 19.8757 moveto 29.3366 20.4615 lineto stroke
+24.526 16.947 moveto 27.1999 18.643 lineto stroke
+27.1999 18.643 moveto 27.7347 18.9822 lineto stroke
+31.6157 19.6176 moveto 24.6556 6.95792 lineto stroke
+24.6556 6.95792 moveto 23.2635 4.42599 lineto stroke
+23.2635 4.42599 moveto 22.7956 6.55286 lineto stroke
+22.7956 6.55286 moveto 22.702 6.97823 lineto stroke
+23.2635 4.42599 moveto 23.2688 2.69425 lineto stroke
+23.2688 2.69425 moveto 23.2699 2.3479 lineto stroke
+23.2635 4.42599 moveto 22.1442 4.1154 lineto stroke
+22.1442 4.1154 moveto 21.9203 4.05328 lineto stroke
+31.6157 19.6176 moveto 40.7603 9.26736 lineto stroke
+40.7603 9.26736 moveto 42.5892 7.19732 lineto stroke
+42.5892 7.19732 moveto 45.5701 7.45344 lineto stroke
+45.5701 7.45344 moveto 46.1662 7.50466 lineto stroke
+42.5892 7.19732 moveto 42.4457 12.1155 lineto stroke
+42.4457 12.1155 moveto 42.417 13.0992 lineto stroke
+42.5892 7.19732 moveto 42.2477 5.24175 lineto stroke
+42.2477 5.24175 moveto 42.1794 4.85063 lineto stroke
+42.5892 7.19732 moveto 38.5768 6.53822 lineto stroke
+38.5768 6.53822 moveto 37.7743 6.4064 lineto stroke
+31.6157 19.6176 moveto 47.3713 8.58838 lineto stroke
+47.3713 8.58838 moveto 50.5224 6.38255 lineto stroke
+50.5224 6.38255 moveto 50.1373 9.29961 lineto stroke
+50.1373 9.29961 moveto 50.0603 9.88303 lineto stroke
+50.5224 6.38255 moveto 50.3255 7.53911 lineto stroke
+50.3255 7.53911 moveto 50.2861 7.77043 lineto stroke
+50.5224 6.38255 moveto 49.4067 11.0173 lineto stroke
+49.4067 11.0173 moveto 49.1836 11.9443 lineto stroke
+50.5224 6.38255 moveto 53.5041 4.61428 lineto stroke
+53.5041 4.61428 moveto 54.1004 4.26063 lineto stroke
+31.6157 19.6176 moveto 47.5684 24.3074 lineto stroke
+47.5684 24.3074 moveto 50.7589 25.2453 lineto stroke
+31.6157 19.6176 moveto 36.7465 21.4049 lineto stroke
+36.7465 21.4049 moveto 37.7726 21.7624 lineto stroke
+37.7726 21.7624 moveto 42.0776 21.2904 lineto stroke
+42.0776 21.2904 moveto 42.9385 21.1961 lineto stroke
+37.7726 21.7624 moveto 37.7589 19.9084 lineto stroke
+37.7589 19.9084 moveto 37.7561 19.5376 lineto stroke
+31.6157 19.6176 moveto 29.9681 5.53792 lineto stroke
+29.9681 5.53792 moveto 29.6386 2.72199 lineto stroke
+29.6386 2.72199 moveto 33.5225 1.28001 lineto stroke
+33.5225 1.28001 moveto 34.2993 0.991613 lineto stroke
+29.6386 2.72199 moveto 28.1621 1.70576 lineto stroke
+28.1621 1.70576 moveto 27.8667 1.50252 lineto stroke
+31.6157 19.6176 moveto 8.90358 25.3873 lineto stroke
+8.90358 25.3873 moveto 4.36115 26.5412 lineto stroke
+4.36115 26.5412 moveto 9.05222 26.8649 lineto stroke
+9.05222 26.8649 moveto 9.99043 26.9297 lineto stroke
+% 31.6157 19.6176 moveto 21.681 22.1799 lineto stroke
+% 21.681 22.1799 moveto 19.6941 22.6923 lineto stroke
+% 19.6941 22.6923 moveto 20.5112 22.7226 lineto stroke
+% 20.5112 22.7226 moveto 20.6746 22.7286 lineto stroke
+0.5 setgray 31.6157 19.6176 moveto 31.6157 19.6176 0.3 0 360 arc fill
+0.5 setgray 57.1459 3.68849 moveto 57.1459 3.68849 0.3 0 360 arc fill
+0.5 setgray 41.8197 14.6055 moveto 41.8197 14.6055 0.3 0 360 arc fill
+0.5 setgray 48.9244 17.1842 moveto 48.9244 17.1842 0.3 0 360 arc fill
+0.5 setgray 27.5858 23.8606 moveto 27.5858 23.8606 0.3 0 360 arc fill
+0.5 setgray 0.255235 2.39751 moveto 0.255235 2.39751 0.3 0 360 arc fill
+0.5 setgray 5.7923 0.672151 moveto 5.7923 0.672151 0.3 0 360 arc fill
+0.5 setgray 2.18206 6.65002 moveto 2.18206 6.65002 0.3 0 360 arc fill
+0.5 setgray 0.099445 0.880664 moveto 0.099445 0.880664 0.3 0 360 arc fill
+0.5 setgray 3.31673 4.80822 moveto 3.31673 4.80822 0.3 0 360 arc fill
+0.5 setgray 9.02363 10.3145 moveto 9.02363 10.3145 0.3 0 360 arc fill
+0.5 setgray 11.519 10.3762 moveto 11.519 10.3762 0.3 0 360 arc fill
+0.5 setgray 9.95565 4.79273 moveto 9.95565 4.79273 0.3 0 360 arc fill
+0 0 1 setrgbcolor 9.95565 4.79273 moveto 9.95565 4.79273 0.3 0 360 arc fill
+0.5 setgray 7.35041 5.64827 moveto 7.35041 5.64827 0.3 0 360 arc fill
+0.5 setgray 56.6852 28.2049 moveto 56.6852 28.2049 0.3 0 360 arc fill
+0.5 setgray 31.7129 17.6436 moveto 31.7129 17.6436 0.3 0 360 arc fill
+0.5 setgray 35.893 9.56334 moveto 35.893 9.56334 0.3 0 360 arc fill
+0.5 setgray 6.09824 19.0415 moveto 6.09824 19.0415 0.3 0 360 arc fill
+0.5 setgray 12.6911 4.60813 moveto 12.6911 4.60813 0.3 0 360 arc fill
+0 0 1 setrgbcolor 12.6911 4.60813 moveto 12.6911 4.60813 0.3 0 360 arc fill
+0.5 setgray 15.2974 3.71546 moveto 15.2974 3.71546 0.3 0 360 arc fill
+0.5 setgray 59.3617 13.3807 moveto 59.3617 13.3807 0.3 0 360 arc fill
+0.5 setgray 17.359 15.433 moveto 17.359 15.433 0.3 0 360 arc fill
+0.5 setgray 12.9149 27.2677 moveto 12.9149 27.2677 0.3 0 360 arc fill
+0.5 setgray 24.526 16.947 moveto 24.526 16.947 0.3 0 360 arc fill
+0.5 setgray 23.2635 4.42599 moveto 23.2635 4.42599 0.3 0 360 arc fill
+0.5 setgray 42.5892 7.19732 moveto 42.5892 7.19732 0.3 0 360 arc fill
+0.5 setgray 50.5224 6.38255 moveto 50.5224 6.38255 0.3 0 360 arc fill
+0.5 setgray 50.7589 25.2453 moveto 50.7589 25.2453 0.3 0 360 arc fill
+0.5 setgray 37.7726 21.7624 moveto 37.7726 21.7624 0.3 0 360 arc fill
+0.5 setgray 29.6386 2.72199 moveto 29.6386 2.72199 0.3 0 360 arc fill
+0.5 setgray 4.36115 26.5412 moveto 4.36115 26.5412 0.3 0 360 arc fill
+% 0.5 setgray 19.6941 22.6923 moveto 19.6941 22.6923 0.3 0 360 arc fill
+1 0 0 setrgbcolor 10.9 4.6 moveto 10.9 4.6 0.3 0 360 arc fill
+grestore
+grestore
+
+showpage
+%%Trailer
+%EOF

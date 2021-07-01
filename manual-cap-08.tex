@@ -1,0 +1,37 @@
+
+          %-----------------%
+\chapter{~~More on manifolds}\label{\numb section 8}
+          %-----------------%
+
+This section gives some details on the notion of manifold in \maniFEM.
+
+Let us begin by recalling that, in this manual, we use the term ``manifold'' to refer to
+a manifold without boundary.
+Of course we will only mesh a bounded domain of the manifold, so the meshes will have a boundary.
+We may also mesh an entire compact manifold like a circle or a sphere or a torus;
+such a mesh will have no boundary.
+
+
+          %-----------------------------------------%
+\section{~~Projecting points on an implicit manifold}\label{\numb section 8.\numb parag 1}
+          %-----------------------------------------%
+
+In many examples we consider a submanifold of $ \mathbb{R}^n $ defined by an implicit equation
+(or by several implicit equations).
+When meshing (a bounded domain of) such a manifold, we often need to project points in
+the surrounding space onto our manifold. This projection operation is achieved by solving
+the equation (or system of equations) defining the submanifold.
+These equations are solved numerically by using a Newton-like algorithm.
+See e.g.\ Appendix B in [BTL].%
+\footnote{C.~Barbarosie, A.M.~Toader, S.~Lopes, A gradient-type algorithm for constrained
+optimization with application to microstructure optimization, Discrete and Continuous Dynamical
+Systems series B, 25, p.\ 1729-1755, 2020}
+This algoritm converges only if the initial guess (that is, the coordinates of the point we are
+trying to project) is close enough to the manifold.
+The user should take this limitation into account.
+
+Many {\small\tt Mesh} constructors project vertices on the current {\small\tt working\_manifold}
+wihtout the user's assistance.
+On the other hand, vertices can be explicitly {\small\tt project}ed if necessary.
+Paragraphs \ref{\numb section 2.\numb parag 3} -- \ref{\numb section 2.\numb parag 12},
+\ref{\numb section 3.\numb parag 2} -- \ref{\numb section 3.\numb parag 9} show such examples.

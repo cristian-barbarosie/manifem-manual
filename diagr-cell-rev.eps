@@ -1,0 +1,365 @@
+%!PS-Adobe-2.0 EPSF-1.2
+%%BoundingBox: 38 0 410 380
+
+% A macro for making a box. Takes four arguments xmin, ymin, xmax, ymax.
+/box{4 -1 roll dup 5 -1 roll dup 3 1 roll moveto % xmin ymin
+% we have now on the stack xmax ymax xmin ymin
+3 -1 roll dup 4 -1 roll exch lineto % xmin ymax
+% we have now on the stack xmax ymin ymax
+3 -1 roll dup 3 -1 roll lineto % xmax ymax
+% we have now on the stack ymin xmax
+exch lineto % xmax ymin
+closepath stroke}def
+
+% A macro for making a rounded box.
+% Takes five arguments xmin, ymin, xmax, ymax, r.
+/roundbox
+{ dup 5 -1 roll dup
+  % we have now on the stack xmin xmax ymax r r ymin ymin
+  3 -1 roll add
+  % we have now on the stack xmin xmax ymax r ymin ymin+r
+  6 -1 roll dup
+  % we have now on the stack xmax ymax r ymin ymin+r xmin xmin
+  3 -1 roll
+  % we have now on the stack xmax ymax r ymin xmin xmin ymin+r
+moveto % xmin ymin+r
+  % we have now on the stack xmax ymax r ymin xmin
+  dup dup dup
+  % we have now on the stack xmax ymax r ymin xmin xmin xmin xmin
+  6 -1 roll dup dup dup
+  % we have now on the stack xmax ymax ymin xmin xmin xmin xmin r r r r
+  5 -1 roll add
+  % we have now on the stack xmax ymax ymin xmin xmin xmin r r r xmin+r
+  8 -1 roll dup dup dup
+  % we have now on the stack xmax ymax xmin xmin xmin r r r xmin+r ymin ymin ymin ymin
+  9 -1 roll exch
+  % we have now on the stack xmax ymax xmin xmin r r r xmin+r ymin ymin ymin xmin ymin
+  10 -1 roll 4 -1 roll
+  % we have now on the stack xmax ymax xmin r r r xmin+r ymin ymin xmin ymin xmin ymin
+  7 -2 roll
+  % we have now on the stack xmax ymax xmin r r r ymin xmin ymin xmin ymin xmin+r ymin
+curveto % xmin ymin xmin ymin xmin+r ymin
+  % we have now on the stack xmax ymax xmin r r r ymin
+  dup 8 -1 roll dup dup dup dup
+  % we have now on the stack ymax xmin r r r ymin ymin xmax xmax xmax xmax xmax
+  8 -1 roll sub
+  % we have now on the stack ymax xmin r r ymin ymin xmax xmax xmax xmax xmax-r
+  6 -1 roll
+  % we have now on the stack ymax xmin r r ymin xmax xmax xmax xmax xmax-r ymin
+lineto % xmax-r ymin
+  % we have now on the stack ymax xmin r r ymin xmax xmax xmax xmax
+  5 -1 roll dup dup
+  % we have now on the stack ymax xmin r r xmax xmax xmax xmax ymin ymin ymin
+  8 -1 roll add
+  % we have now on the stack ymax xmin r xmax xmax xmax xmax ymin ymin ymin+r
+  4 -2 roll 
+  % we have now on the stack ymax xmin r xmax xmax xmax ymin ymin+r xmax ymin
+  5 -2 roll
+  % we have now on the stack ymax xmin r xmax xmax ymin+r xmax ymin xmax ymin
+  6 -2 roll
+  % we have now on the stack ymax xmin r xmax xmax ymin xmax ymin xmax ymin+r
+curveto % xmax ymin xmax ymin xmax ymin+r
+  % we have now on the stack ymax xmin r xmax
+  exch dup dup dup
+  % we have now on the stack ymax xmin xmax r r r r
+  7 -1 roll dup dup dup dup
+  % we have now on the stack xmin xmax r r r r ymax ymax ymax ymax ymax
+  10 -1 roll dup dup dup
+  % we have now on the stack xmin r r r r ymax ymax ymax ymax ymax xmax xmax xmax xmax
+  5 -1 roll 10 -1 roll sub
+  % we have now on the stack xmin r r r ymax ymax ymax ymax xmax xmax xmax xmax ymax-r
+lineto % xmax ymax-r
+  % we have now on the stack xmin r r r ymax ymax ymax ymax xmax xmax xmax
+  8 -1 roll sub
+  % we have now on the stack xmin r r ymax ymax ymax ymax xmax xmax xmax-r
+  4 -2 roll exch
+  % we have now on the stack xmin r r ymax ymax ymax xmax xmax-r xmax ymax
+  5 -2 roll exch
+  % we have now on the stack xmin r r ymax ymax xmax-r xmax ymax xmax ymax
+  6 -2 roll exch
+  % we have now on the stack xmin r r ymax xmax ymax xmax ymax xmax-r ymax
+curveto % xmax ymax xmax ymax xmax-r ymax
+  % we have now on the stack xmin r r ymax
+  dup dup dup
+  % we have now on the stack xmin r r ymax ymax ymax ymax
+  7 -1 roll dup dup dup
+  % we have now on the stack r r ymax ymax ymax ymax xmin xmin xmin xmin
+  9 -1 roll add
+  % we have now on the stack r ymax ymax ymax ymax xmin xmin xmin xmin+r
+  5 -1 roll
+  % we have now on the stack r ymax ymax ymax xmin xmin xmin xmin+r ymax
+lineto % xmin+r ymax
+  % we have now on the stack r ymax ymax ymax xmin xmin xmin
+  7 -2 roll exch sub
+  % we have now on the stack ymax ymax xmin xmin xmin ymax-r
+  5 -2 roll exch
+  % we have now on the stack ymax xmin xmin ymax-r xmin ymax
+  6 -2 roll exch
+  % we have now on the stack xmin ymax-r xmin ymax xmin ymax
+  6 -2 roll
+  % we have now on the stack xmin ymax xmin ymax xmin ymax-r
+curveto
+closepath stroke
+}def
+
+% these procedures were posted in comp.lang.postscript
+% by Bill Lee bill@leeweyr.sccsi.com 
+% Apr 19 1995
+% subject: arc with arrow head
+
+
+%* _____________________________ Arrows ____________________________________ 
+
+%* Procedure to draw the path for an arrow head. Note: the arrowhead will be 
+%* added to the current path. The arrowhead will also be drawn and filled. 
+%* 
+%* Usage: Linewidth deltaX deltaY rArrowHead 
+%* 
+%* where: LineWidth is the width in points of the arrow head lines 
+%* 
+%* deltaX and deltaY define the direction that the arrow points 
+%* 
+%* Note: If Linewidth is zero, a value of 1 will be substituted 
+%*
+/rArrowHead { 
+exch atan matrix currentmatrix exch rotate exch 
+dup 0 eq 
+{ pop 1 } if 
+dup scale 
+-7 2 rlineto 
+1 -2 rlineto 
+-1 -2 rlineto 
+% closepath
+% with closepath we get a sharp arrow
+7 2 rlineto
+% with rlineto we get a pointless arrow (not ugly)
+currentpoint 
+gsave
+newpath moveto 
+-7 2 rlineto 
+1 -2 rlineto 
+-1 -2 rlineto 
+closepath 
+fill 
+grestore 
+setmatrix 
+} def 
+
+%* Procedure to draw the path for an arrow head. Note: the arrowhead will be 
+%* added to the current path. The arrowhead will also be drawn and filled. 
+%* 
+%* Usage: Linewidth PreviousX PreviousY 
+%* ArrowHead 
+%* 
+%* where: LineWidth is the width in points of the arrow head 
+%* lines 
+%* 
+%* PreviousX and PreviousY along with the currentpoint 
+%* define the direction that the arrow points 
+%* 
+%* Note: If Linewidth is zero, a value of 1 will be substituted 
+/ArrowHead { 
+currentpoint moveto 
+currentpoint 
+4 2 roll exch 4 -1 roll exch 
+sub 3 1 roll sub 
+exch atan matrix currentmatrix exch rotate exch 
+dup 0 eq 
+{ pop 1 } if 
+dup scale 
+-7 2 rlineto 
+1 -2 rlineto 
+-1 -2 rlineto 
+7 2 rlineto 
+currentpoint 
+gsave 
+newpath moveto 
+-7 2 rlineto 
+1 -2 rlineto 
+-1 -2 rlineto 
+closepath 
+fill 
+grestore 
+setmatrix 
+} bind def 
+
+%* Procedure to draw the path for an arrow head. Note: the arrowhead will be 
+%* added to the current path. The arrowhead will also be drawn and filled. 
+%* 
+%* Usage: Linewidth PreviousX PreviousY ArrowHead 
+%* 
+%* where: LineWidth is the width in points of the arrow head lines 
+%* 
+%* PreviousX and PreviousY along with the currentpoint 
+%* define the direction that the arrow points 
+%* 
+%* Note: If Linewidth is zero, a value of 1 will be substituted 
+%*
+/ArrowHead { 
+currentpoint 
+4 2 roll exch 4 -1 roll exch 
+sub 3 1 roll sub
+rArrowHead
+} def 
+
+%* _____________________________ RLineto^ ____________________________________ 
+%* Procedure to add a relative line to the current path and then add the 
+%* path for an arrow on its end. 
+%* 
+%* Usage: x y RLineto^ 
+%* 
+%* where: x and y are the offsets from the current point 
+%* 
+/RLineto^ { 
+currentlinewidth currentpoint 5 3 roll 
+rlineto 
+ArrowHead 
+} bind def 
+
+%* _____________________________ Lineto^ ____________________________________ 
+%* Procedure to add a line to the current path and then add the 
+%* path for an arrow on its end. 
+%* 
+%* Usage: x y Lineto^ 
+%* 
+%* where: x and y are the new points for the path 
+%* 
+/Lineto^ { 
+currentlinewidth currentpoint 5 3 roll 
+lineto 
+ArrowHead 
+} bind def 
+
+%* _____________________________ Arc^ ____________________________________ 
+%* Procedure to add an arc to the current path and then add the 
+%* path for arrow on its end. 
+%* 
+%* Usage: x y r ang1 ang2 Arc^ 
+%* 
+%* where: x, y, ang1, ang2, and r are the normal parameters 
+%* for drawing an arc. 
+%* 
+/Arc^ { 
+5 copy arc 
+exch pop 2 sub 
+dup cos 2 index mul 4 index add 
+exch sin 2 index mul 3 index add 
+currentlinewidth 3 1 roll 
+ArrowHead pop pop pop 
+} bind def 
+
+%* _____________________________ Arcn^ ____________________________________ 
+%* Procedure to add an arc to the current path and then add the 
+%* path for arrow on its end. 
+%* 
+%* Usage: x y r ang1 ang2 Arcn^ 
+%* 
+%* where: x, y, ang1, ang2, and r are the normal parameters 
+%* for drawing an arcn. 
+%* 
+/Arcn^ { 
+5 copy arcn 
+exch pop 2 add 
+dup cos 2 index mul 4 index add 
+exch sin 2 index mul 3 index add 
+currentlinewidth 3 1 roll 
+ArrowHead pop pop pop 
+} bind def 
+
+gsave
+0.5 setlinewidth
+0.5 setgray
+
+125 353 215 375 10 roundbox
+130 361 moveto (tag::Util::Core) gsave 1 -1 scale show grestore
+
+gsave [3 3] 0 setdash
+170 353 moveto 170 322 lineto stroke grestore
+170 322 moveto 0.9 0 -1 rArrowHead
+
+51 298 230 320 10 roundbox
+56 306 moveto (tag::Util::Core::DelegateDispose) gsave 1 -1 scale show grestore
+
+gsave [3 3] 0 setdash
+175 298 moveto 210 267 lineto stroke grestore
+210 267 moveto 0.9 1.15 -1 rArrowHead
+
+245 298 390 320 10 roundbox
+252 306 moveto (tag::Util::Core::Inactive) gsave 1 -1 scale show grestore
+
+gsave [3 3] 0 setdash
+270 298 moveto 220 267 lineto stroke grestore
+220 267 moveto 0.9 -1.25 -1 rArrowHead
+
+180 243 245 265 10 roundbox
+182 251 moveto (Cell::Core) gsave 1 -1 scale show grestore
+
+215 243 moveto 165 212 lineto stroke
+165 212 moveto 0.9 -1.4 -1 rArrowHead
+
+110 188 194 210 10 roundbox
+111 196 moveto (Cell::Negative) gsave 1 -1 scale show grestore
+
+220 243 moveto 270 212 lineto stroke
+270 212 moveto 0.9 1.4 -1 rArrowHead
+
+240 188 323 211 10 roundbox
+241 196 moveto (Cell::Positive) gsave 1 -1 scale show grestore
+
+
+
+
+150 188 moveto 120 157 lineto stroke
+120 157 moveto 0.9 -0.9 -1 rArrowHead
+
+40 133 165 155 10 roundbox
+40 141 moveto (Cell::Negative::Vertex) gsave 1 -1 scale show grestore
+
+277 188 moveto 277 157 lineto stroke
+277 157 moveto 0.9 0 -1 rArrowHead
+
+210 133 335 155 10 roundbox
+210 141 moveto (Cell::Positive::Vertex) gsave 1 -1 scale show grestore
+
+165 188 moveto 190 170 197 142 197 122 curveto
+0.9 197 132 ArrowHead stroke
+
+105 98 245 120 10 roundbox
+105 106 moveto (Cell::Negative::NotVertex) gsave 1 -1 scale show grestore
+
+300 188 moveto 345 170 352 152 352 122 curveto
+0.9 352 132 ArrowHead stroke
+
+260 98 401 120 10 roundbox
+260 106 moveto (Cell::Positive::NotVertex) gsave 1 -1 scale show grestore
+
+
+0 -90 translate 
+
+170 188 moveto 140 157 lineto stroke
+140 157 moveto 0.9 -1 -1 rArrowHead
+
+50 133 182 155 10 roundbox
+50 141 moveto (Cell::Negative::Segment) gsave 1 -1 scale show grestore
+
+320 188 moveto 290 157 lineto stroke
+290 157 moveto 0.9 -1 -1 rArrowHead
+
+210 133 339 155 10 roundbox
+210 141 moveto (Cell::Positive::Segment) gsave 1 -1 scale show grestore
+
+200 188 moveto 200 122 lineto stroke
+200 122 moveto 0.9 0 -1 rArrowHead
+
+115 98 245 120 10 roundbox
+115 106 moveto (Cell::Negative::HighDim) gsave 1 -1 scale show grestore
+
+350 188 moveto 350 122 lineto stroke
+350 122 moveto 0.9 0 -1 rArrowHead
+
+265 98 396 120 10 roundbox
+265 106 moveto (Cell::Positive::HighDim) gsave 1 -1 scale show grestore
+
+
+grestore showpage
+%EOF

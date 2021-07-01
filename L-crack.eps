@@ -1,0 +1,965 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title: L-crack
+%%Creator: GL2PS 1.4.3, (C) 1999-2020 C. Geuzaine
+%%For: Gmsh
+%%CreationDate: Thu May 13 21:27:05 2021
+%%LanguageLevel: 3
+%%DocumentData: Clean7Bit
+%%Pages: 1
+%%BoundingBox: 0 0 700 355
+%%EndComments
+%%BeginProlog
+/gl2psdict 64 dict def gl2psdict begin
+/tryPS3shading false def % set to false to force subdivision
+/rThreshold 0.0666667 def % red component subdivision threshold
+/gThreshold 0.05 def % green component subdivision threshold
+/bThreshold 0.1 def % blue component subdivision threshold
+/BD { bind def } bind def
+/C  { setrgbcolor } BD
+/G  { 0.082 mul exch 0.6094 mul add exch 0.3086 mul add neg 1.0 add setgray } BD
+/W  { setlinewidth } BD
+/LC  { setlinecap } BD
+/LJ  { setlinejoin } BD
+/FC { findfont exch /SH exch def SH scalefont setfont } BD
+/SW { dup stringwidth pop } BD
+/S  { FC moveto show } BD
+/SBC{ FC moveto SW -2 div 0 rmoveto show } BD
+/SBR{ FC moveto SW neg 0 rmoveto show } BD
+/SCL{ FC moveto 0 SH -2 div rmoveto show } BD
+/SCC{ FC moveto SW -2 div SH -2 div rmoveto show } BD
+/SCR{ FC moveto SW neg SH -2 div rmoveto show } BD
+/STL{ FC moveto 0 SH neg rmoveto show } BD
+/STC{ FC moveto SW -2 div SH neg rmoveto show } BD
+/STR{ FC moveto SW neg SH neg rmoveto show } BD
+/FCT { FC translate 0 0 } BD
+/SR  { gsave FCT moveto rotate show grestore } BD
+/SBCR{ gsave FCT moveto rotate SW -2 div 0 rmoveto show grestore } BD
+/SBRR{ gsave FCT moveto rotate SW neg 0 rmoveto show grestore } BD
+/SCLR{ gsave FCT moveto rotate 0 SH -2 div rmoveto show grestore} BD
+/SCCR{ gsave FCT moveto rotate SW -2 div SH -2 div rmoveto show grestore} BD
+/SCRR{ gsave FCT moveto rotate SW neg SH -2 div rmoveto show grestore} BD
+/STLR{ gsave FCT moveto rotate 0 SH neg rmoveto show grestore } BD
+/STCR{ gsave FCT moveto rotate SW -2 div SH neg rmoveto show grestore } BD
+/STRR{ gsave FCT moveto rotate SW neg SH neg rmoveto show grestore } BD
+/P  { newpath 0.0 360.0 arc closepath fill } BD
+/LS { newpath moveto } BD
+/L  { lineto } BD
+/LE { lineto stroke } BD
+/T  { newpath moveto lineto lineto closepath fill } BD
+/STshfill {
+      /b1 exch def /g1 exch def /r1 exch def /y1 exch def /x1 exch def
+      /b2 exch def /g2 exch def /r2 exch def /y2 exch def /x2 exch def
+      /b3 exch def /g3 exch def /r3 exch def /y3 exch def /x3 exch def
+      gsave << /ShadingType 4 /ColorSpace [/DeviceRGB]
+      /DataSource [ 0 x1 y1 r1 g1 b1 0 x2 y2 r2 g2 b2 0 x3 y3 r3 g3 b3 ] >>
+      shfill grestore } BD
+/Tm { 3 -1 roll 8 -1 roll 13 -1 roll add add 3 div
+      3 -1 roll 7 -1 roll 11 -1 roll add add 3 div
+      3 -1 roll 6 -1 roll 9 -1 roll add add 3 div C T } BD
+/STsplit {
+      4 index 15 index add 0.5 mul
+      4 index 15 index add 0.5 mul
+      4 index 15 index add 0.5 mul
+      4 index 15 index add 0.5 mul
+      4 index 15 index add 0.5 mul
+      5 copy 5 copy 25 15 roll
+      9 index 30 index add 0.5 mul
+      9 index 30 index add 0.5 mul
+      9 index 30 index add 0.5 mul
+      9 index 30 index add 0.5 mul
+      9 index 30 index add 0.5 mul
+      5 copy 5 copy 35 5 roll 25 5 roll 15 5 roll
+      4 index 10 index add 0.5 mul
+      4 index 10 index add 0.5 mul
+      4 index 10 index add 0.5 mul
+      4 index 10 index add 0.5 mul
+      4 index 10 index add 0.5 mul
+      5 copy 5 copy 40 5 roll 25 5 roll 15 5 roll 25 5 roll
+      STnoshfill STnoshfill STnoshfill STnoshfill } BD
+/STnoshfill {
+      2 index 8 index sub abs rThreshold gt
+      { STsplit }
+      { 1 index 7 index sub abs gThreshold gt
+        { STsplit }
+        { dup 6 index sub abs bThreshold gt
+          { STsplit }
+          { 2 index 13 index sub abs rThreshold gt
+            { STsplit }
+            { 1 index 12 index sub abs gThreshold gt
+              { STsplit }
+              { dup 11 index sub abs bThreshold gt
+                { STsplit }
+                { 7 index 13 index sub abs rThreshold gt
+                  { STsplit }
+                  { 6 index 12 index sub abs gThreshold gt
+                    { STsplit }
+                    { 5 index 11 index sub abs bThreshold gt
+                      { STsplit }
+                      { Tm }
+                      ifelse }
+                    ifelse }
+                  ifelse }
+                ifelse }
+              ifelse }
+            ifelse }
+          ifelse }
+        ifelse }
+      ifelse } BD
+tryPS3shading
+{ /shfill where
+  { /ST { STshfill } BD }
+  { /ST { STnoshfill } BD }
+  ifelse }
+{ /ST { STnoshfill } BD }
+ifelse
+end
+%%EndProlog
+%%BeginSetup
+/DeviceRGB setcolorspace
+gl2psdict begin
+%%EndSetup
+%%Page: 1 1
+%%BeginPageSetup
+%%EndPageSetup
+mark
+0 0 moveto 700 0 lineto 700 355 lineto 0 355 lineto
+closepath clip newpath
+gsave
+1.0 1.0 scale
+1 W
+1 0.501211 0.0204308 C
+0 202.402 LS
+20.8736 202.402 L
+20.8736 252.038 L
+0 252.038 LE
+20.8736 252.038 LS
+20.8736 202.402 L
+85.5813 202.402 L
+85.5813 252.038 L
+20.8736 252.038 LE
+85.5813 252.038 LS
+85.5813 202.402 L
+150.289 202.402 L
+150.289 252.038 L
+85.5813 252.038 LE
+150.289 252.038 LS
+150.289 202.402 L
+214.997 202.402 L
+214.997 252.038 L
+150.289 252.038 LE
+214.997 252.038 LS
+214.997 202.402 L
+279.704 202.402 L
+279.704 252.038 L
+214.997 252.038 LE
+279.704 252.038 LS
+279.704 202.402 L
+344.412 202.402 L
+344.412 252.038 L
+279.704 252.038 LE
+0 252.038 LS
+20.8736 252.038 L
+20.8736 301.674 L
+0 301.674 LE
+20.8736 301.674 LS
+20.8736 252.038 L
+85.5813 252.038 L
+85.5813 301.674 L
+20.8736 301.674 LE
+85.5813 301.674 LS
+85.5813 252.038 L
+150.289 252.038 L
+150.289 301.674 L
+85.5813 301.674 LE
+150.289 301.674 LS
+150.289 252.038 L
+214.997 252.038 L
+214.997 301.674 L
+150.289 301.674 LE
+214.997 301.674 LS
+214.997 252.038 L
+279.704 252.038 L
+279.704 301.674 L
+214.997 301.674 LE
+279.704 301.674 LS
+279.704 252.038 L
+344.412 252.038 L
+344.412 301.674 L
+279.704 301.674 LE
+0 301.674 LS
+20.8736 301.674 L
+20.8736 351.31 L
+0 351.31 LE
+20.8736 351.31 LS
+20.8736 301.674 L
+85.5813 301.674 L
+85.5813 351.31 L
+20.8736 351.31 LE
+85.5813 351.31 LS
+85.5813 301.674 L
+150.289 301.674 L
+150.289 351.31 L
+85.5813 351.31 LE
+150.289 351.31 LS
+150.289 301.674 L
+214.997 301.674 L
+214.997 351.31 L
+150.289 351.31 LE
+214.997 351.31 LS
+214.997 301.674 L
+279.704 301.674 L
+279.704 351.31 L
+214.997 351.31 LE
+279.704 351.31 LS
+279.704 301.674 L
+344.412 301.674 L
+344.412 351.31 L
+279.704 351.31 LE
+0 351.31 LS
+20.8736 351.31 L
+20.8736 355 L
+20.8736 351.31 L
+85.5813 351.31 L
+85.5813 355 L
+85.5813 351.31 L
+150.289 351.31 L
+150.289 355 L
+150.289 351.31 L
+214.997 351.31 L
+214.997 355 L
+214.997 351.31 L
+279.704 351.31 L
+279.704 355 L
+279.704 351.31 L
+344.412 351.31 L
+344.412 355 LE
+357.353 14.7777 LS
+357.353 0 LE
+411.276 0 LS
+411.276 14.7777 L
+357.353 14.7777 LE
+411.276 14.7777 LS
+411.276 0 LE
+465.2 0 LS
+465.2 14.7777 L
+411.276 14.7777 LE
+465.2 14.7777 LS
+465.2 0 LE
+519.123 0 LS
+519.123 14.7777 L
+465.2 14.7777 LE
+519.123 14.7777 LS
+519.123 0 LE
+573.045 0 LS
+573.045 14.7777 L
+519.123 14.7777 LE
+573.045 14.7777 LS
+573.045 0 LE
+626.969 0 LS
+626.969 14.7777 L
+573.045 14.7777 LE
+626.969 14.7777 LS
+626.969 0 LE
+680.892 0 LS
+680.892 14.7777 L
+626.969 14.7777 LE
+680.892 14.7777 LS
+680.892 0 LE
+721 14.7777 LS
+680.892 14.7777 LE
+357.353 58.2092 LS
+357.353 14.7777 L
+411.276 14.7777 L
+411.276 58.2092 L
+357.353 58.2092 LE
+411.276 58.2092 LS
+411.276 14.7777 L
+465.2 14.7777 L
+465.2 58.2092 L
+411.276 58.2092 LE
+465.2 58.2092 LS
+465.2 14.7777 L
+519.123 14.7777 L
+519.123 58.2092 L
+465.2 58.2092 LE
+519.123 58.2092 LS
+519.123 14.7777 L
+573.045 14.7777 L
+573.045 58.2092 L
+519.123 58.2092 LE
+573.045 58.2092 LS
+573.045 14.7777 L
+626.969 14.7777 L
+626.969 58.2092 L
+573.045 58.2092 LE
+626.969 58.2092 LS
+626.969 14.7777 L
+680.892 14.7777 L
+680.892 58.2092 L
+626.969 58.2092 LE
+680.892 58.2092 LS
+680.892 14.7777 L
+721 14.7777 LE
+721 58.2092 LS
+680.892 58.2092 LE
+357.353 101.641 LS
+357.353 58.2092 L
+411.276 58.2092 L
+411.276 101.641 L
+357.353 101.641 LE
+411.276 101.641 LS
+411.276 58.2092 L
+465.2 58.2092 L
+465.2 101.641 L
+411.276 101.641 LE
+465.2 101.641 LS
+465.2 58.2092 L
+519.123 58.2092 L
+519.123 101.641 L
+465.2 101.641 LE
+519.123 101.641 LS
+519.123 58.2092 L
+573.045 58.2092 L
+573.045 101.641 L
+519.123 101.641 LE
+573.045 101.641 LS
+573.045 58.2092 L
+626.969 58.2092 L
+626.969 101.641 L
+573.045 101.641 LE
+626.969 101.641 LS
+626.969 58.2092 L
+680.892 58.2092 L
+680.892 101.641 L
+626.969 101.641 LE
+680.892 101.641 LS
+680.892 58.2092 L
+721 58.2092 LE
+721 101.641 LS
+680.892 101.641 LE
+357.353 145.072 LS
+357.353 101.641 L
+411.276 101.641 L
+411.276 145.072 L
+357.353 145.072 LE
+411.276 145.072 LS
+411.276 101.641 L
+465.2 101.641 L
+465.2 145.072 L
+411.276 145.072 LE
+465.2 145.072 LS
+465.2 101.641 L
+519.123 101.641 L
+519.123 145.072 L
+465.2 145.072 LE
+519.123 145.072 LS
+519.123 101.641 L
+573.045 101.641 L
+573.045 145.072 L
+519.123 145.072 LE
+573.045 145.072 LS
+573.045 101.641 L
+626.969 101.641 L
+626.969 145.072 L
+573.045 145.072 LE
+626.969 145.072 LS
+626.969 101.641 L
+680.892 101.641 L
+680.892 145.072 L
+626.969 145.072 LE
+680.892 145.072 LS
+680.892 101.641 L
+721 101.641 LE
+721 145.072 LS
+680.892 145.072 LE
+357.353 188.504 LS
+357.353 145.072 L
+411.276 145.072 L
+411.276 188.504 L
+357.353 188.504 LE
+411.276 188.504 LS
+411.276 145.072 L
+465.2 145.072 L
+465.2 188.504 L
+411.276 188.504 LE
+465.2 188.504 LS
+465.2 145.072 L
+519.123 145.072 L
+519.123 188.504 L
+465.2 188.504 LE
+519.123 188.504 LS
+519.123 145.072 L
+573.045 145.072 L
+573.045 188.504 L
+519.123 188.504 LE
+573.045 188.504 LS
+573.045 145.072 L
+626.969 145.072 L
+626.969 188.504 L
+573.045 188.504 LE
+626.969 188.504 LS
+626.969 145.072 L
+680.892 145.072 L
+680.892 188.504 L
+626.969 188.504 LE
+680.892 188.504 LS
+680.892 145.072 L
+721 145.072 LE
+721 188.504 LS
+680.892 188.504 LE
+20.8736 0 LS
+20.8736 14.7777 L
+0 14.7777 LE
+20.8736 14.7777 LS
+20.8736 0 LE
+85.5813 0 LS
+85.5813 14.7777 L
+20.8736 14.7777 LE
+85.5813 14.7777 LS
+85.5813 0 LE
+150.289 0 LS
+150.289 14.7777 L
+85.5813 14.7777 LE
+150.289 14.7777 LS
+150.289 0 LE
+214.997 0 LS
+214.997 14.7777 L
+150.289 14.7777 LE
+214.997 14.7777 LS
+214.997 0 LE
+279.704 0 LS
+279.704 14.7777 L
+214.997 14.7777 LE
+279.704 14.7777 LS
+279.704 0 LE
+344.412 0 LS
+344.412 14.7777 L
+279.704 14.7777 LE
+0 14.7777 LS
+20.8736 14.7777 L
+20.8736 58.2092 L
+0 58.2092 LE
+20.8736 58.2092 LS
+20.8736 14.7777 L
+85.5813 14.7777 L
+85.5813 58.2092 L
+20.8736 58.2092 LE
+85.5813 58.2092 LS
+85.5813 14.7777 L
+150.289 14.7777 L
+150.289 58.2092 L
+85.5813 58.2092 LE
+150.289 58.2092 LS
+150.289 14.7777 L
+214.997 14.7777 L
+214.997 58.2092 L
+150.289 58.2092 LE
+214.997 58.2092 LS
+214.997 14.7777 L
+279.704 14.7777 L
+279.704 58.2092 L
+214.997 58.2092 LE
+279.704 58.2092 LS
+279.704 14.7777 L
+344.412 14.7777 L
+344.412 58.2092 L
+279.704 58.2092 LE
+0 58.2092 LS
+20.8736 58.2092 L
+20.8736 101.641 L
+0 101.641 LE
+20.8736 101.641 LS
+20.8736 58.2092 L
+85.5813 58.2092 L
+85.5813 101.641 L
+20.8736 101.641 LE
+85.5813 101.641 LS
+85.5813 58.2092 L
+150.289 58.2092 L
+150.289 101.641 L
+85.5813 101.641 LE
+150.289 101.641 LS
+150.289 58.2092 L
+214.997 58.2092 L
+214.997 101.641 L
+150.289 101.641 LE
+214.997 101.641 LS
+214.997 58.2092 L
+279.704 58.2092 L
+279.704 101.641 L
+214.997 101.641 LE
+279.704 101.641 LS
+279.704 58.2092 L
+344.412 58.2092 L
+344.412 101.641 L
+279.704 101.641 LE
+0 101.641 LS
+20.8736 101.641 L
+20.8736 145.072 L
+0 145.072 LE
+20.8736 145.072 LS
+20.8736 101.641 L
+85.5813 101.641 L
+85.5813 145.072 L
+20.8736 145.072 LE
+85.5813 145.072 LS
+85.5813 101.641 L
+150.289 101.641 L
+150.289 145.072 L
+85.5813 145.072 LE
+150.289 145.072 LS
+150.289 101.641 L
+214.997 101.641 L
+214.997 145.072 L
+150.289 145.072 LE
+214.997 145.072 LS
+214.997 101.641 L
+279.704 101.641 L
+279.704 145.072 L
+214.997 145.072 LE
+279.704 145.072 LS
+279.704 101.641 L
+344.412 101.641 L
+344.412 145.072 L
+279.704 145.072 LE
+0 145.072 LS
+20.8736 145.072 L
+20.8736 188.504 L
+0 188.504 LE
+20.8736 188.504 LS
+20.8736 145.072 L
+85.5813 145.072 L
+85.5813 188.504 L
+20.8736 188.504 LE
+85.5813 188.504 LS
+85.5813 145.072 L
+150.289 145.072 L
+150.289 188.504 L
+85.5813 188.504 LE
+150.289 188.504 LS
+150.289 145.072 L
+214.997 145.072 L
+214.997 188.504 L
+150.289 188.504 LE
+214.997 188.504 LS
+214.997 145.072 L
+279.704 145.072 L
+279.704 188.504 L
+214.997 188.504 LE
+279.704 188.504 LS
+279.704 145.072 L
+344.412 145.072 L
+344.412 188.504 L
+279.704 188.504 LE
+grestore
+
+
+%* _____________________________ Arrows ____________________________________ 
+
+%* Procedure to draw the path for an arrow head. Note: the arrowhead will be 
+%* added to the current path. The arrowhead will also be drawn and filled. 
+%* 
+%* Usage: Linewidth deltaX deltaY ArrowHead 
+%* 
+%* where: LineWidth is the width in points of the arrow head lines 
+%* 
+%* deltaX and deltaY define the direction that the arrow points 
+%* 
+%* Note: If Linewidth is zero, a value of 1 will be substituted 
+%*
+/rArrowHead { 
+exch atan matrix currentmatrix exch rotate exch 
+dup 0 eq 
+{ pop 1 } if 
+dup scale 
+-7 2 rlineto 
+1 -2 rlineto 
+-1 -2 rlineto 
+7 2 rlineto 
+currentpoint 
+gsave 
+newpath moveto 
+-7 2 rlineto 
+1 -2 rlineto 
+-1 -2 rlineto 
+closepath 
+fill 
+grestore 
+setmatrix 
+} def 
+
+%* Procedure to draw the path for an arrow head. Note: the arrowhead will be 
+%* added to the current path. The arrowhead will also be drawn and filled. 
+%* 
+%* Usage: Linewidth PreviousX PreviousY ArrowHead 
+%* 
+%* where: LineWidth is the width in points of the arrow head lines 
+%* 
+%* PreviousX and PreviousY along with the currentpoint 
+%* define the direction that the arrow points 
+%* 
+%* Note: If Linewidth is zero, a value of 1 will be substituted 
+%*
+/ArrowHead { 
+currentpoint 
+4 2 roll exch 4 -1 roll exch 
+sub 3 1 roll sub
+rArrowHead
+} def 
+
+%* _____________________________ RLineto^ ____________________________________ 
+%* Procedure to add a relative line to the current path and then add the 
+%* path for an arrow on its end. 
+%* 
+%* Usage: x y RLineto^ 
+%* 
+%* where: x and y are the offsets from the current point 
+%* 
+/RLineto^ { 
+currentlinewidth currentpoint 5 3 roll 
+rlineto 
+ArrowHead 
+} def 
+
+%* _____________________________ Lineto^ ____________________________________ 
+%* Procedure to add a line to the current path and then add the 
+%* path for an arrow on its end. 
+%* 
+%* Usage: x y Lineto^ 
+%* 
+%* where: x and y are the new points for the path 
+%* 
+/Lineto^ { 
+currentlinewidth currentpoint 5 3 roll 
+lineto 
+ArrowHead 
+} def 
+
+%* _____________________________ Arc^ ____________________________________ 
+%* Procedure to add an arc to the current path and then add the 
+%* path for arrow on its end. 
+%* 
+%* Usage: x y r ang1 ang2 Arc^ 
+%* 
+%* where: x, y, ang1, ang2, and r are the normal parameters 
+%* for drawing an arc. 
+%* 
+/Arc^ { 
+5 copy arc 
+exch pop 2 sub 
+dup cos 2 index mul 4 index add 
+exch sin 2 index mul 3 index add 
+currentlinewidth 3 1 roll 
+ArrowHead pop pop pop 
+} def 
+
+%* _____________________________ Arcn^ ____________________________________ 
+%* Procedure to add an arc to the current path and then add the 
+%* path for arrow on its end. 
+%* 
+%* Usage: x y r ang1 ang2 Arcn^ 
+%* 
+%* where: x, y, ang1, ang2, and r are the normal parameters 
+%* for drawing an arcn. 
+%* 
+/Arcn^ { 
+5 copy arcn 
+exch pop 2 add 
+dup cos 2 index mul 4 index add 
+exch sin 2 index mul 3 index add 
+currentlinewidth 3 1 roll 
+ArrowHead pop pop pop 
+} def
+
+
+
+% Anabela Silva drew all arrows below
+
+1 setlinewidth
+0 0.1 1 setrgbcolor
+
+371 80 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+371 123 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+371 165 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+371 36 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+422 165 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+422 119 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+422 77 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+422 34 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+478 33 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+478 77 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+478 123 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+478 165 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+530 165 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+530 123 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+530 77 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+530 35 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+587 165 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+587 123 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+587 77 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+587 35 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+640 165 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+640 123 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+640 77 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+640 35 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+300 35 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+300 80 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+300 122 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+300 165 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+235 35 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+235 80 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+235 122 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+235 165 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+170 35 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+170 80 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+170 122 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+170 165 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+105 35 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+105 80 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+105 122 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+105 165 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+40 35 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+40 80 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+40 122 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+40 165 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+40 225 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+40 275 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+40 325 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+100 225 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+100 275 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+100 325 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+171 225 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+171 275 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+171 325 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+234 225 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+234 275 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+234 325 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+300 225 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+300 275 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+300 325 moveto currentpoint exch 14 add exch
+14 180 520 arc
+currentlinewidth -11 -15 rArrowHead stroke
+
+
+1.5 setlinewidth
+1 0.1 0.1 setrgbcolor
+
+344 0 moveto 344 15 Lineto^ stroke
+344 15 moveto 344 59 Lineto^ stroke
+344 59 moveto 344 100 Lineto^ stroke
+344 100 moveto 344 142 Lineto^ stroke
+344 142 moveto 344 184 Lineto^ stroke
+344 188 moveto 280 188 Lineto^ stroke
+280 188 moveto 218 188 Lineto^ stroke
+218 188 moveto 150 188 Lineto^ stroke
+150 188 moveto 85 188 Lineto^ stroke
+85 188 moveto 20 188 Lineto^ stroke
+20 188 moveto -20 188 Lineto^ stroke
+
+-20 202 moveto 20 202 Lineto^ stroke
+20 202 moveto 85 202 Lineto^ stroke
+85 202 moveto 150 202 Lineto^ stroke
+150 202 moveto 218 202 Lineto^ stroke
+218 202 moveto 280 202 Lineto^ stroke
+280 202 moveto 344 202 Lineto^ stroke
+
+344 202 moveto 344 252 Lineto^ stroke
+344 252 moveto 344 300 Lineto^ stroke
+344 300 moveto 344 350 Lineto^ stroke
+344 350 moveto 344 400 Lineto^ stroke
+
+750 188 moveto 685 188 Lineto^ stroke
+685 188 moveto 630 188 Lineto^ stroke
+630 188 moveto 575 188 Lineto^ stroke
+575 188 moveto 520 188 Lineto^ stroke
+520 188 moveto 465 188 Lineto^ stroke
+465 188 moveto 410 188 Lineto^ stroke
+410 188 moveto 360 188 Lineto^ stroke
+358 188 moveto 358 146 Lineto^ stroke
+358 146 moveto 358 104 Lineto^ stroke
+358 104 moveto 358 58 Lineto^ stroke
+358 58 moveto 358 16 Lineto^ stroke
+358 16 moveto 358 -15 Lineto^ stroke
+
+355 220 moveto (C) show
+
+showpage
+cleartomark
+%%PageTrailer
+%%Trailer
+end
+%%EOF

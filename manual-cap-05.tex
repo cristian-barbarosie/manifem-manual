@@ -1,0 +1,169 @@
+
+          %----------------------------------------------%
+\chapter{~~Fields, functions and variational formulations}\label{\numb section 5}
+          %----------------------------------------------%
+
+
+          %--------------------%
+\section{~~Fields and functions}\label{\numb section 5.\numb parag 1}
+          %--------------------%
+
+As the reader may have already noticed, all examples in {\maniFEM} begin by declaring a
+Euclidian {\small\tt \verm{Manifold}} and then go on by building a coordinate system :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                     ]
+   \verm{Manifold} RR2 ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
+\end{Verbatim}
+
+See paragraph \numb section 11.\numb parag 3 for more details about tags.
+
+In the above, {\small\tt \verm{xy}} is a {\small\tt \verm{Function}}, a vector field actually,
+with two components, {\small\tt x} and {\small\tt y}.
+The declaration of {\small\tt xy} starts a complex process; under the curtains
+{\maniFEM} declares a {\small\tt \verm{Field}} object associated to {\small\tt xy}.
+The {\small\tt \verm{Field}} object changes the behaviour of {\maniFEM} in what regards
+initialization of {\small\tt \verm{Cell}}s.
+Since {\small\tt xy} is of type Lagrange of degree 1, each newly built vertex
+{\small\tt \verm{Cell}} will have memory space reserved for two {\small\tt double}
+precision numbers.
+If {\small\tt A} is a vertex {\small\tt \verm{Cell}}, an assignment like {\small\tt x(A) = 1.5}
+sets the value of the {\small\tt x} component of the {\small\tt \verm{Field}} associated to
+{\small\tt xy} at {\small\tt A}.
+
+If we declare {\small\tt xy} to be of type Lagrange of degree 2, not only future vertices will
+have space reserved for two {\small\tt double}s, but also future segments.
+So, we may assign the value of {\small\tt y} at the middle of segment {\small\tt AB} by using
+the syntax {\small\tt y(AB) = 0.75}.
+
+{\small\tt \verm{Function}} objects allow for arithmetic expressions like in
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                     ]
+   \verm{Function} \azul{norm} = \verm{power} ( x*x + y*y, 0.5 );
+\end{Verbatim}
+
+The {\small\tt deriv} method performs symbolic differentiation :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                     ]
+   \verm{Function} \azul{norm_x} = norm.deriv ( x );
+   \verm{Function} \azul{norm_y} = norm.deriv ( y );
+\end{Verbatim}
+
+Functions can also be integrated, see section \numb section 6.
+
+
+                 %--------------------%
+\section{~~\cinza{Fields and functions} [outdated]}\label{\numb section 5.\numb parag 2}
+                 %--------------------%
+
+{\normalfont\bfseries The code described in this paragraph is outdated and does not work.}
+
+Consider the mesh built by the code below.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                     ]
+   Mesh::intended_dimension = 2; // topological dimension
+   Mesh::initialize();
+   auto & xy = NumericField::multi_dim ("size", 2, "lives on", "points");	
+   auto & x = xy[0], & y = xy[1];
+   auto & u = NumericField::one_dim ("lives on", "points");
+   auto SW = Cell::point ("SW"); x(SW) = -1.1; y(SW) = 0.3;
+   auto SE = Cell::point ("SE"); x(SE) = 1; y(SE) = 0;
+   auto NE = Cell::point ("NE"); x(NE) = 1; y(NE) = 1;
+   auto NW = Cell::point ("NW"); x(NW) = -1; y(NW) = 1;
+   auto south ( \verm{tag}::segment, SW.reverse(), SE, \verm{tag}::divided_in, 4, xy );
+   auto east  ( \verm{tag}::segment, SE.reverse(), NE, \verm{tag}::divided_in, 2, xy );
+   auto north ( \verm{tag}::segment, NE.reverse(), NW, \verm{tag}::divided_in, 4, xy );
+   auto west  ( \verm{tag}::segment, NW.reverse(), SW, \verm{tag}::divided_in, 2, xy );
+   auto rect_mesh ( \verm{tag}::rectangle, south, east, north, west, xy );
+\end{Verbatim}
+
+Note that, besides the {\small\tt NumericField} objects {\small\tt x} and {\small\tt y}
+which we have already encountered in paragraph \numb section 1.\numb parag 1,
+we introduce another {\small\tt NumericField}, {\small\tt u}, which is meant to hold
+the values of the solution of some PDE.
+
+We now declare two functions defined on the mesh, linked to the two fields {\small\tt x} and
+{\small\tt y}.
+We can declare each function individually, as we did in paragraph \numb section 1.\numb parag 1,
+or we can declare the pair and then extract each component :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   auto & xxyy = FunctionOnMesh::from_field ( xy, "Lagrange degree one" );
+   auto & xx = xxyy[0], & yy = xxyy[1];
+\end{Verbatim}
+
+These functions are described as {\small\tt "Lagrange degree one"}, which means that they vary
+linearly along segments and also inside triangles.
+On quadrilaterals, they are polynomials of degree one, meaning they have a linear part plus
+a bi-linear one.
+
+We can also declare an unknown function and a test function, to be used in a future variational
+problem :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   auto & uu = FunctionOnMesh::unknown ( u, "Lagrange degree one");
+   auto & w = FunctionOnMesh::test ( uu );
+\end{Verbatim}
+
+The unknown {\small\tt uu} is related to the {\small\tt NumericField} previously declared,
+{\small\tt u}, which provides space to hold, at each vertex of the mesh, a real value.
+Hopefully, at the end of the day these will be the values of the solution of our PDE.
+The test function does not need to hold any values.
+The test function is an abstract object whose only use is to express the
+variational formulation.
+
+{\small\tt FunctionOnMesh} objects obey to usual arithmetic rules.
+For instance, {\small\tt (xx+yy*w)/uu} is a valid expression in \maniFEM.
+They can also be differentiated, like in {\small\tt (xx*yy).deriv(xx)}.
+Note that this expression will be evaluated right away, producing the result
+{\small\tt yy}, while expressions involving an unknown function or a test function
+will produce a delayed derivative object, to be evaluated later.
+Thus, {\small\tt w.deriv(xx)} will be evaluated only after replacing the test function
+{\small\tt w} by some function in a base of a discretized Hilbert space.
+
+{\small\tt FunctionOnMesh} objects can also be integrated through their method
+{\small\tt integrate}, which produces a delayed integral expression.
+The integral is not evaluated right away, but only later, with the use of an
+{\small\tt Integrator} object (which could be a Gauss quadrature).
+
+Integral expressions are stored as objects belonging to the class\hfil\break
+{\small\tt FunctionOnMesh::combinIntegrals}.
+These objects can be equated by using their\hfil\break
+{\small\tt operator==}, which returns a {VariationalProblem} object.
+Thus, the operator\hfil\break
+{\small\tt FunctionOnMesh::combinIntegrals::operator==} acts as a factory function
+for\hfil\break {\small\tt VariationalProblem} objects.
+For instance, {\small\tt x.integrate(rect\_mesh) == y.integrate(south)} is a syntactically valid
+expression which would produce a {\small\tt VariationalProblem} but actually
+gives a run-time error because the {\small\tt operator==} checks that the right hand side
+of the variational problem actually contains a function declared as uknown and one
+declared as test, and that the left hand side contains a test function but no unknown.
+Here is a more meaningful example :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   auto & var_pb =
+       ( uu.deriv(xx)*w.deriv(xx) + uu.deriv(yy)*w.deriv(yy) ) .integrate(rect_mesh)
+       == w.integrate(rect_mesh) + w.integrate(south);
+\end{Verbatim}
+
+Note how we can mix integrals on different domains; recall that {\small\tt south} is
+a side of {\small\tt rect\_mesh}.
+
+Dirichlet-type boundary conditions are implemented through the directive
+{\small\tt prescribe\_on} followed by one or more equalities.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ] 
+   var_pb.prescribe_on (north);  uu == 0.;          w == 0.;
+   var_pb.prescribe_on (east);   uu == xx*(1.-yy);  w == 0.;
+   var_pb.prescribe_on (west);   uu == 0.;          w == 0.;
+\end{Verbatim}
+

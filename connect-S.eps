@@ -1,0 +1,53 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox:  -30 63 82 155
+% -100 0 200 200
+
+/Helvetica findfont 10 scalefont setfont	
+-5 82 moveto (A) show
+66 82 moveto (B) show
+52 125 moveto (C) show
+-17 125 moveto (D) show
+
+40 rotate
+
+1.3 setlinewidth
+1 0.5 0 setrgbcolor
+30 60 moveto
+60 60 lineto  % A
+100 20 lineto  % B
+105 0 lineto stroke
+
+75 130 moveto
+80 110 lineto  % D
+120 70 lineto  % C
+140 65 lineto
+stroke
+
+0.8 setlinewidth
+60 60 moveto 55 40 lineto stroke
+100 20 moveto 85 15 lineto stroke
+120 70 moveto 125 90 lineto stroke
+80 110 moveto 96 113 lineto stroke
+
+[3 3] 0 setdash
+1.5 setlinewidth
+0.9 0.4 0.4 setrgbcolor
+80 110 moveto  % D
+60 60 lineto  % A
+120 70 lineto  % C
+100 20 lineto  %B
+stroke
+
+0 setgray % 0 0.35 0 setrgbcolor
+60 60 moveto  % A
+60 60 1.7 0 360 arc fill
+100 20 moveto  % B
+100 20 1.7 0 360 arc fill
+120 70 moveto  % C
+120 70 1.7 0 360 arc fill
+80 110 moveto  % D
+80 110 1.7 0 360 arc fill
+
+showpage
+%%Trailer
+%EOF

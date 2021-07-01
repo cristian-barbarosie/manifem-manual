@@ -1,0 +1,477 @@
+
+          %-------------------%
+\chapter{~~General description}\label{\numb section 1}
+          %-------------------%
+
+This section is a quick tour through \maniFEM's capabilities.
+
+
+          %---------------------%
+\section{~~An elementary example}\label{\numb section 1.\numb parag 1}
+          %---------------------%
+
+In this paragraph, we show how to build a rectangular mesh on a surface in $ \mathbb{R}^3 $ 
+and then compute the integral of a given function.
+Paragraph \ref{\numb section 1.\numb parag 3} shows a purely two-dimensional example.
+
+\begin{figure} \centering
+  \psfrag{SW}{\tt\textcolor{textindraw}{SW}}
+  \psfrag{NW}{\tt\textcolor{textindraw}{NW}}
+  \psfrag{SE}{\tt\textcolor{textindraw}{SE}}
+  \psfrag{NE}{\tt\textcolor{textindraw}{NE}}
+  \includegraphics[width=95mm]{3d-rectangle}
+  \caption{A twisted rectangular mesh}
+  \label{\numb section 1.\numb fig 1}
+\end{figure}
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=main-\ref{\numb section 1.\numb parag 1}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+#include \verde{"maniFEM.h"}
+
+using namespace \verm{maniFEM};
+using namespace std;
+
+int main ()
+
+\{  \cinza{// we choose our (geometric) space dimension :}
+   \verm{Manifold} \azul{RR3} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 3 );
+   
+   \cinza{// xyz is a map defined on our future mesh with values in RR3 :}
+   \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+
+   \cinza{// we can extract components of xyz using the [] operator}
+   \verm{Function} \azul{x} = xyz[0],  \azul{y} = xyz[1],  \azul{z} = xyz[2];
+
+   \cinza{// Let's build a rectangular mesh. First, the four corners :}
+   \verm{Cell} \azul{SW} ( \verm{tag}::vertex );  x(SW) = -1;  y(SW) = 0;  z(SW) = 0;
+   \verm{Cell} \azul{SE} ( \verm{tag}::vertex );  x(SE) =  1;  y(SE) = 0;  z(SE) = 0;
+   \verm{Cell} \azul{NE} ( \verm{tag}::vertex );  x(NE) =  1;  y(NE) = 1;  z(NE) = 0;
+   \verm{Cell} \azul{NW} ( \verm{tag}::vertex );  x(NW) = -1;  y(NW) = 1;  z(NW) = 1;
+   
+   \cinza{// we access the coordinates of a point using the () operator :}								
+   cout << \verde{"coordinates of NW : "} << x(NW) << \verde{" "} << y(NW) << \verde{" "} << z(NW) << endl;
+   \cinza{// now build the four sides of the rectangle :}
+   \verm{Mesh} \azul{south} ( \verm{tag}::segment, SW.reverse(), SE, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{east}  ( \verm{tag}::segment, SE.reverse(), NE, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{north} ( \verm{tag}::segment, NE.reverse(), NW, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{west}  ( \verm{tag}::segment, NW.reverse(), SW, \verm{tag}::divided_in, 10 );
+   
+   \cinza{// and now the rectangle :}
+   \verm{Mesh} \azul{rect_mesh} ( \verm{tag}::rectangle, south, east, north, west );
+
+   \cinza{// We may want to visualize the resulting mesh.}
+   \cinza{// Here is one way to export the mesh in the "msh" format :}
+   rect_mesh.export_msh (\verde{"rectangle.msh"});
+
+   \cinza{// Let's define a symbolic function to integrate}
+   \verm{Function} \azul{f} = x*x+1/(5+y);
+   \cinza{// and compute its integral on the rectangle,}
+   \cinza{// using Gauss quadrature with 9 points}
+
+   \verm{FiniteElement} \azul{fe}
+      ( \verm{tag}::with_master, \verm{tag}::quadrangle, \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   fe.set_integrator ( \verm{tag}::Gauss, \verm{tag}::quad_9 );
+
+   \cinza{// code below does not work yet}
+
+   \cinza{// cout << "integral of " << f.repr() << " = "}
+   \cinza{//      << fe.integrate ( f, tag::over, rect_mesh ) << endl;}
+   \cinza{// cout << "integral of " << g.repr() << " = "}
+   \cinza{//      << fe.integrate ( g, tag::over, rect_mesh ) << endl;}
+
+\}  \cinza{// end of main}
+\end{Verbatim}
+
+Paragraph \ref{\numb section 11.\numb parag 2} explains the coloring conventions observed
+in this manual for {\tt C++} code.
+
+To run this example, you will need a recent {\tt C++} compiler and the {\tt make} utility.
+Visit {\small\tt https://github.com/cristian-barbarosie/manifem}, choose a release
+and download all files to some directory in your computer.
+Latest code may be unstable, releases are stable.
+
+Launch the program through the command
+{\small\tt make run-\ref{\numb section 1.\numb parag 1}};
+a file {\small\tt rectangle.msh} should appear in the working directory.
+You may view the mesh using the software {\tt gmsh}.
+
+Expressions like {\small\tt \verm{tag}::of\_dim} and {\small\tt \verm{tag}::vertex} are
+objects belonging to the {\small\tt namespace \verm{tag}};
+we use them as arguments to many functions.
+See paragraph \ref{\numb section 11.\numb parag 3} for some details.
+
+When declaring a segment {\small\tt \verm{Mesh}}, we must {\small\tt reverse} the first vertex
+(paragraph \ref{\numb section 1.\numb parag 2} discusses the {\small\tt reverse} method).
+Paragraph \ref{\numb section 1.\numb parag 3} explains why we build
+the rectangle based on its four sides rather than on its four vertices.
+
+Note that in this example we do not have exact control on the shape of the surface being meshed.
+The coordinates of the inner vertices are defined rather vaguely by interpolating the
+coordinates of the four corners.
+See sections \ref{\numb section 2} and \ref{\numb section 3} for ways to precisely define
+a submanifold in $ \mathbb{R}^3 $ and mesh (a bounded domain of) it.
+
+
+          %----------------%
+\section{~~Cells and meshes}\label{\numb section 1.\numb parag 2}
+          %----------------%
+
+In \maniFEM, all basic constituents of meshes are called ``cells''. 
+Points are zero-dimensional cells, segments are one-dimensional cells, triangles are
+two-dimensional cells, and so on.
+
+Roughly speaking, a mesh is a collection of cells of the same dimension. 
+For efficiency reasons, meshes keep lists of cells of lower dimension, too. 
+For instance, the mesh built in paragraph \ref{\numb section 1.\numb parag 1} is 
+roughly a list of two-dimensional cells (quadrilaterals), but lists of segments and points
+are also kept.
+This represents quite some amount of redundant information, but it is useful e.g.\ for
+quickly sweeping over all vertices of a mesh.%
+\footnote {Actually, the implementation details are more complicated.
+There are different kinds of meshes, some of them keep more information (lists of cells)
+and are faster; others are slower but lighter in terms of memory occupied.
+See e.g. paragraph \ref{\numb section 11.\numb parag 6}.}
+
+A cell of dimension higher than zero is defined by its boundary, 
+which in turn is a mesh of lower dimension. 
+The boundary of a segment is a (zero-dimensional) mesh made of two points.
+The boundary of a triangle is a one-dimensional mesh made of three segments.
+Thus, a segment is essentially a pair of points, a triangle is essentially a triplet of segments, and so on.
+
+Cells and meshes are oriented. 
+An orientation of a mesh is just an orientation for each of its component cells
+(of course these orientations must be mutually compatible).
+Although this is not how the orientation is implemented internally
+(see paragraph \ref{\numb section 11.\numb parag 4}),
+an oriented point can be conceived simply as a point with a sign attached (1 or -1). 
+The orientation of a cell of dimension higher than zero is given by an orientation
+of its boundary, which is a lower-dimensional mesh.
+
+Thus, an oriented segment is essentially a pair of points, one of which has a \hbox{-1}
+attached, the other having a 1.
+We call the former ``base'' and the latter ``tip''.
+These signs are related to integration of functions along that segment.
+The integral of a function of one variable is equal to the value of the 
+primitive function at one end of the segment minus the value of the primitive at the other end.
+
+An oriented triangle is essentially a triplet of segments, each one with its own orientation.
+The orientations must be compatible to each other in the sense that each vertex 
+must be seen as positive by one of the segments and as negative by another one.
+An oriented tetrahedron can be identified with four triangles, each one with its own
+orientation.
+In such a tetrahedron, each segment must be seen as positive by one of the triangles and
+as negative by another one.
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\tt\textcolor{textindraw}{B}}
+  \includegraphics[width=90mm]{oriented-cells.eps}
+  \caption{Oriented segment, oriented pentagon}
+  \label{\numb section 1.\numb fig 2}
+\end{figure}
+
+We can think of an oriented segment as an arrow pointing from its negative extremity (base)
+towards its positive extremity (tip).
+We can think of an oriented polygon as having an arrow attached to each of it sides,
+or we can imagine a small oriented circle inside the polygon.
+
+\begin{figure} \centering
+  \includegraphics[width=110mm]{hemisphere-7}
+  \caption{Oriented meshes of dimension one and two}
+  \label{\numb section 1.\numb fig 3}
+\end{figure}
+
+A one-dimensional oriented mesh can be thought of as a chain of arrows,
+each one pointing to the next segment's base (like in figure \ref{\numb section 1.\numb fig 3}
+right).
+A two-dimensional oriented triangular mesh can be thought of as a web of triangles,
+each triangle having a small oriented circle inside (like in figure
+\ref{\numb section 1.\numb fig 3} left).
+The orientations of neighbour cells must be compatible : each segment must be seen
+in opposite orientations from the point of view of its two neighbour triangles.
+
+The above description of the orientation of a two-dimensional mesh does not depend
+on the surrounding space.
+A mesh can be immersed in some Euclidian space $ \mathbb{R}^d $ or not.
+As an extreme example, vertices may even have no coordinates at all.
+However, in the case of a two-dimensional mesh immersed in $ \mathbb{R}^3 $,
+the right hand rule establishes a correspondence between the oriented circle described above
+and an arrow normal to the surface being meshed.
+Note that the right hand rule is a convention based on the assuption that
+the surrounding space $ \mathbb{R}^3 $ has a certain orientation.
+
+Note also that an orientation of a mesh defines an orientation of its boundary.
+In the drawing below we can see two opposite orientations of a mesh, together with
+the corresponding orientation of its boundary.
+This convention is used by Stokes' theorem.
+
+\begin{figure}[ht] \centering
+\begin{subfigure}{71mm}\centering
+  \includegraphics[width=70mm]{oriented-annulus-1}
+\end{subfigure}  
+\begin{subfigure}{71mm}\centering
+  \includegraphics[width=70mm]{oriented-annulus-2}
+\end{subfigure}  
+  \caption{Mesh with two opposite orientations}
+  \label{\numb section 1.\numb fig 4}
+\end{figure}
+
+Paragraphs \ref{\numb section 1.\numb parag 3} and \ref{\numb section 3.\numb parag 18}
+show examples where the orientation of the boundary is important for joining meshes.
+
+Cells have a {\small\tt reverse} method returning the reversed cell.
+Segment {\small\tt \verm{Cell}}s have methods {\small\tt base} and {\small\tt tip} returning their extremities.
+For instance :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  \verm{Cell} \azul{B} ( \verm{tag}::vertex );
+   assert ( A.is_positive() );
+   assert ( not A.reverse().is_positive() );
+   assert ( A.reverse().reverse() == A );
+   \verm{Cell} \azul{AB} ( \verm{tag}::segment, A.reverse(), B );
+   \cinza{// here, AB is a segment Cell, not a Mesh}
+   assert ( AB.base() == A.reverse() );
+   assert ( AB.tip() == B );
+   \verm{Cell} \azul{BA} = AB.reverse();
+   assert ( BA.base() == B.reverse() );
+   assert ( BA.tip() == A );
+   assert ( BA().reverse() == AB );
+\end{Verbatim}
+
+Paragraph \ref{\numb section 9.\numb parag 7} gives more details about the orientation of cells.
+See also paragraph \ref{\numb section 11.\numb parag 4}.
+
+Cells are topological entities; they carry no geometric information.
+In particular, points do not have coordinates.
+Coordinates are stored externally, see paragraph \ref{\numb section 6.\numb parag 1}.
+
+{\small\tt \verm{Mesh}}es have a {\small\tt reverse} method, too.
+It is used mainly when we want to {\small\tt join} meshes having a common piece of boundary;
+see paragraphs \ref{\numb section 1.\numb parag 3}, \ref{\numb section 2.\numb parag 5},
+\ref{\numb section 2.\numb parag 6}, \ref{\numb section 2.\numb parag 10},
+\ref{\numb section 3.\numb parag 17}, \ref{\numb section 3.\numb parag 18}.
+
+
+          %--------------%
+\section{~~Joining meshes}\label{\numb section 1.\numb parag 3}
+          %--------------%
+
+The example in paragraph \ref{\numb section 1.\numb parag 1} could have been shortened
+had we used the overloaded version of the {\small\tt \verm{Mesh}} constructor with
+{\small\tt \verm{tag}::rectangle} which accepts the four corners as arguments. 
+This overloaded version exists in \maniFEM, but we prefer to build meshes in a structured way, 
+first corners, then sides and then the plane region. 
+This has the advantage that one can build more complex meshes from simple components. 
+For instance, one can build an L-shaped mesh by joining three rectangular meshes :
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \psfrag{E}{\tt\textcolor{textindraw}{E}}
+  \psfrag{F}{\tt\textcolor{textindraw}{F}}
+  \psfrag{G}{\tt\textcolor{textindraw}{G}}
+  \psfrag{H}{\tt\textcolor{textindraw}{H}}
+  \includegraphics[width=115mm]{L-shaped}
+  \caption{An L-shaped mesh}
+  \label{\numb section 1.\numb fig 5}
+\end{figure}
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=main-\ref{\numb section 1.\numb parag 3}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm]
+   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Function} \azul{x} = xy[0],  \azul{y} = xy[1];
+   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = -1.;  y(A) = 0.;
+   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) =  0.;  y(B) = 0.;
+   \verm{Cell} \azul{C} ( \verm{tag}::vertex );  x(C) =  0.;  y(C) = 0.5;
+   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  x(D) = -1.;  y(D) = 0.5;
+   \verm{Cell} \azul{E} ( \verm{tag}::vertex );  x(E) =  0.;  y(E) = 1.;
+   \verm{Cell} \azul{F} ( \verm{tag}::vertex );  x(F) = -1.;  y(F) = 1.;
+   \verm{Cell} \azul{G} ( \verm{tag}::vertex );  x(G) =  1.;  y(G) = 0.;
+   \verm{Cell} \azul{H} ( \verm{tag}::vertex );  x(H) =  1.;  y(H) = 0.5;
+   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{BC} ( \verm{tag}::segment, B.reverse(), C, \verm{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{CD} ( \verm{tag}::segment, C.reverse(), D, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{DA} ( \verm{tag}::segment, D.reverse(), A, \verm{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{CE} ( \verm{tag}::segment, C.reverse(), E, \verm{tag}::divided_in, 7 );
+   \verm{Mesh} \azul{EF} ( \verm{tag}::segment, E.reverse(), F, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{FD} ( \verm{tag}::segment, F.reverse(), D, \verm{tag}::divided_in, 7 );
+   \verm{Mesh} \azul{BG} ( \verm{tag}::segment, B.reverse(), G, \verm{tag}::divided_in, 12 );
+   \verm{Mesh} \azul{GH} ( \verm{tag}::segment, G.reverse(), H, \verm{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{HC} ( \verm{tag}::segment, H.reverse(), C, \verm{tag}::divided_in, 12 );
+   \verm{Mesh} \azul{ABCD} ( \verm{tag}::rectangle, AB, BC, CD, DA );
+   \verm{Mesh} \azul{CEFD} ( \verm{tag}::rectangle, CE, EF, FD, CD.reverse() );
+   \verm{Mesh} \azul{BGHC} ( \verm{tag}::rectangle, BG, GH, HC, BC.reverse() );
+   \verm{Mesh} \azul{L_shaped} ( \verm{tag}::join, ABCD, CEFD, BGHC );
+\end{Verbatim}
+
+Meshes in $ \mathbb{R}^2 $ like the one above may be exported in the {\small\tt msh} format
+or directly drawn in {\small\tt Postcript}, by one of the two statements below
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   L_shaped.export_msh (\verde{"L-shaped.msh"});
+   L_shaped.draw_ps (\verde{"L-shaped.eps"});
+\end{Verbatim}
+
+Note that, in \maniFEM, cells and meshes are oriented
+(see paragraph \ref{\numb section 1.\numb parag 2}).
+To build {\small\tt CEFD} one must use not {\small\tt CD} but its reverse;
+to build {\small\tt BGHC} one must use not {\small\tt BC} but its reverse.
+In figure \ref{\numb section 1.\numb fig 6} we see a zoom around {\small\tt C};
+the three rectangular meshes have been separated just for visualization purposes.
+The drawing illustrates that the common boundary has a certain orientation when seen
+from one mesh and has the opposite orientation when seen from the neighbour mesh.
+If we do not respect these orientations, {\maniFEM} will be unable to {\small\tt join}
+these meshes.
+
+\begin{figure}[ht]  \centering
+  \psfrag{C}{\tt\textcolor{textindraw}{C}}
+  \includegraphics[width=100mm]{L-crack}
+  \caption{A zoom around {\small\tt C}}
+  \label{\numb section 1.\numb fig 6}
+\end{figure}
+
+We can imagine a magnet attached to each face of a cell.
+For two neighbour cells, the common face will have two magnets, one from each cell.
+If their polarities are not opposite, the magnets will not cling.
+Likewise, the common boundary of two meshes that we intend to join can be thought of
+as a pair of magnets.
+If their polarities are not opposite, the two meshes will not cling.
+
+Note also that if we define the rectangles based on their vertices instead of their sides, 
+the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::join} will not work properly. 
+For instance, the two rectangles defined by
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Mesh} \azul{ABCD} ( \verm{tag}::rectangle, A, B, C, D, 10, 8 );
+   \verm{Mesh} \azul{CEFD} ( \verm{tag}::rectangle, C, E, F, D, 7, 10 );
+\end{Verbatim}
+
+\noindent cannot be joined%
+\footnote {Actually, they can be joined but the resulting mesh will have
+a crack along {\small\tt CD} -- probably not what the user wants.}
+because the side {\small\tt CD} of {\small\tt ABCD} has nothing to do with the side 
+{\small\tt DC} of {\small\tt CEFD}.
+These two sides are one-dimensional meshes both made of 10 segments but with different
+interior points (only {\small\tt C} and {\small\tt D} are shared) and different segments.
+In contrast, {\small\tt CD} and {\small\tt CD.reverse()} share the same 11 points and
+the same 10 segments (reversed).
+
+Paragraph \ref{\numb section 9.\numb parag 2} shows a more complex use of the {\small\tt \verm{Mesh}}
+constructor with {\small\tt \verm{tag}::join}.
+
+Incidentally, note that the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::rectangle} accepts
+any position for the vertices. 
+Thus, you can use it to build any quadrilateral; the inner vertices' coordinates are simply
+interpolated from the coordinates of vertices on the boundary, as shown in paragraphs
+\ref{\numb section 1.\numb parag 5} and \ref{\numb section 2.\numb parag 1}.
+This can be done even in more than two (geometric) dimensions, like in
+paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 2.\numb parag 6}.
+Tags {\small\tt rectangle}, {\small\tt quadrilateral} and {\small\tt quadrangle} can be used
+interchangeably.
+
+See also paragraph \ref{\numb section 11.\numb parag 9}.
+
+
+          %-----------------%
+\section{~~Triangular meshes}\label{\numb section 1.\numb parag 4}
+          %-----------------%
+
+We can also build meshes on triangular domains and {\small\tt join} them as we wish :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=main-\ref{\numb section 1.\numb parag 4}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm]
+   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = -1. ;  y(A) = 0.;
+   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) =  0. ;  y(B) = 0.;
+   \verm{Cell} \azul{C} ( \verm{tag}::vertex );  x(C) =  1. ;  y(C) = 0.;
+   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  x(D) = -0.5;  y(D) = 1.;
+   \verm{Cell} \azul{E} ( \verm{tag}::vertex );  x(E) =  0.5;  y(E) = 1.;
+
+   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{BC} ( \verm{tag}::segment, B.reverse(), C, \verm{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{AD} ( \verm{tag}::segment, A.reverse(), D, \verm{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{BD} ( \verm{tag}::segment, B.reverse(), D, \verm{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{BE} ( \verm{tag}::segment, B.reverse(), E, \verm{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{CE} ( \verm{tag}::segment, C.reverse(), E, \verm{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{ED} ( \verm{tag}::segment, E.reverse(), D, \verm{tag}::divided_in, 8 );
+
+   \verm{Mesh} \azul{ABD} ( \verm{tag}::triangle, AB, BD, AD.reverse() );
+   \verm{Mesh} \azul{BCE} ( \verm{tag}::triangle, BC, CE, BE.reverse() );
+   \verm{Mesh} \azul{BED} ( \verm{tag}::triangle, BE, ED, BD.reverse() );
+
+   \verm{Mesh} \azul{three_tri} ( \verm{tag}::join, ABD, BCE, BED );
+\end{Verbatim}
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \psfrag{E}{\tt\textcolor{textindraw}{E}}
+  \includegraphics[width=130mm]{three-tri}
+  \caption{Mesh obtained by {\small\tt join}ing three triangles}
+  \label{\numb section 1.\numb fig 7}
+\end{figure}
+
+
+          %-------------------------------%
+\section{~~Mixing triangles and rectangles}\label{\numb section 1.\numb parag 5}
+          %-------------------------------%
+
+It is possible to have triangles and quadrilaterals mixed in the same mesh :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=main-\ref{\numb section 1.\numb parag 5}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm]
+   \verm{Mesh} \azul{ABD} ( \verm{tag}::triangle, AB, BD, AD.reverse() );
+   \verm{Mesh} \azul{BCE} ( \verm{tag}::triangle, BC, CE, BE.reverse() );
+   \verm{Mesh} \azul{BEFD} ( \verm{tag}::quadrangle, BE, EF, FD, BD.reverse() );
+   \verm{Mesh} \azul{two_tri_one_rect} ( \verm{tag}::join, ABD, BEFD, BCE );
+\end{Verbatim}
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \psfrag{E}{\tt\textcolor{textindraw}{E}}
+  \psfrag{F}{\tt\textcolor{textindraw}{F}}
+  \includegraphics[width=110mm]{two-tri-one-rect}
+  \caption{Mixed mesh}
+  \label{\numb section 1.\numb fig 8}
+\end{figure}
+
+Paragraph \ref{\numb section 2.\numb parag 2} shows another example of mixed mesh.
+
+
+          %---------%
+\section{~~Functions}\label{\numb section 1.\numb parag 6}
+          %---------%
+
+Objects like {\small\tt xyz} and {\small\tt x} encountered in previous paragraphs
+are {\small\tt \verm{Function}} objects.
+They allow for arithmetic expressions like in
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Function} \azul{norm} = \verm{power} ( x*x + y*y, 0.5 );
+\end{Verbatim}
+
+We access the value of a {\small\tt \verm{Function}} at a cell like in {\small\tt double}
+{\small\tt \azul{n}} {\small\tt =} {\small\tt norm(A)}.
+We can also set this value but not for arithmetic expressions like {\small\tt norm}.
+Thus, pieces of code like {\small\tt x(A)} {\small\tt =} {\small\tt 1.} work fine,
+while {\small\tt norm(A)} {\small\tt =} {\small\tt 1.} produces a run-time error.
+
+The {\small\tt \verm{Function}::deriv} method performs symbolic differentiation :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Function} \azul{norm_x} = norm.deriv ( x );
+   \verm{Function} \azul{norm_y} = norm.deriv ( y );
+\end{Verbatim}
+
+
