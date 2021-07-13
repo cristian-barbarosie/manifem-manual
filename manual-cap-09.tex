@@ -11,7 +11,8 @@ This section gives details about cells and meshes.
           %-------------------------%
 
 As we have already seen in examples in sections \ref{\numb section 2} and \ref{\numb section 3},
-cells and meshes are created by declaring them as {\small\tt \verm{Cell}} or {\small\tt \verm{Mesh}} objects
+cells and meshes are created by declaring them as {\small\tt \verm{Cell}} or
+{\small\tt \verm{Mesh}} objects
 and by providing specific options to their constructor, by means of {\small\tt\verm{tag}}s.
 For instance :
 
@@ -62,8 +63,8 @@ Note that reverse meshes exist always (negative meshes are temporary objects bui
 on-the-fly).
 
 At a basic level, the only situation when you need the {\small\tt reverse} method  for cells is
-when you declare a segment {\small\tt \verm{Mesh}} (you must provide a negative {\small\tt \verm{Cell}} as
-starting point).
+when you declare a segment {\small\tt \verm{Mesh}} (you must provide a negative
+{\small\tt \verm{Cell}} as starting point).
 You will occasionaly need to use the {\small\tt reverse} method for meshes (for instance, if you
 intend to {\small\tt join} two meshes, their common boundary must have a certain orientation when
 seen from a mesh and the opposite orientation when seen from the other mesh).
@@ -144,93 +145,53 @@ We might have set curved boundaries by using a submanifold of $ \mathbb{R}^2 $, 
 See also paragraph \ref{\numb section 11.\numb parag 9}.
 
 
-          %---------------------------%
-\section{~~Lists of cells inside a mesh}\label{\numb section 9.\numb parag 3}
-          %---------------------------%
+          %--------------------%
+\section{~~\cinza{[empty]}}\label{\numb section 9.\numb parag 3}
+          %--------------------%
+
+          %--------------------%
+\section{~~\cinza{[empty]}}\label{\numb section 9.\numb parag 4}
+          %--------------------%
+
+
+          %--------------------%
+\section{~~Iterators over cells}\label{\numb section 9.\numb parag 5}
+          %--------------------%
 
 As explained in paragraph \ref{\numb section 1.\numb parag 2}, a {\small\tt \verm{Mesh}} is
 roughly a list of cells.
 Internally, {\maniFEM} keeps lists of cells of each dimension, up the the maximum
 dimension which is the dimension of the mesh.
 Thus, if {\small\tt msh} is a {\small\tt \verm{Mesh}} object, modelling a
-mesh of triangles, then {\small\tt msh.core->cells[0]} is a list of pointers to cells holding
-all vertices of that mesh, {\small\tt msh.core->cells[1]} is a list of pointers to cells
-holding all segments and {\small\tt msh.core->cells[2]} is a list of pointers to cells
-holding all triangles.
+mesh of triangles, then {\small\tt msh.core->cells[0]} is a list of (wrappers) of
+each vertex of that mesh, {\small\tt msh.core->cells[1]} is a list of (wrappers) of
+each segment and {\small\tt msh.core->cells[2]} is a list of (wrappers) of each triangle.
 
-Thus, we could use a loop like the one below for iterating over all segments of the mesh.
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
-   for ( auto \azul{it} = msh.core->cells[1].begin();
-              it != msh.core->cells[1].end();  it++ )
-   \{ auto \azul{seg} = *it;  do_something_to (*seg);  \}
-\end{Verbatim}
-
+Thus, if we want to iterate over all segments of a mesh, we could use an
+{\small\tt std::list<\verm{Cell}>:: ::iterator}.
 If you are not familiar with the notion of iterator over a list (or over other containers)
 in {\tt C++}, this may be a good time for you to read an introductory book on the
 {\tt C++} Standard Template Library (STL).
 
-The {\small\tt auto} keyword tells the {\tt C++} compiler to guess the type of a variable
-according to the expression used to initialize it.
-
-Note that the above code does not work as it is (it only works for certain meshes upon
-adding some type conversions).
-Paragraphs \ref{\numb section 9.\numb parag 5} and \ref{\numb section 9.\numb parag 6}
-describe nicer ways to iterate over cells of a mesh.
-
 On the other hand, a cell is roughly defined by its boundary which in turn is a mesh of
 lower dimension.
-Thus, if {\small\tt cube} is a {\small\tt \verm{Cell}} object modelling a regular hexahedron,
-then {\small\tt cube.boundary()} is a {\small\tt \verm{Mesh}} object modelling a
-two-dimensional mesh made of six squares.
-So, if we want to iterate, say, over all vertices of that hexahedron, we can use a 
-loop like below.
+Thus, the same type of {\small\tt std::list<\verm{Cell}>::iterator} could be used to
+implement a loop, say, over all vertices of a cube.
 
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
-   auto & \azul{li} = cube.boundary().cells[0];
-   for ( auto \azul{it} = li.begin(); it != li.end(); it++ )
-   \{ auto \azul{P} = *it;  do_something_to (*P);  \}
-\end{Verbatim}
+However, implementation details make this solution unpractical.
+For instance, negative meshes do not hold any list, they just point towards their
+positive counterpart.
+Recall that the boundary of a negative cell is a negative mesh.
+Even among positive meshes, some are implemented with the end of saving space in the
+computer's memory and store less information (connected one-dimensional meshes are an
+example).
+Paragraph \ref{\numb section 11.\numb parag 6} describe the implementation of different
+types of meshes.
 
-Note that the above code does not work if {\small\tt cube} is a negative cell.
-Also, it will not work for two-dimensional cells (whose boundary is a one-dimensional mesh),
-because connected one-dimensional meshes have a different internal representation.
-Paragraph \ref{\numb section 9.\numb parag 6} describes other ways of iterating
-over one-dimensional meshes, which follow the natural order of the vertices or segments.
-
-
-          %--------------------%
-\section{~~\cinza{[empty]}}\label{\numb section 9.\numb parag 4}
-          %--------------------%
-
-          %--------------------%
-\section{~~Iterators over cells}\label{\numb section 9.\numb parag 5}
-          %--------------------%
-
-This paragraph assumes that the reader is familiar to the notion of iterator in {\tt C++}.
-If this is not the case, you should read an introductory book on the {\tt C++}
-Standard Template Library (STL) before proceeding.
-
-As explained in paragraphs \ref{\numb section 1.\numb parag 2} and
-\ref{\numb section 9.\numb parag 3}, a mesh is essentially a collection of cells.
-In many situations, we may want to iterate over all cells of a mesh.
-
+For these reasons, {\maniFEM} provides objects which iterate over cells.
 Suppose we have a mesh {\small\tt msh} of rectangles.
 If we want to do something to each rectangle, that is, to each two-dimensional cell,
-we could use a code like
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
-   for ( auto \azul{it} = msh.core->cells[2].begin();
-              it != msh.core->cells[2].end(); it++ )
-   \{  auto \azul{cll} = *it;  do_something_to (*cll);  \}
-\end{Verbatim}
-
-This style is slightly cumbersome and doesn't work for negative meshes,
-so we provide specific iterators.
-The code above is equivalent to
+we can use a code like
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
@@ -252,12 +213,12 @@ rather than by testing equality with some abstract object like {\small\tt contai
 We have kept the syntax {\small\tt it++} for advancing an iterator in the process of
 running over cells, offering also the equivalent alteratives {\small\tt ++it} and
 {\small\tt it.advance()}.
-We have also kept the notation {\small\tt *it} for dereferencing a {\small\tt \verm{CellIterator}};
-this operation returns a reference to a {\small\tt \verm{Cell}} object.
+We have also kept the notation {\small\tt *it} for dereferencing a
+{\small\tt \verm{CellIterator}};
+this operation returns a {\small\tt \verm{Cell}} object (a wrapper).
 Of course, dereferencing a {\small\tt \verm{CellIterator}} does not produce a new cell,
 just provides access to a previously built cell
-(see also paragraph \ref{\numb section 9.\numb parag 10}).
-\vfil\eject
+(see paragraph \ref{\numb section 9.\numb parag 10} for details).
 
 Often, we {\small\tt reset} an iterator only once, use it in a loop and then discard it.
 For this situation, a handy shortcut is to add the {\small\tt\verm{tag}::reset}
@@ -308,8 +269,6 @@ by adding a {\small\tt \verm{tag}::force\_positive} as in
 Note that it is not safe to modify a mesh while iterating over its cells
 (paragraph \ref{\numb section 10.\numb parag 3} shows an example).
 After modifying a mesh, you may re-use a previously declared iterator by {\small\tt reset}ting it.
-An exception to the above rule happens for one-dimensional meshes, described in paragraph
-\ref{\numb section 9.\numb parag 6}.
 
 If we only want to know how many cells there are in a certain mesh,
 instead of using {\small\tt msh.core->cells[d].size()} ({\small\tt d} being the desired
@@ -559,7 +518,8 @@ a mesh.
   \label{\numb section 9.\numb fig 3}
 \end{figure}
 
-Consider the mesh {\small\tt hex\_msh} shown above, made of three hexagons.
+Consider the mesh {\small\tt hex\_msh} shown in figure \ref{\numb section 9.\numb fig 3},
+made of three hexagons.
 Pick one of them, at random :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
@@ -808,7 +768,7 @@ Thus, we shall not consider the case when the central cell has co-dimension one,
 has dimension equal to the dimension of the mesh minus one.
 
 So, we assume that the co-dimension is two or higher and we distuinguish between
-the case when the central cell has co-dimension two and the case of the co-dimension
+the case when the central cell has co-dimension two and the case of co-dimension
 three or higher.
 
 To begin with, suppose the central cell has co-dimension three or higher.
@@ -937,5 +897,5 @@ to the {\small\tt\verm{CellIterator}} constructor;
 this way, if in {\small\tt DEBUG} mode, {\maniFEM} will produce a run-time error
 if that particular configuration is not compatible with linear ordering
 (that is, if the co-dimension of the central cell is not equal to two).
-Specifying {\small\tt\verm{tag}::backwards} also informs {\maniFEM} that you need
+Specifying {\small\tt\verm{tag}::backwards} also informs {\maniFEM} that you want
 linear ordering of cells, so you don't have to provide both tags.
