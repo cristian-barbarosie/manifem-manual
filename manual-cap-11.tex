@@ -611,9 +611,9 @@ Warnings are harmless, but when they are too many they can be a nuisance.
 You can turn warnings off by removing {\small\tt -W} options from your {\small\tt Makefile}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-'class ManiFEM::Cell::Core' has no member named 'name'
+'class ManiFEM::tag::Util::CellCore' has no member named 'name'
 -- or --
-'class ManiFEM::Cell::Core' has no member named 'get_name'
+'class ManiFEM::tag::Util::CellCore' has no member named 'get_name'
 \end{Verbatim}
 
 It seems you are trying to compile your code in {\small\tt NDEBUG} mode
@@ -621,32 +621,24 @@ It seems you are trying to compile your code in {\small\tt NDEBUG} mode
 In {\small\tt NDEBUG} mode, cells and meshes do not have names.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-cannot declare variable 'cll' to be of abstract type 'ManiFEM::Cell::Core'
--- or similar for PositiveBaseCell or NegativeBaseCell or CoreMesh --
+cannot declare variable 'cll' to be of abstract type 'ManiFEM::tag::Util::CellCore'
+-- or similar for ManiFEM::Cell::Positive or ManiFEM::Cell::Negative
+   or ManiFEM::Cell::PositiveNotVertex or ManiFEM::Cell::NegativeNotVertex
+   or tag::Util::MeshCore or ManiFEM::Mesh::NotZeroDim                      --
 \end{Verbatim}
 
-Classes {\small\tt \verm{Cell}::Core}, {\small\tt PositiveBaseCell} and
-{\small\tt NegativeBaseCell} are abstract and cannot be instantiated.
-You must be more specific; {\small\tt PositiveVertex}, {\small\tt NegativeVertex},
-{\small\tt PositiveSegment}, {\small\tt NegativeSegment}, {\small\tt PositiveCell} and
-{\small\tt NegativeCell} can be instantiated.
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-use of deleted function 'ManiFEM::PositiveVertex& ManiFEM::
-PositiveVertex::PositiveVertex(const ManiFEM::PositiveVertex&)'
--- or similar for NegativeVertex or PositiveSegment or NegativeSegment --
---      or PositiveCell or NegativeCell or PositiveMesh --
--- or --
-use of deleted function 'ManiFEM::PositiveVertex& ManiFEM::
-PositiveVertex::operator=(const ManiFEM::PositiveVertex&)'
--- or similar for NegativeVertex or PositiveSegment or NegativeSegment --
---      or PositiveCell or NegativeCell or PositiveMesh or PosOneDimMesh --
-\end{Verbatim}
-
-Core cells and meshes cannot be copied.
-You cannot ask for things like {\small\tt cell\_\,2 = cell\_\,1} or
-{\small\tt mesh\_\,2 = mesh\_\,1}.
-See paragraph \ref{\numb section 11.\numb parag 8} for more details.
+Classes {\small\tt \verm{Cell}::Core}, {\small\tt\verm{Cell}::Positive},
+{\small\tt\verm{Cell}::Negative}, {\small\tt\verm{Cell}::Positive::NotVertex},\hfil\break
+{\small\tt\verm{Cell}::Negative::NotVertex}, {\small\tt \verm{Mesh}::Core},
+{\small\tt \verm{Mesh}::NotZeroDim}are abstract and cannot be instantiated.
+You must be more specific; {\small\tt\verm{Cell}::Positive::Vertex},
+{\small\tt\verm{Cell}::Negative::Vertex},\hfil\break
+{\small\tt\verm{Cell}::Positive::Segment},
+{\small\tt\verm{Cell}::Negative::Segment}, {\small\tt\verm{Cell}::Positive::HighDim},
+{\small\tt\verm{Cell}::Negative::HighDim}, {\small\tt\verm{Mesh}::ZeroDim},
+{\small\tt\verm{Mesh}::Connected::OneDim}, {\small\tt\verm{Mesh}::Fuzzy}
+can be instantiated.
+See paragraph \ref{\numb section 11.\numb parag 4}.
 
 
           %---------------------------%
@@ -660,19 +652,11 @@ Some errors give explicit messages. For instance, messages like
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
 only one-dimensional meshes have first vertex
+-- or --
+virtual maniFEM::Cell maniFEM::tag::Util::CellCore::tip(): Only segments have extremities. 
 \end{Verbatim}
 
 \noindent are self-explaining.
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-ManiFEM::Cell& ManiFEM::Cell::base(): Assertion 'dim == 1' failed.
--- or --
-ManiFEM::Cell& ManiFEM::Cell::tip(): Assertion 'dim == 1' failed.
-\end{Verbatim}
-
-It seems you are trying to get the base or the tip of a cell of dimension
-different from $1$.
-This does not make sense.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
 double& ManiFEM::OneDimField::operator()(ManiFEM::Cell&) const:
@@ -684,12 +668,8 @@ no value has been associated.
 Either you picked a cell of a different dimension (e.g.\ a segment instead of a
 vertex) or you are looking at a negative cell.
 Values are usually stored at positive cells; negative cells have no information attached.
-For any cell, you may use the {\small\tt positive} attribute which is a pointer
-equal to {\small\tt this} if the cell is positive or points to the reverse if
-the cell is negative (so the reverse is positive).
-Or you may check if a certain cell is positive or negative by using the method
-{\small\tt is\_\,positive} (which simply returns the result of the comparison
-{\small\tt this == this->positive}).
+You may check if a certain cell is positive or negative by using the method
+{\small\tt is\_\,positive}.
 Paragraph \ref{\numb section 9.\numb parag 7} gives more details about orientation of
 cells and meshes.
 See also paragraphs \ref{\numb section 9.\numb parag 12} and
@@ -704,21 +684,22 @@ Consider using the {\small\tt \verm{tag}::force\_\,positive}.
 See paragraphs \ref{\numb section 9.\numb parag 5} and \ref{\numb section 9.\numb parag 6}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-ManiFEM::Cell& ManiFEM::Mesh::cell_in_front_of(ManiFEM::Cell&,
-const ManiFEM::tag::SurelyExists&): Assertion 'cll != NULL' failed.
+assertion "this->core->reverse_attr.exists()" failed: file "mesh.h",
+function: maniFEM::Cell maniFEM::Cell::reverse(const maniFEM::tag::SurelyExists&) const
 -- or --
-ManiFEM::Cell& ManiFEM::Mesh::cell_behind(ManiFEM::Cell&,
-const ManiFEM::tag::SurelyExists&): Assertion 'cll != NULL' failed.
+assertion "it != face.core->cell_behind_within.end()" failed: file "mesh.h",
+function: maniFEM::Cell maniFEM::Mesh::cell_behind
+(maniFEM::Cell, const maniFEM::tag::SurelyExists&) const
 \end{Verbatim}
 
-You are navigating dangerously close to the boundary of a mesh.
+You may be navigating dangerously close to the boundary of a mesh.
 See paragraph \ref{\numb section 9.\numb parag 9}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-static size_t ManiFEM::Mesh::diff(size_t, size_t): Assertion 'a >= b' failed.
+assertion "cll->meshes.size() > dif_dim" failed
 -- or --
-virtual void ManiFEM::PositiveCell::add_to(ManiFEM::CoreMesh*):
-Assertion 'this->meshes.size() > 0' failed.
+static size_t ManiFEM::tag::Util::assert_diff(const size_t, const size_t):
+Assertion 'a >= b' failed.
 \end{Verbatim}
 
 You are trying to build meshes of dimension higher than those \maniFEM\ expects.
