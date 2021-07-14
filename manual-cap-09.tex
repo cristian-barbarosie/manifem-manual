@@ -35,9 +35,9 @@ depending on its relationships with other cells and meshes.
 This is explained in paragraph \ref{\numb section 11.\numb parag 5}.
 
 Cells and meshes are unique objects, it makes no sense to copy them.
-A statement like {\small\tt \verm{Cell}} {\small\tt copy\_of\_A} {\small\tt =} {\small\tt A}
+A statement like {\small\tt \verm{Cell}} {\small\tt copy\_\,of\_\,A} {\small\tt =} {\small\tt A}
 will make a copy of the wrapper but it will refer to the same cell {\small\tt A}.
-If you change e.g.\ a coordinate of {\small\tt copy\_of\_A}, the coordinate of {\small\tt A}
+If you change e.g.\ a coordinate of {\small\tt copy\_\,of\_\,A}, the coordinate of {\small\tt A}
 will also change.
 That is, wrapper classes {\small\tt \verm{Cell}} and {\small\tt \verm{Mesh}} can be viewed as
 customized pointers.
@@ -46,7 +46,7 @@ This is useful if we need to create many meshes in a loop, as shown in paragraph
 However, there are operations which do create a new cell or mesh.
 There are also operations which create a new cell or mesh only if necessary,
 otherwise they will return an existing cell or mesh.
-Paragraph \ref{\numb section 9.\numb parag 10} gives a complete list.
+Paragraph \ref{\numb section 9.\numb parag 12} gives a complete list.
 
 Recall that, in \maniFEM, cells and meshes are oriented.
 When a cell is declared, it is built as positive and has no reverse.
@@ -179,10 +179,10 @@ Thus, the same type of {\small\tt std::list<\verm{Cell}>::iterator} could be use
 implement a loop, say, over all vertices of a cube.
 
 However, implementation details make this solution unpractical.
-For instance, negative meshes do not hold any list, they just point towards their
-positive counterpart.
+For instance, negative meshes do not keep any list,
+they just hold a pointer towards their positive counterpart.
 Recall that the boundary of a negative cell is a negative mesh.
-Even among positive meshes, some are implemented with the end of saving space in the
+Even among positive meshes, some are implemented with the goal of saving space in the
 computer's memory and store less information (connected one-dimensional meshes are an
 example).
 Paragraph \ref{\numb section 11.\numb parag 6} describe the implementation of different
@@ -208,7 +208,7 @@ We have chosen that, when we want to start an iteration process, we set the iter
 a starting configuration by using a {\small\tt reset} method rather than through an assignment
 like {\small\tt it = container.begin()}.
 Similarly, when an iterator has offered access to all cells of a mesh and cannot find
-other cells, it goes into a state which can be checked using its {\small\tt in\_range} method
+other cells, it goes into a state which can be checked using its {\small\tt in\_\,range} method
 rather than by testing equality with some abstract object like {\small\tt container.end()}.
 We have kept the syntax {\small\tt it++} for advancing an iterator in the process of
 running over cells, offering also the equivalent alteratives {\small\tt ++it} and
@@ -218,7 +218,8 @@ We have also kept the notation {\small\tt *it} for dereferencing a
 this operation returns a {\small\tt \verm{Cell}} object (a wrapper).
 Of course, dereferencing a {\small\tt \verm{CellIterator}} does not produce a new cell,
 just provides access to a previously built cell
-(see paragraph \ref{\numb section 9.\numb parag 10} for details).
+(with the slight exception described in paragraph \ref{\numb section 9.\numb parag 10};
+see also paragraph \ref{\numb section 9.\numb parag 12}).
 
 Often, we {\small\tt reset} an iterator only once, use it in a loop and then discard it.
 For this situation, a handy shortcut is to add the {\small\tt\verm{tag}::reset}
@@ -259,7 +260,7 @@ Paragraph \ref{\numb section 9.\numb parag 7} discusses this possibility.
 Iterators over cells of lower dimension produce always positive cells.
 
 We can force an iterator over cells of maximum dimension to produce only positive cells
-by adding a {\small\tt \verm{tag}::force\_positive} as in
+by adding a {\small\tt \verm{tag}::force\_\,positive} as in
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
@@ -272,20 +273,20 @@ After modifying a mesh, you may re-use a previously declared iterator by {\small
 
 If we only want to know how many cells there are in a certain mesh,
 instead of using {\small\tt msh.core->cells[d].size()} ({\small\tt d} being the desired
-dimension of the cells) we may use the method {\small\tt number\_of} :
+dimension of the cells) we may use the method {\small\tt number\_\,of} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    size_t \azul{n} = msh.number_of ( \verm{tag}::cells_of_dim, 2 );
 \end{Verbatim}
 
-\noindent Expression {\small\tt msh.number\_of}\hskip1pt{\small\tt (}\hskip1pt
+\noindent Expression {\small\tt msh.number\_\,of}\hskip1pt{\small\tt (}\hskip1pt
 {\small\tt \verm{tag}::vertices}\hskip1pt{\small\tt )} is equivalent to
-\hbox{{\small\tt msh.number\_of}\hskip1pt{\small\tt (}\hskip1pt
-{\small\tt \verm{tag}::cells\_of\_dim,}\hskip1pt{\small\tt 0}\hskip1pt{\small\tt )}},
-while {\small\tt msh.number\_of}\hskip2pt{\small\tt
+\hbox{{\small\tt msh.number\_\,of}\hskip1pt{\small\tt (}\hskip1pt
+{\small\tt \verm{tag}::cells\_\,of\_\,dim,}\hskip1pt{\small\tt 0}\hskip1pt{\small\tt )}},
+while {\small\tt msh.number\_\,of}\hskip2pt{\small\tt
 (}\hskip2pt{\small\tt \verm{tag}::segments}\hskip2pt{\small\tt )} is equivalent to
-{\small\tt msh.number\_of}\hskip2pt{\small\tt (}\hskip2pt{\small\tt \verm{tag}::cells\_of\_dim,}\hskip2pt{\small\tt 1}\hskip2pt{\small\tt )}.
+{\small\tt msh.number\_\,of}\hskip2pt{\small\tt (}\hskip2pt{\small\tt \verm{tag}::cells\_\,of\_\,dim,}\hskip2pt{\small\tt 1}\hskip2pt{\small\tt )}.
 
 Paragraph \ref{\numb section 9.\numb parag 6} describes iterators specific to one-dimensional
 meshes.
@@ -329,7 +330,7 @@ The syntax is the same as the one described in pragraph \ref{\numb section 9.\nu
 \end{Verbatim}
 
 If we want to start at a specific location, we can make a {\small\tt reset} call with
-{\small\tt \verm{tag}::start\_at} followed by a second argument of type {\small\tt\verm{Cell}}.
+{\small\tt \verm{tag}::start\_\,at} followed by a second argument of type {\small\tt\verm{Cell}}.
 For iterators over vertices, this second argument should be a positive vertex,
 while for iterators over segments this argument should be a (positive or negative) segment.
 In this case, the iteration process will begin at that particular vertex or segment.
@@ -340,7 +341,7 @@ argument will not show up in the iteration process.
 Note that {\small\tt it0} produces positive points, while {\small\tt  it1} produces
 oriented segments (positive or negative).
 We may enforce that we only want positive segments by adding the
-{\small\tt \verm{tag}::force\_positive}, as shown in paragraph \ref{\numb section 9.\numb parag 7}.
+{\small\tt \verm{tag}::force\_\,positive}, as shown in paragraph \ref{\numb section 9.\numb parag 7}.
 
 There are also reversed versions of these iterators (they go backwards), obtained by adding
 the {\small\tt \verm{tag}::backwards} :
@@ -351,17 +352,17 @@ the {\small\tt \verm{tag}::backwards} :
    \verm{CellIterator} \azul{it0r} = chain.iterator ( \verm{tag}::over_vertices, \verm{tag}::backwards );
 \end{Verbatim}
 
-Connected one-dimensional meshes have also methods {\small\tt first\_vertex},
-{\small\tt last\_vertex},\break
-{\small\tt first\_segment} and {\small\tt last\_segment} which return the cell described by their
+Connected one-dimensional meshes have also methods {\small\tt first\_\,vertex},
+{\small\tt last\_\,vertex},\break
+{\small\tt first\_\,segment} and {\small\tt last\_\,segment} which return the cell described by their
 names.
 % They should only be used for an open chain (not for a loop).
-Note that {\small\tt \verm{Mesh}::first\_vertex} returns a negative vertex while
-{\small\tt \verm{Mesh}::last\_vertex} returns a positive vertex, similarly to the
+Note that {\small\tt \verm{Mesh}::first\_\,vertex} returns a negative vertex while
+{\small\tt \verm{Mesh}::last\_\,vertex} returns a positive vertex, similarly to the
 {\small\tt \verm{Cell}::base} and {\small\tt \verm{Cell}::tip} methods (described in paragraph
 \ref{\numb section 1.\numb parag 2}).
 
-As explained in paragraph \ref{\numb section 9.\numb parag 10},
+As explained in paragraph \ref{\numb section 9.\numb parag 12},
 dereferencing a {\small\tt \verm{CellIterator}} does not produce a new cell,
 just provides access to a previously built cell.
 
@@ -369,12 +370,12 @@ Sometimes it may be not obvious for the user whether a certain {\small\tt \verm{
 is internally a {\small\tt \verm{Mesh}:: ::Connected::OneDim}
 (see paragraph \ref{\numb section 11.\numb parag 6}).
 An iterator declared as {\small\tt \azul{it} = chain.iterator}\break
-{\small\tt(} {\small\tt\verm{tag}::over\_vertices} {\small\tt)} will obey to
+{\small\tt(} {\small\tt\verm{tag}::over\_\,vertices} {\small\tt)} will obey to
 the natural order of the vertices if {\small\tt chain} is a\break
 {\small\tt \verm{Mesh}::Connected::OneDim}; otherwise it will bring up vertices
 in a rather unpredictable order.
 If we want to make sure the vertices will come up in a linear order, we can add a
-{\small\tt \verm{tag}::require\_order} :
+{\small\tt \verm{tag}::require\_\,order} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
@@ -395,10 +396,10 @@ In \maniFEM, all cells and meshes are oriented.
 
 This can be confusing sometimes, so let's have a closer look at a particular example.
 
-Consider a mesh {\small\tt tri\_mesh} made of triangles, part of which is represented below.
-Unless requested otherwise, {\small\tt tri\_mesh} will be a positive mesh and all triangles
+Consider a mesh {\small\tt tri\_\,mesh} made of triangles, part of which is represented below.
+Unless requested otherwise, {\small\tt tri\_\,mesh} will be a positive mesh and all triangles
 composing it will also be positive.
-So, the triangles composing {\small\tt tri\_mesh} will have no reverse cell
+So, the triangles composing {\small\tt tri\_\,mesh} will have no reverse cell
 (there is no need for such).
 
 \begin{figure}[ht] \centering
@@ -416,7 +417,7 @@ Consider triangle {\small\tt ABC} for instance.
 Its boundary is made of three segments; let's look at {\small\tt AB} for example,
 a segment having {\small\tt A} as base and {\small\tt B} as tip.
 Now, a triangle {\small\tt BAD} (no offense intended) also exists as part of
-{\small\tt tri\_mesh}.
+{\small\tt tri\_\,mesh}.
 The boundary of {\small\tt BAD} is made of three segments, one of them being {\small\tt BA},
 which has {\small\tt B} as base and {\small\tt A} as tip.
 {\small\tt AB} and {\small\tt BA} are different {\small\tt \verm{Cell}} objects;
@@ -424,7 +425,7 @@ each is the reverse of the other.
 One of them is considered positive and the other is considered negative.
 Which is which depends on which one was built first.
 So, all inner segments must have a reverse;
-segments on the boundary of {\small\tt tri\_mesh} (not visible in figure
+segments on the boundary of {\small\tt tri\_\,mesh} (not visible in figure
 \ref{\numb section 9.\numb fig 2}) will probably have no reverse.
 
 For points (vertices), the situation is even more complex.
@@ -433,7 +434,7 @@ but other segments like {\small\tt CA} see {\small\tt A} as positive.
 
 Let's look again at iterators described in paragraph \ref{\numb section 9.\numb parag 5}.
 We now understand that there is no point to have an iterator over oriented
-segments, or over oriented vertices, of {\small\tt tri\_mesh}.
+segments, or over oriented vertices, of {\small\tt tri\_\,mesh}.
 That's why iterators over cells of lower dimension always produce positive cells.
 
 We also understand that usually there is no difference between these two iterators :
@@ -445,15 +446,15 @@ We also understand that usually there is no difference between these two iterato
       tri_msh.iterator ( \verm{tag}::over_cells_of_dim, 2, \verm{tag}::force_positive );
 \end{Verbatim}
 
-\noindent because all triangles composing {\small\tt tri\_mesh} should be positive
+\noindent because all triangles composing {\small\tt tri\_\,mesh} should be positive
 (use {\small\tt it1}, it is slightly faster).
 However, if some of the triangles are negative {\small\tt it1} will behave differently from
 {\small\tt it2}.
-For instance, if {\small\tt tri\_mesh} is the boundary of a polyhedron in $ \mathbb{R}^3 $
+For instance, if {\small\tt tri\_\,mesh} is the boundary of a polyhedron in $ \mathbb{R}^3 $
 and this polyhedron touches other polyhedra (there are shared faces), then it is
-quite possible that some of the triangles in {\small\tt tri\_mesh} be negative.
+quite possible that some of the triangles in {\small\tt tri\_\,mesh} be negative.
 If you are aware that your mesh may contain negative cells but
-you want to iterate over their positive counterparts, use the {\small\tt \verm{tag}::force\_positive}.
+you want to iterate over their positive counterparts, use the {\small\tt \verm{tag}::force\_\,positive}.
 
 We now turn to iterators over one-dimensional meshes, described in paragraph
 \ref{\numb section 9.\numb parag 6}.
@@ -489,7 +490,7 @@ Iterator {\small\tt it7} will produce segments {\small\tt AB}, {\small\tt CA}, {
 {\small\tt BA}, {\small\tt AC}, {\small\tt CB} (not necessarily beginning at {\small\tt BA}).
 
 Incidentally, note that a segment, say, {\small\tt BC}, may have no reverse,
-for instance if it is on the boundary of {\small\tt tri\_mesh}.
+for instance if it is on the boundary of {\small\tt tri\_\,mesh}.
 However, its reverse {\small\tt CB} will be built on-the-fly (and will stay persistent)
 as soon as you use the reverse mesh {\small\tt ABC.boundary().reverse()} in the declaration of
 {\small\tt it6} (or {\small\tt it8}, whichever happens first in your code).
@@ -499,8 +500,8 @@ as soon as you use the reverse mesh {\small\tt ABC.boundary().reverse()} in the 
 \section{~~Navigating inside a mesh}\label{\numb section 9.\numb parag 8}
           %------------------------%
 
-Objects in class {\small\tt \verm{Mesh}} have two methods, {\small\tt cell\_behind} and
-{\small\tt cell\_in\_front\_of},
+Objects in class {\small\tt \verm{Mesh}} have two methods, {\small\tt cell\_\,behind} and
+{\small\tt cell\_\,in\_\,front\_\,of},
 which provide access to the neighbours of a given cell within that mesh.
 Together with methods {\small\tt base} and {\small\tt tip} of class {\small\tt \verm{Cell}}
 (mentioned in paragraph \ref{\numb section 1.\numb parag 2}), they allow us to navigate inside
@@ -511,14 +512,14 @@ a mesh.
   \psfrag{B}{\tt\textcolor{textindraw}{B}}
   \psfrag{C}{\tt\textcolor{textindraw}{C}}
   \psfrag{D}{\tt\textcolor{textindraw}{D}}
-  \psfrag{hex_1}{\tt\textcolor{textindraw}{hex\_1}}
-  \psfrag{hex_2}{\tt\textcolor{textindraw}{hex\_2}}
+  \psfrag{hex_1}{\tt\textcolor{textindraw}{hex\_\,1}}
+  \psfrag{hex_2}{\tt\textcolor{textindraw}{hex\_\,2}}
   \includegraphics[width=40mm]{malha-hex}
   \caption{A mesh made of hexagons}
   \label{\numb section 9.\numb fig 3}
 \end{figure}
 
-Consider the mesh {\small\tt hex\_msh} shown in figure \ref{\numb section 9.\numb fig 3},
+Consider the mesh {\small\tt hex\_\,msh} shown in figure \ref{\numb section 9.\numb fig 3},
 made of three hexagons.
 Pick one of them, at random :
 
@@ -529,7 +530,7 @@ Pick one of them, at random :
    \verm{Cell} \azul{hex_1} = *it1;
 \end{Verbatim}
 
-Now choose a random segment on the boundary of {\small\tt hex\_1} :
+Now choose a random segment on the boundary of {\small\tt hex\_\,1} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
@@ -545,7 +546,7 @@ Take its tip :
    \verm{Cell} \azul{B} = AB.tip();
 \end{Verbatim}
 
-Suppose now we want the next segment, within the boundary of {\small\tt hex\_1} :
+Suppose now we want the next segment, within the boundary of {\small\tt hex\_\,1} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
@@ -565,34 +566,34 @@ following it$\;$:
 one-dimensional meshes, described in paragraph \ref{\numb section 9.\numb parag 6},
 are implemented internally).
 
-Within the mesh {\small\tt hex\_msh}, we can navigate towards a neighbour hexagon :
+Within the mesh {\small\tt hex\_\,msh}, we can navigate towards a neighbour hexagon :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Cell} \azul{hex_2} = hex_msh.cell_in_front_of ( CD );
 \end{Verbatim}
 
-Since we have picked {\small\tt hex\_1} at random within {\small\tt hex\_msh},
-as well as {\small\tt AB} within the boundary of {\small\tt hex\_1},
+Since we have picked {\small\tt hex\_\,1} at random within {\small\tt hex\_\,msh},
+as well as {\small\tt AB} within the boundary of {\small\tt hex\_\,1},
 there is no guarantee that we actually are in the configuration shown in
 Figure \ref{\numb section 9.\numb fig 3}.
-That is, {\small\tt CD} may be on the boundary of {\small\tt hex\_msh};
-there may be no neighbour hexagon {\small\tt hex\_2}.
+That is, {\small\tt CD} may be on the boundary of {\small\tt hex\_\,msh};
+there may be no neighbour hexagon {\small\tt hex\_\,2}.
 If that is the case, the code above will produce an execution error.
 See paragraph \ref{\numb section 9.\numb parag 9} for a way to check whether there is actually
 a neighbour cell and thus avoid errors at execution time.
 
 Note that faces point outwards.
-For instance, {\small\tt CD} belongs to the boundary of {\small\tt hex\_1} and points
-outwards, towards {\small\tt hex\_2}.
-Thus, {\small\tt hex\_msh.cell\_in\_front\_of(CD)} produces {\small\tt hex\_2}.
-On the other hand, {\small\tt hex\_msh.cell\_behind(CD)} is {\small\tt hex\_1}.
+For instance, {\small\tt CD} belongs to the boundary of {\small\tt hex\_\,1} and points
+outwards, towards {\small\tt hex\_\,2}.
+Thus, {\small\tt hex\_\,msh.cell\_\,in\_\,front\_\,of(CD)} produces {\small\tt hex\_\,2}.
+On the other hand, {\small\tt hex\_\,msh.cell\_\,behind(CD)} is {\small\tt hex\_\,1}.
 
-Note also that {\small\tt CD} does not belong to the boundary of {\small\tt hex\_2}.
-If we take {\small\tt hex\_2.boundary(). .cell\_in\_front\_of(D)} we will obtain not
+Note also that {\small\tt CD} does not belong to the boundary of {\small\tt hex\_\,2}.
+If we take {\small\tt hex\_\,2.boundary(). .cell\_\,in\_\,front\_\,of(D)} we will obtain not
 {\small\tt CD} but its reverse, a distinct cell which we may call {\small\tt DC}.
-We have that {\small\tt hex\_msh.cell\_in\_front\_of(DC)} is {\small\tt hex\_1} and
-{\small\tt hex\_msh.cell\_behind(DC)} is {\small\tt hex\_2}.
+We have that {\small\tt hex\_\,msh.cell\_\,in\_\,front\_\,of(DC)} is {\small\tt hex\_\,1} and
+{\small\tt hex\_\,msh.cell\_\,behind(DC)} is {\small\tt hex\_\,2}.
 Between {\small\tt CD} and {\small\tt DC}, one is positive and the other is negative;
 which is which is not very important for the user.
 
@@ -615,7 +616,7 @@ In {\small\tt NDEBUG} mode, the behaviour is undefined
 The {\small\tt DEBUG} mode is explained in paragraph \ref{\numb section 11.\numb parag 15}.
 
 You may check the existence of the neighbour cell by using a
-{\small\tt \verm{tag}::may\_not\_exist} and then the cell's method {\small\tt exists} :
+{\small\tt \verm{tag}::may\_\;not\_\,exist} and then the cell's method {\small\tt exists} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
@@ -626,12 +627,198 @@ You may check the existence of the neighbour cell by using a
 
 \noindent thus avoiding errors at execution time.
 
-Paragraph \ref{\numb section 9.\numb parag 10} gives a complete list of operations which return
+Paragraph \ref{\numb section 9.\numb parag 12} gives a complete list of operations which return
 an existing cell or build a new one.
 
 
+          %-----------------------%
+\section{~~Iterators around a cell}\label{\numb section 9.\numb parag 10}
+          %-----------------------%
+
+Suppose we are looking at a vertex within a mesh and we want to do something to all segments
+originating at that vertex, or to all squares touching that vertex, or (depending on the
+dimension of the mesh) to all cubes sharing that vertex.
+
+Within this paragraph, in order to simplify the speech, we shall call ``square'' to a generic
+cell of dimension 2 (which may be a triangle or a hexagon or some other shape) and
+``cube'' to a generic cell of dimension three (which may be a tetrahedron or some other shape).
+
+Another similar situation is when we are looking at a segment within a mesh and we want to
+run over all squares having that segment as edge, or to all cubes having that edge.
+These situations require an iterator quite different from the ones described in paragraphs
+\ref{\numb section 9.\numb parag 5} and \ref{\numb section 9.\numb parag 6}.
+We need an iterator which goes ``around'' a certain cell.
+
+Note that we do not need an iterator to find, in a two-dimensional mesh, the two squares
+neighbour to a given segment, or, in a three-dimensional mesh, the two cubes neighbour to
+a given square.
+We do this by using methods {\small\tt cell\_\,in\_\,front\_\,of} and {\small\tt cell\_\,behind},
+as explained in paragraphs \ref{\numb section 9.\numb parag 8} and
+\ref{\numb section 9.\numb parag 9}.
+Thus, we shall not consider the case when the central cell has co-dimension one, that is,
+has dimension equal to the dimension of the mesh minus one.
+
+So, we assume that the co-dimension is two or higher and we distuinguish between
+the case when the central cell has co-dimension two and the case of co-dimension
+three or higher.
+
+To begin with, suppose the central cell has co-dimension three or higher.
+The only natural example is a vertex in a three-dimensional mesh (that's co-dimension three).
+Less intuitive examples may appear if we play with meshes of (topological) dimension
+four or higher.
+
+In code below, we iterate over all segments originating at a given vertex.
+The segments will show up in a rahter unpredictable order.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{Mesh} \azul{msh} ( \cinza{...} );  \cinza{// a mesh of cubes for instance}
+   \verm{CellIterator} \azul{it} =  \cinza{// P is a positive vertex within msh}
+               msh.iterator ( \verm{tag}::over_cells_of_dim, 1, \verm{tag}::around, P.reverse() );
+   \cinza{// or, equivalently :}
+   \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P.reverse() )}
+   for ( it.reset(); it.in_range(); it++ )
+   \{  \verm{Cell} \azul{seg} = *it;  do_something_to ( seg );   \}
+\end{Verbatim}
+
+The orientation of the central cell is important in this case.
+In the above, we have provided a negative center, {\small\tt P.reverse()};
+thus, the iterator will produce segments {\small\tt seg} having {\small\tt P} as base
+(or rather {\small\tt P.reverse()}) and pointing away from {\small\tt P}.
+In contrast, the iterator declared below, having {\small\tt P} as centrall cell,
+produces segments pointing towards {\small\tt P}.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 1, \verm{tag}::around, P );
+   \cinza{// or, equivalently :}
+   \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P )}
+\end{Verbatim}
+
+In either case, since we are in a three-dimensional mesh, positive or negative segments
+{\small\tt seg} may show up.
+If you want positive segments, add a {\small\tt\verm{tag}::force\_\,positive} before
+{\small\tt\verm{tag}::around} in the declaration of {\small\tt it};
+in this case, some of the segments will point towards {\small\tt P},
+others will point away from {\small\tt P}.
+Note that, if you provide a {\small\tt\verm{tag}::force\_\,positive}, it makes no difference
+if you give {\small\tt P} or {\small\tt P.reverse()} as central cell in the constructor.
+
+On the other hand, if we want to run over squares or cubes having {\small\tt P} as vertex,
+the orientation of the ``center'' does not matter.
+We can provide a positive vertex {\small\tt P} or a negative one {\small\tt P.reverse()},
+this will not change the behaviour of the iterator {\small\tt it} :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 2, \verm{tag}::around, P );
+   for ( it.reset(); it.in_range(); it++ )
+   \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );   \}
+\end{Verbatim}
+
+Such an iterator will produce positive two-dimensional cells.
+
+If we ask for cubes, we will get cells oriented in accordance to the mesh {\small\tt msh}.
+Except in exotic examples, these cells will be positive, but if you want to be sure you
+can always add the {\small\tt\verm{tag}::force\_\,positive} :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 3, \verm{tag}::force_positive
+                                    \verm{tag}::around, P                                 );
+\end{Verbatim}
+
+Note that {\small\tt P} may be on the boundary of {\small\tt msh}.
+The iterator will produce, of course, only cells belonging to the mesh, including those
+on the boundary.
+
+Consider now the case when the co-dimension is two, that is, we are centered at a vertex
+within a two-dimensional mesh, or at a segment within a three-dimensional mesh.
+
+In this case, the cells around that ``center'' have a natural linear order.
+If the ``center'' is at the boundary of {\small\tt msh}, this order is like an
+open chain; if the ``center'' is in the interior of {\small\tt msh}, these cells
+are organized in a closed loop.
+Hence, the constructor of an iterator centered at a cell of co-dimension two accepts
+tags like {\small\tt\verm{tag}::backwards} or {\small\tt\verm{tag}::require\_\,order}.
+Also, the {\small\tt reset} method accepts the {\small\tt\verm{tag}::start\_\,at} followed
+by an argument of type {\small\tt\verm{Cell}}.
+Thus, many of the considerations in paragraph \ref{\numb section 9.\numb parag 6}
+apply to this type of iterators.
+
+For example, if {\small\tt msh} is a two-dimensional mesh, code below will produce
+all squares sharing the vertex {\small\tt P}, linearly ordered.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 2, \verm{tag}::around, P );
+\end{Verbatim}
+
+If {\small\tt P} is at the boundary of {\small\tt msh}, the iteration process will begin
+with a square adjacent to the boundary and will also end by touching the boundary.
+
+We can iterate over segments originating at {\small\tt P} (now the orientation of
+{\small\tt P} is important) as in:
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{CellIterator} \azul{it} = 
+               msh.iterator ( \verm{tag}::over_cells_of_dim, 1, \verm{tag}::around, P.reverse() );
+   \cinza{// or, equivalently :}
+   \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P.reverse() )}
+\end{Verbatim}
+
+If we want to start with a particular square {\small\tt sq}, we specify this by giving
+supplementary arguments to the {\small\tt reset} method :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 2, \verm{tag}::around, P );
+   for ( it.reset ( \verm{tag}::start_at, sq ); it.in_range(); it++ )
+   \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );   \}
+\end{Verbatim}
+
+Just like in paragraph \ref{\numb section 9.\numb parag 6}, beware : if {\small\tt P}
+is at the boundary of {\small\tt msh}, cells previous to {\small\tt sq} will not
+show up.
+
+If you need the cells to show up in a linear order but you are not familiar
+with the notion of co-dimension, you can add the {\small\tt\verm{tag}::require\_\,order}
+to the {\small\tt\verm{CellIterator}} constructor;
+this way, if in {\small\tt DEBUG} mode, {\maniFEM} will produce a run-time error
+if that particular configuration is not compatible with linear ordering
+(that is, if the co-dimension of the central cell is not equal to two).
+Specifying {\small\tt\verm{tag}::backwards} also informs {\maniFEM} that you want
+linear ordering of cells, so you don't have to provide both tags.
+
+As a general rule, de-referencing a {\small\tt\verm{CellIterator}} does not build a new
+cell (it returns a new wrapper to an existing cell).
+Iterators around a cell, described in the present paragraph, are a slight exception to this
+rule.
+When they encounter positive cells having no reverse, they may choose to build the reverse,
+negative, cell.
+Actually, this may happen even without de-referencing the iterator;
+the constructor of the iterator may, in some cases, build a new negative cell
+(e.g.\ a face on the boundary of the mesh).
+Negative cells are harmless, except that they occupy some space in the computer's memory.
+If you really insist that you don't want new cells to appear due to an iterator,
+you can provide the {\small\tt\verm{tag}::do\_\,not\_\,build\_\,cells} as an argument
+to the constructor, as in
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{CellIterator} \azul{it} = msh.iterator
+                 ( \verm{tag}::over_segments, \verm{tag}::do_not_build_cells, \verm{tag}::around, P );
+\end{Verbatim}
+
+
+          %--------------------%
+\section{~~\cinza{[empty]}}\label{\numb section 9.\numb parag 11}
+          %--------------------%
+
+
           %--------------------------%
-\section{~~Declaring cells and meshes}\label{\numb section 9.\numb parag 10}
+\section{~~Declaring cells and meshes}\label{\numb section 9.\numb parag 12}
           %--------------------------%
 
 As explained in paragraph \ref{\numb section 11.\numb parag 4}, the {\small\tt \verm{Cell}} class
@@ -719,6 +906,9 @@ If that object does not exist, it is built on-the-fly.
    \verm{Cell} \azul{A_rev} ( \verm{tag}::reverse_of, A, \verm{tag}::build_if_not_exists );
 \end{Verbatim}
 
+De-referencing a {\small\tt\verm{CellIterator}} returns (a new wrapper for) an existing cell;
+a slight exception to this rule is described in paragraph \ref{\numb section 9.\numb parag 10}.
+
 Statements below return a wrapper for a brand new cell or mesh :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
@@ -735,167 +925,3 @@ Statements below return a wrapper for a brand new cell or mesh :
 % on {\small\tt \verm{Cell}::Core}s.
 
 
-          %--------------------------%
-\section{~~\cinza{[empty]}}\label{\numb section 9.\numb parag 11}
-          %--------------------------%
-
-
-          %-----------------------%
-\section{~~Iterators around a cell}\label{\numb section 9.\numb parag 12}
-          %-----------------------%
-
-Suppose we are looking at a vertex within a mesh and we want to do something to all segments
-originating at that vertex, or to all squares touching that vertex, or (depending on the
-dimension of the mesh) to all cubes sharing that vertex.
-
-Within this paragraph, in order to simplify the speech, we shall call ``square'' to a generic
-cell of dimension 2 (which may be a triangle or a hexagon or some other shape) and
-``cube'' to a generic cell of dimension three (which may be a tetrahedron or some other shape).
-
-Another similar situation is when we are looking at a segment within a mesh and we want to
-run over all squares having that segment as edge, or to all cubes having that edge.
-These situations require an iterator quite different from the ones described in paragraphs
-\ref{\numb section 9.\numb parag 5} and \ref{\numb section 9.\numb parag 6}.
-We need an iterator which goes ``around'' a certain cell.
-
-Note that we do not need an iterator to find, in a two-dimensional mesh, the two squares
-neighbour to a given segment, or, in a three-dimensional mesh, the two cubes neighbour to
-a given square.
-We do this by using methods {\small\tt cell\_in\_front\_of} and {\small\tt cell\_behind},
-as explained in paragraphs \ref{\numb section 9.\numb parag 8} and
-\ref{\numb section 9.\numb parag 9}.
-Thus, we shall not consider the case when the central cell has co-dimension one, that is,
-has dimension equal to the dimension of the mesh minus one.
-
-So, we assume that the co-dimension is two or higher and we distuinguish between
-the case when the central cell has co-dimension two and the case of co-dimension
-three or higher.
-
-To begin with, suppose the central cell has co-dimension three or higher.
-The only natural example is a vertex in a three-dimensional mesh (that's co-dimension three).
-Less intuitive examples may appear if we play with meshes of (topological) dimension
-four or higher.
-
-In code below, we iterate over all segments originating at a given vertex.
-The segments will show up in a rahter unpredictable order.
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Mesh} \azul{msh} ( \cinza{...} );  \cinza{// a mesh of cubes for instance}
-   \verm{CellIterator} \azul{it} =  \cinza{// P is a positive vertex within msh}
-               msh.iterator ( \verm{tag}::over_cells_of_dim, 1, \verm{tag}::around, P.reverse() );
-   \cinza{// or, equivalently :}
-   \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P.reverse() )}
-   for ( it.reset(); it.in_range(); it++ )
-   \{  \verm{Cell} \azul{seg} = *it;  do_something_to ( seg );   \}
-\end{Verbatim}
-
-The orientation of the central cell is important in this case.
-In the above, we have provided a negative center, {\small\tt P.reverse()};
-thus, the iterator will produce segments {\small\tt seg} having {\small\tt P} as base
-(or rather {\small\tt P.reverse()}) and pointing away from {\small\tt P}.
-In contrast, the iterator declared below, having {\small\tt P} as centrall cell,
-produces segments pointing towards {\small\tt P}.
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 1, \verm{tag}::around, P );
-   \cinza{// or, equivalently :}
-   \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P )}
-\end{Verbatim}
-
-In either case, since we are in a three-dimensional mesh, positive or negative segments
-{\small\tt seg} may show up.
-If you want positive segments, add a {\small\tt\verm{tag}::force\_positive} before
-{\small\tt\verm{tag}::around} in the declaration of {\small\tt it};
-in this case, some of the segments will point towards {\small\tt P},
-others will point away from {\small\tt P}.
-Note that, if you provide a {\small\tt\verm{tag}::force\_positive}, it makes no difference
-if you give {\small\tt P} or {\small\tt P.reverse()} as central cell in the constructor.
-
-On the other hand, if we want to run over squares or cubes having {\small\tt P} as vertex,
-the orientation of the ``center'' does not matter.
-We can provide a positive vertex {\small\tt P} or a negative one {\small\tt P.reverse()},
-this will not change the behaviour of the iterator {\small\tt it} :
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 2, \verm{tag}::around, P );
-   for ( it.reset(); it.in_range(); it++ )
-   \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );   \}
-\end{Verbatim}
-
-Such an iterator will produce positive two-dimensional cells.
-
-If we ask for cubes, we will get cells oriented in accordance to the mesh {\small\tt msh}.
-Except in exotic examples, these cells will be positive, but if you want to be sure you
-can always add the {\small\tt\verm{tag}::force\_positive} :
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 3, \verm{tag}::force_positive
-                                    \verm{tag}::around, P                                 );
-\end{Verbatim}
-
-Note that {\small\tt P} may be on the boundary of {\small\tt msh}.
-The iterator will produce, of course, only cells belonging to the mesh, including those
-on the boundary.
-
-Consider now the case when the co-dimension is two, that is, we are centered at a vertex
-within a two-dimensional mesh, or at a segment within a three-dimensional mesh.
-
-In this case, the cells around that ``center'' have a natural linear order.
-If the ``center'' is at the boundary of {\small\tt msh}, this order is like an
-open chain; if the ``center'' is in the interior of {\small\tt msh}, these cells
-are organized in a closed loop.
-Hence, the constructor of an iterator centered at a cell of co-dimension two accepts
-tags like {\small\tt\verm{tag}::backwards} or {\small\tt\verm{tag}::require\_order}.
-Also, the {\small\tt reset} method accepts the {\small\tt\verm{tag}::start\_at} followed
-by an argument of type {\small\tt\verm{Cell}}.
-Thus, many of the considerations in paragraph \ref{\numb section 9.\numb parag 6}
-apply to this type of iterators.
-
-For example, if {\small\tt msh} is a two-dimensional mesh, code below will produce
-all squares sharing the vertex {\small\tt P}, linearly ordered.
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 2, \verm{tag}::around, P );
-\end{Verbatim}
-
-If {\small\tt P} is at the boundary of {\small\tt msh}, the iteration process will begin
-with a square adjacent to the boundary and will also end by touching the boundary.
-
-We can iterate over segments originating at {\small\tt P} (now the orientation of
-{\small\tt P} is important) as in:
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = 
-               msh.iterator ( \verm{tag}::over_cells_of_dim, 1, \verm{tag}::around, P.reverse() );
-   \cinza{// or, equivalently :}
-   \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P.reverse() )}
-\end{Verbatim}
-
-If we want to start with a particular square {\small\tt sq}, we specify this by giving
-supplementary arguments to the {\small\tt reset} method :
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 2, \verm{tag}::around, P );
-   for ( it.reset ( \verm{tag}::start_at, sq ); it.in_range(); it++ )
-   \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );   \}
-\end{Verbatim}
-
-Just like in paragraph \ref{\numb section 9.\numb parag 6}, beware : if {\small\tt P}
-is at the boundary of {\small\tt msh}, cells previous to {\small\tt sq} will not
-show up.
-
-If you need the cells to show up in a linear order but you are not familiar
-with the notion of co-dimension, you can add the {\small\tt\verm{tag}::require\_order}
-to the {\small\tt\verm{CellIterator}} constructor;
-this way, if in {\small\tt DEBUG} mode, {\maniFEM} will produce a run-time error
-if that particular configuration is not compatible with linear ordering
-(that is, if the co-dimension of the central cell is not equal to two).
-Specifying {\small\tt\verm{tag}::backwards} also informs {\maniFEM} that you want
-linear ordering of cells, so you don't have to provide both tags.

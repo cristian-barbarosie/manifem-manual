@@ -79,7 +79,7 @@ See paragraph \ref{\numb section 11.\numb parag 3} for more details about tags.
 
 On a rectangular domain, we can build a mesh of triangles by using the {\small\tt \verm{Mesh}}
 constructor with {\small\tt \verm{tag}::rectangle}, providing as last argument the
-{\small\tt \verm{tag}::with\_triangles}.
+{\small\tt \verm{tag}::with\_\,triangles}.
 For instance, in the example \ref{\numb section 1.\numb parag 3},
 if we re-write the definition of {\small\tt BGHC} as
 
@@ -129,7 +129,7 @@ The mesh in paragraph \ref{\numb section 1.\numb parag 4} could have been built 
 used to build domains of the desired shape.
 
 Until now, we have only met the trivial Euclidian manifold, defined as {\small\tt
-\verm{Manifold}\break ( \verm{tag}::Euclid,} {\small\tt \verm{tag}::of\_dim,} {\small\tt n}
+\verm{Manifold}\break ( \verm{tag}::Euclid,} {\small\tt \verm{tag}::of\_\,dim,} {\small\tt n}
 {\small\tt )}.
 One can define a submanifold in terms of an implicit equation, that is, as a level set,
 using the method {\small\tt implicit} of the Euclidian manifold.
@@ -373,17 +373,17 @@ taking as argument a list of {\small\tt \verm{Mesh}}es; the same constructor is 
 paragraph \ref{\numb section 9.\numb parag 2}.
 
 Unlike in paragraph \ref{\numb section 2.\numb parag 5}, here we do not control the
-exact shape of the segments {\small\tt S\_mSW}, {\small\tt S\_mSup} and so on.
+exact shape of the segments {\small\tt S\_\,mSW}, {\small\tt S\_\,mSup} and so on.
 They are projections of straight line segments onto our surface but since the equation
 of the surface is rather complicated we do not know the exact shape of these projections.
 Since points like {\small\tt mSW} and {\small\tt mSE} have been placed initially in
 {\small\tt RR3} not belonging to the {\small\tt bupmy} manifold and then explicitly
 {\small\tt project}ed,
 there is no guarantee that they lie in the plane $ z = 0 $ (they probably don't).
-We notice an angle between {\small\tt W\_mSW} and {\small\tt S\_mSW} at {\small\tt mSW}.
+We notice an angle between {\small\tt W\_\,mSW} and {\small\tt S\_\,mSW} at {\small\tt mSW}.
 
 Paragraph \ref{\numb section 2.\numb parag 12} shows a way to control the shape of the segments
-{\small\tt S\_mSW}, {\small\tt S\_mSE} and so on.
+{\small\tt S\_\,mSW}, {\small\tt S\_\,mSE} and so on.
 
 Section \ref{\numb section 3} shows other ways of meshing a surface.
 
@@ -413,7 +413,7 @@ We can build the boundary of the disk just like in paragraph
 \ref{\numb section 2.\numb parag 4}, by placing ourselves in the manifold {\small\tt circle}.
 But if we want to subsequently mesh the interior of the disk, we must leave {\small\tt circle}
 and switch back to the original {\small\tt RR2} manifold.
-Method {\small\tt set\_as\_working\_manifold} allows us to do that.
+Method {\small\tt set\_\,as\_\,working\_\,manifold} allows us to do that.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=main-\ref{\numb section 2.\numb parag 8}.cpp,rulecolor=\color{coment},
@@ -454,7 +454,7 @@ another way of meshing a disk, having its boundary as starting point.
 
 Each time a {\small\tt \verm{Manifold}} object is created, its constructor sets it as working manifold;
 this is why in many cases we don't need to know about method
-{\small\tt set\_as\_working\_manifold}.
+{\small\tt set\_\,as\_\,working\_\,manifold}.
 We need it, however, in cases like the one presented here.
 
 
@@ -823,7 +823,7 @@ They correspond to values of {\small\tt t} which are uniformly distributed betwe
 $ \pi/2 $ (at {\small\tt A}) and $ 5\pi $ (at {\small\tt B}).
 
 The approach described above has the disadvantage that, if we want to subsequently change the
-distribution of nodes along the {\small\tt arc\_of\_spiral}, we must switch back to the original
+distribution of nodes along the {\small\tt arc\_\,of\_\,spiral}, we must switch back to the original
 {\small\tt t} coordinate.
 
 Paragraph \ref{\numb section 3.\numb parag 5} shows another way of meshing a curve,

@@ -7,7 +7,7 @@
 \def\manifemrelease{21.**}
 \def\manualversion{21.**}
 \let\production 0
-\includeonly{manual-cap-09}
+\includeonly{manual-cap-09,manual-cap-10,manual-cap-11}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -87,7 +87,7 @@ We hope it will prove particularly useful for people who want fine control on th
 e.g.\ for implementing their own meshing or remeshing algorithms.
 
 {\ManiFEM} \ uses \ {\tt Eigen} \ for \ storing matrices \ and \ solving \ systems \ of
-\ linear \ equations, \ see {\small\tt http://eigen.tuxfamily.org/index.php?title=Main\_Page}.
+\ linear \ equations, \ see {\small\tt http://eigen.tuxfamily.org/index.php?title=Main\_\,Page}.
 Many drawings in this manual have been produced by {\tt gmsh}, see
 {\small\tt http://gmsh.info/}
 
@@ -137,7 +137,7 @@ Under linux it should be easy to install them.
 It is not that easy to install and use them under Windows, but it is certainly possible,
 for instance \hbox{by using {\small\tt cygwin}}, available at {\small\tt https://www.cygwin.com/}.
 For some examples, the {\small\tt Eigen} library is necessary; just copy its source tree
-from {\small\tt http://eigen.tuxfamily.org/index.php?title=Main\_Page}
+from {\small\tt http://eigen.tuxfamily.org/index.php?title=Main\_\,Page}
 to $\;$some $\;$place $\;$in $\;$your $\;$computer $\;$and $\;$be $\;$sure $\;$that
 $\;$path $\;$is $\;$mentioned in your {\small\tt Makefile}
 under the {\small\tt -I} flag of your compiler.
@@ -273,20 +273,18 @@ paragraph \ref{\numb section 11.\numb parag 6}.
 \noindent Introduced garbage collectors (not fully working for cells and meshes).
 
 
-\section*{\manifemrelease}
+\section*{21.07}
 
 \noindent Garbage collectors for cells and meshes work,
 paragraph \ref{\numb section 11.\numb parag 5}.
 
 \noindent Introduced iterators centered at a cell,
-paragraph \ref{\numb section 9.\numb parag 12}.
+paragraph \ref{\numb section 9.\numb parag 10}.
 
 \noindent Some examples about remeshing, section \ref{\numb section 10}.
 
 
 \section*{To do}
-
-\noindent Garbage collector for cells and meshes is buggy.
 
 \noindent 3D meshing
 
@@ -348,7 +346,7 @@ interpolation of coordinates :
 iterators over cells : \ref{\numb section 9.\numb parag 5}, \ref{\numb section 9.\numb parag 7}
 
 \noindent
-{\small\tt init\_cell} : \ref{\numb section 11.\numb parag 10}
+{\small\tt init\_\,cell} : \ref{\numb section 11.\numb parag 10}
 
 \noindent
 {\small\tt join}ing meshes : \ref{\numb section 1.\numb parag 3},
@@ -386,7 +384,7 @@ memory management : \ref{\numb section 11.\numb parag 5}
 mesh : all over the place, esp.\ \ref{\numb section 1.\numb parag 2},
 \ref{\numb section 1.\numb parag 3}, \ref{\numb section 9.\numb parag 1},
 \ref{\numb section 9.\numb parag 3},
-\ref{\numb section 9.\numb parag 7} -- \ref{\numb section 9.\numb parag 10}
+\ref{\numb section 9.\numb parag 7} -- \ref{\numb section 9.\numb parag 12}
 
 \noindent
 {\small\tt \verm{MetricTree}} : \ref{\numb section 12.\numb parag 10},
@@ -440,7 +438,7 @@ segment {\small\tt \verm{Mesh}}es :
 \ref{\numb section 11.\numb parag 6}
 
 \noindent
-{\small\tt set\_as\_working\_manifold} :
+{\small\tt set\_\,as\_\,working\_\,manifold} :
 \ref{\numb section 2.\numb parag 8} -- \ref{\numb section 2.\numb parag 10},
 \ref{\numb section 2.\numb parag 12}, \ref{\numb section 3.\numb parag 1},
 \ref{\numb section 3.\numb parag 2}, \ref{\numb section 3.\numb parag 3},
@@ -451,7 +449,7 @@ segment {\small\tt \verm{Mesh}}es :
 {\small\tt\verm{tag}}s : \ref{\numb section 11.\numb parag 3}
 
 \noindent
-wrapper : \ref{\numb section 9.\numb parag 1}, \ref{\numb section 9.\numb parag 10},
+wrapper : \ref{\numb section 9.\numb parag 1}, \ref{\numb section 9.\numb parag 12},
 \ref{\numb section 11.\numb parag 4}
 
 

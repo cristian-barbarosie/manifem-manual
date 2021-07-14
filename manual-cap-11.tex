@@ -58,7 +58,8 @@ only used in one file.
 In the {\small\tt namespace \verm{maniFEM}} there are also many overloaded functions.
 Because they take arguments of specific type, they will not clash with names defined
 by the user.
-Examples are : {\small\tt\verm{smooth\_min}}, {\small\tt\verm{power}}, {\small\tt\verm{sin}}.
+Examples are : {\small\tt\verm{smooth\_\,min}}, {\small\tt\verm{power}}, {\small\tt\verm{abs}},
+{\small\tt\verm{sin}}.
 
 
           %-------------%
@@ -77,7 +78,7 @@ the even more rarely needed {\small\tt \verm{MeshIterator}} and {\small\tt\verm{
 % There is an exception to this rule : the word {\small\tt tag}, although directly exposed
 % in {\small\tt namespace \verm{maniFEM}}, is not coloured
 % (that's because we want it to be discrete).
-There are also functions like {\small\tt \verm{smooth\_min}} and also overloaded versions
+There are also functions like {\small\tt \verm{smooth\_\,min}} and also overloaded versions
 of common functions like {\small\tt\verm{power}}, {\small\tt \verm{sin}}, {\small\tt \verm{cos}}.
 
 Newly declared objects are shown in \azul{purple}.
@@ -126,9 +127,9 @@ In \maniFEM, namespaces and class names begin with capital letter
 The namespace {\small\tt\verm{tag}} (or {\small\tt \verm{maniFEM}::tag} if you are not
 {\small\tt using namespace \verm{maniFEM}}) is an exception to the above rule.
 We prefer its name to have only lower case letters because we want it to be
-discrete. For instance, if we wrote {\small\tt\verm{Tag}::divided\_in},
-the reader's eye would catch {\small\tt\verm{Tag}} much before {\small\tt divided\_in};
-thus, {\small\tt\verm{tag}::divided\_in} is more readable.
+discrete. For instance, if we wrote {\small\tt\verm{Tag}::divided\_\,in},
+the reader's eye would catch {\small\tt\verm{Tag}} much before {\small\tt divided\_\,in};
+thus, {\small\tt\verm{tag}::divided\_\,in} is more readable.
 Of course, the final user has the choice of {\small\tt using namespace \verm{tag}}
 but beware, it has many names which may conflict with the ones in your code.
 
@@ -174,7 +175,7 @@ Both {\small\tt\verm{Cell}::Positive} and {\small\tt\verm{Cell}::Negative} are d
 {\small\tt\verm{Cell}::Core}.
 % See the graph in figure \ref{\numb section 11.\numb fig 1}.
 The graph below shows these inheritance relations; dotted lines represent relations subject to
-the {\small\tt -DMANIFEM\_COLLECT\_CM} compilation option, explained in paragraph
+the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} compilation option, explained in paragraph
 \ref{\numb section 11.\numb parag 5}.
 
 \begin{figure}[ht] \centering
@@ -210,7 +211,7 @@ object inside remains intact (unless there are no more wrappers for that core, a
 paragraph \ref{\numb section 11.\numb parag 5}).
 Also, you can copy the wrapper as in {\small\tt \verm{Cell} A = B} or {\small\tt \verm{Mesh} BA = AB.reverse()}
 but these operations do not create new core objects, they just give new names to
-already existing cells or meshes (paragraph \ref{\numb section 9.\numb parag 10} gives
+already existing cells or meshes (paragraph \ref{\numb section 9.\numb parag 12} gives
 more details).
 You can think of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es as customized pointers towards
 {\small\tt \verm{Cell}::Core}s and {\small\tt \verm{Mesh}::Core}s, respectively.
@@ -226,7 +227,7 @@ One-dimensional meshes have often a particular structure (they are chains of seg
 when this happens they are implemented in a specialized class {\small\tt \verm{Mesh}::Connected::OneDim}.
 % See the graph in figure \ref{\numb section 11.\numb fig 2}.
 The graph below shows these inheritance relations; dotted lines represent relations subject to
-the {\small\tt -DMANIFEM\_COLLECT\_CM} compilation option, explained in paragraph
+the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} compilation option, explained in paragraph
 \ref{\numb section 11.\numb parag 5}.
 
 \begin{figure}[ht] \centering
@@ -280,7 +281,7 @@ their cores inherit from {\small\tt \verm{tag}::Util::Core}.
 Wrappers contain a pointer to a core; each core keeps a counter of wrappers pointing to it.
 The destructor of a wrapper decrements the counter and destroys the core if the counter
 reaches zero.
-It's like a {\small\tt shared\_ptr}.
+It's like a {\small\tt shared\_\,ptr}.
 
 Cells and meshes depend on each other in a complicated manner.
 A cell keeps its boundary (which is a mesh) alive.
@@ -289,15 +290,15 @@ A negative cell keeps alive its positive counterpart but the reverse does not ho
 care must be taken to break dependency cycles.
 
 Some programs consist only in building a mesh and never (or rarely) discarding cells.
-For such programs, there is no advantage in using a {\small\tt shared\_ptr}-like strategy.
+For such programs, there is no advantage in using a {\small\tt shared\_\,ptr}-like strategy.
 Thus, unlike for other {\maniFEM} objects, the garbage collector for {\small\tt \verm{Cell}}s and
 {\small\tt \verm{Mesh}}es can be turned off by erasing the option
-{\small\tt -DMANIFEM\_COLLECT\_CM} in the {\small\tt Makefile}.
+{\small\tt -DMANIFEM\_\,COLLECT\_\,CM} in the {\small\tt Makefile}.
 Remember to {\small\tt make clean} and re-build your program;
 see also paragraph \ref{\numb section 11.\numb parag 15}.
 The graphs in figures \ref{\numb section 11.\numb fig 1} and \ref{\numb section 11.\numb fig 2}
 show dotted lines where the inheritance relationship is subject to the
-{\small\tt -DMANIFEM\_COLLECT\_CM} option.
+{\small\tt -DMANIFEM\_\,COLLECT\_\,CM} option.
 If you turn off the garbage collector, {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es
 will occupy less space in the computer's memory and your program will run slightly faster.
 However you should not turn it off if you do a lot of remeshing,
@@ -378,7 +379,7 @@ Otherwise, the result will be a {\small\tt \verm{Mesh}::Fuzzy}.
 \leavevmode {\ManiFEM} assumes you will not build meshes of topological dimension
 above 3.
 If you want to play with higher-dimensional meshes, you must relax this assumption
-through the statement {\small\tt \verm{Mesh}::set\_max\_dim (}some-integer{\small\tt )}.
+through the statement {\small\tt \verm{Mesh}::set\_\,max\_\,dim (}some-integer{\small\tt )}.
 
 On the other hand, you may want to decrease the expected dimension.
 Suppose you want to mesh surfaces in $ \mathbb{R}^3 $.
@@ -386,7 +387,7 @@ This means your maximum topological dimension will be 2
 (this has nothing to do with the geometric dimension, here 3).
 Then you may state your intention at the beginning of your program
 (before building any cell, before even declaring the first vertex) through
-the statement {\small\tt \verm{Mesh}::set\_max\_dim(2)}.
+the statement {\small\tt \verm{Mesh}::set\_\,max\_\,dim(2)}.
 This will decrease the size of the {\small\tt \verm{Cell}::Core} objects in your code,
 thus saving some memory.
 
@@ -436,7 +437,7 @@ Note that there are no negative mesh cores.
 
 The graphs in figures \ref{\numb section 11.\numb fig 1} and \ref{\numb section 11.\numb fig 2}
 show inheritance relationships between these classes; dotted lines represent
-inheritance relationships  subject to the {\small\tt -DMANIFEM\_COLLECT\_CM} option.
+inheritance relationships  subject to the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} option.
 
 
           %----------------------------------%
@@ -445,79 +446,79 @@ inheritance relationships  subject to the {\small\tt -DMANIFEM\_COLLECT\_CM} opt
 
 At a high level, we build cells and meshes using the appropriate {\small\tt \verm{Cell}} and
 {\small\tt \verm{Mesh}} constructors.
-At low level, cells and meshes are built by methods {\small\tt \verm{Cell}::glue\_on\_bdry\_of},
-{\small\tt \verm{Cell}::cut\_from\_bdry\_of}, {\small\tt \verm{Cell}::add\_to\_mesh} and
-{\small\tt \verm{Cell}::remove\_from\_mesh}.
+At low level, cells and meshes are built by methods {\small\tt \verm{Cell}::glue\_\,on\_\,bdry\_\,of},
+{\small\tt \verm{Cell}::cut\_\,from\_\,bdry\_\,of}, {\small\tt \verm{Cell}::add\_\,to\_\,mesh} and
+{\small\tt \verm{Cell}::remove\_\,from\_\,mesh}.
 
-The inlined method {\small\tt \verm{Cell}::glue\_on\_bdry\_of} is used for sticking a new
+The inlined method {\small\tt \verm{Cell}::glue\_\,on\_\,bdry\_\,of} is used for sticking a new
 {\small\tt face} on the
 boundary of an existing cell {\small\tt cll} (whose boundary is incomplete).
-It simply calls the inlined method \ {\small\tt \verm{Cell}::Core::glue\_on\_bdry\_of}
-which in turn calls the virtual method {\small\tt cll->glue\_on\_my\_bdry(face)}.
-Different methods {\small\tt \verm{Cell}::***::glue\_on\_my\_bdry} exist for different kinds of
-cells but to summarize we state that {\small\tt glue\_on\_my\_bdry} first calls
-{\small\tt face->add\_to\_bdry} in order to add the face to the boundary of {\small\tt cll}
-then calls the inlined method {\small\tt \verm{Cell}::Positive::NotVertex::glue\_common}.
+It simply calls the inlined method \ {\small\tt \verm{Cell}::Core::glue\_\,on\_\,bdry\_\,of}
+which in turn calls the virtual method {\small\tt cll->glue\_\,on\_\,my\_\,bdry(face)}.
+Different methods {\small\tt \verm{Cell}::***::glue\_\,on\_\,my\_\,bdry} exist for different kinds of
+cells but to summarize we state that {\small\tt glue\_\,on\_\,my\_\,bdry} first calls
+{\small\tt face->add\_\,to\_\,bdry} in order to add the face to the boundary of {\small\tt cll}
+then calls the inlined method {\small\tt \verm{Cell}::Positive::NotVertex::glue\_\,common}.
 
-Method {\small\tt \verm{Cell}::Core::add\_to\_bdry} is virtual so it does different things for
+Method {\small\tt \verm{Cell}::Core::add\_\,to\_\,bdry} is virtual so it does different things for
 different kinds of cells but the common idea is that it calls another virtual method
-{\small\tt \verm{Mesh}::Core::add\_***} (the name depends on the type of cell being added).
-The latter calls an inline function {\small\tt make\_deep\_connections} (hidden in an anonymous
+{\small\tt \verm{Mesh}::Core::add\_\,***} (the name depends on the type of cell being added).
+The latter calls an inline function {\small\tt make\_\,deep\_\,connections} (hidden in an anonymous
 namespace in {\small\tt mesh.cpp}) which updates fields
-{\small\tt \verm{Cell}::Positive::meshes}, {\small\tt \verm{Cell}::Positive***::meshes\_same\_dim} and
+{\small\tt \verm{Cell}::Positive::meshes}, {\small\tt \verm{Cell}::Positive***::meshes\_\,same\_\,dim} and
 {\small\tt \verm{Mesh}::Fuzzy::cells} for several pairs cell-mesh
 (including cells of lower dimension and meshes of higher dimension).
-After that, {\small\tt \verm{Mesh}::Core::add\_***} updates neighbourhood relations
-coded in the map {\small\tt \verm{Cell}::Core:: ::cell\_behind\_within}.
+After that, {\small\tt \verm{Mesh}::Core::add\_\,***} updates neighbourhood relations
+coded in the map {\small\tt \verm{Cell}::Core:: ::cell\_\,behind\_\,within}.
 
-The inlined method {\small\tt \verm{Cell}::Positive::NotVertex::glue\_common} deals with
+The inlined method {\small\tt \verm{Cell}::Positive::NotVertex::glue\_\,common} deals with
 the case when the cell (on whose boundary we are trying to glue a new face)
 already belongs to some mesh(es).
-In that case, it updates the information in {\small\tt face->cell\_behind\_within}.
+In that case, it updates the information in {\small\tt face->cell\_\,behind\_\,within}.
 
 If we want to add a cell to a mesh which is not a boundary of a cell (this happens
 frequently in {\small\tt \verm{Mesh}} constructors),
-we call the inlined method {\small\tt \verm{Cell}::add\_to} which calls the virtual method
-{\small\tt \verm{Cell}::Core::add\_to\_mesh} which is similar to {\small\tt \verm{Cell}::Core::add\_to\_bdry}
+we call the inlined method {\small\tt \verm{Cell}::add\_\,to} which calls the virtual method
+{\small\tt \verm{Cell}::Core::add\_\,to\_\,mesh} which is similar to {\small\tt \verm{Cell}::Core::add\_\,to\_\,bdry}
 described above.
 
 In the constructor of a cell, since we are sure there are no meshes containing that cell
 (the cell is just being built),
-we call method {\small\tt add\_to\_mesh} instead of {\small\tt glue\_on\_bdry\_of}
+we call method {\small\tt add\_\,to\_\,mesh} instead of {\small\tt glue\_\,on\_\,bdry\_\,of}
 (we pretend the mesh is not a boundary).
 
 Removing a face from the boundary of an existing cell, or removing a cell from a mesh
 which is not a boundary, implies a process similar to the one described above,
-with methods replaced by {\small\tt \verm{Cell}::cut\_from\_bdry\_of},
-{\small\tt \verm{Cell}::remove\_from\_mesh},
-{\small\tt \verm{Cell}::Core::cut\_from\_bdry\_of},
-{\small\tt \verm{Cell}::Core::cut\_from\_my\_bdry},
-{\small\tt \verm{Cell}::Core::remove\_from\_bdry}, {\small\tt \verm{Cell}::Core::remove\_from\_mesh},
-{\small\tt \verm{Mesh}::Core:remove\_***}, {\small\tt break\_deep\_connections},
-{\small\tt \verm{Cell}::Positive::NotVertex::cut\_common}.
+with methods replaced by {\small\tt \verm{Cell}::cut\_\,from\_\,bdry\_\,of},
+{\small\tt \verm{Cell}::remove\_\,from\_\,mesh},
+{\small\tt \verm{Cell}::Core::cut\_\,from\_\,bdry\_\,of},
+{\small\tt \verm{Cell}::Core::cut\_\,from\_\,my\_\,bdry},
+{\small\tt \verm{Cell}::Core::remove\_\,from\_\,bdry}, {\small\tt \verm{Cell}::Core::remove\_\,from\_\,mesh},
+{\small\tt \verm{Mesh}::Core:remove\_\,***}, {\small\tt break\_\,deep\_\,connections},
+{\small\tt \verm{Cell}::Positive::NotVertex::cut\_\,common}.
 
 
                  %----------------------%
-\section{~~\cinza{About {\tt init\_cell}} (outdated)}\label{\numb section 11.\numb parag 10}
+\section{~~\cinza{About {\tt init\_\,cell}} (outdated)}\label{\numb section 11.\numb parag 10}
                  %----------------------%
 
-The {\small\tt \verm{Cell}} class has static attributes {\small\tt init\_cell},
-{\small\tt init\_cell\_r}, {\small\tt data\_for\_init}, {\small\tt data\_for\_init\_r}.
-The attribute {\small\tt init\_cell} is a list of pointers to functions to be called by
-the constructor of a positive cell, while {\small\tt data\_for\_init} is a void pointer which
-can be used to pass supplementary information to {\small\tt init\_cell}.
-Attributes {\small\tt init\_cell\_r} and {\small\tt data\_for\_init\_r} fulfill a similar task
+The {\small\tt \verm{Cell}} class has static attributes {\small\tt init\_\,cell},
+{\small\tt init\_\,cell\_\,r}, {\small\tt data\_\,for\_\,init}, {\small\tt data\_\,for\_\,init\_\,r}.
+The attribute {\small\tt init\_\,cell} is a list of pointers to functions to be called by
+the constructor of a positive cell, while {\small\tt data\_\,for\_\,init} is a void pointer which
+can be used to pass supplementary information to {\small\tt init\_\,cell}.
+Attributes {\small\tt init\_\,cell\_\,r} and {\small\tt data\_\,for\_\,init\_\,r} fulfill a similar task
 when building negative cells.
 
-For instance, {\small\tt \verm{Manifold}::coordinate\_system} inserts into the list
-{\small\tt \verm{Cell}::init\_cell[0]} a call to {\small\tt \verm{Mesh}::prescribe\_on} which in turn calls
-{\small\tt \verm{FunctionOnMesh}::prescribe\_on} in order to prepare the ground for instructions like
+For instance, {\small\tt \verm{Manifold}::coordinate\_\,system} inserts into the list
+{\small\tt \verm{Cell}::init\_\,cell[0]} a call to {\small\tt \verm{Mesh}::prescribe\_\,on} which in turn calls
+{\small\tt \verm{FunctionOnMesh}::prescribe\_\,on} in order to prepare the ground for instructions like
 {\small\tt \azul{x} == 1.0} to produce the desired effect after the creation of each point.
 
 Another example is the constructor {\small\tt\verm{FiniteElement}::Lagrange::Q1} which
-adds a call to\break {\small\tt\verm{FiniteElement}::Lagrange::Q1::enumerate\_new\_vertex} to
-the list {\small\tt\verm{Cell}::init\_cell[0]}.
-This way, future vertices will receive automatically a {\small\tt size\_t} label, to be used
+adds a call to\break {\small\tt\verm{FiniteElement}::Lagrange::Q1::enumerate\_\;new\_\,vertex} to
+the list {\small\tt\verm{Cell}::init\_\,cell[0]}.
+This way, future vertices will receive automatically a {\small\tt size\_\,t} label, to be used
 by Lagrange finite elements.
 
 
@@ -643,8 +644,8 @@ PositiveVertex::operator=(const ManiFEM::PositiveVertex&)'
 \end{Verbatim}
 
 Core cells and meshes cannot be copied.
-You cannot ask for things like {\small\tt cell\_2 = cell\_1} or
-{\small\tt mesh\_2 = mesh\_1}.
+You cannot ask for things like {\small\tt cell\_\,2 = cell\_\,1} or
+{\small\tt mesh\_\,2 = mesh\_\,1}.
 See paragraph \ref{\numb section 11.\numb parag 8} for more details.
 
 
@@ -687,11 +688,11 @@ For any cell, you may use the {\small\tt positive} attribute which is a pointer
 equal to {\small\tt this} if the cell is positive or points to the reverse if
 the cell is negative (so the reverse is positive).
 Or you may check if a certain cell is positive or negative by using the method
-{\small\tt is\_positive} (which simply returns the result of the comparison
+{\small\tt is\_\,positive} (which simply returns the result of the comparison
 {\small\tt this == this->positive}).
 Paragraph \ref{\numb section 9.\numb parag 7} gives more details about orientation of
 cells and meshes.
-See also paragraphs \ref{\numb section 9.\numb parag 10} and
+See also paragraphs \ref{\numb section 9.\numb parag 12} and
 \ref{\numb section 11.\numb parag 4}.
 
 Note that, if {\small\tt seg} is a segment (a one-dimensional cell), then
@@ -699,7 +700,7 @@ Note that, if {\small\tt seg} is a segment (a one-dimensional cell), then
 So, you probably need to use {\small\tt seg.base().reverse()} instead.
 Iterators over cells of maximum dimension (that is, of dimension equal to the dimension
 of the mesh) produce oriented cells (which may be positive or negative).
-Consider using the {\small\tt \verm{tag}::force\_positive}.
+Consider using the {\small\tt \verm{tag}::force\_\,positive}.
 See paragraphs \ref{\numb section 9.\numb parag 5} and \ref{\numb section 9.\numb parag 6}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
@@ -722,9 +723,9 @@ Assertion 'this->meshes.size() > 0' failed.
 
 You are trying to build meshes of dimension higher than those \maniFEM\ expects.
 Did you re-define this expectation through the statement
-{\small\tt \verm{Mesh}::set\_max\_dim} ?
+{\small\tt \verm{Mesh}::set\_\,max\_\,dim} ?
 Along your program, you may have different maximum topological dimensions (that is,
-you may use {\small\tt \verm{Mesh}::set\_max\_dim} several times) but, at each moment,
+you may use {\small\tt \verm{Mesh}::set\_\,max\_\,dim} several times) but, at each moment,
 you can only build meshes of dimension up to the value most recently defined.
 See paragraph \ref{\numb section 11.\numb parag 7}.
 \medskip
@@ -752,7 +753,7 @@ Remember to {\small\tt make} {\small\tt  clean} before re-building your applicat
 
 The garbage collector for cells and meshes (described in paragraph
 \ref{\numb section 11.\numb parag 5}) can be turned on by adding the
-{\small\tt -DMANIFEM\_COLLECT\_CM} compilation flag in your {\small\tt Makefile}.
-To turn it off, remove the {\small\tt -DMANIFEM\_COLLECT\_CM} compilation flag.
+{\small\tt -DMANIFEM\_\,COLLECT\_\,CM} compilation flag in your {\small\tt Makefile}.
+To turn it off, remove the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} compilation flag.
 
 

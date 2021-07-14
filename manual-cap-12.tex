@@ -33,7 +33,7 @@ New segments are built by means of constructor {\small\tt \verm{Cell}} {\small\t
 where {\small\tt A} is a {\small\tt \verm{Cell}::Negative::Vertex} and {\small\tt B} is a
 {\small\tt \verm{Cell}::Positive::Vertex}.
 
-Note that the interpolation operation is a method belonging to {\small\tt working\_manifold}
+Note that the interpolation operation is a method belonging to {\small\tt working\_\,manifold}
 (an object of the class {\small\tt Manifold}).
 For a Euclidian manifold, this is just a convex combination of the values of the coordinates.
 However, for other manifolds it may be a more complex operation.
@@ -92,7 +92,7 @@ For a manifold defined through an external parameter, the convex combination is 
 on the external parameter and then the space coordinates are computed accordingly
 (paragraph \ref{\numb section 2.\numb parag 16} shows such a situation).
 
-Providing a {\small\tt \verm{tag}::with\_triangles} makes the constructor cut each rectangle
+Providing a {\small\tt \verm{tag}::with\_\,triangles} makes the constructor cut each rectangle
 in halves; results are shown in paragraphs \ref{\numb section 2.\numb parag 2} and
 \ref{\numb section 2.\numb parag 7}.
 
@@ -110,12 +110,12 @@ the boundary of the triangle, as shown in figure below.
   \psfrag{B}{\tt\textcolor{textindraw}{B}}
   \psfrag{C}{\tt\textcolor{textindraw}{C}}
   \psfrag{S}{\tt\textcolor{textindraw}{S}}
-  \psfrag{P_AB}{\tt\textcolor{textindraw}{P\_AB}}
-  \psfrag{Q_AB}{\tt\textcolor{textindraw}{Q\_AB}}
-  \psfrag{P_BC}{\tt\textcolor{textindraw}{P\_BC}}
-  \psfrag{Q_BC}{\tt\textcolor{textindraw}{Q\_BC}}
-  \psfrag{P_CA}{\tt\textcolor{textindraw}{P\_CA}}
-  \psfrag{Q_CA}{\tt\textcolor{textindraw}{Q\_CA}}
+  \psfrag{P_AB}{\tt\textcolor{textindraw}{P\_\,AB}}
+  \psfrag{Q_AB}{\tt\textcolor{textindraw}{Q\_\,AB}}
+  \psfrag{P_BC}{\tt\textcolor{textindraw}{P\_\,BC}}
+  \psfrag{Q_BC}{\tt\textcolor{textindraw}{Q\_\,BC}}
+  \psfrag{P_CA}{\tt\textcolor{textindraw}{P\_\,CA}}
+  \psfrag{Q_CA}{\tt\textcolor{textindraw}{Q\_\,CA}}
   \includegraphics[width=75mm]{fig-triangle}
   \caption{Building a triangle}
   \label{\numb section 12.\numb fig 2}
@@ -146,7 +146,7 @@ Section \ref{\numb section 3} gives several examples.
 This is a complex process, much more complex than building a regular mesh of rectangles
 (as described in paragraph \ref{\numb section 12.\numb parag 3}) or of triangles (as described
 in paragraph \ref{\numb section 12.\numb parag 4}).
-The constructor delegates the job to the function {\small\tt progressive\_construct}.
+The constructor delegates the job to the function {\small\tt progressive\_\,construct}.
 
 The mesh must follow the shape of the manifold; this is achieved by {\small\tt project}ing
 newly created vertices on the working manifold, as explained in paragraph
@@ -215,8 +215,8 @@ Its normal must be computed (see paragraph \ref{\numb section 12.\numb parag 6})
   \psfrag{A}{\tt\textcolor{textindraw}{A}}
   \psfrag{B}{\tt\textcolor{textindraw}{B}}
   \psfrag{P}{\tt\textcolor{textindraw}{P}}
-  \psfrag{point60}{\tt\textcolor{textindraw}{point\_60}}
-  \psfrag{point120}{\tt\textcolor{textindraw}{point\_120}}
+  \psfrag{point60}{\tt\textcolor{textindraw}{point\_\,60}}
+  \psfrag{point120}{\tt\textcolor{textindraw}{point\_\,120}}
 \begin{subfigure}{71mm}\centering
   \includegraphics[width=55mm]{fill-angle-60}
 \end{subfigure}  
@@ -299,8 +299,8 @@ Paragraphs \ref{\numb section 12.\numb parag 10} and \ref{\numb section 12.\numb
 explain how the {\small\tt\verm{MetricTree}} optimizes the process of checking whether a
 certain vertex has come close to other vertices.
 
-Methods {\small\tt glue\_two\_segs\_S} and
-{\small\tt glue\_two\_segs\_Z} deal with two possible ways in which two
+Methods {\small\tt glue\_\,two\_\,segs\_\,S} and
+{\small\tt glue\_\,two\_\,segs\_\,Z} deal with two possible ways in which two
 zones of the interface may touch,
 independently of whether the two zones belong to the same connected component or not.
 In the drawing below on the right hand side an S-shaped connection is created,
@@ -374,7 +374,7 @@ distances (see below).
 Method {\small\tt add} adds a {\small\tt Point} to the cloud and returns a pointer to a
 {\small\tt Node} which the user must keep and later provide to the {\small\tt remove} method.
 The {\small\tt remove} method removes a {\small\tt Node} from the {\small\tt\verm{MetricTree}}.
-Finally, and most importantly, method {\small\tt find\_close\_neighbours\_of} receives a
+Finally, and most importantly, method {\small\tt find\_\,close\_\,neighbours\_\,of} receives a
 {\small\tt Point P} and a distance threshold and returns a list of {\small\tt Node}s near
 {\small\tt P}.
 It is irrelevant whether {\small\tt P} belongs or not to the cloud (if it belongs, it will
@@ -429,7 +429,7 @@ Again, the reverse may be false.
 
 Figure \ref{\numb section 11.\numb fig 3} shows a cloud of (randomly generated) points in
 $ \mathbb{R}^2 $ organized in a {\small\tt\verm{MetricTree}}.
-It also illustrates the process of {\small\tt find\_close\_neighbours\_of} a given point.
+It also illustrates the process of {\small\tt find\_\,close\_\,neighbours\_\,of} a given point.
 This method takes two arguments : a {\small\tt Point} (drawn in red) and a distance.
 It returns a list (drawn in blue) of all {\small\tt Node}s in the cloud which are close enough
 to the red point (closer than the given distance).
@@ -437,7 +437,7 @@ It is irrelevant whether the red point belongs to the cloud or not;
 if it belongs, it will be returned as element of the list.
 
 Figure \ref{\numb section 11.\numb fig 3} shows grey dots at nodes which have been analysed
-during the process of {\small\tt find\_close\_neighbours}
+during the process of {\small\tt find\_\,close\_\,neighbours}
 x(their distance to the red dot has been computed).
 Lines without a dot represent nodes in the {\small\tt\verm{MetricTree}} which have not even been
 looked at because their parent has decided (based on the triangular inequality)
@@ -475,30 +475,30 @@ computationally).
 We have chosen the following work-out.
 We use a {\small\tt\verm{MetricTree}} with (the square of) the usual Euclidian distance (which is
 computationally cheap).
-This means that a call to {\small\tt\verm{MetricTree}:: ::find\_close\_neighbours\_of}
+This means that a call to {\small\tt\verm{MetricTree}:: ::find\_\,close\_\,neighbours\_\,of}
 will produce a list which is too large in the sense that it may contain points which are
 farther than the distance given as argument.
 The calling program must then filter this list by measuring distances with the local metric.
 The difference shouldn't be important if we are careful to choose the {\small\tt
-desired\_distance} (be it a constant or a function) small when compared with the curvature
+desired\_\,distance} (be it a constant or a function) small when compared with the curvature
 of the manifold (see paragraph \ref{\numb section 3.\numb parag 16}).
 
 If we define a non-uniform Riemann metric
 (as in paragraph \ref{\numb section 3.\numb parag 23}),
-we must call {\small\tt find\_close\_ \_neighbours\_of} with a modified value of the
+we must call {\small\tt find\_\,close\_\, \_\,neighbours\_\,of} with a modified value of the
 distance.
 If we define an anisotropic Riemann metric
 (as in paragraph \ref{\numb section 3.\numb parag 24}),
 we need a lower bound on the Rayleigh coefficient of the matrix $M$ (i.e.\ a lower bound
 on its eigenvalues, or, equivalently, an upper bound of the spectral radius of the inverse
-matrix) for computing the modified value to provide to {\small\tt find\_close\_neighbours\_of}.
-Providing separately the {\small\tt principal\_part} and the {\small\tt deviatoric\_part} helps.
-The {\small\tt principal\_part} is a positive scalar, while {\small\tt deviatoric\_part} is
+matrix) for computing the modified value to provide to {\small\tt find\_\,close\_\,neighbours\_\,of}.
+Providing separately the {\small\tt principal\_\,part} and the {\small\tt deviatoric\_\,part} helps.
+The {\small\tt principal\_\,part} is a positive scalar, while {\small\tt deviatoric\_\,part} is
 a matrix responsible for the anisotropy; this matrix should be semi-definite positive.
-Desirably, the {\small\tt deviatoric\_part} should be a singular matrix (having a null eigenvalue);
-this way, the lower bound on the Rayleigh coefficient is simply the {\small\tt principal\_part}.
+Desirably, the {\small\tt deviatoric\_\,part} should be a singular matrix (having a null eigenvalue);
+this way, the lower bound on the Rayleigh coefficient is simply the {\small\tt principal\_\,part}.
 If we provide only the sum $M$, {\maniFEM} will compute, at each step, the lower bound on the
 Rayleigh coefficient, which may be a heavy computational burden.
 When the metric is highly anisotropic, the list returned by method
-{\small\tt find\_close\_neighbours\_of} will be singnificantly larger than the correct, filtered, list.
+{\small\tt find\_\,close\_\,neighbours\_\,of} will be singnificantly larger than the correct, filtered, list.
 

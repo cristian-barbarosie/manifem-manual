@@ -140,7 +140,7 @@ These objects can be equated by using their\hfil\break
 Thus, the operator\hfil\break
 {\small\tt FunctionOnMesh::combinIntegrals::operator==} acts as a factory function
 for\hfil\break {\small\tt VariationalProblem} objects.
-For instance, {\small\tt x.integrate(rect\_mesh) == y.integrate(south)} is a syntactically valid
+For instance, {\small\tt x.integrate(rect\_\,mesh) == y.integrate(south)} is a syntactically valid
 expression which would produce a {\small\tt VariationalProblem} but actually
 gives a run-time error because the {\small\tt operator==} checks that the right hand side
 of the variational problem actually contains a function declared as uknown and one
@@ -155,10 +155,10 @@ Here is a more meaningful example :
 \end{Verbatim}
 
 Note how we can mix integrals on different domains; recall that {\small\tt south} is
-a side of {\small\tt rect\_mesh}.
+a side of {\small\tt rect\_\,mesh}.
 
 Dirichlet-type boundary conditions are implemented through the directive
-{\small\tt prescribe\_on} followed by one or more equalities.
+{\small\tt prescribe\_\,on} followed by one or more equalities.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ] 

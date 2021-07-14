@@ -41,24 +41,24 @@ the master element to the current physical cell.
 This map depends of course on the geometry of the cell and thus it must be computed from
 scratch each time we begin integrating on a new cell.
 We say that the {\small\tt \verm{FiniteElement}} is docked on a new {\small\tt \verm{Cell}};
-the method {\small\tt dock\_on} performs this operation.
+the method {\small\tt dock\_\,on} performs this operation.
 This method is element-specific, each type of finite element having its own class.
 
-For instance, the class {\small\tt \verm{FiniteElement}::Lagrange\_Q1} is a class derived from
+For instance, the class {\small\tt \verm{FiniteElement}::Lagrange\_\,Q1} is a class derived from
 {\small\tt \verm{FiniteElement}:: ::withMaster}.
-It will only {\small\tt dock\_on} quadrilaterals (two-dimensional {\small\tt \verm{Cell}}s
+It will only {\small\tt dock\_\,on} quadrilaterals (two-dimensional {\small\tt \verm{Cell}}s
 with four sides).
 % Recall that in {\maniFEM} the vertices do not have necessarily any number attached.
-% When we create a {\small\tt \verm{FiniteElement}::Lagrange\_Q1} object, it will enumerate vertices
+% When we create a {\small\tt \verm{FiniteElement}::Lagrange\_\,Q1} object, it will enumerate vertices
 % of the mesh if a mesh exists already, and it will prepare the ground for vertices created
 % in the future to be enumerated, too.
 % This enumeration is useful to identify a vector of real numbers with the values
 % (at each vertex) of a function defined on the mesh.
-When docking on a cell, the {\small\tt \verm{FiniteElement}::Lagrange\_Q1} object will build four
+When docking on a cell, the {\small\tt \verm{FiniteElement}::Lagrange\_\,Q1} object will build four
 ``shape functions'' and a transformation map (a diffeomorphism between a master element
 occuppying the square $ [-1, 1]^2 $ and the current cell).
 It will also build the jacobian of this transformation map.
-The four shape functions can be accessed through the method {\small\tt basis\_function},
+The four shape functions can be accessed through the method {\small\tt basis\_\,function},
 as shown in paragraph \ref{\numb section 6.\numb parag 2}.
 
 
@@ -159,11 +159,11 @@ a sparse matrix.
 
 We impose Dirichlet boundary conditions $ u(x,y) = xy $ (this way, we know beforehand
 the exact solution will be $ u(x,y) = xy $).
-We use a function {\small\tt impose\_value\_of\_unknown} which changes the {\small\tt matrix\_A}
-and the {\small\tt vector\_b} in order to impose the Dirichlet condition {\small\tt u(i) = 
-some\_value}.
+We use a function {\small\tt impose\_\,value\_\,of\_\,unknown} which changes the {\small\tt matrix\_\,A}
+and the {\small\tt vector\_\,b} in order to impose the Dirichlet condition {\small\tt u(i) = 
+some\_\,value}.
 See the source code in file {\small\tt main-\ref{\numb section 6.\numb parag 2}.cpp}
-in the distribution tree for the definition of the {\small\tt impose\_value\_of\_unknown}
+in the distribution tree for the definition of the {\small\tt impose\_\,value\_\,of\_\,unknown}
 function.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
