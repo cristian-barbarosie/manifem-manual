@@ -352,18 +352,17 @@ the {\small\tt \verm{tag}::backwards} :
    \verm{CellIterator} \azul{it0r} = chain.iterator ( \verm{tag}::over_vertices, \verm{tag}::backwards );
 \end{Verbatim}
 
-Connected one-dimensional meshes have also methods {\small\tt first\_\,vertex},
-{\small\tt last\_\,vertex},\break
-{\small\tt first\_\,segment} and {\small\tt last\_\,segment} which return the cell described by their
-names.
-% They should only be used for an open chain (not for a loop).
+Connected one-dimensional meshes have methods {\small\tt first\_\,vertex},
+{\small\tt last\_\,vertex}, {\small\tt first\_\,segment} and {\small\tt last\_\,segment}
+which return the cell described by their names.
+They should only be used for an open chain (not for a loop).
 Note that {\small\tt \verm{Mesh}::first\_\,vertex} returns a negative vertex while
 {\small\tt \verm{Mesh}::last\_\,vertex} returns a positive vertex, similarly to the
 {\small\tt \verm{Cell}::base} and {\small\tt \verm{Cell}::tip} methods (described in paragraph
 \ref{\numb section 1.\numb parag 2}).
 
 As explained in paragraph \ref{\numb section 9.\numb parag 12},
-dereferencing a {\small\tt \verm{CellIterator}} does not produce a new cell,
+de-referencing a {\small\tt \verm{CellIterator}} does not produce a new cell,
 just provides access to a previously built cell.
 
 Sometimes it may be not obvious for the user whether a certain {\small\tt \verm{Mesh}}
@@ -643,7 +642,8 @@ Within this paragraph, in order to simplify the speech, we shall call ``square''
 cell of dimension 2 (which may be a triangle or a hexagon or some other shape) and
 ``cube'' to a generic cell of dimension three (which may be a tetrahedron or some other shape).
 
-Another similar situation is when we are looking at a segment within a mesh and we want to
+Another similar situation is when we are looking at a segment in a three-dimensional mesh
+and we want to
 run over all squares having that segment as edge, or to all cubes having that edge.
 These situations require an iterator quite different from the ones described in paragraphs
 \ref{\numb section 9.\numb parag 5} and \ref{\numb section 9.\numb parag 6}.
@@ -704,8 +704,8 @@ others will point away from {\small\tt P}.
 Note that, if you provide a {\small\tt\verm{tag}::force\_\,positive}, it makes no difference
 if you give {\small\tt P} or {\small\tt P.reverse()} as central cell in the constructor.
 
-On the other hand, if we want to run over squares or cubes having {\small\tt P} as vertex,
-the orientation of the ``center'' does not matter.
+If we want to run over squares or cubes having {\small\tt P} as vertex,
+the orientation of the ``center'' {\small\tt P} does not matter.
 We can provide a positive vertex {\small\tt P} or a negative one {\small\tt P.reverse()},
 this will not change the behaviour of the iterator {\small\tt it} :
 
@@ -732,7 +732,7 @@ Note that {\small\tt P} may be on the boundary of {\small\tt msh}.
 The iterator will produce, of course, only cells belonging to the mesh, including those
 on the boundary.
 
-Consider now the case when the co-dimension is two, that is, we are centered at a vertex
+Consider now the case when the co-dimension is two, that is, when we are centered at a vertex
 within a two-dimensional mesh, or at a segment within a three-dimensional mesh.
 
 In this case, the cells around that ``center'' have a natural linear order.
@@ -799,7 +799,7 @@ When they encounter positive cells having no reverse, they may choose to build t
 negative, cell.
 Actually, this may happen even without de-referencing the iterator;
 the constructor of the iterator may, in some cases, build a new negative cell
-(e.g.\ a face on the boundary of the mesh).
+(e.g., the reverse of a face on the boundary of the mesh).
 Negative cells are harmless, except that they occupy some space in the computer's memory.
 If you really insist that you don't want new cells to appear due to an iterator,
 you can provide the {\small\tt\verm{tag}::do\_\,not\_\,build\_\,cells} as an argument
