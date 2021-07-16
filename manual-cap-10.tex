@@ -21,7 +21,7 @@ One way to achieve this is
    label=main-\ref{\numb section 10.\numb parag 1}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    ABCD.remove_from_mesh ( msh );
-   \verm{Cell} \azul{AC} ( \verm{tag}::segment, A.reverse(), B );
+   \verm{Cell} \azul{AC} ( \verm{tag}::segment, A.reverse(), C );
    \verm{Cell} \azul{ABC} ( \verm{tag}::triangle, AB, BC, AC.reverse() );
    \verm{Cell} \azul{CDA} ( \verm{tag}::triangle, CD, DA, AC );
    ABC.add_to_mesh ( msh );
@@ -48,9 +48,14 @@ to an undesirable phenomenon known as ``memory leak''.
 If your program does this a lot, it will occupy increasingly more memory without reason.
 
 
-          %-------------------------------------%
-\section{~~Transforming a square into a triangle}\label{\numb section 10.\numb parag 2}
-          %-------------------------------------%
+                 %-------------------------------------%
+\section{~~\cinza{Transforming a square into a triangle}}\label{\numb section 10.\numb parag 2}
+                 %-------------------------------------%
+
+{\normalfont\bfseries The code described in this paragraph does not work.
+The internal representation of {\small\tt Mesh::Connected::OneDim} requires a different
+implementation of methods {\small\tt add\_\,to\_\,mesh}, {\small\tt remove\_\,from\_\,mesh},
+{\small\tt glue\_\,on\_\,bdry\_\,of} and {\small\tt cut\_\,from\_\,bdry\_\,of}.              }
 
 Instead of discarding the square and building two new triangles, we can use the same
 {\small\tt\verm{Cell}} object {\small\tt ABCD}
@@ -65,9 +70,9 @@ a new triangle to obtain the same result as in paragraph \ref{\numb section 10.\
    \cinza{// at this point, ABCD is a cell whose boundary is incomplete}
    \cinza{// it has only two sides and an opening}
    \cinza{// however, it still is part of 'msh'}
-   \verm{Cell} \azul{AC} ( \verm{tag}::segment, A.reverse(), B );
+   \verm{Cell} \azul{AC} ( \verm{tag}::segment, A.reverse(), C );
    AC.reverse().glue_on_bdry_of ( ABCD );
-   \cinza{// at this point, and in spite of its name, ABCD is no longer a square;}
+   \cinza{// at this point, and in spite of its name, ABCD is no longer a square}
    \cinza{// it is a triangle, still part of 'msh'}
    \verm{Cell} \azul{CDA} ( \verm{tag}::triangle, CD, DA, AC );
    CDA.add_to_mesh ( msh );
