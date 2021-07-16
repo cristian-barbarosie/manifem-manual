@@ -44,7 +44,7 @@ and adding triangles, one by one, until the disk is completely covered :
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 1}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 1}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
    \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -84,7 +84,7 @@ Instead of building the circle by joining four (curved) segments, we can mesh di
 the circle manifold, then mesh the disk :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
    \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -136,7 +136,7 @@ by providing the initial direction as shown in paragraph \ref{\numb section 3.\n
 Inner boundaries must have the reverse orientation :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 3}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{circle} = RR2.implicit ( x*x + y*y == 1. );
    \verm{Mesh} \azul{outer} ( \verm{tag}::progressive, \verm{tag}::desired_length, 0.1 );
@@ -168,7 +168,7 @@ We may apply the same {\small\tt progressive} algorithm for meshing the circle i
 $ \mathbb{R}^3 $ introduced in paragraph \ref{\numb section 2.\numb parag 11} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 4}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 3 );
    \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -211,7 +211,7 @@ Looking at the example in paragraph \ref{\numb section 2.\numb parag 13}, let us
 spiral with a slightly different look and switch to progressive mesh generation.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 5}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
    \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -301,7 +301,7 @@ of segments.
 Code below builds a mesh on the sphere.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 6}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 6}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 3 );
    \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -333,7 +333,7 @@ Here is an example of a compact surface given by a more complicated implicit equ
 It can be vaguely described as a convolution between two tori.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 7}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 7}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 3 );
    \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -476,7 +476,7 @@ The code producing the spiral in paragraph \ref{\numb section 3.\numb parag 5}
 can be changed as below.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 12}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 12}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) =    pi*pi;   y(A) =  0.;
    \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) = 81*pi*pi;   y(B) =  0.;
@@ -728,7 +728,7 @@ in paragraphs \ref{\numb section 2.\numb parag 12}, \ref{\numb section 3.\numb p
 \ref{\numb section 3.\numb parag 14}, oriented upwards.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 15}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 15}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Cell} S ( \verm{tag}::vertex );    x(S) =  0.;  y(S) = -1.;  z(S) =  0.;
    std::vector < double > \azul{tau} \{ 1., 0., 0. \};
@@ -799,7 +799,7 @@ The user must define separately smooth pieces of the boundary and then join them
 Here is how to mesh the diamond-shaped domain in paragraph \ref{\numb section 2.\numb parag 9}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 17}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 17}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// we define the arcs NW, WS, SE and EN either as segments, like in}
    RR2.implicit ( x*y + x - y == -1. );
@@ -840,7 +840,7 @@ The edges must be built first;
 thus, some previous knowledge about the geometry of the surface is needed.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 18}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 18}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 3 );
    \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -942,7 +942,7 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{cylinder} = RR3.implicit ( y*y + (z-0.5)*(z-0.5) == rc*rc );
    \verm{Manifold} \azul{intersection} = cylinder.implicit ( x*x + y*y + z*z == rs*rs );
@@ -998,7 +998,7 @@ A typical example is the vertex of a cone.
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 20}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 20}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{cone_manif} = RR3.implicit ( x*x + y*x == z*z );
    cone_manif.implicit ( z == 1. );
@@ -1037,7 +1037,7 @@ We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb para
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 21}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 21}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{cylinder} = RR3.implicit ( y*y + (z-0.5)*(z-0.5) == 0.25 );
    \verm{Manifold} \azul{infinity} = cylinder.implicit ( x*x + y*y + z*z == 1. );
@@ -1073,7 +1073,7 @@ This is why we provide the two pieces of boundary separately.
 The {\small\tt desired\_\,length} may be a non-constant function.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 3.\numb parag 22}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 22}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Function} \azul{d} = 0.03 + 0.04 * ( (x+0.3)*(x+0.3) + (y-0.9)*(y-0.9) );
    \verm{Manifold} \azul{circle} = RR2.implicit ( x*x + y*y == 1. );

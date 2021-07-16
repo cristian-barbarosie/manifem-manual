@@ -81,7 +81,7 @@ unless you remove the {\small\tt -W} options from the compilation command in you
 {\small\tt Makefile}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
    \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -112,7 +112,7 @@ The matrix of the linear system and the vector holding the free coefficients
 are declared as objects of the {\small\tt Eigen} library.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    size_t \azul{size_matrix} = ABCD.number_of ( \verm{tag}::vertices );
    assert ( size_matrix == numbering.size() );
@@ -127,7 +127,7 @@ compute integrals of the form $ \displaystyle \int\!\!\!\int {\partial \psi_i \o
 values to the global matrix:
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    // run over all square cells composing ABCD
    \verm{CellIterator} \azul{it} = ABCD.iterator ( \verm{tag}::over_cells_of_dim, 2 );
@@ -167,7 +167,7 @@ in the distribution tree for the definition of the {\small\tt impose\_\,value\_\
 function.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{CellIterator} \azul{it} = BC.iterator ( \verm{tag}::over_vertices );
    for ( it.reset(); it.in_range(); it++ )
@@ -179,7 +179,7 @@ function.
 We then use {\small\tt Eigen} to solve the system of linear equations :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    Eigen::ConjugateGradient < Eigen::SparseMatrix<double>,
                               Eigen::Lower|Eigen::Upper    > \azul{cg};
@@ -237,7 +237,7 @@ We do this by declaring a 1D finite element which we then dock on each segment o
 part of the boundary where we need to integrate.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe_bdry} ( \verm{tag}::with_master, \verm{tag}::segment,
                            \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );

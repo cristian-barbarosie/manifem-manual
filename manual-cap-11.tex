@@ -321,7 +321,7 @@ which differ in their internal implementation; the wrapper provides a uniform in
 to the user (making use of virtual methods of the core).
 
 Negative meshes are temporary wrappers built on-the-fly.
-Their core points to a positive mesh.
+Their wrapper contains a pointer to a positive core mesh.
 
 Zero-dimensional meshes appear only as boundaries of segment {\small\tt \verm{Cell}}s.
 They are temporary objects built on-the-fly.
@@ -348,9 +348,9 @@ Also, cell constructors with {\small\tt \verm{tag}::triangle} and {\small\tt \ve
 whose boundary is a closed {\small\tt \verm{Mesh}::Connected::OneDim}.
 
 Connected meshes of dimension two or higher are not yet implemented; for now,
-{\small\tt \verm{Mesh}} constructors with {\small\tt \verm{tag}::rectange} or
+{\small\tt \verm{Mesh}} constructors with {\small\tt \verm{tag}::rectangle} or
 {\small\tt \verm{tag}::triangle} build a {\small\tt Fuzzy} mesh instead.
-A class {\small\tt \verm{Mesh}::Connected:: ::HighDim} is object of current work.
+A class {\small\tt \verm{Mesh}:: ::Connected::HighDim} is object of current work.
 We also intend to implement multiply connected meshes.
 
 {\small\tt STSI} meshes are object of current work (see the graph in figure

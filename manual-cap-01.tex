@@ -25,7 +25,7 @@ Paragraph \ref{\numb section 1.\numb parag 3} shows a purely two-dimensional exa
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 1.\numb parag 1}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 1.\numb parag 1}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
 #include \verde{"maniFEM.h"}
 
@@ -280,7 +280,7 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 1.\numb parag 3}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 1.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
    \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -384,7 +384,7 @@ See also paragraph \ref{\numb section 11.\numb parag 9}.
 We can also build meshes on triangular domains and {\small\tt join} them as we wish :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 1.\numb parag 4}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 1.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = -1. ;  y(A) = 0.;
    \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) =  0. ;  y(B) = 0.;
@@ -426,7 +426,7 @@ We can also build meshes on triangular domains and {\small\tt join} them as we w
 It is possible to have triangles and quadrilaterals mixed in the same mesh :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 1.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 1.\numb parag 5}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Mesh} \azul{ABD} ( \verm{tag}::triangle, AB, BD, AD.reverse() );
    \verm{Mesh} \azul{BCE} ( \verm{tag}::triangle, BC, CE, BE.reverse() );

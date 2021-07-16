@@ -18,7 +18,7 @@ squares in two triangles, cutting it along one of its diagonals.
 One way to achieve this is
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 10.\numb parag 1}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 10.\numb parag 1}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    ABCD.remove_from_mesh ( msh );
    \verm{Cell} \azul{AC} ( \verm{tag}::segment, A.reverse(), C );
@@ -63,7 +63,7 @@ by transforming it into a triangle, without removing it from {\small\tt msh}, th
 a new triangle to obtain the same result as in paragraph \ref{\numb section 10.\numb parag 1}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 10.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 10.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    CD.cut_from_bdry_of ( ABCD );
    DA.cut_from_bdry_of ( ABCD );
@@ -109,7 +109,7 @@ the boundary of those squares.
 The vertices give an indication about which diagonal to choose to cut the square.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 10.\numb parag 3}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 10.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    std::list<\verm{Cell}> list_of_squares, list_of_vertices;
    \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 2 );

@@ -49,7 +49,7 @@ Here is another way of meshing the same L-shaped domain as in paragraph
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 1}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 1}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Mesh} \azul{AG} ( \verm{tag}::segment, A.reverse(), G, \verm{tag}::divided_in, 22 );
    \verm{Mesh} \azul{GH} ( \verm{tag}::segment, G.reverse(), H, \verm{tag}::divided_in, 8 );
@@ -136,7 +136,7 @@ using the method {\small\tt implicit} of the Euclidian manifold.
 The code below introduces a one-dimensional submanifold of $ \mathbb{R}^2 $ (a hiperbola).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 3}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
    \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -195,7 +195,7 @@ We can define several arcs of curve and {\small\tt join} them, thus obtaining a 
 \medskip
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 4}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{circle_manifold} = RR2.implicit ( x*x + y*y == 1. );
    \verm{Cell} \azul{N} ( \verm{tag}::vertex );  x(N) =  0.;   y(N) =  1.;
@@ -238,7 +238,7 @@ see paragraphs \ref{\numb section 2.\numb parag 8} and \ref{\numb section 2.\num
 Let's look at a surface in $ \mathbb{R}^3 $ :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 5}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR3} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 3 );
    \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -313,7 +313,7 @@ we must use smaller patches in order to get a mesh of good quality.
 Below we use twelve rectangles to get a bumpy hemisphere.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 6}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 6}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} nut = RR3.implicit ( x*x + y*y + z*z + 1.5*x*y*z == 1. );
 
@@ -416,7 +416,7 @@ and switch back to the original {\small\tt RR2} manifold.
 Method {\small\tt set\_\,as\_\,working\_\,manifold} allows us to do that.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 8}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 8}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
    \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -466,7 +466,7 @@ Here is an example similar to the one in paragraph \ref{\numb section 2.\numb pa
 this time with four arcs of hiperbola.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 9}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 9}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
    \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -526,7 +526,7 @@ This paragraph describes a surface meant to mimic the shape of a physalis fruit.
 We begin by defining a revolution surface in $ \mathbb{R}^3 $ :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Function} \azul{r2} = x*x + y*y + z*z;
    const double \azul{pi} = 3.1415926536;
@@ -545,7 +545,7 @@ Instead of meshing the {\small\tt apple} surface, we just build eight curves imm
 (each curve joins {\small\tt A} to {\small\tt D} and is made of three shorter curves) :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) =  0.;  y(A) =  0.;  z(A) = std::sqrt ( 2.*pi/3. );
    \verm{Cell} \azul{B1} ( \verm{tag}::vertex );  x(B1) =  1.;  y(B1) =  0.;  z(B1) =  1.;
@@ -562,7 +562,7 @@ Then we switch back to {\small\tt RR3} (thus leaving the {\small\tt apple} manif
 transversal segments, as well as triangular and quadrangular patches :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    RR3.set_as_working_manifold();
    \verm{Mesh} \azul{B1B2} ( \verm{tag}::segment, B1.reverse(), B2, \verm{tag}::divided_in, 10 );
@@ -580,7 +580,7 @@ transversal segments, as well as triangular and quadrangular patches :
 
 We then join all patches :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Mesh} \azul{sect1} ( \verm{tag}::join, AB1B2, B1C1C2B2, C1DC2 );
    \verm{Mesh} \azul{sect2} ( \verm{tag}::join, AB2B3, B2C2C3B3, C2DC3 );
@@ -600,7 +600,7 @@ get a sharper tip.
 The {\small\tt apple} manifold is no longer relevant.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{CellIterator} \azul{it} = fisalis.iterator ( \verm{tag}::over_vertices );
    for ( it.reset(); it.in_range(); it++ )
@@ -621,7 +621,7 @@ vertices, so the boundary of the sector is not changed.
 Thus, the eight rims defined in the beginning are kept unchanged.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    std::list<\verm{Mesh}>::iterator \azul{it1};
    for ( it1 = lm.begin(); it1 != lm.end(); it1++ )
@@ -665,7 +665,7 @@ We can define a one-dimensional submanifold of $ \mathbb{R}^3 $ by two implicit 
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 11}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 11}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR3} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 3 );
    \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -705,7 +705,7 @@ For the rest of the surface, we switch back to the two-dimensional manifold {\sm
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 12}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 12}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{nut} = RR3.implicit ( x*x + y*y + z*z + 1.5*x*y*z == 1. );
    int \azul{n} = 10;
@@ -781,7 +781,7 @@ Below is an example.
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 13}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 13}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \cinza{// at the beginning, we define 'spiral' as a straight line}
    \verm{Manifold} \azul{spiral} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 1 );
@@ -838,7 +838,7 @@ In the approach of paragraph \ref{\numb section 2.\numb parag 13}, it is possibl
 build a closed curve :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 14}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 14}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{circle_manif} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 1 );
    \verm{Function} \azul{t} = circle_manif.build_coordinate_system
@@ -903,7 +903,7 @@ Here is an example of a parametrized surface :
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 15}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 15}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{torus} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
    \verm{Function} \azul{alpha_beta} =
@@ -974,7 +974,7 @@ There is a disadvantage however, regarding performance : {\maniFEM} will reserve
 for each vertex, space in the computer's memory for five {\small\tt double} values.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=main-\ref{\numb section 2.\numb parag 16}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 16}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR5} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 5 );
    \verm{Function} \azul{xyzab} = RR5.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
