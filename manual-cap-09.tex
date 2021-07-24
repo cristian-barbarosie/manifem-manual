@@ -1,7 +1,7 @@
 
-          %---------------------------------%
-\chapter{~~A closer look at cells and meshes}\label{\numb section 9}
-          %---------------------------------%
+          %------------------------%
+\chapter{~~Cells, meshes, iterators}\label{\numb section 9}
+          %------------------------%
 
 
 This section gives details about cells and meshes.
@@ -781,6 +781,19 @@ supplementary arguments to the {\small\tt reset} method :
 Just like in paragraph \ref{\numb section 9.\numb parag 6}, beware : if {\small\tt P}
 is at the boundary of {\small\tt msh}, cells previous to {\small\tt sq} will not
 show up.
+
+There are also iterators over vertices around a given vertex.
+They simply iterate over the segments originating at that vertex and,
+when de-referenced, produce the tip of the current segment.
+They provide an ordered sequence of vertices if the surrounding mesh is two-dimensional;
+they produce vertices in a rather unpredictable order in a three-dimensional mesh :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_vertices, \verm{tag}::around, P );
+   for ( it.reset(); it.in_range(); it++ )
+   \{  \verm{Cell} \azul{Q} = *it;  do_something_to ( Q );   \}
+\end{Verbatim}
 
 If you need the cells to show up in a linear order but you are not familiar
 with the notion of co-dimension, you can add the {\small\tt\verm{tag}::require\_\,order}

@@ -156,10 +156,10 @@ The code below introduces a one-dimensional submanifold of $ \mathbb{R}^2 $ (a h
    arc_of_hiperbola.export_msh (\verde{"hiperbola.msh"});
 \end{Verbatim}
 
-\begin{figure} \centering
+\begin{figure}[ht] \centering
   \psfrag{A}{\tt\textcolor{textindraw}{A}}
   \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \includegraphics[width=75mm]{hiperbola}
+  \includegraphics[width=120mm]{hiperbola}
   \caption{An arc of hiperbola}
   \label{\numb section 2.\numb fig 3}
 \end{figure}
@@ -214,12 +214,12 @@ We can define several arcs of curve and {\small\tt join} them, thus obtaining a 
    \verm{Mesh} \azul{circle} ( \verm{tag}::join, NW, WS, SE, EN );
 \end{Verbatim}
 
-\begin{figure} \centering
+\begin{figure}[ht] \centering
   \psfrag{N}{\tt\textcolor{textindraw}{N}}
   \psfrag{S}{\tt\textcolor{textindraw}{S}}
   \psfrag{E}{\tt\textcolor{textindraw}{E}}
   \psfrag{W}{\tt\textcolor{textindraw}{W}}
-  \includegraphics[width=60mm]{circle}
+  \includegraphics[width=80mm]{circle}
   \caption{A circle obtained by {\small\tt join}ing four segments}
   \label{\numb section 2.\numb fig 4}
 \end{figure}
@@ -250,7 +250,6 @@ Let's look at a surface in $ \mathbb{R}^3 $ :
    \verm{Function} \azul{x} = xyz[0],  \azul{y} = xyz[1],  \azul{z} = xyz[2];
 
    \verm{Manifold} \azul{sphere} = RR3.implicit ( x*x + y*y + z*z == 1. );
-
    \cinza{// let's mesh half of a sphere}
    \verm{Cell} \azul{E}  ( \verm{tag}::vertex );   x(E) =  1.;   y(E) =  0.;   z(E) = 0.;
    \verm{Cell} \azul{N}  ( \verm{tag}::vertex );   x(N) =  0.;   y(N) =  1.;   z(N) = 0.;
@@ -277,11 +276,11 @@ Let's look at a surface in $ \mathbb{R}^3 $ :
    \verm{Mesh} \azul{hemisphere} ( \verm{tag}::join, ENup, NWup, WSup, SEup );
 \end{Verbatim}
 
-\begin{figure} \centering
+\begin{figure}[ht] \centering
   \psfrag{S}{\tt\textcolor{textindraw}{S}}
   \psfrag{W}{\tt\textcolor{textindraw}{W}}
   \psfrag{up}{\tt\textcolor{textindraw}{up}}
-  \includegraphics[width=100mm]{hemisphere}
+  \includegraphics[width=85mm]{hemisphere}
   \caption{A hemisphere obtained by {\small\tt join}ing four triangles}
 \end{figure}
 
@@ -336,7 +335,26 @@ Below we use twelve rectangles to get a bumpy hemisphere.
    \verm{Cell} \azul{mSWup} ( \verm{tag}::vertex );  x(mSWup) = -1.;  y(mSWup) = -1.;  z(mSWup) = 1.;
    nut.project ( mSWup );  \cinza{// somewhere between S, W and up}
    \cinza{// ... and so forth ...}
+\end{Verbatim}
+
+\begin{figure}[hb] \centering
+  \psfrag{S}{\tt\textcolor{textindraw}{S}}
+  \psfrag{W}{\tt\textcolor{textindraw}{W}}
+  \psfrag{mWS}{\tt\textcolor{textindraw}{mWS}}
+  \psfrag{mSE}{\tt\textcolor{textindraw}{mSE}}
+  \psfrag{mWup}{\tt\textcolor{textindraw}{mWup}}
+  \psfrag{mSup}{\tt\textcolor{textindraw}{mSup}}
+  \psfrag{mSEup}{\tt\textcolor{textindraw}{mSEup}}
+  \psfrag{up}{\tt\textcolor{textindraw}{up}}
+  \psfrag{mWSup}{\tt\textcolor{textindraw}{mWSup}}
+  \includegraphics[width=110mm]{hemisphere-2}
+  \caption{Here we have {\small\tt join}ed twelve rectangles}
+  \label{\numb section 2.\numb fig 6}
+\end{figure}
 	
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 2.\numb parag 6}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm]
    \cinza{// now build segments :}
    int \azul{n} = 10;
    \verm{Mesh} \azul{W_mSW}  ( \verm{tag}::segment, W.reverse(), mSW,  \verm{tag}::divided_in, n );
@@ -357,21 +375,6 @@ Below we use twelve rectangles to get a bumpy hemisphere.
       \{ rect_E_NE, rect_E_SE, rect_S_SE, rect_S_SW, rect_W_SW, rect_W_NW,
         rect_N_NE, rect_N_NW, rect_up_SE, rect_up_SW, rect_up_NE, rect_up_NW \} );
 \end{Verbatim}
-
-\begin{figure} \centering
-  \psfrag{S}{\tt\textcolor{textindraw}{S}}
-  \psfrag{W}{\tt\textcolor{textindraw}{W}}
-  \psfrag{mWS}{\tt\textcolor{textindraw}{mWS}}
-  \psfrag{mSE}{\tt\textcolor{textindraw}{mSE}}
-  \psfrag{mWup}{\tt\textcolor{textindraw}{mWup}}
-  \psfrag{mSup}{\tt\textcolor{textindraw}{mSup}}
-  \psfrag{mSEup}{\tt\textcolor{textindraw}{mSEup}}
-  \psfrag{up}{\tt\textcolor{textindraw}{up}}
-  \psfrag{mWSup}{\tt\textcolor{textindraw}{mWSup}}
-  \includegraphics[width=105mm]{hemisphere-2}
-  \caption{Here we have {\small\tt join}ed twelve rectangles}
-  \label{\numb section 2.\numb fig 6}
-\end{figure}
 
 Note how we use a version of the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::join}
 taking as argument a list of {\small\tt \verm{Mesh}}es; the same constructor is used in
@@ -442,7 +445,7 @@ Method {\small\tt set\_\,as\_\,working\_\,manifold} allows us to do that.
    \verm{Mesh} \azul{disk} ( \verm{tag}::quadrangle, NW, WS, SE, EN );
 \end{Verbatim}
 
-\begin{figure} \centering
+\begin{figure}[ht] \centering
   \psfrag{S}{\tt\textcolor{textindraw}{S}}
   \psfrag{N}{\tt\textcolor{textindraw}{N}}
   \psfrag{E}{\tt\textcolor{textindraw}{E}}
@@ -495,12 +498,12 @@ this time with four arcs of hiperbola.
    \verm{Mesh} \azul{diamond} ( \verm{tag}::quadrangle, NW, WS, SE, EN );
 \end{Verbatim}
 
-\begin{figure} \centering
+\begin{figure}[ht] \centering
   \psfrag{S}{\tt\textcolor{textindraw}{S}}
   \psfrag{N}{\tt\textcolor{textindraw}{N}}
   \psfrag{E}{\tt\textcolor{textindraw}{E}}
   \psfrag{W}{\tt\textcolor{textindraw}{W}}
-  \includegraphics[width=85mm]{diamond}
+  \includegraphics[width=100mm]{diamond}
   \caption{A diamond shape}
   \label{\numb section 2.\numb fig 9}
 \end{figure}
@@ -514,19 +517,22 @@ Paragraph \ref{\numb section 3.\numb parag 17} shows another way of meshing the 
 
 This paragraph describes a surface meant to mimic the shape of a physalis fruit.
 
-\begin{figure}[h!]\centering
-  \includegraphics[width=85mm]{empty}
-  \caption{Dry physalis, with fruit inside}\label{\numb section 2.\numb fig 10}
-\end{figure}
+%\begin{figure}[h!]\centering
+%  \includegraphics[width=85mm]{empty}
+%  \caption{Dry physalis, with fruit inside}\label{\numb section 2.\numb fig 10}
+%\end{figure}
 
-{\vskip -3mm
+\begin{figure}[ht]\centering
+%\vskip -3mm
 \if\production 1
-\centerline{\includegraphics[width=90mm]{dry-physalis}}
+\centerline{\includegraphics[width=85mm]{dry-physalis}}
 \else
 \psfrag{photo}{[photo of a physalis]}
-\centerline{\includegraphics[width=100mm]{fake-physalis}}
-\fi}
-\vfil\eject
+\centerline{\includegraphics[width=95mm]{fake-physalis}}
+\fi
+  \caption{Dry physalis, with fruit inside}\label{\numb section 2.\numb fig 10}
+\end{figure}
+%\vfil\eject
 
 We begin by defining a revolution surface in $ \mathbb{R}^3 $ :
 
@@ -595,7 +601,7 @@ We then join all patches :
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
-  \includegraphics[width=60mm]{fisalis-round}
+  \includegraphics[width=70mm]{fisalis-round}
   \caption{Not yet a physalis}
   \label{\numb section 2.\numb fig 12}
 \end{figure}
@@ -642,8 +648,8 @@ Thus, the eight rims defined in the beginning are kept unchanged.
 
 And we are happy with the final result.
 
-\begin{figure} \centering
-  \includegraphics[width=60mm]{fisalis}
+\begin{figure}[ht] \centering
+  \includegraphics[width=80mm]{fisalis}
   \caption{Meshing a chinese lantern}
   \label{\numb section 2.\numb fig 13}
 \end{figure}
@@ -664,7 +670,7 @@ We can define a one-dimensional submanifold of $ \mathbb{R}^3 $ by two implicit 
   \psfrag{N}{\tt\textcolor{textindraw}{N}}
   \psfrag{E}{\tt\textcolor{textindraw}{E}}
   \psfrag{W}{\tt\textcolor{textindraw}{W}}
-  \includegraphics[width=85mm]{circle-3d}
+  \includegraphics[width=95mm]{circle-3d}
   \caption{One-dimensional mesh in $ {\mathbb R}^3 $}
   \label{\numb section 2.\numb fig 14}
 \end{figure}
@@ -902,11 +908,6 @@ On the other hand, if we only want a visual illusion of a closed circle, we may 
 
 Here is an example of a parametrized surface :
 
-\begin{figure}[b] \centering
-  \includegraphics[width=110mm]{torus}
-  \caption{Incomplete torus}
-\end{figure}
-
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 15}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
@@ -916,7 +917,6 @@ Here is an example of a parametrized surface :
 
    \cinza{// extract components of alpha_beta :}
    \verm{Function} \azul{alpha} = alpha_beta[0], \azul{beta} = alpha_beta[1];
-
    \cinza{// build a rectangle in the alpha-beta plane}
    const double \azul{pi} = 3.1415926536;
    \verm{Cell} \azul{A} ( \verm{tag}::vertex );  alpha(A) = 0.;       beta(A) = 0.;
@@ -937,13 +937,16 @@ Here is an example of a parametrized surface :
             \azul{y} = ( big_radius + small_radius * \verm{cos}(beta) ) * \verm{sin}(alpha),
             \azul{z} = small_radius * \verm{sin}(beta);
 
-   \cinza{// forget about alpha and beta :}
-   torus.set_coordinates ( x && y && z );
-
+   torus.set_coordinates ( x && y && z );  \cinza{// forget about alpha and beta}
    \cinza{// in future statements (e.g. for graphical representation)}
    \cinza{// x, y and z will be used, not alpha nor beta :}
    ABCD.export_msh (\verde{"torus.msh"});
 \end{Verbatim}
+
+\begin{figure}[ht] \centering
+  \includegraphics[width=90mm]{torus}
+  \caption{Incomplete torus}
+\end{figure}
 
 Closing the torus in the cumbersome manner shown in paragraph
 \ref{\numb section 2.\numb parag 14} is possible but not practical.
