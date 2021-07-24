@@ -4,10 +4,10 @@
 \usepackage{typearea}
 \areaset[1cm]{158mm}{234mm}
 
-\def\manifemrelease{21.07}
+\def\manifemrelease{21.**}
 \def\manualversion{21.**}
 \let\production 0
-\includeonly{manual-cap-13}
+% \includeonly{manual-cap-10,manual-cap-13}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -256,6 +256,7 @@ This manual is licensed under the
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \addchap{Changelog}
 
 
@@ -281,10 +282,15 @@ paragraph \ref{\numb section 11.\numb parag 6}.
 \noindent Garbage collectors for cells and meshes work,
 paragraph \ref{\numb section 11.\numb parag 5}.
 
-\noindent Introduced iterators centered at a cell,
+\noindent Introduced iterators around a cell,
 paragraph \ref{\numb section 9.\numb parag 10}.
 
 \noindent Some examples about remeshing, section \ref{\numb section 10}.
+
+
+\section*{21.\manifemrelease}
+
+\noindent Minor improvements and bug fixes.
 
 
 \section*{To do}
@@ -299,8 +305,12 @@ on STSI (self-touching or self-intersecting) meshes
 \noindent Progressive mesh generation : the algorithm can be simplified by using
 a STSI interface instead of a list of connected interfaces
 
+\noindent Define regions in a manifold (i.e.\ manifolds with boundary) by means of
+inequalities between {\small\tt\verm{Function}}s.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \addchap{Index}
 
@@ -346,7 +356,8 @@ interpolation of coordinates :
 \ref{\numb section 12.\numb parag 2} -- \ref{\numb section 12.\numb parag 4}
 
 \noindent
-iterators over cells : \ref{\numb section 9.\numb parag 5}, \ref{\numb section 9.\numb parag 7}
+iterators over cells : \ref{\numb section 9.\numb parag 5}, \ref{\numb section 9.\numb parag 7},
+\ref{\numb section 9.\numb parag 10}
 
 \noindent
 {\small\tt init\_\,cell} : \ref{\numb section 11.\numb parag 10}
@@ -402,8 +413,8 @@ oct-tree : \ref{\numb section 12.\numb parag 10}
 
 \noindent
 orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es :
-\ref{\numb section 1.\numb parag 2},
-\ref{\numb section 1.\numb parag 3}, \ref{\numb section 9.\numb parag 1},
+\ref{\numb section 1.\numb parag 2}, \ref{\numb section 1.\numb parag 3},
+\ref{\numb section 3.\numb parag 18}, \ref{\numb section 9.\numb parag 1},
 \ref{\numb section 9.\numb parag 7}, \ref{\numb section 11.\numb parag 8}
 
 \noindent

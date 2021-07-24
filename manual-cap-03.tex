@@ -1,13 +1,13 @@
 
-          %---------------------------%
-\chapter{~~Progressive mesh generation}\label{\numb section 3}
-          %---------------------------%
+          %-----------------------------------------%
+\chapter{~~Progressive mesh generation; cross-stitch}\label{\numb section 3}
+          %-----------------------------------------%
 
-Section \ref{\numb section 2} shows how to build meshes by joining rectangles and
-triangles together, like patches.
-The present section explains how to build a mesh starting from its boundary only;
+Section \ref{\numb section 2} shows how to build meshes by joining together several regular meshes
+(triangles or quadrangles), like patches.
+The present section explains how to build a mesh by gradually adding cells, on by one.
 we call this approach ``progressive mesh generation''.
-It consists of starting with a given interface and add triangles, one by one,
+In some cases, the process starts with a given interface and adds triangles, one by one,
 moving and deforming the interface, until it shrinks and disappears.
 In some cases (like in paragraphs \ref{\numb section 3.\numb parag 2},
 \ref{\numb section 3.\numb parag 4}, \ref{\numb section 3.\numb parag 6},

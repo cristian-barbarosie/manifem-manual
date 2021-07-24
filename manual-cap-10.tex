@@ -33,7 +33,7 @@ One way to achieve this is
   \psfrag{B}{\tt\textcolor{textindraw}{B}}
   \psfrag{C}{\tt\textcolor{textindraw}{C}}
   \psfrag{D}{\tt\textcolor{textindraw}{D}}
-  \includegraphics[width=50mm]{malha-quadr}
+  \includegraphics[width=60mm]{malha-quadr}
   \caption{A (part of a) mesh of squares}
   \label{\numb section 10.\numb fig 1}
 \end{figure}
@@ -48,14 +48,9 @@ to an undesirable phenomenon known as ``memory leak''.
 If your program does this a lot, it will occupy increasingly more memory without reason.
 
 
-                 %-------------------------------------%
-\section{~~\cinza{Transforming a square into a triangle}}\label{\numb section 10.\numb parag 2}
-                 %-------------------------------------%
-
-{\normalfont\bfseries The code described in this paragraph does not work.
-The internal representation of {\small\tt Mesh::Connected::OneDim} requires a different
-implementation of methods {\small\tt add\_\,to\_\,mesh}, {\small\tt remove\_\,from\_\,mesh},
-{\small\tt glue\_\,on\_\,bdry\_\,of} and {\small\tt cut\_\,from\_\,bdry\_\,of}.              }
+           %-------------------------------------%
+\section{~~{Transforming a square into a triangle}}\label{\numb section 10.\numb parag 2}
+           %-------------------------------------%
 
 Instead of discarding the square and building two new triangles, we can use the same
 {\small\tt\verm{Cell}} object {\small\tt ABCD}
@@ -127,7 +122,7 @@ The vertices give an indication about which diagonal to choose to cut the square
                                    \azul{it2} = list_of_vertices.begin();
          it1 != list_of_squares.end(); it1++, it2++                )
    \{  assert ( it2 != list_of_vertices.end() );
-      \verm{Cell} \azul{square} = *it1, P = *it2;
+      \verm{Cell} \azul{square} = *it1, \azul{P} = *it2;
       \verm{Cell} \azul{PQ} = square.boundary().cell_in_front_of ( P );
       \verm{Cell} \azul{Q} = PQ.tip();
       \verm{Cell} \azul{QR} = square.boundary().cell_in_front_of ( Q );
