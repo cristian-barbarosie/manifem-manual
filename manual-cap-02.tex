@@ -637,13 +637,11 @@ Thus, the eight rims defined in the beginning are kept unchanged.
    std::list<\verm{Mesh}>::iterator \azul{it1};
    for ( it1 = lm.begin(); it1 != lm.end(); it1++ )
    \{  \verm{Mesh} \azul{sect} = *it1;
-      \verm{CellIterator} \azul{it2} = sect.iterator ( \verm{tag}::over_segments );
+      \verm{CellIterator} \azul{it2} = sect.iterator ( \verm{tag}::over_vertices );
       for ( int \azul{i} = 1; i < 20; i++ )
       for ( it2.reset(); it2.in_range(); it2++ )
-      \{  \verm{Cell} \azul{seg} = *it2;
-         sect.baricenter ( seg.tip(), seg );
-         seg = seg.reverse();
-         sect.baricenter ( seg.tip(), seg );  \}                     \}
+      \{  \verm{Cell} \azul{ver} = *it2;
+         if ( ver.is_inner_to ( sect ) ) sect.baricenter ( ver );  \}                     \}
 \end{Verbatim}
 
 And we are happy with the final result.
