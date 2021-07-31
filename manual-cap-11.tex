@@ -371,6 +371,17 @@ For instance, when {\small\tt join}ing two meshes of the kind
 is the same as the first vertex (reversed) of the other mesh.
 Otherwise, the result will be a {\small\tt \verm{Mesh}::Fuzzy}.
 
+Methods {\small\tt\verm{Cell}::add\_\,to\_\,mesh} and
+{\small\tt\verm{Cell}::remove\_\,from\_\,mesh} accept as second argument a
+{\small\tt\verm{tag}::do\_\,not\_\,bother}.
+This tag has no effect for a fuzzy mesh.
+For a connected one-dimensional mesh, the method without tag will take measures
+to ensure the connectivity of the mesh and will update the total number of segments.
+By providing a {\small\tt\verm{tag}::do\_\,not\_\,bother}, the user instructs
+{\maniFEM} not to waste execution time with these details.
+The user assumes responsibility for updating data members {\small\tt nb\_\,of\_\,segs},
+{\small\tt first\_\,ver} and {\small\tt last\_\,ver}..
+The same will apply to a high-dimensional connected mesh (object of current work).
 
           %-----------------------------%
 \section{~~Maximum topological dimension}\label{\numb section 11.\numb parag 7}
