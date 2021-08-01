@@ -369,10 +369,6 @@ If we want sharp edges, we must build the edges first as explained in paragraphs
 Comments at the end of paragraph \ref{\numb section 3.\numb parag 6} apply here, too :
 {\maniFEM} must find a starting point and the right orientation.
 
-This is a good place to mention that the progressive meshing algorithm has a bug
-which shows up very rarely, possibly related to the function {\small\tt \verm{smooth\_\,min}}.
-We are doing our best to track the bug.
-
 
 \section{~~\cinza{[empty]}}\label{\numb section 3.\numb parag 8}
 
@@ -781,13 +777,6 @@ In contrast, {\maniFEM} is ``at ease'' when meshing the disk in paragraph
 \ref{\numb section 3.\numb parag 2} because there the segments on the boundary have
 (approximately) constant length.
 
-This is a good place to mention that the progressive meshing algorithm has a bug
-which shows up very rarely.
-It has been observed in examples similar to the one in paragraph
-\ref{\numb section 3.\numb parag 7}, which means it could be related not to
-the meshing algorithm itself but to the function {\small\tt \verm{smooth\_\,min}}.
-We are doing our best to track the bug. Fingers crossed.
-
 
           %------------%
 \section{~~Sharp angles}\label{\numb section 3.\numb parag 17}
@@ -875,7 +864,7 @@ thus, some previous knowledge about the geometry of the surface is needed.
    RR3.implicit ( x*x + y*y + z*z == rs*rs );
    \verm{Mesh} \azul{piece_of_sph} ( \verm{tag}::progressive, \verm{tag}::boundary, circle_2,
                        \verm{tag}::start_at, start_2, \verm{tag}::towards, \{ 0., 0., -1. \},
-                       \verm{tag}::desired_length, seg_ size                         );
+                       \verm{tag}::desired_length, seg_size                         );
                        
    \verm{Mesh} \azul{sphere_and_cylinder} ( \verm{tag}::join, piece_of_sph, piece_of_cyl );
 \end{Verbatim}
@@ -886,8 +875,8 @@ thus, some previous knowledge about the geometry of the surface is needed.
   \label{\numb section 3.\numb fig 5}
 \end{figure}
 
-\begin{figure} \centering
- \includegraphics[width=110mm]{crack}
+\begin{figure}[ht] \centering
+ \includegraphics[width=100mm]{crack}
   \caption{Zoom around the joint}
   \label{\numb section 3.\numb fig 6}
 \end{figure}
@@ -933,9 +922,9 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
 
 \begin{figure}[ht] \centering
 \if\production 1
- \includegraphics[width=78mm]{sphere-tunnel-cloud-im}
+ \includegraphics[width=94mm]{sphere-tunnel-cloud-im}
 \else
- \includegraphics[width=78mm]{sphere-tunnel-low-res}
+ \includegraphics[width=94mm]{sphere-tunnel-low-res}
 \fi
   \caption{Sphere with tunnel}
   \label{\numb section 3.\numb fig 7}
@@ -991,7 +980,7 @@ If we want to mesh (a part of) a surface with singular points, we must give to {
 knowledge about these singularities.
 A typical example is the vertex of a cone.
 
-\begin{figure} \centering
+\begin{figure}[ht] \centering
  \includegraphics[width=85mm]{cone}
   \caption{A singularity (vertex)}
   \label{\numb section 3.\numb fig 8}
@@ -1176,7 +1165,7 @@ $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for th
 \end{Verbatim}
 
 \begin{figure} \centering
- \includegraphics[width=80mm]{disk-anisotrop}
+ \includegraphics[width=90mm]{disk-anisotrop}
   \caption{Anisotropic mesh}
   \label{\numb section 3.\numb fig 11}
 \end{figure}
