@@ -4,10 +4,10 @@
 \usepackage{typearea}
 \areaset[1cm]{158mm}{234mm}
 
-\def\manifemrelease{21.08}
-\def\manualversion{21.08}
-\let\production 1
-% \includeonly{manual-cap-11,manual-cap-12}
+\def\manifemrelease{21.**}
+\def\manualversion{21.**}
+\let\production 0
+\includeonly{manual-cap-06,manual-cap-11}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -300,14 +300,23 @@ paragraph \ref{\numb section 9.\numb parag 10}.
 \noindent Quotient manifolds
 
 \noindent High-dimensional connected meshes; the implementation of the iterators depends
-on STSI (self-touching or self-intersecting) meshes
+on STSI (self-touching or self-intersecting) meshes.
 
 \noindent Progressive mesh generation : the algorithm can be simplified by using
-a STSI interface instead of a list of connected interfaces
+a STSI interface instead of a list of connected interfaces.
 
 \noindent Define regions in a manifold (i.e.\ manifolds with boundary) by means of
 inequalities between {\small\tt\verm{Function}}s.
 
+\noindent The name {\small\tt\verm{CellIterator}} is ugly.
+I have chosen this name to hint that we are dealing with an iterator over cells.
+If I choose to stick on this hint, I could change it to {\small\tt\verm{Cell}::Iterator}
+(thus exposing one less name in the {\small\tt namespace \verm{maniFEM}}).
+Another possibility is to follow the convention for {\tt STL} iterators :
+{\small\tt ContainerClass::iterator}.
+This would lead to the name {\small\tt\verm{Mesh}::Iterator} since a {\small\tt\verm{Mesh}}
+can be seen as a container for {\small\tt\verm{Cell}}s.
+Suggestions are welcome.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

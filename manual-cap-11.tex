@@ -509,26 +509,24 @@ with methods replaced by {\small\tt \verm{Cell}::cut\_\,from\_\,bdry\_\,of},
 {\small\tt \verm{Cell}::Positive::NotVertex::cut\_\,common}.
 
 
-                 %----------------------%
-\section{~~\cinza{About {\tt init\_\,cell}} (outdated)}\label{\numb section 11.\numb parag 10}
-                 %----------------------%
+          %------------------------------%
+\section{~~About {\tt init\_\,***\_\,cell}}\label{\numb section 11.\numb parag 10}
+          %------------------------------%
 
-The {\small\tt \verm{Cell}} class has static attributes {\small\tt init\_\,cell},
-{\small\tt init\_\,cell\_\,r}, {\small\tt data\_\,for\_\,init}, {\small\tt data\_\,for\_\,init\_\,r}.
-The attribute {\small\tt init\_\,cell} is a list of pointers to functions to be called by
-the constructor of a positive cell, while {\small\tt data\_\,for\_\,init} is a void pointer which
-can be used to pass supplementary information to {\small\tt init\_\,cell}.
-Attributes {\small\tt init\_\,cell\_\,r} and {\small\tt data\_\,for\_\,init\_\,r} fulfill a similar task
-when building negative cells.
+The \ {\small\tt\verm{Cell}} \ class \ has \ static \ attributes \ {\small\tt init\_\,pos\_\,cell},
+\ {\small\tt init\_\,neg\_\,cell}, \ {\small\tt data\_\,for\_\,init\_\,pos},
+{\small\tt data\_\,for\_\,init\_\,neg}.
+The attribute {\small\tt init\_\,pos\_\,cell} is a list of pointers to functions to be called by
+the constructor of a positive cell, while {\small\tt data\_\,for\_\,init\_\,pos} is a void pointer
+which can be used to pass supplementary information to {\small\tt init\_\,pos\_\,cell}.
+Attributes {\small\tt init\_\,neg\_\,cell} and {\small\tt data\_\,for\_\,init\_\,neg} fulfill
+a similar task when building negative cells.
 
-For instance, {\small\tt \verm{Manifold}::coordinate\_\,system} inserts into the list
-{\small\tt \verm{Cell}::init\_\,cell[0]} a call to {\small\tt \verm{Mesh}::prescribe\_\,on} which in turn calls
-{\small\tt \verm{FunctionOnMesh}::prescribe\_\,on} in order to prepare the ground for instructions like
-{\small\tt \azul{x} == 1.0} to produce the desired effect after the creation of each point.
-
-Another example is the constructor {\small\tt\verm{FiniteElement}::Lagrange::Q1} which
-adds a call to\break {\small\tt\verm{FiniteElement}::Lagrange::Q1::enumerate\_\;new\_\,vertex} to
-the list {\small\tt\verm{Cell}::init\_\,cell[0]}.
+For instance, the constructor of a {\small\tt\verm{FiniteElement}} with
+{\small\tt\verm{tag}::build\_\;enum} builds a new
+{\small\tt\verm{Cell}:: ::Numbering::Field} whose constructor
+adds a call to {\small\tt\verm{Cell}::Numbering::Field::set\_\,and\_\,increment} to
+the list {\small\tt\verm{Cell}::init\_\;pos\_\,cell[0]}.
 This way, future vertices will receive automatically a {\small\tt size\_\,t} label, to be used
 by Lagrange finite elements.
 
