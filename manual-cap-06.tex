@@ -70,13 +70,14 @@ and compact.
 Note also that these examples make use of the {\small\tt Eigen} library.
 
 
-
           %------------------------------------------------%
 \section{~~Laplace operator, Dicrichlet boundary conditions}\label{\numb section 6.\numb parag 2}
           %------------------------------------------------%
+\vskip 1mm
 
 Let's look at an example about the Laplace operator with non-homogeneous Dirichlet
 boundary conditions.
+\vskip 1mm
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
@@ -101,13 +102,13 @@ boundary conditions.
    \verm{Mesh} \azul{DA} ( \verm{tag}::segment, D.reverse(), A, \verm{tag}::divided_in, 12 );
    \verm{Mesh} \azul{ABCD} ( \verm{tag}::rectangle, AB, BC, CD, DA );
 \end{Verbatim}
+\vskip 1mm
 
-After declaring a finite element of type Lagrange, the process of creating new cells
-(vertices, in this specfic case) will be different.
-Space will be reserved for a {\small\tt size\_\,t} value for each vertex, and
-this value can be used for numbering vertices.
-We will present this approach in paragraph \ref{\numb section 6.\numb parag 4}.
-For now, we prefer to build by hand a {\small\tt map} for numbering vertices.
+A finite element can handle by itself the numbering of vertices, as shown in paragraph
+\ref{\numb section 6.\numb parag 4}.
+For now, we prefer the conceptually simpler approach of building by hand a {\small\tt map}
+for numbering vertices.
+\vskip 1mm
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
@@ -118,6 +119,7 @@ For now, we prefer to build by hand a {\small\tt map} for numbering vertices.
    for ( it.reset() ; it.in_range(); it++ )
    \{  \verm{Cell} \azul{V} = *it;  numbering[V] = counter;  ++counter;  \}
 \end{Verbatim}
+\vskip 1mm
 
 The matrix of the linear system and the vector holding the free coefficients
 are declared as objects of the {\small\tt Eigen} library.
@@ -130,12 +132,14 @@ are declared as objects of the {\small\tt Eigen} library.
    Eigen::SparseMatrix <double> \azul{matrix_A} ( size_matrix, size_matrix );
    Eigen::VectorXd \azul{vector_b} ( size_matrix );  vector_b.setZero();
 \end{Verbatim}
+\vskip 1mm
 
 We now run over all rectangular cells of {\small\tt ABCD}, dock the finite element
 on the current cell,
 compute integrals of the form $ \displaystyle \int\!\!\!\int {\partial \psi_i \over
 \partial x_\alpha} {\partial \psi_j \over \partial x_\beta} dx $ and add the obtained
 values to the global matrix:
+\vskip 1mm
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
@@ -282,16 +286,24 @@ This is object of on-going work.
 \section{~~Automatic numberig of vertices}\label{\numb section 6.\numb parag 4}
           %------------------------------%
 
-In previous examples we have built a numbering {\small\tt map}.
+In previous examples we have built a {\small\tt map} for handling numbering of vertices.
 In this paragraph we show how to use instead the automatic numbering associated to the
 finite element itself.
-After declaring a finite element of type Lagrange, the process of creating new cells
-(vertices, in this specfic case) will be different.
+After declaring a finite element of type Lagrange with {\small\tt\verm{tag}::enumerate\_\,cells},
+the process of creating new cells (vertices, in this specfic case) will be different.
 A new function will be added to the list of functions {\small\tt\verm{Cell}::init\_\,pos\_\,cell[0]},
 invoked by {\small\tt\verm{Cell}::Core} constructors (see paragraph
 \ref{\numb section 11.\numb parag 10}).
 Space will be reserved for a {\small\tt size\_\,t} value for each vertex, and
-this value can be used for numbering vertices, as shown below.
+this value can be used for numbering vertices.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 6.\numb parag 4}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   \verm{FiniteElement} \azul{fe} ( \verm{tag}::with_master, \verm{tag}::quadrangle,
+                      \verm{tag}::Lagrange, \verm{tag}::of_degree, 1, \verm{tag}::enumerate_cells );
+   \verm{Cell}::Numbering & \azul{numbering} = fe.numbering ( \verm{tag}::vertices );
+\end{Verbatim}
 
 In this approach, the access to the index of a given vertex is very fast (constant time)
 because the index is stored within the {\small\tt\verm{Cell}::Core}, so no search is needed.
@@ -299,17 +311,21 @@ In contrast, when using a {\small\tt map} as shown in paragraph \ref{\numb secti
 a search is necessary through all vertices of the mesh.
 Due to the implementation of the {\small\tt map} class in {\tt STL}, this search takes
 logarithmic time.
+The only advantage of the approach described in paragraph \ref{\numb section 6.\numb parag 2}
+is that the user has full contol of the numbering (see below).
 
 Using the numbering associated to the finite element itself has the following disadvantage.
 This automatic numbering process does not distinguish between vertices created at the user's
-request and other vertices used internally by {\maniFEM} which are invisible to the user.
+request and other vertices used internally by different components of {\maniFEM};
+these vertices are invisible to the user.
 As a consequence, the numbering will not be contiguous.
 Lines of the global matrix corresponding to ``missing'' vertices are not significant in any way.
-Columns corresponding to missing vertices are not significant either because they will only
-have zero entries.
-However, the solver of the linear system will not work because the matrix is singular.
+Columns corresponding to missing vertices are not significant either (because they will only
+have zero entries).
+However, the solver of the linear system will complain that the matrix is singular.
 To circumvent this problem, we insert a non-zero value in the diagonal of the global matrix
 at places corresponding to ``missing'' vertices.
+This is equivalent to imposing a Dirichlet boundary condition on those vertices.
 Since we have no way of running over the missing vertices, we first fill the entire
 diagonal with ones, then erase them for existing vertices.
 
@@ -325,3 +341,15 @@ diagonal with ones, then erase them for existing vertices.
       matrix_A.coeffRef ( i, i ) = 0.;  \}
 \end{Verbatim}
 
+The rest of the code is identical to paragraph \ref{\numb section 6.\numb parag 2}.
+
+Note that both numbering methods (presented in paragraphs \ref{\numb section 6.\numb parag 2}
+and \ref{\numb section 6.\numb parag 4}) allow for retrieving
+an index of a given vertex but not the other way around.
+If you need to retrieve a vertex from its index you should probably use 
+a vector of {\small\tt\verm{Cell}}s.
+
+For the example in paragraph \ref{\numb section 6.\numb parag 3}, you should add the
+{\small\tt\verm{tag}::enumerate\_\,cells} when declaring {\small\tt fe} and not when
+declaring {\small\tt fe\_\,bdry} -- you don't want two independent mechanisms for numbering
+vertices, do you ?
