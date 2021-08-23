@@ -182,7 +182,7 @@ As an alternative, we might explicitly project them onto the {\small\tt hiperbol
 \end{Verbatim}
 
 \noindent In contrast, the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::segment}
-builds points in the {\small\tt RR2} space and then projects them onto the
+builds points in the surrounding space {\small\tt RR2} and then projects them onto the
 {\small\tt hiperbola} without the user's assistance.
 
 The projection is done by applying a few steps of Newton's method for under-determined
@@ -292,7 +292,7 @@ In contrast, the {\small\tt \verm{Mesh}} constructors with {\small\tt \verm{tag}
 {\small\tt \verm{tag}::quadrangle} and {\small\tt \verm{tag}::triangle} build points in the
 surrounding space ($ \mathbb{R}^2 $ or $ \mathbb{R}^3 $) and
 then project them onto the current manifold without the user's assistance (paragraph
-\ref{\numb section 8.\numb parag 1} describe this projection operation).
+\ref{\numb section 8.\numb parag 1} describes this projection operation).
 As a side effect, within each triangle ({\small\tt ENup}, {\small\tt NWup} and so forth),
 the distribution of the vertices is not perfectly uniform.
 

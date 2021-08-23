@@ -1,13 +1,9 @@
 
-                 %---------------------------------------------------%
-\chapter{~~\cinza{Quotient manifolds and periodic boundary conditions}}
-                 %---------------------------------------------------%
+          %---------------------------------------------------%
+\chapter{~~Quotient manifolds and periodic boundary conditions}
+          %---------------------------------------------------%
 \label{\numb section 7}
 
-
-{\normalfont\bfseries The code described in this section does not work yet.
-It should be regarded as a mere declaration of intentions.}
-\medskip
 
 The roots of {\maniFEM} go back to a PhD thesis in 2002
 % (or even earlier, to a Master thesis in 1997)
@@ -21,6 +17,8 @@ translations of $ \mathbb{R}^2 $ with two generators;
 you may think of it as $ {\mathbb R}^2/{\mathbb Z}^2 $.
 It should be stressed that this manifold is not the usual ``donut'' built in paragraph
 \ref{\numb section 2.\numb parag 15}.
+These two manifolds are homeomorphic (topologically equivalent) but they are not isometric,
+that is, their geometry differ.
 The quotient torus is a Riemann manifold with no curvature; it is locally Euclidian
 (that is, locally isometric to open sets of $ \mathbb{R}^2 $); we may call it ``flat torus''.
 It cannot be embedded in $ \mathbb{R}^3 $, much less be represented graphically.
@@ -32,15 +30,12 @@ Different quotient operations can be used, with groups of translations of $ \mat
 with other groups of transformations.
 
 
-                 %--------------------------%
-\section{~~\cinza{A circle with no curvature}}\label{\numb section 7.\numb parag 1}
-                 %--------------------------%
-
-{\normalfont\bfseries The code described in this paragraph does not work yet.
-It should be regarded as a mere declaration of intentions.}
+          %--------------------------%
+\section{~~A circle with no curvature}\label{\numb section 7.\numb parag 1}
+          %--------------------------%
 
 Here is the closed curve $ \mathbb{R}/{\mathbb Z} $.
-We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified {\small\tt jump}.
+We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified {\small\tt spin}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
@@ -48,14 +43,14 @@ We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified 
    \verm{Manifold} \azul{RR} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 1 );
    \verm{Function} \azul{x} = RR.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
 
-   \cinza{// define an action on RR2 (a translation)}
-   \verm{Manifold}::Action \azul{g};  g(x) = x+1;
+   \cinza{// define an action on RR (a translation)}
+   \verm{Function}::Action \azul{g} ( tag::transforms, x, tag::into, x+1. );
    \verm{Manifold} \azul{circle} = RR.quotient ( g );
 
    \cinza{// one vertex is enough to start the process}
    \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0.02;
    \cinza{// with this vertex, we build a segment}
-   \verm{Mesh} \azul{seg} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::jump, g );
+   \verm{Mesh} \azul{seg} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::spin, \{1\} );
 \end{Verbatim}
 
 We do not bother with the graphical representation of this one-dimensional mesh.

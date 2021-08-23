@@ -7,7 +7,7 @@
 \def\manifemrelease{21.**}
 \def\manualversion{21.**}
 \let\production 0
-\includeonly{manual-cap-06}
+% \includeonly{manual-cap-06}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -98,9 +98,9 @@ However, {\maniFEM} can be used at a basic level by people with no deep knowledg
 {\tt C++}.
 
 In its current version, release \manifemrelease, {\maniFEM} works quite well for mesh generation.
-Quotient manifolds (section \ref{\numb section 7}) and anisotropic meshing (paragraph
-\ref{\numb section 3.\numb parag 24}) are not yet implemented.
-Variational formulations (section \ref{\numb section 5}) are not yet implemented.
+Anisotropic meshing (paragraph \ref{\numb section 3.\numb parag 24}) and
+variational formulations (section \ref{\numb section 5}) are not yet implemented.
+Quotient manifolds (section \ref{\numb section 7}) are still incipient
 Finite elements (section \ref{\numb section 6}) work in a rather rudimentary manner for now.
 To check which version of {\maniFEM} is installed in your computer,
 see at the beginning of the file {\small\tt maniFEM.h}.
@@ -162,7 +162,7 @@ A quick overview of \maniFEM's capabilities.
 \subparagraph*{\ref{\numb section 2} \ Meshes and manifolds; patchwork}
 Shows how to build meshes by joining simple shapes, like patches, some of them on manifolds.
 
-\subparagraph*{\ref{\numb section 3} \ Progressive mesh generation; cross-stitch}
+\subparagraph*{\ref{\numb section 3} \ Progressive mesh generation; knitting}
 Shows how to build meshes starting from their boundary alone, some of them on manifolds.
 
 \subparagraph*{\ref{\numb section 4} \ \cinza{Meshing three-dimensional domains}}
@@ -174,8 +174,8 @@ Some details about functions, a lot of work to do.
 \subparagraph*{\ref{\numb section 6} \ Finite elements and integrators}
 Shows two examples of finite element computations, still rudimentary.
 
-\subparagraph*{\ref{\numb section 7} \ \cinza{Quotient manifolds and periodic boundary conditions}}
-Describes meshes on quotient manifolds (code not working).
+\subparagraph*{\ref{\numb section 7} \ Quotient manifolds and periodic boundary conditions}
+Describes meshes on quotient manifolds.
 
 \subparagraph*{\ref{\numb section 8} \ More on manifolds}
 Describes manifolds, particularly the projection algorithm on implicitly defined manifolds.
@@ -267,14 +267,14 @@ This manual is licensed under the
 
 \section*{21.06}
 
-\noindent Changed syntax of iterators.
+\noindent Change syntax of iterators.
 
-\noindent Introduced different types of meshes :
+\noindent Introduce different types of meshes :
 {\small\tt\verm{Mesh}::Fuzzy} keep lists of cells,
 {\small\tt\verm{Mesh}::Connected::OneDim} only keep first and last vertices,
 paragraph \ref{\numb section 11.\numb parag 6}.
 
-\noindent Introduced garbage collectors (not fully working for cells and meshes).
+\noindent Introduce garbage collectors (not fully working for cells and meshes).
 
 
 \section*{21.07}
@@ -282,7 +282,7 @@ paragraph \ref{\numb section 11.\numb parag 6}.
 \noindent Garbage collectors for cells and meshes work,
 paragraph \ref{\numb section 11.\numb parag 5}.
 
-\noindent Introduced iterators around a cell,
+\noindent Introduce iterators around a cell,
 paragraph \ref{\numb section 9.\numb parag 10}.
 
 \noindent Some examples about remeshing, section \ref{\numb section 10}.
@@ -291,6 +291,11 @@ paragraph \ref{\numb section 9.\numb parag 10}.
 \section*{21.08}
 
 \noindent Minor improvements and bug fixes, particularly a bug in progressive mesh generation.
+
+
+\section*{21.??}
+
+\noindent Incipient examples of quotient manifolds.
 
 
 \section*{To do}
@@ -341,7 +346,8 @@ dimension of a cell or mesh : \ref{\numb section 1.\numb parag 2},
 \ref{\numb section 11.\numb parag 4}, \ref{\numb section 11.\numb parag 7}
 
 \noindent
-docking (of a finite element on a cell) : \ref{\numb section 6.\numb parag 1}
+docking (of a finite element on a cell) :
+\ref{\numb section 6.\numb parag 1} -- \ref{\numb section 6.\numb parag 3}
 
 \noindent
 errors : \ref{\numb section 11.\numb parag 13}, \ref{\numb section 11.\numb parag 14}
@@ -414,8 +420,15 @@ mesh : all over the place, esp.\ \ref{\numb section 1.\numb parag 2},
 \ref{\numb section 12.\numb parag 11}
 
 \noindent
+multi-threading : \ref{\numb section 13.\numb parag 3}, \ref{\numb section 13.\numb parag 4}
+
+\noindent
 negative {\small\tt \verm{Cell}} or {\small\tt \verm{Mesh}} :
 see orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es
+
+\noindent
+numbering of vertices :
+\ref{\numb section 6.\numb parag 2}, \ref{\numb section 6.\numb parag 4}
 
 \noindent
 oct-tree : \ref{\numb section 12.\numb parag 10}
@@ -428,6 +441,9 @@ orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es :
 
 \noindent
 orientation of a {\small\tt \verm{Manifold}} : \ref{\numb section 3.\numb parag 10}
+
+\noindent
+parallel processing : \ref{\numb section 13.\numb parag 3}, \ref{\numb section 13.\numb parag 4}
 
 \noindent
 parametric manifold : see manifold, parametric

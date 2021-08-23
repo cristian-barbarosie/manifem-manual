@@ -71,7 +71,7 @@ Note also that these examples make use of the {\small\tt Eigen} library.
 
 
           %------------------------------------------------%
-\section{~~Laplace operator, Dicrichlet boundary conditions}\label{\numb section 6.\numb parag 2}
+\section{~~Laplace operator, Dirichlet boundary conditions}\label{\numb section 6.\numb parag 2}
           %------------------------------------------------%
 \vskip 1mm
 
@@ -342,6 +342,24 @@ diagonal with ones, then erase them for existing vertices.
 \end{Verbatim}
 
 The rest of the code is identical to paragraph \ref{\numb section 6.\numb parag 2}.
+
+A different way around can be used, which allows the use of a {\small\tt matrix\_\,A}
+with the correct dimension (equal to the number of vertices in the mesh {\small\tt ABCD}).
+We simply assign the desired value to the numbering of each vertex :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm          ]
+   \verm{CellIterator} \azul{it} = ABCD.iterator ( \verm{tag}::over_vertices );
+   size_t \azul{counter} = 0;
+   for ( it.reset(); it.in_range(); it++ )
+   \{  \verm{Cell} \azul{P} = *it;
+      numbering ( P ) = counter++;  \}
+\end{Verbatim}
+
+However, the information from {\small\tt numbering.size()} will still be misleading
+(it still takes into account the ``hidden'' vertices).
+You should use instead {\small\tt ABCD.number\_\,of} {\small\tt} {\small\tt (}
+{\small\tt \verm{tag}::vertices )}.
 
 Note that both numbering methods (presented in paragraphs \ref{\numb section 6.\numb parag 2}
 and \ref{\numb section 6.\numb parag 4}) allow for retrieving

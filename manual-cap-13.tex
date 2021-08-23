@@ -36,7 +36,26 @@ Otherwise, you should use {\small\tt add\_\,to\_\,mesh} and {\small\tt remove\_\
 
 In some cases (when you are sure there is no mesh ``above'' this cell), it makes no difference,
 so you can use either.
-This happens for {\small\tt\verm{Cell}} constructors and destructors
-(it is documented in the source code).
-We have chosen to use {\small\tt add\_\,to\_\,mesh} and {\small\tt remove\_\,from\_\,mesh}
+For instance, in {\small\tt\verm{Cell}} constructors and destructors
+we have chosen to use {\small\tt add\_\,to\_\,mesh} and {\small\tt remove\_\,from\_\,mesh}
 because they are slightly faster.
+
+
+          %-----------------------------------------------------------------%
+\section{~~Is {\maniFEM} thread-safe ? Does it support parallel processing ?}
+          %-----------------------------------------------------------------%
+\label{\numb section 13.\numb parag 3}
+
+No.
+
+
+          %-----------------------------------------------------------%
+\section{~~Will {\maniFEM} support parallel processing in the future ?}
+          %-----------------------------------------------------------%
+\label{\numb section 13.\numb parag 4}
+
+At the moment, this is not part of our plans.
+
+
+
+
