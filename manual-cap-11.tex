@@ -53,7 +53,7 @@ Also, in the source code there are comments like
 In an effort not to expose too many names in the {\small\tt\verm{maniFEM}} namespace, we have
 used the namespace {\small\tt\verm{tag}::Util} to keep names which did not fit elsewhere.
 We have also used anonymous namespaces in order to hide names of functions which are
-only used in one file.
+only used in one source file.
 
 In the {\small\tt namespace \verm{maniFEM}} there are also many overloaded functions.
 Because they take arguments of specific type, they will not clash with names defined
@@ -150,7 +150,7 @@ are roughly collections of cells of the same dimension and cells are essentially
 defined by their boundary which is a lower-dimensional mesh.
 This conceptual simplicity does not survive to the demands of an efficient code
 (although it has been extremely useful in the process of designing \maniFEM;
-it should also be useful for learning and using it).
+it should also be useful for learning and using \maniFEM).
 
 Vertices (zero-dimensional cells) have no boundary at all.
 One-dimensional cells (segments) have all the same shape and have a rudimentary boundary

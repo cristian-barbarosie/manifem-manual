@@ -37,8 +37,9 @@ with other groups of transformations.
 Here is the closed curve $ \mathbb{R}/{\mathbb Z} $.
 We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified {\small\tt spin}.
 
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 1}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// begin with the one-dimensional line}
    \verm{Manifold} \azul{RR} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 1 );
    \verm{Function} \azul{x} = RR.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
@@ -50,11 +51,15 @@ We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified 
    \cinza{// one vertex is enough to start the process}
    \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0.02;
    \cinza{// with this vertex, we build a segment}
-   \verm{Mesh} \azul{seg} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::spin, \{1\} );
+   \verm{Mesh} \azul{seg} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::spin, g );
 \end{Verbatim}
 
 We do not bother with the graphical representation of this one-dimensional mesh.
 
+Note that, in an effort not to expose too many names in the {\small\tt namespace \verm{maniFEM}},
+we have chosen to hide the keyword {\small\tt Action} inside the namespace of
+{\small\tt class \verm{Function}}.
+See paragraph \ref{\numb section 11.\numb parag 1}.
 
                  %------------%
 \section{~~\cinza{A flat torus}}\label{\numb section 7.\numb parag 2}
@@ -82,9 +87,9 @@ Here is the classical example of $ \mathbb{R}^2/{\mathbb Z}^2 $.
    \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0.02;  y(A) = 0.02;
    \cinza{// with this vertex, we build two segments}
    \verm{Mesh} \azul{seg_horiz} ( \verm{tag}::segment, A.reverse(), A,
-                    \verm{tag}::divided_in, 10, \verm{tag}::jump, g1 );
+                    \verm{tag}::divided_in, 10, \verm{tag}::spin, g1 );
    \verm{Mesh} \azul{seg_vert}  ( \verm{tag}::segment, A.reverse(), A,
-                    \verm{tag}::divided_in, 10, \verm{tag}::jump, g2 );
+                    \verm{tag}::divided_in, 10, \verm{tag}::spin, g2 );
    \cinza{// and a rectangle}
    \verm{Mesh} \azul{torus} ( \verm{tag}::rectangle, seg_horiz, seg_vert,
                 seg_horiz.reverse(), seg_vert.reverse() );
@@ -118,12 +123,9 @@ We can build a skew torus by simply choosing other actions on {\small\tt RR2}.
 Again, we have added a shadow representing the periodicity cell, this time a parallelogram.
 
 
-                 %---------------%
-\section{~~\cinza{A curved circle}}\label{\numb section 7.\numb parag 4}
-                 %---------------%
-
-{\normalfont\bfseries The code described in this paragraph does not work yet.
-It should be regarded as a mere declaration of intentions.}
+          %---------------%
+\section{~~A curved circle}\label{\numb section 7.\numb parag 4}
+          %---------------%
 
 We are now in a position to resume the example in paragraph \ref{\numb section 2.\numb parag 14},
 this time in a less cumbersome manner.
@@ -133,11 +135,11 @@ this time in a less cumbersome manner.
    \verm{Manifold} \azul{RR} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 1 );
    \verm{Function} \azul{theta} = RR.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
    const double \azul{pi} = 3.1415926536;
-   \verm{Manifold}::Action \azul{g};  g(theta) = theta + 2*pi;
+   \verm{Function}::Action \azul{g} ( tag::transforms, theta, tag::into, theta + 2*pi );
    \verm{Manifold} \azul{circle} = RR.quotient ( g );
 
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  theta(A) = 0.;
-   \verm{Mesh} \azul{seg} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::jump, g );
+   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  theta ( A ) = 0.;
+   \verm{Mesh} \azul{seg} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::spin, g );
 
    \cinza{// define new coordinates x and y as arithmetic expressions of theta}
    \verm{Function} \azul{x} = \verm{cos}(theta), \azul{y} = \verm{sin}(theta);
@@ -145,6 +147,9 @@ this time in a less cumbersome manner.
    circle.set_coordinates ( x && y );
    seg.export_msh (\verde{"circle.msh"});
 \end{Verbatim}
+
+In {\tt gmsh}, you must select {\small\tt Tools} $\to$ {\small\tt Options} $\to$
+{\small\tt Mesh} $\to$ {\small\tt 1D Elements} in order to see this mesh.
 
 
                  %----------%
@@ -154,7 +159,7 @@ this time in a less cumbersome manner.
 {\normalfont\bfseries The code described in this paragraph does not work yet.
 It should be regarded as a mere declaration of intentions.}
 
-Here is how to build a cylinder in $ \mathbb{R}^3 $ :
+Here is how to build a (part of a) cylinder in $ \mathbb{R}^3 $ :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
@@ -168,9 +173,9 @@ Here is how to build a cylinder in $ \mathbb{R}^3 $ :
 
    \verm{Cell} \azul{A} ( \verm{tag}::vertex );  theta(A) = 0.; z(A) = -1.;
    \verm{Cell} \azul{B} ( \verm{tag}::vertex );  theta(B) = 0.; z(B) =  1.;
-   \verm{Mesh} \azul{AA} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::jump,  g );
+   \verm{Mesh} \azul{AA} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::spin,  g );
    \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 10 );  \cinza{// no jump}
-   \verm{Mesh} \azul{BB} ( \verm{tag}::segment, B.reverse(), B, \verm{tag}::divided_in, 10, \verm{tag}::jump, -g );
+   \verm{Mesh} \azul{BB} ( \verm{tag}::segment, B.reverse(), B, \verm{tag}::divided_in, 10, \verm{tag}::spin, -g );
    \verm{Mesh} \azul{cylinder} ( \verm{tag}::rectangle, AA, AB, BB, AB.reverse() );
 
    \cinza{// define new coordinates x and y as arithmetic expressions of theta}
@@ -205,9 +210,9 @@ this time by using the quotient manifold $ \mathbb{R}^2/{\mathbb Z}^2 $ introduc
 
    \verm{Cell} \azul{A} ( \verm{tag}::vertex );  alpha(A) = 0.;  beta(A) = 0.;
    \verm{Mesh} \azul{seg_horiz} ( \verm{tag}::segment, A.reverse(), A,
-                    \verm{tag}::divided_in, 10, \verm{tag}::jump, g1 );
+                    \verm{tag}::divided_in, 10, \verm{tag}::spin, g1 );
    \verm{Mesh} \azul{seg_vert}  ( \verm{tag}::segment, A.reverse(), A,
-                    \verm{tag}::divided_in, 10, \verm{tag}::jump, g2 );
+                    \verm{tag}::divided_in, 10, \verm{tag}::spin, g2 );
    \verm{Mesh} \azul{torus} ( \verm{tag}::rectangle, seg_horiz, seg_vert,
                 seg_horiz.reverse(), seg_vert.reverse() );
 
