@@ -1,0 +1,2215 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title:                     maniFEM
+%%BoundingBox:  13  13  510   330
+%%EndComments
+%%BeginSetup
+<< /PageSize [520 340.968] >> setpagedevice
+%%EndSetup
+
+/contour
+{ /xmin {-1.2} def  /xmax {1.7} def  /ymin {-0.3} def  /ymax {1.5} def  /border {0.04}  def
+xmin border add ymin border add border 180 270 arc
+xmax border sub ymin lineto
+xmax border sub ymin border add border -90 0 arc
+xmax ymax border sub lineto
+xmax border sub ymax border sub border 0 90 arc
+xmin border add ymax lineto
+xmin border add ymax border sub border 90 180 arc
+xmin ymin border add lineto
+} def
+
+/shadow
+{ 0 0 moveto
+  1 0.1 rlineto 0.1 1 rlineto -1 -0.1 rlineto } def
+
+gsave
+219.677 72.9032 translate
+161.29 dup scale
+
+0.0186 setlinewidth 0.5 setgray contour stroke
+0 setgray contour clip
+newpath 0.85 setgray shadow fill
+0.0093 setlinewidth 1 0.5 0 setrgbcolor
+
+1.01 1.01 moveto
+1.02 1.11 lineto stroke
+0.01 0.91 moveto
+0.02 1.01 lineto stroke
+-0.09 -0.09 moveto
+-0.08 0.01 lineto stroke
+0.91 0.01 moveto
+0.92 0.11 lineto stroke
+-0.99 0.81 moveto
+-0.98 0.91 lineto stroke
+-1.09 -0.19 moveto
+-1.08 -0.09 lineto stroke
+0.91 1 moveto
+0.92 1.1 lineto stroke
+-0.09 0.9 moveto
+-0.08 1 lineto stroke
+-0.19 -0.1 moveto
+-0.18 1.38778e-17 lineto stroke
+0.81 2.22045e-16 moveto
+0.82 0.1 lineto stroke
+-1.09 0.8 moveto
+-1.08 0.9 lineto stroke
+-1.19 -0.2 moveto
+-1.18 -0.1 lineto stroke
+0.81 0.99 moveto
+0.82 1.09 lineto stroke
+-0.19 0.89 moveto
+-0.18 0.99 lineto stroke
+-0.29 -0.11 moveto
+-0.28 -0.01 lineto stroke
+0.71 -0.01 moveto
+0.72 0.09 lineto stroke
+-1.19 0.79 moveto
+-1.18 0.89 lineto stroke
+0.71 0.98 moveto
+0.72 1.08 lineto stroke
+-0.29 0.88 moveto
+-0.28 0.98 lineto stroke
+-0.39 -0.12 moveto
+-0.38 -0.02 lineto stroke
+0.61 -0.02 moveto
+0.62 0.08 lineto stroke
+1.61 0.08 moveto
+1.62 0.18 lineto stroke
+0.61 0.97 moveto
+0.62 1.07 lineto stroke
+1.61 1.07 moveto
+1.62 1.17 lineto stroke
+-0.39 0.87 moveto
+-0.38 0.97 lineto stroke
+-0.49 -0.13 moveto
+-0.48 -0.03 lineto stroke
+0.51 -0.03 moveto
+0.52 0.07 lineto stroke
+1.51 0.07 moveto
+1.52 0.17 lineto stroke
+0.51 0.96 moveto
+0.52 1.06 lineto stroke
+1.51 1.06 moveto
+1.52 1.16 lineto stroke
+-0.49 0.86 moveto
+-0.48 0.96 lineto stroke
+-0.59 -0.14 moveto
+-0.58 -0.04 lineto stroke
+0.41 -0.04 moveto
+0.42 0.06 lineto stroke
+1.41 0.06 moveto
+1.42 0.16 lineto stroke
+0.41 0.95 moveto
+0.42 1.05 lineto stroke
+1.41 1.05 moveto
+1.42 1.15 lineto stroke
+-0.59 0.85 moveto
+-0.58 0.95 lineto stroke
+-0.69 -0.15 moveto
+-0.68 -0.05 lineto stroke
+0.31 -0.05 moveto
+0.32 0.05 lineto stroke
+1.31 0.05 moveto
+1.32 0.15 lineto stroke
+0.31 0.94 moveto
+0.32 1.04 lineto stroke
+1.31 1.04 moveto
+1.32 1.14 lineto stroke
+-0.69 0.84 moveto
+-0.68 0.94 lineto stroke
+-0.79 -0.16 moveto
+-0.78 -0.06 lineto stroke
+0.21 -0.06 moveto
+0.22 0.04 lineto stroke
+1.21 0.04 moveto
+1.22 0.14 lineto stroke
+0.21 0.93 moveto
+0.22 1.03 lineto stroke
+1.21 1.03 moveto
+1.22 1.13 lineto stroke
+-0.79 0.83 moveto
+-0.78 0.93 lineto stroke
+-0.89 -0.17 moveto
+-0.88 -0.07 lineto stroke
+0.11 -0.07 moveto
+0.12 0.03 lineto stroke
+1.11 0.03 moveto
+1.12 0.13 lineto stroke
+0.11 0.92 moveto
+0.01 0.91 lineto stroke
+1.11 1.02 moveto
+1.01 1.01 lineto stroke
+-0.89 0.82 moveto
+-0.99 0.81 lineto stroke
+-0.99 -0.18 moveto
+-1.09 -0.19 lineto stroke
+0.01 -0.08 moveto
+-0.09 -0.09 lineto stroke
+1.01 0.02 moveto
+0.91 0.01 lineto stroke
+1.01 1.01 moveto
+0.91 1 lineto stroke
+0.01 0.91 moveto
+-0.09 0.9 lineto stroke
+-0.09 -0.09 moveto
+-0.19 -0.1 lineto stroke
+0.91 0.01 moveto
+0.81 2.22045e-16 lineto stroke
+-0.99 0.81 moveto
+-1.09 0.8 lineto stroke
+-1.09 -0.19 moveto
+-1.19 -0.2 lineto stroke
+1 0.91 moveto
+1.01 1.01 lineto stroke
+2.22045e-16 0.81 moveto
+0.01 0.91 lineto stroke
+-0.1 -0.19 moveto
+-0.09 -0.09 lineto stroke
+0.9 -0.09 moveto
+0.91 0.01 lineto stroke
+-1 0.71 moveto
+-0.99 0.81 lineto stroke
+-1.1 -0.29 moveto
+-1.09 -0.19 lineto stroke
+0.91 1 moveto
+0.81 0.99 lineto stroke
+-0.09 0.9 moveto
+-0.19 0.89 lineto stroke
+-0.19 -0.1 moveto
+-0.29 -0.11 lineto stroke
+0.81 2.22045e-16 moveto
+0.71 -0.01 lineto stroke
+-1.09 0.8 moveto
+-1.19 0.79 lineto stroke
+-1.19 -0.2 moveto
+-1.29 -0.21 lineto stroke
+0.9 0.9 moveto
+0.91 1 lineto stroke
+-0.1 0.8 moveto
+-0.09 0.9 lineto stroke
+-0.2 -0.2 moveto
+-0.19 -0.1 lineto stroke
+0.8 -0.1 moveto
+0.81 2.22045e-16 lineto stroke
+-1.1 0.7 moveto
+-1.09 0.8 lineto stroke
+-1.2 -0.3 moveto
+-1.19 -0.2 lineto stroke
+0.81 0.99 moveto
+0.71 0.98 lineto stroke
+-0.19 0.89 moveto
+-0.29 0.88 lineto stroke
+-0.29 -0.11 moveto
+-0.39 -0.12 lineto stroke
+0.71 -0.01 moveto
+0.61 -0.02 lineto stroke
+1.71 0.09 moveto
+1.61 0.08 lineto stroke
+-1.19 0.79 moveto
+-1.29 0.78 lineto stroke
+0.8 0.89 moveto
+0.81 0.99 lineto stroke
+-0.2 0.79 moveto
+-0.19 0.89 lineto stroke
+-0.3 -0.21 moveto
+-0.29 -0.11 lineto stroke
+0.7 -0.11 moveto
+0.71 -0.01 lineto stroke
+1.7 -0.01 moveto
+1.71 0.09 lineto stroke
+-1.2 0.69 moveto
+-1.19 0.79 lineto stroke
+0.71 0.98 moveto
+0.61 0.97 lineto stroke
+1.71 1.08 moveto
+1.61 1.07 lineto stroke
+-0.29 0.88 moveto
+-0.39 0.87 lineto stroke
+-0.39 -0.12 moveto
+-0.49 -0.13 lineto stroke
+0.61 -0.02 moveto
+0.51 -0.03 lineto stroke
+1.61 0.08 moveto
+1.51 0.07 lineto stroke
+0.7 0.88 moveto
+0.71 0.98 lineto stroke
+1.7 0.98 moveto
+1.71 1.08 lineto stroke
+-0.3 0.78 moveto
+-0.29 0.88 lineto stroke
+-0.4 -0.22 moveto
+-0.39 -0.12 lineto stroke
+0.6 -0.12 moveto
+0.61 -0.02 lineto stroke
+1.6 -0.02 moveto
+1.61 0.08 lineto stroke
+0.61 0.97 moveto
+0.51 0.96 lineto stroke
+1.61 1.07 moveto
+1.51 1.06 lineto stroke
+-0.39 0.87 moveto
+-0.49 0.86 lineto stroke
+-0.49 -0.13 moveto
+-0.59 -0.14 lineto stroke
+0.51 -0.03 moveto
+0.41 -0.04 lineto stroke
+1.51 0.07 moveto
+1.41 0.06 lineto stroke
+0.6 0.87 moveto
+0.61 0.97 lineto stroke
+1.6 0.97 moveto
+1.61 1.07 lineto stroke
+-0.4 0.77 moveto
+-0.39 0.87 lineto stroke
+-0.5 -0.23 moveto
+-0.49 -0.13 lineto stroke
+0.5 -0.13 moveto
+0.51 -0.03 lineto stroke
+1.5 -0.03 moveto
+1.51 0.07 lineto stroke
+0.51 0.96 moveto
+0.41 0.95 lineto stroke
+1.51 1.06 moveto
+1.41 1.05 lineto stroke
+-0.49 0.86 moveto
+-0.59 0.85 lineto stroke
+-0.59 -0.14 moveto
+-0.69 -0.15 lineto stroke
+0.41 -0.04 moveto
+0.31 -0.05 lineto stroke
+1.41 0.06 moveto
+1.31 0.05 lineto stroke
+0.5 0.86 moveto
+0.51 0.96 lineto stroke
+1.5 0.96 moveto
+1.51 1.06 lineto stroke
+-0.5 0.76 moveto
+-0.49 0.86 lineto stroke
+-0.6 -0.24 moveto
+-0.59 -0.14 lineto stroke
+0.4 -0.14 moveto
+0.41 -0.04 lineto stroke
+1.4 -0.04 moveto
+1.41 0.06 lineto stroke
+0.41 0.95 moveto
+0.31 0.94 lineto stroke
+1.41 1.05 moveto
+1.31 1.04 lineto stroke
+-0.59 0.85 moveto
+-0.69 0.84 lineto stroke
+-0.69 -0.15 moveto
+-0.79 -0.16 lineto stroke
+0.31 -0.05 moveto
+0.21 -0.06 lineto stroke
+1.31 0.05 moveto
+1.21 0.04 lineto stroke
+0.4 0.85 moveto
+0.41 0.95 lineto stroke
+1.4 0.95 moveto
+1.41 1.05 lineto stroke
+-0.6 0.75 moveto
+-0.59 0.85 lineto stroke
+-0.7 -0.25 moveto
+-0.69 -0.15 lineto stroke
+0.3 -0.15 moveto
+0.31 -0.05 lineto stroke
+1.3 -0.05 moveto
+1.31 0.05 lineto stroke
+0.31 0.94 moveto
+0.21 0.93 lineto stroke
+1.31 1.04 moveto
+1.21 1.03 lineto stroke
+-0.69 0.84 moveto
+-0.79 0.83 lineto stroke
+-0.79 -0.16 moveto
+-0.89 -0.17 lineto stroke
+0.21 -0.06 moveto
+0.11 -0.07 lineto stroke
+1.21 0.04 moveto
+1.11 0.03 lineto stroke
+0.3 0.84 moveto
+0.31 0.94 lineto stroke
+1.3 0.94 moveto
+1.31 1.04 lineto stroke
+-0.7 0.74 moveto
+-0.69 0.84 lineto stroke
+-0.8 -0.26 moveto
+-0.79 -0.16 lineto stroke
+0.2 -0.16 moveto
+0.21 -0.06 lineto stroke
+1.2 -0.06 moveto
+1.21 0.04 lineto stroke
+0.1 0.82 moveto
+0.11 0.92 lineto stroke
+1.1 0.92 moveto
+1.11 1.02 lineto stroke
+-0.9 0.72 moveto
+-0.89 0.82 lineto stroke
+-1 -0.28 moveto
+-0.99 -0.18 lineto stroke
+1.38778e-17 -0.18 moveto
+0.01 -0.08 lineto stroke
+1 -0.08 moveto
+1.01 0.02 lineto stroke
+0.21 0.93 moveto
+0.11 0.92 lineto stroke
+1.21 1.03 moveto
+1.11 1.02 lineto stroke
+-0.79 0.83 moveto
+-0.89 0.82 lineto stroke
+-0.89 -0.17 moveto
+-0.99 -0.18 lineto stroke
+0.11 -0.07 moveto
+0.01 -0.08 lineto stroke
+1.11 0.03 moveto
+1.01 0.02 lineto stroke
+0.2 0.83 moveto
+0.21 0.93 lineto stroke
+1.2 0.93 moveto
+1.21 1.03 lineto stroke
+-0.8 0.73 moveto
+-0.79 0.83 lineto stroke
+-0.9 -0.27 moveto
+-0.89 -0.17 lineto stroke
+0.1 -0.17 moveto
+0.11 -0.07 lineto stroke
+1.1 -0.07 moveto
+1.11 0.03 lineto stroke
+0.1 0.82 moveto
+2.22045e-16 0.81 lineto stroke
+1.1 0.92 moveto
+1 0.91 lineto stroke
+-0.9 0.72 moveto
+-1 0.71 lineto stroke
+-1 -0.28 moveto
+-1.1 -0.29 lineto stroke
+1.38778e-17 -0.18 moveto
+-0.1 -0.19 lineto stroke
+1 -0.08 moveto
+0.9 -0.09 lineto stroke
+1 0.91 moveto
+0.9 0.9 lineto stroke
+2.22045e-16 0.81 moveto
+-0.1 0.8 lineto stroke
+-0.1 -0.19 moveto
+-0.2 -0.2 lineto stroke
+0.9 -0.09 moveto
+0.8 -0.1 lineto stroke
+-1 0.71 moveto
+-1.1 0.7 lineto stroke
+-1.1 -0.29 moveto
+-1.2 -0.3 lineto stroke
+0.99 0.81 moveto
+1 0.91 lineto stroke
+-0.01 0.71 moveto
+2.22045e-16 0.81 lineto stroke
+-0.11 -0.29 moveto
+-0.1 -0.19 lineto stroke
+0.89 -0.19 moveto
+0.9 -0.09 lineto stroke
+-1.01 0.61 moveto
+-1 0.71 lineto stroke
+-1.11 -0.39 moveto
+-1.1 -0.29 lineto stroke
+0.9 0.9 moveto
+0.8 0.89 lineto stroke
+-0.1 0.8 moveto
+-0.2 0.79 lineto stroke
+-0.2 -0.2 moveto
+-0.3 -0.21 lineto stroke
+0.8 -0.1 moveto
+0.7 -0.11 lineto stroke
+1.8 0 moveto
+1.7 -0.01 lineto stroke
+-1.1 0.7 moveto
+-1.2 0.69 lineto stroke
+0.89 0.8 moveto
+0.9 0.9 lineto stroke
+-0.11 0.7 moveto
+-0.1 0.8 lineto stroke
+-0.21 -0.3 moveto
+-0.2 -0.2 lineto stroke
+0.79 -0.2 moveto
+0.8 -0.1 lineto stroke
+-1.11 0.6 moveto
+-1.1 0.7 lineto stroke
+0.8 0.89 moveto
+0.7 0.88 lineto stroke
+1.8 0.99 moveto
+1.7 0.98 lineto stroke
+-0.2 0.79 moveto
+-0.3 0.78 lineto stroke
+-0.3 -0.21 moveto
+-0.4 -0.22 lineto stroke
+0.7 -0.11 moveto
+0.6 -0.12 lineto stroke
+1.7 -0.01 moveto
+1.6 -0.02 lineto stroke
+-1.2 0.69 moveto
+-1.3 0.68 lineto stroke
+0.79 0.79 moveto
+0.8 0.89 lineto stroke
+-0.21 0.69 moveto
+-0.2 0.79 lineto stroke
+-0.31 -0.31 moveto
+-0.3 -0.21 lineto stroke
+0.69 -0.21 moveto
+0.7 -0.11 lineto stroke
+1.69 -0.11 moveto
+1.7 -0.01 lineto stroke
+-1.21 0.59 moveto
+-1.2 0.69 lineto stroke
+0.7 0.88 moveto
+0.6 0.87 lineto stroke
+1.7 0.98 moveto
+1.6 0.97 lineto stroke
+-0.3 0.78 moveto
+-0.4 0.77 lineto stroke
+-0.4 -0.22 moveto
+-0.5 -0.23 lineto stroke
+0.6 -0.12 moveto
+0.5 -0.13 lineto stroke
+1.6 -0.02 moveto
+1.5 -0.03 lineto stroke
+0.69 0.78 moveto
+0.7 0.88 lineto stroke
+1.69 0.88 moveto
+1.7 0.98 lineto stroke
+-0.31 0.68 moveto
+-0.3 0.78 lineto stroke
+-0.41 -0.32 moveto
+-0.4 -0.22 lineto stroke
+0.59 -0.22 moveto
+0.6 -0.12 lineto stroke
+1.59 -0.12 moveto
+1.6 -0.02 lineto stroke
+0.6 0.87 moveto
+0.5 0.86 lineto stroke
+1.6 0.97 moveto
+1.5 0.96 lineto stroke
+-0.4 0.77 moveto
+-0.5 0.76 lineto stroke
+-0.5 -0.23 moveto
+-0.6 -0.24 lineto stroke
+0.5 -0.13 moveto
+0.4 -0.14 lineto stroke
+1.5 -0.03 moveto
+1.4 -0.04 lineto stroke
+0.59 0.77 moveto
+0.6 0.87 lineto stroke
+1.59 0.87 moveto
+1.6 0.97 lineto stroke
+-0.41 0.67 moveto
+-0.4 0.77 lineto stroke
+-0.51 -0.33 moveto
+-0.5 -0.23 lineto stroke
+0.49 -0.23 moveto
+0.5 -0.13 lineto stroke
+1.49 -0.13 moveto
+1.5 -0.03 lineto stroke
+0.5 0.86 moveto
+0.4 0.85 lineto stroke
+1.5 0.96 moveto
+1.4 0.95 lineto stroke
+-0.5 0.76 moveto
+-0.6 0.75 lineto stroke
+-0.6 -0.24 moveto
+-0.7 -0.25 lineto stroke
+0.4 -0.14 moveto
+0.3 -0.15 lineto stroke
+1.4 -0.04 moveto
+1.3 -0.05 lineto stroke
+0.49 0.76 moveto
+0.5 0.86 lineto stroke
+1.49 0.86 moveto
+1.5 0.96 lineto stroke
+-0.51 0.66 moveto
+-0.5 0.76 lineto stroke
+-0.61 -0.34 moveto
+-0.6 -0.24 lineto stroke
+0.39 -0.24 moveto
+0.4 -0.14 lineto stroke
+1.39 -0.14 moveto
+1.4 -0.04 lineto stroke
+0.4 0.85 moveto
+0.3 0.84 lineto stroke
+1.4 0.95 moveto
+1.3 0.94 lineto stroke
+-0.6 0.75 moveto
+-0.7 0.74 lineto stroke
+-0.7 -0.25 moveto
+-0.8 -0.26 lineto stroke
+0.3 -0.15 moveto
+0.2 -0.16 lineto stroke
+1.3 -0.05 moveto
+1.2 -0.06 lineto stroke
+0.39 0.75 moveto
+0.4 0.85 lineto stroke
+1.39 0.85 moveto
+1.4 0.95 lineto stroke
+-0.61 0.65 moveto
+-0.6 0.75 lineto stroke
+-0.71 -0.35 moveto
+-0.7 -0.25 lineto stroke
+0.29 -0.25 moveto
+0.3 -0.15 lineto stroke
+1.29 -0.15 moveto
+1.3 -0.05 lineto stroke
+0.3 0.84 moveto
+0.2 0.83 lineto stroke
+1.3 0.94 moveto
+1.2 0.93 lineto stroke
+-0.7 0.74 moveto
+-0.8 0.73 lineto stroke
+-0.8 -0.26 moveto
+-0.9 -0.27 lineto stroke
+0.2 -0.16 moveto
+0.1 -0.17 lineto stroke
+1.2 -0.06 moveto
+1.1 -0.07 lineto stroke
+0.29 0.74 moveto
+0.3 0.84 lineto stroke
+1.29 0.84 moveto
+1.3 0.94 lineto stroke
+-0.71 0.64 moveto
+-0.7 0.74 lineto stroke
+-0.81 -0.36 moveto
+-0.8 -0.26 lineto stroke
+0.19 -0.26 moveto
+0.2 -0.16 lineto stroke
+1.19 -0.16 moveto
+1.2 -0.06 lineto stroke
+0.09 0.72 moveto
+0.1 0.82 lineto stroke
+1.09 0.82 moveto
+1.1 0.92 lineto stroke
+-0.91 0.62 moveto
+-0.9 0.72 lineto stroke
+-1.01 -0.38 moveto
+-1 -0.28 lineto stroke
+-0.01 -0.28 moveto
+1.38778e-17 -0.18 lineto stroke
+0.99 -0.18 moveto
+1 -0.08 lineto stroke
+0.2 0.83 moveto
+0.1 0.82 lineto stroke
+1.2 0.93 moveto
+1.1 0.92 lineto stroke
+-0.8 0.73 moveto
+-0.9 0.72 lineto stroke
+-0.9 -0.27 moveto
+-1 -0.28 lineto stroke
+0.1 -0.17 moveto
+1.38778e-17 -0.18 lineto stroke
+1.1 -0.07 moveto
+1 -0.08 lineto stroke
+0.19 0.73 moveto
+0.2 0.83 lineto stroke
+1.19 0.83 moveto
+1.2 0.93 lineto stroke
+-0.81 0.63 moveto
+-0.8 0.73 lineto stroke
+-0.91 -0.37 moveto
+-0.9 -0.27 lineto stroke
+0.09 -0.27 moveto
+0.1 -0.17 lineto stroke
+1.09 -0.17 moveto
+1.1 -0.07 lineto stroke
+0.09 0.72 moveto
+-0.01 0.71 lineto stroke
+1.09 0.82 moveto
+0.99 0.81 lineto stroke
+-0.91 0.62 moveto
+-1.01 0.61 lineto stroke
+-0.01 -0.28 moveto
+-0.11 -0.29 lineto stroke
+0.99 -0.18 moveto
+0.89 -0.19 lineto stroke
+0.99 0.81 moveto
+0.89 0.8 lineto stroke
+-0.01 0.71 moveto
+-0.11 0.7 lineto stroke
+-0.11 -0.29 moveto
+-0.21 -0.3 lineto stroke
+0.89 -0.19 moveto
+0.79 -0.2 lineto stroke
+-1.01 0.61 moveto
+-1.11 0.6 lineto stroke
+0.98 0.71 moveto
+0.99 0.81 lineto stroke
+-0.02 0.61 moveto
+-0.01 0.71 lineto stroke
+-0.12 -0.39 moveto
+-0.11 -0.29 lineto stroke
+0.88 -0.29 moveto
+0.89 -0.19 lineto stroke
+-1.02 0.51 moveto
+-1.01 0.61 lineto stroke
+0.89 0.8 moveto
+0.79 0.79 lineto stroke
+-0.11 0.7 moveto
+-0.21 0.69 lineto stroke
+0.79 -0.2 moveto
+0.69 -0.21 lineto stroke
+1.79 -0.1 moveto
+1.69 -0.11 lineto stroke
+-1.11 0.6 moveto
+-1.21 0.59 lineto stroke
+0.88 0.7 moveto
+0.89 0.8 lineto stroke
+-0.12 0.6 moveto
+-0.11 0.7 lineto stroke
+0.78 -0.3 moveto
+0.79 -0.2 lineto stroke
+-1.02 1.5 moveto
+-1.01 1.6 lineto stroke
+-1.12 0.5 moveto
+-1.11 0.6 lineto stroke
+0.79 0.79 moveto
+0.69 0.78 lineto stroke
+1.79 0.89 moveto
+1.69 0.88 lineto stroke
+-0.21 0.69 moveto
+-0.31 0.68 lineto stroke
+0.69 -0.21 moveto
+0.59 -0.22 lineto stroke
+1.69 -0.11 moveto
+1.59 -0.12 lineto stroke
+0.78 0.69 moveto
+0.79 0.79 lineto stroke
+-0.22 0.59 moveto
+-0.21 0.69 lineto stroke
+0.68 -0.31 moveto
+0.69 -0.21 lineto stroke
+1.68 -0.21 moveto
+1.69 -0.11 lineto stroke
+-1.12 1.49 moveto
+-1.11 1.59 lineto stroke
+0.69 0.78 moveto
+0.59 0.77 lineto stroke
+1.69 0.88 moveto
+1.59 0.87 lineto stroke
+-0.31 0.68 moveto
+-0.41 0.67 lineto stroke
+0.59 -0.22 moveto
+0.49 -0.23 lineto stroke
+1.59 -0.12 moveto
+1.49 -0.13 lineto stroke
+0.68 0.68 moveto
+0.69 0.78 lineto stroke
+1.68 0.78 moveto
+1.69 0.88 lineto stroke
+-0.32 0.58 moveto
+-0.31 0.68 lineto stroke
+0.58 -0.32 moveto
+0.59 -0.22 lineto stroke
+1.58 -0.22 moveto
+1.59 -0.12 lineto stroke
+0.59 0.77 moveto
+0.49 0.76 lineto stroke
+1.59 0.87 moveto
+1.49 0.86 lineto stroke
+-0.41 0.67 moveto
+-0.51 0.66 lineto stroke
+0.49 -0.23 moveto
+0.39 -0.24 lineto stroke
+1.49 -0.13 moveto
+1.39 -0.14 lineto stroke
+0.58 0.67 moveto
+0.59 0.77 lineto stroke
+1.58 0.77 moveto
+1.59 0.87 lineto stroke
+-0.42 0.57 moveto
+-0.41 0.67 lineto stroke
+0.48 -0.33 moveto
+0.49 -0.23 lineto stroke
+1.48 -0.23 moveto
+1.49 -0.13 lineto stroke
+0.49 0.76 moveto
+0.39 0.75 lineto stroke
+1.49 0.86 moveto
+1.39 0.85 lineto stroke
+-0.51 0.66 moveto
+-0.61 0.65 lineto stroke
+0.39 -0.24 moveto
+0.29 -0.25 lineto stroke
+1.39 -0.14 moveto
+1.29 -0.15 lineto stroke
+0.48 0.66 moveto
+0.49 0.76 lineto stroke
+1.48 0.76 moveto
+1.49 0.86 lineto stroke
+-0.52 0.56 moveto
+-0.51 0.66 lineto stroke
+0.38 -0.34 moveto
+0.39 -0.24 lineto stroke
+1.38 -0.24 moveto
+1.39 -0.14 lineto stroke
+0.39 0.75 moveto
+0.29 0.74 lineto stroke
+1.39 0.85 moveto
+1.29 0.84 lineto stroke
+-0.61 0.65 moveto
+-0.71 0.64 lineto stroke
+0.29 -0.25 moveto
+0.19 -0.26 lineto stroke
+1.29 -0.15 moveto
+1.19 -0.16 lineto stroke
+0.38 0.65 moveto
+0.39 0.75 lineto stroke
+1.38 0.75 moveto
+1.39 0.85 lineto stroke
+-0.62 0.55 moveto
+-0.61 0.65 lineto stroke
+0.28 -0.35 moveto
+0.29 -0.25 lineto stroke
+1.28 -0.25 moveto
+1.29 -0.15 lineto stroke
+0.29 0.74 moveto
+0.19 0.73 lineto stroke
+1.29 0.84 moveto
+1.19 0.83 lineto stroke
+-0.71 0.64 moveto
+-0.81 0.63 lineto stroke
+0.19 -0.26 moveto
+0.09 -0.27 lineto stroke
+1.19 -0.16 moveto
+1.09 -0.17 lineto stroke
+0.28 0.64 moveto
+0.29 0.74 lineto stroke
+1.28 0.74 moveto
+1.29 0.84 lineto stroke
+-0.72 0.54 moveto
+-0.71 0.64 lineto stroke
+0.18 -0.36 moveto
+0.19 -0.26 lineto stroke
+1.18 -0.26 moveto
+1.19 -0.16 lineto stroke
+0.08 0.62 moveto
+0.09 0.72 lineto stroke
+1.08 0.72 moveto
+1.09 0.82 lineto stroke
+-0.92 0.52 moveto
+-0.91 0.62 lineto stroke
+-0.02 -0.38 moveto
+-0.01 -0.28 lineto stroke
+0.98 -0.28 moveto
+0.99 -0.18 lineto stroke
+0.19 0.73 moveto
+0.09 0.72 lineto stroke
+1.19 0.83 moveto
+1.09 0.82 lineto stroke
+-0.81 0.63 moveto
+-0.91 0.62 lineto stroke
+0.09 -0.27 moveto
+-0.01 -0.28 lineto stroke
+1.09 -0.17 moveto
+0.99 -0.18 lineto stroke
+0.18 0.63 moveto
+0.19 0.73 lineto stroke
+1.18 0.73 moveto
+1.19 0.83 lineto stroke
+-0.82 0.53 moveto
+-0.81 0.63 lineto stroke
+0.08 -0.37 moveto
+0.09 -0.27 lineto stroke
+1.08 -0.27 moveto
+1.09 -0.17 lineto stroke
+0.08 0.62 moveto
+-0.02 0.61 lineto stroke
+1.08 0.72 moveto
+0.98 0.71 lineto stroke
+-0.92 0.52 moveto
+-1.02 0.51 lineto stroke
+0.98 -0.28 moveto
+0.88 -0.29 lineto stroke
+0.98 0.71 moveto
+0.88 0.7 lineto stroke
+-0.02 0.61 moveto
+-0.12 0.6 lineto stroke
+0.88 -0.29 moveto
+0.78 -0.3 lineto stroke
+-0.92 1.51 moveto
+-1.02 1.5 lineto stroke
+-1.02 0.51 moveto
+-1.12 0.5 lineto stroke
+0.97 0.61 moveto
+0.98 0.71 lineto stroke
+-0.03 0.51 moveto
+-0.02 0.61 lineto stroke
+0.87 -0.39 moveto
+0.88 -0.29 lineto stroke
+-0.93 1.41 moveto
+-0.92 1.51 lineto stroke
+-1.03 0.41 moveto
+-1.02 0.51 lineto stroke
+0.88 0.7 moveto
+0.78 0.69 lineto stroke
+-0.12 0.6 moveto
+-0.22 0.59 lineto stroke
+1.78 -0.2 moveto
+1.68 -0.21 lineto stroke
+-1.02 1.5 moveto
+-1.12 1.49 lineto stroke
+-1.12 0.5 moveto
+-1.22 0.49 lineto stroke
+0.87 0.6 moveto
+0.88 0.7 lineto stroke
+-0.03 1.5 moveto
+-0.02 1.6 lineto stroke
+-0.13 0.5 moveto
+-0.12 0.6 lineto stroke
+-1.03 1.4 moveto
+-1.02 1.5 lineto stroke
+-1.13 0.4 moveto
+-1.12 0.5 lineto stroke
+0.78 0.69 moveto
+0.68 0.68 lineto stroke
+1.78 0.79 moveto
+1.68 0.78 lineto stroke
+-0.22 0.59 moveto
+-0.32 0.58 lineto stroke
+1.68 -0.21 moveto
+1.58 -0.22 lineto stroke
+-1.12 1.49 moveto
+-1.22 1.48 lineto stroke
+0.77 0.59 moveto
+0.78 0.69 lineto stroke
+-0.13 1.49 moveto
+-0.12 1.59 lineto stroke
+-0.23 0.49 moveto
+-0.22 0.59 lineto stroke
+1.67 -0.31 moveto
+1.68 -0.21 lineto stroke
+-1.13 1.39 moveto
+-1.12 1.49 lineto stroke
+0.68 0.68 moveto
+0.58 0.67 lineto stroke
+1.68 0.78 moveto
+1.58 0.77 lineto stroke
+-0.32 0.58 moveto
+-0.42 0.57 lineto stroke
+1.58 -0.22 moveto
+1.48 -0.23 lineto stroke
+0.67 0.58 moveto
+0.68 0.68 lineto stroke
+1.67 0.68 moveto
+1.68 0.78 lineto stroke
+-0.23 1.48 moveto
+-0.22 1.58 lineto stroke
+-0.33 0.48 moveto
+-0.32 0.58 lineto stroke
+1.57 -0.32 moveto
+1.58 -0.22 lineto stroke
+0.58 0.67 moveto
+0.48 0.66 lineto stroke
+1.58 0.77 moveto
+1.48 0.76 lineto stroke
+-0.42 0.57 moveto
+-0.52 0.56 lineto stroke
+1.48 -0.23 moveto
+1.38 -0.24 lineto stroke
+0.57 0.57 moveto
+0.58 0.67 lineto stroke
+1.57 0.67 moveto
+1.58 0.77 lineto stroke
+-0.33 1.47 moveto
+-0.32 1.57 lineto stroke
+-0.43 0.47 moveto
+-0.42 0.57 lineto stroke
+1.47 -0.33 moveto
+1.48 -0.23 lineto stroke
+0.48 0.66 moveto
+0.38 0.65 lineto stroke
+1.48 0.76 moveto
+1.38 0.75 lineto stroke
+-0.52 0.56 moveto
+-0.62 0.55 lineto stroke
+1.38 -0.24 moveto
+1.28 -0.25 lineto stroke
+0.47 0.56 moveto
+0.48 0.66 lineto stroke
+1.47 0.66 moveto
+1.48 0.76 lineto stroke
+-0.43 1.46 moveto
+-0.42 1.56 lineto stroke
+-0.53 0.46 moveto
+-0.52 0.56 lineto stroke
+1.37 -0.34 moveto
+1.38 -0.24 lineto stroke
+0.38 0.65 moveto
+0.28 0.64 lineto stroke
+1.38 0.75 moveto
+1.28 0.74 lineto stroke
+-0.62 0.55 moveto
+-0.72 0.54 lineto stroke
+1.28 -0.25 moveto
+1.18 -0.26 lineto stroke
+0.37 0.55 moveto
+0.38 0.65 lineto stroke
+1.37 0.65 moveto
+1.38 0.75 lineto stroke
+-0.53 1.45 moveto
+-0.52 1.55 lineto stroke
+-0.63 0.45 moveto
+-0.62 0.55 lineto stroke
+1.27 -0.35 moveto
+1.28 -0.25 lineto stroke
+0.28 0.64 moveto
+0.18 0.63 lineto stroke
+1.28 0.74 moveto
+1.18 0.73 lineto stroke
+-0.72 0.54 moveto
+-0.82 0.53 lineto stroke
+1.18 -0.26 moveto
+1.08 -0.27 lineto stroke
+0.27 0.54 moveto
+0.28 0.64 lineto stroke
+1.27 0.64 moveto
+1.28 0.74 lineto stroke
+-0.63 1.44 moveto
+-0.62 1.54 lineto stroke
+-0.73 0.44 moveto
+-0.72 0.54 lineto stroke
+1.17 -0.36 moveto
+1.18 -0.26 lineto stroke
+0.07 0.52 moveto
+0.08 0.62 lineto stroke
+1.07 0.62 moveto
+1.08 0.72 lineto stroke
+-0.83 1.42 moveto
+-0.82 1.52 lineto stroke
+-0.93 0.42 moveto
+-0.92 0.52 lineto stroke
+0.97 -0.38 moveto
+0.98 -0.28 lineto stroke
+0.18 0.63 moveto
+0.08 0.62 lineto stroke
+1.18 0.73 moveto
+1.08 0.72 lineto stroke
+-0.82 0.53 moveto
+-0.92 0.52 lineto stroke
+1.08 -0.27 moveto
+0.98 -0.28 lineto stroke
+0.17 0.53 moveto
+0.18 0.63 lineto stroke
+1.17 0.63 moveto
+1.18 0.73 lineto stroke
+-0.73 1.43 moveto
+-0.72 1.53 lineto stroke
+-0.83 0.43 moveto
+-0.82 0.53 lineto stroke
+1.07 -0.37 moveto
+1.08 -0.27 lineto stroke
+0.07 0.52 moveto
+-0.03 0.51 lineto stroke
+1.07 0.62 moveto
+0.97 0.61 lineto stroke
+-0.83 1.42 moveto
+-0.93 1.41 lineto stroke
+-0.93 0.42 moveto
+-1.03 0.41 lineto stroke
+0.97 0.61 moveto
+0.87 0.6 lineto stroke
+0.07 1.51 moveto
+-0.03 1.5 lineto stroke
+-0.03 0.51 moveto
+-0.13 0.5 lineto stroke
+-0.93 1.41 moveto
+-1.03 1.4 lineto stroke
+-1.03 0.41 moveto
+-1.13 0.4 lineto stroke
+0.96 0.51 moveto
+0.97 0.61 lineto stroke
+0.06 1.41 moveto
+0.07 1.51 lineto stroke
+-0.04 0.41 moveto
+-0.03 0.51 lineto stroke
+-0.94 1.31 moveto
+-0.93 1.41 lineto stroke
+-1.04 0.31 moveto
+-1.03 0.41 lineto stroke
+0.87 0.6 moveto
+0.77 0.59 lineto stroke
+-0.03 1.5 moveto
+-0.13 1.49 lineto stroke
+-0.13 0.5 moveto
+-0.23 0.49 lineto stroke
+-1.03 1.4 moveto
+-1.13 1.39 lineto stroke
+-1.13 0.4 moveto
+-1.23 0.39 lineto stroke
+0.86 0.5 moveto
+0.87 0.6 lineto stroke
+0.96 1.5 moveto
+0.97 1.6 lineto stroke
+-0.04 1.4 moveto
+-0.03 1.5 lineto stroke
+-0.14 0.4 moveto
+-0.13 0.5 lineto stroke
+-1.04 1.3 moveto
+-1.03 1.4 lineto stroke
+-1.14 0.3 moveto
+-1.13 0.4 lineto stroke
+0.77 0.59 moveto
+0.67 0.58 lineto stroke
+1.77 0.69 moveto
+1.67 0.68 lineto stroke
+-0.13 1.49 moveto
+-0.23 1.48 lineto stroke
+-0.23 0.49 moveto
+-0.33 0.48 lineto stroke
+-1.13 1.39 moveto
+-1.23 1.38 lineto stroke
+0.76 0.49 moveto
+0.77 0.59 lineto stroke
+0.86 1.49 moveto
+0.87 1.59 lineto stroke
+-0.14 1.39 moveto
+-0.13 1.49 lineto stroke
+-0.24 0.39 moveto
+-0.23 0.49 lineto stroke
+-1.14 1.29 moveto
+-1.13 1.39 lineto stroke
+0.67 0.58 moveto
+0.57 0.57 lineto stroke
+1.67 0.68 moveto
+1.57 0.67 lineto stroke
+-0.23 1.48 moveto
+-0.33 1.47 lineto stroke
+-0.33 0.48 moveto
+-0.43 0.47 lineto stroke
+0.66 0.48 moveto
+0.67 0.58 lineto stroke
+1.66 0.58 moveto
+1.67 0.68 lineto stroke
+0.76 1.48 moveto
+0.77 1.58 lineto stroke
+-0.24 1.38 moveto
+-0.23 1.48 lineto stroke
+-0.34 0.38 moveto
+-0.33 0.48 lineto stroke
+0.57 0.57 moveto
+0.47 0.56 lineto stroke
+1.57 0.67 moveto
+1.47 0.66 lineto stroke
+-0.33 1.47 moveto
+-0.43 1.46 lineto stroke
+-0.43 0.47 moveto
+-0.53 0.46 lineto stroke
+0.56 0.47 moveto
+0.57 0.57 lineto stroke
+1.56 0.57 moveto
+1.57 0.67 lineto stroke
+0.66 1.47 moveto
+0.67 1.57 lineto stroke
+-0.34 1.37 moveto
+-0.33 1.47 lineto stroke
+-0.44 0.37 moveto
+-0.43 0.47 lineto stroke
+0.47 0.56 moveto
+0.37 0.55 lineto stroke
+1.47 0.66 moveto
+1.37 0.65 lineto stroke
+-0.43 1.46 moveto
+-0.53 1.45 lineto stroke
+-0.53 0.46 moveto
+-0.63 0.45 lineto stroke
+0.46 0.46 moveto
+0.47 0.56 lineto stroke
+1.46 0.56 moveto
+1.47 0.66 lineto stroke
+0.56 1.46 moveto
+0.57 1.56 lineto stroke
+-0.44 1.36 moveto
+-0.43 1.46 lineto stroke
+-0.54 0.36 moveto
+-0.53 0.46 lineto stroke
+0.37 0.55 moveto
+0.27 0.54 lineto stroke
+1.37 0.65 moveto
+1.27 0.64 lineto stroke
+-0.53 1.45 moveto
+-0.63 1.44 lineto stroke
+-0.63 0.45 moveto
+-0.73 0.44 lineto stroke
+0.36 0.45 moveto
+0.37 0.55 lineto stroke
+1.36 0.55 moveto
+1.37 0.65 lineto stroke
+0.46 1.45 moveto
+0.47 1.55 lineto stroke
+-0.54 1.35 moveto
+-0.53 1.45 lineto stroke
+-0.64 0.35 moveto
+-0.63 0.45 lineto stroke
+0.27 0.54 moveto
+0.17 0.53 lineto stroke
+1.27 0.64 moveto
+1.17 0.63 lineto stroke
+-0.63 1.44 moveto
+-0.73 1.43 lineto stroke
+-0.73 0.44 moveto
+-0.83 0.43 lineto stroke
+0.26 0.44 moveto
+0.27 0.54 lineto stroke
+1.26 0.54 moveto
+1.27 0.64 lineto stroke
+0.36 1.44 moveto
+0.37 1.54 lineto stroke
+-0.64 1.34 moveto
+-0.63 1.44 lineto stroke
+-0.74 0.34 moveto
+-0.73 0.44 lineto stroke
+0.06 0.42 moveto
+0.07 0.52 lineto stroke
+1.06 0.52 moveto
+1.07 0.62 lineto stroke
+0.16 1.42 moveto
+0.17 1.52 lineto stroke
+-0.84 1.32 moveto
+-0.83 1.42 lineto stroke
+-0.94 0.32 moveto
+-0.93 0.42 lineto stroke
+0.17 0.53 moveto
+0.07 0.52 lineto stroke
+1.17 0.63 moveto
+1.07 0.62 lineto stroke
+-0.73 1.43 moveto
+-0.83 1.42 lineto stroke
+-0.83 0.43 moveto
+-0.93 0.42 lineto stroke
+0.16 0.43 moveto
+0.17 0.53 lineto stroke
+1.16 0.53 moveto
+1.17 0.63 lineto stroke
+0.26 1.43 moveto
+0.27 1.53 lineto stroke
+-0.74 1.33 moveto
+-0.73 1.43 lineto stroke
+-0.84 0.33 moveto
+-0.83 0.43 lineto stroke
+0.06 0.42 moveto
+-0.04 0.41 lineto stroke
+1.06 0.52 moveto
+0.96 0.51 lineto stroke
+0.16 1.42 moveto
+0.06 1.41 lineto stroke
+-0.84 1.32 moveto
+-0.94 1.31 lineto stroke
+-0.94 0.32 moveto
+-1.04 0.31 lineto stroke
+0.96 0.51 moveto
+0.86 0.5 lineto stroke
+1.06 1.51 moveto
+0.96 1.5 lineto stroke
+0.06 1.41 moveto
+-0.04 1.4 lineto stroke
+-0.04 0.41 moveto
+-0.14 0.4 lineto stroke
+-0.94 1.31 moveto
+-1.04 1.3 lineto stroke
+-1.04 0.31 moveto
+-1.14 0.3 lineto stroke
+0.95 0.41 moveto
+0.96 0.51 lineto stroke
+1.05 1.41 moveto
+1.06 1.51 lineto stroke
+0.05 1.31 moveto
+0.06 1.41 lineto stroke
+-0.05 0.31 moveto
+-0.04 0.41 lineto stroke
+-0.95 1.21 moveto
+-0.94 1.31 lineto stroke
+-1.05 0.21 moveto
+-1.04 0.31 lineto stroke
+0.86 0.5 moveto
+0.76 0.49 lineto stroke
+0.96 1.5 moveto
+0.86 1.49 lineto stroke
+-0.04 1.4 moveto
+-0.14 1.39 lineto stroke
+-0.14 0.4 moveto
+-0.24 0.39 lineto stroke
+-1.04 1.3 moveto
+-1.14 1.29 lineto stroke
+-1.14 0.3 moveto
+-1.24 0.29 lineto stroke
+0.85 0.4 moveto
+0.86 0.5 lineto stroke
+0.95 1.4 moveto
+0.96 1.5 lineto stroke
+-0.05 1.3 moveto
+-0.04 1.4 lineto stroke
+-0.15 0.3 moveto
+-0.14 0.4 lineto stroke
+-1.05 1.2 moveto
+-1.04 1.3 lineto stroke
+-1.15 0.2 moveto
+-1.14 0.3 lineto stroke
+0.76 0.49 moveto
+0.66 0.48 lineto stroke
+1.76 0.59 moveto
+1.66 0.58 lineto stroke
+0.86 1.49 moveto
+0.76 1.48 lineto stroke
+-0.14 1.39 moveto
+-0.24 1.38 lineto stroke
+-0.24 0.39 moveto
+-0.34 0.38 lineto stroke
+-1.14 1.29 moveto
+-1.24 1.28 lineto stroke
+0.75 0.39 moveto
+0.76 0.49 lineto stroke
+0.85 1.39 moveto
+0.86 1.49 lineto stroke
+-0.15 1.29 moveto
+-0.14 1.39 lineto stroke
+-0.25 0.29 moveto
+-0.24 0.39 lineto stroke
+-1.15 1.19 moveto
+-1.14 1.29 lineto stroke
+0.66 0.48 moveto
+0.56 0.47 lineto stroke
+1.66 0.58 moveto
+1.56 0.57 lineto stroke
+0.76 1.48 moveto
+0.66 1.47 lineto stroke
+-0.24 1.38 moveto
+-0.34 1.37 lineto stroke
+-0.34 0.38 moveto
+-0.44 0.37 lineto stroke
+0.65 0.38 moveto
+0.66 0.48 lineto stroke
+1.65 0.48 moveto
+1.66 0.58 lineto stroke
+0.75 1.38 moveto
+0.76 1.48 lineto stroke
+-0.25 1.28 moveto
+-0.24 1.38 lineto stroke
+-0.35 0.28 moveto
+-0.34 0.38 lineto stroke
+0.56 0.47 moveto
+0.46 0.46 lineto stroke
+1.56 0.57 moveto
+1.46 0.56 lineto stroke
+0.66 1.47 moveto
+0.56 1.46 lineto stroke
+-0.34 1.37 moveto
+-0.44 1.36 lineto stroke
+-0.44 0.37 moveto
+-0.54 0.36 lineto stroke
+0.55 0.37 moveto
+0.56 0.47 lineto stroke
+1.55 0.47 moveto
+1.56 0.57 lineto stroke
+1.65 1.47 moveto
+1.66 1.57 lineto stroke
+0.65 1.37 moveto
+0.66 1.47 lineto stroke
+-0.35 1.27 moveto
+-0.34 1.37 lineto stroke
+-0.45 0.27 moveto
+-0.44 0.37 lineto stroke
+0.46 0.46 moveto
+0.36 0.45 lineto stroke
+1.46 0.56 moveto
+1.36 0.55 lineto stroke
+0.56 1.46 moveto
+0.46 1.45 lineto stroke
+-0.44 1.36 moveto
+-0.54 1.35 lineto stroke
+-0.54 0.36 moveto
+-0.64 0.35 lineto stroke
+0.45 0.36 moveto
+0.46 0.46 lineto stroke
+1.45 0.46 moveto
+1.46 0.56 lineto stroke
+1.55 1.46 moveto
+1.56 1.56 lineto stroke
+0.55 1.36 moveto
+0.56 1.46 lineto stroke
+-0.45 1.26 moveto
+-0.44 1.36 lineto stroke
+-0.55 0.26 moveto
+-0.54 0.36 lineto stroke
+0.36 0.45 moveto
+0.26 0.44 lineto stroke
+1.36 0.55 moveto
+1.26 0.54 lineto stroke
+0.46 1.45 moveto
+0.36 1.44 lineto stroke
+-0.54 1.35 moveto
+-0.64 1.34 lineto stroke
+-0.64 0.35 moveto
+-0.74 0.34 lineto stroke
+0.35 0.35 moveto
+0.36 0.45 lineto stroke
+1.35 0.45 moveto
+1.36 0.55 lineto stroke
+1.45 1.45 moveto
+1.46 1.55 lineto stroke
+0.45 1.35 moveto
+0.46 1.45 lineto stroke
+-0.55 1.25 moveto
+-0.54 1.35 lineto stroke
+-0.65 0.25 moveto
+-0.64 0.35 lineto stroke
+0.26 0.44 moveto
+0.16 0.43 lineto stroke
+1.26 0.54 moveto
+1.16 0.53 lineto stroke
+0.36 1.44 moveto
+0.26 1.43 lineto stroke
+-0.64 1.34 moveto
+-0.74 1.33 lineto stroke
+-0.74 0.34 moveto
+-0.84 0.33 lineto stroke
+0.25 0.34 moveto
+0.26 0.44 lineto stroke
+1.25 0.44 moveto
+1.26 0.54 lineto stroke
+1.35 1.44 moveto
+1.36 1.54 lineto stroke
+0.35 1.34 moveto
+0.36 1.44 lineto stroke
+-0.65 1.24 moveto
+-0.64 1.34 lineto stroke
+-0.75 0.24 moveto
+-0.74 0.34 lineto stroke
+0.05 0.32 moveto
+0.06 0.42 lineto stroke
+1.05 0.42 moveto
+1.06 0.52 lineto stroke
+1.15 1.42 moveto
+1.16 1.52 lineto stroke
+0.15 1.32 moveto
+0.16 1.42 lineto stroke
+-0.85 1.22 moveto
+-0.84 1.32 lineto stroke
+-0.95 0.22 moveto
+-0.94 0.32 lineto stroke
+0.16 0.43 moveto
+0.06 0.42 lineto stroke
+1.16 0.53 moveto
+1.06 0.52 lineto stroke
+0.26 1.43 moveto
+0.16 1.42 lineto stroke
+-0.74 1.33 moveto
+-0.84 1.32 lineto stroke
+-0.84 0.33 moveto
+-0.94 0.32 lineto stroke
+0.15 0.33 moveto
+0.16 0.43 lineto stroke
+1.15 0.43 moveto
+1.16 0.53 lineto stroke
+1.25 1.43 moveto
+1.26 1.53 lineto stroke
+0.25 1.33 moveto
+0.26 1.43 lineto stroke
+-0.75 1.23 moveto
+-0.74 1.33 lineto stroke
+-0.85 0.23 moveto
+-0.84 0.33 lineto stroke
+0.05 0.32 moveto
+-0.05 0.31 lineto stroke
+1.05 0.42 moveto
+0.95 0.41 lineto stroke
+1.15 1.42 moveto
+1.05 1.41 lineto stroke
+0.15 1.32 moveto
+0.05 1.31 lineto stroke
+-0.85 1.22 moveto
+-0.95 1.21 lineto stroke
+-0.95 0.22 moveto
+-1.05 0.21 lineto stroke
+0.95 0.41 moveto
+0.85 0.4 lineto stroke
+1.05 1.41 moveto
+0.95 1.4 lineto stroke
+0.05 1.31 moveto
+-0.05 1.3 lineto stroke
+-0.05 0.31 moveto
+-0.15 0.3 lineto stroke
+-0.95 1.21 moveto
+-1.05 1.2 lineto stroke
+-1.05 0.21 moveto
+-1.15 0.2 lineto stroke
+0.94 0.31 moveto
+0.95 0.41 lineto stroke
+1.04 1.31 moveto
+1.05 1.41 lineto stroke
+0.04 1.21 moveto
+0.05 1.31 lineto stroke
+-0.06 0.21 moveto
+-0.05 0.31 lineto stroke
+-0.96 1.11 moveto
+-0.95 1.21 lineto stroke
+-1.06 0.11 moveto
+-1.05 0.21 lineto stroke
+0.85 0.4 moveto
+0.75 0.39 lineto stroke
+0.95 1.4 moveto
+0.85 1.39 lineto stroke
+-0.05 1.3 moveto
+-0.15 1.29 lineto stroke
+-0.15 0.3 moveto
+-0.25 0.29 lineto stroke
+-1.05 1.2 moveto
+-1.15 1.19 lineto stroke
+-1.15 0.2 moveto
+-1.25 0.19 lineto stroke
+0.84 0.3 moveto
+0.85 0.4 lineto stroke
+0.94 1.3 moveto
+0.95 1.4 lineto stroke
+-0.06 1.2 moveto
+-0.05 1.3 lineto stroke
+-0.16 0.2 moveto
+-0.15 0.3 lineto stroke
+-1.06 1.1 moveto
+-1.05 1.2 lineto stroke
+-1.16 0.1 moveto
+-1.15 0.2 lineto stroke
+0.75 0.39 moveto
+0.65 0.38 lineto stroke
+1.75 0.49 moveto
+1.65 0.48 lineto stroke
+0.85 1.39 moveto
+0.75 1.38 lineto stroke
+-0.15 1.29 moveto
+-0.25 1.28 lineto stroke
+-0.25 0.29 moveto
+-0.35 0.28 lineto stroke
+-1.15 1.19 moveto
+-1.25 1.18 lineto stroke
+0.74 0.29 moveto
+0.75 0.39 lineto stroke
+0.84 1.29 moveto
+0.85 1.39 lineto stroke
+-0.16 1.19 moveto
+-0.15 1.29 lineto stroke
+-0.26 0.19 moveto
+-0.25 0.29 lineto stroke
+-1.16 1.09 moveto
+-1.15 1.19 lineto stroke
+0.65 0.38 moveto
+0.55 0.37 lineto stroke
+1.65 0.48 moveto
+1.55 0.47 lineto stroke
+1.75 1.48 moveto
+1.65 1.47 lineto stroke
+0.75 1.38 moveto
+0.65 1.37 lineto stroke
+-0.25 1.28 moveto
+-0.35 1.27 lineto stroke
+-0.35 0.28 moveto
+-0.45 0.27 lineto stroke
+0.64 0.28 moveto
+0.65 0.38 lineto stroke
+1.64 0.38 moveto
+1.65 0.48 lineto stroke
+0.74 1.28 moveto
+0.75 1.38 lineto stroke
+-0.26 1.18 moveto
+-0.25 1.28 lineto stroke
+-0.36 0.18 moveto
+-0.35 0.28 lineto stroke
+0.55 0.37 moveto
+0.45 0.36 lineto stroke
+1.55 0.47 moveto
+1.45 0.46 lineto stroke
+1.65 1.47 moveto
+1.55 1.46 lineto stroke
+0.65 1.37 moveto
+0.55 1.36 lineto stroke
+-0.35 1.27 moveto
+-0.45 1.26 lineto stroke
+-0.45 0.27 moveto
+-0.55 0.26 lineto stroke
+0.54 0.27 moveto
+0.55 0.37 lineto stroke
+1.54 0.37 moveto
+1.55 0.47 lineto stroke
+1.64 1.37 moveto
+1.65 1.47 lineto stroke
+0.64 1.27 moveto
+0.65 1.37 lineto stroke
+-0.36 1.17 moveto
+-0.35 1.27 lineto stroke
+-0.46 0.17 moveto
+-0.45 0.27 lineto stroke
+0.45 0.36 moveto
+0.35 0.35 lineto stroke
+1.45 0.46 moveto
+1.35 0.45 lineto stroke
+1.55 1.46 moveto
+1.45 1.45 lineto stroke
+0.55 1.36 moveto
+0.45 1.35 lineto stroke
+-0.45 1.26 moveto
+-0.55 1.25 lineto stroke
+-0.55 0.26 moveto
+-0.65 0.25 lineto stroke
+0.44 0.26 moveto
+0.45 0.36 lineto stroke
+1.44 0.36 moveto
+1.45 0.46 lineto stroke
+1.54 1.36 moveto
+1.55 1.46 lineto stroke
+0.54 1.26 moveto
+0.55 1.36 lineto stroke
+-0.46 1.16 moveto
+-0.45 1.26 lineto stroke
+-0.56 0.16 moveto
+-0.55 0.26 lineto stroke
+0.35 0.35 moveto
+0.25 0.34 lineto stroke
+1.35 0.45 moveto
+1.25 0.44 lineto stroke
+1.45 1.45 moveto
+1.35 1.44 lineto stroke
+0.45 1.35 moveto
+0.35 1.34 lineto stroke
+-0.55 1.25 moveto
+-0.65 1.24 lineto stroke
+-0.65 0.25 moveto
+-0.75 0.24 lineto stroke
+0.34 0.25 moveto
+0.35 0.35 lineto stroke
+1.34 0.35 moveto
+1.35 0.45 lineto stroke
+1.44 1.35 moveto
+1.45 1.45 lineto stroke
+0.44 1.25 moveto
+0.45 1.35 lineto stroke
+-0.56 1.15 moveto
+-0.55 1.25 lineto stroke
+-0.66 0.15 moveto
+-0.65 0.25 lineto stroke
+0.25 0.34 moveto
+0.15 0.33 lineto stroke
+1.25 0.44 moveto
+1.15 0.43 lineto stroke
+1.35 1.44 moveto
+1.25 1.43 lineto stroke
+0.35 1.34 moveto
+0.25 1.33 lineto stroke
+-0.65 1.24 moveto
+-0.75 1.23 lineto stroke
+-0.75 0.24 moveto
+-0.85 0.23 lineto stroke
+0.24 0.24 moveto
+0.25 0.34 lineto stroke
+1.24 0.34 moveto
+1.25 0.44 lineto stroke
+1.34 1.34 moveto
+1.35 1.44 lineto stroke
+0.34 1.24 moveto
+0.35 1.34 lineto stroke
+-0.66 1.14 moveto
+-0.65 1.24 lineto stroke
+-0.76 0.14 moveto
+-0.75 0.24 lineto stroke
+0.04 0.22 moveto
+0.05 0.32 lineto stroke
+1.04 0.32 moveto
+1.05 0.42 lineto stroke
+1.14 1.32 moveto
+1.15 1.42 lineto stroke
+0.14 1.22 moveto
+0.15 1.32 lineto stroke
+-0.86 1.12 moveto
+-0.85 1.22 lineto stroke
+-0.96 0.12 moveto
+-0.95 0.22 lineto stroke
+0.15 0.33 moveto
+0.05 0.32 lineto stroke
+1.15 0.43 moveto
+1.05 0.42 lineto stroke
+1.25 1.43 moveto
+1.15 1.42 lineto stroke
+0.25 1.33 moveto
+0.15 1.32 lineto stroke
+-0.75 1.23 moveto
+-0.85 1.22 lineto stroke
+-0.85 0.23 moveto
+-0.95 0.22 lineto stroke
+0.14 0.23 moveto
+0.15 0.33 lineto stroke
+1.14 0.33 moveto
+1.15 0.43 lineto stroke
+1.24 1.33 moveto
+1.25 1.43 lineto stroke
+0.24 1.23 moveto
+0.25 1.33 lineto stroke
+-0.76 1.13 moveto
+-0.75 1.23 lineto stroke
+-0.86 0.13 moveto
+-0.85 0.23 lineto stroke
+0.04 0.22 moveto
+-0.06 0.21 lineto stroke
+1.04 0.32 moveto
+0.94 0.31 lineto stroke
+1.14 1.32 moveto
+1.04 1.31 lineto stroke
+0.14 1.22 moveto
+0.04 1.21 lineto stroke
+-0.86 1.12 moveto
+-0.96 1.11 lineto stroke
+-0.96 0.12 moveto
+-1.06 0.11 lineto stroke
+0.94 0.31 moveto
+0.84 0.3 lineto stroke
+1.04 1.31 moveto
+0.94 1.3 lineto stroke
+0.04 1.21 moveto
+-0.06 1.2 lineto stroke
+-0.06 0.21 moveto
+-0.16 0.2 lineto stroke
+-0.96 1.11 moveto
+-1.06 1.1 lineto stroke
+-1.06 0.11 moveto
+-1.16 0.1 lineto stroke
+0.93 0.21 moveto
+0.94 0.31 lineto stroke
+1.03 1.21 moveto
+1.04 1.31 lineto stroke
+0.03 1.11 moveto
+0.04 1.21 lineto stroke
+-0.07 0.11 moveto
+-0.06 0.21 lineto stroke
+-0.97 1.01 moveto
+-0.96 1.11 lineto stroke
+-1.07 0.01 moveto
+-1.06 0.11 lineto stroke
+0.84 0.3 moveto
+0.74 0.29 lineto stroke
+0.94 1.3 moveto
+0.84 1.29 lineto stroke
+-0.06 1.2 moveto
+-0.16 1.19 lineto stroke
+-0.16 0.2 moveto
+-0.26 0.19 lineto stroke
+-1.06 1.1 moveto
+-1.16 1.09 lineto stroke
+-1.16 0.1 moveto
+-1.26 0.09 lineto stroke
+0.83 0.2 moveto
+0.84 0.3 lineto stroke
+0.93 1.2 moveto
+0.94 1.3 lineto stroke
+-0.07 1.1 moveto
+-0.06 1.2 lineto stroke
+-0.17 0.1 moveto
+-0.16 0.2 lineto stroke
+-1.07 1 moveto
+-1.06 1.1 lineto stroke
+-1.17 0 moveto
+-1.16 0.1 lineto stroke
+0.74 0.29 moveto
+0.64 0.28 lineto stroke
+1.74 0.39 moveto
+1.64 0.38 lineto stroke
+0.84 1.29 moveto
+0.74 1.28 lineto stroke
+-0.16 1.19 moveto
+-0.26 1.18 lineto stroke
+-0.26 0.19 moveto
+-0.36 0.18 lineto stroke
+-1.16 1.09 moveto
+-1.26 1.08 lineto stroke
+0.73 0.19 moveto
+0.74 0.29 lineto stroke
+0.83 1.19 moveto
+0.84 1.29 lineto stroke
+-0.17 1.09 moveto
+-0.16 1.19 lineto stroke
+-0.27 0.09 moveto
+-0.26 0.19 lineto stroke
+-1.17 0.99 moveto
+-1.16 1.09 lineto stroke
+0.64 0.28 moveto
+0.54 0.27 lineto stroke
+1.64 0.38 moveto
+1.54 0.37 lineto stroke
+1.74 1.38 moveto
+1.64 1.37 lineto stroke
+0.74 1.28 moveto
+0.64 1.27 lineto stroke
+-0.26 1.18 moveto
+-0.36 1.17 lineto stroke
+-0.36 0.18 moveto
+-0.46 0.17 lineto stroke
+0.63 0.18 moveto
+0.64 0.28 lineto stroke
+1.63 0.28 moveto
+1.64 0.38 lineto stroke
+0.73 1.18 moveto
+0.74 1.28 lineto stroke
+-0.27 1.08 moveto
+-0.26 1.18 lineto stroke
+-0.37 0.08 moveto
+-0.36 0.18 lineto stroke
+0.54 0.27 moveto
+0.44 0.26 lineto stroke
+1.54 0.37 moveto
+1.44 0.36 lineto stroke
+1.64 1.37 moveto
+1.54 1.36 lineto stroke
+0.64 1.27 moveto
+0.54 1.26 lineto stroke
+-0.36 1.17 moveto
+-0.46 1.16 lineto stroke
+-0.46 0.17 moveto
+-0.56 0.16 lineto stroke
+0.53 0.17 moveto
+0.54 0.27 lineto stroke
+1.53 0.27 moveto
+1.54 0.37 lineto stroke
+1.63 1.27 moveto
+1.64 1.37 lineto stroke
+0.63 1.17 moveto
+0.64 1.27 lineto stroke
+-0.37 1.07 moveto
+-0.36 1.17 lineto stroke
+-0.47 0.07 moveto
+-0.46 0.17 lineto stroke
+0.44 0.26 moveto
+0.34 0.25 lineto stroke
+1.44 0.36 moveto
+1.34 0.35 lineto stroke
+1.54 1.36 moveto
+1.44 1.35 lineto stroke
+0.54 1.26 moveto
+0.44 1.25 lineto stroke
+-0.46 1.16 moveto
+-0.56 1.15 lineto stroke
+-0.56 0.16 moveto
+-0.66 0.15 lineto stroke
+0.43 0.16 moveto
+0.44 0.26 lineto stroke
+1.43 0.26 moveto
+1.44 0.36 lineto stroke
+1.53 1.26 moveto
+1.54 1.36 lineto stroke
+0.53 1.16 moveto
+0.54 1.26 lineto stroke
+-0.47 1.06 moveto
+-0.46 1.16 lineto stroke
+-0.57 0.06 moveto
+-0.56 0.16 lineto stroke
+0.34 0.25 moveto
+0.24 0.24 lineto stroke
+1.34 0.35 moveto
+1.24 0.34 lineto stroke
+1.44 1.35 moveto
+1.34 1.34 lineto stroke
+0.44 1.25 moveto
+0.34 1.24 lineto stroke
+-0.56 1.15 moveto
+-0.66 1.14 lineto stroke
+-0.66 0.15 moveto
+-0.76 0.14 lineto stroke
+0.33 0.15 moveto
+0.34 0.25 lineto stroke
+1.33 0.25 moveto
+1.34 0.35 lineto stroke
+1.43 1.25 moveto
+1.44 1.35 lineto stroke
+0.43 1.15 moveto
+0.44 1.25 lineto stroke
+-0.57 1.05 moveto
+-0.56 1.15 lineto stroke
+-0.67 0.05 moveto
+-0.66 0.15 lineto stroke
+0.24 0.24 moveto
+0.14 0.23 lineto stroke
+1.24 0.34 moveto
+1.14 0.33 lineto stroke
+1.34 1.34 moveto
+1.24 1.33 lineto stroke
+0.34 1.24 moveto
+0.24 1.23 lineto stroke
+-0.66 1.14 moveto
+-0.76 1.13 lineto stroke
+-0.76 0.14 moveto
+-0.86 0.13 lineto stroke
+0.23 0.14 moveto
+0.24 0.24 lineto stroke
+1.23 0.24 moveto
+1.24 0.34 lineto stroke
+1.33 1.24 moveto
+1.34 1.34 lineto stroke
+0.33 1.14 moveto
+0.34 1.24 lineto stroke
+-0.67 1.04 moveto
+-0.66 1.14 lineto stroke
+-0.77 0.04 moveto
+-0.76 0.14 lineto stroke
+0.03 0.12 moveto
+0.04 0.22 lineto stroke
+1.03 0.22 moveto
+1.04 0.32 lineto stroke
+1.13 1.22 moveto
+1.14 1.32 lineto stroke
+0.13 1.12 moveto
+0.14 1.22 lineto stroke
+-0.87 1.02 moveto
+-0.86 1.12 lineto stroke
+-0.97 0.02 moveto
+-0.96 0.12 lineto stroke
+0.14 0.23 moveto
+0.04 0.22 lineto stroke
+1.14 0.33 moveto
+1.04 0.32 lineto stroke
+1.24 1.33 moveto
+1.14 1.32 lineto stroke
+0.24 1.23 moveto
+0.14 1.22 lineto stroke
+-0.76 1.13 moveto
+-0.86 1.12 lineto stroke
+-0.86 0.13 moveto
+-0.96 0.12 lineto stroke
+0.13 0.13 moveto
+0.14 0.23 lineto stroke
+1.13 0.23 moveto
+1.14 0.33 lineto stroke
+1.23 1.23 moveto
+1.24 1.33 lineto stroke
+0.23 1.13 moveto
+0.24 1.23 lineto stroke
+-0.77 1.03 moveto
+-0.76 1.13 lineto stroke
+-0.87 0.03 moveto
+-0.86 0.13 lineto stroke
+0.03 0.12 moveto
+-0.07 0.11 lineto stroke
+1.03 0.22 moveto
+0.93 0.21 lineto stroke
+1.13 1.22 moveto
+1.03 1.21 lineto stroke
+0.13 1.12 moveto
+0.03 1.11 lineto stroke
+-0.87 1.02 moveto
+-0.97 1.01 lineto stroke
+-0.97 0.02 moveto
+-1.07 0.01 lineto stroke
+0.93 0.21 moveto
+0.83 0.2 lineto stroke
+1.03 1.21 moveto
+0.93 1.2 lineto stroke
+0.03 1.11 moveto
+-0.07 1.1 lineto stroke
+-0.07 0.11 moveto
+-0.17 0.1 lineto stroke
+-0.97 1.01 moveto
+-1.07 1 lineto stroke
+-1.07 0.01 moveto
+-1.17 0 lineto stroke
+0.92 0.11 moveto
+0.93 0.21 lineto stroke
+1.02 1.11 moveto
+1.03 1.21 lineto stroke
+0.02 1.01 moveto
+0.03 1.11 lineto stroke
+-0.08 0.01 moveto
+-0.07 0.11 lineto stroke
+-0.98 0.91 moveto
+-0.97 1.01 lineto stroke
+-1.08 -0.09 moveto
+-1.07 0.01 lineto stroke
+0.82 0.1 moveto
+0.92 0.11 lineto stroke
+0.92 1.1 moveto
+1.02 1.11 lineto stroke
+-0.08 1 moveto
+0.02 1.01 lineto stroke
+-0.18 1.38778e-17 moveto
+-0.08 0.01 lineto stroke
+-1.08 0.9 moveto
+-0.98 0.91 lineto stroke
+-1.18 -0.1 moveto
+-1.08 -0.09 lineto stroke
+0.83 0.2 moveto
+0.73 0.19 lineto stroke
+0.93 1.2 moveto
+0.83 1.19 lineto stroke
+-0.07 1.1 moveto
+-0.17 1.09 lineto stroke
+-0.17 0.1 moveto
+-0.27 0.09 lineto stroke
+-1.07 1 moveto
+-1.17 0.99 lineto stroke
+-1.17 0 moveto
+-1.27 -0.01 lineto stroke
+0.82 0.1 moveto
+0.83 0.2 lineto stroke
+0.92 1.1 moveto
+0.93 1.2 lineto stroke
+-0.08 1 moveto
+-0.07 1.1 lineto stroke
+-0.18 1.38778e-17 moveto
+-0.17 0.1 lineto stroke
+-1.08 0.9 moveto
+-1.07 1 lineto stroke
+-1.18 -0.1 moveto
+-1.17 0 lineto stroke
+0.72 0.09 moveto
+0.82 0.1 lineto stroke
+0.82 1.09 moveto
+0.92 1.1 lineto stroke
+-0.18 0.99 moveto
+-0.08 1 lineto stroke
+-0.28 -0.01 moveto
+-0.18 1.38778e-17 lineto stroke
+-1.18 0.89 moveto
+-1.08 0.9 lineto stroke
+-1.28 -0.11 moveto
+-1.18 -0.1 lineto stroke
+0.73 0.19 moveto
+0.63 0.18 lineto stroke
+1.73 0.29 moveto
+1.63 0.28 lineto stroke
+0.83 1.19 moveto
+0.73 1.18 lineto stroke
+-0.17 1.09 moveto
+-0.27 1.08 lineto stroke
+-0.27 0.09 moveto
+-0.37 0.08 lineto stroke
+-1.17 0.99 moveto
+-1.27 0.98 lineto stroke
+0.72 0.09 moveto
+0.73 0.19 lineto stroke
+0.82 1.09 moveto
+0.83 1.19 lineto stroke
+-0.18 0.99 moveto
+-0.17 1.09 lineto stroke
+-0.28 -0.01 moveto
+-0.27 0.09 lineto stroke
+-1.18 0.89 moveto
+-1.17 0.99 lineto stroke
+0.62 0.08 moveto
+0.72 0.09 lineto stroke
+1.62 0.18 moveto
+1.72 0.19 lineto stroke
+0.72 1.08 moveto
+0.82 1.09 lineto stroke
+-0.28 0.98 moveto
+-0.18 0.99 lineto stroke
+-0.38 -0.02 moveto
+-0.28 -0.01 lineto stroke
+-1.28 0.88 moveto
+-1.18 0.89 lineto stroke
+0.63 0.18 moveto
+0.53 0.17 lineto stroke
+1.63 0.28 moveto
+1.53 0.27 lineto stroke
+1.73 1.28 moveto
+1.63 1.27 lineto stroke
+0.73 1.18 moveto
+0.63 1.17 lineto stroke
+-0.27 1.08 moveto
+-0.37 1.07 lineto stroke
+-0.37 0.08 moveto
+-0.47 0.07 lineto stroke
+0.62 0.08 moveto
+0.63 0.18 lineto stroke
+1.62 0.18 moveto
+1.63 0.28 lineto stroke
+0.72 1.08 moveto
+0.73 1.18 lineto stroke
+-0.28 0.98 moveto
+-0.27 1.08 lineto stroke
+-0.38 -0.02 moveto
+-0.37 0.08 lineto stroke
+0.52 0.07 moveto
+0.62 0.08 lineto stroke
+1.52 0.17 moveto
+1.62 0.18 lineto stroke
+1.62 1.17 moveto
+1.72 1.18 lineto stroke
+0.62 1.07 moveto
+0.72 1.08 lineto stroke
+-0.38 0.97 moveto
+-0.28 0.98 lineto stroke
+-0.48 -0.03 moveto
+-0.38 -0.02 lineto stroke
+0.53 0.17 moveto
+0.43 0.16 lineto stroke
+1.53 0.27 moveto
+1.43 0.26 lineto stroke
+1.63 1.27 moveto
+1.53 1.26 lineto stroke
+0.63 1.17 moveto
+0.53 1.16 lineto stroke
+-0.37 1.07 moveto
+-0.47 1.06 lineto stroke
+-0.47 0.07 moveto
+-0.57 0.06 lineto stroke
+0.52 0.07 moveto
+0.53 0.17 lineto stroke
+1.52 0.17 moveto
+1.53 0.27 lineto stroke
+1.62 1.17 moveto
+1.63 1.27 lineto stroke
+0.62 1.07 moveto
+0.63 1.17 lineto stroke
+-0.38 0.97 moveto
+-0.37 1.07 lineto stroke
+-0.48 -0.03 moveto
+-0.47 0.07 lineto stroke
+0.42 0.06 moveto
+0.52 0.07 lineto stroke
+1.42 0.16 moveto
+1.52 0.17 lineto stroke
+1.52 1.16 moveto
+1.62 1.17 lineto stroke
+0.52 1.06 moveto
+0.62 1.07 lineto stroke
+-0.48 0.96 moveto
+-0.38 0.97 lineto stroke
+-0.58 -0.04 moveto
+-0.48 -0.03 lineto stroke
+0.43 0.16 moveto
+0.33 0.15 lineto stroke
+1.43 0.26 moveto
+1.33 0.25 lineto stroke
+1.53 1.26 moveto
+1.43 1.25 lineto stroke
+0.53 1.16 moveto
+0.43 1.15 lineto stroke
+-0.47 1.06 moveto
+-0.57 1.05 lineto stroke
+-0.57 0.06 moveto
+-0.67 0.05 lineto stroke
+0.42 0.06 moveto
+0.43 0.16 lineto stroke
+1.42 0.16 moveto
+1.43 0.26 lineto stroke
+1.52 1.16 moveto
+1.53 1.26 lineto stroke
+0.52 1.06 moveto
+0.53 1.16 lineto stroke
+-0.48 0.96 moveto
+-0.47 1.06 lineto stroke
+-0.58 -0.04 moveto
+-0.57 0.06 lineto stroke
+0.32 0.05 moveto
+0.42 0.06 lineto stroke
+1.32 0.15 moveto
+1.42 0.16 lineto stroke
+1.42 1.15 moveto
+1.52 1.16 lineto stroke
+0.42 1.05 moveto
+0.52 1.06 lineto stroke
+-0.58 0.95 moveto
+-0.48 0.96 lineto stroke
+-0.68 -0.05 moveto
+-0.58 -0.04 lineto stroke
+0.33 0.15 moveto
+0.23 0.14 lineto stroke
+1.33 0.25 moveto
+1.23 0.24 lineto stroke
+1.43 1.25 moveto
+1.33 1.24 lineto stroke
+0.43 1.15 moveto
+0.33 1.14 lineto stroke
+-0.57 1.05 moveto
+-0.67 1.04 lineto stroke
+-0.67 0.05 moveto
+-0.77 0.04 lineto stroke
+0.32 0.05 moveto
+0.33 0.15 lineto stroke
+1.32 0.15 moveto
+1.33 0.25 lineto stroke
+1.42 1.15 moveto
+1.43 1.25 lineto stroke
+0.42 1.05 moveto
+0.43 1.15 lineto stroke
+-0.58 0.95 moveto
+-0.57 1.05 lineto stroke
+-0.68 -0.05 moveto
+-0.67 0.05 lineto stroke
+0.22 0.04 moveto
+0.32 0.05 lineto stroke
+1.22 0.14 moveto
+1.32 0.15 lineto stroke
+1.32 1.14 moveto
+1.42 1.15 lineto stroke
+0.32 1.04 moveto
+0.42 1.05 lineto stroke
+-0.68 0.94 moveto
+-0.58 0.95 lineto stroke
+-0.78 -0.06 moveto
+-0.68 -0.05 lineto stroke
+0.23 0.14 moveto
+0.13 0.13 lineto stroke
+1.23 0.24 moveto
+1.13 0.23 lineto stroke
+1.33 1.24 moveto
+1.23 1.23 lineto stroke
+0.33 1.14 moveto
+0.23 1.13 lineto stroke
+-0.67 1.04 moveto
+-0.77 1.03 lineto stroke
+-0.77 0.04 moveto
+-0.87 0.03 lineto stroke
+0.22 0.04 moveto
+0.23 0.14 lineto stroke
+1.22 0.14 moveto
+1.23 0.24 lineto stroke
+1.32 1.14 moveto
+1.33 1.24 lineto stroke
+0.32 1.04 moveto
+0.33 1.14 lineto stroke
+-0.68 0.94 moveto
+-0.67 1.04 lineto stroke
+-0.78 -0.06 moveto
+-0.77 0.04 lineto stroke
+0.12 0.03 moveto
+0.22 0.04 lineto stroke
+1.12 0.13 moveto
+1.22 0.14 lineto stroke
+1.22 1.13 moveto
+1.32 1.14 lineto stroke
+0.22 1.03 moveto
+0.32 1.04 lineto stroke
+-0.78 0.93 moveto
+-0.68 0.94 lineto stroke
+-0.88 -0.07 moveto
+-0.78 -0.06 lineto stroke
+0.13 0.13 moveto
+0.03 0.12 lineto stroke
+1.13 0.23 moveto
+1.03 0.22 lineto stroke
+1.23 1.23 moveto
+1.13 1.22 lineto stroke
+0.23 1.13 moveto
+0.13 1.12 lineto stroke
+-0.77 1.03 moveto
+-0.87 1.02 lineto stroke
+-0.87 0.03 moveto
+-0.97 0.02 lineto stroke
+0.12 0.03 moveto
+0.13 0.13 lineto stroke
+1.12 0.13 moveto
+1.13 0.23 lineto stroke
+1.22 1.13 moveto
+1.23 1.23 lineto stroke
+0.22 1.03 moveto
+0.23 1.13 lineto stroke
+-0.78 0.93 moveto
+-0.77 1.03 lineto stroke
+-0.88 -0.07 moveto
+-0.87 0.03 lineto stroke
+
+0.5 setgray 0.03 setlinewidth
+newpath contour stroke
+
+grestore
+
+showpage
+%%Trailer
+%EOF
+

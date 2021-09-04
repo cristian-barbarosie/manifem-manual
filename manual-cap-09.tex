@@ -46,7 +46,7 @@ This is useful if we need to create many meshes in a loop, as shown in paragraph
 However, there are operations which do create a new cell or mesh.
 There are also operations which create a new cell or mesh only if necessary,
 otherwise they will return an existing cell or mesh.
-Paragraph \ref{\numb section 9.\numb parag 12} gives a complete list.
+Paragraph \ref{\numb section 9.\numb parag 10} gives a complete list.
 
 Recall that, in \maniFEM, cells and meshes are oriented.
 When a cell is declared, it is built as positive and has no reverse.
@@ -54,7 +54,7 @@ Its reverse is a negative cell and will be built only if necessary.
 Cells have a method {\small\tt reverse} which does the following.
 It checks if the reverse object has already been built; if yes, it returns that object;
 otherwise, it builds the reverse cell on-the-fly and returns it.
-Paragraph \ref{\numb section 9.\numb parag 7} gives a more detailed explanation about
+Paragraph \ref{\numb section 9.\numb parag 5} gives a more detailed explanation about
 orientation of cells and meshes.
 % See also paragraph \ref{\numb section 11.\numb parag 4}.
 
@@ -137,25 +137,16 @@ paragraph \ref{\numb section 11.\numb parag 4}.
 
 Note how we use a version of the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::join}
 taking as argument a list of {\small\tt \verm{Mesh}}es; we have already seen it in paragraphs
-\ref{\numb section 2.\numb parag 6} and \ref{\numb section 2.\numb parag 10}.
+\ref{\numb section 2.\numb parag 7} and \ref{\numb section 2.\numb parag 11}.
 
 We might have set curved boundaries by using a submanifold of $ \mathbb{R}^2 $, like in paragraph
-\ref{\numb section 2.\numb parag 8}.
+\ref{\numb section 2.\numb parag 9}.
 
 See also paragraph \ref{\numb section 11.\numb parag 9}.
 
 
           %--------------------%
-\section{~~\cinza{[empty]}}\label{\numb section 9.\numb parag 3}
-          %--------------------%
-
-          %--------------------%
-\section{~~\cinza{[empty]}}\label{\numb section 9.\numb parag 4}
-          %--------------------%
-
-
-          %--------------------%
-\section{~~Iterators over cells}\label{\numb section 9.\numb parag 5}
+\section{~~Iterators over cells}\label{\numb section 9.\numb parag 3}
           %--------------------%
 
 As explained in paragraph \ref{\numb section 1.\numb parag 2}, a {\small\tt \verm{Mesh}} is
@@ -218,8 +209,8 @@ We have also kept the notation {\small\tt *it} for dereferencing a
 this operation returns a {\small\tt \verm{Cell}} object (a wrapper).
 Of course, dereferencing a {\small\tt \verm{CellIterator}} does not produce a new cell,
 just provides access to a previously built cell
-(with the slight exception described in paragraph \ref{\numb section 9.\numb parag 10};
-see also paragraph \ref{\numb section 9.\numb parag 12}).
+(with the slight exception described in paragraph \ref{\numb section 9.\numb parag 8};
+see also paragraph \ref{\numb section 9.\numb parag 10}).
 
 Often, we {\small\tt reset} an iterator only once, use it in a loop and then discard it.
 For this situation, a handy shortcut is to add the {\small\tt\verm{tag}::reset}
@@ -256,7 +247,7 @@ If we want to iterate over all segments of the mesh, we can use
 
 Note that an iterator running through cells of maximum dimension, that is, of dimension equal
 to the dimension of the mesh, may produce negative cells if the mesh contains them.
-Paragraph \ref{\numb section 9.\numb parag 7} discusses this possibility.
+Paragraph \ref{\numb section 9.\numb parag 5} discusses this possibility.
 Iterators over cells of lower dimension produce always positive cells.
 
 We can force an iterator over cells of maximum dimension to produce only positive cells
@@ -288,12 +279,12 @@ while {\small\tt msh.number\_\,of}\hskip2pt{\small\tt
 (}\hskip2pt{\small\tt \verm{tag}::segments}\hskip2pt{\small\tt )} is equivalent to
 {\small\tt msh.number\_\,of}\hskip2pt{\small\tt (}\hskip2pt{\small\tt \verm{tag}::cells\_\,of\_\,dim,}\hskip2pt{\small\tt 1}\hskip2pt{\small\tt )}.
 
-Paragraph \ref{\numb section 9.\numb parag 6} describes iterators specific to one-dimensional
+Paragraph \ref{\numb section 9.\numb parag 4} describes iterators specific to one-dimensional
 meshes.
 
 
           %---------------------------------%
-\section{~~Iterators over chains of segments}\label{\numb section 9.\numb parag 6}
+\section{~~Iterators over chains of segments}\label{\numb section 9.\numb parag 4}
           %---------------------------------%
 
 One-dimensional meshes are peculiar, especially if they are connected.
@@ -308,7 +299,7 @@ One of these flavors, called {\small\tt \verm{Mesh}::Connected::OneDim}, provide
 over vertices and segments which obey to the natural order of the chain of segments and,
 for an open chain, begin at the natural starting point.
 
-The syntax is the same as the one described in pragraph \ref{\numb section 9.\numb parag 5}.
+The syntax is the same as the one described in pragraph \ref{\numb section 9.\numb parag 3}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
@@ -341,7 +332,7 @@ argument will not show up in the iteration process.
 Note that {\small\tt it0} produces positive points, while {\small\tt  it1} produces
 oriented segments (positive or negative).
 We may enforce that we only want positive segments by adding the
-{\small\tt \verm{tag}::force\_\,positive}, as shown in paragraph \ref{\numb section 9.\numb parag 7}.
+{\small\tt \verm{tag}::force\_\,positive}, as shown in paragraph \ref{\numb section 9.\numb parag 5}.
 
 There are also reversed versions of these iterators (they go backwards), obtained by adding
 the {\small\tt \verm{tag}::backwards} :
@@ -361,7 +352,7 @@ Note that {\small\tt \verm{Mesh}::first\_\,vertex} returns a negative vertex whi
 {\small\tt \verm{Cell}::base} and {\small\tt \verm{Cell}::tip} methods (described in paragraph
 \ref{\numb section 1.\numb parag 2}).
 
-As explained in paragraph \ref{\numb section 9.\numb parag 12},
+As explained in paragraph \ref{\numb section 9.\numb parag 10},
 de-referencing a {\small\tt \verm{CellIterator}} does not produce a new cell,
 just provides access to a previously built cell.
 
@@ -388,7 +379,7 @@ Specifying {\small\tt\verm{tag}::backwards} also informs {\maniFEM} that you nee
 linear ordering of cells, so you don't have to provide both tags.
 
           %----------------------------------%
-\section{~~Orientation of cells within a mesh}\label{\numb section 9.\numb parag 7}
+\section{~~Orientation of cells within a mesh}\label{\numb section 9.\numb parag 5}
           %----------------------------------%
 
 In \maniFEM, all cells and meshes are oriented.
@@ -431,7 +422,7 @@ For points (vertices), the situation is even more complex.
 Segment {\small\tt AB} sees {\small\tt A} as negative because {\small\tt A} is its base,
 but other segments like {\small\tt CA} see {\small\tt A} as positive.
 
-Let's look again at iterators described in paragraph \ref{\numb section 9.\numb parag 5}.
+Let's look again at iterators described in paragraph \ref{\numb section 9.\numb parag 3}.
 We now understand that there is no point to have an iterator over oriented
 segments, or over oriented vertices, of {\small\tt tri\_\,mesh}.
 That's why iterators over cells of lower dimension always produce positive cells.
@@ -456,7 +447,7 @@ If you are aware that your mesh may contain negative cells but
 you want to iterate over their positive counterparts, use the {\small\tt \verm{tag}::force\_\,positive}.
 
 We now turn to iterators over one-dimensional meshes, described in paragraph
-\ref{\numb section 9.\numb parag 6}.
+\ref{\numb section 9.\numb parag 4}.
 The two iterators below will probably have different behaviours,
 depending on which segments happen to be positive :
 
@@ -496,7 +487,7 @@ as soon as you use the reverse mesh {\small\tt ABC.boundary().reverse()} in the 
 
 
           %------------------------%
-\section{~~Navigating inside a mesh}\label{\numb section 9.\numb parag 8}
+\section{~~Navigating inside a mesh}\label{\numb section 9.\numb parag 6}
           %------------------------%
 
 Objects in class {\small\tt \verm{Mesh}} have two methods, {\small\tt cell\_\,behind} and
@@ -562,7 +553,7 @@ following it$\;$:
 \end{Verbatim}
 
 \noindent an so forth (this is how iterators over vertices and segments of connected
-one-dimensional meshes, described in paragraph \ref{\numb section 9.\numb parag 6},
+one-dimensional meshes, described in paragraph \ref{\numb section 9.\numb parag 4},
 are implemented internally).
 
 Within the mesh {\small\tt hex\_\,msh}, we can navigate towards a neighbour hexagon :
@@ -579,7 +570,7 @@ Figure \ref{\numb section 9.\numb fig 3}.
 That is, {\small\tt CD} may be on the boundary of {\small\tt hex\_\,msh};
 there may be no neighbour hexagon {\small\tt hex\_\,2}.
 If that is the case, the code above will produce an execution error.
-See paragraph \ref{\numb section 9.\numb parag 9} for a way to check whether there is actually
+See paragraph \ref{\numb section 9.\numb parag 7} for a way to check whether there is actually
 a neighbour cell and thus avoid errors at execution time.
 
 Note that faces point outwards.
@@ -598,10 +589,10 @@ which is which is not very important for the user.
 
 
           %------------------------------------%
-\section{~~Navigating at the boundary of a mesh}\label{\numb section 9.\numb parag 9}
+\section{~~Navigating at the boundary of a mesh}\label{\numb section 9.\numb parag 7}
           %------------------------------------%
 
-Consider the example in paragraph \ref{\numb section 9.\numb parag 8}.
+Consider the example in paragraph \ref{\numb section 9.\numb parag 6}.
 Suppose you try to get a neighbour hexagon which does not exist :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
@@ -626,12 +617,12 @@ You may check the existence of the neighbour cell by using a
 
 \noindent thus avoiding errors at execution time.
 
-Paragraph \ref{\numb section 9.\numb parag 12} gives a complete list of operations which return
+Paragraph \ref{\numb section 9.\numb parag 10} gives a complete list of operations which return
 an existing cell or build a new one.
 
 
           %-----------------------%
-\section{~~Iterators around a cell}\label{\numb section 9.\numb parag 10}
+\section{~~Iterators around a cell}\label{\numb section 9.\numb parag 8}
           %-----------------------%
 
 Suppose we are looking at a vertex within a mesh and we want to do something to all segments
@@ -646,15 +637,15 @@ Another similar situation is when we are looking at a segment in a three-dimensi
 and we want to
 run over all squares having that segment as edge, or to all cubes having that edge.
 These situations require an iterator quite different from the ones described in paragraphs
-\ref{\numb section 9.\numb parag 5} and \ref{\numb section 9.\numb parag 6}.
+\ref{\numb section 9.\numb parag 3} and \ref{\numb section 9.\numb parag 4}.
 We need an iterator which goes ``around'' a certain cell.
 
 Note that we do not need an iterator to find, in a two-dimensional mesh, the two squares
 neighbour to a given segment, or, in a three-dimensional mesh, the two cubes neighbour to
 a given square.
 We do this by using methods {\small\tt cell\_\,in\_\,front\_\,of} and {\small\tt cell\_\,behind},
-as explained in paragraphs \ref{\numb section 9.\numb parag 8} and
-\ref{\numb section 9.\numb parag 9}.
+as explained in paragraphs \ref{\numb section 9.\numb parag 6} and
+\ref{\numb section 9.\numb parag 7}.
 Thus, we shall not consider the case when the central cell has co-dimension one, that is,
 has dimension equal to the dimension of the mesh minus one.
 
@@ -743,7 +734,7 @@ Hence, the constructor of an iterator centered at a cell of co-dimension two acc
 tags like {\small\tt\verm{tag}::backwards} or {\small\tt\verm{tag}::require\_\,order}.
 Also, the {\small\tt reset} method accepts the {\small\tt\verm{tag}::start\_\,at} followed
 by an argument of type {\small\tt\verm{Cell}}.
-Thus, many of the considerations in paragraph \ref{\numb section 9.\numb parag 6}
+Thus, many of the considerations in paragraph \ref{\numb section 9.\numb parag 4}
 apply to this type of iterators.
 
 For example, if {\small\tt msh} is a two-dimensional mesh, code below will produce
@@ -778,7 +769,7 @@ supplementary arguments to the {\small\tt reset} method :
    \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );   \}
 \end{Verbatim}
 
-Just like in paragraph \ref{\numb section 9.\numb parag 6}, beware : if {\small\tt P}
+Just like in paragraph \ref{\numb section 9.\numb parag 4}, beware : if {\small\tt P}
 is at the boundary of {\small\tt msh}, cells previous to {\small\tt sq} will not
 show up.
 
@@ -826,12 +817,12 @@ to the constructor, as in
 
 
           %--------------------%
-\section{~~\cinza{[empty]}}\label{\numb section 9.\numb parag 11}
+\section{~~\cinza{[empty]}}\label{\numb section 9.\numb parag 9}
           %--------------------%
 
 
           %--------------------------%
-\section{~~Declaring cells and meshes}\label{\numb section 9.\numb parag 12}
+\section{~~Declaring cells and meshes}\label{\numb section 9.\numb parag 10}
           %--------------------------%
 
 As explained in paragraph \ref{\numb section 11.\numb parag 4}, the {\small\tt \verm{Cell}} class
@@ -888,7 +879,7 @@ If the respective cell exists, (a new wrapper for) it is returned.
 Otherwise, a non-existent cell is returned
 (an empty wrapper); the user has the possibility of inquiring the existence
 of the returned cell using its method {\small\tt exists}, as illustrated in paragraph
-\ref{\numb section 9.\numb parag 9}.
+\ref{\numb section 9.\numb parag 7}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
@@ -920,7 +911,7 @@ If that object does not exist, it is built on-the-fly.
 \end{Verbatim}
 
 De-referencing a {\small\tt\verm{CellIterator}} returns (a new wrapper for) an existing cell;
-a slight exception to this rule is described in paragraph \ref{\numb section 9.\numb parag 10}.
+a slight exception to this rule is described in paragraph \ref{\numb section 9.\numb parag 8}.
 
 Statements below return a wrapper for a brand new cell or mesh :
 

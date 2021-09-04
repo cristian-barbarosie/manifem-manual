@@ -4,8 +4,8 @@
 \usepackage{typearea}
 \areaset[1cm]{158mm}{234mm}
 
-\def\manifemrelease{21.**}
-\def\manualversion{21.**}
+\def\manifemrelease{21.09}
+\def\manualversion{21.09}
 \let\production 0
 \includeonly{manual-cap-07}
 % \usepackage{showkeys}
@@ -97,11 +97,12 @@ The user should have some understanding of programming and of {\tt C++}.
 However, {\maniFEM} can be used at a basic level by people with no deep knowledge of
 {\tt C++}.
 
-In its current version, release \manifemrelease, {\maniFEM} works quite well for mesh generation.
+In its current version, release \manifemrelease, {\maniFEM} works quite well for mesh generation,
+including some meshes on quotient manifolds.
 Anisotropic meshing (paragraph \ref{\numb section 3.\numb parag 24}) and
 variational formulations (section \ref{\numb section 5}) are not yet implemented.
-Quotient manifolds (section \ref{\numb section 7}) are still incipient
 Finite elements (section \ref{\numb section 6}) work in a rather rudimentary manner for now.
+A changelog is included at the end of this manual, before the index.
 To check which version of {\maniFEM} is installed in your computer,
 see at the beginning of the file {\small\tt maniFEM.h}.
 
@@ -112,10 +113,10 @@ See paragraph \ref{\numb section 12.\numb parag 10}.
 {\ManiFEM} is being developed by Cristian Barbarosie,%
 \footnote {\small\tt cristian.barbarosie@gmail.com}
 S\'ergio Lopes and Anca-Maria Toader.
-Their work is supported by National Funding from FCT -- Funda\c c\~ao para a Ci\^encia e a
-Tecnologia (Portugal), through Faculdade de Ci\^encias da Universidade de Lisboa and
-Centro de Matem\'atica, Aplica\c c\~oes Fundamentais e Investiga\c c\~ao Operacional.%
-\footnote{project UID/MAT/04561/2020}
+% Their work is supported by National Funding from FCT -- Funda\c c\~ao para a Ci\^encia e a
+% Tecnologia (Portugal), through Faculdade de Ci\^encias da Universidade de Lisboa and
+% Centro de Matem\'atica, Aplica\c c\~oes Fundamentais e Investiga\c c\~ao Operacional.%
+% \footnote{project UID/MAT/04561/2020}
 
 {\ManiFEM} is free software; it is copyrighted by Cristian Barbarosie
 under the GNU Lesser General Public Licence.
@@ -130,8 +131,8 @@ Latest code may be unstable, releases are stable.
 You can then run the examples in this manual :
 just {\small\tt make run-\ref{\numb section 1.\numb parag 1}}
 for the example in paragraph \ref{\numb section 1.\numb parag 1},
-{\small\tt make run-\ref{\numb section 2.\numb parag 5}}
-for the example in paragraph \ref{\numb section 2.\numb parag 5}, and so on.
+{\small\tt make run-\ref{\numb section 2.\numb parag 6}}
+for the example in paragraph \ref{\numb section 2.\numb parag 6}, and so on.
 You will need a recent {\tt C++} compiler (we use {\tt g++}) and the {\tt make} utility.
 Under linux it should be easy to install them.
 It is not that easy to install and use them under Windows, but it is certainly possible,
@@ -283,7 +284,7 @@ paragraph \ref{\numb section 11.\numb parag 6}.
 paragraph \ref{\numb section 11.\numb parag 5}.
 
 \noindent Introduce iterators around a cell,
-paragraph \ref{\numb section 9.\numb parag 10}.
+paragraph \ref{\numb section 9.\numb parag 8}.
 
 \noindent Some examples about remeshing, section \ref{\numb section 10}.
 
@@ -293,16 +294,16 @@ paragraph \ref{\numb section 9.\numb parag 10}.
 \noindent Minor improvements and bug fixes, particularly a bug in progressive mesh generation.
 
 
-\section*{21.??}
+\section*{21.09}
 
-\noindent Incipient examples of quotient manifolds.
+\noindent Some examples of quotient manifolds.
 
 
 \section*{To do}
 
 \noindent 3D meshing
 
-\noindent Quotient manifolds
+\noindent Progressive meshing on quotient manifolds
 
 \noindent High-dimensional connected meshes; the implementation of the iterators depends
 on STSI (self-touching or self-intersecting) meshes.
@@ -329,7 +330,7 @@ Suggestions are welcome.
 \addchap{Index}
 
 \noindent
-boundary of a cell : \ref{\numb section 1.\numb parag 2}, \ref{\numb section 9.\numb parag 3}
+boundary of a cell : \ref{\numb section 1.\numb parag 2}
 
 \noindent
 cell : \ref{\numb section 1.\numb parag 2}, \ref{\numb section 9.\numb parag 1}
@@ -367,12 +368,12 @@ garbage collector : \ref{\numb section 11.\numb parag 5}
 
 \noindent
 interpolation of coordinates :
-\ref{\numb section 2.\numb parag 3} -- \ref{\numb section 2.\numb parag 9},
+\ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb parag 10},
 \ref{\numb section 12.\numb parag 2} -- \ref{\numb section 12.\numb parag 4}
 
 \noindent
-iterators over cells : \ref{\numb section 9.\numb parag 5}, \ref{\numb section 9.\numb parag 7},
-\ref{\numb section 9.\numb parag 10}
+iterators over cells : \ref{\numb section 9.\numb parag 3}, \ref{\numb section 9.\numb parag 5},
+\ref{\numb section 9.\numb parag 8}
 
 \noindent
 {\small\tt init\_\,cell} : \ref{\numb section 11.\numb parag 10}
@@ -380,9 +381,9 @@ iterators over cells : \ref{\numb section 9.\numb parag 5}, \ref{\numb section 9
 \noindent
 {\small\tt join}ing meshes : \ref{\numb section 1.\numb parag 3},
 \ref{\numb section 1.\numb parag 4}, \ref{\numb section 1.\numb parag 5},
-\ref{\numb section 2.\numb parag 1}, \ref{\numb section 2.\numb parag 2},
-\ref{\numb section 2.\numb parag 4}, \ref{\numb section 2.\numb parag 5},
-\ref{\numb section 2.\numb parag 6}, \ref{\numb section 9.\numb parag 2}
+\ref{\numb section 2.\numb parag 1}, \ref{\numb section 2.\numb parag 3},
+\ref{\numb section 2.\numb parag 5}, \ref{\numb section 2.\numb parag 6},
+\ref{\numb section 2.\numb parag 7}, \ref{\numb section 9.\numb parag 2}
 
 \noindent
 level set : see manifold, defined by an implicit equation
@@ -396,12 +397,12 @@ manifold, Euclidian : all over the place\hfil\break
 
 \noindent
 manifold, defined by an implicit equation :
-\ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb parag 9},
+\ref{\numb section 2.\numb parag 5} -- \ref{\numb section 2.\numb parag 10},
 section \ref{\numb section 3}
 
 \noindent
-manifold, parametric : \ref{\numb section 2.\numb parag 13},
-\ref{\numb section 2.\numb parag 14}
+manifold, parametric : \ref{\numb section 2.\numb parag 14},
+\ref{\numb section 2.\numb parag 15}
 
 \noindent
 manifold, quotient : section \ref{\numb section 7}
@@ -412,8 +413,7 @@ memory management : \ref{\numb section 11.\numb parag 5}
 \noindent
 mesh : all over the place, esp.\ \ref{\numb section 1.\numb parag 2},
 \ref{\numb section 1.\numb parag 3}, \ref{\numb section 9.\numb parag 1},
-\ref{\numb section 9.\numb parag 3},
-\ref{\numb section 9.\numb parag 7} -- \ref{\numb section 9.\numb parag 12}
+\ref{\numb section 9.\numb parag 5} -- \ref{\numb section 9.\numb parag 10}
 
 \noindent
 {\small\tt \verm{MetricTree}} : \ref{\numb section 12.\numb parag 10},
@@ -437,7 +437,7 @@ oct-tree : \ref{\numb section 12.\numb parag 10}
 orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es :
 \ref{\numb section 1.\numb parag 2}, \ref{\numb section 1.\numb parag 3},
 \ref{\numb section 3.\numb parag 18}, \ref{\numb section 9.\numb parag 1},
-\ref{\numb section 9.\numb parag 7}, \ref{\numb section 11.\numb parag 8}
+\ref{\numb section 9.\numb parag 5}, \ref{\numb section 11.\numb parag 8}
 
 \noindent
 orientation of a {\small\tt \verm{Manifold}} : \ref{\numb section 3.\numb parag 10}
@@ -472,14 +472,14 @@ segment {\small\tt \verm{Cell}}s : \ref{\numb section 1.\numb parag 2}
 \noindent
 segment {\small\tt \verm{Mesh}}es :
 \ref{\numb section 1.\numb parag 1} -- \ref{\numb section 1.\numb parag 3},
-\ref{\numb section 9.\numb parag 1}, \ref{\numb section 9.\numb parag 7} --
-\ref{\numb section 9.\numb parag 9}, \ref{\numb section 11.\numb parag 4},
+\ref{\numb section 9.\numb parag 1}, \ref{\numb section 9.\numb parag 5} --
+\ref{\numb section 9.\numb parag 7}, \ref{\numb section 11.\numb parag 4},
 \ref{\numb section 11.\numb parag 6}
 
 \noindent
 {\small\tt set\_\,as\_\,working\_\,manifold} :
-\ref{\numb section 2.\numb parag 8} -- \ref{\numb section 2.\numb parag 10},
-\ref{\numb section 2.\numb parag 12}, \ref{\numb section 3.\numb parag 1},
+\ref{\numb section 2.\numb parag 9} -- \ref{\numb section 2.\numb parag 11},
+\ref{\numb section 2.\numb parag 13}, \ref{\numb section 3.\numb parag 1},
 \ref{\numb section 3.\numb parag 2}, \ref{\numb section 3.\numb parag 3},
 \ref{\numb section 3.\numb parag 9},
 \ref{\numb section 3.\numb parag 14} -- \ref{\numb section 3.\numb parag 24}
@@ -488,7 +488,7 @@ segment {\small\tt \verm{Mesh}}es :
 {\small\tt\verm{tag}}s : \ref{\numb section 11.\numb parag 3}
 
 \noindent
-wrapper : \ref{\numb section 9.\numb parag 1}, \ref{\numb section 9.\numb parag 12},
+wrapper : \ref{\numb section 9.\numb parag 1}, \ref{\numb section 9.\numb parag 10},
 \ref{\numb section 11.\numb parag 4}
 
 

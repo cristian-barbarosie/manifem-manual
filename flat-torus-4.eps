@@ -1,0 +1,3121 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title:                     maniFEM
+%%BoundingBox:  10  10  510   278
+%%EndComments
+%%BeginSetup
+<< /PageSize [520 289.231] >> setpagedevice
+%%EndSetup
+
+/contour
+{ /xmin {-2} def  /xmax {1.7} def  /ymin {-0.4} def  /ymax {1.5} def  /border {0.07}  def
+xmin border add ymin border add border 180 270 arc
+xmax border sub ymin lineto
+xmax border sub ymin border add border -90 0 arc
+xmax ymax border sub lineto
+xmax border sub ymax border sub border 0 90 arc
+xmin border add ymax lineto
+xmin border add ymax border sub border 90 180 arc
+xmin ymin border add lineto
+} def
+
+/shadow
+{ 0 0 moveto
+  1 0 rlineto 0.5 1 rlineto -1 0 rlineto } def
+
+gsave
+279.231 74.1026 translate
+128.205 dup scale
+
+0.0234 setlinewidth 0.5 setgray contour stroke
+0 setgray contour clip
+newpath 0.85 setgray shadow fill
+newpath -1.35 0.25 moveto 1. 0 rlineto 0 1 rlineto -1 0 rlineto closepath fill
+
+0.0117 setlinewidth 1 0.5 0 setrgbcolor
+
+0.5 0.9 moveto
+0.6 0.9 lineto stroke
+1.5 0.9 moveto
+1.6 0.9 lineto stroke
+-0.5 0.9 moveto
+-0.4 0.9 lineto stroke
+-1 -0.1 moveto
+-0.9 -0.1 lineto stroke
+0 -0.1 moveto
+0.1 -0.1 lineto stroke
+1 -0.1 moveto
+1.1 -0.1 lineto stroke
+-1.5 0.9 moveto
+-1.4 0.9 lineto stroke
+-2 -0.1 moveto
+-1.9 -0.1 lineto stroke
+0.5 0.8 moveto
+0.6 0.8 lineto stroke
+1.5 0.8 moveto
+1.6 0.8 lineto stroke
+-0.5 0.8 moveto
+-0.4 0.8 lineto stroke
+-1 -0.2 moveto
+-0.9 -0.2 lineto stroke
+0 -0.2 moveto
+0.1 -0.2 lineto stroke
+1 -0.2 moveto
+1.1 -0.2 lineto stroke
+-1.5 0.8 moveto
+-1.4 0.8 lineto stroke
+-2 -0.2 moveto
+-1.9 -0.2 lineto stroke
+0.5 0.7 moveto
+0.6 0.7 lineto stroke
+1.5 0.7 moveto
+1.6 0.7 lineto stroke
+-0.5 0.7 moveto
+-0.4 0.7 lineto stroke
+-1 -0.3 moveto
+-0.9 -0.3 lineto stroke
+0 -0.3 moveto
+0.1 -0.3 lineto stroke
+1 -0.3 moveto
+1.1 -0.3 lineto stroke
+-1.5 0.7 moveto
+-1.4 0.7 lineto stroke
+-2 -0.3 moveto
+-1.9 -0.3 lineto stroke
+0.5 0.6 moveto
+0.6 0.6 lineto stroke
+1.5 0.6 moveto
+1.6 0.6 lineto stroke
+-0.5 0.6 moveto
+-0.4 0.6 lineto stroke
+-1 -0.4 moveto
+-0.9 -0.4 lineto stroke
+0 -0.4 moveto
+0.1 -0.4 lineto stroke
+1 -0.4 moveto
+1.1 -0.4 lineto stroke
+-1.5 0.6 moveto
+-1.4 0.6 lineto stroke
+-2 -0.4 moveto
+-1.9 -0.4 lineto stroke
+0.5 0.5 moveto
+0.6 0.5 lineto stroke
+1.5 0.5 moveto
+1.6 0.5 lineto stroke
+1 1.5 moveto
+1.1 1.5 lineto stroke
+0 1.5 moveto
+0.1 1.5 lineto stroke
+-0.5 0.5 moveto
+-0.4 0.5 lineto stroke
+-1 1.5 moveto
+-0.9 1.5 lineto stroke
+-1.5 0.5 moveto
+-1.4 0.5 lineto stroke
+-2 1.5 moveto
+-1.9 1.5 lineto stroke
+0.5 0.4 moveto
+0.6 0.4 lineto stroke
+1.5 0.4 moveto
+1.6 0.4 lineto stroke
+1 1.4 moveto
+1.1 1.4 lineto stroke
+0 1.4 moveto
+0.1 1.4 lineto stroke
+-0.5 0.4 moveto
+-0.4 0.4 lineto stroke
+-1 1.4 moveto
+-0.9 1.4 lineto stroke
+-1.5 0.4 moveto
+-1.4 0.4 lineto stroke
+-2 1.4 moveto
+-1.9 1.4 lineto stroke
+0.5 0.3 moveto
+0.6 0.3 lineto stroke
+1.5 0.3 moveto
+1.6 0.3 lineto stroke
+1 1.3 moveto
+1.1 1.3 lineto stroke
+0 1.3 moveto
+0.1 1.3 lineto stroke
+-0.5 0.3 moveto
+-0.4 0.3 lineto stroke
+-1 1.3 moveto
+-0.9 1.3 lineto stroke
+-1.5 0.3 moveto
+-1.4 0.3 lineto stroke
+-2 1.3 moveto
+-1.9 1.3 lineto stroke
+0.5 0.2 moveto
+0.6 0.2 lineto stroke
+1.5 0.2 moveto
+1.6 0.2 lineto stroke
+1 1.2 moveto
+1.1 1.2 lineto stroke
+0 1.2 moveto
+0.1 1.2 lineto stroke
+-0.5 0.2 moveto
+-0.4 0.2 lineto stroke
+-1 1.2 moveto
+-0.9 1.2 lineto stroke
+-1.5 0.2 moveto
+-1.4 0.2 lineto stroke
+-2 1.2 moveto
+-1.9 1.2 lineto stroke
+0.5 0.1 moveto
+0.6 0.1 lineto stroke
+1.5 0.1 moveto
+1.6 0.1 lineto stroke
+1 1.1 moveto
+1.1 1.1 lineto stroke
+0 1.1 moveto
+0.1 1.1 lineto stroke
+-0.5 0.1 moveto
+-0.4 0.1 lineto stroke
+-1 1.1 moveto
+-0.9 1.1 lineto stroke
+-1.5 0.1 moveto
+-1.4 0.1 lineto stroke
+-2 1.1 moveto
+-1.9 1.1 lineto stroke
+0.1 -0.1 moveto
+0.1 0 lineto stroke
+1.1 -0.1 moveto
+1.1 0 lineto stroke
+1.6 0.9 moveto
+1.6 1 lineto stroke
+0.6 0.9 moveto
+0.6 1 lineto stroke
+-0.4 0.9 moveto
+-0.4 1 lineto stroke
+-0.9 -0.1 moveto
+-0.9 0 lineto stroke
+-1.4 0.9 moveto
+-1.4 1 lineto stroke
+-1.9 -0.1 moveto
+-1.9 0 lineto stroke
+0.1 -0.1 moveto
+0.2 -0.1 lineto stroke
+1.1 -0.1 moveto
+1.2 -0.1 lineto stroke
+1.6 0.9 moveto
+1.7 0.9 lineto stroke
+0.6 0.9 moveto
+0.7 0.9 lineto stroke
+-0.4 0.9 moveto
+-0.3 0.9 lineto stroke
+-0.9 -0.1 moveto
+-0.8 -0.1 lineto stroke
+-1.4 0.9 moveto
+-1.3 0.9 lineto stroke
+-1.9 -0.1 moveto
+-1.8 -0.1 lineto stroke
+0.1 -0.2 moveto
+0.1 -0.1 lineto stroke
+1.1 -0.2 moveto
+1.1 -0.1 lineto stroke
+1.6 0.8 moveto
+1.6 0.9 lineto stroke
+0.6 0.8 moveto
+0.6 0.9 lineto stroke
+-0.4 0.8 moveto
+-0.4 0.9 lineto stroke
+-0.9 -0.2 moveto
+-0.9 -0.1 lineto stroke
+-1.4 0.8 moveto
+-1.4 0.9 lineto stroke
+-1.9 -0.2 moveto
+-1.9 -0.1 lineto stroke
+0.1 -0.2 moveto
+0.2 -0.2 lineto stroke
+1.1 -0.2 moveto
+1.2 -0.2 lineto stroke
+1.6 0.8 moveto
+1.7 0.8 lineto stroke
+0.6 0.8 moveto
+0.7 0.8 lineto stroke
+-0.4 0.8 moveto
+-0.3 0.8 lineto stroke
+-0.9 -0.2 moveto
+-0.8 -0.2 lineto stroke
+-1.4 0.8 moveto
+-1.3 0.8 lineto stroke
+-1.9 -0.2 moveto
+-1.8 -0.2 lineto stroke
+0.1 -0.3 moveto
+0.1 -0.2 lineto stroke
+1.1 -0.3 moveto
+1.1 -0.2 lineto stroke
+1.6 0.7 moveto
+1.6 0.8 lineto stroke
+0.6 0.7 moveto
+0.6 0.8 lineto stroke
+-0.4 0.7 moveto
+-0.4 0.8 lineto stroke
+-0.9 -0.3 moveto
+-0.9 -0.2 lineto stroke
+-1.4 0.7 moveto
+-1.4 0.8 lineto stroke
+-1.9 -0.3 moveto
+-1.9 -0.2 lineto stroke
+0.1 -0.3 moveto
+0.2 -0.3 lineto stroke
+1.1 -0.3 moveto
+1.2 -0.3 lineto stroke
+1.6 0.7 moveto
+1.7 0.7 lineto stroke
+0.6 0.7 moveto
+0.7 0.7 lineto stroke
+-0.4 0.7 moveto
+-0.3 0.7 lineto stroke
+-0.9 -0.3 moveto
+-0.8 -0.3 lineto stroke
+-1.4 0.7 moveto
+-1.3 0.7 lineto stroke
+-1.9 -0.3 moveto
+-1.8 -0.3 lineto stroke
+0.1 -0.4 moveto
+0.1 -0.3 lineto stroke
+1.1 -0.4 moveto
+1.1 -0.3 lineto stroke
+1.6 0.6 moveto
+1.6 0.7 lineto stroke
+0.6 0.6 moveto
+0.6 0.7 lineto stroke
+-0.4 0.6 moveto
+-0.4 0.7 lineto stroke
+-0.9 -0.4 moveto
+-0.9 -0.3 lineto stroke
+-1.4 0.6 moveto
+-1.4 0.7 lineto stroke
+-1.9 -0.4 moveto
+-1.9 -0.3 lineto stroke
+0.1 -0.4 moveto
+0.2 -0.4 lineto stroke
+1.1 -0.4 moveto
+1.2 -0.4 lineto stroke
+1.6 0.6 moveto
+1.7 0.6 lineto stroke
+0.6 0.6 moveto
+0.7 0.6 lineto stroke
+-0.4 0.6 moveto
+-0.3 0.6 lineto stroke
+-0.9 -0.4 moveto
+-0.8 -0.4 lineto stroke
+-1.4 0.6 moveto
+-1.3 0.6 lineto stroke
+-1.9 -0.4 moveto
+-1.8 -0.4 lineto stroke
+0.1 -0.5 moveto
+0.1 -0.4 lineto stroke
+1.1 -0.5 moveto
+1.1 -0.4 lineto stroke
+1.6 0.5 moveto
+1.6 0.6 lineto stroke
+0.6 0.5 moveto
+0.6 0.6 lineto stroke
+-0.4 0.5 moveto
+-0.4 0.6 lineto stroke
+-0.9 -0.5 moveto
+-0.9 -0.4 lineto stroke
+1.1 1.5 moveto
+1.1 1.6 lineto stroke
+0.1 1.5 moveto
+0.1 1.6 lineto stroke
+-0.9 1.5 moveto
+-0.9 1.6 lineto stroke
+-1.4 0.5 moveto
+-1.4 0.6 lineto stroke
+-1.9 -0.5 moveto
+-1.9 -0.4 lineto stroke
+-1.9 1.5 moveto
+-1.9 1.6 lineto stroke
+1.6 0.5 moveto
+1.7 0.5 lineto stroke
+0.6 0.5 moveto
+0.7 0.5 lineto stroke
+-0.4 0.5 moveto
+-0.3 0.5 lineto stroke
+1.1 1.5 moveto
+1.2 1.5 lineto stroke
+0.1 1.5 moveto
+0.2 1.5 lineto stroke
+-0.9 1.5 moveto
+-0.8 1.5 lineto stroke
+-1.4 0.5 moveto
+-1.3 0.5 lineto stroke
+-1.9 1.5 moveto
+-1.8 1.5 lineto stroke
+1.6 0.4 moveto
+1.6 0.5 lineto stroke
+0.6 0.4 moveto
+0.6 0.5 lineto stroke
+-0.4 0.4 moveto
+-0.4 0.5 lineto stroke
+1.1 1.4 moveto
+1.1 1.5 lineto stroke
+0.1 1.4 moveto
+0.1 1.5 lineto stroke
+-0.9 1.4 moveto
+-0.9 1.5 lineto stroke
+-1.4 0.4 moveto
+-1.4 0.5 lineto stroke
+-1.9 1.4 moveto
+-1.9 1.5 lineto stroke
+1.6 0.4 moveto
+1.7 0.4 lineto stroke
+0.6 0.4 moveto
+0.7 0.4 lineto stroke
+-0.4 0.4 moveto
+-0.3 0.4 lineto stroke
+1.1 1.4 moveto
+1.2 1.4 lineto stroke
+0.1 1.4 moveto
+0.2 1.4 lineto stroke
+-0.9 1.4 moveto
+-0.8 1.4 lineto stroke
+-1.4 0.4 moveto
+-1.3 0.4 lineto stroke
+-1.9 1.4 moveto
+-1.8 1.4 lineto stroke
+1.6 0.3 moveto
+1.6 0.4 lineto stroke
+0.6 0.3 moveto
+0.6 0.4 lineto stroke
+-0.4 0.3 moveto
+-0.4 0.4 lineto stroke
+1.1 1.3 moveto
+1.1 1.4 lineto stroke
+0.1 1.3 moveto
+0.1 1.4 lineto stroke
+-0.9 1.3 moveto
+-0.9 1.4 lineto stroke
+-1.4 0.3 moveto
+-1.4 0.4 lineto stroke
+-1.9 1.3 moveto
+-1.9 1.4 lineto stroke
+1.6 0.3 moveto
+1.7 0.3 lineto stroke
+0.6 0.3 moveto
+0.7 0.3 lineto stroke
+-0.4 0.3 moveto
+-0.3 0.3 lineto stroke
+1.1 1.3 moveto
+1.2 1.3 lineto stroke
+0.1 1.3 moveto
+0.2 1.3 lineto stroke
+-0.9 1.3 moveto
+-0.8 1.3 lineto stroke
+-1.4 0.3 moveto
+-1.3 0.3 lineto stroke
+-1.9 1.3 moveto
+-1.8 1.3 lineto stroke
+1.6 0.2 moveto
+1.6 0.3 lineto stroke
+0.6 0.2 moveto
+0.6 0.3 lineto stroke
+-0.4 0.2 moveto
+-0.4 0.3 lineto stroke
+1.1 1.2 moveto
+1.1 1.3 lineto stroke
+0.1 1.2 moveto
+0.1 1.3 lineto stroke
+-0.9 1.2 moveto
+-0.9 1.3 lineto stroke
+-1.4 0.2 moveto
+-1.4 0.3 lineto stroke
+-1.9 1.2 moveto
+-1.9 1.3 lineto stroke
+1.6 0.2 moveto
+1.7 0.2 lineto stroke
+0.6 0.2 moveto
+0.7 0.2 lineto stroke
+-0.4 0.2 moveto
+-0.3 0.2 lineto stroke
+1.1 1.2 moveto
+1.2 1.2 lineto stroke
+0.1 1.2 moveto
+0.2 1.2 lineto stroke
+-0.9 1.2 moveto
+-0.8 1.2 lineto stroke
+-1.4 0.2 moveto
+-1.3 0.2 lineto stroke
+-1.9 1.2 moveto
+-1.8 1.2 lineto stroke
+1.6 0.1 moveto
+1.6 0.2 lineto stroke
+0.6 0.1 moveto
+0.6 0.2 lineto stroke
+-0.4 0.1 moveto
+-0.4 0.2 lineto stroke
+1.1 1.1 moveto
+1.1 1.2 lineto stroke
+0.1 1.1 moveto
+0.1 1.2 lineto stroke
+-0.9 1.1 moveto
+-0.9 1.2 lineto stroke
+-1.4 0.1 moveto
+-1.4 0.2 lineto stroke
+-1.9 1.1 moveto
+-1.9 1.2 lineto stroke
+1.6 0.1 moveto
+1.7 0.1 lineto stroke
+0.6 0.1 moveto
+0.7 0.1 lineto stroke
+-0.4 0.1 moveto
+-0.3 0.1 lineto stroke
+1.1 1.1 moveto
+1.2 1.1 lineto stroke
+0.1 1.1 moveto
+0.2 1.1 lineto stroke
+-0.9 1.1 moveto
+-0.8 1.1 lineto stroke
+-1.4 0.1 moveto
+-1.3 0.1 lineto stroke
+-1.9 1.1 moveto
+-1.8 1.1 lineto stroke
+0.6 0 moveto
+0.6 0.1 lineto stroke
+1.6 0 moveto
+1.6 0.1 lineto stroke
+1.1 1 moveto
+1.1 1.1 lineto stroke
+0.1 1 moveto
+0.1 1.1 lineto stroke
+-0.4 0 moveto
+-0.4 0.1 lineto stroke
+-0.9 1 moveto
+-0.9 1.1 lineto stroke
+-1.4 0 moveto
+-1.4 0.1 lineto stroke
+-1.9 1 moveto
+-1.9 1.1 lineto stroke
+0.2 -0.1 moveto
+0.2 0 lineto stroke
+1.2 -0.1 moveto
+1.2 0 lineto stroke
+1.7 0.9 moveto
+1.7 1 lineto stroke
+0.7 0.9 moveto
+0.7 1 lineto stroke
+-0.3 0.9 moveto
+-0.3 1 lineto stroke
+-0.8 -0.1 moveto
+-0.8 0 lineto stroke
+-1.3 0.9 moveto
+-1.3 1 lineto stroke
+-1.8 -0.1 moveto
+-1.8 0 lineto stroke
+0.2 -0.1 moveto
+0.3 -0.1 lineto stroke
+1.2 -0.1 moveto
+1.3 -0.1 lineto stroke
+1.7 0.9 moveto
+1.8 0.9 lineto stroke
+0.7 0.9 moveto
+0.8 0.9 lineto stroke
+-0.3 0.9 moveto
+-0.2 0.9 lineto stroke
+-0.8 -0.1 moveto
+-0.7 -0.1 lineto stroke
+-1.3 0.9 moveto
+-1.2 0.9 lineto stroke
+-1.8 -0.1 moveto
+-1.7 -0.1 lineto stroke
+0.2 -0.2 moveto
+0.2 -0.1 lineto stroke
+1.2 -0.2 moveto
+1.2 -0.1 lineto stroke
+1.7 0.8 moveto
+1.7 0.9 lineto stroke
+0.7 0.8 moveto
+0.7 0.9 lineto stroke
+-0.3 0.8 moveto
+-0.3 0.9 lineto stroke
+-0.8 -0.2 moveto
+-0.8 -0.1 lineto stroke
+-1.3 0.8 moveto
+-1.3 0.9 lineto stroke
+-1.8 -0.2 moveto
+-1.8 -0.1 lineto stroke
+0.2 -0.2 moveto
+0.3 -0.2 lineto stroke
+1.2 -0.2 moveto
+1.3 -0.2 lineto stroke
+1.7 0.8 moveto
+1.8 0.8 lineto stroke
+0.7 0.8 moveto
+0.8 0.8 lineto stroke
+-0.3 0.8 moveto
+-0.2 0.8 lineto stroke
+-0.8 -0.2 moveto
+-0.7 -0.2 lineto stroke
+-1.3 0.8 moveto
+-1.2 0.8 lineto stroke
+-1.8 -0.2 moveto
+-1.7 -0.2 lineto stroke
+0.2 -0.3 moveto
+0.2 -0.2 lineto stroke
+1.2 -0.3 moveto
+1.2 -0.2 lineto stroke
+1.7 0.7 moveto
+1.7 0.8 lineto stroke
+0.7 0.7 moveto
+0.7 0.8 lineto stroke
+-0.3 0.7 moveto
+-0.3 0.8 lineto stroke
+-0.8 -0.3 moveto
+-0.8 -0.2 lineto stroke
+-1.3 0.7 moveto
+-1.3 0.8 lineto stroke
+-1.8 -0.3 moveto
+-1.8 -0.2 lineto stroke
+0.2 -0.3 moveto
+0.3 -0.3 lineto stroke
+1.2 -0.3 moveto
+1.3 -0.3 lineto stroke
+1.7 0.7 moveto
+1.8 0.7 lineto stroke
+0.7 0.7 moveto
+0.8 0.7 lineto stroke
+-0.3 0.7 moveto
+-0.2 0.7 lineto stroke
+-0.8 -0.3 moveto
+-0.7 -0.3 lineto stroke
+-1.3 0.7 moveto
+-1.2 0.7 lineto stroke
+-1.8 -0.3 moveto
+-1.7 -0.3 lineto stroke
+0.2 -0.4 moveto
+0.2 -0.3 lineto stroke
+1.2 -0.4 moveto
+1.2 -0.3 lineto stroke
+1.7 0.6 moveto
+1.7 0.7 lineto stroke
+0.7 0.6 moveto
+0.7 0.7 lineto stroke
+-0.3 0.6 moveto
+-0.3 0.7 lineto stroke
+-0.8 -0.4 moveto
+-0.8 -0.3 lineto stroke
+-1.3 0.6 moveto
+-1.3 0.7 lineto stroke
+-1.8 -0.4 moveto
+-1.8 -0.3 lineto stroke
+0.2 -0.4 moveto
+0.3 -0.4 lineto stroke
+1.2 -0.4 moveto
+1.3 -0.4 lineto stroke
+1.7 0.6 moveto
+1.8 0.6 lineto stroke
+0.7 0.6 moveto
+0.8 0.6 lineto stroke
+-0.3 0.6 moveto
+-0.2 0.6 lineto stroke
+-0.8 -0.4 moveto
+-0.7 -0.4 lineto stroke
+-1.3 0.6 moveto
+-1.2 0.6 lineto stroke
+-1.8 -0.4 moveto
+-1.7 -0.4 lineto stroke
+0.2 -0.5 moveto
+0.2 -0.4 lineto stroke
+1.2 -0.5 moveto
+1.2 -0.4 lineto stroke
+1.7 0.5 moveto
+1.7 0.6 lineto stroke
+0.7 0.5 moveto
+0.7 0.6 lineto stroke
+-0.3 0.5 moveto
+-0.3 0.6 lineto stroke
+-0.8 -0.5 moveto
+-0.8 -0.4 lineto stroke
+1.2 1.5 moveto
+1.2 1.6 lineto stroke
+0.2 1.5 moveto
+0.2 1.6 lineto stroke
+-0.8 1.5 moveto
+-0.8 1.6 lineto stroke
+-1.3 0.5 moveto
+-1.3 0.6 lineto stroke
+-1.8 -0.5 moveto
+-1.8 -0.4 lineto stroke
+-1.8 1.5 moveto
+-1.8 1.6 lineto stroke
+1.7 0.5 moveto
+1.8 0.5 lineto stroke
+0.7 0.5 moveto
+0.8 0.5 lineto stroke
+-0.3 0.5 moveto
+-0.2 0.5 lineto stroke
+1.2 1.5 moveto
+1.3 1.5 lineto stroke
+0.2 1.5 moveto
+0.3 1.5 lineto stroke
+-0.8 1.5 moveto
+-0.7 1.5 lineto stroke
+-1.3 0.5 moveto
+-1.2 0.5 lineto stroke
+-1.8 1.5 moveto
+-1.7 1.5 lineto stroke
+1.7 0.4 moveto
+1.7 0.5 lineto stroke
+0.7 0.4 moveto
+0.7 0.5 lineto stroke
+-0.3 0.4 moveto
+-0.3 0.5 lineto stroke
+1.2 1.4 moveto
+1.2 1.5 lineto stroke
+0.2 1.4 moveto
+0.2 1.5 lineto stroke
+-0.8 1.4 moveto
+-0.8 1.5 lineto stroke
+-1.3 0.4 moveto
+-1.3 0.5 lineto stroke
+-1.8 1.4 moveto
+-1.8 1.5 lineto stroke
+1.7 0.4 moveto
+1.8 0.4 lineto stroke
+0.7 0.4 moveto
+0.8 0.4 lineto stroke
+-0.3 0.4 moveto
+-0.2 0.4 lineto stroke
+1.2 1.4 moveto
+1.3 1.4 lineto stroke
+0.2 1.4 moveto
+0.3 1.4 lineto stroke
+-0.8 1.4 moveto
+-0.7 1.4 lineto stroke
+-1.3 0.4 moveto
+-1.2 0.4 lineto stroke
+-1.8 1.4 moveto
+-1.7 1.4 lineto stroke
+1.7 0.3 moveto
+1.7 0.4 lineto stroke
+0.7 0.3 moveto
+0.7 0.4 lineto stroke
+-0.3 0.3 moveto
+-0.3 0.4 lineto stroke
+1.2 1.3 moveto
+1.2 1.4 lineto stroke
+0.2 1.3 moveto
+0.2 1.4 lineto stroke
+-0.8 1.3 moveto
+-0.8 1.4 lineto stroke
+-1.3 0.3 moveto
+-1.3 0.4 lineto stroke
+-1.8 1.3 moveto
+-1.8 1.4 lineto stroke
+1.7 0.3 moveto
+1.8 0.3 lineto stroke
+0.7 0.3 moveto
+0.8 0.3 lineto stroke
+-0.3 0.3 moveto
+-0.2 0.3 lineto stroke
+1.2 1.3 moveto
+1.3 1.3 lineto stroke
+0.2 1.3 moveto
+0.3 1.3 lineto stroke
+-0.8 1.3 moveto
+-0.7 1.3 lineto stroke
+-1.3 0.3 moveto
+-1.2 0.3 lineto stroke
+-1.8 1.3 moveto
+-1.7 1.3 lineto stroke
+1.7 0.2 moveto
+1.7 0.3 lineto stroke
+0.7 0.2 moveto
+0.7 0.3 lineto stroke
+-0.3 0.2 moveto
+-0.3 0.3 lineto stroke
+1.2 1.2 moveto
+1.2 1.3 lineto stroke
+0.2 1.2 moveto
+0.2 1.3 lineto stroke
+-0.8 1.2 moveto
+-0.8 1.3 lineto stroke
+-1.3 0.2 moveto
+-1.3 0.3 lineto stroke
+-1.8 1.2 moveto
+-1.8 1.3 lineto stroke
+1.7 0.2 moveto
+1.8 0.2 lineto stroke
+0.7 0.2 moveto
+0.8 0.2 lineto stroke
+-0.3 0.2 moveto
+-0.2 0.2 lineto stroke
+1.2 1.2 moveto
+1.3 1.2 lineto stroke
+0.2 1.2 moveto
+0.3 1.2 lineto stroke
+-0.8 1.2 moveto
+-0.7 1.2 lineto stroke
+-1.3 0.2 moveto
+-1.2 0.2 lineto stroke
+-1.8 1.2 moveto
+-1.7 1.2 lineto stroke
+1.7 0.1 moveto
+1.7 0.2 lineto stroke
+0.7 0.1 moveto
+0.7 0.2 lineto stroke
+-0.3 0.1 moveto
+-0.3 0.2 lineto stroke
+1.2 1.1 moveto
+1.2 1.2 lineto stroke
+0.2 1.1 moveto
+0.2 1.2 lineto stroke
+-0.8 1.1 moveto
+-0.8 1.2 lineto stroke
+-1.3 0.1 moveto
+-1.3 0.2 lineto stroke
+-1.8 1.1 moveto
+-1.8 1.2 lineto stroke
+1.7 0.1 moveto
+1.8 0.1 lineto stroke
+0.7 0.1 moveto
+0.8 0.1 lineto stroke
+-0.3 0.1 moveto
+-0.2 0.1 lineto stroke
+1.2 1.1 moveto
+1.3 1.1 lineto stroke
+0.2 1.1 moveto
+0.3 1.1 lineto stroke
+-0.8 1.1 moveto
+-0.7 1.1 lineto stroke
+-1.3 0.1 moveto
+-1.2 0.1 lineto stroke
+-1.8 1.1 moveto
+-1.7 1.1 lineto stroke
+0.7 0 moveto
+0.7 0.1 lineto stroke
+1.7 0 moveto
+1.7 0.1 lineto stroke
+1.2 1 moveto
+1.2 1.1 lineto stroke
+0.2 1 moveto
+0.2 1.1 lineto stroke
+-0.3 0 moveto
+-0.3 0.1 lineto stroke
+-0.8 1 moveto
+-0.8 1.1 lineto stroke
+-1.3 0 moveto
+-1.3 0.1 lineto stroke
+-1.8 1 moveto
+-1.8 1.1 lineto stroke
+0.3 -0.1 moveto
+0.3 0 lineto stroke
+1.3 -0.1 moveto
+1.3 0 lineto stroke
+0.8 0.9 moveto
+0.8 1 lineto stroke
+-0.2 0.9 moveto
+-0.2 1 lineto stroke
+-0.7 -0.1 moveto
+-0.7 0 lineto stroke
+-1.2 0.9 moveto
+-1.2 1 lineto stroke
+-1.7 -0.1 moveto
+-1.7 0 lineto stroke
+0.3 -0.1 moveto
+0.4 -0.1 lineto stroke
+1.3 -0.1 moveto
+1.4 -0.1 lineto stroke
+0.8 0.9 moveto
+0.9 0.9 lineto stroke
+-0.2 0.9 moveto
+-0.1 0.9 lineto stroke
+-0.7 -0.1 moveto
+-0.6 -0.1 lineto stroke
+-1.2 0.9 moveto
+-1.1 0.9 lineto stroke
+-1.7 -0.1 moveto
+-1.6 -0.1 lineto stroke
+0.3 -0.2 moveto
+0.3 -0.1 lineto stroke
+1.3 -0.2 moveto
+1.3 -0.1 lineto stroke
+0.8 0.8 moveto
+0.8 0.9 lineto stroke
+-0.2 0.8 moveto
+-0.2 0.9 lineto stroke
+-0.7 -0.2 moveto
+-0.7 -0.1 lineto stroke
+-1.2 0.8 moveto
+-1.2 0.9 lineto stroke
+-1.7 -0.2 moveto
+-1.7 -0.1 lineto stroke
+0.3 -0.2 moveto
+0.4 -0.2 lineto stroke
+1.3 -0.2 moveto
+1.4 -0.2 lineto stroke
+0.8 0.8 moveto
+0.9 0.8 lineto stroke
+-0.2 0.8 moveto
+-0.1 0.8 lineto stroke
+-0.7 -0.2 moveto
+-0.6 -0.2 lineto stroke
+-1.2 0.8 moveto
+-1.1 0.8 lineto stroke
+-1.7 -0.2 moveto
+-1.6 -0.2 lineto stroke
+0.3 -0.3 moveto
+0.3 -0.2 lineto stroke
+1.3 -0.3 moveto
+1.3 -0.2 lineto stroke
+0.8 0.7 moveto
+0.8 0.8 lineto stroke
+-0.2 0.7 moveto
+-0.2 0.8 lineto stroke
+-0.7 -0.3 moveto
+-0.7 -0.2 lineto stroke
+-1.2 0.7 moveto
+-1.2 0.8 lineto stroke
+-1.7 -0.3 moveto
+-1.7 -0.2 lineto stroke
+0.3 -0.3 moveto
+0.4 -0.3 lineto stroke
+1.3 -0.3 moveto
+1.4 -0.3 lineto stroke
+0.8 0.7 moveto
+0.9 0.7 lineto stroke
+-0.2 0.7 moveto
+-0.1 0.7 lineto stroke
+-0.7 -0.3 moveto
+-0.6 -0.3 lineto stroke
+-1.2 0.7 moveto
+-1.1 0.7 lineto stroke
+-1.7 -0.3 moveto
+-1.6 -0.3 lineto stroke
+0.3 -0.4 moveto
+0.3 -0.3 lineto stroke
+1.3 -0.4 moveto
+1.3 -0.3 lineto stroke
+0.8 0.6 moveto
+0.8 0.7 lineto stroke
+-0.2 0.6 moveto
+-0.2 0.7 lineto stroke
+-0.7 -0.4 moveto
+-0.7 -0.3 lineto stroke
+-1.2 0.6 moveto
+-1.2 0.7 lineto stroke
+-1.7 -0.4 moveto
+-1.7 -0.3 lineto stroke
+0.3 -0.4 moveto
+0.4 -0.4 lineto stroke
+1.3 -0.4 moveto
+1.4 -0.4 lineto stroke
+0.8 0.6 moveto
+0.9 0.6 lineto stroke
+-0.2 0.6 moveto
+-0.1 0.6 lineto stroke
+-0.7 -0.4 moveto
+-0.6 -0.4 lineto stroke
+-1.2 0.6 moveto
+-1.1 0.6 lineto stroke
+-1.7 -0.4 moveto
+-1.6 -0.4 lineto stroke
+0.3 -0.5 moveto
+0.3 -0.4 lineto stroke
+1.3 -0.5 moveto
+1.3 -0.4 lineto stroke
+0.8 0.5 moveto
+0.8 0.6 lineto stroke
+-0.2 0.5 moveto
+-0.2 0.6 lineto stroke
+-0.7 -0.5 moveto
+-0.7 -0.4 lineto stroke
+1.3 1.5 moveto
+1.3 1.6 lineto stroke
+0.3 1.5 moveto
+0.3 1.6 lineto stroke
+-0.7 1.5 moveto
+-0.7 1.6 lineto stroke
+-1.2 0.5 moveto
+-1.2 0.6 lineto stroke
+-1.7 -0.5 moveto
+-1.7 -0.4 lineto stroke
+-1.7 1.5 moveto
+-1.7 1.6 lineto stroke
+0.8 0.5 moveto
+0.9 0.5 lineto stroke
+-0.2 0.5 moveto
+-0.1 0.5 lineto stroke
+1.3 1.5 moveto
+1.4 1.5 lineto stroke
+0.3 1.5 moveto
+0.4 1.5 lineto stroke
+-0.7 1.5 moveto
+-0.6 1.5 lineto stroke
+-1.2 0.5 moveto
+-1.1 0.5 lineto stroke
+-1.7 1.5 moveto
+-1.6 1.5 lineto stroke
+0.8 0.4 moveto
+0.8 0.5 lineto stroke
+-0.2 0.4 moveto
+-0.2 0.5 lineto stroke
+1.3 1.4 moveto
+1.3 1.5 lineto stroke
+0.3 1.4 moveto
+0.3 1.5 lineto stroke
+-0.7 1.4 moveto
+-0.7 1.5 lineto stroke
+-1.2 0.4 moveto
+-1.2 0.5 lineto stroke
+-1.7 1.4 moveto
+-1.7 1.5 lineto stroke
+0.8 0.4 moveto
+0.9 0.4 lineto stroke
+-0.2 0.4 moveto
+-0.1 0.4 lineto stroke
+1.3 1.4 moveto
+1.4 1.4 lineto stroke
+0.3 1.4 moveto
+0.4 1.4 lineto stroke
+-0.7 1.4 moveto
+-0.6 1.4 lineto stroke
+-1.2 0.4 moveto
+-1.1 0.4 lineto stroke
+-1.7 1.4 moveto
+-1.6 1.4 lineto stroke
+0.8 0.3 moveto
+0.8 0.4 lineto stroke
+-0.2 0.3 moveto
+-0.2 0.4 lineto stroke
+1.3 1.3 moveto
+1.3 1.4 lineto stroke
+0.3 1.3 moveto
+0.3 1.4 lineto stroke
+-0.7 1.3 moveto
+-0.7 1.4 lineto stroke
+-1.2 0.3 moveto
+-1.2 0.4 lineto stroke
+-1.7 1.3 moveto
+-1.7 1.4 lineto stroke
+0.8 0.3 moveto
+0.9 0.3 lineto stroke
+-0.2 0.3 moveto
+-0.1 0.3 lineto stroke
+1.3 1.3 moveto
+1.4 1.3 lineto stroke
+0.3 1.3 moveto
+0.4 1.3 lineto stroke
+-0.7 1.3 moveto
+-0.6 1.3 lineto stroke
+-1.2 0.3 moveto
+-1.1 0.3 lineto stroke
+-1.7 1.3 moveto
+-1.6 1.3 lineto stroke
+0.8 0.2 moveto
+0.8 0.3 lineto stroke
+-0.2 0.2 moveto
+-0.2 0.3 lineto stroke
+1.3 1.2 moveto
+1.3 1.3 lineto stroke
+0.3 1.2 moveto
+0.3 1.3 lineto stroke
+-0.7 1.2 moveto
+-0.7 1.3 lineto stroke
+-1.2 0.2 moveto
+-1.2 0.3 lineto stroke
+-1.7 1.2 moveto
+-1.7 1.3 lineto stroke
+0.8 0.2 moveto
+0.9 0.2 lineto stroke
+-0.2 0.2 moveto
+-0.1 0.2 lineto stroke
+1.3 1.2 moveto
+1.4 1.2 lineto stroke
+0.3 1.2 moveto
+0.4 1.2 lineto stroke
+-0.7 1.2 moveto
+-0.6 1.2 lineto stroke
+-1.2 0.2 moveto
+-1.1 0.2 lineto stroke
+-1.7 1.2 moveto
+-1.6 1.2 lineto stroke
+0.8 0.1 moveto
+0.8 0.2 lineto stroke
+-0.2 0.1 moveto
+-0.2 0.2 lineto stroke
+1.3 1.1 moveto
+1.3 1.2 lineto stroke
+0.3 1.1 moveto
+0.3 1.2 lineto stroke
+-0.7 1.1 moveto
+-0.7 1.2 lineto stroke
+-1.2 0.1 moveto
+-1.2 0.2 lineto stroke
+-1.7 1.1 moveto
+-1.7 1.2 lineto stroke
+0.8 0.1 moveto
+0.9 0.1 lineto stroke
+-0.2 0.1 moveto
+-0.1 0.1 lineto stroke
+1.3 1.1 moveto
+1.4 1.1 lineto stroke
+0.3 1.1 moveto
+0.4 1.1 lineto stroke
+-0.7 1.1 moveto
+-0.6 1.1 lineto stroke
+-1.2 0.1 moveto
+-1.1 0.1 lineto stroke
+-1.7 1.1 moveto
+-1.6 1.1 lineto stroke
+0.8 0 moveto
+0.8 0.1 lineto stroke
+1.3 1 moveto
+1.3 1.1 lineto stroke
+0.3 1 moveto
+0.3 1.1 lineto stroke
+-0.2 0 moveto
+-0.2 0.1 lineto stroke
+-0.7 1 moveto
+-0.7 1.1 lineto stroke
+-1.2 0 moveto
+-1.2 0.1 lineto stroke
+-1.7 1 moveto
+-1.7 1.1 lineto stroke
+0.4 -0.1 moveto
+0.4 0 lineto stroke
+1.4 -0.1 moveto
+1.4 0 lineto stroke
+0.9 0.9 moveto
+0.9 1 lineto stroke
+-0.1 0.9 moveto
+-0.1 1 lineto stroke
+-0.6 -0.1 moveto
+-0.6 0 lineto stroke
+-1.1 0.9 moveto
+-1.1 1 lineto stroke
+-1.6 -0.1 moveto
+-1.6 0 lineto stroke
+0.4 -0.1 moveto
+0.5 -0.1 lineto stroke
+1.4 -0.1 moveto
+1.5 -0.1 lineto stroke
+0.9 0.9 moveto
+1 0.9 lineto stroke
+-0.1 0.9 moveto
+0 0.9 lineto stroke
+-0.6 -0.1 moveto
+-0.5 -0.1 lineto stroke
+-1.1 0.9 moveto
+-1 0.9 lineto stroke
+-1.6 -0.1 moveto
+-1.5 -0.1 lineto stroke
+-2.1 0.9 moveto
+-2 0.9 lineto stroke
+0.4 -0.2 moveto
+0.4 -0.1 lineto stroke
+1.4 -0.2 moveto
+1.4 -0.1 lineto stroke
+0.9 0.8 moveto
+0.9 0.9 lineto stroke
+-0.1 0.8 moveto
+-0.1 0.9 lineto stroke
+-0.6 -0.2 moveto
+-0.6 -0.1 lineto stroke
+-1.1 0.8 moveto
+-1.1 0.9 lineto stroke
+-1.6 -0.2 moveto
+-1.6 -0.1 lineto stroke
+0.4 -0.2 moveto
+0.5 -0.2 lineto stroke
+1.4 -0.2 moveto
+1.5 -0.2 lineto stroke
+0.9 0.8 moveto
+1 0.8 lineto stroke
+-0.1 0.8 moveto
+0 0.8 lineto stroke
+-0.6 -0.2 moveto
+-0.5 -0.2 lineto stroke
+-1.1 0.8 moveto
+-1 0.8 lineto stroke
+-1.6 -0.2 moveto
+-1.5 -0.2 lineto stroke
+-2.1 0.8 moveto
+-2 0.8 lineto stroke
+0.4 -0.3 moveto
+0.4 -0.2 lineto stroke
+1.4 -0.3 moveto
+1.4 -0.2 lineto stroke
+0.9 0.7 moveto
+0.9 0.8 lineto stroke
+-0.1 0.7 moveto
+-0.1 0.8 lineto stroke
+-0.6 -0.3 moveto
+-0.6 -0.2 lineto stroke
+-1.1 0.7 moveto
+-1.1 0.8 lineto stroke
+-1.6 -0.3 moveto
+-1.6 -0.2 lineto stroke
+0.4 -0.3 moveto
+0.5 -0.3 lineto stroke
+1.4 -0.3 moveto
+1.5 -0.3 lineto stroke
+0.9 0.7 moveto
+1 0.7 lineto stroke
+-0.1 0.7 moveto
+0 0.7 lineto stroke
+-0.6 -0.3 moveto
+-0.5 -0.3 lineto stroke
+-1.1 0.7 moveto
+-1 0.7 lineto stroke
+-1.6 -0.3 moveto
+-1.5 -0.3 lineto stroke
+-2.1 0.7 moveto
+-2 0.7 lineto stroke
+0.4 -0.4 moveto
+0.4 -0.3 lineto stroke
+1.4 -0.4 moveto
+1.4 -0.3 lineto stroke
+0.9 0.6 moveto
+0.9 0.7 lineto stroke
+-0.1 0.6 moveto
+-0.1 0.7 lineto stroke
+-0.6 -0.4 moveto
+-0.6 -0.3 lineto stroke
+-1.1 0.6 moveto
+-1.1 0.7 lineto stroke
+-1.6 -0.4 moveto
+-1.6 -0.3 lineto stroke
+0.4 -0.4 moveto
+0.5 -0.4 lineto stroke
+1.4 -0.4 moveto
+1.5 -0.4 lineto stroke
+0.9 0.6 moveto
+1 0.6 lineto stroke
+-0.1 0.6 moveto
+0 0.6 lineto stroke
+-0.6 -0.4 moveto
+-0.5 -0.4 lineto stroke
+-1.1 0.6 moveto
+-1 0.6 lineto stroke
+-1.6 -0.4 moveto
+-1.5 -0.4 lineto stroke
+-2.1 0.6 moveto
+-2 0.6 lineto stroke
+0.4 -0.5 moveto
+0.4 -0.4 lineto stroke
+1.4 -0.5 moveto
+1.4 -0.4 lineto stroke
+0.9 0.5 moveto
+0.9 0.6 lineto stroke
+-0.1 0.5 moveto
+-0.1 0.6 lineto stroke
+-0.6 -0.5 moveto
+-0.6 -0.4 lineto stroke
+1.4 1.5 moveto
+1.4 1.6 lineto stroke
+0.4 1.5 moveto
+0.4 1.6 lineto stroke
+-0.6 1.5 moveto
+-0.6 1.6 lineto stroke
+-1.1 0.5 moveto
+-1.1 0.6 lineto stroke
+-1.6 -0.5 moveto
+-1.6 -0.4 lineto stroke
+-1.6 1.5 moveto
+-1.6 1.6 lineto stroke
+0.9 0.5 moveto
+1 0.5 lineto stroke
+-0.1 0.5 moveto
+0 0.5 lineto stroke
+1.4 1.5 moveto
+1.5 1.5 lineto stroke
+0.4 1.5 moveto
+0.5 1.5 lineto stroke
+-0.6 1.5 moveto
+-0.5 1.5 lineto stroke
+-1.1 0.5 moveto
+-1 0.5 lineto stroke
+-1.6 1.5 moveto
+-1.5 1.5 lineto stroke
+-2.1 0.5 moveto
+-2 0.5 lineto stroke
+0.9 0.4 moveto
+0.9 0.5 lineto stroke
+-0.1 0.4 moveto
+-0.1 0.5 lineto stroke
+1.4 1.4 moveto
+1.4 1.5 lineto stroke
+0.4 1.4 moveto
+0.4 1.5 lineto stroke
+-0.6 1.4 moveto
+-0.6 1.5 lineto stroke
+-1.1 0.4 moveto
+-1.1 0.5 lineto stroke
+-1.6 1.4 moveto
+-1.6 1.5 lineto stroke
+0.9 0.4 moveto
+1 0.4 lineto stroke
+-0.1 0.4 moveto
+0 0.4 lineto stroke
+1.4 1.4 moveto
+1.5 1.4 lineto stroke
+0.4 1.4 moveto
+0.5 1.4 lineto stroke
+-0.6 1.4 moveto
+-0.5 1.4 lineto stroke
+-1.1 0.4 moveto
+-1 0.4 lineto stroke
+-1.6 1.4 moveto
+-1.5 1.4 lineto stroke
+-2.1 0.4 moveto
+-2 0.4 lineto stroke
+0.9 0.3 moveto
+0.9 0.4 lineto stroke
+-0.1 0.3 moveto
+-0.1 0.4 lineto stroke
+1.4 1.3 moveto
+1.4 1.4 lineto stroke
+0.4 1.3 moveto
+0.4 1.4 lineto stroke
+-0.6 1.3 moveto
+-0.6 1.4 lineto stroke
+-1.1 0.3 moveto
+-1.1 0.4 lineto stroke
+-1.6 1.3 moveto
+-1.6 1.4 lineto stroke
+0.9 0.3 moveto
+1 0.3 lineto stroke
+-0.1 0.3 moveto
+0 0.3 lineto stroke
+1.4 1.3 moveto
+1.5 1.3 lineto stroke
+0.4 1.3 moveto
+0.5 1.3 lineto stroke
+-0.6 1.3 moveto
+-0.5 1.3 lineto stroke
+-1.1 0.3 moveto
+-1 0.3 lineto stroke
+-1.6 1.3 moveto
+-1.5 1.3 lineto stroke
+-2.1 0.3 moveto
+-2 0.3 lineto stroke
+0.9 0.2 moveto
+0.9 0.3 lineto stroke
+-0.1 0.2 moveto
+-0.1 0.3 lineto stroke
+1.4 1.2 moveto
+1.4 1.3 lineto stroke
+0.4 1.2 moveto
+0.4 1.3 lineto stroke
+-0.6 1.2 moveto
+-0.6 1.3 lineto stroke
+-1.1 0.2 moveto
+-1.1 0.3 lineto stroke
+-1.6 1.2 moveto
+-1.6 1.3 lineto stroke
+0.9 0.2 moveto
+1 0.2 lineto stroke
+-0.1 0.2 moveto
+0 0.2 lineto stroke
+1.4 1.2 moveto
+1.5 1.2 lineto stroke
+0.4 1.2 moveto
+0.5 1.2 lineto stroke
+-0.6 1.2 moveto
+-0.5 1.2 lineto stroke
+-1.1 0.2 moveto
+-1 0.2 lineto stroke
+-1.6 1.2 moveto
+-1.5 1.2 lineto stroke
+-2.1 0.2 moveto
+-2 0.2 lineto stroke
+0.9 0.1 moveto
+0.9 0.2 lineto stroke
+-0.1 0.1 moveto
+-0.1 0.2 lineto stroke
+1.4 1.1 moveto
+1.4 1.2 lineto stroke
+0.4 1.1 moveto
+0.4 1.2 lineto stroke
+-0.6 1.1 moveto
+-0.6 1.2 lineto stroke
+-1.1 0.1 moveto
+-1.1 0.2 lineto stroke
+-1.6 1.1 moveto
+-1.6 1.2 lineto stroke
+0.9 0.1 moveto
+1 0.1 lineto stroke
+-0.1 0.1 moveto
+0 0.1 lineto stroke
+1.4 1.1 moveto
+1.5 1.1 lineto stroke
+0.4 1.1 moveto
+0.5 1.1 lineto stroke
+-0.6 1.1 moveto
+-0.5 1.1 lineto stroke
+-1.1 0.1 moveto
+-1 0.1 lineto stroke
+-1.6 1.1 moveto
+-1.5 1.1 lineto stroke
+-2.1 0.1 moveto
+-2 0.1 lineto stroke
+0.9 0 moveto
+0.9 0.1 lineto stroke
+1.4 1 moveto
+1.4 1.1 lineto stroke
+0.4 1 moveto
+0.4 1.1 lineto stroke
+-0.1 0 moveto
+-0.1 0.1 lineto stroke
+-0.6 1 moveto
+-0.6 1.1 lineto stroke
+-1.1 0 moveto
+-1.1 0.1 lineto stroke
+-1.6 1 moveto
+-1.6 1.1 lineto stroke
+0 0 moveto
+0 0.1 lineto stroke
+1 0 moveto
+1 0.1 lineto stroke
+1.5 1 moveto
+1.5 1.1 lineto stroke
+0.5 1 moveto
+0.5 1.1 lineto stroke
+-0.5 1 moveto
+-0.5 1.1 lineto stroke
+-1 0 moveto
+-1 0.1 lineto stroke
+-1.5 1 moveto
+-1.5 1.1 lineto stroke
+-2 0 moveto
+-2 0.1 lineto stroke
+0 0 moveto
+0.1 0 lineto stroke
+1 0 moveto
+1.1 0 lineto stroke
+1.5 1 moveto
+1.6 1 lineto stroke
+0.5 1 moveto
+0.6 1 lineto stroke
+-0.5 1 moveto
+-0.4 1 lineto stroke
+-1 0 moveto
+-0.9 0 lineto stroke
+-1.5 1 moveto
+-1.4 1 lineto stroke
+-2 0 moveto
+-1.9 0 lineto stroke
+0.1 0 moveto
+0.1 0.1 lineto stroke
+1.1 0 moveto
+1.1 0.1 lineto stroke
+1.6 1 moveto
+1.6 1.1 lineto stroke
+0.6 1 moveto
+0.6 1.1 lineto stroke
+-0.4 1 moveto
+-0.4 1.1 lineto stroke
+-0.9 0 moveto
+-0.9 0.1 lineto stroke
+-1.4 1 moveto
+-1.4 1.1 lineto stroke
+-1.9 0 moveto
+-1.9 0.1 lineto stroke
+0.1 0 moveto
+0.2 0 lineto stroke
+1.1 0 moveto
+1.2 0 lineto stroke
+1.6 1 moveto
+1.7 1 lineto stroke
+0.6 1 moveto
+0.7 1 lineto stroke
+-0.4 1 moveto
+-0.3 1 lineto stroke
+-0.9 0 moveto
+-0.8 0 lineto stroke
+-1.4 1 moveto
+-1.3 1 lineto stroke
+-1.9 0 moveto
+-1.8 0 lineto stroke
+0.2 0 moveto
+0.2 0.1 lineto stroke
+1.2 0 moveto
+1.2 0.1 lineto stroke
+1.7 1 moveto
+1.7 1.1 lineto stroke
+0.7 1 moveto
+0.7 1.1 lineto stroke
+-0.3 1 moveto
+-0.3 1.1 lineto stroke
+-0.8 0 moveto
+-0.8 0.1 lineto stroke
+-1.3 1 moveto
+-1.3 1.1 lineto stroke
+-1.8 0 moveto
+-1.8 0.1 lineto stroke
+0.2 0 moveto
+0.3 0 lineto stroke
+1.2 0 moveto
+1.3 0 lineto stroke
+1.7 1 moveto
+1.8 1 lineto stroke
+0.7 1 moveto
+0.8 1 lineto stroke
+-0.3 1 moveto
+-0.2 1 lineto stroke
+-0.8 0 moveto
+-0.7 0 lineto stroke
+-1.3 1 moveto
+-1.2 1 lineto stroke
+-1.8 0 moveto
+-1.7 0 lineto stroke
+0.3 0 moveto
+0.3 0.1 lineto stroke
+1.3 0 moveto
+1.3 0.1 lineto stroke
+0.8 1 moveto
+0.8 1.1 lineto stroke
+-0.2 1 moveto
+-0.2 1.1 lineto stroke
+-0.7 0 moveto
+-0.7 0.1 lineto stroke
+-1.2 1 moveto
+-1.2 1.1 lineto stroke
+-1.7 0 moveto
+-1.7 0.1 lineto stroke
+0.3 0 moveto
+0.4 0 lineto stroke
+1.3 0 moveto
+1.4 0 lineto stroke
+0.8 1 moveto
+0.9 1 lineto stroke
+-0.2 1 moveto
+-0.1 1 lineto stroke
+-0.7 0 moveto
+-0.6 0 lineto stroke
+-1.2 1 moveto
+-1.1 1 lineto stroke
+-1.7 0 moveto
+-1.6 0 lineto stroke
+0.4 0 moveto
+0.4 0.1 lineto stroke
+1.4 0 moveto
+1.4 0.1 lineto stroke
+0.9 1 moveto
+0.9 1.1 lineto stroke
+-0.1 1 moveto
+-0.1 1.1 lineto stroke
+-0.6 0 moveto
+-0.6 0.1 lineto stroke
+-1.1 1 moveto
+-1.1 1.1 lineto stroke
+-1.6 0 moveto
+-1.6 0.1 lineto stroke
+0 0.1 moveto
+0 0.2 lineto stroke
+1 0.1 moveto
+1 0.2 lineto stroke
+1.5 1.1 moveto
+1.5 1.2 lineto stroke
+0.5 1.1 moveto
+0.5 1.2 lineto stroke
+-0.5 1.1 moveto
+-0.5 1.2 lineto stroke
+-1 0.1 moveto
+-1 0.2 lineto stroke
+-1.5 1.1 moveto
+-1.5 1.2 lineto stroke
+-2 0.1 moveto
+-2 0.2 lineto stroke
+0.1 0.1 moveto
+0 0.1 lineto stroke
+1.1 0.1 moveto
+1 0.1 lineto stroke
+1.6 1.1 moveto
+1.5 1.1 lineto stroke
+0.6 1.1 moveto
+0.5 1.1 lineto stroke
+-0.4 1.1 moveto
+-0.5 1.1 lineto stroke
+-0.9 0.1 moveto
+-1 0.1 lineto stroke
+-1.4 1.1 moveto
+-1.5 1.1 lineto stroke
+-1.9 0.1 moveto
+-2 0.1 lineto stroke
+0.1 0.1 moveto
+0.1 0.2 lineto stroke
+1.1 0.1 moveto
+1.1 0.2 lineto stroke
+1.6 1.1 moveto
+1.6 1.2 lineto stroke
+0.6 1.1 moveto
+0.6 1.2 lineto stroke
+-0.4 1.1 moveto
+-0.4 1.2 lineto stroke
+-0.9 0.1 moveto
+-0.9 0.2 lineto stroke
+-1.4 1.1 moveto
+-1.4 1.2 lineto stroke
+-1.9 0.1 moveto
+-1.9 0.2 lineto stroke
+0.2 0.1 moveto
+0.1 0.1 lineto stroke
+1.2 0.1 moveto
+1.1 0.1 lineto stroke
+1.7 1.1 moveto
+1.6 1.1 lineto stroke
+0.7 1.1 moveto
+0.6 1.1 lineto stroke
+-0.3 1.1 moveto
+-0.4 1.1 lineto stroke
+-0.8 0.1 moveto
+-0.9 0.1 lineto stroke
+-1.3 1.1 moveto
+-1.4 1.1 lineto stroke
+-1.8 0.1 moveto
+-1.9 0.1 lineto stroke
+0.2 0.1 moveto
+0.2 0.2 lineto stroke
+1.2 0.1 moveto
+1.2 0.2 lineto stroke
+1.7 1.1 moveto
+1.7 1.2 lineto stroke
+0.7 1.1 moveto
+0.7 1.2 lineto stroke
+-0.3 1.1 moveto
+-0.3 1.2 lineto stroke
+-0.8 0.1 moveto
+-0.8 0.2 lineto stroke
+-1.3 1.1 moveto
+-1.3 1.2 lineto stroke
+-1.8 0.1 moveto
+-1.8 0.2 lineto stroke
+0.3 0.1 moveto
+0.2 0.1 lineto stroke
+1.3 0.1 moveto
+1.2 0.1 lineto stroke
+1.8 1.1 moveto
+1.7 1.1 lineto stroke
+0.8 1.1 moveto
+0.7 1.1 lineto stroke
+-0.2 1.1 moveto
+-0.3 1.1 lineto stroke
+-0.7 0.1 moveto
+-0.8 0.1 lineto stroke
+-1.2 1.1 moveto
+-1.3 1.1 lineto stroke
+-1.7 0.1 moveto
+-1.8 0.1 lineto stroke
+0.3 0.1 moveto
+0.3 0.2 lineto stroke
+1.3 0.1 moveto
+1.3 0.2 lineto stroke
+0.8 1.1 moveto
+0.8 1.2 lineto stroke
+-0.2 1.1 moveto
+-0.2 1.2 lineto stroke
+-0.7 0.1 moveto
+-0.7 0.2 lineto stroke
+-1.2 1.1 moveto
+-1.2 1.2 lineto stroke
+-1.7 0.1 moveto
+-1.7 0.2 lineto stroke
+0.4 0.1 moveto
+0.3 0.1 lineto stroke
+1.4 0.1 moveto
+1.3 0.1 lineto stroke
+0.9 1.1 moveto
+0.8 1.1 lineto stroke
+-0.1 1.1 moveto
+-0.2 1.1 lineto stroke
+-0.6 0.1 moveto
+-0.7 0.1 lineto stroke
+-1.1 1.1 moveto
+-1.2 1.1 lineto stroke
+-1.6 0.1 moveto
+-1.7 0.1 lineto stroke
+0.4 0.1 moveto
+0.4 0.2 lineto stroke
+1.4 0.1 moveto
+1.4 0.2 lineto stroke
+0.9 1.1 moveto
+0.9 1.2 lineto stroke
+-0.1 1.1 moveto
+-0.1 1.2 lineto stroke
+-0.6 0.1 moveto
+-0.6 0.2 lineto stroke
+-1.1 1.1 moveto
+-1.1 1.2 lineto stroke
+-1.6 0.1 moveto
+-1.6 0.2 lineto stroke
+0.5 0.1 moveto
+0.5 0.2 lineto stroke
+1.5 0.1 moveto
+1.5 0.2 lineto stroke
+1 1.1 moveto
+1 1.2 lineto stroke
+0 1.1 moveto
+0 1.2 lineto stroke
+-0.5 0.1 moveto
+-0.5 0.2 lineto stroke
+-1 1.1 moveto
+-1 1.2 lineto stroke
+-1.5 0.1 moveto
+-1.5 0.2 lineto stroke
+-2 1.1 moveto
+-2 1.2 lineto stroke
+0.5 0.1 moveto
+0.4 0.1 lineto stroke
+1.5 0.1 moveto
+1.4 0.1 lineto stroke
+1 1.1 moveto
+0.9 1.1 lineto stroke
+0 1.1 moveto
+-0.1 1.1 lineto stroke
+-0.5 0.1 moveto
+-0.6 0.1 lineto stroke
+-1 1.1 moveto
+-1.1 1.1 lineto stroke
+-1.5 0.1 moveto
+-1.6 0.1 lineto stroke
+-2 1.1 moveto
+-2.1 1.1 lineto stroke
+0 0.2 moveto
+0 0.3 lineto stroke
+1 0.2 moveto
+1 0.3 lineto stroke
+1.5 1.2 moveto
+1.5 1.3 lineto stroke
+0.5 1.2 moveto
+0.5 1.3 lineto stroke
+-0.5 1.2 moveto
+-0.5 1.3 lineto stroke
+-1 0.2 moveto
+-1 0.3 lineto stroke
+-1.5 1.2 moveto
+-1.5 1.3 lineto stroke
+-2 0.2 moveto
+-2 0.3 lineto stroke
+0.1 0.2 moveto
+0 0.2 lineto stroke
+1.1 0.2 moveto
+1 0.2 lineto stroke
+1.6 1.2 moveto
+1.5 1.2 lineto stroke
+0.6 1.2 moveto
+0.5 1.2 lineto stroke
+-0.4 1.2 moveto
+-0.5 1.2 lineto stroke
+-0.9 0.2 moveto
+-1 0.2 lineto stroke
+-1.4 1.2 moveto
+-1.5 1.2 lineto stroke
+-1.9 0.2 moveto
+-2 0.2 lineto stroke
+0.1 0.2 moveto
+0.1 0.3 lineto stroke
+1.1 0.2 moveto
+1.1 0.3 lineto stroke
+1.6 1.2 moveto
+1.6 1.3 lineto stroke
+0.6 1.2 moveto
+0.6 1.3 lineto stroke
+-0.4 1.2 moveto
+-0.4 1.3 lineto stroke
+-0.9 0.2 moveto
+-0.9 0.3 lineto stroke
+-1.4 1.2 moveto
+-1.4 1.3 lineto stroke
+-1.9 0.2 moveto
+-1.9 0.3 lineto stroke
+0.2 0.2 moveto
+0.1 0.2 lineto stroke
+1.2 0.2 moveto
+1.1 0.2 lineto stroke
+1.7 1.2 moveto
+1.6 1.2 lineto stroke
+0.7 1.2 moveto
+0.6 1.2 lineto stroke
+-0.3 1.2 moveto
+-0.4 1.2 lineto stroke
+-0.8 0.2 moveto
+-0.9 0.2 lineto stroke
+-1.3 1.2 moveto
+-1.4 1.2 lineto stroke
+-1.8 0.2 moveto
+-1.9 0.2 lineto stroke
+0.2 0.2 moveto
+0.2 0.3 lineto stroke
+1.2 0.2 moveto
+1.2 0.3 lineto stroke
+1.7 1.2 moveto
+1.7 1.3 lineto stroke
+0.7 1.2 moveto
+0.7 1.3 lineto stroke
+-0.3 1.2 moveto
+-0.3 1.3 lineto stroke
+-0.8 0.2 moveto
+-0.8 0.3 lineto stroke
+-1.3 1.2 moveto
+-1.3 1.3 lineto stroke
+-1.8 0.2 moveto
+-1.8 0.3 lineto stroke
+0.3 0.2 moveto
+0.2 0.2 lineto stroke
+1.3 0.2 moveto
+1.2 0.2 lineto stroke
+1.8 1.2 moveto
+1.7 1.2 lineto stroke
+0.8 1.2 moveto
+0.7 1.2 lineto stroke
+-0.2 1.2 moveto
+-0.3 1.2 lineto stroke
+-0.7 0.2 moveto
+-0.8 0.2 lineto stroke
+-1.2 1.2 moveto
+-1.3 1.2 lineto stroke
+-1.7 0.2 moveto
+-1.8 0.2 lineto stroke
+0.3 0.2 moveto
+0.3 0.3 lineto stroke
+1.3 0.2 moveto
+1.3 0.3 lineto stroke
+0.8 1.2 moveto
+0.8 1.3 lineto stroke
+-0.2 1.2 moveto
+-0.2 1.3 lineto stroke
+-0.7 0.2 moveto
+-0.7 0.3 lineto stroke
+-1.2 1.2 moveto
+-1.2 1.3 lineto stroke
+-1.7 0.2 moveto
+-1.7 0.3 lineto stroke
+0.4 0.2 moveto
+0.3 0.2 lineto stroke
+1.4 0.2 moveto
+1.3 0.2 lineto stroke
+0.9 1.2 moveto
+0.8 1.2 lineto stroke
+-0.1 1.2 moveto
+-0.2 1.2 lineto stroke
+-0.6 0.2 moveto
+-0.7 0.2 lineto stroke
+-1.1 1.2 moveto
+-1.2 1.2 lineto stroke
+-1.6 0.2 moveto
+-1.7 0.2 lineto stroke
+0.4 0.2 moveto
+0.4 0.3 lineto stroke
+1.4 0.2 moveto
+1.4 0.3 lineto stroke
+0.9 1.2 moveto
+0.9 1.3 lineto stroke
+-0.1 1.2 moveto
+-0.1 1.3 lineto stroke
+-0.6 0.2 moveto
+-0.6 0.3 lineto stroke
+-1.1 1.2 moveto
+-1.1 1.3 lineto stroke
+-1.6 0.2 moveto
+-1.6 0.3 lineto stroke
+0.5 0.2 moveto
+0.5 0.3 lineto stroke
+1.5 0.2 moveto
+1.5 0.3 lineto stroke
+1 1.2 moveto
+1 1.3 lineto stroke
+0 1.2 moveto
+0 1.3 lineto stroke
+-0.5 0.2 moveto
+-0.5 0.3 lineto stroke
+-1 1.2 moveto
+-1 1.3 lineto stroke
+-1.5 0.2 moveto
+-1.5 0.3 lineto stroke
+-2 1.2 moveto
+-2 1.3 lineto stroke
+0.5 0.2 moveto
+0.4 0.2 lineto stroke
+1.5 0.2 moveto
+1.4 0.2 lineto stroke
+1 1.2 moveto
+0.9 1.2 lineto stroke
+0 1.2 moveto
+-0.1 1.2 lineto stroke
+-0.5 0.2 moveto
+-0.6 0.2 lineto stroke
+-1 1.2 moveto
+-1.1 1.2 lineto stroke
+-1.5 0.2 moveto
+-1.6 0.2 lineto stroke
+-2 1.2 moveto
+-2.1 1.2 lineto stroke
+0 0.3 moveto
+0 0.4 lineto stroke
+1 0.3 moveto
+1 0.4 lineto stroke
+1.5 1.3 moveto
+1.5 1.4 lineto stroke
+0.5 1.3 moveto
+0.5 1.4 lineto stroke
+-0.5 1.3 moveto
+-0.5 1.4 lineto stroke
+-1 0.3 moveto
+-1 0.4 lineto stroke
+-1.5 1.3 moveto
+-1.5 1.4 lineto stroke
+-2 0.3 moveto
+-2 0.4 lineto stroke
+0.1 0.3 moveto
+0 0.3 lineto stroke
+1.1 0.3 moveto
+1 0.3 lineto stroke
+1.6 1.3 moveto
+1.5 1.3 lineto stroke
+0.6 1.3 moveto
+0.5 1.3 lineto stroke
+-0.4 1.3 moveto
+-0.5 1.3 lineto stroke
+-0.9 0.3 moveto
+-1 0.3 lineto stroke
+-1.4 1.3 moveto
+-1.5 1.3 lineto stroke
+-1.9 0.3 moveto
+-2 0.3 lineto stroke
+0.1 0.3 moveto
+0.1 0.4 lineto stroke
+1.1 0.3 moveto
+1.1 0.4 lineto stroke
+1.6 1.3 moveto
+1.6 1.4 lineto stroke
+0.6 1.3 moveto
+0.6 1.4 lineto stroke
+-0.4 1.3 moveto
+-0.4 1.4 lineto stroke
+-0.9 0.3 moveto
+-0.9 0.4 lineto stroke
+-1.4 1.3 moveto
+-1.4 1.4 lineto stroke
+-1.9 0.3 moveto
+-1.9 0.4 lineto stroke
+0.2 0.3 moveto
+0.1 0.3 lineto stroke
+1.2 0.3 moveto
+1.1 0.3 lineto stroke
+1.7 1.3 moveto
+1.6 1.3 lineto stroke
+0.7 1.3 moveto
+0.6 1.3 lineto stroke
+-0.3 1.3 moveto
+-0.4 1.3 lineto stroke
+-0.8 0.3 moveto
+-0.9 0.3 lineto stroke
+-1.3 1.3 moveto
+-1.4 1.3 lineto stroke
+-1.8 0.3 moveto
+-1.9 0.3 lineto stroke
+0.2 0.3 moveto
+0.2 0.4 lineto stroke
+1.2 0.3 moveto
+1.2 0.4 lineto stroke
+1.7 1.3 moveto
+1.7 1.4 lineto stroke
+0.7 1.3 moveto
+0.7 1.4 lineto stroke
+-0.3 1.3 moveto
+-0.3 1.4 lineto stroke
+-0.8 0.3 moveto
+-0.8 0.4 lineto stroke
+-1.3 1.3 moveto
+-1.3 1.4 lineto stroke
+-1.8 0.3 moveto
+-1.8 0.4 lineto stroke
+0.3 0.3 moveto
+0.2 0.3 lineto stroke
+1.3 0.3 moveto
+1.2 0.3 lineto stroke
+1.8 1.3 moveto
+1.7 1.3 lineto stroke
+0.8 1.3 moveto
+0.7 1.3 lineto stroke
+-0.2 1.3 moveto
+-0.3 1.3 lineto stroke
+-0.7 0.3 moveto
+-0.8 0.3 lineto stroke
+-1.2 1.3 moveto
+-1.3 1.3 lineto stroke
+-1.7 0.3 moveto
+-1.8 0.3 lineto stroke
+0.3 0.3 moveto
+0.3 0.4 lineto stroke
+1.3 0.3 moveto
+1.3 0.4 lineto stroke
+0.8 1.3 moveto
+0.8 1.4 lineto stroke
+-0.2 1.3 moveto
+-0.2 1.4 lineto stroke
+-0.7 0.3 moveto
+-0.7 0.4 lineto stroke
+-1.2 1.3 moveto
+-1.2 1.4 lineto stroke
+-1.7 0.3 moveto
+-1.7 0.4 lineto stroke
+0.4 0.3 moveto
+0.3 0.3 lineto stroke
+1.4 0.3 moveto
+1.3 0.3 lineto stroke
+0.9 1.3 moveto
+0.8 1.3 lineto stroke
+-0.1 1.3 moveto
+-0.2 1.3 lineto stroke
+-0.6 0.3 moveto
+-0.7 0.3 lineto stroke
+-1.1 1.3 moveto
+-1.2 1.3 lineto stroke
+-1.6 0.3 moveto
+-1.7 0.3 lineto stroke
+0.4 0.3 moveto
+0.4 0.4 lineto stroke
+1.4 0.3 moveto
+1.4 0.4 lineto stroke
+0.9 1.3 moveto
+0.9 1.4 lineto stroke
+-0.1 1.3 moveto
+-0.1 1.4 lineto stroke
+-0.6 0.3 moveto
+-0.6 0.4 lineto stroke
+-1.1 1.3 moveto
+-1.1 1.4 lineto stroke
+-1.6 0.3 moveto
+-1.6 0.4 lineto stroke
+0.5 0.3 moveto
+0.5 0.4 lineto stroke
+1.5 0.3 moveto
+1.5 0.4 lineto stroke
+1 1.3 moveto
+1 1.4 lineto stroke
+0 1.3 moveto
+0 1.4 lineto stroke
+-0.5 0.3 moveto
+-0.5 0.4 lineto stroke
+-1 1.3 moveto
+-1 1.4 lineto stroke
+-1.5 0.3 moveto
+-1.5 0.4 lineto stroke
+-2 1.3 moveto
+-2 1.4 lineto stroke
+0.5 0.3 moveto
+0.4 0.3 lineto stroke
+1.5 0.3 moveto
+1.4 0.3 lineto stroke
+1 1.3 moveto
+0.9 1.3 lineto stroke
+0 1.3 moveto
+-0.1 1.3 lineto stroke
+-0.5 0.3 moveto
+-0.6 0.3 lineto stroke
+-1 1.3 moveto
+-1.1 1.3 lineto stroke
+-1.5 0.3 moveto
+-1.6 0.3 lineto stroke
+-2 1.3 moveto
+-2.1 1.3 lineto stroke
+0 0.4 moveto
+0 0.5 lineto stroke
+1 0.4 moveto
+1 0.5 lineto stroke
+1.5 1.4 moveto
+1.5 1.5 lineto stroke
+0.5 1.4 moveto
+0.5 1.5 lineto stroke
+-0.5 1.4 moveto
+-0.5 1.5 lineto stroke
+-1 0.4 moveto
+-1 0.5 lineto stroke
+-1.5 1.4 moveto
+-1.5 1.5 lineto stroke
+-2 0.4 moveto
+-2 0.5 lineto stroke
+0.1 0.4 moveto
+0 0.4 lineto stroke
+1.1 0.4 moveto
+1 0.4 lineto stroke
+1.6 1.4 moveto
+1.5 1.4 lineto stroke
+0.6 1.4 moveto
+0.5 1.4 lineto stroke
+-0.4 1.4 moveto
+-0.5 1.4 lineto stroke
+-0.9 0.4 moveto
+-1 0.4 lineto stroke
+-1.4 1.4 moveto
+-1.5 1.4 lineto stroke
+-1.9 0.4 moveto
+-2 0.4 lineto stroke
+0.1 0.4 moveto
+0.1 0.5 lineto stroke
+1.1 0.4 moveto
+1.1 0.5 lineto stroke
+1.6 1.4 moveto
+1.6 1.5 lineto stroke
+0.6 1.4 moveto
+0.6 1.5 lineto stroke
+-0.4 1.4 moveto
+-0.4 1.5 lineto stroke
+-0.9 0.4 moveto
+-0.9 0.5 lineto stroke
+-1.4 1.4 moveto
+-1.4 1.5 lineto stroke
+-1.9 0.4 moveto
+-1.9 0.5 lineto stroke
+0.2 0.4 moveto
+0.1 0.4 lineto stroke
+1.2 0.4 moveto
+1.1 0.4 lineto stroke
+1.7 1.4 moveto
+1.6 1.4 lineto stroke
+0.7 1.4 moveto
+0.6 1.4 lineto stroke
+-0.3 1.4 moveto
+-0.4 1.4 lineto stroke
+-0.8 0.4 moveto
+-0.9 0.4 lineto stroke
+-1.3 1.4 moveto
+-1.4 1.4 lineto stroke
+-1.8 0.4 moveto
+-1.9 0.4 lineto stroke
+0.2 0.4 moveto
+0.2 0.5 lineto stroke
+1.2 0.4 moveto
+1.2 0.5 lineto stroke
+1.7 1.4 moveto
+1.7 1.5 lineto stroke
+0.7 1.4 moveto
+0.7 1.5 lineto stroke
+-0.3 1.4 moveto
+-0.3 1.5 lineto stroke
+-0.8 0.4 moveto
+-0.8 0.5 lineto stroke
+-1.3 1.4 moveto
+-1.3 1.5 lineto stroke
+-1.8 0.4 moveto
+-1.8 0.5 lineto stroke
+0.3 0.4 moveto
+0.2 0.4 lineto stroke
+1.3 0.4 moveto
+1.2 0.4 lineto stroke
+1.8 1.4 moveto
+1.7 1.4 lineto stroke
+0.8 1.4 moveto
+0.7 1.4 lineto stroke
+-0.2 1.4 moveto
+-0.3 1.4 lineto stroke
+-0.7 0.4 moveto
+-0.8 0.4 lineto stroke
+-1.2 1.4 moveto
+-1.3 1.4 lineto stroke
+-1.7 0.4 moveto
+-1.8 0.4 lineto stroke
+0.3 0.4 moveto
+0.3 0.5 lineto stroke
+1.3 0.4 moveto
+1.3 0.5 lineto stroke
+0.8 1.4 moveto
+0.8 1.5 lineto stroke
+-0.2 1.4 moveto
+-0.2 1.5 lineto stroke
+-0.7 0.4 moveto
+-0.7 0.5 lineto stroke
+-1.2 1.4 moveto
+-1.2 1.5 lineto stroke
+-1.7 0.4 moveto
+-1.7 0.5 lineto stroke
+0.4 0.4 moveto
+0.3 0.4 lineto stroke
+1.4 0.4 moveto
+1.3 0.4 lineto stroke
+0.9 1.4 moveto
+0.8 1.4 lineto stroke
+-0.1 1.4 moveto
+-0.2 1.4 lineto stroke
+-0.6 0.4 moveto
+-0.7 0.4 lineto stroke
+-1.1 1.4 moveto
+-1.2 1.4 lineto stroke
+-1.6 0.4 moveto
+-1.7 0.4 lineto stroke
+0.4 0.4 moveto
+0.4 0.5 lineto stroke
+1.4 0.4 moveto
+1.4 0.5 lineto stroke
+0.9 1.4 moveto
+0.9 1.5 lineto stroke
+-0.1 1.4 moveto
+-0.1 1.5 lineto stroke
+-0.6 0.4 moveto
+-0.6 0.5 lineto stroke
+-1.1 1.4 moveto
+-1.1 1.5 lineto stroke
+-1.6 0.4 moveto
+-1.6 0.5 lineto stroke
+0.5 0.4 moveto
+0.5 0.5 lineto stroke
+1.5 0.4 moveto
+1.5 0.5 lineto stroke
+1 1.4 moveto
+1 1.5 lineto stroke
+0 1.4 moveto
+0 1.5 lineto stroke
+-0.5 0.4 moveto
+-0.5 0.5 lineto stroke
+-1 1.4 moveto
+-1 1.5 lineto stroke
+-1.5 0.4 moveto
+-1.5 0.5 lineto stroke
+-2 1.4 moveto
+-2 1.5 lineto stroke
+0.5 0.4 moveto
+0.4 0.4 lineto stroke
+1.5 0.4 moveto
+1.4 0.4 lineto stroke
+1 1.4 moveto
+0.9 1.4 lineto stroke
+0 1.4 moveto
+-0.1 1.4 lineto stroke
+-0.5 0.4 moveto
+-0.6 0.4 lineto stroke
+-1 1.4 moveto
+-1.1 1.4 lineto stroke
+-1.5 0.4 moveto
+-1.6 0.4 lineto stroke
+-2 1.4 moveto
+-2.1 1.4 lineto stroke
+0 0.5 moveto
+0 0.6 lineto stroke
+1 0.5 moveto
+1 0.6 lineto stroke
+1.5 1.5 moveto
+1.5 1.6 lineto stroke
+0.5 1.5 moveto
+0.5 1.6 lineto stroke
+-0.5 1.5 moveto
+-0.5 1.6 lineto stroke
+-1 0.5 moveto
+-1 0.6 lineto stroke
+-1.5 -0.5 moveto
+-1.5 -0.4 lineto stroke
+-0.5 -0.5 moveto
+-0.5 -0.4 lineto stroke
+0.5 -0.5 moveto
+0.5 -0.4 lineto stroke
+1.5 -0.5 moveto
+1.5 -0.4 lineto stroke
+-1.5 1.5 moveto
+-1.5 1.6 lineto stroke
+-2 0.5 moveto
+-2 0.6 lineto stroke
+0.1 0.5 moveto
+0 0.5 lineto stroke
+1.1 0.5 moveto
+1 0.5 lineto stroke
+1.6 1.5 moveto
+1.5 1.5 lineto stroke
+0.6 1.5 moveto
+0.5 1.5 lineto stroke
+-0.4 1.5 moveto
+-0.5 1.5 lineto stroke
+-0.9 0.5 moveto
+-1 0.5 lineto stroke
+-1.4 1.5 moveto
+-1.5 1.5 lineto stroke
+-1.9 0.5 moveto
+-2 0.5 lineto stroke
+0.1 0.5 moveto
+0.1 0.6 lineto stroke
+1.1 0.5 moveto
+1.1 0.6 lineto stroke
+1.6 1.5 moveto
+1.6 1.6 lineto stroke
+0.6 1.5 moveto
+0.6 1.6 lineto stroke
+-0.4 1.5 moveto
+-0.4 1.6 lineto stroke
+-0.9 0.5 moveto
+-0.9 0.6 lineto stroke
+-1.4 -0.5 moveto
+-1.4 -0.4 lineto stroke
+-0.4 -0.5 moveto
+-0.4 -0.4 lineto stroke
+0.6 -0.5 moveto
+0.6 -0.4 lineto stroke
+1.6 -0.5 moveto
+1.6 -0.4 lineto stroke
+-1.4 1.5 moveto
+-1.4 1.6 lineto stroke
+-1.9 0.5 moveto
+-1.9 0.6 lineto stroke
+0.2 0.5 moveto
+0.1 0.5 lineto stroke
+1.2 0.5 moveto
+1.1 0.5 lineto stroke
+1.7 1.5 moveto
+1.6 1.5 lineto stroke
+0.7 1.5 moveto
+0.6 1.5 lineto stroke
+-0.3 1.5 moveto
+-0.4 1.5 lineto stroke
+-0.8 0.5 moveto
+-0.9 0.5 lineto stroke
+-1.3 1.5 moveto
+-1.4 1.5 lineto stroke
+-1.8 0.5 moveto
+-1.9 0.5 lineto stroke
+0.2 0.5 moveto
+0.2 0.6 lineto stroke
+1.2 0.5 moveto
+1.2 0.6 lineto stroke
+1.7 1.5 moveto
+1.7 1.6 lineto stroke
+0.7 1.5 moveto
+0.7 1.6 lineto stroke
+-0.3 1.5 moveto
+-0.3 1.6 lineto stroke
+-0.8 0.5 moveto
+-0.8 0.6 lineto stroke
+-1.3 -0.5 moveto
+-1.3 -0.4 lineto stroke
+-0.3 -0.5 moveto
+-0.3 -0.4 lineto stroke
+0.7 -0.5 moveto
+0.7 -0.4 lineto stroke
+-1.3 1.5 moveto
+-1.3 1.6 lineto stroke
+-1.8 0.5 moveto
+-1.8 0.6 lineto stroke
+0.3 0.5 moveto
+0.2 0.5 lineto stroke
+1.3 0.5 moveto
+1.2 0.5 lineto stroke
+1.8 1.5 moveto
+1.7 1.5 lineto stroke
+0.8 1.5 moveto
+0.7 1.5 lineto stroke
+-0.2 1.5 moveto
+-0.3 1.5 lineto stroke
+-0.7 0.5 moveto
+-0.8 0.5 lineto stroke
+-1.2 1.5 moveto
+-1.3 1.5 lineto stroke
+-1.7 0.5 moveto
+-1.8 0.5 lineto stroke
+0.3 0.5 moveto
+0.3 0.6 lineto stroke
+1.3 0.5 moveto
+1.3 0.6 lineto stroke
+0.8 1.5 moveto
+0.8 1.6 lineto stroke
+-0.2 1.5 moveto
+-0.2 1.6 lineto stroke
+-0.7 0.5 moveto
+-0.7 0.6 lineto stroke
+-1.2 -0.5 moveto
+-1.2 -0.4 lineto stroke
+-0.2 -0.5 moveto
+-0.2 -0.4 lineto stroke
+0.8 -0.5 moveto
+0.8 -0.4 lineto stroke
+-1.2 1.5 moveto
+-1.2 1.6 lineto stroke
+-1.7 0.5 moveto
+-1.7 0.6 lineto stroke
+0.4 0.5 moveto
+0.3 0.5 lineto stroke
+1.4 0.5 moveto
+1.3 0.5 lineto stroke
+0.9 1.5 moveto
+0.8 1.5 lineto stroke
+-0.1 1.5 moveto
+-0.2 1.5 lineto stroke
+-0.6 0.5 moveto
+-0.7 0.5 lineto stroke
+-1.1 1.5 moveto
+-1.2 1.5 lineto stroke
+-1.6 0.5 moveto
+-1.7 0.5 lineto stroke
+0.4 0.5 moveto
+0.4 0.6 lineto stroke
+1.4 0.5 moveto
+1.4 0.6 lineto stroke
+0.9 1.5 moveto
+0.9 1.6 lineto stroke
+-0.1 1.5 moveto
+-0.1 1.6 lineto stroke
+-0.6 0.5 moveto
+-0.6 0.6 lineto stroke
+-1.1 -0.5 moveto
+-1.1 -0.4 lineto stroke
+-0.1 -0.5 moveto
+-0.1 -0.4 lineto stroke
+0.9 -0.5 moveto
+0.9 -0.4 lineto stroke
+-1.1 1.5 moveto
+-1.1 1.6 lineto stroke
+-1.6 0.5 moveto
+-1.6 0.6 lineto stroke
+0.5 0.5 moveto
+0.5 0.6 lineto stroke
+1.5 0.5 moveto
+1.5 0.6 lineto stroke
+1 1.5 moveto
+1 1.6 lineto stroke
+0 1.5 moveto
+0 1.6 lineto stroke
+-0.5 0.5 moveto
+-0.5 0.6 lineto stroke
+-1 -0.5 moveto
+-1 -0.4 lineto stroke
+0 -0.5 moveto
+0 -0.4 lineto stroke
+1 -0.5 moveto
+1 -0.4 lineto stroke
+-1 1.5 moveto
+-1 1.6 lineto stroke
+-1.5 0.5 moveto
+-1.5 0.6 lineto stroke
+-2 -0.5 moveto
+-2 -0.4 lineto stroke
+-2 1.5 moveto
+-2 1.6 lineto stroke
+0.5 0.5 moveto
+0.4 0.5 lineto stroke
+1.5 0.5 moveto
+1.4 0.5 lineto stroke
+1 1.5 moveto
+0.9 1.5 lineto stroke
+0 1.5 moveto
+-0.1 1.5 lineto stroke
+-0.5 0.5 moveto
+-0.6 0.5 lineto stroke
+-1 1.5 moveto
+-1.1 1.5 lineto stroke
+-1.5 0.5 moveto
+-1.6 0.5 lineto stroke
+-2 1.5 moveto
+-2.1 1.5 lineto stroke
+0 0.6 moveto
+0 0.7 lineto stroke
+1 0.6 moveto
+1 0.7 lineto stroke
+-1 0.6 moveto
+-1 0.7 lineto stroke
+-1.5 -0.4 moveto
+-1.5 -0.3 lineto stroke
+-0.5 -0.4 moveto
+-0.5 -0.3 lineto stroke
+0.5 -0.4 moveto
+0.5 -0.3 lineto stroke
+1.5 -0.4 moveto
+1.5 -0.3 lineto stroke
+-2 0.6 moveto
+-2 0.7 lineto stroke
+0.1 0.6 moveto
+0 0.6 lineto stroke
+1.1 0.6 moveto
+1 0.6 lineto stroke
+-0.9 0.6 moveto
+-1 0.6 lineto stroke
+-1.4 -0.4 moveto
+-1.5 -0.4 lineto stroke
+-0.4 -0.4 moveto
+-0.5 -0.4 lineto stroke
+0.6 -0.4 moveto
+0.5 -0.4 lineto stroke
+1.6 -0.4 moveto
+1.5 -0.4 lineto stroke
+-1.9 0.6 moveto
+-2 0.6 lineto stroke
+0.1 0.6 moveto
+0.1 0.7 lineto stroke
+1.1 0.6 moveto
+1.1 0.7 lineto stroke
+-0.9 0.6 moveto
+-0.9 0.7 lineto stroke
+-1.4 -0.4 moveto
+-1.4 -0.3 lineto stroke
+-0.4 -0.4 moveto
+-0.4 -0.3 lineto stroke
+0.6 -0.4 moveto
+0.6 -0.3 lineto stroke
+1.6 -0.4 moveto
+1.6 -0.3 lineto stroke
+-1.9 0.6 moveto
+-1.9 0.7 lineto stroke
+0.2 0.6 moveto
+0.1 0.6 lineto stroke
+1.2 0.6 moveto
+1.1 0.6 lineto stroke
+-0.8 0.6 moveto
+-0.9 0.6 lineto stroke
+-1.3 -0.4 moveto
+-1.4 -0.4 lineto stroke
+-0.3 -0.4 moveto
+-0.4 -0.4 lineto stroke
+0.7 -0.4 moveto
+0.6 -0.4 lineto stroke
+1.7 -0.4 moveto
+1.6 -0.4 lineto stroke
+-1.8 0.6 moveto
+-1.9 0.6 lineto stroke
+0.2 0.6 moveto
+0.2 0.7 lineto stroke
+1.2 0.6 moveto
+1.2 0.7 lineto stroke
+-0.8 0.6 moveto
+-0.8 0.7 lineto stroke
+-1.3 -0.4 moveto
+-1.3 -0.3 lineto stroke
+-0.3 -0.4 moveto
+-0.3 -0.3 lineto stroke
+0.7 -0.4 moveto
+0.7 -0.3 lineto stroke
+-1.8 0.6 moveto
+-1.8 0.7 lineto stroke
+0.3 0.6 moveto
+0.2 0.6 lineto stroke
+1.3 0.6 moveto
+1.2 0.6 lineto stroke
+-0.7 0.6 moveto
+-0.8 0.6 lineto stroke
+-1.2 -0.4 moveto
+-1.3 -0.4 lineto stroke
+-0.2 -0.4 moveto
+-0.3 -0.4 lineto stroke
+0.8 -0.4 moveto
+0.7 -0.4 lineto stroke
+-1.7 0.6 moveto
+-1.8 0.6 lineto stroke
+0.3 0.6 moveto
+0.3 0.7 lineto stroke
+1.3 0.6 moveto
+1.3 0.7 lineto stroke
+-0.7 0.6 moveto
+-0.7 0.7 lineto stroke
+-1.2 -0.4 moveto
+-1.2 -0.3 lineto stroke
+-0.2 -0.4 moveto
+-0.2 -0.3 lineto stroke
+0.8 -0.4 moveto
+0.8 -0.3 lineto stroke
+-1.7 0.6 moveto
+-1.7 0.7 lineto stroke
+0.4 0.6 moveto
+0.3 0.6 lineto stroke
+1.4 0.6 moveto
+1.3 0.6 lineto stroke
+-0.6 0.6 moveto
+-0.7 0.6 lineto stroke
+-1.1 -0.4 moveto
+-1.2 -0.4 lineto stroke
+-0.1 -0.4 moveto
+-0.2 -0.4 lineto stroke
+0.9 -0.4 moveto
+0.8 -0.4 lineto stroke
+-1.6 0.6 moveto
+-1.7 0.6 lineto stroke
+0.4 0.6 moveto
+0.4 0.7 lineto stroke
+1.4 0.6 moveto
+1.4 0.7 lineto stroke
+-0.6 0.6 moveto
+-0.6 0.7 lineto stroke
+-1.1 -0.4 moveto
+-1.1 -0.3 lineto stroke
+-0.1 -0.4 moveto
+-0.1 -0.3 lineto stroke
+0.9 -0.4 moveto
+0.9 -0.3 lineto stroke
+-1.6 0.6 moveto
+-1.6 0.7 lineto stroke
+0.5 0.6 moveto
+0.5 0.7 lineto stroke
+1.5 0.6 moveto
+1.5 0.7 lineto stroke
+-0.5 0.6 moveto
+-0.5 0.7 lineto stroke
+-1 -0.4 moveto
+-1 -0.3 lineto stroke
+0 -0.4 moveto
+0 -0.3 lineto stroke
+1 -0.4 moveto
+1 -0.3 lineto stroke
+-1.5 0.6 moveto
+-1.5 0.7 lineto stroke
+-2 -0.4 moveto
+-2 -0.3 lineto stroke
+0.5 0.6 moveto
+0.4 0.6 lineto stroke
+1.5 0.6 moveto
+1.4 0.6 lineto stroke
+-0.5 0.6 moveto
+-0.6 0.6 lineto stroke
+-1 -0.4 moveto
+-1.1 -0.4 lineto stroke
+0 -0.4 moveto
+-0.1 -0.4 lineto stroke
+1 -0.4 moveto
+0.9 -0.4 lineto stroke
+-1.5 0.6 moveto
+-1.6 0.6 lineto stroke
+-2 -0.4 moveto
+-2.1 -0.4 lineto stroke
+0 0.7 moveto
+0 0.8 lineto stroke
+1 0.7 moveto
+1 0.8 lineto stroke
+-1 0.7 moveto
+-1 0.8 lineto stroke
+-1.5 -0.3 moveto
+-1.5 -0.2 lineto stroke
+-0.5 -0.3 moveto
+-0.5 -0.2 lineto stroke
+0.5 -0.3 moveto
+0.5 -0.2 lineto stroke
+1.5 -0.3 moveto
+1.5 -0.2 lineto stroke
+-2 0.7 moveto
+-2 0.8 lineto stroke
+0.1 0.7 moveto
+0 0.7 lineto stroke
+1.1 0.7 moveto
+1 0.7 lineto stroke
+-0.9 0.7 moveto
+-1 0.7 lineto stroke
+-1.4 -0.3 moveto
+-1.5 -0.3 lineto stroke
+-0.4 -0.3 moveto
+-0.5 -0.3 lineto stroke
+0.6 -0.3 moveto
+0.5 -0.3 lineto stroke
+1.6 -0.3 moveto
+1.5 -0.3 lineto stroke
+-1.9 0.7 moveto
+-2 0.7 lineto stroke
+0.1 0.7 moveto
+0.1 0.8 lineto stroke
+1.1 0.7 moveto
+1.1 0.8 lineto stroke
+-0.9 0.7 moveto
+-0.9 0.8 lineto stroke
+-1.4 -0.3 moveto
+-1.4 -0.2 lineto stroke
+-0.4 -0.3 moveto
+-0.4 -0.2 lineto stroke
+0.6 -0.3 moveto
+0.6 -0.2 lineto stroke
+1.6 -0.3 moveto
+1.6 -0.2 lineto stroke
+-1.9 0.7 moveto
+-1.9 0.8 lineto stroke
+0.2 0.7 moveto
+0.1 0.7 lineto stroke
+1.2 0.7 moveto
+1.1 0.7 lineto stroke
+-0.8 0.7 moveto
+-0.9 0.7 lineto stroke
+-1.3 -0.3 moveto
+-1.4 -0.3 lineto stroke
+-0.3 -0.3 moveto
+-0.4 -0.3 lineto stroke
+0.7 -0.3 moveto
+0.6 -0.3 lineto stroke
+1.7 -0.3 moveto
+1.6 -0.3 lineto stroke
+-1.8 0.7 moveto
+-1.9 0.7 lineto stroke
+0.2 0.7 moveto
+0.2 0.8 lineto stroke
+1.2 0.7 moveto
+1.2 0.8 lineto stroke
+-0.8 0.7 moveto
+-0.8 0.8 lineto stroke
+-1.3 -0.3 moveto
+-1.3 -0.2 lineto stroke
+-0.3 -0.3 moveto
+-0.3 -0.2 lineto stroke
+0.7 -0.3 moveto
+0.7 -0.2 lineto stroke
+-1.8 0.7 moveto
+-1.8 0.8 lineto stroke
+0.3 0.7 moveto
+0.2 0.7 lineto stroke
+1.3 0.7 moveto
+1.2 0.7 lineto stroke
+-0.7 0.7 moveto
+-0.8 0.7 lineto stroke
+-1.2 -0.3 moveto
+-1.3 -0.3 lineto stroke
+-0.2 -0.3 moveto
+-0.3 -0.3 lineto stroke
+0.8 -0.3 moveto
+0.7 -0.3 lineto stroke
+-1.7 0.7 moveto
+-1.8 0.7 lineto stroke
+0.3 0.7 moveto
+0.3 0.8 lineto stroke
+1.3 0.7 moveto
+1.3 0.8 lineto stroke
+-0.7 0.7 moveto
+-0.7 0.8 lineto stroke
+-1.2 -0.3 moveto
+-1.2 -0.2 lineto stroke
+-0.2 -0.3 moveto
+-0.2 -0.2 lineto stroke
+0.8 -0.3 moveto
+0.8 -0.2 lineto stroke
+-1.7 0.7 moveto
+-1.7 0.8 lineto stroke
+0.4 0.7 moveto
+0.3 0.7 lineto stroke
+1.4 0.7 moveto
+1.3 0.7 lineto stroke
+-0.6 0.7 moveto
+-0.7 0.7 lineto stroke
+-1.1 -0.3 moveto
+-1.2 -0.3 lineto stroke
+-0.1 -0.3 moveto
+-0.2 -0.3 lineto stroke
+0.9 -0.3 moveto
+0.8 -0.3 lineto stroke
+-1.6 0.7 moveto
+-1.7 0.7 lineto stroke
+0.4 0.7 moveto
+0.4 0.8 lineto stroke
+1.4 0.7 moveto
+1.4 0.8 lineto stroke
+-0.6 0.7 moveto
+-0.6 0.8 lineto stroke
+-1.1 -0.3 moveto
+-1.1 -0.2 lineto stroke
+-0.1 -0.3 moveto
+-0.1 -0.2 lineto stroke
+0.9 -0.3 moveto
+0.9 -0.2 lineto stroke
+-1.6 0.7 moveto
+-1.6 0.8 lineto stroke
+0.5 0.7 moveto
+0.5 0.8 lineto stroke
+1.5 0.7 moveto
+1.5 0.8 lineto stroke
+-0.5 0.7 moveto
+-0.5 0.8 lineto stroke
+-1 -0.3 moveto
+-1 -0.2 lineto stroke
+0 -0.3 moveto
+0 -0.2 lineto stroke
+1 -0.3 moveto
+1 -0.2 lineto stroke
+-1.5 0.7 moveto
+-1.5 0.8 lineto stroke
+-2 -0.3 moveto
+-2 -0.2 lineto stroke
+0.5 0.7 moveto
+0.4 0.7 lineto stroke
+1.5 0.7 moveto
+1.4 0.7 lineto stroke
+-0.5 0.7 moveto
+-0.6 0.7 lineto stroke
+-1 -0.3 moveto
+-1.1 -0.3 lineto stroke
+0 -0.3 moveto
+-0.1 -0.3 lineto stroke
+1 -0.3 moveto
+0.9 -0.3 lineto stroke
+-1.5 0.7 moveto
+-1.6 0.7 lineto stroke
+-2 -0.3 moveto
+-2.1 -0.3 lineto stroke
+0 0.8 moveto
+0 0.9 lineto stroke
+1 0.8 moveto
+1 0.9 lineto stroke
+-1 0.8 moveto
+-1 0.9 lineto stroke
+-1.5 -0.2 moveto
+-1.5 -0.1 lineto stroke
+-0.5 -0.2 moveto
+-0.5 -0.1 lineto stroke
+0.5 -0.2 moveto
+0.5 -0.1 lineto stroke
+1.5 -0.2 moveto
+1.5 -0.1 lineto stroke
+-2 0.8 moveto
+-2 0.9 lineto stroke
+0.1 0.8 moveto
+0 0.8 lineto stroke
+1.1 0.8 moveto
+1 0.8 lineto stroke
+-0.9 0.8 moveto
+-1 0.8 lineto stroke
+-1.4 -0.2 moveto
+-1.5 -0.2 lineto stroke
+-0.4 -0.2 moveto
+-0.5 -0.2 lineto stroke
+0.6 -0.2 moveto
+0.5 -0.2 lineto stroke
+1.6 -0.2 moveto
+1.5 -0.2 lineto stroke
+-1.9 0.8 moveto
+-2 0.8 lineto stroke
+0.1 0.8 moveto
+0.1 0.9 lineto stroke
+1.1 0.8 moveto
+1.1 0.9 lineto stroke
+-0.9 0.8 moveto
+-0.9 0.9 lineto stroke
+-1.4 -0.2 moveto
+-1.4 -0.1 lineto stroke
+-0.4 -0.2 moveto
+-0.4 -0.1 lineto stroke
+0.6 -0.2 moveto
+0.6 -0.1 lineto stroke
+1.6 -0.2 moveto
+1.6 -0.1 lineto stroke
+-1.9 0.8 moveto
+-1.9 0.9 lineto stroke
+0.2 0.8 moveto
+0.1 0.8 lineto stroke
+1.2 0.8 moveto
+1.1 0.8 lineto stroke
+-0.8 0.8 moveto
+-0.9 0.8 lineto stroke
+-1.3 -0.2 moveto
+-1.4 -0.2 lineto stroke
+-0.3 -0.2 moveto
+-0.4 -0.2 lineto stroke
+0.7 -0.2 moveto
+0.6 -0.2 lineto stroke
+1.7 -0.2 moveto
+1.6 -0.2 lineto stroke
+-1.8 0.8 moveto
+-1.9 0.8 lineto stroke
+0.2 0.8 moveto
+0.2 0.9 lineto stroke
+1.2 0.8 moveto
+1.2 0.9 lineto stroke
+-0.8 0.8 moveto
+-0.8 0.9 lineto stroke
+-1.3 -0.2 moveto
+-1.3 -0.1 lineto stroke
+-0.3 -0.2 moveto
+-0.3 -0.1 lineto stroke
+0.7 -0.2 moveto
+0.7 -0.1 lineto stroke
+-1.8 0.8 moveto
+-1.8 0.9 lineto stroke
+0.3 0.8 moveto
+0.2 0.8 lineto stroke
+1.3 0.8 moveto
+1.2 0.8 lineto stroke
+-0.7 0.8 moveto
+-0.8 0.8 lineto stroke
+-1.2 -0.2 moveto
+-1.3 -0.2 lineto stroke
+-0.2 -0.2 moveto
+-0.3 -0.2 lineto stroke
+0.8 -0.2 moveto
+0.7 -0.2 lineto stroke
+-1.7 0.8 moveto
+-1.8 0.8 lineto stroke
+0.3 0.8 moveto
+0.3 0.9 lineto stroke
+1.3 0.8 moveto
+1.3 0.9 lineto stroke
+-0.7 0.8 moveto
+-0.7 0.9 lineto stroke
+-1.2 -0.2 moveto
+-1.2 -0.1 lineto stroke
+-0.2 -0.2 moveto
+-0.2 -0.1 lineto stroke
+0.8 -0.2 moveto
+0.8 -0.1 lineto stroke
+-1.7 0.8 moveto
+-1.7 0.9 lineto stroke
+0.4 0.8 moveto
+0.3 0.8 lineto stroke
+1.4 0.8 moveto
+1.3 0.8 lineto stroke
+-0.6 0.8 moveto
+-0.7 0.8 lineto stroke
+-1.1 -0.2 moveto
+-1.2 -0.2 lineto stroke
+-0.1 -0.2 moveto
+-0.2 -0.2 lineto stroke
+0.9 -0.2 moveto
+0.8 -0.2 lineto stroke
+-1.6 0.8 moveto
+-1.7 0.8 lineto stroke
+0.4 0.8 moveto
+0.4 0.9 lineto stroke
+1.4 0.8 moveto
+1.4 0.9 lineto stroke
+-0.6 0.8 moveto
+-0.6 0.9 lineto stroke
+-1.1 -0.2 moveto
+-1.1 -0.1 lineto stroke
+-0.1 -0.2 moveto
+-0.1 -0.1 lineto stroke
+0.9 -0.2 moveto
+0.9 -0.1 lineto stroke
+-1.6 0.8 moveto
+-1.6 0.9 lineto stroke
+0.5 0.8 moveto
+0.5 0.9 lineto stroke
+1.5 0.8 moveto
+1.5 0.9 lineto stroke
+-0.5 0.8 moveto
+-0.5 0.9 lineto stroke
+-1 -0.2 moveto
+-1 -0.1 lineto stroke
+0 -0.2 moveto
+0 -0.1 lineto stroke
+1 -0.2 moveto
+1 -0.1 lineto stroke
+-1.5 0.8 moveto
+-1.5 0.9 lineto stroke
+-2 -0.2 moveto
+-2 -0.1 lineto stroke
+0.5 0.8 moveto
+0.4 0.8 lineto stroke
+1.5 0.8 moveto
+1.4 0.8 lineto stroke
+-0.5 0.8 moveto
+-0.6 0.8 lineto stroke
+-1 -0.2 moveto
+-1.1 -0.2 lineto stroke
+0 -0.2 moveto
+-0.1 -0.2 lineto stroke
+1 -0.2 moveto
+0.9 -0.2 lineto stroke
+-1.5 0.8 moveto
+-1.6 0.8 lineto stroke
+-2 -0.2 moveto
+-2.1 -0.2 lineto stroke
+0.1 0.9 moveto
+0 0.9 lineto stroke
+1.1 0.9 moveto
+1 0.9 lineto stroke
+-0.9 0.9 moveto
+-1 0.9 lineto stroke
+-1.4 -0.1 moveto
+-1.5 -0.1 lineto stroke
+-0.4 -0.1 moveto
+-0.5 -0.1 lineto stroke
+0.6 -0.1 moveto
+0.5 -0.1 lineto stroke
+1.6 -0.1 moveto
+1.5 -0.1 lineto stroke
+-1.9 0.9 moveto
+-2 0.9 lineto stroke
+0.1 0.9 moveto
+0.1 1 lineto stroke
+1.1 0.9 moveto
+1.1 1 lineto stroke
+-0.9 0.9 moveto
+-0.9 1 lineto stroke
+-1.4 -0.1 moveto
+-1.4 0 lineto stroke
+-0.4 -0.1 moveto
+-0.4 0 lineto stroke
+0.6 -0.1 moveto
+0.6 0 lineto stroke
+1.6 -0.1 moveto
+1.6 0 lineto stroke
+-1.9 0.9 moveto
+-1.9 1 lineto stroke
+0.6 0 moveto
+0.7 0 lineto stroke
+1.6 0 moveto
+1.7 0 lineto stroke
+1.1 1 moveto
+1.2 1 lineto stroke
+0.1 1 moveto
+0.2 1 lineto stroke
+-0.4 0 moveto
+-0.3 0 lineto stroke
+-0.9 1 moveto
+-0.8 1 lineto stroke
+-1.4 0 moveto
+-1.3 0 lineto stroke
+-1.9 1 moveto
+-1.8 1 lineto stroke
+0.2 0.9 moveto
+0.1 0.9 lineto stroke
+1.2 0.9 moveto
+1.1 0.9 lineto stroke
+-0.8 0.9 moveto
+-0.9 0.9 lineto stroke
+-1.3 -0.1 moveto
+-1.4 -0.1 lineto stroke
+-0.3 -0.1 moveto
+-0.4 -0.1 lineto stroke
+0.7 -0.1 moveto
+0.6 -0.1 lineto stroke
+1.7 -0.1 moveto
+1.6 -0.1 lineto stroke
+-1.8 0.9 moveto
+-1.9 0.9 lineto stroke
+0.2 0.9 moveto
+0.2 1 lineto stroke
+1.2 0.9 moveto
+1.2 1 lineto stroke
+-0.8 0.9 moveto
+-0.8 1 lineto stroke
+-1.3 -0.1 moveto
+-1.3 0 lineto stroke
+-0.3 -0.1 moveto
+-0.3 0 lineto stroke
+0.7 -0.1 moveto
+0.7 0 lineto stroke
+1.7 -0.1 moveto
+1.7 0 lineto stroke
+-1.8 0.9 moveto
+-1.8 1 lineto stroke
+0.7 0 moveto
+0.8 0 lineto stroke
+1.7 0 moveto
+1.8 0 lineto stroke
+1.2 1 moveto
+1.3 1 lineto stroke
+0.2 1 moveto
+0.3 1 lineto stroke
+-0.3 0 moveto
+-0.2 0 lineto stroke
+-0.8 1 moveto
+-0.7 1 lineto stroke
+-1.3 0 moveto
+-1.2 0 lineto stroke
+-1.8 1 moveto
+-1.7 1 lineto stroke
+0.3 0.9 moveto
+0.2 0.9 lineto stroke
+1.3 0.9 moveto
+1.2 0.9 lineto stroke
+-0.7 0.9 moveto
+-0.8 0.9 lineto stroke
+-1.2 -0.1 moveto
+-1.3 -0.1 lineto stroke
+-0.2 -0.1 moveto
+-0.3 -0.1 lineto stroke
+0.8 -0.1 moveto
+0.7 -0.1 lineto stroke
+-1.7 0.9 moveto
+-1.8 0.9 lineto stroke
+0.3 0.9 moveto
+0.3 1 lineto stroke
+1.3 0.9 moveto
+1.3 1 lineto stroke
+-0.7 0.9 moveto
+-0.7 1 lineto stroke
+-1.2 -0.1 moveto
+-1.2 0 lineto stroke
+-0.2 -0.1 moveto
+-0.2 0 lineto stroke
+0.8 -0.1 moveto
+0.8 0 lineto stroke
+-1.7 0.9 moveto
+-1.7 1 lineto stroke
+0.8 0 moveto
+0.9 0 lineto stroke
+1.3 1 moveto
+1.4 1 lineto stroke
+0.3 1 moveto
+0.4 1 lineto stroke
+-0.2 0 moveto
+-0.1 0 lineto stroke
+-0.7 1 moveto
+-0.6 1 lineto stroke
+-1.2 0 moveto
+-1.1 0 lineto stroke
+-1.7 1 moveto
+-1.6 1 lineto stroke
+0.4 0.9 moveto
+0.3 0.9 lineto stroke
+1.4 0.9 moveto
+1.3 0.9 lineto stroke
+-0.6 0.9 moveto
+-0.7 0.9 lineto stroke
+-1.1 -0.1 moveto
+-1.2 -0.1 lineto stroke
+-0.1 -0.1 moveto
+-0.2 -0.1 lineto stroke
+0.9 -0.1 moveto
+0.8 -0.1 lineto stroke
+-1.6 0.9 moveto
+-1.7 0.9 lineto stroke
+0.4 0.9 moveto
+0.4 1 lineto stroke
+1.4 0.9 moveto
+1.4 1 lineto stroke
+-0.6 0.9 moveto
+-0.6 1 lineto stroke
+-1.1 -0.1 moveto
+-1.1 0 lineto stroke
+-0.1 -0.1 moveto
+-0.1 0 lineto stroke
+0.9 -0.1 moveto
+0.9 0 lineto stroke
+-1.6 0.9 moveto
+-1.6 1 lineto stroke
+0.9 0 moveto
+1 0 lineto stroke
+1.4 1 moveto
+1.5 1 lineto stroke
+0.4 1 moveto
+0.5 1 lineto stroke
+-0.1 0 moveto
+0 0 lineto stroke
+-0.6 1 moveto
+-0.5 1 lineto stroke
+-1.1 0 moveto
+-1 0 lineto stroke
+-1.6 1 moveto
+-1.5 1 lineto stroke
+-2.1 0 moveto
+-2 0 lineto stroke
+0.5 0.9 moveto
+0.5 1 lineto stroke
+1.5 0.9 moveto
+1.5 1 lineto stroke
+-0.5 0.9 moveto
+-0.5 1 lineto stroke
+-1 -0.1 moveto
+-1 0 lineto stroke
+0 -0.1 moveto
+0 0 lineto stroke
+1 -0.1 moveto
+1 0 lineto stroke
+-1.5 0.9 moveto
+-1.5 1 lineto stroke
+-2 -0.1 moveto
+-2 0 lineto stroke
+0.5 0.9 moveto
+0.4 0.9 lineto stroke
+1.5 0.9 moveto
+1.4 0.9 lineto stroke
+-0.5 0.9 moveto
+-0.6 0.9 lineto stroke
+-1 -0.1 moveto
+-1.1 -0.1 lineto stroke
+0 -0.1 moveto
+-0.1 -0.1 lineto stroke
+1 -0.1 moveto
+0.9 -0.1 lineto stroke
+-1.5 0.9 moveto
+-1.6 0.9 lineto stroke
+-2 -0.1 moveto
+-2.1 -0.1 lineto stroke
+
+0.5 setgray 0.03 setlinewidth
+newpath contour stroke
+
+grestore
+
+showpage
+%%Trailer
+%EOF
+

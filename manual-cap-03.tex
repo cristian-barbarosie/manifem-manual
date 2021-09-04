@@ -6,7 +6,7 @@
 Section \ref{\numb section 2} shows how to build meshes by joining together several regular meshes
 (triangles or quadrangles), like patches.
 The present section explains how to build a mesh by gradually adding cells, on by one.
-we call this approach ``progressive mesh generation''.
+We call this approach ``progressive mesh generation''.
 In some cases, the process starts with a given interface and adds triangles, one by one,
 moving and deforming the interface, until it shrinks and disappears.
 In some cases (like in paragraphs \ref{\numb section 3.\numb parag 2},
@@ -29,7 +29,7 @@ Recall that in this manual we use the term ``manifold'' to mean a manifold witho
 \section{~~Filling a disk}\label{\numb section 3.\numb parag 1}
           %--------------%
 
-Paragraph \ref{\numb section 2.\numb parag 8} shows how to build a mesh over a disk,
+Paragraph \ref{\numb section 2.\numb parag 9} shows how to build a mesh over a disk,
 but the quality of the mesh is quite poor.
 This is so because the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::quadrangle} treats the
 disk as a (much) deformed rectangle.
@@ -165,7 +165,7 @@ explain how {\maniFEM} chooses the orientation of closed curves.
           %--------------------------------%
 
 We may apply the same {\small\tt progressive} algorithm for meshing the circle in
-$ \mathbb{R}^3 $ introduced in paragraph \ref{\numb section 2.\numb parag 11} :
+$ \mathbb{R}^3 $ introduced in paragraph \ref{\numb section 2.\numb parag 12} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 4}.cpp,rulecolor=\color{coment},
@@ -207,7 +207,7 @@ we have meshed the entire closed curve {\small\tt circle}.
 If we only want a piece of a curve, we must specify two points, one for starting and
 the other one for stopping.
 
-Looking at the example in paragraph \ref{\numb section 2.\numb parag 13}, let us define a
+Looking at the example in paragraph \ref{\numb section 2.\numb parag 14}, let us define a
 spiral with a slightly different look and switch to progressive mesh generation.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -240,15 +240,15 @@ spiral with a slightly different look and switch to progressive mesh generation.
 
 Figure \ref{\numb section 3.\numb fig 3} shows the resulting mesh.
 
-Unlike in paragraph \ref{\numb section 2.\numb parag 13}, we define the spiral through
+Unlike in paragraph \ref{\numb section 2.\numb parag 14}, we define the spiral through
 an implicit equation.
 Had we chosen the (natural) definition {\small\tt r = \verm{power} ( x*x + y*y, 0.5 )},
-the very same spiral as in paragraph \ref{\numb section 2.\numb parag 13} would have been
+the very same spiral as in paragraph \ref{\numb section 2.\numb parag 14} would have been
 obtained.
 For aesthetic reasons, we have chosen a different definition of {\small\tt r}, thus obtaining
 a different spacing between the arcs of the spiral.
 
-Another noteworthy difference from paragraph \ref{\numb section 2.\numb parag 13} is that
+Another noteworthy difference from paragraph \ref{\numb section 2.\numb parag 14} is that
 vertices are distributed uniformly along the spiral (with respect to the distance
 in the surrounding space $ \mathbb{R}^2 $).
 The segments are too small to be seen in the figure.
@@ -377,7 +377,7 @@ Comments at the end of paragraph \ref{\numb section 3.\numb parag 6} apply here,
 \section{~~A bumpy hemisphere}\label{\numb section 3.\numb parag 9}
           %------------------%
 
-We now look again at the surface in paragraph \ref{\numb section 2.\numb parag 12}
+We now look again at the surface in paragraph \ref{\numb section 2.\numb parag 13}
 and build it progressively, using fewer lines of code.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
@@ -404,7 +404,7 @@ Paragraphs \ref{\numb section 3.\numb parag 10}, \ref{\numb section 3.\numb para
           %-----------------------------%
 
 In \maniFEM, cells and meshes are oriented (paragraphs \ref{\numb section 1.\numb parag 2}
-and \ref{\numb section 9.\numb parag 7} provide details).
+and \ref{\numb section 9.\numb parag 5} provide details).
 For building a mesh progressively, {\maniFEM} needs to know which orientation we want.
 
 Manifolds may be oriented or not.
@@ -720,7 +720,7 @@ In paragraph \ref{\numb section 3.\numb parag 12} we have seen how we can specif
 of propagation of the mesh for one-dimensional manifolds.
 A similar approach can be taken for two-dimensional meshes.
 For instance, code below will mesh the upper half of the ``bumpy hemisphere'' already considered
-in paragraphs \ref{\numb section 2.\numb parag 12}, \ref{\numb section 3.\numb parag 9} and
+in paragraphs \ref{\numb section 2.\numb parag 13}, \ref{\numb section 3.\numb parag 9} and
 \ref{\numb section 3.\numb parag 14}, oriented upwards.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -770,7 +770,7 @@ The example in paragraph \ref{\numb section 3.\numb parag 1} is also ``on the ed
 for a different reason.
 While {\maniFEM} tries to build a mesh with segments of constant given length,
 the length of the segments on the boundary of the disk varies (paragraphs
-\ref{\numb section 2.\numb parag 3} and \ref{\numb section 2.\numb parag 4} explain why).
+\ref{\numb section 2.\numb parag 4} and \ref{\numb section 2.\numb parag 5} explain why).
 This contradiction puts the algorithm in a difficult position.
 If the variation were larger (or sharper) the algorithm might stop with some error message.
 In contrast, {\maniFEM} is ``at ease'' when meshing the disk in paragraph
@@ -785,7 +785,7 @@ In contrast, {\maniFEM} is ``at ease'' when meshing the disk in paragraph
 {\ManiFEM} can deal with non-smooth domains.
 The user must define separately smooth pieces of the boundary and then join them.
 
-Here is how to mesh the diamond-shaped domain in paragraph \ref{\numb section 2.\numb parag 9}.
+Here is how to mesh the diamond-shaped domain in paragraph \ref{\numb section 2.\numb parag 10}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 17}.cpp,rulecolor=\color{coment},

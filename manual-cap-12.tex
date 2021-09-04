@@ -58,12 +58,13 @@ many others (e.g. in section \ref{\numb section 2}) show the use of this constru
 Actually, the name {\small\tt rectangle} is misleading.
 Perhaps a better name would be {\small\tt quadrangle} but even this is not general enough to
 describe the constructor's ability to build curved patches like the ones shown in paragraphs
-\ref{\numb section 1.\numb parag 1} or \ref{\numb section 2.\numb parag 6} --
-\ref{\numb section 2.\numb parag 9}.
+\ref{\numb section 1.\numb parag 1} or \ref{\numb section 2.\numb parag 7} --
+\ref{\numb section 2.\numb parag 10}.
 Tags {\small\tt rectangle}, {\small\tt quadrangle} and {\small\tt quadrilateral} can be used
 interchangeably.
 
 \begin{figure}[ht] \centering
+  \psfrag{A}{\tt\textcolor{textindraw}{A}}
   \psfrag{B}{\tt\textcolor{textindraw}{B}}
   \psfrag{C}{\tt\textcolor{textindraw}{C}}
   \psfrag{D}{\tt\textcolor{textindraw}{D}}
@@ -72,7 +73,7 @@ interchangeably.
   \psfrag{north}{\tt\textcolor{textindraw}{north}}
   \psfrag{west}{\tt\textcolor{textindraw}{west}}
   \includegraphics[width=90mm]{fig-rectangle}
-  \caption{Building a rectangle}
+  \caption{Meshing a rectangle}
   \label{\numb section 12.\numb fig 1}
 \end{figure}
 
@@ -81,20 +82,20 @@ on the four given sides, as shown in the figure above.
 The complicated formula for the coefficients (involving $ \alpha^3 $ and $ \beta^3 $) is there
 to ensure a smooth transition for the distribution of inner vertices in the case of non-uniform
 distribution along one or several sides.
-Paragraphs \ref{\numb section 2.\numb parag 1}, \ref{\numb section 2.\numb parag 8} and
-\ref{\numb section 2.\numb parag 9} show examples where this is useful.
+Paragraphs \ref{\numb section 2.\numb parag 1}, \ref{\numb section 2.\numb parag 9} and
+\ref{\numb section 2.\numb parag 10} show examples where this is useful.
 
 The remarks made in paragraph \ref{\numb section 12.\numb parag 2} about
 the interpolation operation hold here.
-Paragraph \ref{\numb section 2.\numb parag 6} shows an example where the interpolation operation
+Paragraph \ref{\numb section 2.\numb parag 7} shows an example where the interpolation operation
 consists of a convex combination followed by a projection.
 For a manifold defined through an external parameter, the convex combination is performed
 on the external parameter and then the space coordinates are computed accordingly
-(paragraph \ref{\numb section 2.\numb parag 16} shows such a situation).
+(paragraph \ref{\numb section 2.\numb parag 17} shows such a situation).
 
 Providing a {\small\tt \verm{tag}::with\_\,triangles} makes the constructor cut each rectangle
-in halves; results are shown in paragraphs \ref{\numb section 2.\numb parag 2} and
-\ref{\numb section 2.\numb parag 7}.
+in halves; results are shown in paragraphs \ref{\numb section 2.\numb parag 3} and
+\ref{\numb section 2.\numb parag 8}.
 
 
           %--------------------------%
@@ -117,7 +118,7 @@ the boundary of the triangle, as shown in figure below.
   \psfrag{P_CA}{\tt\textcolor{textindraw}{P\_\,CA}}
   \psfrag{Q_CA}{\tt\textcolor{textindraw}{Q\_\,CA}}
   \includegraphics[width=75mm]{fig-triangle}
-  \caption{Building a triangle}
+  \caption{Meshing a triangle}
   \label{\numb section 12.\numb fig 2}
 \end{figure}
 
@@ -126,7 +127,7 @@ constructor of a rectangle (presented in paragraph \ref{\numb section 12.\numb p
 the fact that we interpolate from six vertices compensates that.
 
 Examples are presented in paragraphs \ref{\numb section 1.\numb parag 4},
-\ref{\numb section 1.\numb parag 5} and \ref{\numb section 2.\numb parag 5}.
+\ref{\numb section 1.\numb parag 5} and \ref{\numb section 2.\numb parag 6}.
 
 
           %---------------------------%

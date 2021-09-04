@@ -100,8 +100,8 @@ A {\small\tt\verm{tag}} is used to clearly distinguish between functions with th
 (overloaded functions).
 For instance, in the code excerpt below five {\small\tt\verm{CellIterator}}s are defined
 by means of different (overloaded) methods having the same name {\small\tt\verm{Mesh}::iterator});
-the iterators behave very differently (see paragraphs \ref{\numb section 9.\numb parag 5} and
-\ref{\numb section 9.\numb parag 6}).
+the iterators behave very differently (see paragraphs \ref{\numb section 9.\numb parag 3} and
+\ref{\numb section 9.\numb parag 4}).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \cinza{// 'chain' is a one-dimensional Mesh}
@@ -211,7 +211,7 @@ object inside remains intact (unless there are no more wrappers for that core, a
 paragraph \ref{\numb section 11.\numb parag 5}).
 Also, you can copy the wrapper as in {\small\tt \verm{Cell} A = B} or {\small\tt \verm{Mesh} BA = AB.reverse()}
 but these operations do not create new core objects, they just give new names to
-already existing cells or meshes (paragraph \ref{\numb section 9.\numb parag 12} gives
+already existing cells or meshes (paragraph \ref{\numb section 9.\numb parag 10} gives
 more details).
 You can think of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es as customized pointers towards
 {\small\tt \verm{Cell}::Core}s and {\small\tt \verm{Mesh}::Core}s, respectively.
@@ -341,7 +341,7 @@ segments and vertices composing such a mesh have a natural order (linear order).
 Recall that all meshes in {\maniFEM} are oriented.
 A one-dimensional connected mesh can be a closed loop or an open chain of segments.
 In the latter case, there is a natural starting point (the first vertex or first segment).
-Iterators over such meshes are described in paragraph \ref{\numb section 9.\numb parag 6}.
+Iterators over such meshes are described in paragraph \ref{\numb section 9.\numb parag 4}.
 The {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::segment} builds an open
 {\small\tt \verm{Mesh}::Connected::OneDim}.
 Also, cell constructors with {\small\tt \verm{tag}::triangle} and {\small\tt \verm{tag}::quadrangle} produce cells
@@ -409,7 +409,7 @@ The {\small\tt DEBUG} mode is explained in paragraph \ref{\numb section 11.\numb
 
 The geometric dimension is set by simply declaring a Euclidian manifold and building
 a coordinate system on it (see e.g.\ paragraphs \ref{\numb section 1.\numb parag 1}
-and \ref{\numb section 2.\numb parag 16}).
+and \ref{\numb section 2.\numb parag 17}).
 
 
           %--------------------%
@@ -581,7 +581,7 @@ I guess my mind has been formatted by Python.
 
 {\small\tt CellIterator}s obey to syntactic rules slightly different from the conventions for
 iterators in the Standard Template Library.
-See paragraph \ref{\numb section 9.\numb parag 5}.
+See paragraph \ref{\numb section 9.\numb parag 3}.
 
 Also, the version numbering is somewhat unusual.
 The version consists merely of the year and month.
@@ -679,9 +679,9 @@ vertex) or you are looking at a negative cell.
 Values are usually stored at positive cells; negative cells have no information attached.
 You may check if a certain cell is positive or negative by using the method
 {\small\tt is\_\,positive}.
-Paragraph \ref{\numb section 9.\numb parag 7} gives more details about orientation of
+Paragraph \ref{\numb section 9.\numb parag 5} gives more details about orientation of
 cells and meshes.
-See also paragraphs \ref{\numb section 9.\numb parag 12} and
+See also paragraphs \ref{\numb section 9.\numb parag 10} and
 \ref{\numb section 11.\numb parag 4}.
 
 Note that, if {\small\tt seg} is a segment (a one-dimensional cell), then
@@ -690,7 +690,7 @@ So, you probably need to use {\small\tt seg.base().reverse()} instead.
 Iterators over cells of maximum dimension (that is, of dimension equal to the dimension
 of the mesh) produce oriented cells (which may be positive or negative).
 Consider using the {\small\tt \verm{tag}::force\_\,positive}.
-See paragraphs \ref{\numb section 9.\numb parag 5} and \ref{\numb section 9.\numb parag 6}.
+See paragraphs \ref{\numb section 9.\numb parag 3} and \ref{\numb section 9.\numb parag 4}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
 assertion "this->core->reverse_attr.exists()" failed: file "mesh.h",
@@ -702,7 +702,7 @@ function: maniFEM::Cell maniFEM::Mesh::cell_behind
 \end{Verbatim}
 
 You may be navigating dangerously close to the boundary of a mesh.
-See paragraph \ref{\numb section 9.\numb parag 9}.
+See paragraph \ref{\numb section 9.\numb parag 7}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
 assertion "cll->meshes.size() > dif_dim" failed
