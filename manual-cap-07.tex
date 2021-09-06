@@ -133,6 +133,19 @@ and that it must take spins into account.
 Specific information about spins is included in the three segments {\small\tt AA}, {\small\tt AB}
 and {\small\tt BB}.
 
+Note the additive syntax used to represent composition of actions.
+The expression {\small\tt -g} stands for the inverse of {\small\tt g}.
+In subsequent paragraphs, we shall encounter expressions like
+{\small\tt g2} {\small\tt -} {\small\tt g1} which stands for the composition between
+{\small\tt g2} and the inverse of {\small\tt g1} (we assume the action group is commutative).
+
+Some people may prefer a multiplicative notation like {\small\tt pow} {\small\tt (} {\small\tt g,}
+{\small\tt -1} {\small\tt )} or {\small\tt g2} {\small\tt /} {\small\tt g1};
+we have chosen the additive syntax because it allows for expressions like {\small\tt -5g2}
+{\small\tt +} {\small\tt 3g1} which become somewhat cumbersome if we use the multiplicative notation.
+Besides that, the composition of translations corresponds to the sum of the vectors
+defining the translations.
+
 
           %------------%
 \section{~~A flat torus}\label{\numb section 7.\numb parag 4}
@@ -166,16 +179,9 @@ Here is the classical example of $ \mathbb{R}^2/{\mathbb Z}^2 $.
 
    \cinza{// it would be meaningless to export 'square' as a msh file}
    \cinza{// we can however draw an unfolded mesh :}
-   torus.draw_ps ( "torus.eps", \verm{tag}::unfold,
+   torus.draw_ps ( \verde{"torus.eps"}, \verm{tag}::unfold,
                    \verm{tag}::over_region, -0.5 < x < 1.5, -0.2 < y < 1.2 );
 \end{Verbatim}
-
-\begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \includegraphics[width=100mm]{flat-torus-1.eps}
-  \caption{A flat torus}
-  \label{\numb section 7.\numb fig 1}
-\end{figure}
 
 The {\small\tt\verm{tag}::spin} in the constructor {\small\verm{Mesh} \azul{torus}}
 provides no specific information, it just warns {\maniFEM} that we are on a quotient manifold
@@ -196,8 +202,8 @@ This gives a hint about the repeated structure of the the unfolded mesh.
 We see that, for instance, the vertex {\small\tt A} shows up four times.
 Each segment originating from {\small\tt A} is also drawn four times.
 Other vertices and segments are drawn only twice, or only once.
-These numbers depend on the position of the vertex or segment and on the size of the
-viewing window.
+These numbers depend on the position of the vertex or segment and on the shape and size
+of the viewing window.
 
 The mesh {\small\tt torus} has 100 squares, 200 segments and 100 vertices.
 It has no boundary, it is closed in itself, it covers entirely $ \mathbb{R}^2/{\mathbb Z}^2 $
@@ -205,10 +211,17 @@ which is a compact manifold with no boundary.
 In contrast, if we mesh the square $ [0,1]^2 $ in the usual Euclidian plane
 we get a mesh with 100 squares, 220 segments and 121 vertices (and of course we get a boundary).
 
+\begin{figure}[ht] \centering
+  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \includegraphics[width=96mm]{flat-torus-1.eps}
+  \caption{A flat torus}
+  \label{\numb section 7.\numb fig 1}
+\end{figure}
+
 Figure \ref{\numb section 7.\numb fig 1} is rather dull because the mesh is very regular.
-In paragraphs {\numb section 7.\numb parag 6} -- {\numb section 7.\numb parag 9}
-we have introduced an inhomogeneity (a small hole) in the mesh
-in order to turn the repetitive pattern more visible.
+In paragraphs \ref{\numb section 7.\numb parag 6} -- \ref{\numb section 7.\numb parag 9}
+we introduce an inhomogeneity (a small hole) in the mesh in order to turn the repetitive pattern
+more visible.
 
 If you feel uncomfortable with this minimalist approach (of defining a square with only one
 vertex), you may think in terms of four squares instead :
@@ -288,6 +301,16 @@ In this paragraph, we perforate the flat torus.
 This small inhomogeneity makes the drawing more meaningful.
 We also change the shape of the viewing window, just for the fun of it.
 
+We stress that this mesh has only one hole; figure \ref{\numb section 7.\numb fig 2}
+shows several images of the same hole, due to the unfolding.
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \includegraphics[width=105mm]{flat-torus-2.eps}
+  \caption{A flat torus with a hole}
+  \label{\numb section 7.\numb fig 2}
+\end{figure}
+
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 6}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
@@ -299,21 +322,11 @@ We also change the shape of the viewing window, just for the fun of it.
    for ( itv = vec.begin(); itv != vec.end(); itv++ )
    \{  \verm{Cell} \azul{sq} = *itv;  sq.remove_from_mesh ( torus );  \}
 
-   torus.draw_ps ( "torus.eps", \verm{tag}::unfold,
+   torus.draw_ps ( \verde{"torus.eps"}, \verm{tag}::unfold,
                    \verm{tag}::over_region, x*x + 2.*y*y < 3.5 );
 \end{Verbatim}
 
-\begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \includegraphics[width=110mm]{flat-torus-2.eps}
-  \caption{A flat torus with a hole}
-  \label{\numb section 7.\numb fig 2}
-\end{figure}
-
 Paragraph \ref{\numb section 9.\numb parag 8} describes iterators around a vertex.
-
-We stress that this mesh has only one hole; figure \ref{\numb section 7.\numb fig 2}
-shows several images of the same hole, due to the unfolding.
 
 
           %-----------------%
@@ -332,7 +345,7 @@ We can build a skew torus by simply choosing other actions on {\small\tt RR2}.
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \includegraphics[width=95mm]{flat-torus-3.eps}
+  \includegraphics[width=85mm]{flat-torus-3.eps}
   \caption{A skew flat torus}
   \label{\numb section 7.\numb fig 3}
 \end{figure}
@@ -356,28 +369,52 @@ rather than skew parallelograms.
 
    \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0. ;  y(A) = 0.;
    \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) = 0.5;  y(B) = 0.;
-
    \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 5 );
-   \verm{Mesh} \azul{BA1} ( \verm{tag}::segment, B.reverse(), A, \verm{tag}::divided_in, 5, \verm{tag}::spin, g1 );
-   \verm{Mesh} \azul{BA2} ( \verm{tag}::segment, B.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::spin, g2 );
-   \verm{Mesh} \azul{AB2} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 10, \verm{tag}::spin, g2-g1 );
+   \verm{Mesh} \azul{BA_horiz}
+      ( \verm{tag}::segment, B.reverse(), A, \verm{tag}::divided_in, 5, \verm{tag}::spin, g1 );
+   \verm{Mesh} \azul{BA_vert}
+      ( \verm{tag}::segment, B.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::spin, g2 );
+   \verm{Mesh} \azul{AB_vert}
+      ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 10, \verm{tag}::spin, g2 - g1 );
 
-   \verm{Mesh} \azul{sq1} ( \verm{tag}::rectangle, AB, BA2, BA1.reverse(), AB2.reverse(), \verm{tag}::spin );
-   \verm{Mesh} \azul{sq2} ( \verm{tag}::rectangle, BA2.reverse(), BA1, AB2, AB.reverse(), \verm{tag}::spin );
+   \verm{Mesh} \azul{sq1} ( \verm{tag}::rectangle, AB, BA_vert, BA_horiz.reverse(), AB_vert.reverse(),
+              \verm{tag}::spin                                                          );
+   \verm{Mesh} \azul{sq2} ( \verm{tag}::rectangle, BA_vert.reverse(), BA_horiz, AB_vert, AB.reverse(),
+              \verm{tag}::spin                                                          );
 
    \verm{Mesh} \azul{torus} ( \verm{tag}::join, sq1, sq2 );
 \end{Verbatim}
 
+Note the additive syntax for composing actions; comments in paragraph
+\ref{\numb section 7.\numb parag 3} apply.
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \includegraphics[width=130mm]{flat-torus-4.eps}
+  \includegraphics[width=120mm]{flat-torus-4.eps}
   \caption{A different torus}
   \label{\numb section 7.\numb fig 4}
 \end{figure}
 
 In figure \ref{\numb section 7.\numb fig 4} we have drawn two shadows.
-The skew shadow can be called ``periodicity cell''; we call the other one ``representative domain''.
+The skew parallelogram can be called ``periodicity cell'';
+we call the other one ``representative domain''.
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\tt\textcolor{textindraw}{B}}
+  \psfrag{AB}{\tt\textcolor{textindraw}{AB}}
+  \psfrag{BAh}{\tt\textcolor{textindraw}{BA\_\,horiz}}
+  \psfrag{ABv}{\tt\textcolor{textindraw}{AB\_\,vert}}
+  \psfrag{BAv}{\tt\textcolor{textindraw}{BA\_\,vert}}
+  \includegraphics[width=70mm]{torus-sketch.eps}
+  \caption{Segment meshes used for building the torus}
+  \label{\numb section 7.\numb fig 5}
+\end{figure}
+
+Figure \ref{\numb section 7.\numb fig 5} shows the four segment meshes {\small\tt AB},
+{\small\tt BA\_\,horiz}, {\small\tt AB\_\,vert}, {\small\tt BA\_\,vert} used for
+building this torus.
+
 
 
           %------------------------%
@@ -389,8 +426,8 @@ Here is an example of a torus built with two triangular patches.
 \begin{figure}[ht] \centering
   \psfrag{A}{\tt\textcolor{textindraw}{A}}
   \includegraphics[width=130mm]{flat-torus-5.eps}
-  \caption{A torus built with triangles}
-  \label{\numb section 7.\numb fig 5}
+  \caption{A torus meshed with triangles}
+  \label{\numb section 7.\numb fig 6}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -407,7 +444,7 @@ Here is an example of a torus built with two triangular patches.
         \azul{seg1}      ( \verm{tag}::segment, A.reverse(), A,
                     \verm{tag}::divided_in, 10, \verm{tag}::spin, g2 ),
         \azul{seg2}      ( \verm{tag}::segment, A.reverse(), A,
-                    \verm{tag}::divided_in, 10, \verm{tag}::spin, g2-g1 );
+                    \verm{tag}::divided_in, 10, \verm{tag}::spin, g2 - g1 );
 
    \verm{Mesh} \azul{tri1} ( \verm{tag}::triangle, seg_horiz, seg2, seg1.reverse(), \verm{tag}::spin ),
         \azul{tri2} ( \verm{tag}::triangle, seg_horiz.reverse(), seg2.reverse(), seg1, \verm{tag}::spin );
@@ -415,7 +452,10 @@ Here is an example of a torus built with two triangular patches.
    \verm{Mesh} \azul{torus} ( \verm{tag}::join, tri1, tri2 );
 \end{Verbatim}
 
-In figure \ref{\numb section 7.\numb fig 5} we have drawn four shadows.
+Note the additive syntax for composing actions; comments in paragraph
+\ref{\numb section 7.\numb parag 3} apply.
+
+In figure \ref{\numb section 7.\numb fig 6} we have drawn four shadows.
 The skew paralellogram can be called ``periodicity cell'';
 the other ones are ``representative domains''.
 Due to the shape of one of these shadows, this periodic arrangement is often called
@@ -426,8 +466,8 @@ Due to the shape of one of these shadows, this periodic arrangement is often cal
 \section{~~Exercise}\label{\numb section 7.\numb parag 10}
           %--------%
 
-Build the mesh shown in figure \ref{\numb section 7.\numb fig 5}
-(the same as in paragraph \ref{\numb section 7.\numb parag 9}) using only one rectangular patch.
+Build the mesh shown in figure \ref{\numb section 7.\numb fig 6}
+(the same as in paragraph \ref{\numb section 7.\numb parag 9}) using only one quadrangular patch.
 (Hint: have a look at paragraphs \ref{\numb section 2.\numb parag 3} and
 \ref{\numb section 2.\numb parag 8}.)
 
