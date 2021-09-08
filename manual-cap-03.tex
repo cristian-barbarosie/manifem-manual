@@ -650,7 +650,7 @@ Thus, in the code below we will obtain the upper hemisphere.
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Cell} \azul{S} ( \verm{tag}::vertex );  x(S) =  0.;  y(S) = -1.;  z(S) =  0.;
    \verm{Mesh} \azul{circle} ( \verm{tag}::progressive, \verm{tag}::start_at, S, \verm{tag}::towards, \{ 1., 0., 0. \},
-                 \verm{tag}::desired_length, 0.1                                          );
+                 \verm{tag}::desired_length, 0.1                                         );
    nut.set_as_working_manifold();
    \verm{Mesh} \azul{bumpy} ( \verm{tag}::progressive, \verm{tag}::boundary, circle,
                 \verm{tag}::desired_length, 0.1, \verm{tag}::inherent_orientation );
@@ -662,7 +662,7 @@ Code below will produce the lower hemisphere.
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Cell} \azul{S} ( \verm{tag}::vertex );    x(S) =  0.;  y(S) = -1.;  z(S) =  0.;
    \verm{Mesh} \azul{circle} ( \verm{tag}::progressive, \verm{tag}::start_at, S, \verm{tag}::towards, \{ -1., 0., 0. \},
-                 \verm{tag}::desired_length, 0.1                                           );
+                 \verm{tag}::desired_length, 0.1                                          );
    nut.set_as_working_manifold();
    \verm{Mesh} \azul{bumpy} ( \verm{tag}::progressive, \verm{tag}::boundary, circle,
                 \verm{tag}::desired_length, 0.1, \verm{tag}::inherent_orientation );
@@ -678,7 +678,7 @@ Here, the word ``upwards'' is used in the sense of the right hand rule
    baselinestretch=0.94,framesep=2mm                     ]
    \verm{Cell} \azul{S} ( \verm{tag}::vertex );    x(S) =  0.;  y(S) = -1.;  z(S) =  0.;
    \verm{Mesh} \azul{circle} ( \verm{tag}::progressive, \verm{tag}::start_at, S, \verm{tag}::towards, \{ 1., 0., 0. \},
-                 \verm{tag}::desired_length, 0.1                                          );
+                 \verm{tag}::desired_length, 0.1                                         );
    nut.set_as_working_manifold();
    \verm{Mesh} \azul{bumpy} ( \verm{tag}::progressive, \verm{tag}::boundary, circle, \verm{tag}::desired_length, 0.1 );
 \end{Verbatim}
@@ -690,7 +690,7 @@ in either case, the produced mesh will be oriented downwards.
    baselinestretch=0.94,framesep=2mm                     ]
    \verm{Cell} \azul{S} ( \verm{tag}::vertex );    x(S) =  0.;  y(S) = -1.;  z(S) =  0.;
    \verm{Mesh} \azul{circle} ( \verm{tag}::progressive, \verm{tag}::start_at, S, \verm{tag}::towards, \{ -1., 0., 0. \},
-                 \verm{tag}::desired_length, 0.1                                           );
+                 \verm{tag}::desired_length, 0.1                                          );
    nut.set_as_working_manifold();
    \verm{Mesh} \azul{bumpy} ( \verm{tag}::progressive, \verm{tag}::boundary, circle, \verm{tag}::desired_length, 0.1 );
 \end{Verbatim}
@@ -899,7 +899,7 @@ If we want to close the extremity of the cylinder, it suffices to add a few line
    RR3.implicit ( x == 1.5 );
    \verm{Mesh} \azul{disk} ( \verm{tag}::progressive, \verm{tag}::boundary, circle_1.reverse(),
                \verm{tag}::start_at, start_1, \verm{tag}::towards, \{ 0., 0., -1. \},
-               \verm{tag}::desired_length, seg_size                          );
+               \verm{tag}::desired_length, seg_size                         );
    \verm{Mesh} \azul{sphere_and_cylinder} ( \verm{tag}::join, piece_of_sph, piece_of_cyl, disk );
 \end{Verbatim}
 
@@ -949,12 +949,12 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
    cylinder.set_as_working_manifold();
    \verm{Mesh} \azul{piece_of_cyl} ( \verm{tag}::progressive, \verm{tag}::boundary, two_circles,
                        \verm{tag}::start:at, start_1, \verm{tag}::towards, \{ -1., 0., 0. \},
-                       \verm{tag}::desired_length, seg_size                          );
+                       \verm{tag}::desired_length, seg_size                         );
    \verm{Mesh} \azul{two_circles_rev} ( \verm{tag}::join, circle_1, circle_2.reverse() );
    RR3.implicit ( x*x + y*y + z*z == rs*rs );
    \verm{Mesh} \azul{piece_of_sph} ( \verm{tag}::progressive, \verm{tag}::boundary, two_circles_rev,
                        \verm{tag}::start:at, start_1, \verm{tag}::towards, \{ 0., 0., -1. \},
-                       \verm{tag}::desired_length, seg_size                          );
+                       \verm{tag}::desired_length, seg_size                         );
    \verm{Mesh} \azul{perf_sphere} ( \verm{tag}::join, piece_os_sph, piece_of_cyl );
 \end{Verbatim}
 
@@ -994,12 +994,12 @@ A typical example is the vertex of a cone.
    \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 1.;  y(A) = 0.;  z(A) = 1.;
    \verm{Mesh} \azul{circle} ( \verm{tag}::progressive, \verm{tag}::start_at, A,
                  \verm{tag}::towards, \{ 0., -1., 0. \},
-                 \verm{tag}::desired_length, 0.1            );
+                 \verm{tag}::desired_length, 0.1           );
    cone_manif.set_as_working_manifold();
    \verm{Cell} \azul{V} ( \verm{tag}::vertex );  x(V) = 0.;  y(V) = 0.;  z(V) = 0.;
    \verm{Mesh} \azul{cone} ( \verm{tag}::progressive, \verm{tag}::boundary, circle,
                \verm{tag}::start_at, A, \verm{tag}::towards, \{ -1., 0., -1. \},
-               \verm{tag}::singular, V, \verm{tag}::desired_length, 0.1        );
+               \verm{tag}::singular, V, \verm{tag}::desired_length, 0.1       );
 \end{Verbatim}
 
 
@@ -1033,16 +1033,16 @@ We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb para
    \verm{Cell} \azul{V} ( \verm{tag}::vertex );  x(V) = 0.;  y(V) = 0.;  z(V) = 1.;
    \verm{Mesh} \azul{circle_1} ( \verm{tag}::progressive,
                    \verm{tag}:: start_at, V, \verm{tag}::towards, \{ 1., 1., 0. \},
-                   \verm{tag}::singular, V, \verm{tag}::desired_length, 0.1       );
+                   \verm{tag}::singular, V, \verm{tag}::desired_length, 0.1      );
    \verm{Mesh} \azul{circle_2} ( \verm{tag}::progressive,
                    \verm{tag}:: start_at, V, \verm{tag}::towards, \{ -1., -1., 0. \},
-                   \verm{tag}::singular, V, \verm{tag}::desired_length, 0.1         );
+                   \verm{tag}::singular, V, \verm{tag}::desired_length, 0.1        );
 
    cylinder.set_as_working_manifold();
    \verm{Cell} \azul{W} = circle_1.cell_in_front_of(V).tip();
    \verm{Mesh} \azul{piece_of_cyl} ( \verm{tag}::progressive, \verm{tag}::boundary, circle_1, circle_2,
                        \verm{tag}::start_at, W, \verm{tag}::towards, \{ -1., 1., 0. \},
-                       \verm{tag}::singular, V, \verm{tag}::desired_length, 0.1           );
+                       \verm{tag}::singular, V, \verm{tag}::desired_length, 0.1          );
 \end{Verbatim}
 
 {\ManiFEM} accepts as {\small\tt \verm{Manifold}} a self-intersecting set like {\small\tt infinity}.

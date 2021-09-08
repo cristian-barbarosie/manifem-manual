@@ -230,9 +230,9 @@ If we want to iterate over all vertices of the mesh, we can use
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 0 );
+   \cinza{// or, equivalently :  CellIterator it = msh.iterator ( tag::over_vertices )}
    for ( it.reset(); it.in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;  do_something_to (P);  \}
-   \cinza{// or, equivalently :  CellIterator it = msh.iterator ( tag::over_vertices )}
 \end{Verbatim}
 
 If we want to iterate over all segments of the mesh, we can use
@@ -240,9 +240,9 @@ If we want to iterate over all segments of the mesh, we can use
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 1 );
+   \cinza{// or, equivalently :  CellIterator it = msh.iterator ( tag::over_segments )}
    for ( it.reset(); it.in_range(); it++ )
    \{  \verm{Cell} \azul{seg} = *it;  do_something_to (seg);  \}
-   \cinza{// or, equivalently :  CellIterator it = msh.iterator ( tag::over_segments )}
 \end{Verbatim}
 
 Note that an iterator running through cells of maximum dimension, that is, of dimension equal

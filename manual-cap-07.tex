@@ -196,6 +196,12 @@ An unfolded mesh in $ \mathbb{R}^2 $ can be represented graphically,
 as in figure \ref{\numb section 7.\numb fig 1}, where vertices and segments from the torus
 are drawn more than once.
 
+The mesh {\small\tt torus} has 100 squares, 200 segments and 100 vertices.
+It has no boundary, it is closed in itself, it covers entirely $ \mathbb{R}^2/{\mathbb Z}^2 $
+which is a compact manifold with no boundary.
+In contrast, if we mesh the square $ [0,1]^2 $ in the usual Euclidian plane
+we get a mesh with 100 squares, 220 segments and 121 vertices (and of course we get a boundary).
+
 In figure \ref{\numb section 7.\numb fig 1} we have added a shadow representing
 the periodicity cell $ [0,1]^2 $.
 This gives a hint about the repeated structure of the the unfolded mesh.
@@ -204,12 +210,6 @@ Each segment originating from {\small\tt A} is also drawn four times.
 Other vertices and segments are drawn only twice, or only once.
 These numbers depend on the position of the vertex or segment and on the shape and size
 of the viewing window.
-
-The mesh {\small\tt torus} has 100 squares, 200 segments and 100 vertices.
-It has no boundary, it is closed in itself, it covers entirely $ \mathbb{R}^2/{\mathbb Z}^2 $
-which is a compact manifold with no boundary.
-In contrast, if we mesh the square $ [0,1]^2 $ in the usual Euclidian plane
-we get a mesh with 100 squares, 220 segments and 121 vertices (and of course we get a boundary).
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\tt\textcolor{textindraw}{A}}
@@ -457,7 +457,7 @@ Note the additive syntax for composing actions; comments in paragraph
 
 In figure \ref{\numb section 7.\numb fig 6} we have drawn four shadows.
 The skew paralellogram can be called ``periodicity cell'';
-the other ones are ``representative domains''.
+the other three are ``representative domains''.
 Due to the shape of one of these shadows, this periodic arrangement is often called
 ``hexagonal periodicity''.
 
