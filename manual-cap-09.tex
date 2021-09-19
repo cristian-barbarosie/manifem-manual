@@ -176,7 +176,7 @@ Recall that the boundary of a negative cell is a negative mesh.
 Even among positive meshes, some are implemented with the goal of saving space in the
 computer's memory and store less information (connected one-dimensional meshes are an
 example).
-Paragraph \ref{\numb section 11.\numb parag 6} describe the implementation of different
+Paragraph \ref{\numb section 11.\numb parag 6} describes the implementation of different
 types of meshes.
 
 For these reasons, {\maniFEM} provides objects which iterate over cells.
@@ -715,7 +715,7 @@ can always add the {\small\tt\verm{tag}::force\_\,positive} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 3, \verm{tag}::force_positive
+   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 3, \verm{tag}::force_positive,
                                     \verm{tag}::around, P                                 );
 \end{Verbatim}
 
