@@ -655,10 +655,14 @@ The last argument of method {\small\tt\verm{Mesh}::fold} controls this detail.
 A {\small\tt\verm{tag}::build\_\,new\_\,vertices} says that new vertices must be built
 and geometric coordinates copied from the old vertices to the new ones.
 A {\small\tt\verm{tag}::use\_\,existing\_\,vertices} says that old vertices must be used
-for the new mesh; note that vertices belonging to {\small\tt DA} will not show up in the
-new mesh, corresponding vertices from {\small\tt BC} will be used instead.
-Using existing vertices can be useful if they carry some information (e.g.\ values
-of a solution of a PDE) and also saves space in the computer's memory.
+for the new mesh; this can be useful if the vertices carry some information
+(e.g.\ values of a solution of a PDE) and also saves space in the computer's memory.
+Note that vertices belonging to {\small\tt DA} will not show up in the
+new mesh; corresponding vertices from {\small\tt BC} will be used instead.
+
+We must identify {\small\tt BC} with the reverse of {\small\tt DA} (which we may call
+{\small\tt AD} if we wish), otherwise the cylinder will get twisted.
+This event is discussed in paragraph \ref{\numb section 13.\numb parag 5}.
 
 
           %------------------------------%
@@ -677,5 +681,13 @@ It suffices to identify two pairs of opposite faces.
                               \verm{tag}::identify, BC, \verm{tag}::with, DA.reverse(),
                               \verm{tag}::use_existing_vertices                 );
 \end{Verbatim}
+
+
+          %-----------------------------------------%
+\section{~~Progressive meshing on quotient manifolds}\label{\numb section 7.\numb parag 16}
+          %-----------------------------------------%
+
+At present, progressive mesh generation (described in section \ref{\numb section 3})
+does not work on a quotient manifold.
 
 

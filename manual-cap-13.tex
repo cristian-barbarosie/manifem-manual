@@ -16,7 +16,8 @@ There are Euclidian {\small\tt\verm{Manifold}}s, there are implicitly defined
 sub-{\small\tt\verm{Manifold}}s, there are parametric {\small\tt\verm{Manifold}}s
 and also quotient {\small\tt\verm{Manifold}}s.
 
-Often, a {\small\tt\verm{Mesh}} is a discretization of a {\small\tt\verm{Manifold}}.
+A {\small\tt\verm{Mesh}} may be the discretization of a {\small\tt\verm{Manifold}}
+or of a piece (region) of a {\small\tt\verm{Manifold}}.
 
 See paragraphs \ref{\numb section 2.\numb parag 4}, \ref{\numb section 2.\numb parag 10},
 \ref{\numb section 2.\numb parag 13} and \ref{\numb section 2.\numb parag 14};
@@ -57,5 +58,43 @@ No.
 At the moment, this is not part of our plans.
 
 
+          %----------------------------------------------------%
+\section{~~What happens if we try to identify a twisted pair of
+           opposite faces of a parallelogram ?}
+          %----------------------------------------------------%
+\label{\numb section 13.\numb parag 5}
 
+If, in paragraph \ref{\numb section 7.\numb parag 14}, we ask {\maniFEM} to identify
+{\small\tt BC} with {\small\tt DA} (forgetting to reverse {\small\tt DA}),
+{\maniFEM} will complain about orientations.
+
+\ManiFEM{} has been designed around the concept of oriented mesh so it will
+bluntly refuse to mesh a non-orientable manifold.
+Had it been otherwise, identifying {\small\tt BC} with {\small\tt AD}
+would produce a M\"obius strip.
+
+Similarly, in paragraph \ref{\numb section 7.\numb parag 15}, a statement like
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                     ]
+   \verm{Mesh} \azul{torus} = square.fold ( \verm{tag}::identify, AB, \verm{tag}::with, CD.reverse(),
+                              \verm{tag}::identify, BC, \verm{tag}::with, DA,
+                              \verm{tag}::use_existing_vertices                 );
+\end{Verbatim}
+
+\noindent would produce a Klein surface if {\maniFEM} were not so stubbornly reliant on
+oriented meshes.
+
+\vfill\eject
+On the other hand, the statement
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                     ]
+   \verm{Mesh} \azul{torus} = square.fold ( \verm{tag}::identify, AB, \verm{tag}::with, CD,
+                              \verm{tag}::identify, BC, \verm{tag}::with, DA,
+                              \verm{tag}::use_existing_vertices       );
+\end{Verbatim}
+
+\noindent would produce a projective plane if {\maniFEM} were not so reluctant of
+non-oriented objects.
 
