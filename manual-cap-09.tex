@@ -107,7 +107,7 @@ paragraph \ref{\numb section 11.\numb parag 4}.
                   \verm{tag}::divided_in, radial_divisions     );
    \verm{Mesh} \azul{prev_seg} = ini_seg;
    \verm{Cell} \azul{A} = ini_A,  \azul{B} = ini_B;
-   list < \verm{Mesh} > \azul{sectors};
+   std::vector < \verm{Mesh} > \azul{sectors};
 
    for ( short int \azul{i} = 1; i < n_sectors; i++ )
    \{  double \azul{theta} = i * step_theta;
@@ -136,7 +136,7 @@ paragraph \ref{\numb section 11.\numb parag 4}.
 \end{Verbatim}
 
 Note how we use a version of the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::join}
-taking as argument a list of {\small\tt \verm{Mesh}}es; we have already seen it in paragraphs
+taking as argument a vector of {\small\tt \verm{Mesh}}es; we have already seen it in paragraphs
 \ref{\numb section 2.\numb parag 7} and \ref{\numb section 2.\numb parag 11}.
 
 We might have set curved boundaries by using a submanifold of $ \mathbb{R}^2 $, like in paragraph

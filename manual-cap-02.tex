@@ -405,7 +405,7 @@ Below we use twelve rectangles to get a bumpy hemisphere.
 \end{Verbatim}
 
 Note how we use a version of the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::join}
-taking as argument a list of {\small\tt \verm{Mesh}}es; the same constructor is used in
+taking as argument a vector of {\small\tt \verm{Mesh}}es; the same constructor is used in
 paragraph \ref{\numb section 9.\numb parag 2}.
 
 Unlike in paragraph \ref{\numb section 2.\numb parag 6}, here we do not control the
@@ -625,7 +625,7 @@ We then join all patches :
    \verm{Mesh} \azul{sect1} ( \verm{tag}::join, AB1B2, B1C1C2B2, C1DC2 );
    \verm{Mesh} \azul{sect2} ( \verm{tag}::join, AB2B3, B2C2C3B3, C2DC3 );
    \cinza{// more sectors ...}
-   std::list < \verm{Mesh} > lm \{ sect1, sect2, sect3, sect4, sect5, sect6, sect7, sect8 \};
+   std::vector < \verm{Mesh} > lm \{ sect1, sect2, sect3, sect4, sect5, sect6, sect7, sect8 \};
    \verm{Mesh} \azul{fisalis} ( \verm{tag}::join, lm ); 
 \end{Verbatim}
 
@@ -663,7 +663,7 @@ Thus, the eight rims defined in the beginning are kept unchanged.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 11}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   std::list<\verm{Mesh}>::iterator \azul{it1};
+   std::vector<\verm{Mesh}>::iterator \azul{it1};
    for ( it1 = lm.begin(); it1 != lm.end(); it1++ )
    \{  \verm{Mesh} \azul{sect} = *it1;
       \verm{CellIterator} \azul{it2} = sect.iterator ( \verm{tag}::over_vertices );

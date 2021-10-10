@@ -987,8 +987,8 @@ A typical example is the vertex of a cone.
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 20}.cpp,rulecolor=\color{coment},
-   baselinestretch=0.94,framesep=2mm                                            ]
+   label=code not working,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                  ]
    \verm{Manifold} \azul{cone_manif} = RR3.implicit ( x*x + y*x == z*z );
    cone_manif.implicit ( z == 1. );
    \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 1.;  y(A) = 0.;  z(A) = 1.;
@@ -1026,8 +1026,8 @@ We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb para
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 21}.cpp,rulecolor=\color{coment},
-   baselinestretch=0.94,framesep=2mm                                            ]
+   label=code not working,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                  ]
    \verm{Manifold} \azul{cylinder} = RR3.implicit ( y*y + (z-0.5)*(z-0.5) == 0.25 );
    \verm{Manifold} \azul{infinity} = cylinder.implicit ( x*x + y*y + z*z == 1. );
    \verm{Cell} \azul{V} ( \verm{tag}::vertex );  x(V) = 0.;  y(V) = 0.;  z(V) = 1.;
@@ -1106,8 +1106,9 @@ As a consequence, the meshing algorithm, while trying to build a mesh of constan
 we see in the drawing), thus producing the same result as in paragraph
 \ref{\numb section 3.\numb parag 22}.
 
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=code not working,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                   ]
    \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
    \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0],  \azul{y} = xy[1];
@@ -1144,8 +1145,9 @@ The arguments of {\small\tt set\_\,metric} are $ m_{11} $, $ m_{12} $ and $ m_{2
 for two dimensions,
 $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for three dimensions.
 
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                     ]
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=code not working,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                  ]
    \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
    \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0],  \azul{y} = xy[1];

@@ -32,8 +32,5 @@ pdf : manual.pdf
 view-pdf: manual.pdf
 	cygstart $^
 
-clean :
-	rm -f manual.dvi manual.ps manual.pdf
-
-.PHONY: view-ps, view-pdf, view-dvi, ps, pdf, dvi, clean
+.PHONY: view-ps, view-pdf, view-dvi, ps, pdf, dvi
 
