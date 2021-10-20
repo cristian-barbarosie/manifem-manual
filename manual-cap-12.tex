@@ -19,17 +19,17 @@ It contains mainly drawings which document specific parts of \maniFEM.
           %----------------------------%
 
 One of the simplest meshes is an open chain of segments.
-The {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::segment}
-calls the {\small\tt\verm{Mesh}::build} method with {\small\tt \verm{tag}::segment}.
+The {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::segment}
+calls the {\small\tt\verm{Mesh}::build} method with {\small\tt \textcolor{tag}{tag}::segment}.
 This method is defined in
 {\small\tt global.cpp}, receives two vertices (a negative one and a positive one)
 and the desired number of segments and builds the chain.
 New vertices are built by using the constructor\hfil\break
-{\small\tt \verm{Cell}} {\small\tt(} {\small\tt\verm{tag}::vertex} {\small\tt)}.
+{\small\tt \verm{Cell}} {\small\tt(} {\small\tt\textcolor{tag}{tag}::vertex} {\small\tt)}.
 Space coordinates of each new vertex are defined by interpolating the coordinates of the
 two extremities of the chain.
 New segments are built by means of constructor {\small\tt \verm{Cell}} {\small\tt(}
-{\small\tt\verm{tag}::segment,} {\small\tt A,} {\small\tt B} {\small\tt )},
+{\small\tt\textcolor{tag}{tag}::segment,} {\small\tt A,} {\small\tt B} {\small\tt )},
 where {\small\tt A} is a {\small\tt \verm{Cell}::Negative::Vertex} and {\small\tt B} is a
 {\small\tt \verm{Cell}::Positive::Vertex}.
 
@@ -45,8 +45,8 @@ For an implicit manifold, it involves a projection operation, as explained in pa
 \section{~~Building a rectangular mesh}\label{\numb section 12.\numb parag 3}
           %---------------------------%
 
-Constructor {\small\tt \verm{Mesh}::Mesh} {\small\tt(} {\small\tt\verm{tag}::rectangle,...)}
-calls the {\small\tt\verm{Mesh}::build} method with {\small\tt \verm{tag}::rectangle}.
+Constructor {\small\tt \verm{Mesh}::Mesh} {\small\tt(} {\small\tt\textcolor{tag}{tag}::rectangle,...)}
+calls the {\small\tt\verm{Mesh}::build} method with {\small\tt \textcolor{tag}{tag}::rectangle}.
 This method, defined in {\small\tt global.cpp}, builds a rectangular mesh from its
 four sides (which are one-dimensional meshes, more precisely, open chains of segments).
 No need to provide the number of divisions, the four sides already have their internal divisions.
@@ -93,7 +93,7 @@ For a manifold defined through an external parameter, the convex combination is 
 on the external parameter and then the space coordinates are computed accordingly
 (paragraph \ref{\numb section 2.\numb parag 17} shows such a situation).
 
-Providing a {\small\tt \verm{tag}::with\_\,triangles} makes the constructor cut each rectangle
+Providing a {\small\tt \textcolor{tag}{tag}::with\_\,triangles} makes the constructor cut each rectangle
 in halves; results are shown in paragraphs \ref{\numb section 2.\numb parag 3} and
 \ref{\numb section 2.\numb parag 8}.
 
@@ -135,7 +135,7 @@ Examples are presented in paragraphs \ref{\numb section 1.\numb parag 4},
           %---------------------------%
 
 Several constructors {\small\tt \verm{Mesh}::Mesh} {\small\tt(}
-{\small\tt\verm{tag}::progressive,...)} are defined in {\small\tt progressive.cpp};
+{\small\tt\textcolor{tag}{tag}::progressive,...)} are defined in {\small\tt progressive.cpp};
 they build a mesh on a given manifold starting with almost nothing.
 More precisely, they start with the boundary of the future mesh, then they
 move this interface with small steps, building the mesh behind it like a spider.

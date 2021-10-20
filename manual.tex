@@ -8,7 +8,7 @@
 \def\manifemrelease{***}
 \def\manualversion{***}
 \let\production 0
-\includeonly{manual-cap-07}
+\includeonly{manual-cap-01}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -40,9 +40,10 @@
 \newcommand\ManiFEM{\leavevmode\hbox{\includegraphics[width=13mm]{manifem-large}}}
 \newcommand\maniFEM{\leavevmode\hbox{\includegraphics[width=13mm]{manifem-small}}}
 
-\definecolor{manif}{rgb}{0., 0., 0.38}
+\definecolor{manif}{rgb}{0., 0., 0.55}
+\definecolor{tag}{rgb}{0.07, 0.07, 0.3}
 \definecolor{coment}{rgb}{0.3, 0.3, 0.3}
-\definecolor{nova}{rgb}{0.38, 0., 0.15}
+\definecolor{nova}{rgb}{0.55, 0., 0.2}
 \definecolor{incl}{rgb}{0.3, 0.2, 0.1}
 \definecolor{string}{rgb}{0.1, 0.25, 0.}
 \definecolor{textindraw}{rgb}{0., 0.37, 0.}
@@ -319,7 +320,7 @@ a STSI interface instead of a list of connected interfaces.
 
 \noindent Define regions in a manifold (i.e.\ manifolds with boundary) by means of
 inequalities between {\small\tt\verm{Function}}s (partially done, see {\small\tt draw\_\,ps}
-with {\small\tt\verm{tag}::unfold}).
+with {\small\tt\textcolor{tag}{tag}::unfold}).
 
 \noindent The name {\small\tt\verm{CellIterator}} is ugly.
 I have chosen this name to hint that we are dealing with an iterator over cells.
@@ -346,8 +347,18 @@ cell : \ref{\numb section 1.\numb parag 2}, \ref{\numb section 9.\numb parag 1}
 cloud : see {\small\tt \verm{MetricTree}}
 
 \noindent
+code coloring : \ref{\numb section 11.\numb parag 2}
+
+% \noindent
+% coloring conventions for code samples : \ref{\numb section 11.\numb parag 2}
+
+\noindent
 compilation process : \ref{\numb section 11.\numb parag 14},
 \ref{\numb section 11.\numb parag 15}
+
+\noindent
+cylinder : \ref{\numb section 3.\numb parag 18}, \ref{\numb section 3.\numb parag 19},
+\ref{\numb section 7.\numb parag 3}, \ref{\numb section 7.\numb parag 14}
 
 \noindent
 dimension of a cell or mesh : \ref{\numb section 1.\numb parag 2},
@@ -505,10 +516,15 @@ segment {\small\tt \verm{Mesh}}es :
 \ref{\numb section 3.\numb parag 14} -- \ref{\numb section 3.\numb parag 24}
 
 \noindent
-{\small\tt\verm{tag}}s : \ref{\numb section 11.\numb parag 3}
+source text coloring : \ref{\numb section 11.\numb parag 2}
 
 \noindent
-torus : \ref{\numb section 7.\numb parag 4} -- \ref{\numb section 7.\numb parag 10},
+{\small\tt\textcolor{tag}{tag}}s : \ref{\numb section 11.\numb parag 3}
+
+\noindent
+torus : \ref{\numb section 2.\numb parag 16}, \ref{\numb section 2.\numb parag 7},
+\ref{\numb section 3.\numb parag 7},
+\ref{\numb section 7.\numb parag 4} -- \ref{\numb section 7.\numb parag 10},
 \ref{\numb section 7.\numb parag 15}
 
 \noindent

@@ -35,30 +35,30 @@ using namespace std;
 int main ()
 
 \{  \cinza{// we choose our (geometric) space dimension :}
-   \verm{Manifold} \azul{RR3} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 3 );
+   \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 3 );
    
    \cinza{// xyz is a map defined on our future mesh with values in RR3 :}
-   \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
 
    \cinza{// we can extract components of xyz using the [] operator}
    \verm{Function} \azul{x} = xyz[0],  \azul{y} = xyz[1],  \azul{z} = xyz[2];
 
    \cinza{// Let's build a rectangular mesh. First, the four corners :}
-   \verm{Cell} \azul{SW} ( \verm{tag}::vertex );  x(SW) = -1;  y(SW) = 0;  z(SW) = 0;
-   \verm{Cell} \azul{SE} ( \verm{tag}::vertex );  x(SE) =  1;  y(SE) = 0;  z(SE) = 0;
-   \verm{Cell} \azul{NE} ( \verm{tag}::vertex );  x(NE) =  1;  y(NE) = 1;  z(NE) = 0;
-   \verm{Cell} \azul{NW} ( \verm{tag}::vertex );  x(NW) = -1;  y(NW) = 1;  z(NW) = 1;
+   \verm{Cell} \azul{SW} ( \textcolor{tag}{tag}::vertex );  x(SW) = -1;  y(SW) = 0;  z(SW) = 0;
+   \verm{Cell} \azul{SE} ( \textcolor{tag}{tag}::vertex );  x(SE) =  1;  y(SE) = 0;  z(SE) = 0;
+   \verm{Cell} \azul{NE} ( \textcolor{tag}{tag}::vertex );  x(NE) =  1;  y(NE) = 1;  z(NE) = 0;
+   \verm{Cell} \azul{NW} ( \textcolor{tag}{tag}::vertex );  x(NW) = -1;  y(NW) = 1;  z(NW) = 1;
    
    \cinza{// we access the coordinates of a point using the () operator :}								
    cout << \verde{"coordinates of NW : "} << x(NW) << \verde{" "} << y(NW) << \verde{" "} << z(NW) << endl;
    \cinza{// now build the four sides of the rectangle :}
-   \verm{Mesh} \azul{south} ( \verm{tag}::segment, SW.reverse(), SE, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{east}  ( \verm{tag}::segment, SE.reverse(), NE, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{north} ( \verm{tag}::segment, NE.reverse(), NW, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{west}  ( \verm{tag}::segment, NW.reverse(), SW, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{south} ( \textcolor{tag}{tag}::segment, SW.reverse(), SE, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{east}  ( \textcolor{tag}{tag}::segment, SE.reverse(), NE, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{north} ( \textcolor{tag}{tag}::segment, NE.reverse(), NW, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{west}  ( \textcolor{tag}{tag}::segment, NW.reverse(), SW, \textcolor{tag}{tag}::divided_in, 10 );
    
    \cinza{// and now the rectangle :}
-   \verm{Mesh} \azul{rect_mesh} ( \verm{tag}::rectangle, south, east, north, west );
+   \verm{Mesh} \azul{rect_mesh} ( \textcolor{tag}{tag}::rectangle, south, east, north, west );
 
    \cinza{// We may want to visualize the resulting mesh.}
    \cinza{// Here is one way to export the mesh in the "msh" format :}
@@ -70,8 +70,8 @@ int main ()
    \cinza{// using Gauss quadrature with 9 points}
 
    \verm{FiniteElement} \azul{fe}
-      ( \verm{tag}::with_master, \verm{tag}::quadrangle, \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
-   fe.set_integrator ( \verm{tag}::Gauss, \verm{tag}::quad_9 );
+      ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   fe.set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::quad_9 );
 
    \cinza{// code below does not work yet}
 
@@ -96,8 +96,8 @@ Launch the program through the command
 a file {\small\tt rectangle.msh} should appear in the working directory.
 You may view the mesh using the software {\tt gmsh}.
 
-Expressions like {\small\tt \verm{tag}::of\_\,dim} and {\small\tt \verm{tag}::vertex} are
-objects belonging to the {\small\tt namespace \verm{tag}};
+Expressions like {\small\tt \textcolor{tag}{tag}::of\_\,dim} and {\small\tt \textcolor{tag}{tag}::vertex} are
+objects belonging to the {\small\tt namespace \textcolor{tag}{tag}};
 we use them as arguments to many functions.
 See paragraph \ref{\numb section 11.\numb parag 3} for some details.
 
@@ -202,9 +202,12 @@ Note that the right hand rule is a convention based on the assuption that
 the surrounding space $ \mathbb{R}^3 $ has a certain orientation.
 
 Note also that an orientation of a mesh defines an orientation of its boundary.
-In the drawing below we can see two opposite orientations of a mesh, together with
-the corresponding orientation of its boundary.
+In figure \ref{\numb section 1.\numb fig 3} we can see the orientation of the
+boundary of the mesh, shown with pink arrows.
 This convention is used by Stokes' theorem.
+
+Figure \ref{\numb section 1.\numb fig 4} shows two opposite orientations of a mesh,
+together with the corresponding orientation of its boundary.
 
 \begin{figure}[ht] \centering
 \begin{subfigure}{71mm}\centering
@@ -225,11 +228,11 @@ Segment {\small\tt \verm{Cell}}s have methods {\small\tt base} and {\small\tt ti
 For instance :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  \verm{Cell} \azul{B} ( \verm{tag}::vertex );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );
    assert ( A.is_positive() );
    assert ( not A.reverse().is_positive() );
    assert ( A.reverse().reverse() == A );
-   \verm{Cell} \azul{AB} ( \verm{tag}::segment, A.reverse(), B );
+   \verm{Cell} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B );
    \cinza{// here, AB is a segment Cell, not a Mesh}
    assert ( AB.base() == A.reverse() );
    assert ( AB.tip() == B );
@@ -259,7 +262,7 @@ see paragraphs \ref{\numb section 1.\numb parag 3}, \ref{\numb section 2.\numb p
 
 The example in paragraph \ref{\numb section 1.\numb parag 1} could have been shortened
 had we used the overloaded version of the {\small\tt \verm{Mesh}} constructor with
-{\small\tt \verm{tag}::rectangle} which accepts the four corners as arguments. 
+{\small\tt \textcolor{tag}{tag}::rectangle} which accepts the four corners as arguments. 
 This overloaded version exists in \maniFEM, but we prefer to build meshes in a structured way, 
 first corners, then sides and then the plane region. 
 This has the advantage that one can build more complex meshes from simple components. 
@@ -282,31 +285,31 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 1.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0],  \azul{y} = xy[1];
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = -1.;  y(A) = 0.;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) =  0.;  y(B) = 0.;
-   \verm{Cell} \azul{C} ( \verm{tag}::vertex );  x(C) =  0.;  y(C) = 0.5;
-   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  x(D) = -1.;  y(D) = 0.5;
-   \verm{Cell} \azul{E} ( \verm{tag}::vertex );  x(E) =  0.;  y(E) = 1.;
-   \verm{Cell} \azul{F} ( \verm{tag}::vertex );  x(F) = -1.;  y(F) = 1.;
-   \verm{Cell} \azul{G} ( \verm{tag}::vertex );  x(G) =  1.;  y(G) = 0.;
-   \verm{Cell} \azul{H} ( \verm{tag}::vertex );  x(H) =  1.;  y(H) = 0.5;
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{BC} ( \verm{tag}::segment, B.reverse(), C, \verm{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{CD} ( \verm{tag}::segment, C.reverse(), D, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{DA} ( \verm{tag}::segment, D.reverse(), A, \verm{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{CE} ( \verm{tag}::segment, C.reverse(), E, \verm{tag}::divided_in, 7 );
-   \verm{Mesh} \azul{EF} ( \verm{tag}::segment, E.reverse(), F, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{FD} ( \verm{tag}::segment, F.reverse(), D, \verm{tag}::divided_in, 7 );
-   \verm{Mesh} \azul{BG} ( \verm{tag}::segment, B.reverse(), G, \verm{tag}::divided_in, 12 );
-   \verm{Mesh} \azul{GH} ( \verm{tag}::segment, G.reverse(), H, \verm{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{HC} ( \verm{tag}::segment, H.reverse(), C, \verm{tag}::divided_in, 12 );
-   \verm{Mesh} \azul{ABCD} ( \verm{tag}::rectangle, AB, BC, CD, DA );
-   \verm{Mesh} \azul{CEFD} ( \verm{tag}::rectangle, CE, EF, FD, CD.reverse() );
-   \verm{Mesh} \azul{BGHC} ( \verm{tag}::rectangle, BG, GH, HC, BC.reverse() );
-   \verm{Mesh} \azul{L_shaped} ( \verm{tag}::join, ABCD, CEFD, BGHC );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = -1.;  y(A) = 0.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  0.;  y(B) = 0.;
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) =  0.;  y(C) = 0.5;
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = -1.;  y(D) = 0.5;
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  0.;  y(E) = 1.;
+   \verm{Cell} \azul{F} ( \textcolor{tag}{tag}::vertex );  x(F) = -1.;  y(F) = 1.;
+   \verm{Cell} \azul{G} ( \textcolor{tag}{tag}::vertex );  x(G) =  1.;  y(G) = 0.;
+   \verm{Cell} \azul{H} ( \textcolor{tag}{tag}::vertex );  x(H) =  1.;  y(H) = 0.5;
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C.reverse(), E, \textcolor{tag}{tag}::divided_in, 7 );
+   \verm{Mesh} \azul{EF} ( \textcolor{tag}{tag}::segment, E.reverse(), F, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{FD} ( \textcolor{tag}{tag}::segment, F.reverse(), D, \textcolor{tag}{tag}::divided_in, 7 );
+   \verm{Mesh} \azul{BG} ( \textcolor{tag}{tag}::segment, B.reverse(), G, \textcolor{tag}{tag}::divided_in, 12 );
+   \verm{Mesh} \azul{GH} ( \textcolor{tag}{tag}::segment, G.reverse(), H, \textcolor{tag}{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{HC} ( \textcolor{tag}{tag}::segment, H.reverse(), C, \textcolor{tag}{tag}::divided_in, 12 );
+   \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );
+   \verm{Mesh} \azul{CEFD} ( \textcolor{tag}{tag}::rectangle, CE, EF, FD, CD.reverse() );
+   \verm{Mesh} \azul{BGHC} ( \textcolor{tag}{tag}::rectangle, BG, GH, HC, BC.reverse() );
+   \verm{Mesh} \azul{L_shaped} ( \textcolor{tag}{tag}::join, ABCD, CEFD, BGHC );
 \end{Verbatim}
 
 Meshes in $ \mathbb{R}^2 $ like the one above may be exported in the {\small\tt msh} format
@@ -343,12 +346,12 @@ as a pair of magnets.
 If their polarities are not opposite, the two meshes will not cling.
 
 Note also that if we define the rectangles based on their vertices instead of their sides, 
-the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::join} will not work properly. 
+the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::join} will not work properly. 
 For instance, the two rectangles defined by
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Mesh} \azul{ABCD} ( \verm{tag}::rectangle, A, B, C, D, 10, 8 );
-   \verm{Mesh} \azul{CEFD} ( \verm{tag}::rectangle, C, E, F, D, 7, 10 );
+   \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, A, B, C, D, 10, 8 );
+   \verm{Mesh} \azul{CEFD} ( \textcolor{tag}{tag}::rectangle, C, E, F, D, 7, 10 );
 \end{Verbatim}
 
 \noindent cannot be joined%
@@ -362,9 +365,9 @@ In contrast, {\small\tt CD} and {\small\tt CD.reverse()} share the same 11 point
 the same 10 segments (reversed).
 
 Paragraph \ref{\numb section 9.\numb parag 2} shows a more complex use of the {\small\tt \verm{Mesh}}
-constructor with {\small\tt \verm{tag}::join}.
+constructor with {\small\tt \textcolor{tag}{tag}::join}.
 
-Incidentally, note that the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::rectangle} accepts
+Incidentally, note that the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::rectangle} accepts
 any position for the vertices. 
 Thus, you can use it to build any quadrilateral; the inner vertices' coordinates are simply
 interpolated from the coordinates of vertices on the boundary, as shown in paragraphs
@@ -386,25 +389,25 @@ We can also build meshes on triangular domains and {\small\tt join} them as we w
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 1.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = -1. ;  y(A) = 0.;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) =  0. ;  y(B) = 0.;
-   \verm{Cell} \azul{C} ( \verm{tag}::vertex );  x(C) =  1. ;  y(C) = 0.;
-   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  x(D) = -0.5;  y(D) = 1.;
-   \verm{Cell} \azul{E} ( \verm{tag}::vertex );  x(E) =  0.5;  y(E) = 1.;
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = -1. ;  y(A) = 0.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  0. ;  y(B) = 0.;
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) =  1. ;  y(C) = 0.;
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = -0.5;  y(D) = 1.;
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  0.5;  y(E) = 1.;
 
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{BC} ( \verm{tag}::segment, B.reverse(), C, \verm{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{AD} ( \verm{tag}::segment, A.reverse(), D, \verm{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{BD} ( \verm{tag}::segment, B.reverse(), D, \verm{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{BE} ( \verm{tag}::segment, B.reverse(), E, \verm{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{CE} ( \verm{tag}::segment, C.reverse(), E, \verm{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{ED} ( \verm{tag}::segment, E.reverse(), D, \verm{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{AD} ( \textcolor{tag}{tag}::segment, A.reverse(), D, \textcolor{tag}{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{BD} ( \textcolor{tag}{tag}::segment, B.reverse(), D, \textcolor{tag}{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{BE} ( \textcolor{tag}{tag}::segment, B.reverse(), E, \textcolor{tag}{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C.reverse(), E, \textcolor{tag}{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{ED} ( \textcolor{tag}{tag}::segment, E.reverse(), D, \textcolor{tag}{tag}::divided_in, 8 );
 
-   \verm{Mesh} \azul{ABD} ( \verm{tag}::triangle, AB, BD, AD.reverse() );
-   \verm{Mesh} \azul{BCE} ( \verm{tag}::triangle, BC, CE, BE.reverse() );
-   \verm{Mesh} \azul{BED} ( \verm{tag}::triangle, BE, ED, BD.reverse() );
+   \verm{Mesh} \azul{ABD} ( \textcolor{tag}{tag}::triangle, AB, BD, AD.reverse() );
+   \verm{Mesh} \azul{BCE} ( \textcolor{tag}{tag}::triangle, BC, CE, BE.reverse() );
+   \verm{Mesh} \azul{BED} ( \textcolor{tag}{tag}::triangle, BE, ED, BD.reverse() );
 
-   \verm{Mesh} \azul{three_tri} ( \verm{tag}::join, ABD, BCE, BED );
+   \verm{Mesh} \azul{three_tri} ( \textcolor{tag}{tag}::join, ABD, BCE, BED );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -428,10 +431,10 @@ It is possible to have triangles and quadrilaterals mixed in the same mesh :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 1.\numb parag 5}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Mesh} \azul{ABD} ( \verm{tag}::triangle, AB, BD, AD.reverse() );
-   \verm{Mesh} \azul{BCE} ( \verm{tag}::triangle, BC, CE, BE.reverse() );
-   \verm{Mesh} \azul{BEFD} ( \verm{tag}::quadrangle, BE, EF, FD, BD.reverse() );
-   \verm{Mesh} \azul{two_tri_one_rect} ( \verm{tag}::join, ABD, BEFD, BCE );
+   \verm{Mesh} \azul{ABD} ( \textcolor{tag}{tag}::triangle, AB, BD, AD.reverse() );
+   \verm{Mesh} \azul{BCE} ( \textcolor{tag}{tag}::triangle, BC, CE, BE.reverse() );
+   \verm{Mesh} \azul{BEFD} ( \textcolor{tag}{tag}::quadrangle, BE, EF, FD, BD.reverse() );
+   \verm{Mesh} \azul{two_tri_one_rect} ( \textcolor{tag}{tag}::join, ABD, BEFD, BCE );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering

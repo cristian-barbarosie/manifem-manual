@@ -21,9 +21,9 @@ One way to achieve this is
    label=parag-\ref{\numb section 10.\numb parag 1}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    ABCD.remove_from_mesh ( msh );
-   \verm{Cell} \azul{AC} ( \verm{tag}::segment, A.reverse(), C );
-   \verm{Cell} \azul{ABC} ( \verm{tag}::triangle, AB, BC, AC.reverse() );
-   \verm{Cell} \azul{CDA} ( \verm{tag}::triangle, CD, DA, AC );
+   \verm{Cell} \azul{AC} ( \textcolor{tag}{tag}::segment, A.reverse(), C );
+   \verm{Cell} \azul{ABC} ( \textcolor{tag}{tag}::triangle, AB, BC, AC.reverse() );
+   \verm{Cell} \azul{CDA} ( \textcolor{tag}{tag}::triangle, CD, DA, AC );
    ABC.add_to_mesh ( msh );
    CDA.add_to_mesh ( msh );
 \end{Verbatim}
@@ -65,11 +65,11 @@ a new triangle to obtain the same result as in paragraph \ref{\numb section 10.\
    \cinza{// at this point, ABCD is a cell whose boundary is incomplete}
    \cinza{// it has only two sides and an opening}
    \cinza{// however, it still is part of 'msh'}
-   \verm{Cell} \azul{AC} ( \verm{tag}::segment, A.reverse(), C );
+   \verm{Cell} \azul{AC} ( \textcolor{tag}{tag}::segment, A.reverse(), C );
    AC.reverse().glue_on_bdry_of ( ABCD );
    \cinza{// at this point, and in spite of its name, ABCD is no longer a square}
    \cinza{// it is a triangle, still part of 'msh'}
-   \verm{Cell} \azul{CDA} ( \verm{tag}::triangle, CD, DA, AC );
+   \verm{Cell} \azul{CDA} ( \textcolor{tag}{tag}::triangle, CD, DA, AC );
    CDA.add_to_mesh ( msh );
 \end{Verbatim}
 
@@ -87,7 +87,7 @@ will occur).
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=incorrect code !,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 2 );
+   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
    for ( it.reset(); it.in_range(); it++ )
    \{  \verm{Cell} \azul{square} = *it;
       if ( \cinza{... some criterion ...} )
@@ -107,7 +107,7 @@ The vertices give an indication about which diagonal to choose to cut the square
    label=parag-\ref{\numb section 10.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    std::list<\verm{Cell}> list_of_squares, list_of_vertices;
-   \verm{CellIterator} \azul{it} = msh.iterator ( \verm{tag}::over_cells_of_dim, 2 );
+   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
    for ( it.reset(); it.in_range(); it++ )
    \{  \verm{Cell} \azul{square} = *it;
       if ( \cinza{... some criterion ...} )  \cinza{// we decide to cut this square in halves}
@@ -132,9 +132,9 @@ The vertices give an indication about which diagonal to choose to cut the square
       \verm{Cell} \azul{SP} = square.boundary().cell_in_front_of ( S );
       assert ( SP.tip() == P );
       square.remove_from_mesh ( msh );
-      \verm{Cell} \azul{PR} ( \verm{tag}::segment, P.reverse(), R );
-      \verm{Cell} \azul{PQR} ( \verm{tag}::triangle, PQ, QR, PR.reverse() );
+      \verm{Cell} \azul{PR} ( \textcolor{tag}{tag}::segment, P.reverse(), R );
+      \verm{Cell} \azul{PQR} ( \textcolor{tag}{tag}::triangle, PQ, QR, PR.reverse() );
       PQR.add_to_mesh ( msh );
-      \verm{Cell} \azul{RSP} ( \verm{tag}::triangle, RS, SP, PR );
+      \verm{Cell} \azul{RSP} ( \textcolor{tag}{tag}::triangle, RS, SP, PR );
       RSP.add_to_mesh ( msh );                                     \}
 \end{Verbatim}

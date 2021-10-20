@@ -82,25 +82,25 @@ boundary conditions.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
 
    \cinza{// declare the type of finite element}
    \verm{FiniteElement} \azul{fe}
-      ( \verm{tag}::with_master, \verm{tag}::quadrangle, \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
-   \verm{Integrator} \azul{integ} = fe.set_integrator ( \verm{tag}::Gauss, \verm{tag}::quad_4 );
+      ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{Integrator} \azul{integ} = fe.set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::quad_4 );
 
    \cinza{// build a 10x12 mesh on a square domain}
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0.;   y(A) = 0.;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) = 1.;   y(B) = 0.;
-   \verm{Cell} \azul{C} ( \verm{tag}::vertex );  x(C) = 1.;   y(C) = 1.;
-   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  x(D) = 0.;   y(D) = 1.;
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{BC} ( \verm{tag}::segment, B.reverse(), C, \verm{tag}::divided_in, 12 );
-   \verm{Mesh} \azul{CD} ( \verm{tag}::segment, C.reverse(), D, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{DA} ( \verm{tag}::segment, D.reverse(), A, \verm{tag}::divided_in, 12 );
-   \verm{Mesh} \azul{ABCD} ( \verm{tag}::rectangle, AB, BC, CD, DA );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.;   y(A) = 0.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = 1.;   y(B) = 0.;
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) = 1.;   y(C) = 1.;
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = 0.;   y(D) = 1.;
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, 12 );
+   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, 12 );
+   \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );
 \end{Verbatim}
 \vskip 1mm
 
@@ -114,7 +114,7 @@ for numbering vertices.
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    std::map < Cell, size_t > \azul{numbering};
-   \verm{CellIterator} \azul{it} = ABCD.iterator ( \verm{tag}::over_vertices );
+   \verm{CellIterator} \azul{it} = ABCD.iterator ( \textcolor{tag}{tag}::over_vertices );
    size_t \azul{counter} = 0;
    for ( it.reset() ; it.in_range(); it++ )
    \{  \verm{Cell} \azul{V} = *it;  numbering[V] = counter;  ++counter;  \}
@@ -127,7 +127,7 @@ are declared as objects of the {\small\tt Eigen} library.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   size_t \azul{size_matrix} = ABCD.number_of ( \verm{tag}::vertices );
+   size_t \azul{size_matrix} = ABCD.number_of ( \textcolor{tag}{tag}::vertices );
    assert ( size_matrix == numbering.size() );
    Eigen::SparseMatrix <double> \azul{matrix_A} ( size_matrix, size_matrix );
    Eigen::VectorXd \azul{vector_b} ( size_matrix );  vector_b.setZero();
@@ -145,13 +145,13 @@ values to the global matrix:
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    // run over all square cells composing ABCD
-   \verm{CellIterator} \azul{it} = ABCD.iterator ( \verm{tag}::over_cells_of_dim, 2 );
+   \verm{CellIterator} \azul{it} = ABCD.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
    for ( it.reset(); it.in_range(); it++ )
    \{  \verm{Cell} \azul{small_square} = *it;
       fe.dock_on ( small_square );
       // run twice over the four vertices of 'small_square'
-      \verm{CellIterator} \azul{it1} = small_square.boundary().iterator ( \verm{tag}::over_vertices );
-      \verm{CellIterator} \azul{it2} = small_square.boundary().iterator ( \verm{tag}::over_vertices );
+      \verm{CellIterator} \azul{it1} = small_square.boundary().iterator ( \textcolor{tag}{tag}::over_vertices );
+      \verm{CellIterator} \azul{it2} = small_square.boundary().iterator ( \textcolor{tag}{tag}::over_vertices );
       for ( it1.reset(); it1.in_range(); it1++ )
       for ( it2.reset(); it2.in_range(); it2++ )
       \{  \verm{Cell} \azul{V} = *it1, \azul{W} = *it2;
@@ -184,7 +184,7 @@ function.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{CellIterator} \azul{it} = BC.iterator ( \verm{tag}::over_vertices );
+   \verm{CellIterator} \azul{it} = BC.iterator ( \textcolor{tag}{tag}::over_vertices );
    for ( it.reset(); it.in_range(); it++ )
    \{   \verm{Cell} \azul{P} = *it;
        size_t \azul{i} = numbering[P.core]-1;
@@ -196,8 +196,8 @@ We then use {\small\tt Eigen} to solve the system of linear equations :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   Eigen::ConjugateGradient < Eigen::SparseMatrix<double>,
-                              Eigen::Lower|Eigen::Upper    > \azul{cg};
+   Eigen::ConjugateGradient < Eigen::SparseMatrix <double>,
+                              Eigen::Lower | Eigen::Upper  > \azul{cg};
    cg.compute ( matrix_A );
    Eigen::VectorXd \azul{u} = cg.solve ( vector_b );
 \end{Verbatim}
@@ -253,15 +253,15 @@ part of the boundary where we need to integrate.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{FiniteElement} \azul{fe_bdry} ( \verm{tag}::with_master, \verm{tag}::segment,
-                           \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
-   \verm{Integrator} \azul{integ_bdry} = fe_bdry.set_integrator ( \verm{tag}::Gauss, \verm{tag}::seg_3 );
+   \verm{FiniteElement} \azul{fe_bdry} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::segment,
+                           \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{Integrator} \azul{integ_bdry} = fe_bdry.set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::seg_3 );
 
    \cinza{// ... assemble the matrix ...}
 
    \verm{Function} \azul{heat_source} = x+y;
    \cinza{// impose Neumann boundary conditions du/dn = heat_source :}
-   \verm{CellIterator} \azul{it} = DA.iter_over ( \verm{tag}::segments );
+   \verm{CellIterator} \azul{it} = DA.iterator ( \textcolor{tag}{tag}::over_segments );
    for ( it.reset(); it.in_range(); it++ )
    \{  \verm{Cell} \azul{seg} = *it;
       fe_bdry.dock_on ( seg );
@@ -289,7 +289,7 @@ This is object of on-going work.
 In previous examples we have built a {\small\tt map} for handling numbering of vertices.
 In this paragraph we show how to use instead the automatic numbering associated to the
 finite element itself.
-After declaring a finite element of type Lagrange with {\small\tt\verm{tag}::enumerate\_\,cells},
+After declaring a finite element of type Lagrange with {\small\tt\textcolor{tag}{tag}::enumerate\_\,cells},
 the process of creating new cells (vertices, in this specfic case) will be different.
 A new function will be added to the list of functions {\small\tt\verm{Cell}::init\_\,pos\_\,cell[0]},
 invoked by {\small\tt\verm{Cell}::Core} constructors (see paragraph
@@ -300,9 +300,9 @@ this value can be used for numbering vertices.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{FiniteElement} \azul{fe} ( \verm{tag}::with_master, \verm{tag}::quadrangle,
-                      \verm{tag}::Lagrange, \verm{tag}::of_degree, 1, \verm{tag}::enumerate_cells );
-   \verm{Cell}::Numbering & \azul{numbering} = fe.numbering ( \verm{tag}::vertices );
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle,
+                      \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1, \textcolor{tag}{tag}::enumerate_cells );
+   \verm{Cell}::Numbering & \azul{numbering} = fe.numbering ( \textcolor{tag}{tag}::vertices );
 \end{Verbatim}
 
 In this approach, the access to the index of a given vertex is very fast (constant time)
@@ -334,7 +334,7 @@ diagonal with ones, then erase them for existing vertices.
    baselinestretch=0.94,framesep=2mm                                            ]
    for ( size_t \azul{i} = 0; i < size_matrix; i++ )
       matrix_A.insert ( i, i ) = 1.;
-   \verm{CellIterator} \azul{it} = ABCD.iterator ( \verm{tag}::over_vertices );
+   \verm{CellIterator} \azul{it} = ABCD.iterator ( \textcolor{tag}{tag}::over_vertices );
    for ( it.reset(); it.in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;
       size_t \azul{i} = numbering ( P );
@@ -349,7 +349,7 @@ We simply assign the desired value to the numbering of each vertex :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm          ]
-   \verm{CellIterator} \azul{it} = ABCD.iterator ( \verm{tag}::over_vertices );
+   \verm{CellIterator} \azul{it} = ABCD.iterator ( \textcolor{tag}{tag}::over_vertices );
    size_t \azul{counter} = 0;
    for ( it.reset(); it.in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;
@@ -359,7 +359,7 @@ We simply assign the desired value to the numbering of each vertex :
 However, the information from {\small\tt numbering.size()} will still be misleading
 (it still takes into account the ``hidden'' vertices).
 You should use instead {\small\tt ABCD.number\_\,of} {\small\tt} {\small\tt (}
-{\small\tt \verm{tag}::vertices )}.
+{\small\tt \textcolor{tag}{tag}::vertices )}.
 
 Note that both numbering methods (presented in paragraphs \ref{\numb section 6.\numb parag 2}
 and \ref{\numb section 6.\numb parag 4}) allow for retrieving
@@ -368,6 +368,6 @@ If you need to retrieve a vertex from its index you should probably use
 a vector of {\small\tt\verm{Cell}}s.
 
 For the example in paragraph \ref{\numb section 6.\numb parag 3}, you should add the
-{\small\tt\verm{tag}::enumerate\_\,cells} when declaring {\small\tt fe} and not when
+{\small\tt\textcolor{tag}{tag}::enumerate\_\,cells} when declaring {\small\tt fe} and not when
 declaring {\small\tt fe\_\,bdry} -- you don't want two independent mechanisms for numbering
 vertices, do you ?

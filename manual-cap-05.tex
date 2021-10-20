@@ -13,8 +13,8 @@ Euclidian {\small\tt \verm{Manifold}} and then go on by building a coordinate sy
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Manifold} RR2 ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} RR2 ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
 \end{Verbatim}
 
@@ -75,11 +75,11 @@ Consider the mesh built by the code below.
    auto SE = Cell::point ("SE"); x(SE) = 1; y(SE) = 0;
    auto NE = Cell::point ("NE"); x(NE) = 1; y(NE) = 1;
    auto NW = Cell::point ("NW"); x(NW) = -1; y(NW) = 1;
-   auto south ( \verm{tag}::segment, SW.reverse(), SE, \verm{tag}::divided_in, 4, xy );
-   auto east  ( \verm{tag}::segment, SE.reverse(), NE, \verm{tag}::divided_in, 2, xy );
-   auto north ( \verm{tag}::segment, NE.reverse(), NW, \verm{tag}::divided_in, 4, xy );
-   auto west  ( \verm{tag}::segment, NW.reverse(), SW, \verm{tag}::divided_in, 2, xy );
-   auto rect_mesh ( \verm{tag}::rectangle, south, east, north, west, xy );
+   auto south ( \textcolor{tag}{tag}::segment, SW.reverse(), SE, \textcolor{tag}{tag}::divided_in, 4, xy );
+   auto east  ( \textcolor{tag}{tag}::segment, SE.reverse(), NE, \textcolor{tag}{tag}::divided_in, 2, xy );
+   auto north ( \textcolor{tag}{tag}::segment, NE.reverse(), NW, \textcolor{tag}{tag}::divided_in, 4, xy );
+   auto west  ( \textcolor{tag}{tag}::segment, NW.reverse(), SW, \textcolor{tag}{tag}::divided_in, 2, xy );
+   auto rect_mesh ( \textcolor{tag}{tag}::rectangle, south, east, north, west, xy );
 \end{Verbatim}
 
 Note that, besides the {\small\tt NumericField} objects {\small\tt x} and {\small\tt y}

@@ -77,9 +77,9 @@ Similarly, in paragraph \ref{\numb section 7.\numb parag 15}, a statement like
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Mesh} \azul{torus} = square.fold ( \verm{tag}::identify, AB, \verm{tag}::with, CD.reverse(),
-                              \verm{tag}::identify, BC, \verm{tag}::with, DA,
-                              \verm{tag}::use_existing_vertices                 );
+   \verm{Mesh} \azul{torus} = square.fold ( \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, CD.reverse(),
+                              \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, DA,
+                              \textcolor{tag}{tag}::use_existing_vertices                 );
 \end{Verbatim}
 
 \noindent would produce a Klein surface if {\maniFEM} were not so stubbornly reliant on
@@ -90,9 +90,9 @@ On the other hand, the statement
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Mesh} \azul{torus} = square.fold ( \verm{tag}::identify, AB, \verm{tag}::with, CD,
-                              \verm{tag}::identify, BC, \verm{tag}::with, DA,
-                              \verm{tag}::use_existing_vertices       );
+   \verm{Mesh} \azul{torus} = square.fold ( \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, CD,
+                              \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, DA,
+                              \textcolor{tag}{tag}::use_existing_vertices       );
 \end{Verbatim}
 
 \noindent would produce a projective plane if {\maniFEM} were not so reluctant of

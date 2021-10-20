@@ -41,17 +41,17 @@ We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified 
    label=parag-\ref{\numb section 7.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// begin with the one-dimensional line}
-   \verm{Manifold} \azul{RR} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 1 );
-   \verm{Function} \azul{x} = RR.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 1 );
+   \verm{Function} \azul{x} = RR.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
 
    \cinza{// define an action on RR (a translation)}
    \verm{Function}::Action \azul{g} ( tag::transforms, x, tag::into, x+1. );
    \verm{Manifold} \azul{circle} = RR.quotient ( g );
 
    \cinza{// one vertex is enough to start the process}
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0.02;
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.02;
    \cinza{// with this vertex, we build a segment}
-   \verm{Mesh} \azul{seg} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::spin, g );
+   \verm{Mesh} \azul{seg} ( \textcolor{tag}{tag}::segment, A.reverse(), A, \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::spin, g );
 \end{Verbatim}
 
 We do not bother with the graphical representation of this one-dimensional mesh.
@@ -65,6 +65,9 @@ we have chosen to hide the class name {\small\tt Action} inside the namespace of
 {\small\tt class \verm{Function}}.
 See paragraph \ref{\numb section 11.\numb parag 1}.
 
+Paragraph \ref{\numb section 11.\numb parag 2} explains the coloring conventions observed
+in this manual for {\tt C++} code.
+
 
           %---------------%
 \section{~~A curved circle}\label{\numb section 7.\numb parag 2}
@@ -76,14 +79,14 @@ this time in a less cumbersome manner.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Manifold} \azul{RR} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 1 );
-   \verm{Function} \azul{theta} = RR.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 1 );
+   \verm{Function} \azul{theta} = RR.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    const double \azul{pi} = 3.1415926536;
    \verm{Function}::Action \azul{g} ( tag::transforms, theta, tag::into, theta + 2*pi );
    \verm{Manifold} \azul{circle} = RR.quotient ( g );
 
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  theta ( A ) = 0.;
-   \verm{Mesh} \azul{loop} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 20, \verm{tag}::spin, g );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  theta ( A ) = 0.;
+   \verm{Mesh} \azul{loop} ( \textcolor{tag}{tag}::segment, A.reverse(), A, \textcolor{tag}{tag}::divided_in, 20, \textcolor{tag}{tag}::spin, g );
 
    \cinza{// define new coordinates x and y as arithmetic expressions of theta}
    \verm{Function} \azul{x} = \verm{cos}(theta), \azul{y} = \verm{sin}(theta);
@@ -105,20 +108,20 @@ Here is how to build a (part of a) cylinder in $ \mathbb{R}^3 $ :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
+   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
    \verm{Function} \azul{theta_z} =
-      RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+      RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{theta} = theta_z[0], \azul{z} = theta_z[1];
    const double \azul{pi} = 3.1415926536;
    \verm{Function}::Action \azul{g} ( tag::transforms, theta_z, tag::into, (theta+2*pi) && z );
    \verm{Manifold} \azul{cylinder_manif} = RR2.quotient ( g );
 
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  theta(A) = 0.; z(A) = -1.;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  theta(B) = 0.; z(B) =  1.;
-   \verm{Mesh} \azul{AA} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 20, \verm{tag}::spin,  g );
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 15 );  \cinza{// no spin}
-   \verm{Mesh} \azul{BB} ( \verm{tag}::segment, B.reverse(), B, \verm{tag}::divided_in, 20, \verm{tag}::spin, -g );
-   \verm{Mesh} \azul{cylinder} ( \verm{tag}::rectangle, AA, AB, BB, AB.reverse(), \verm{tag}::spin );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  theta(A) = 0.; z(A) = -1.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  theta(B) = 0.; z(B) =  1.;
+   \verm{Mesh} \azul{AA} ( \textcolor{tag}{tag}::segment, A.reverse(), A, \textcolor{tag}{tag}::divided_in, 20, \textcolor{tag}{tag}::spin,  g );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 15 );  \cinza{// no spin}
+   \verm{Mesh} \azul{BB} ( \textcolor{tag}{tag}::segment, B.reverse(), B, \textcolor{tag}{tag}::divided_in, 20, \textcolor{tag}{tag}::spin, -g );
+   \verm{Mesh} \azul{cylinder} ( \textcolor{tag}{tag}::rectangle, AA, AB, BB, AB.reverse(), \textcolor{tag}{tag}::spin );
 
    \cinza{// define new coordinates x and y as arithmetic expressions of theta}
    \verm{Function} \azul{x} = \verm{cos}(theta), \azul{y} = \verm{sin}(theta);
@@ -127,7 +130,7 @@ Here is how to build a (part of a) cylinder in $ \mathbb{R}^3 $ :
    cylinder.export_msh (\verde{"cylinder.msh"});
 \end{Verbatim}
 
-The {\small\tt\verm{tag}::spin} in the constructor {\small\tt\verm{Mesh} \azul{cylinder}}
+The {\small\tt\textcolor{tag}{tag}::spin} in the constructor {\small\tt\verm{Mesh} \azul{cylinder}}
 provides no specific information, it just warns {\maniFEM} that we are on a quotient manifold
 and that it must take spins into account.
 Specific information about spins is included in the three segments {\small\tt AA}, {\small\tt AB}
@@ -158,33 +161,33 @@ Here is the classical example of $ \mathbb{R}^2/{\mathbb Z}^2 $.
    label=parag-\ref{\numb section 7.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// begin with the usual two-dimensional space}
-   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
 
    \cinza{// define two actions on RR2 (translations)}
-   \verm{Function}::Action \azul{g_horiz} ( \verm{tag}::transforms, xy, \verm{tag}::into, (x+1.) && y );
-   \verm{Function}::Action \azul{g_vert} ( \verm{tag}::transforms, xy, \verm{tag}::into, x && (y+1.) );
+   \verm{Function}::Action \azul{g_horiz} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+1.) && y );
+   \verm{Function}::Action \azul{g_vert} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, x && (y+1.) );
    \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g_horiz, g_vert );
 
    \cinza{// one vertex is enough to start the process}
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0.02;  y(A) = 0.02;
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.02;  y(A) = 0.02;
    \cinza{// with this vertex, we build two segments}
-   \verm{Mesh} \azul{seg_horiz} ( \verm{tag}::segment, A.reverse(), A,
-                    \verm{tag}::divided_in, 10, \verm{tag}::spin, g_horiz );
-   \verm{Mesh} \azul{seg_vert}  ( \verm{tag}::segment, A.reverse(), A,
-                    \verm{tag}::divided_in, 10, \verm{tag}::spin, g_vert );
+   \verm{Mesh} \azul{seg_horiz} ( \textcolor{tag}{tag}::segment, A.reverse(), A,
+                    \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::spin, g_horiz );
+   \verm{Mesh} \azul{seg_vert}  ( \textcolor{tag}{tag}::segment, A.reverse(), A,
+                    \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::spin, g_vert  );
    \cinza{// and a rectangle}
-   \verm{Mesh} \azul{torus} ( \verm{tag}::rectangle, seg_horiz, seg_vert,
-                seg_horiz.reverse(), seg_vert.reverse(), \verm{tag}::spin );
+   \verm{Mesh} \azul{torus} ( \textcolor{tag}{tag}::rectangle, seg_horiz, seg_vert,
+                seg_horiz.reverse(), seg_vert.reverse(), \textcolor{tag}{tag}::spin );
 
    \cinza{// it would be meaningless to export 'square' as a msh file}
    \cinza{// we can however draw an unfolded mesh :}
-   torus.draw_ps ( \verde{"torus.eps"}, \verm{tag}::unfold,
-                   \verm{tag}::over_region, -0.5 < x < 1.5, -0.2 < y < 1.2 );
+   torus.draw_ps ( \verde{"torus.eps"}, \textcolor{tag}{tag}::unfold,
+                   \textcolor{tag}{tag}::over_region, -0.5 < x < 1.5, -0.2 < y < 1.2 );
 \end{Verbatim}
 
-The {\small\tt\verm{tag}::spin} in the constructor {\small\verm{Mesh} \azul{torus}}
+The {\small\tt\textcolor{tag}{tag}::spin} in the constructor {\small\verm{Mesh} \azul{torus}}
 provides no specific information, it just warns {\maniFEM} that we are on a quotient manifold
 and that it must take spins into account.
 Specific information about spins is included in the two segments {\small\tt seg\_\,horiz}
@@ -229,26 +232,26 @@ vertex), you may think in terms of four squares instead :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0. ;  y(A) = 0. ;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) = 0.5;  y(B) = 0. ;
-   \verm{Cell} \azul{C} ( \verm{tag}::vertex );  x(C) = 0.5;  y(C) = 0.5;
-   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  x(D) = 0. ;  y(D) = 0.5;
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0. ;  y(A) = 0. ;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = 0.5;  y(B) = 0. ;
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) = 0.5;  y(C) = 0.5;
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = 0. ;  y(D) = 0.5;
    
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 5 ),
-        \azul{BC} ( \verm{tag}::segment, B.reverse(), C, \verm{tag}::divided_in, 5 ),
-        \azul{CD} ( \verm{tag}::segment, C.reverse(), D, \verm{tag}::divided_in, 5 ),
-        \azul{DA} ( \verm{tag}::segment, D.reverse(), A, \verm{tag}::divided_in, 5 ),
-        \azul{BA1} ( \verm{tag}::segment, B.reverse(), A, \verm{tag}::divided_in, 5, \verm{tag}::spin, g_horiz ),
-        \azul{CD1} ( \verm{tag}::segment, C.reverse(), D, \verm{tag}::divided_in, 5, \verm{tag}::spin, g_horiz ),
-        \azul{CB2} ( \verm{tag}::segment, C.reverse(), B, \verm{tag}::divided_in, 5, \verm{tag}::spin, g_vert ),
-        \azul{DA2} ( \verm{tag}::segment, D.reverse(), A, \verm{tag}::divided_in, 5, \verm{tag}::spin, g_vert );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 5 ),
+        \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, 5 ),
+        \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, 5 ),
+        \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, 5 ),
+        \azul{BA1} ( \textcolor{tag}{tag}::segment, B.reverse(), A, \textcolor{tag}{tag}::divided_in, 5, \textcolor{tag}{tag}::spin, g_horiz ),
+        \azul{CD1} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, 5, \textcolor{tag}{tag}::spin, g_horiz ),
+        \azul{CB2} ( \textcolor{tag}{tag}::segment, C.reverse(), B, \textcolor{tag}{tag}::divided_in, 5, \textcolor{tag}{tag}::spin, g_vert ),
+        \azul{DA2} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, 5, \textcolor{tag}{tag}::spin, g_vert );
 
-   \verm{Mesh} \azul{sq1} ( \verm{tag}::rectangle, AB, BC, CD, DA ),
-        \azul{sq2} ( \verm{tag}::rectangle, BA1, DA.reverse(), CD1.reverse(), BC.reverse(), \verm{tag}::spin ),
-        \azul{sq3} ( \verm{tag}::rectangle, DA2.reverse(), CD.reverse(), CB2, AB.reverse(), \verm{tag}::spin ),
-        \azul{sq4} ( \verm{tag}::rectangle, CD1, DA2, BA1.reverse(), CB2.reverse(), \verm{tag}::spin );
+   \verm{Mesh} \azul{sq1} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA ),
+        \azul{sq2} ( \textcolor{tag}{tag}::rectangle, BA1, DA.reverse(), CD1.reverse(), BC.reverse(), \textcolor{tag}{tag}::spin ),
+        \azul{sq3} ( \textcolor{tag}{tag}::rectangle, DA2.reverse(), CD.reverse(), CB2, AB.reverse(), \textcolor{tag}{tag}::spin ),
+        \azul{sq4} ( \textcolor{tag}{tag}::rectangle, CD1, DA2, BA1.reverse(), CB2.reverse(), \textcolor{tag}{tag}::spin );
 	
-   \verm{Mesh} \azul{torus} ( \verm{tag}::join, sq1, sq2, sq3, sq4 );
+   \verm{Mesh} \azul{torus} ( \textcolor{tag}{tag}::join, sq1, sq2, sq3, sq4 );
 \end{Verbatim}
 
 
@@ -263,21 +266,21 @@ this time by using the quotient manifold $ \mathbb{R}^2/{\mathbb Z}^2 $ introduc
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 5}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
-   \verm{Function} \azul{ab} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
+   \verm{Function} \azul{ab} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{alpha} = ab[0], \azul{beta} = ab[1];
    const double \azul{pi} = 3.1415926536;
-   \verm{Function}::Action \azul{g1} ( \verm{tag}::transforms, ab, \verm{tag}::into, (alpha+2.*pi) && beta );
-   \verm{Function}::Action \azul{g2} ( \verm{tag}::transforms, ab, \verm{tag}::into, alpha && (beta+2.*pi) );
+   \verm{Function}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, ab, \textcolor{tag}{tag}::into, (alpha+2.*pi) && beta );
+   \verm{Function}::Action \azul{g2} ( \textcolor{tag}{tag}::transforms, ab, \textcolor{tag}{tag}::into, alpha && (beta+2.*pi) );
    \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
 
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  alpha(A) = 0.;  beta(A) = 0.;
-   \verm{Mesh} \azul{seg_horiz} ( \verm{tag}::segment, A.reverse(), A,
-                    \verm{tag}::divided_in, 40, \verm{tag}::spin, g1 );
-   \verm{Mesh} \azul{seg_vert}  ( \verm{tag}::segment, A.reverse(), A,
-                    \verm{tag}::divided_in, 20, \verm{tag}::spin, g2 );
-   \verm{Mesh} \azul{torus} ( \verm{tag}::rectangle, seg_horiz, seg_vert,
-                seg_horiz.reverse(), seg_vert.reverse(), \verm{tag}::spin );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  alpha(A) = 0.;  beta(A) = 0.;
+   \verm{Mesh} \azul{seg_horiz} ( \textcolor{tag}{tag}::segment, A.reverse(), A,
+                    \textcolor{tag}{tag}::divided_in, 40, \textcolor{tag}{tag}::spin, g1 );
+   \verm{Mesh} \azul{seg_vert}  ( \textcolor{tag}{tag}::segment, A.reverse(), A,
+                    \textcolor{tag}{tag}::divided_in, 20, \textcolor{tag}{tag}::spin, g2 );
+   \verm{Mesh} \azul{torus} ( \textcolor{tag}{tag}::rectangle, seg_horiz, seg_vert,
+                seg_horiz.reverse(), seg_vert.reverse(), \textcolor{tag}{tag}::spin );
 
    \cinza{// parametrize the doughnut}
    const double \azul{big_radius} = 3., \azul{small_radius} = 1.;
@@ -317,14 +320,14 @@ shows several images of the same hole, due to the unfolding.
    baselinestretch=0.94,framesep=2mm                                            ]
    std::vector < \verm{Cell} > \azul{vec};
    \verm{CellIterator} \azul{it} = torus.iterator
-      ( \verm{tag}::over_cells, \verm{tag}::of_dim, 2, \verm{tag}::around, A );
+      ( \textcolor{tag}{tag}::over_cells, \textcolor{tag}{tag}::of_dim, 2, \textcolor{tag}{tag}::around, A );
    for ( it.reset(); it.in_range(); it++ ) vec.push_back ( *it );
    std::vector<\verm{Cell}>::iterator \azul{itv};
    for ( itv = vec.begin(); itv != vec.end(); itv++ )
    \{  \verm{Cell} \azul{sq} = *itv;  sq.remove_from_mesh ( torus );  \}
 
-   torus.draw_ps ( \verde{"torus.eps"}, \verm{tag}::unfold,
-                   \verm{tag}::over_region, x*x + 2.*y*y < 3.5 );
+   torus.draw_ps ( \verde{"torus.eps"}, \textcolor{tag}{tag}::unfold,
+                   \textcolor{tag}{tag}::over_region, x*x + 2.*y*y < 3.5 );
 \end{Verbatim}
 
 Paragraph \ref{\numb section 9.\numb parag 8} describes iterators around a vertex.
@@ -364,26 +367,26 @@ rather than skew parallelograms.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 8}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Function}::Action \azul{g1} ( \verm{tag}::transforms, xy, \verm{tag}::into, (x+1.) && y ),
-                    \azul{g2} ( \verm{tag}::transforms, xy, \verm{tag}::into, (x+0.5) && (y+1.) );
+   \verm{Function}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+1.) && y ),
+                    \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+0.5) && (y+1.) );
    \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
 
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0. ;  y(A) = 0.;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) = 0.5;  y(B) = 0.;
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 5 );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0. ;  y(A) = 0.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = 0.5;  y(B) = 0.;
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 5 );
    \verm{Mesh} \azul{BA_horiz}
-      ( \verm{tag}::segment, B.reverse(), A, \verm{tag}::divided_in, 5, \verm{tag}::spin, g1 );
+      ( \textcolor{tag}{tag}::segment, B.reverse(), A, \textcolor{tag}{tag}::divided_in, 5, \textcolor{tag}{tag}::spin, g1 );
    \verm{Mesh} \azul{BA_vert}
-      ( \verm{tag}::segment, B.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::spin, g2 );
+      ( \textcolor{tag}{tag}::segment, B.reverse(), A, \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::spin, g2 );
    \verm{Mesh} \azul{AB_vert}
-      ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 10, \verm{tag}::spin, g2 - g1 );
+      ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::spin, g2 - g1 );
 
-   \verm{Mesh} \azul{sq1} ( \verm{tag}::rectangle, AB, BA_vert, BA_horiz.reverse(), AB_vert.reverse(),
-              \verm{tag}::spin                                                          );
-   \verm{Mesh} \azul{sq2} ( \verm{tag}::rectangle, BA_vert.reverse(), BA_horiz, AB_vert, AB.reverse(),
-              \verm{tag}::spin                                                          );
+   \verm{Mesh} \azul{sq1} ( \textcolor{tag}{tag}::rectangle, AB, BA_vert, BA_horiz.reverse(), AB_vert.reverse(),
+              \textcolor{tag}{tag}::spin                                                          );
+   \verm{Mesh} \azul{sq2} ( \textcolor{tag}{tag}::rectangle, BA_vert.reverse(), BA_horiz, AB_vert, AB.reverse(),
+              \textcolor{tag}{tag}::spin                                                          );
 
-   \verm{Mesh} \azul{torus} ( \verm{tag}::join, sq1, sq2 );
+   \verm{Mesh} \azul{torus} ( \textcolor{tag}{tag}::join, sq1, sq2 );
 \end{Verbatim}
 
 Note the additive syntax for composing actions; comments in paragraph
@@ -434,23 +437,23 @@ Here is an example of a torus built with two triangular patches.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 9}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Function}::Action \azul{g1} ( \verm{tag}::transforms, xy, \verm{tag}::into, (x+1.) && y ),
-                    \azul{g2} ( \verm{tag}::transforms, xy, \verm{tag}::into, (x+0.5) && (y+0.866) );
+   \verm{Function}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+1.) && y ),
+                    \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+0.5) && (y+0.866) );
    \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
 
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0.;  y(A) = 0.;
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.;  y(A) = 0.;
 
-   \verm{Mesh} \azul{seg_horiz} ( \verm{tag}::segment, A.reverse(), A,
-                    \verm{tag}::divided_in, 10, \verm{tag}::spin, g1 ),
-        \azul{seg1}      ( \verm{tag}::segment, A.reverse(), A,
-                    \verm{tag}::divided_in, 10, \verm{tag}::spin, g2 ),
-        \azul{seg2}      ( \verm{tag}::segment, A.reverse(), A,
-                    \verm{tag}::divided_in, 10, \verm{tag}::spin, g2 - g1 );
+   \verm{Mesh} \azul{seg_horiz} ( \textcolor{tag}{tag}::segment, A.reverse(), A,
+                    \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::spin, g1 ),
+        \azul{seg1}      ( \textcolor{tag}{tag}::segment, A.reverse(), A,
+                    \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::spin, g2 ),
+        \azul{seg2}      ( \textcolor{tag}{tag}::segment, A.reverse(), A,
+                    \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::spin, g2 - g1 );
 
-   \verm{Mesh} \azul{tri1} ( \verm{tag}::triangle, seg_horiz, seg2, seg1.reverse(), \verm{tag}::spin ),
-        \azul{tri2} ( \verm{tag}::triangle, seg_horiz.reverse(), seg2.reverse(), seg1, \verm{tag}::spin );
+   \verm{Mesh} \azul{tri1} ( \textcolor{tag}{tag}::triangle, seg_horiz, seg2, seg1.reverse(), \textcolor{tag}{tag}::spin ),
+        \azul{tri2} ( \textcolor{tag}{tag}::triangle, seg_horiz.reverse(), seg2.reverse(), seg1, \textcolor{tag}{tag}::spin );
    
-   \verm{Mesh} \azul{torus} ( \verm{tag}::join, tri1, tri2 );
+   \verm{Mesh} \azul{torus} ( \textcolor{tag}{tag}::join, tri1, tri2 );
 \end{Verbatim}
 
 Note the additive syntax for composing actions; comments in paragraph
@@ -492,20 +495,20 @@ In contrast, translations (used in previous paragraphs) are always invertible.
    const double \azul{cos_theta} = std::cos ( theta ), \azul{sin_theta} = std::sin ( theta );
 	
    // define an action on RR2 (a rotation)
-   \verm{Function}::Action \azul{rot} ( \verm{tag}::transforms, xy, \verm{tag}::into,
+   \verm{Function}::Action \azul{rot} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into,
          ( cos_theta * x - sin_theta * y ) && ( sin_theta * x + cos_theta * y ) );
 
    // and divide RR2 by the group generated by rot
    \verm{Manifold} \azul{RR2_q} = RR2.quotient ( rot );
 
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0.;  y(A) = 1.;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) = 0.;  y(B) = 2.;
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.;  y(A) = 1.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = 0.;  y(B) = 2.;
 
-   \verm{Mesh} \azul{AA} ( \verm{tag}::segment, A.reverse(), A, \verm{tag}::divided_in, 10, \verm{tag}::spin, -rot );
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 7 );  // no spin
-   \verm{Mesh} \azul{BB} ( \verm{tag}::segment, B.reverse(), B, \verm{tag}::divided_in, 10, \verm{tag}::spin, rot );
+   \verm{Mesh} \azul{AA} ( \textcolor{tag}{tag}::segment, A.reverse(), A, \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::spin, -rot );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 7 );  // no spin
+   \verm{Mesh} \azul{BB} ( \textcolor{tag}{tag}::segment, B.reverse(), B, \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::spin, rot );
 
-   \verm{Mesh} \azul{sector} ( \verm{tag}::rectangle, AA, AB, BB, AB.reverse(), \verm{tag}::spin );
+   \verm{Mesh} \azul{sector} ( \textcolor{tag}{tag}::rectangle, AA, AB, BB, AB.reverse(), \textcolor{tag}{tag}::spin );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -520,7 +523,8 @@ We have drawn a ``representative domain'' but this is not entirely correct since
 rotations of this region with multiples of {\small\tt theta} close to $ 2k\pi $
 will overlap with the region.
 
-This process is very different from the one described in \ref{\numb section 9.\numb parag 2}
+This process is very different from the one described in paragraph
+\ref{\numb section 9.\numb parag 2}
 where many meshes are built in a {\small\tt for} loop then are joined to form an annulus.
 
 
@@ -536,7 +540,7 @@ In contrast, translations are always invertible.
    label=parag-\ref{\numb section 7.\numb parag 12}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                             ]
    // define an action on RR2 (a linear map)
-   \verm{Function}::Action \azul{g} ( \verm{tag}::transforms, xy, \verm{tag}::into,
+   \verm{Function}::Action \azul{g} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into,
       ( 0.8 * cos_theta * x - 0.8 * sin_theta * y ) &&
       ( 0.8 * sin_theta * x + 0.8 * cos_theta * y )    );
 
@@ -567,22 +571,22 @@ In contrast, translations are always invertible and they commute.
    baselinestretch=0.94,framesep=2mm                                             ]
    // define two actions on RR2
    // a rotation
-   \verm{Function}::Action \azul{rot} ( \verm{tag}::transforms, xy, \verm{tag}::into,
+   \verm{Function}::Action \azul{rot} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into,
       ( cos_theta * x - sin_theta * y ) && ( sin_theta * x + cos_theta * y ) );
    // and a zoom
-   \verm{Function}::Action \azul{zoom} ( \verm{tag}::transforms, xy, \verm{tag}::into, ( 2.*x ) && ( 2.*y ) );
+   \verm{Function}::Action \azul{zoom} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, ( 2.*x ) && ( 2.*y ) );
 
    // divide RR2 by the group generated by \{ rot, zoom \}
    \verm{Manifold} \azul{torus_manif} = RR2.quotient ( rot, zoom );
 
    // one vertex is enough to start the process
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = 0.;  y(A) = 1.;
-   \verm{Mesh} \azul{AA} ( \verm{tag}::segment, A.reverse(), A, tag::divided_in, 10, \verm{tag}::spin, -rot );
-   \verm{Mesh} \azul{AA_vert} ( \verm{tag}::segment, A.reverse(), A,
-                  \verm{tag}::divided_in, 7, \verm{tag}::spin, zoom );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.;  y(A) = 1.;
+   \verm{Mesh} \azul{AA} ( \textcolor{tag}{tag}::segment, A.reverse(), A, tag::divided_in, 10, \textcolor{tag}{tag}::spin, -rot );
+   \verm{Mesh} \azul{AA_vert} ( \textcolor{tag}{tag}::segment, A.reverse(), A,
+                  \textcolor{tag}{tag}::divided_in, 7, \textcolor{tag}{tag}::spin, zoom );
 
-   \verm{Mesh} \azul{sector} ( \verm{tag}::rectangle, AA, AA_vert, AA.reverse(), AA_vert.reverse(),
-                 \verm{tag}::spin                                                    );
+   \verm{Mesh} \azul{sector} ( \textcolor{tag}{tag}::rectangle, AA, AA_vert, AA.reverse(), AA_vert.reverse(),
+                 \textcolor{tag}{tag}::spin                                                    );
 \end{Verbatim}
   
 \begin{figure}[ht] \centering
@@ -600,40 +604,40 @@ In contrast, translations are always invertible and they commute.
 
 We can start with a usual mesh in the Euclidian plane and wrap it around a cylinder.
 The outer boundary of the mesh must have two parallel segments of equal length and with
-the same number of segments (to be identified); it may have many other details
+the same number of segments (to be identified); the mesh may have many other details
 which do not interfere in the process.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 14}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                             ]
-   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
 
    size_t \azul{n} = 20;
    double \azul{d} = 2.6 / double(n);
 
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = -1.3;  y(A) = -1.3;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) =  1.3;  y(B) = -1.3;
-   \verm{Cell} \azul{C} ( \verm{tag}::vertex );  x(C) =  1.3;  y(C) =  1.3;
-   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  x(D) = -1.3;  y(D) =  1.3;
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = -1.3;  y(A) = -1.3;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  1.3;  y(B) = -1.3;
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) =  1.3;  y(C) =  1.3;
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = -1.3;  y(D) =  1.3;
 
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{BC} ( \verm{tag}::segment, B.reverse(), C, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{CD} ( \verm{tag}::segment, C.reverse(), D, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{DA} ( \verm{tag}::segment, D.reverse(), A, \verm{tag}::divided_in, n );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, n );
 
    \verm{Manifold} \azul{circle} = RR2.implicit ( x*x + y*y == 1. );
    \verm{Mesh} \azul{inner}
-      ( \verm{tag}::progressive, \verm{tag}::entire_manifold, circle, \verm{tag}::desired_length, d );
+      ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::entire_manifold, circle, \textcolor{tag}{tag}::desired_length, d );
 
-   \verm{Mesh} \azul{bdry} ( \verm{tag}::join, AB, BC, CD, DA, inner.reverse() );
+   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, AB, BC, CD, DA, inner.reverse() );
 
    RR2.set_as_working_manifold();
-   \verm{Mesh} \azul{square} ( \verm{tag}::progressive, \verm{tag}::boundary, bdry, \verm{tag}::desired_length, d );
+   \verm{Mesh} \azul{square} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, d );
 
    \verm{Mesh} \azul{cyl} = square.fold
-      ( \verm{tag}::identify, BC, \verm{tag}::with, DA.reverse(), \verm{tag}::use_existing_vertices );
+      ( \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, DA.reverse(), \textcolor{tag}{tag}::use_existing_vertices );
 \end{Verbatim}
 
 The method {\small\tt\verm{Mesh}::fold} (which can also be used under the name
@@ -656,9 +660,9 @@ The mesh {\small\tt cyl} is entirely new and distinct from {\small\tt square},
 with the exception of vertices which can be shared between the two meshes if the
 user so desires.
 The last argument of method {\small\tt\verm{Mesh}::fold} controls this detail.
-A {\small\tt\verm{tag}::build\_\,new\_\,vertices} says that new vertices must be built
+A {\small\tt\textcolor{tag}{tag}::build\_\,new\_\,vertices} says that new vertices must be built
 and geometric coordinates copied from the old vertices to the new ones.
-A {\small\tt\verm{tag}::use\_\,existing\_\,vertices} says that old vertices must be used
+A {\small\tt\textcolor{tag}{tag}::use\_\,existing\_\,vertices} says that old vertices must be used
 for the new mesh; this can be useful if the vertices carry some information
 (e.g.\ values of a solution of a PDE) and also saves space in the computer's memory.
 Note that vertices belonging to {\small\tt DA} will not show up in the
@@ -682,9 +686,9 @@ It suffices to identify two pairs of opposite faces.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 15}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                             ]
-   \verm{Mesh} \azul{torus} = square.fold ( \verm{tag}::identify, AB, \verm{tag}::with, CD.reverse(),
-                              \verm{tag}::identify, BC, \verm{tag}::with, DA.reverse(),
-                              \verm{tag}::use_existing_vertices                 );
+   \verm{Mesh} \azul{torus} = square.fold ( \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, CD.reverse(),
+                              \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, DA.reverse(),
+                              \textcolor{tag}{tag}::use_existing_vertices                 );
 \end{Verbatim}
 
 
@@ -695,7 +699,12 @@ It suffices to identify two pairs of opposite faces.
 If we want to obtain the hexagonal periodicity referred in paragraph
 \ref{\numb section 7.\numb parag 9}, we can literally take a hexagon and
 identify three pairs of opposite faces.
-Actually, we can even take a rectangle and treat it as if it were a hexagon :
+Actually, we can even take a rectangle%
+\footnote{This rectangle is somewhat similar to the square in paragraph
+\ref{\numb section 7.\numb parag 8}.
+It is different in that it has a round hole and different aspect ratio --
+it has the proportions of the rectangular shadow in figure \ref{\numb section 7.\numb fig 6}.}
+and treat it as if it were a hexagon :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 15}.cpp,rulecolor=\color{coment},
@@ -703,35 +712,41 @@ Actually, we can even take a rectangle and treat it as if it were a hexagon :
    const double \azul{d} = 0.13;
    const size_t \azul{n} = 1.5 / d, \azul{m} = 2.6 / d;
 
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) = -1.5;  y(A) = -1.3;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) =  0. ;  y(B) = -1.3;
-   \verm{Cell} \azul{C} ( \verm{tag}::vertex );  x(C) =  1.5;  y(C) = -1.3;
-   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  x(D) =  1.5;  y(D) =  1.3;
-   \verm{Cell} \azul{E} ( \verm{tag}::vertex );  x(E) =  0. ;  y(E) =  1.3;
-   \verm{Cell} \azul{F} ( \verm{tag}::vertex );  x(F) = -1.5;  y(F) =  1.3;
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = -1.5;  y(A) = -1.3;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  0. ;  y(B) = -1.3;
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) =  1.5;  y(C) = -1.3;
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) =  1.5;  y(D) =  1.3;
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  0. ;  y(E) =  1.3;
+   \verm{Cell} \azul{F} ( \textcolor{tag}{tag}::vertex );  x(F) = -1.5;  y(F) =  1.3;
 
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{BC} ( \verm{tag}::segment, B.reverse(), C, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{CD} ( \verm{tag}::segment, C.reverse(), D, \verm{tag}::divided_in, m );
-   \verm{Mesh} \azul{DE} ( \verm{tag}::segment, D.reverse(), E, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{EF} ( \verm{tag}::segment, E.reverse(), F, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{FA} ( \verm{tag}::segment, F.reverse(), A, \verm{tag}::divided_in, m );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, m );
+   \verm{Mesh} \azul{DE} ( \textcolor{tag}{tag}::segment, D.reverse(), E, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{EF} ( \textcolor{tag}{tag}::segment, E.reverse(), F, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{FA} ( \textcolor{tag}{tag}::segment, F.reverse(), A, \textcolor{tag}{tag}::divided_in, m );
 
    \verm{Manifold} \azul{circle} = RR2.implicit ( x*x + y*y == 1. );
-   \verm{Mesh} \azul{inner} ( \verm{tag}::progressive, \verm{tag}::entire_manifold, circle,
-                \verm{tag}::desired_length, d                         );
+   \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::entire_manifold, circle,
+                \textcolor{tag}{tag}::desired_length, d                         );
 
-   \verm{Mesh} \azul{bdry} ( \verm{tag}::join, { AB, BC, CD, DE, EF, FA, inner.reverse() } );
+   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, { AB, BC, CD, DE, EF, FA, inner.reverse() } );
 
    RR2.set_as_working_manifold();
-   \verm{Mesh} \azul{rectangle} ( \verm{tag}::progressive, \verm{tag}::boundary, bdry, \verm{tag}::desired_length, d );
+   \verm{Mesh} \azul{rectangle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, d );
 
-   \verm{Mesh} \azul{torus} = rectangle.fold ( \verm{tag}::identify, CD, \verm{tag}::with, FA.reverse(),
-                                 \verm{tag}::identify, BC, \verm{tag}::with, EF.reverse(),
-                                 \verm{tag}::identify, AB, \verm{tag}::with, DE.reverse(),
-                                 \verm{tag}::use_existing_vertices                 );
+   \verm{Mesh} \azul{torus} = rectangle.fold ( \textcolor{tag}{tag}::identify, CD, \textcolor{tag}{tag}::with, FA.reverse(),
+                                 \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, EF.reverse(),
+                                 \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, DE.reverse(),
+                                 \textcolor{tag}{tag}::use_existing_vertices                 );
 \end{Verbatim}
-  
+
+Figure \ref{\numb section 7.\numb fig 11} shows the resulting mesh, together with the
+periodicity cell.
+We recall that the same periodicity group (i.e., periodic arrangement) may be generated
+by different sets of generators and, consequently, may be viewed as originating
+from different periodicity cells.
+
 \begin{figure}[ht] \centering
   \psfrag{A}{\tt\textcolor{textindraw}{A}}
   \psfrag{B}{\tt\textcolor{textindraw}{B}}
@@ -764,16 +779,16 @@ We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=code not working,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                   ]
-   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
    
    const double \azul{e} = 1.5;
    \verm{Manifold} \azul{curve1} = RR2.implicit 
       ( \verm{smooth_min} ( 300.*\verm{power}((x+y)*(x+y),e) + \verm{power}((x-y-1.)*(x-y-1.),e),
                      300.*\verm{power}((x-y)*(x-y),e) + \verm{power}((x+y+1.)*(x+y+1.),e),
-                     \verm{tag}::threshold, 1.5                     )  == 1. );
-   \verm{Mesh} \azul{loop1} ( \verm{tag}::progressive, \verm{tag}::desired_length, 0.05 );
+                     \textcolor{tag}{tag}::threshold, 1.5                     )  == 1. );
+   \verm{Mesh} \azul{loop1} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, 0.05 );
       
    double \azul{a} = 0.15, \azul{b} = 0.82;
    \verm{Manifold} \azul{curve2} = RR2.implicit 
@@ -781,10 +796,10 @@ We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
                           \verm{power}((x-a-y-b-1.)*(x-a-y-b-1.),e),
                      300.*\verm{power}((x-2.-a-y-b)*(x-2.-a-y-b),e) +
                           \verm{power}((x-2.-a+y+b+1.)*(x-2.-a+y+b+1.),e),
-                     \verm{tag}::threshold, 1.5                     )  == 1. );
-   \verm{Mesh} \azul{loop2} ( \verm{tag}::progressive, \verm{tag}::desired_length, 0.05 );
+                     \textcolor{tag}{tag}::threshold, 1.5                     )  == 1. );
+   \verm{Mesh} \azul{loop2} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, 0.05 );
 
-   \verm{Mesh} \azul{loops} ( \verm{tag}::join, loop1.reverse(), loop2.reverse() );                     
+   \verm{Mesh} \azul{loops} ( \textcolor{tag}{tag}::join, loop1.reverse(), loop2.reverse() );                     
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -805,8 +820,8 @@ Define a torus manifold by means of two appropriate translations.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=code not working,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                   ]
-   \verm{Function}::Action \azul{g1} ( \verm{tag}::transforms, xy, \verm{tag}::into, (x+2.3) && y ),
-                    \azul{g2} ( \verm{tag}::transforms, xy, \verm{tag}::into, x && (y+1.4) );
+   \verm{Function}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+2.3) && y ),
+                    \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, x && (y+1.4) );
    \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
 \end{Verbatim}
 
@@ -823,9 +838,9 @@ the folding operation will use the geometry of this torus.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=code not working,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                   ]
-   \verm{Mesh} \azul{folded_loops} = loops.fold ( \verm{tag}::use_existing_vertices );
-   folded_loops.draw_ps (\verde{"VV.eps"}, \verm{tag}::unfold,
-                          \verm{tag}::over_region, -1.5 < x < 2.5, -2 < y < 0.5 );
+   \verm{Mesh} \azul{folded_loops} = loops.fold ( \textcolor{tag}{tag}::use_existing_vertices );
+   folded_loops.draw_ps (\verde{"VV.eps"}, \textcolor{tag}{tag}::unfold,
+                          \textcolor{tag}{tag}::over_region, -1.5 < x < 2.5, -2 < y < 0.5 );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -850,10 +865,10 @@ it meets the mesh on the other side of the torus.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=code not working,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                   ]
-   \verm{Mesh} \azul{perforated} ( \verm{tag}::progressive, \verm{tag}::boundary, loops,
-                     \verm{tag}::desired_length, 0.05              );
-   perforated.draw_ps (\verde{"perforated.eps"}, \verm{tag}::unfold,
-                        \verm{tag}::over_region, -1.5 < x < 2.5, -2 < y < 0.5 );
+   \verm{Mesh} \azul{perforated} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, loops,
+                     \textcolor{tag}{tag}::desired_length, 0.05              );
+   perforated.draw_ps (\verde{"perforated.eps"}, \textcolor{tag}{tag}::unfold,
+                        \textcolor{tag}{tag}::over_region, -1.5 < x < 2.5, -2 < y < 0.5 );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering

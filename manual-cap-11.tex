@@ -24,7 +24,7 @@ As a general rule, namespaces and class names are written with capital initial
 letter$\;$:
 {\small\tt\verm{Cell}}, {\small\tt\verm{Mesh}}, {\small\tt\verm{Integrator}},
 {\small\tt\verm{FiniteElement}}, {\small\tt\verm{VariationalFormulation}}.
-Namespace {\small\tt\verm{tag}} (see paragraph \ref{\numb section 11.\numb parag 3})
+Namespace {\small\tt\textcolor{tag}{tag}} (see paragraph \ref{\numb section 11.\numb parag 3})
 is an exception to the above rule.
 Namespace {\small\tt\verm{maniFEM}} itself is also an exception, for merely aestetic reasons.
 
@@ -51,7 +51,7 @@ Also, in the source code there are comments like
 \end{Verbatim}
 
 In an effort not to expose too many names in the {\small\tt\verm{maniFEM}} namespace, we have
-used the namespace {\small\tt\verm{tag}::Util} to keep names which did not fit elsewhere.
+used the namespace {\small\tt\textcolor{tag}{tag}::Util} to keep names which did not fit elsewhere.
 We have also used anonymous namespaces in order to hide names of functions which are
 only used in one source file.
 
@@ -75,11 +75,11 @@ Class names directly exposed in {\small\tt namespace \verm{maniFEM}} are shown i
 {\small\tt \verm{VariationalFormulation}}, {\small\tt \verm{Integrator}},
 {\small\tt \verm{FiniteElement}}, the rarely needed {\small\tt \verm{Field}} and
 the even more rarely needed {\small\tt \verm{MeshIterator}} and {\small\tt\verm{MetricTree}}.
-% There is an exception to this rule : the word {\small\tt tag}, although directly exposed
-% in {\small\tt namespace \verm{maniFEM}}, is not coloured
-% (that's because we want it to be discrete).
 There are also functions like {\small\tt \verm{smooth\_\,min}} and also overloaded versions
 of common functions like {\small\tt\verm{power}}, {\small\tt \verm{sin}}, {\small\tt \verm{cos}}.
+The word {\small\tt \textcolor{tag}{tag}} deserves a special treatment.
+On one hand, it is directly exposed, on the other hand, we want it to be discrete.
+That's why we have chosen a blue grey for {\small\tt \textcolor{tag}{tag}}s.
 
 Newly declared objects are shown in \azul{purple}.
 
@@ -92,11 +92,11 @@ Strings are \verde{dark green}.
 \section{~~Tags}\label{\numb section 11.\numb parag 3}
           %----%
 
-We use extensively {\small\tt\verm{tag}}s.
-These are {\tt C++} structures gathered in the {\small\tt namespace \verm{tag}}.
+We use extensively {\small\tt\textcolor{tag}{tag}}s.
+These are {\tt C++} structures gathered in the {\small\tt namespace \textcolor{tag}{tag}}.
 Most of them contain no data; only their type is useful, at compile time.
 
-A {\small\tt\verm{tag}} is used to clearly distinguish between functions with the same name
+A {\small\tt\textcolor{tag}{tag}} is used to clearly distinguish between functions with the same name
 (overloaded functions).
 For instance, in the code excerpt below five {\small\tt\verm{CellIterator}}s are defined
 by means of different (overloaded) methods having the same name {\small\tt\verm{Mesh}::iterator});
@@ -105,36 +105,36 @@ the iterators behave very differently (see paragraphs \ref{\numb section 9.\numb
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \cinza{// 'chain' is a one-dimensional Mesh}
-   \verm{CellIterator} \azul{it1} = chain.iterator ( \verm{tag}::over_vertices );
-   \verm{CellIterator} \azul{it2} = chain.iterator ( \verm{tag}::over_vertices, \verm{tag}::backwards );
-   \verm{CellIterator} \azul{it3} = chain.iterator ( \verm{tag}::over_segments );
-   \verm{CellIterator} \azul{it4} = chain.iterator ( \verm{tag}::over_segments, \verm{tag}::backwards );
-   \verm{CellIterator} \azul{it5} = chain.iterator ( \verm{tag}::over_segments, \verm{tag}::force_positive );
+   \verm{CellIterator} \azul{it1} = chain.iterator ( \textcolor{tag}{tag}::over_vertices );
+   \verm{CellIterator} \azul{it2} = chain.iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
+   \verm{CellIterator} \azul{it3} = chain.iterator ( \textcolor{tag}{tag}::over_segments );
+   \verm{CellIterator} \azul{it4} = chain.iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
+   \verm{CellIterator} \azul{it5} = chain.iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::force_positive );
 \end{Verbatim}
 
 The above could be achieved by giving longer names to the functions, but we believe
-{\small\tt\verm{tag}}s make the code more readable.
+{\small\tt\textcolor{tag}{tag}}s make the code more readable.
 Besides that, in the case of constructors, we do not have the choice of the name of the function
 (a constructor has the same name as its class).
-{\ManiFEM} uses {\small\tt\verm{tag}}s extensively for constructors, e.g.
+{\ManiFEM} uses {\small\tt\textcolor{tag}{tag}}s extensively for constructors, e.g.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  \verm{Cell} \azul{B} ( \verm{tag}::vertex );
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 10 );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 10 );
 \end{Verbatim}
 
 In \maniFEM, namespaces and class names begin with capital letter
 (see paragraph \ref{\numb section 11.\numb parag 1})
-The namespace {\small\tt\verm{tag}} (or {\small\tt \verm{maniFEM}::tag} if you are not
+The namespace {\small\tt\textcolor{tag}{tag}} (or {\small\tt \verm{maniFEM}::tag} if you are not
 {\small\tt using namespace \verm{maniFEM}}) is an exception to the above rule.
 We prefer its name to have only lower case letters because we want it to be
-discrete. For instance, if we wrote {\small\tt\verm{Tag}::divided\_\,in},
-the reader's eye would catch {\small\tt\verm{Tag}} much before {\small\tt divided\_\,in};
-thus, {\small\tt\verm{tag}::divided\_\,in} is more readable.
-Of course, the final user has the choice of {\small\tt using namespace \verm{tag}}
+discrete. For instance, if we wrote {\small\tt\textcolor{tag}{tag}::divided\_\,in},
+the reader's eye would catch {\small\tt\textcolor{tag}{tag}} much before {\small\tt divided\_\,in};
+thus, {\small\tt\textcolor{tag}{tag}::divided\_\,in} is more readable.
+Of course, the final user has the choice of {\small\tt using namespace \textcolor{tag}{tag}}
 but beware, it has many names which may conflict with the ones in your code.
 
 Most tags have only lower-case letters and underscores.
-The exceptions are proper names : {\small\tt \verm{tag}::Lagrange}, {\small\tt \verm{tag}::Euclid}.
+The exceptions are proper names : {\small\tt \textcolor{tag}{tag}::Lagrange}, {\small\tt \textcolor{tag}{tag}::Euclid}.
 
 
           %------------------%
@@ -179,9 +179,9 @@ the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} compilation option, explained in para
 \ref{\numb section 11.\numb parag 5}.
 
 \begin{figure}[ht] \centering
- \psfrag{tag::Util::Core::Inactive}{{\small\tt\verm{tag}::Util::Core::Inactive}}
- \psfrag{tag::Util::Core::DelegateDispose}{{\small\tt\verm{tag}::Util::Core::DelegateDispose}}
- \psfrag{tag::Util::Core}{{\small\tt\verm{tag}::Util::Core}}
+ \psfrag{tag::Util::Core::Inactive}{{\small\tt\textcolor{tag}{tag}::Util::Core::Inactive}}
+ \psfrag{tag::Util::Core::DelegateDispose}{{\small\tt\textcolor{tag}{tag}::Util::Core::DelegateDispose}}
+ \psfrag{tag::Util::Core}{{\small\tt\textcolor{tag}{tag}::Util::Core}}
  \psfrag{Cell::Core}{{\small\tt\verm{Cell}::Core}}
  \psfrag{Cell::Negative}{{\small\tt\verm{Cell}::Negative}}
  \psfrag{Cell::Positive}{{\small\tt\verm{Cell}::Positive}}
@@ -231,7 +231,7 @@ the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} compilation option, explained in para
 \ref{\numb section 11.\numb parag 5}.
 
 \begin{figure}[ht] \centering
- \psfrag{tag::Util::Core}{{\small\tt\verm{tag}::Util::Core}}
+ \psfrag{tag::Util::Core}{{\small\tt\textcolor{tag}{tag}::Util::Core}}
  \psfrag{Mesh::Core}{{\small\tt\verm{Mesh}::Core}}
  \psfrag{Mesh::NotZeroDim}{{\small\tt\verm{Mesh}::NotZeroDim}}
  \psfrag{Mesh::ZeroDim}{{\small\tt\verm{Mesh}::ZeroDim}}
@@ -276,8 +276,8 @@ Examples are {\small\tt\verm{Cell}}s, {\small\tt\verm{Mesh}}es,
 {\small\tt\verm{Function}}s, {\small\tt\verm{FiniteElement}}s, {\small\tt\verm{Integrator}}s,%
 \break {\small\tt\verm{VariationalFormulation}}s.
 A garbage collector is implemented; all these classes inherit from
-{\small\tt \verm{tag}::Util::Wrapper} and
-their cores inherit from {\small\tt \verm{tag}::Util::Core}.
+{\small\tt \textcolor{tag}{tag}::Util::Wrapper} and
+their cores inherit from {\small\tt \textcolor{tag}{tag}::Util::Core}.
 Wrappers contain a pointer to a core; each core keeps a counter of wrappers pointing to it.
 The destructor of a wrapper decrements the counter and destroys the core if the counter
 reaches zero.
@@ -342,14 +342,14 @@ Recall that all meshes in {\maniFEM} are oriented.
 A one-dimensional connected mesh can be a closed loop or an open chain of segments.
 In the latter case, there is a natural starting point (the first vertex or first segment).
 Iterators over such meshes are described in paragraph \ref{\numb section 9.\numb parag 4}.
-The {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::segment} builds an open
+The {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::segment} builds an open
 {\small\tt \verm{Mesh}::Connected::OneDim}.
-Also, cell constructors with {\small\tt \verm{tag}::triangle} and {\small\tt \verm{tag}::quadrangle} produce cells
+Also, cell constructors with {\small\tt \textcolor{tag}{tag}::triangle} and {\small\tt \textcolor{tag}{tag}::quadrangle} produce cells
 whose boundary is a closed {\small\tt \verm{Mesh}::Connected::OneDim}.
 
 Connected meshes of dimension two or higher are not yet implemented; for now,
-{\small\tt \verm{Mesh}} constructors with {\small\tt \verm{tag}::rectangle} or
-{\small\tt \verm{tag}::triangle} build a {\small\tt Fuzzy} mesh instead.
+{\small\tt \verm{Mesh}} constructors with {\small\tt \textcolor{tag}{tag}::rectangle} or
+{\small\tt \textcolor{tag}{tag}::triangle} build a {\small\tt Fuzzy} mesh instead.
 A class {\small\tt \verm{Mesh}:: ::Connected::HighDim} is object of current work.
 We also intend to implement multiply connected meshes.
 
@@ -373,11 +373,11 @@ Otherwise, the result will be a {\small\tt \verm{Mesh}::Fuzzy}.
 
 Methods {\small\tt\verm{Cell}::add\_\,to\_\,mesh} and
 {\small\tt\verm{Cell}::remove\_\,from\_\,mesh} accept as second argument a\break
-{\small\tt\verm{tag}::do\_\,not\_\,bother}.
+{\small\tt\textcolor{tag}{tag}::do\_\,not\_\,bother}.
 This tag has no effect for a fuzzy mesh.
 For a connected one-dimensional mesh, the method without tag will take measures
 to ensure the connectivity of the mesh and will update the total number of segments.
-By providing a {\small\tt\verm{tag}::do\_\,not\_\,bother}, the user instructs
+By providing a {\small\tt\textcolor{tag}{tag}::do\_\,not\_\,bother}, the user instructs
 {\maniFEM} not to waste execution time with these details.
 The user assumes responsibility for updating data members {\small\tt nb\_\,of\_\,segs},
 {\small\tt first\_\,ver} and {\small\tt last\_\,ver}..
@@ -523,7 +523,7 @@ Attributes {\small\tt init\_\,neg\_\,cell} and {\small\tt data\_\,for\_\,init\_\
 a similar task when building negative cells.
 
 For instance, the constructor of a {\small\tt\verm{FiniteElement}} with
-{\small\tt\verm{tag}::build\_\;enum} builds a new
+{\small\tt\textcolor{tag}{tag}::build\_\;enum} builds a new
 {\small\tt\verm{Cell}:: ::Numbering::Field} whose constructor
 adds a call to {\small\tt\verm{Cell}::Numbering::Field::set\_\,and\_\,increment} to
 the list {\small\tt\verm{Cell}::init\_\;pos\_\,cell[0]}.
@@ -689,7 +689,7 @@ Note that, if {\small\tt seg} is a segment (a one-dimensional cell), then
 So, you probably need to use {\small\tt seg.base().reverse()} instead.
 Iterators over cells of maximum dimension (that is, of dimension equal to the dimension
 of the mesh) produce oriented cells (which may be positive or negative).
-Consider using the {\small\tt \verm{tag}::force\_\,positive}.
+Consider using the {\small\tt \textcolor{tag}{tag}::force\_\,positive}.
 See paragraphs \ref{\numb section 9.\numb parag 3} and \ref{\numb section 9.\numb parag 4}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]

@@ -57,25 +57,27 @@ Here is another way of meshing the same L-shaped domain as in paragraph
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 1}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Mesh} \azul{AG} ( \verm{tag}::segment, A.reverse(), G, \verm{tag}::divided_in, 22 );
-   \verm{Mesh} \azul{GH} ( \verm{tag}::segment, G.reverse(), H, \verm{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{HC} ( \verm{tag}::segment, H.reverse(), C, \verm{tag}::divided_in, 12 );
-   \verm{Mesh} \azul{CD} ( \verm{tag}::segment, C.reverse(), D, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{HD} ( \verm{tag}::join, HC, CD );
-   \verm{Mesh} \azul{DA} ( \verm{tag}::segment, D.reverse(), A, \verm{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{CE} ( \verm{tag}::segment, C.reverse(), E, \verm{tag}::divided_in, 7 );
-   \verm{Mesh} \azul{EF} ( \verm{tag}::segment, E.reverse(), F, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{FD} ( \verm{tag}::segment, F.reverse(), D, \verm{tag}::divided_in, 7 );
-   \verm{Mesh} \azul{AGHD} ( \verm{tag}::rectangle, AG, GH, HD, DA );
-   \verm{Mesh} \azul{CEFD} ( \verm{tag}::rectangle, CE, EF, FD, CD.reverse() );
-   \verm{Mesh} \azul{L_shaped} ( \verm{tag}::join, AGHD, CEFD );
+   \verm{Mesh} \azul{AG} ( \textcolor{tag}{tag}::segment, A.reverse(), G, \textcolor{tag}{tag}::divided_in, 22 );
+   \verm{Mesh} \azul{GH} ( \textcolor{tag}{tag}::segment, G.reverse(), H, \textcolor{tag}{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{HC} ( \textcolor{tag}{tag}::segment, H.reverse(), C, \textcolor{tag}{tag}::divided_in, 12 );
+   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{HD} ( \textcolor{tag}{tag}::join, HC, CD );
+   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C.reverse(), E, \textcolor{tag}{tag}::divided_in, 7 );
+   \verm{Mesh} \azul{EF} ( \textcolor{tag}{tag}::segment, E.reverse(), F, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{FD} ( \textcolor{tag}{tag}::segment, F.reverse(), D, \textcolor{tag}{tag}::divided_in, 7 );
+   \verm{Mesh} \azul{AGHD} ( \textcolor{tag}{tag}::rectangle, AG, GH, HD, DA );
+   \verm{Mesh} \azul{CEFD} ( \textcolor{tag}{tag}::rectangle, CE, EF, FD, CD.reverse() );
+   \verm{Mesh} \azul{L_shaped} ( \textcolor{tag}{tag}::join, AGHD, CEFD );
 \end{Verbatim}
 
 The only difference between this mesh and the one presented in paragraph
 \ref{\numb section 1.\numb parag 3} is a slight distortion in the lower half of the domain,
 due to the non-uniform distribution of the vertices along {\small\tt HD}.
 
-See paragraph \ref{\numb section 11.\numb parag 3} for more details about tags.
+Paragraph \ref{\numb section 11.\numb parag 2} explains the coloring conventions used in
+this manual for {\tt C++} code.
+Paragraph \ref{\numb section 11.\numb parag 3} gives details about \textcolor{tag}{tag}s.
 % See also paragraph \ref{\numb section 11.\numb parag 9}.
 
 
@@ -107,13 +109,13 @@ We ask for one connected mesh, that is, the triangle and the rectangle must shar
           %-------------------------------%
 
 On a rectangular domain, we can build a mesh of triangles by using the {\small\tt \verm{Mesh}}
-constructor with {\small\tt \verm{tag}::rectangle}, providing as last argument the
-{\small\tt \verm{tag}::with\_\,triangles}.
+constructor with {\small\tt \textcolor{tag}{tag}::rectangle}, providing as last argument the
+{\small\tt \textcolor{tag}{tag}::with\_\,triangles}.
 For instance, in the example \ref{\numb section 1.\numb parag 3},
 if we re-write the definition of {\small\tt BGHC} as
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Mesh} \azul{BGHC} ( \verm{tag}::rectangle, BG, GH, HC, BC.reverse(), \verm{tag}::with_triangles );
+   \verm{Mesh} \azul{BGHC} ( \textcolor{tag}{tag}::rectangle, BG, GH, HC, BC.reverse(), \textcolor{tag}{tag}::with_triangles );
 \end{Verbatim}
 
 \noindent we get the mesh shown in figure \ref{\numb section 2.\numb fig 3}.
@@ -135,7 +137,7 @@ if we re-write the definition of {\small\tt BGHC} as
 If we give the sides of the rectangle in a different order, like in
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Mesh} \azul{BGHC} ( \verm{tag}::rectangle, GH, HC, BC.reverse(), BG, \verm{tag}::with_triangles );
+   \verm{Mesh} \azul{BGHC} ( \textcolor{tag}{tag}::rectangle, GH, HC, BC.reverse(), BG, \textcolor{tag}{tag}::with_triangles );
 \end{Verbatim}
 
 \noindent the rectangles will be cut along the other diagonal (check it yourself).
@@ -143,9 +145,9 @@ If we give the sides of the rectangle in a different order, like in
 The mesh in paragraph \ref{\numb section 1.\numb parag 4} could have been built like this :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Mesh} \azul{ABD} ( \verm{tag}::triangle, AB, BD, AD.reverse() );
-   \verm{Mesh} \azul{BCED} ( \verm{tag}::quadrangle, CE, ED, BD.reverse(), BC, \verm{tag}::with_triangles );
-   \verm{Mesh} \azul{one_tri_one_rect} ( \verm{tag}::join, ABD, BCED );
+   \verm{Mesh} \azul{ABD} ( \textcolor{tag}{tag}::triangle, AB, BD, AD.reverse() );
+   \verm{Mesh} \azul{BCED} ( \textcolor{tag}{tag}::quadrangle, CE, ED, BD.reverse(), BC, \textcolor{tag}{tag}::with_triangles );
+   \verm{Mesh} \azul{one_tri_one_rect} ( \textcolor{tag}{tag}::join, ABD, BCED );
 \end{Verbatim}
 
 
@@ -158,7 +160,7 @@ The mesh in paragraph \ref{\numb section 1.\numb parag 4} could have been built 
 used to build domains of the desired shape.
 
 Until now, we have only met the trivial Euclidian manifold, defined as {\small\tt
-\verm{Manifold}\break ( \verm{tag}::Euclid,} {\small\tt \verm{tag}::of\_\,dim,} {\small\tt n}
+\verm{Manifold}\break ( \textcolor{tag}{tag}::Euclid,} {\small\tt \textcolor{tag}{tag}::of\_\,dim,} {\small\tt n}
 {\small\tt )}.
 One can define a submanifold in terms of an implicit equation, that is, as a level set,
 using the method {\small\tt implicit} of the Euclidian manifold.
@@ -167,15 +169,15 @@ The code below introduces a one-dimensional submanifold of $ \mathbb{R}^2 $ (a h
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0],  \azul{y} = xy[1];
    
    \verm{Manifold} \azul{hiperbola} = RR2.implicit ( x*y == 1. );
    
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) =  0.5;   y(A) =  2.;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  x(B) =  3;     y(B) =  0.333333333333;
-   \verm{Mesh} \azul{arc_of_hiperbola} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 7 );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) =  0.5;   y(A) =  2.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  3;     y(B) =  0.333333333333;
+   \verm{Mesh} \azul{arc_of_hiperbola} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 7 );
    arc_of_hiperbola.draw_ps (\verde{"hiperbola.eps"});
    arc_of_hiperbola.export_msh (\verde{"hiperbola.msh"});
 \end{Verbatim}
@@ -201,11 +203,11 @@ the {\small\tt hiperbola} manifold.
 As an alternative, we might explicitly project them onto the {\small\tt hiperbola} like this :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Cell} \azul{P} ( \verm{tag}::vertex );  x(P) = 0.6;   y(P) = 2.1;
+   \verm{Cell} \azul{P} ( \textcolor{tag}{tag}::vertex );  x(P) = 0.6;   y(P) = 2.1;
    hiperbola.project(P);
 \end{Verbatim}
 
-\noindent In contrast, the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::segment}
+\noindent In contrast, the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::segment}
 builds points in the surrounding space {\small\tt RR2} and then projects them onto the
 {\small\tt hiperbola} without the user's assistance.
 
@@ -227,15 +229,15 @@ We can define several arcs of curve and {\small\tt join} them, thus obtaining a 
    label=parag-\ref{\numb section 2.\numb parag 5}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{circle_manifold} = RR2.implicit ( x*x + y*y == 1. );
-   \verm{Cell} \azul{N} ( \verm{tag}::vertex );  x(N) =  0.;   y(N) =  1.;
-   \verm{Cell} \azul{W} ( \verm{tag}::vertex );  x(W) = -1.;   y(W) =  0.;
-   \verm{Cell} \azul{S} ( \verm{tag}::vertex );  x(S) =  0.;   y(S) = -1.;
-   \verm{Cell} \azul{E} ( \verm{tag}::vertex );  x(E) =  1.;   y(E) =  0.;
-   \verm{Mesh} \azul{NW} ( \verm{tag}::segment, N.reverse(), W, \verm{tag}::divided_in, 5 );
-   \verm{Mesh} \azul{WS} ( \verm{tag}::segment, W.reverse(), S, \verm{tag}::divided_in, 5 );
-   \verm{Mesh} \azul{SE} ( \verm{tag}::segment, S.reverse(), E, \verm{tag}::divided_in, 5 );
-   \verm{Mesh} \azul{EN} ( \verm{tag}::segment, E.reverse(), N, \verm{tag}::divided_in, 5 );
-   \verm{Mesh} \azul{circle} ( \verm{tag}::join, NW, WS, SE, EN );
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x(N) =  0.;   y(N) =  1.;
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x(W) = -1.;   y(W) =  0.;
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  0.;   y(S) = -1.;
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  1.;   y(E) =  0.;
+   \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N.reverse(), W, \textcolor{tag}{tag}::divided_in, 5 );
+   \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W.reverse(), S, \textcolor{tag}{tag}::divided_in, 5 );
+   \verm{Mesh} \azul{SE} ( \textcolor{tag}{tag}::segment, S.reverse(), E, \textcolor{tag}{tag}::divided_in, 5 );
+   \verm{Mesh} \azul{EN} ( \textcolor{tag}{tag}::segment, E.reverse(), N, \textcolor{tag}{tag}::divided_in, 5 );
+   \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::join, NW, WS, SE, EN );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -254,9 +256,9 @@ along straight segments {\small\tt NW}, {\small\tt WS} and so forth.
 Paragraph \ref{\numb section 3.\numb parag 2} shows another way of meshing a closed curve,
 producing equidistant vertices.
 
-Note that applying the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::join}
+Note that applying the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::join}
 to four segments is very different from applying the {\small\tt \verm{Mesh}} constructor with
-{\small\tt \verm{tag}::quadrangle} to the same four segments;
+{\small\tt \textcolor{tag}{tag}::quadrangle} to the same four segments;
 see paragraphs \ref{\numb section 2.\numb parag 9} and \ref{\numb section 2.\numb parag 10}.
 
 
@@ -269,26 +271,26 @@ Let's look at a surface in $ \mathbb{R}^3 $ :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 6}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Manifold} \azul{RR3} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 3 );
-   \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 3 );
+   \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xyz[0],  \azul{y} = xyz[1],  \azul{z} = xyz[2];
 
    \verm{Manifold} \azul{sphere} = RR3.implicit ( x*x + y*y + z*z == 1. );
    \cinza{// let's mesh half of a sphere}
-   \verm{Cell} \azul{E}  ( \verm{tag}::vertex );   x(E) =  1.;   y(E) =  0.;   z(E) = 0.;
-   \verm{Cell} \azul{N}  ( \verm{tag}::vertex );   x(N) =  0.;   y(N) =  1.;   z(N) = 0.;
-   \verm{Cell} \azul{W}  ( \verm{tag}::vertex );   x(W) = -1.;   y(W) =  0.;   z(W) = 0.;
-   \verm{Cell} \azul{S}  ( \verm{tag}::vertex );   x(W) =  0.;   y(W) = -1.;   z(W) = 0.;
-   \verm{Cell} \azul{up} ( \verm{tag}::vertex );   x(up)=  0.;   y(up)=  0.;   z(up)= 1.;
+   \verm{Cell} \azul{E}  ( \textcolor{tag}{tag}::vertex );   x(E) =  1.;   y(E) =  0.;   z(E) = 0.;
+   \verm{Cell} \azul{N}  ( \textcolor{tag}{tag}::vertex );   x(N) =  0.;   y(N) =  1.;   z(N) = 0.;
+   \verm{Cell} \azul{W}  ( \textcolor{tag}{tag}::vertex );   x(W) = -1.;   y(W) =  0.;   z(W) = 0.;
+   \verm{Cell} \azul{S}  ( \textcolor{tag}{tag}::vertex );   x(W) =  0.;   y(W) = -1.;   z(W) = 0.;
+   \verm{Cell} \azul{up} ( \textcolor{tag}{tag}::vertex );   x(up)=  0.;   y(up)=  0.;   z(up)= 1.;
    int \azul{n} = 15;
-   \verm{Mesh} \azul{EN} ( \verm{tag}::segment, E.reverse(), N, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{NW} ( \verm{tag}::segment, N.reverse(), W, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{WS} ( \verm{tag}::segment, W.reverse(), S, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{SE} ( \verm{tag}::segment, S.reverse(), E, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{upE} ( \verm{tag}::segment, up.reverse(), E, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{upN} ( \verm{tag}::segment, up.reverse(), N, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{upW} ( \verm{tag}::segment, up.reverse(), W, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{upS} ( \verm{tag}::segment, up.reverse(), S, \verm{tag}::divided_in, n );
+   \verm{Mesh} \azul{EN} ( \textcolor{tag}{tag}::segment, E.reverse(), N, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N.reverse(), W, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W.reverse(), S, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{SE} ( \textcolor{tag}{tag}::segment, S.reverse(), E, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{upE} ( \textcolor{tag}{tag}::segment, up.reverse(), E, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{upN} ( \textcolor{tag}{tag}::segment, up.reverse(), N, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{upW} ( \textcolor{tag}{tag}::segment, up.reverse(), W, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{upS} ( \textcolor{tag}{tag}::segment, up.reverse(), S, \textcolor{tag}{tag}::divided_in, n );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -303,21 +305,21 @@ Let's look at a surface in $ \mathbb{R}^3 $ :
    label=parag-\ref{\numb section 2.\numb parag 6}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// build four triangles}
-   \verm{Mesh} \azul{ENup} ( \verm{tag}::triangle, EN, upN.reverse(), upE );
-   \verm{Mesh} \azul{NWup} ( \verm{tag}::triangle, NW, upW.reverse(), upN );
-   \verm{Mesh} \azul{WSup} ( \verm{tag}::triangle, WS, upS.reverse(), upW );
-   \verm{Mesh} \azul{SEup} ( \verm{tag}::triangle, SE, upE.reverse(), upS );
+   \verm{Mesh} \azul{ENup} ( \textcolor{tag}{tag}::triangle, EN, upN.reverse(), upE );
+   \verm{Mesh} \azul{NWup} ( \textcolor{tag}{tag}::triangle, NW, upW.reverse(), upN );
+   \verm{Mesh} \azul{WSup} ( \textcolor{tag}{tag}::triangle, WS, upS.reverse(), upW );
+   \verm{Mesh} \azul{SEup} ( \textcolor{tag}{tag}::triangle, SE, upE.reverse(), upS );
 
    \cinza{// and finally join the triangles :}
-   \verm{Mesh} \azul{hemisphere} ( \verm{tag}::join, ENup, NWup, WSup, SEup );
+   \verm{Mesh} \azul{hemisphere} ( \textcolor{tag}{tag}::join, ENup, NWup, WSup, SEup );
 \end{Verbatim}
 
 Again, when we define individual points {\small\tt E}, {\small\tt N}, {\small\tt W},
 {\small\tt S} and {\small\tt up} we must be careful to provide coordinates on the
 {\small\tt sphere} (or {\small\tt project} them explicitly as shown in paragraph
 \ref{\numb section 2.\numb parag 7}).
-In contrast, the {\small\tt \verm{Mesh}} constructors with {\small\tt \verm{tag}::segment},
-{\small\tt \verm{tag}::quadrangle} and {\small\tt \verm{tag}::triangle} build points in the
+In contrast, the {\small\tt \verm{Mesh}} constructors with {\small\tt \textcolor{tag}{tag}::segment},
+{\small\tt \textcolor{tag}{tag}::quadrangle} and {\small\tt \textcolor{tag}{tag}::triangle} build points in the
 surrounding space ($ \mathbb{R}^2 $ or $ \mathbb{R}^3 $) and
 then project them onto the current manifold without the user's assistance (paragraph
 \ref{\numb section 8.\numb parag 1} describes this projection operation).
@@ -350,24 +352,24 @@ Below we use twelve rectangles to get a bumpy hemisphere.
    \verm{Manifold} nut = RR3.implicit ( x*x + y*y + z*z + 1.5*x*y*z == 1. );
 
    \cinza{// let's mesh a hemisphere (much deformed)}
-   \verm{Cell} \azul{S} ( \verm{tag}::vertex );    x(S)  =   0.;   y(S)  =  -1.;   z(S)  =  0.;
-   \verm{Cell} \azul{E} ( \verm{tag}::vertex );    x(E)  =   1.;   y(E)  =   0.;   z(E)  =  0.;
-   \verm{Cell} \azul{N} ( \verm{tag}::vertex );    x(N)  =   0.;   y(N)  =   1.;   z(N)  =  0.;
-   \verm{Cell} \azul{W} ( \verm{tag}::vertex );    x(W)  =  -1.;   y(W)  =   0.;   z(W)  =  0.;
-   \verm{Cell} \azul{up} ( \verm{tag}::vertex );   x(up) =   0.;   y(up) =   0.;   z(up) =  1.;
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );    x(S)  =   0.;   y(S)  =  -1.;   z(S)  =  0.;
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );    x(E)  =   1.;   y(E)  =   0.;   z(E)  =  0.;
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );    x(N)  =   0.;   y(N)  =   1.;   z(N)  =  0.;
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );    x(W)  =  -1.;   y(W)  =   0.;   z(W)  =  0.;
+   \verm{Cell} \azul{up} ( \textcolor{tag}{tag}::vertex );   x(up) =   0.;   y(up) =   0.;   z(up) =  1.;
    \cinza{// no need to project these}
-   \verm{Cell} \azul{mSW} ( \verm{tag}::vertex );  x(mSW) = -1.;   y(mSW) = -1.;   z(mSW) = 0.;
+   \verm{Cell} \azul{mSW} ( \textcolor{tag}{tag}::vertex );  x(mSW) = -1.;   y(mSW) = -1.;   z(mSW) = 0.;
    nut.project ( mSW );  \cinza{// midway between S and W}
-   \verm{Cell} \azul{mSup}  ( \verm{tag}::vertex );  x(mSup) =  0.;   y(mSup) = -1.;   z(mSup) = 1.;
+   \verm{Cell} \azul{mSup}  ( \textcolor{tag}{tag}::vertex );  x(mSup) =  0.;   y(mSup) = -1.;   z(mSup) = 1.;
    nut.project ( mSup );  \cinza{// midway between S and up}
-   \verm{Cell} \azul{mSWup} ( \verm{tag}::vertex );  x(mSWup) = -1.;  y(mSWup) = -1.;  z(mSWup) = 1.;
+   \verm{Cell} \azul{mSWup} ( \textcolor{tag}{tag}::vertex );  x(mSWup) = -1.;  y(mSWup) = -1.;  z(mSWup) = 1.;
    nut.project ( mSWup );  \cinza{// somewhere between S, W and up}
    \cinza{// ... and so forth ...}
 
    \cinza{// now build segments :}
    int \azul{n} = 10;
-   \verm{Mesh} \azul{W_mSW}  ( \verm{tag}::segment, W.reverse(), mSW,  \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{W_mWup} ( \verm{tag}::segment, W.reverse(), mWup, \verm{tag}::divided_in, n );
+   \verm{Mesh} \azul{W_mSW}  ( \textcolor{tag}{tag}::segment, W.reverse(), mSW,  \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{W_mWup} ( \textcolor{tag}{tag}::segment, W.reverse(), mWup, \textcolor{tag}{tag}::divided_in, n );
    \cinza{// ... and so forth ...}
 \end{Verbatim}
 
@@ -390,21 +392,21 @@ Below we use twelve rectangles to get a bumpy hemisphere.
    label=parag-\ref{\numb section 2.\numb parag 7}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \cinza{// now the twelve rectangles :}
-   \verm{Mesh} \azul{rect_W_SW}  ( \verm{tag}::quadrangle,
+   \verm{Mesh} \azul{rect_W_SW}  ( \textcolor{tag}{tag}::quadrangle,
       mSW_mSWup, mWup_mSWup.reverse(), W_mWup.reverse(), W_mSW );
-   \verm{Mesh} \azul{rect_S_SW}  ( \verm{tag}::quadrangle,
+   \verm{Mesh} \azul{rect_S_SW}  ( \textcolor{tag}{tag}::quadrangle,
       mSup_mSWup, mSW_mSWup.reverse(), S_mSW.reverse(), S_mSup );
-   \verm{Mesh} \azul{rect_up_SW} ( \verm{tag}::quadrangle,
+   \verm{Mesh} \azul{rect_up_SW} ( \textcolor{tag}{tag}::quadrangle,
       mWup_mSWup, mSup_mSWup.reverse(), up_mSup.reverse(), up_mWup );
    \cinza{// ... and so forth ...}
 
    \cinza{// and finally join the rectangles :}
-   \verm{Mesh} \azul{hemisphere} ( \verm{tag}::join,
+   \verm{Mesh} \azul{hemisphere} ( \textcolor{tag}{tag}::join,
       \{ rect_E_NE, rect_E_SE, rect_S_SE, rect_S_SW, rect_W_SW, rect_W_NW,
         rect_N_NE, rect_N_NW, rect_up_SE, rect_up_SW, rect_up_NE, rect_up_NW \} );
 \end{Verbatim}
 
-Note how we use a version of the {\small\tt \verm{Mesh}} constructor with {\small\tt \verm{tag}::join}
+Note how we use a version of the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::join}
 taking as argument a vector of {\small\tt \verm{Mesh}}es; the same constructor is used in
 paragraph \ref{\numb section 9.\numb parag 2}.
 
@@ -454,23 +456,23 @@ Method {\small\tt set\_\,as\_\,working\_\,manifold} allows us to do that.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 9}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0],  \azul{y} = xy[1];
    
    \verm{Manifold} \azul{circle} = RR2.implicit ( x*x + y*y == 1. );
    
-   \verm{Cell} \azul{N} ( \verm{tag}::vertex );  x(N) =  0.;   y(N) =  1.;
-   \verm{Cell} \azul{W} ( \verm{tag}::vertex );  x(W) = -1.;   y(W) =  0.;
-   \verm{Cell} \azul{S} ( \verm{tag}::vertex );  x(S) =  0.;   y(S) = -1.;
-   \verm{Cell} \azul{E} ( \verm{tag}::vertex );  x(E) =  1.;   y(E) =  0.;
-   \verm{Mesh} \azul{NW} ( \verm{tag}::segment, N.reverse(), W, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{WS} ( \verm{tag}::segment, W.reverse(), S, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{SE} ( \verm{tag}::segment, S.reverse(), E, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{EN} ( \verm{tag}::segment, E.reverse(), N, \verm{tag}::divided_in, 10 );
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x(N) =  0.;   y(N) =  1.;
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x(W) = -1.;   y(W) =  0.;
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  0.;   y(S) = -1.;
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  1.;   y(E) =  0.;
+   \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N.reverse(), W, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W.reverse(), S, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{SE} ( \textcolor{tag}{tag}::segment, S.reverse(), E, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{EN} ( \textcolor{tag}{tag}::segment, E.reverse(), N, \textcolor{tag}{tag}::divided_in, 10 );
    
    RR2.set_as_working_manifold();
-   \verm{Mesh} \azul{disk} ( \verm{tag}::quadrangle, NW, WS, SE, EN );
+   \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::quadrangle, NW, WS, SE, EN );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -515,25 +517,25 @@ this time with four arcs of hiperbola.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 10}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Manifold} \azul{RR2} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0],  \azul{y} = xy[1];
-   \verm{Cell} \azul{N} ( \verm{tag}::vertex );  x(N) =  0.;   y(N) =  1.;
-   \verm{Cell} \azul{W} ( \verm{tag}::vertex );  x(W) = -1.;   y(W) =  0.;
-   \verm{Cell} \azul{S} ( \verm{tag}::vertex );  x(S) =  0.;   y(S) = -1.;
-   \verm{Cell} \azul{E} ( \verm{tag}::vertex );  x(E) =  1.;   y(E) =  0.;
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x(N) =  0.;   y(N) =  1.;
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x(W) = -1.;   y(W) =  0.;
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  0.;   y(S) = -1.;
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  1.;   y(E) =  0.;
 
    \verm{Manifold} \azul{first_arc}  = RR2.implicit ( x*y + x - y == -1. );
-   \verm{Mesh} \azul{NW} ( \verm{tag}::segment, N.reverse(), W, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N.reverse(), W, \textcolor{tag}{tag}::divided_in, 10 );
    \verm{Manifold} \azul{second_arc} = RR2.implicit ( x*y - x - y ==  1. );
-   \verm{Mesh} \azul{WS} ( \verm{tag}::segment, W.reverse(), S, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W.reverse(), S, \textcolor{tag}{tag}::divided_in, 10 );
    \verm{Manifold} \azul{third_arc}  = RR2.implicit ( x*y - x + y == -1. );
-   \verm{Mesh} \azul{SE} ( \verm{tag}::segment, S.reverse(), E, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{SE} ( \textcolor{tag}{tag}::segment, S.reverse(), E, \textcolor{tag}{tag}::divided_in, 10 );
    \verm{Manifold} \azul{fourth_arc} = RR2.implicit ( x*y + x + y ==  1. );
-   \verm{Mesh} \azul{EN} ( \verm{tag}::segment, E.reverse(), N, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{EN} ( \textcolor{tag}{tag}::segment, E.reverse(), N, \textcolor{tag}{tag}::divided_in, 10 );
    
    RR2.set_as_working_manifold();
-   \verm{Mesh} \azul{diamond} ( \verm{tag}::quadrangle, NW, WS, SE, EN );
+   \verm{Mesh} \azul{diamond} ( \textcolor{tag}{tag}::quadrangle, NW, WS, SE, EN );
 \end{Verbatim}
 
 Paragraph \ref{\numb section 3.\numb parag 17} shows another way of meshing the same domain.
@@ -587,14 +589,14 @@ Instead of meshing the {\small\tt apple} surface, we just build eight curves imm
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 11}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  x(A) =  0.;  y(A) =  0.;  z(A) = std::sqrt ( 2.*pi/3. );
-   \verm{Cell} \azul{B1} ( \verm{tag}::vertex );  x(B1) =  1.;  y(B1) =  0.;  z(B1) =  1.;
-   \verm{Cell} \azul{C1} ( \verm{tag}::vertex );  x(C1) =  1.;  y(C1) =  0.;  z(C1) =  0.;
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) =  0.;  y(A) =  0.;  z(A) = std::sqrt ( 2.*pi/3. );
+   \verm{Cell} \azul{B1} ( \textcolor{tag}{tag}::vertex );  x(B1) =  1.;  y(B1) =  0.;  z(B1) =  1.;
+   \verm{Cell} \azul{C1} ( \textcolor{tag}{tag}::vertex );  x(C1) =  1.;  y(C1) =  0.;  z(C1) =  0.;
    apple.project (B1);  apple.project (C1);
-   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  x(D) =  0.;  y(D) =  0.;  z(D) =  0.;
-   \verm{Mesh} \azul{AB1} ( \verm{tag}::segment, A.reverse(), B1, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{B1C1} ( \verm{tag}::segment, B1.reverse(), C1, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{C1D} ( \verm{tag}::segment, C1.reverse(), D, \verm{tag}::divided_in, 10 );
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) =  0.;  y(D) =  0.;  z(D) =  0.;
+   \verm{Mesh} \azul{AB1} ( \textcolor{tag}{tag}::segment, A.reverse(), B1, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{B1C1} ( \textcolor{tag}{tag}::segment, B1.reverse(), C1, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{C1D} ( \textcolor{tag}{tag}::segment, C1.reverse(), D, \textcolor{tag}{tag}::divided_in, 10 );
    \cinza{// and so on ...}
 \end{Verbatim}
 
@@ -605,16 +607,16 @@ transversal segments, as well as triangular and quadrangular patches :
    label=parag-\ref{\numb section 2.\numb parag 11}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    RR3.set_as_working_manifold();
-   \verm{Mesh} \azul{B1B2} ( \verm{tag}::segment, B1.reverse(), B2, \verm{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{B2B3} ( \verm{tag}::segment, B2.reverse(), B3, \verm{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{B1B2} ( \textcolor{tag}{tag}::segment, B1.reverse(), B2, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{B2B3} ( \textcolor{tag}{tag}::segment, B2.reverse(), B3, \textcolor{tag}{tag}::divided_in, 10 );
    \cinza{// and many other segments ...}
-   \verm{Mesh} \azul{AB1B2} ( \verm{tag}::triangle, AB1, B1B2, AB2.reverse() );
-   \verm{Mesh} \azul{AB2B3} ( \verm{tag}::triangle, AB2, B2B3, AB3.reverse() );
+   \verm{Mesh} \azul{AB1B2} ( \textcolor{tag}{tag}::triangle, AB1, B1B2, AB2.reverse() );
+   \verm{Mesh} \azul{AB2B3} ( \textcolor{tag}{tag}::triangle, AB2, B2B3, AB3.reverse() );
    \cinza{// and other triangular patches ...}
-   \verm{Mesh} \azul{B1C1C2B2} ( \verm{tag}::quadrangle, B1C1, C1C2, B2C2.reverse(), B1B2.reverse(),
-                   \verm{tag}::with_triangles                                           );
-   \verm{Mesh} \azul{B2C2C3B3} ( \verm{tag}::quadrangle, B2C2, C2C3, B3C3.reverse(), B2B3.reverse(),
-                   \verm{tag}::with_triangles                                           );
+   \verm{Mesh} \azul{B1C1C2B2} ( \textcolor{tag}{tag}::quadrangle, B1C1, C1C2, B2C2.reverse(), B1B2.reverse(),
+                   \textcolor{tag}{tag}::with_triangles                                           );
+   \verm{Mesh} \azul{B2C2C3B3} ( \textcolor{tag}{tag}::quadrangle, B2C2, C2C3, B3C3.reverse(), B2B3.reverse(),
+                   \textcolor{tag}{tag}::with_triangles                                           );
    \cinza{// and other quadrangular patches ...}   
 \end{Verbatim}
 
@@ -622,11 +624,11 @@ We then join all patches :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 11}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Mesh} \azul{sect1} ( \verm{tag}::join, AB1B2, B1C1C2B2, C1DC2 );
-   \verm{Mesh} \azul{sect2} ( \verm{tag}::join, AB2B3, B2C2C3B3, C2DC3 );
+   \verm{Mesh} \azul{sect1} ( \textcolor{tag}{tag}::join, AB1B2, B1C1C2B2, C1DC2 );
+   \verm{Mesh} \azul{sect2} ( \textcolor{tag}{tag}::join, AB2B3, B2C2C3B3, C2DC3 );
    \cinza{// more sectors ...}
    std::vector < \verm{Mesh} > lm \{ sect1, sect2, sect3, sect4, sect5, sect6, sect7, sect8 \};
-   \verm{Mesh} \azul{fisalis} ( \verm{tag}::join, lm ); 
+   \verm{Mesh} \azul{fisalis} ( \textcolor{tag}{tag}::join, lm ); 
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -642,7 +644,7 @@ The {\small\tt apple} manifold is no longer relevant.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 11}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{CellIterator} \azul{it} = fisalis.iterator ( \verm{tag}::over_vertices );
+   \verm{CellIterator} \azul{it} = fisalis.iterator ( \textcolor{tag}{tag}::over_vertices );
    for ( it.reset(); it.in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;
       x(P) *= 0.8;  y(P) *= 0.8;
@@ -666,7 +668,7 @@ Thus, the eight rims defined in the beginning are kept unchanged.
    std::vector<\verm{Mesh}>::iterator \azul{it1};
    for ( it1 = lm.begin(); it1 != lm.end(); it1++ )
    \{  \verm{Mesh} \azul{sect} = *it1;
-      \verm{CellIterator} \azul{it2} = sect.iterator ( \verm{tag}::over_vertices );
+      \verm{CellIterator} \azul{it2} = sect.iterator ( \textcolor{tag}{tag}::over_vertices );
       for ( int \azul{i} = 1; i < 20; i++ )
       for ( it2.reset(); it2.in_range(); it2++ )
       \{  \verm{Cell} \azul{ver} = *it2;
@@ -705,21 +707,21 @@ We can define a one-dimensional submanifold of $ \mathbb{R}^3 $ by two implicit 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 12}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Manifold} \azul{RR3} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 3 );
-   \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 3 );
+   \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xyz[0],  \azul{y} = xyz[1],  \azul{z} = xyz[2];
 
    \verm{Manifold} \azul{circle_manifold} = RR3.implicit ( x*x + y*y == 1., x*y == 4.*z );
-   \verm{Cell} \azul{S} ( \verm{tag}::vertex );  x(S) =  0.;   y(S) = -1.;  z(S) = 0.;
-   \verm{Cell} \azul{E} ( \verm{tag}::vertex );  x(E) =  1.;   y(E) =  0.;  z(E) = 0.;
-   \verm{Cell} \azul{N} ( \verm{tag}::vertex );  x(N) =  0.;   y(N) =  1.;  z(N) = 0.;
-   \verm{Cell} \azul{W} ( \verm{tag}::vertex );  x(W) = -1.;   y(W) =  0.;  z(W) = 0.;
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  0.;   y(S) = -1.;  z(S) = 0.;
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  1.;   y(E) =  0.;  z(E) = 0.;
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x(N) =  0.;   y(N) =  1.;  z(N) = 0.;
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x(W) = -1.;   y(W) =  0.;  z(W) = 0.;
    \cinza{// these four points already belong to 'circle_manifold', no projection needed}
-   \verm{Mesh} \azul{SE} ( \verm{tag}::segment, S.reverse(), E, \verm{tag}::divided_in, 5 );
-   \verm{Mesh} \azul{EN} ( \verm{tag}::segment, E.reverse(), N, \verm{tag}::divided_in, 5 );
-   \verm{Mesh} \azul{NW} ( \verm{tag}::segment, N.reverse(), W, \verm{tag}::divided_in, 5 );
-   \verm{Mesh} \azul{WS} ( \verm{tag}::segment, W.reverse(), S, \verm{tag}::divided_in, 5 );
-   \verm{Mesh} \azul{circle} ( \verm{tag}::join, SE, EN, NW, WS );
+   \verm{Mesh} \azul{SE} ( \textcolor{tag}{tag}::segment, S.reverse(), E, \textcolor{tag}{tag}::divided_in, 5 );
+   \verm{Mesh} \azul{EN} ( \textcolor{tag}{tag}::segment, E.reverse(), N, \textcolor{tag}{tag}::divided_in, 5 );
+   \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N.reverse(), W, \textcolor{tag}{tag}::divided_in, 5 );
+   \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W.reverse(), S, \textcolor{tag}{tag}::divided_in, 5 );
+   \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::join, SE, EN, NW, WS );
 \end{Verbatim}
 
 Paragraph \ref{\numb section 3.\numb parag 4} shows another way of meshing the same loop.
@@ -751,43 +753,43 @@ For the rest of the surface, we switch back to the two-dimensional manifold {\sm
    \cinza{// first build the base (a closed curve)}
    \verm{Manifold} \azul{base} = nut.implicit ( x*x + 3.*z == 0. );
 
-   \verm{Cell} \azul{S} ( \verm{tag}::vertex );    x(S)  =   0.;   y(S)  =  -1.;   z(S)  =  0.;
-   \verm{Cell} \azul{E} ( \verm{tag}::vertex );    x(E)  =   1.;   y(E)  =   0.;   z(E)  =  0.;
-   \verm{Cell} \azul{N} ( \verm{tag}::vertex );    x(N)  =   0.;   y(N)  =   1.;   z(N)  =  0.;
-   \verm{Cell} \azul{W} ( \verm{tag}::vertex );    x(W)  =  -1.;   y(W)  =   0.;   z(W)  =  0.;
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );    x(S)  =   0.;   y(S)  =  -1.;   z(S)  =  0.;
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );    x(E)  =   1.;   y(E)  =   0.;   z(E)  =  0.;
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );    x(N)  =   0.;   y(N)  =   1.;   z(N)  =  0.;
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );    x(W)  =  -1.;   y(W)  =   0.;   z(W)  =  0.;
    \cinza{// no need to project S and N, they are already on 'base'}
    base.project(E);  base.project(W);
-   \verm{Cell} \azul{mSW} ( \verm{tag}::vertex );  x(mSW) = -1.;   y(mSW) = -1.;   z(mSW) = 0.;
+   \verm{Cell} \azul{mSW} ( \textcolor{tag}{tag}::vertex );  x(mSW) = -1.;   y(mSW) = -1.;   z(mSW) = 0.;
    base.project ( mSW );  \cinza{// midway between S and W}
-   \verm{Cell} \azul{mSE} ( \verm{tag}::vertex );  x(mSE) =  1.;   y(mSE) = -1.;   z(mSW) = 0.;
+   \verm{Cell} \azul{mSE} ( \textcolor{tag}{tag}::vertex );  x(mSE) =  1.;   y(mSE) = -1.;   z(mSW) = 0.;
    base.project ( mSE );  \cinza{// midway between S and E}
    \cinza{// define similarly mNE and mNW}
 
    \cinza{// now build eight segments, forming the base}
-   \verm{Mesh} \azul{S_mSW} ( \verm{tag}::segment, S.reverse(), mSW, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{S_mSE} ( \verm{tag}::segment, S.reverse(), mSE, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{E_mSE} ( \verm{tag}::segment, E.reverse(), mSE, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{E_mNE} ( \verm{tag}::segment, E.reverse(), mNE, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{N_mNE} ( \verm{tag}::segment, N.reverse(), mNE, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{N_mNW} ( \verm{tag}::segment, N.reverse(), mNW, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{W_mSW} ( \verm{tag}::segment, W.reverse(), mSW, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{W_mNW} ( \verm{tag}::segment, W.reverse(), mNW, \verm{tag}::divided_in, n );
+   \verm{Mesh} \azul{S_mSW} ( \textcolor{tag}{tag}::segment, S.reverse(), mSW, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{S_mSE} ( \textcolor{tag}{tag}::segment, S.reverse(), mSE, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{E_mSE} ( \textcolor{tag}{tag}::segment, E.reverse(), mSE, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{E_mNE} ( \textcolor{tag}{tag}::segment, E.reverse(), mNE, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{N_mNE} ( \textcolor{tag}{tag}::segment, N.reverse(), mNE, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{N_mNW} ( \textcolor{tag}{tag}::segment, N.reverse(), mNW, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{W_mSW} ( \textcolor{tag}{tag}::segment, W.reverse(), mSW, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{W_mNW} ( \textcolor{tag}{tag}::segment, W.reverse(), mNW, \textcolor{tag}{tag}::divided_in, n );
 
    \cinza{// we are done with the base, now switch back to 'nut'}
    nut.set_as_working_manifold();
    \cinza{// more points :}
-   \verm{Cell} \azul{up} ( \verm{tag}::vertex );   x(up) =   0.;   y(up) =   0.;   z(up) =  1.;
+   \verm{Cell} \azul{up} ( \textcolor{tag}{tag}::vertex );   x(up) =   0.;   y(up) =   0.;   z(up) =  1.;
    \cinza{// no need to project 'up', it is already on 'nut'}
-   \verm{Cell} \azul{mSup}  ( \verm{tag}::vertex );  x(mSup) =  0.;   y(mSup) = -1.;   z(mSup) = 1.;
+   \verm{Cell} \azul{mSup}  ( \textcolor{tag}{tag}::vertex );  x(mSup) =  0.;   y(mSup) = -1.;   z(mSup) = 1.;
    nut.project ( mSup );  \cinza{// midway between S and up}
-   \verm{Cell} \azul{mSWup} ( \verm{tag}::vertex );  x(mSWup) = -1.;  y(mSWup) = -1.;  z(mSWup) = 1.;
+   \verm{Cell} \azul{mSWup} ( \textcolor{tag}{tag}::vertex );  x(mSWup) = -1.;  y(mSWup) = -1.;  z(mSWup) = 1.;
    nut.project ( mSWup );  \cinza{// somewhere between S, W and up}
    \cinza{// ... and so forth ...}
 
    \cinza{// more segments :}
-   \verm{Mesh} \azul{W_mWup} ( \verm{tag}::segment, W.reverse(), mWup, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{mSW_mSWup} ( \verm{tag}::segment, mSW.reverse(), mSWup, \verm{tag}::divided_in, n );
-   \verm{Mesh} \azul{mWup_mSWup} ( \verm{tag}::segment, mWup.reverse(), mSWup, \verm{tag}::divided_in, n );
+   \verm{Mesh} \azul{W_mWup} ( \textcolor{tag}{tag}::segment, W.reverse(), mWup, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{mSW_mSWup} ( \textcolor{tag}{tag}::segment, mSW.reverse(), mSWup, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{mWup_mSWup} ( \textcolor{tag}{tag}::segment, mWup.reverse(), mSWup, \textcolor{tag}{tag}::divided_in, n );
    \cinza{// ... and so forth ...}
 \end{Verbatim}
 
@@ -822,14 +824,14 @@ Below is an example.
    label=parag-\ref{\numb section 2.\numb parag 14}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \cinza{// at the beginning, we define 'spiral' as a straight line}
-   \verm{Manifold} \azul{spiral} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 1 );
-   \verm{Function} \azul{t} = spiral.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{spiral} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 1 );
+   \verm{Function} \azul{t} = spiral.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
 
    \cinza{// now build 'arc_of_spiral' merely as a segment from pi/2 to 5 pi}
    const double \azul{pi} = 3.1415926536;
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  t(A) =  pi/2.;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  t(B) =  5.*pi;
-   \verm{Mesh} \azul{arc_of_spiral} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 30 );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  t(A) =  pi/2.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  t(B) =  5.*pi;
+   \verm{Mesh} \azul{arc_of_spiral} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 30 );
    \cinza{// not very interesting for now}
    \cinza{// but now define functions x and y as expressions of t :}
    \verm{Function} \azul{x} = t*\verm{cos}(t), \azul{y} = t*\verm{sin}(t);
@@ -851,8 +853,8 @@ Functions {\small\tt x} and {\small\tt y} are defined later, as arithmetic expre
 %Both may be vector functions (may have serveral components).
 %The ``coordinates'' are used, for instance, for graphical representation.
 %The ``parameter'' or ``parameters'' are used, for instance, for interpolation.
-%The {\small\tt \verm{Mesh}} constructors with {\small\tt \verm{tag}::segment}, {\small\tt \verm{tag}::quadrangle} or
-%{\small\tt \verm{tag}::triangle} build new points and define their position in the manifold by
+%The {\small\tt \verm{Mesh}} constructors with {\small\tt \textcolor{tag}{tag}::segment}, {\small\tt \textcolor{tag}{tag}::quadrangle} or
+%{\small\tt \textcolor{tag}{tag}::triangle} build new points and define their position in the manifold by
 %interpolating the parameters, not the coordinates.
 %Unlike for implicit manifolds, no projection is necessary.
 In the drawing above, we note that the generated points are not equidistant in the sense of the
@@ -878,18 +880,18 @@ build a closed curve :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 15}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Manifold} \azul{circle_manif} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 1 );
+   \verm{Manifold} \azul{circle_manif} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 1 );
    \verm{Function} \azul{t} = circle_manif.build_coordinate_system
-      ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+      ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
 
    \cinza{// build 'circle' merely as a segment from 0 to 1.9 pi}
    const double \azul{pi} = 3.1415926536;
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  t(A) =  0.;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  t(B) =  1.9*pi;
-   \verm{Mesh} \azul{circle} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 19 );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  t(A) =  0.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  t(B) =  1.9*pi;
+   \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 19 );
 
    \cinza{// now close the curve in a not very elegant manner}
-   \verm{Cell} \azul{BA} ( \verm{tag}::segment, B.reverse(), A );
+   \verm{Cell} \azul{BA} ( \textcolor{tag}{tag}::segment, B.reverse(), A );
    BA.add_to ( circle );
 
    \cinza{// define new coordinates on circle_manif as expressions of t :}
@@ -912,15 +914,15 @@ Paragraph \ref{\numb section 7.\numb parag 2} shows a more elegant way to close 
 On the other hand, if we only want a visual illusion of a closed circle, we may use the code below.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Manifold} \azul{circle_manif} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 1 );
+   \verm{Manifold} \azul{circle_manif} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 1 );
    \verm{Function} \azul{t} = circle_manif.build_coordinate_system
-      ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+      ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
 
    \cinza{// build 'circle' merely as a segment from 0 to 2 pi}
    const double \azul{pi} = 3.1415926536;
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  t(A) =  0.;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  t(B) =  2.*pi;
-   \verm{Mesh} \azul{circle} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 20 );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  t(A) =  0.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  t(B) =  2.*pi;
+   \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 20 );
    \cinza{// gives the illusion of a closed circle}
 
    \cinza{// define new coordinates on circle_manif as expressions of t :}
@@ -943,25 +945,25 @@ Here is an example of a parametrized surface :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 16}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Manifold} \azul{torus} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 2 );
+   \verm{Manifold} \azul{torus} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
    \verm{Function} \azul{alpha_beta} =
-      torus.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+      torus.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
 
    \cinza{// extract components of alpha_beta :}
    \verm{Function} \azul{alpha} = alpha_beta[0], \azul{beta} = alpha_beta[1];
    \cinza{// build a rectangle in the alpha-beta plane}
    const double \azul{pi} = 3.1415926536;
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  alpha(A) = 0.;       beta(A) = 0.;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  alpha(B) = 0.;       beta(B) = 1.9*pi;
-   \verm{Cell} \azul{C} ( \verm{tag}::vertex );  alpha(C) = 1.95*pi;  beta(C) = 1.9*pi;
-   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  alpha(D) = 1.95*pi;  beta(D) = 0.;
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  alpha(A) = 0.;       beta(A) = 0.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  alpha(B) = 0.;       beta(B) = 1.9*pi;
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  alpha(C) = 1.95*pi;  beta(C) = 1.9*pi;
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  alpha(D) = 1.95*pi;  beta(D) = 0.;
 
    \cinza{// four almost-closed circles :}
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 19 );
-   \verm{Mesh} \azul{BC} ( \verm{tag}::segment, B.reverse(), C, \verm{tag}::divided_in, 39 );
-   \verm{Mesh} \azul{CD} ( \verm{tag}::segment, C.reverse(), D, \verm{tag}::divided_in, 19 );
-   \verm{Mesh} \azul{DA} ( \verm{tag}::segment, D.reverse(), A, \verm{tag}::divided_in, 39 );
-   \verm{Mesh} \azul{ABCD} ( \verm{tag}::rectangle, AB, BC, CD, DA );  \cinza{// an almost-closed torus}
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 19 );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, 39 );
+   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, 19 );
+   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, 39 );
+   \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );  \cinza{// an almost-closed torus}
    \cinza{// parametrize the torus}
    const double \azul{big_radius} = 3., \azul{small_radius} = 1.;
    \verm{Function} \azul{x} = ( big_radius + small_radius * \verm{cos}(beta) ) * \verm{cos}(alpha),
@@ -981,16 +983,16 @@ Paragraph \ref{\numb section 7.\numb parag 5} shows a more elegant solution.
 If we only want a visual illusion of a closed surface, we may use the code below
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  alpha(A) = 0.;     beta(A) = 0.;
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  alpha(B) = 0.;     beta(B) = 2.*pi;
-   \verm{Cell} \azul{C} ( \verm{tag}::vertex );  alpha(C) = 2.*pi;  beta(C) = 2.*pi;
-   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  alpha(D) = 2.*pi;  beta(D) = 0.;
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 20 );
-   \verm{Mesh} \azul{BC} ( \verm{tag}::segment, B.reverse(), C, \verm{tag}::divided_in, 40 );
-   \verm{Mesh} \azul{CD} ( \verm{tag}::segment, C.reverse(), D, \verm{tag}::divided_in, 20 );
-   \verm{Mesh} \azul{DA} ( \verm{tag}::segment, D.reverse(), A, \verm{tag}::divided_in, 40 );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  alpha(A) = 0.;     beta(A) = 0.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  alpha(B) = 0.;     beta(B) = 2.*pi;
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  alpha(C) = 2.*pi;  beta(C) = 2.*pi;
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  alpha(D) = 2.*pi;  beta(D) = 0.;
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 20 );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, 40 );
+   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, 20 );
+   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, 40 );
    \cinza{// AB, BC, CD and DA look like closed circles}
-   \verm{Mesh} \azul{ABCD} ( \verm{tag}::rectangle, AB, BC, CD, DA );
+   \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );
    \cinza{// ABCD gives the illusion of a closed torus}
 \end{Verbatim}
 
@@ -1010,8 +1012,8 @@ for each vertex, space in the computer's memory for five {\small\tt double} valu
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 17}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Manifold} \azul{RR5} ( \verm{tag}::Euclid, \verm{tag}::of_dim, 5 );
-   \verm{Function} \azul{xyzab} = RR5.build_coordinate_system ( \verm{tag}::Lagrange, \verm{tag}::of_degree, 1 );
+   \verm{Manifold} \azul{RR5} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 5 );
+   \verm{Function} \azul{xyzab} = RR5.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \cinza{// extract components of xyzab :}
    \verm{Function} \azul{x} = xyzab[0], \azul{y} = xyzab[1], \azul{z} = xyzab[2],
                    \azul{alpha} = xyzab[3], \azul{beta} = xyzab[4];
@@ -1024,18 +1026,18 @@ for each vertex, space in the computer's memory for five {\small\tt double} valu
    const double \azul{pi} = 3.1415926536;
         
    \cinza{// define four corners :}
-   \verm{Cell} \azul{A} ( \verm{tag}::vertex );  alpha(A) = 0.;      beta(A) = 0.;      torus.project(A);
-   \verm{Cell} \azul{B} ( \verm{tag}::vertex );  alpha(B) = 0.;      beta(B) = 1.9*pi;  torus.project(B);
-   \verm{Cell} \azul{C} ( \verm{tag}::vertex );  alpha(C) = 1.95*pi; beta(C) = 1.9*pi;  torus.project(C);
-   \verm{Cell} \azul{D} ( \verm{tag}::vertex );  alpha(D) = 1.95*pi; beta(D) = 0.;      torus.project(D);
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  alpha(A) = 0.;      beta(A) = 0.;      torus.project(A);
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  alpha(B) = 0.;      beta(B) = 1.9*pi;  torus.project(B);
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  alpha(C) = 1.95*pi; beta(C) = 1.9*pi;  torus.project(C);
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  alpha(D) = 1.95*pi; beta(D) = 0.;      torus.project(D);
    \cinza{// four almost-closed circles :}
-   \verm{Mesh} \azul{AB} ( \verm{tag}::segment, A.reverse(), B, \verm{tag}::divided_in, 19 );
-   \verm{Mesh} \azul{BC} ( \verm{tag}::segment, B.reverse(), C, \verm{tag}::divided_in, 39 );
-   \verm{Mesh} \azul{CD} ( \verm{tag}::segment, C.reverse(), D, \verm{tag}::divided_in, 19 );
-   \verm{Mesh} \azul{DA} ( \verm{tag}::segment, D.reverse(), A, \verm{tag}::divided_in, 39 );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 19 );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, 39 );
+   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, 19 );
+   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, 39 );
 
    \cinza{// build a rectangle}
-   \verm{Mesh} \azul{ABCD} ( \verm{tag}::rectangle, AB, BC, CD, DA );  \cinza{// an almost-closed torus}
+   \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );  \cinza{// an almost-closed torus}
 
    \cinza{// forget about alpha and beta :}
    torus.set_coordinates ( x && y && z );
