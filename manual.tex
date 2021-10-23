@@ -47,13 +47,16 @@
 \definecolor{incl}{rgb}{0.3, 0.2, 0.1}
 \definecolor{string}{rgb}{0.1, 0.25, 0.}
 \definecolor{textindraw}{rgb}{0., 0.37, 0.}
+\definecolor{numero}{rgb}{0.6, 0.3, 0.}
 % \definecolor{nova}{rgb}{0., 0., 0.8}
 % \definecolor{coment}{rgb}{0.5, 0.5, 0.5}
 % \definecolor{manif}{rgb}{0.6, 0.1, 0.1}
+\definecolor{numero}{rgb}{0.7, 0.4, 0.}
 \newcommand\azul[1]{\textcolor{nova}{#1}}
 \newcommand\cinza[1]{\textcolor{coment}{#1}}
 \newcommand\verm[1]{\textcolor{manif}{#1}}
 \newcommand\verde[1]{\textcolor{string}{#1}}
+\newcommand\laranja[1]{\textcolor{numero}{#1}}
 
 \renewcommand\tt{\normalfont\ttfamily}
 
@@ -88,11 +91,6 @@ and easy to read.
 We hope it will prove particularly useful for people who want fine control on the mesh,
 e.g.\ for implementing their own meshing or remeshing algorithms.
 
-{\ManiFEM} \ uses \ {\tt Eigen} \ for \ storing matrices \ and \ solving \ systems \ of
-\ linear \ equations, \ see {\small\tt http://eigen.tuxfamily.org/index.php?title=Main\_\,Page}.
-Many drawings in this manual have been produced by {\tt gmsh}, see
-{\small\tt http://gmsh.info/}
-
 {\ManiFEM} is just a collection of {\tt C++} classes.
 It has no user-friendly interface nor graphic capabilities.
 The user should have some understanding of programming and of {\tt C++}.
@@ -111,6 +109,11 @@ see at the beginning of the file {\small\tt maniFEM.h}.
 A component of \maniFEM, {\small\tt MetricTree}, can be used independently.
 It is a generalization of quad-trees for metric spaces.
 See paragraph \ref{\numb section 12.\numb parag 10}.
+
+Some examples use the {\tt Eigen} library for  storing matrices and solving systems of
+linear equations, see {\small\tt http://eigen.tuxfamily.org/index.php?title=Main\_\,Page}.
+Many drawings in this manual have been produced by {\tt gmsh}, see
+{\small\tt http://gmsh.info/}
 
 {\ManiFEM} is being developed by Cristian Barbarosie,%
 \footnote {\small\tt cristian.barbarosie@gmail.com}
@@ -519,7 +522,7 @@ segment {\small\tt \verm{Mesh}}es :
 source text coloring : \ref{\numb section 11.\numb parag 2}
 
 \noindent
-{\small\tt\textcolor{tag}{tag}}s : \ref{\numb section 11.\numb parag 3}
+{\small\tt\textcolor{tag}{tag}}\hskip0.5pt s : \ref{\numb section 11.\numb parag 3}
 
 \noindent
 torus : \ref{\numb section 2.\numb parag 16}, \ref{\numb section 2.\numb parag 7},
