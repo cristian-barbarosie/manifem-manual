@@ -29,6 +29,16 @@ One of the goals of {\maniFEM} is to deal with meshes on quotient manifolds.
 Different quotient operations can be used, with groups of translations of $ \mathbb{R}^2 $ but also
 with other groups of transformations.
 
+In paragraphs \ref{\numb section 7.\numb parag 3} -- \ref{\numb section 7.\numb parag 13},
+a quotient manifold is declared and then a mesh is built directly on this manifold.
+It is like holding a cylinder or a torus in your hand and drawing the mesh directly
+on the cylinder or torus.
+In paragraphs \ref{\numb section 7.\numb parag 14} -- \ref{\numb section 7.\numb parag 16},
+a mesh is built in the usual Euclidian plane and then is folded.
+It is like drawing the mesh on a plane sheet of paper, then cutting the paper with a scissor
+along the boundary of the mesh and then folding the resulting piece of paper
+by glueing opposite faces.
+
 
           %--------------------------%
 \section{~~A circle with no curvature}\label{\numb section 7.\numb parag 1}
@@ -45,7 +55,7 @@ We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified 
    \verm{Function} \azul{x} = RR.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
 
    \cinza{// define an action on RR (a translation)}
-   \verm{Function}::Action \azul{g} ( tag::transforms, x, tag::into, x+1. );
+   \verm{Function}::Action \azul{g} ( \textcolor{tag}{tag}::transforms, x, \textcolor{tag}{tag}::into, x+1. );
    \verm{Manifold} \azul{circle} = RR.quotient ( g );
 
    \cinza{// one vertex is enough to start the process}
@@ -67,6 +77,8 @@ See paragraph \ref{\numb section 11.\numb parag 1}.
 
 Paragraph \ref{\numb section 11.\numb parag 2} explains the coloring conventions observed
 in this manual for {\tt C++} code.
+Paragraph \ref{\numb section 11.\numb parag 3} gives details about
+{\small\tt\textcolor{tag}{tag}}s.
 
 
           %---------------%
@@ -82,7 +94,7 @@ this time in a less cumbersome manner.
    \verm{Manifold} \azul{RR} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 1 );
    \verm{Function} \azul{theta} = RR.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    const double \azul{pi} = 3.1415926536;
-   \verm{Function}::Action \azul{g} ( tag::transforms, theta, tag::into, theta + 2*pi );
+   \verm{Function}::Action \azul{g} ( \textcolor{tag}{tag}::transforms, theta, \textcolor{tag}{tag}::into, theta + 2*pi );
    \verm{Manifold} \azul{circle} = RR.quotient ( g );
 
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  theta ( A ) = 0.;
@@ -113,7 +125,7 @@ Here is how to build a (part of a) cylinder in $ \mathbb{R}^3 $ :
       RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{theta} = theta_z[0], \azul{z} = theta_z[1];
    const double \azul{pi} = 3.1415926536;
-   \verm{Function}::Action \azul{g} ( tag::transforms, theta_z, tag::into, (theta+2*pi) && z );
+   \verm{Function}::Action \azul{g} ( \textcolor{tag}{tag}::transforms, theta_z, \textcolor{tag}{tag}::into, (theta+2*pi) && z );
    \verm{Manifold} \azul{cylinder_manif} = RR2.quotient ( g );
 
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  theta(A) = 0.; z(A) = -1.;
@@ -342,8 +354,8 @@ We can build a skew torus by simply choosing other actions on {\small\tt RR2}.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 7}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Function}::Action \azul{g1} ( tag::transforms, xy, tag::into, (x+1.) && (y+0.1) );
-   \verm{Function}::Action \azul{g2} ( tag::transforms, xy, tag::into, (x+0.1) && (y+1.) );
+   \verm{Function}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+1.) && (y+0.1) );
+   \verm{Function}::Action \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+0.1) && (y+1.) );
    \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
 \end{Verbatim}
 
@@ -581,7 +593,7 @@ In contrast, translations are always invertible and they commute.
 
    // one vertex is enough to start the process
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.;  y(A) = 1.;
-   \verm{Mesh} \azul{AA} ( \textcolor{tag}{tag}::segment, A.reverse(), A, tag::divided_in, 10, \textcolor{tag}{tag}::spin, -rot );
+   \verm{Mesh} \azul{AA} ( \textcolor{tag}{tag}::segment, A.reverse(), A, \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::spin, -rot );
    \verm{Mesh} \azul{AA_vert} ( \textcolor{tag}{tag}::segment, A.reverse(), A,
                   \textcolor{tag}{tag}::divided_in, 7, \textcolor{tag}{tag}::spin, zoom );
 

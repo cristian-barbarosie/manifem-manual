@@ -25,18 +25,18 @@ see sections \ref{\numb section 7} and \ref{\numb section 8}.
 
 
           %-----------------------------------------------------%
-\section{~~What's the difference between methods {\small\tt glue\_\,on\_\,bdry\_\,of} and
-  {\small\tt add\_\,to\_\,mesh}, or between {\small\tt cut\_\,from\_\,bdry\_\,of} and
-  {\small\tt remove\_\,from\_\,mesh} ?}
+\section{~~What's the difference between methods {\tt glue\_\,on\_\,bdry\_\,of} and
+  {\tt add\_\,to\_\,mesh}, or between {\tt cut\_\,from\_\,bdry\_\,of} and
+  {\tt remove\_\,from\_\,mesh} ?}
           %-----------------------------------------------------%
 \label{\numb section 13.\numb parag 2}
 
-When a mesh is the boundary of a cell, you should use {\small\tt glue\_\,on\_\,bdry\_\,of} and
-{\small\tt cut\_\,from\_\,bdry\_\,of}.
+For adding a cell to a mesh which is the boundary of some other cell,
+you should use {\small\tt glue\_\,on\_\,bdry\_\,of} and {\small\tt cut\_\,from\_\,bdry\_\,of}.
 Otherwise, you should use {\small\tt add\_\,to\_\,mesh} and {\small\tt remove\_\,from\_\,mesh}.
 
-In some cases (when you are sure there is no mesh ``above'' this cell), it makes no difference,
-so you can use either.
+In some cases (when you are sure there is no mesh ``above'' that other cell)
+it makes no difference, so you can use either.
 For instance, in {\small\tt\verm{Cell}} constructors and destructors
 we have chosen to use {\small\tt add\_\,to\_\,mesh} and {\small\tt remove\_\,from\_\,mesh}
 because they are slightly faster.

@@ -41,21 +41,21 @@ int main ()
    \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
 
    \cinza{// we can extract components of xyz using the [] operator}
-   \verm{Function} \azul{x} = xyz[0],  \azul{y} = xyz[1],  \azul{z} = xyz[2];
+   \verm{Function} \azul{x} = xyz[\laranja{0}],  \azul{y} = xyz[\laranja{1}],  \azul{z} = xyz[\laranja{2}];
 
    \cinza{// Let's build a rectangular mesh. First, the four corners :}
-   \verm{Cell} \azul{SW} ( \textcolor{tag}{tag}::vertex );  x(SW) = \laranja{-1};  y(SW) = 0;  z(SW) = 0;
-   \verm{Cell} \azul{SE} ( \textcolor{tag}{tag}::vertex );  x(SE) =  \laranja{1};  y(SE) = 0;  z(SE) = 0;
-   \verm{Cell} \azul{NE} ( \textcolor{tag}{tag}::vertex );  x(NE) =  \laranja{1};  y(NE) = 1;  z(NE) = 0;
-   \verm{Cell} \azul{NW} ( \textcolor{tag}{tag}::vertex );  x(NW) = \laranja{-1};  y(NW) = 1;  z(NW) = 1;
+   \verm{Cell} \azul{SW} ( \textcolor{tag}{tag}::vertex );  x(SW) = \laranja{-1};  y(SW) = \laranja{0};  z(SW) = \laranja{0};
+   \verm{Cell} \azul{SE} ( \textcolor{tag}{tag}::vertex );  x(SE) =  \laranja{1};  y(SE) = \laranja{0};  z(SE) = \laranja{0};
+   \verm{Cell} \azul{NE} ( \textcolor{tag}{tag}::vertex );  x(NE) =  \laranja{1};  y(NE) = \laranja{1};  z(NE) = \laranja{0};
+   \verm{Cell} \azul{NW} ( \textcolor{tag}{tag}::vertex );  x(NW) = \laranja{-1};  y(NW) = \laranja{1};  z(NW) = \laranja{1};
    
    \cinza{// we access the coordinates of a point using the () operator :}								
    cout << \verde{"coordinates of NW : "} << x(NW) << \verde{" "} << y(NW) << \verde{" "} << z(NW) << endl;
    \cinza{// now build the four sides of the rectangle :}
-   \verm{Mesh} \azul{south} ( \textcolor{tag}{tag}::segment, SW.reverse(), SE, \textcolor{tag}{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{east}  ( \textcolor{tag}{tag}::segment, SE.reverse(), NE, \textcolor{tag}{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{north} ( \textcolor{tag}{tag}::segment, NE.reverse(), NW, \textcolor{tag}{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{west}  ( \textcolor{tag}{tag}::segment, NW.reverse(), SW, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{south} ( \textcolor{tag}{tag}::segment, SW.reverse(), SE, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{east}  ( \textcolor{tag}{tag}::segment, SE.reverse(), NE, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{north} ( \textcolor{tag}{tag}::segment, NE.reverse(), NW, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{west}  ( \textcolor{tag}{tag}::segment, NW.reverse(), SW, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    
    \cinza{// and now the rectangle :}
    \verm{Mesh} \azul{rect_mesh} ( \textcolor{tag}{tag}::rectangle, south, east, north, west );
@@ -65,12 +65,12 @@ int main ()
    rect_mesh.export_msh (\verde{"rectangle.msh"});
 
    \cinza{// Let's define a symbolic function to integrate}
-   \verm{Function} \azul{f} = x*x+1/(5+y);
+   \verm{Function} \azul{f} = x*x+\laranja{1}/(\laranja{5}+y);
    \cinza{// and compute its integral on the rectangle,}
    \cinza{// using Gauss quadrature with 9 points}
 
    \verm{FiniteElement} \azul{fe}
-      ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+      ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    fe.set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::quad_9 );
 
    \cinza{// code below does not work yet}
@@ -285,27 +285,27 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 1.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
-   \verm{Function} \azul{x} = xy[0],  \azul{y} = xy[1];
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = -1.;  y(A) = 0.;
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  0.;  y(B) = 0.;
-   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) =  0.;  y(C) = 0.5;
-   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = -1.;  y(D) = 0.5;
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  0.;  y(E) = 1.;
-   \verm{Cell} \azul{F} ( \textcolor{tag}{tag}::vertex );  x(F) = -1.;  y(F) = 1.;
-   \verm{Cell} \azul{G} ( \textcolor{tag}{tag}::vertex );  x(G) =  1.;  y(G) = 0.;
-   \verm{Cell} \azul{H} ( \textcolor{tag}{tag}::vertex );  x(H) =  1.;  y(H) = 0.5;
-   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C.reverse(), E, \textcolor{tag}{tag}::divided_in, 7 );
-   \verm{Mesh} \azul{EF} ( \textcolor{tag}{tag}::segment, E.reverse(), F, \textcolor{tag}{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{FD} ( \textcolor{tag}{tag}::segment, F.reverse(), D, \textcolor{tag}{tag}::divided_in, 7 );
-   \verm{Mesh} \azul{BG} ( \textcolor{tag}{tag}::segment, B.reverse(), G, \textcolor{tag}{tag}::divided_in, 12 );
-   \verm{Mesh} \azul{GH} ( \textcolor{tag}{tag}::segment, G.reverse(), H, \textcolor{tag}{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{HC} ( \textcolor{tag}{tag}::segment, H.reverse(), C, \textcolor{tag}{tag}::divided_in, 12 );
+   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
+   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xy[\laranja{0}],  \azul{y} = xy[\laranja{1}];
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{-1.};  y(A) = \laranja{0.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  \laranja{0.};  y(B) = \laranja{0.};
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) =  \laranja{0.};  y(C) = \laranja{0.5};
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = \laranja{-1.};  y(D) = \laranja{0.5};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{0.};  y(E) = \laranja{1.};
+   \verm{Cell} \azul{F} ( \textcolor{tag}{tag}::vertex );  x(F) = \laranja{-1.};  y(F) = \laranja{1.};
+   \verm{Cell} \azul{G} ( \textcolor{tag}{tag}::vertex );  x(G) =  \laranja{1.};  y(G) = \laranja{0.};
+   \verm{Cell} \azul{H} ( \textcolor{tag}{tag}::vertex );  x(H) =  \laranja{1.};  y(H) = \laranja{0.5};
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C.reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{7} );
+   \verm{Mesh} \azul{EF} ( \textcolor{tag}{tag}::segment, E.reverse(), F, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{FD} ( \textcolor{tag}{tag}::segment, F.reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{7} );
+   \verm{Mesh} \azul{BG} ( \textcolor{tag}{tag}::segment, B.reverse(), G, \textcolor{tag}{tag}::divided_in, \laranja{12} );
+   \verm{Mesh} \azul{GH} ( \textcolor{tag}{tag}::segment, G.reverse(), H, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{HC} ( \textcolor{tag}{tag}::segment, H.reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{12} );
    \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );
    \verm{Mesh} \azul{CEFD} ( \textcolor{tag}{tag}::rectangle, CE, EF, FD, CD.reverse() );
    \verm{Mesh} \azul{BGHC} ( \textcolor{tag}{tag}::rectangle, BG, GH, HC, BC.reverse() );
@@ -350,8 +350,8 @@ the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::jo
 For instance, the two rectangles defined by
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, A, B, C, D, 10, 8 );
-   \verm{Mesh} \azul{CEFD} ( \textcolor{tag}{tag}::rectangle, C, E, F, D, 7, 10 );
+   \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, A, B, C, D, \laranja{10}, \laranja{8} );
+   \verm{Mesh} \azul{CEFD} ( \textcolor{tag}{tag}::rectangle, C, E, F, D, \laranja{7}, \laranja{10} );
 \end{Verbatim}
 
 \noindent cannot be joined%
@@ -389,19 +389,19 @@ We can also build meshes on triangular domains and {\small\tt join} them as we w
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 1.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = -1. ;  y(A) = 0.;
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  0. ;  y(B) = 0.;
-   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) =  1. ;  y(C) = 0.;
-   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = -0.5;  y(D) = 1.;
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  0.5;  y(E) = 1.;
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{-1.} ;  y(A) = \laranja{0.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  \laranja{0.} ;  y(B) = \laranja{0.};
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) =  \laranja{1.} ;  y(C) = \laranja{0.};
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = \laranja{-0.5};  y(D) = \laranja{1.};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{0.5};  y(E) = \laranja{1.};
 
-   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{AD} ( \textcolor{tag}{tag}::segment, A.reverse(), D, \textcolor{tag}{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{BD} ( \textcolor{tag}{tag}::segment, B.reverse(), D, \textcolor{tag}{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{BE} ( \textcolor{tag}{tag}::segment, B.reverse(), E, \textcolor{tag}{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C.reverse(), E, \textcolor{tag}{tag}::divided_in, 8 );
-   \verm{Mesh} \azul{ED} ( \textcolor{tag}{tag}::segment, E.reverse(), D, \textcolor{tag}{tag}::divided_in, 8 );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{AD} ( \textcolor{tag}{tag}::segment, A.reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{BD} ( \textcolor{tag}{tag}::segment, B.reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{BE} ( \textcolor{tag}{tag}::segment, B.reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C.reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{ED} ( \textcolor{tag}{tag}::segment, E.reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{8} );
 
    \verm{Mesh} \azul{ABD} ( \textcolor{tag}{tag}::triangle, AB, BD, AD.reverse() );
    \verm{Mesh} \azul{BCE} ( \textcolor{tag}{tag}::triangle, BC, CE, BE.reverse() );
@@ -461,14 +461,14 @@ are {\small\tt \verm{Function}} objects.
 They allow for arithmetic expressions like in
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Function} \azul{norm} = \verm{power} ( x*x + y*y, 0.5 );
+   \verm{Function} \azul{norm} = \verm{power} ( x*x + y*y, \laranja{0.5} );
 \end{Verbatim}
 
 We access the value of a {\small\tt \verm{Function}} at a cell like in {\small\tt double}
 {\small\tt \azul{n}} {\small\tt =} {\small\tt norm(A)}.
 We can also set this value but not for arithmetic expressions like {\small\tt norm}.
-Thus, pieces of code like {\small\tt x(A)} {\small\tt =} {\small\tt 1.} work fine,
-while {\small\tt norm(A)} {\small\tt =} {\small\tt 1.} produces a run-time error.
+Thus, pieces of code like {\small\tt x(A)} {\small\tt =} {\small\tt \laranja{1.}} work fine,
+while {\small\tt norm(A)} {\small\tt =} {\small\tt \laranja{1.}} produces a run-time error.
 
 The {\small\tt \verm{Function}::deriv} method performs symbolic differentiation :
 
