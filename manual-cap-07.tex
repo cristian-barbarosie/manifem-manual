@@ -781,7 +781,7 @@ It should be regarded as a mere declaration of intentions.}
 
 
 The algorithm for progressive meshing (described in section \ref{\numb section 3})
-should work with only minimal changes for quotient manifolds.
+should work on quotient manifolds with only minimal changes.
 Here is how we see it working in the future.
 
 We begin by defining two closed curves (the boundaries of the two future holes),
@@ -789,8 +789,7 @@ represented in Figure \ref{\numb section 7.\numb fig 12}.
 We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=code not working,rulecolor=\color{coment},
-   baselinestretch=0.94,framesep=2mm                                   ]
+   rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm         ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
    \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
@@ -808,7 +807,7 @@ We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
                           \verm{power}((x-a-y-b-1.)*(x-a-y-b-1.),e),
                      300.*\verm{power}((x-2.-a-y-b)*(x-2.-a-y-b),e) +
                           \verm{power}((x-2.-a+y+b+1.)*(x-2.-a+y+b+1.),e),
-                     \textcolor{tag}{tag}::threshold, 1.5                     )  == 1. );
+                     \textcolor{tag}{tag}::threshold, 1.5                           )  == 1. );
    \verm{Mesh} \azul{loop2} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, 0.05 );
 
    \verm{Mesh} \azul{loops} ( \textcolor{tag}{tag}::join, loop1.reverse(), loop2.reverse() );                     
@@ -830,8 +829,7 @@ in the mesh (the mesh will be on the exterior of each curve).
 Define a torus manifold by means of two appropriate translations.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=code not working,rulecolor=\color{coment},
-   baselinestretch=0.94,framesep=2mm                                   ]
+   rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm         ]
    \verm{Function}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+2.3) && y ),
                     \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, x && (y+1.4) );
    \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
@@ -848,8 +846,7 @@ Here, it is the other way around : a quotient manifold has already been declared
 the folding operation will use the geometry of this torus.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=code not working,rulecolor=\color{coment},
-   baselinestretch=0.94,framesep=2mm                                   ]
+   rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm         ]
    \verm{Mesh} \azul{folded_loops} = loops.fold ( \textcolor{tag}{tag}::use_existing_vertices );
    folded_loops.draw_ps (\verde{"VV.eps"}, \textcolor{tag}{tag}::unfold,
                           \textcolor{tag}{tag}::over_region, -1.5 < x < 2.5, -2 < y < 0.5 );
