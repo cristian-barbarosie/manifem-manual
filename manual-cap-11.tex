@@ -260,13 +260,6 @@ According to their arguments, they build different core objects.
 Other objects have been implemented using the same logic of wrappers and core objects :
 iterators, fields, functions, manifolds.
 
-% There are Euclidian manifolds, cartesian products, implicitly defined submanifolds and
-% parametrized submanifolds.
-% Distinct notions with very different internal implementations.
-% But we would like to offer the user the possibility of declaring any of these as ``a
-% {\small\tt Manifold}''.
-\vfil\break
-
 
           %------------------------%
 \section{~~The lifecycle of objects}\label{\numb section 11.\numb parag 5}
@@ -471,7 +464,7 @@ which in turn calls the virtual method {\small\tt cll->glue\_\,on\_\,my\_\,bdry(
 Different methods {\small\tt \verm{Cell}::***::glue\_\,on\_\,my\_\,bdry} exist for different kinds of
 cells but to summarize we state that {\small\tt glue\_\,on\_\,my\_\,bdry} first calls
 {\small\tt face->add\_\,to\_\,bdry} in order to add the face to the boundary of {\small\tt cll}
-then calls the inlined method {\small\tt \verm{Cell}::Positive::NotVertex::glue\_\,common}.
+then calls the inline function {\small\tt add\_\,cell\_\,behind\_\,above}.
 
 Method {\small\tt \verm{Cell}::Core::add\_\,to\_\,bdry} is virtual so it does different things for
 different kinds of cells but the common idea is that it calls another virtual method
@@ -484,7 +477,7 @@ namespace in {\small\tt mesh.cpp}) which updates fields
 After that, {\small\tt \verm{Mesh}::Core::add\_\,***} updates neighbourhood relations
 coded in the map {\small\tt \verm{Cell}::Core:: ::cell\_\,behind\_\,within}.
 
-The inlined method {\small\tt \verm{Cell}::Positive::NotVertex::glue\_\,common} deals with
+The inlined function {\small\tt add\_\,cell\_\,behind\_\,above} deals with
 the case when the cell (on whose boundary we are trying to glue a new face)
 already belongs to some mesh(es).
 In that case, it updates the information in {\small\tt face->cell\_\,behind\_\,within}.
@@ -508,7 +501,100 @@ with methods replaced by {\small\tt \verm{Cell}::cut\_\,from\_\,bdry\_\,of},
 {\small\tt \verm{Cell}::Core::cut\_\,from\_\,my\_\,bdry},
 {\small\tt \verm{Cell}::Core::remove\_\,from\_\,bdry}, {\small\tt \verm{Cell}::Core::remove\_\,from\_\,mesh},
 {\small\tt \verm{Mesh}::Core:remove\_\,***}, {\small\tt break\_\,deep\_\,connections},
-{\small\tt \verm{Cell}::Positive::NotVertex::cut\_\,common}.
+{\small\tt remove\_\,cell\_\,behind\_\,above}.
+
+Below is a very rough sketch of the process of adding a segment to the boundary of a triangle.
+Note that the triangle may belong to a mesh or even to the boundary of a three-dimensional
+cell which in turn may belong to a three-dimensional mesh
+(cells and meshes of dimension higher than three may also show up).
+Note also that the segment may be negative, just as the triangle may be negative.
+Three stars {\small\tt ***} stand for either {\small\tt pos} or {\small\tt neg},
+one star {\small\tt *} stands for a counter,
+{\small\tt wh} stands for a pointer which for {\small\tt Fuzyy} meshes points into the
+list of {\small\tt cells} while for other types of meshes is meaningless.
+Often, {\small\tt tri->boundary} is a {\small\tt\verm{Mesh}::Connected::OneDim},
+not a {\small\tt\verm{Mesh}::Fuzzy}, but meshes {\small\tt msh} of dimension 2 or higher
+are usually {\small\tt Fuzzy}.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+seg->glue_on_bdry_of ( tri )
+   tri->glue_on_my_bdry ( seg )
+      seg->add_to_bdry ( tri->boundary )
+         tri->boundary->add_***_seg ( seg, \textcolor{tag}{tag}::mesh_is_bdry )
+            make_deep_connections_1d ( seg, tri->boundary, \textcolor{tag}{tag}::mesh_is_bdry )
+               add_link_same_dim ( seg, tri->boundary )
+                  tri->boundary->cells[1] .push ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} tri->boundary \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                  seg->meshes_same_dim [ tri->boundary ] = ( 1 \mbox{\fontfamily{helvetica}\selectfont{}or} -1, wh )
+               link_face_to_higher ( seg, tri, *, * )
+                  for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
+                     add_link ( seg, msh, *, * )
+                        if seg \mbox{\fontfamily{helvetica}\selectfont{}already belongs} to msh
+                           \mbox{\fontfamily{helvetica}\selectfont{}increment counters}
+                        else
+                           msh->cells[1] .push ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                           seg->meshes[d] [ msh ] = ( *, *, wh )
+               for \azul{ver} in \{\mbox{\fontfamily{helvetica}\selectfont\,two extremities of} seg\,\}
+                  link_face_to_msh ( ver, seg, tri->boundary, *, * )
+                     add_link ( ver, tri->boundary, *, * )
+                        if ver \mbox{\fontfamily{helvetica}\selectfont{}already belongs to} tri->boundary
+                           \mbox{\fontfamily{helvetica}\selectfont{}increment one counter}
+                        else
+                           tri->boundary->cells[0] .push ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} Fuzzy
+                           ver->meshes[1] [ tri->boundary ] = ( *, *, wh )
+                  link_face_to_higher ( ver, tri, *, * )
+                     for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
+                        add_link ( ver, msh, *, * )
+                           if ver \mbox{\fontfamily{helvetica}\selectfont{}already belongs to} msh
+                              \mbox{\fontfamily{helvetica}\selectfont{}increment counters}
+                           else
+                              msh->cells[0] .push ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                              ver->meshes[d] [ msh ] = ( *, *, wh )
+            add_cell_behind_below_***_seg ( seg, tri->boundary )
+               for \azul{ver} in \{\mbox{\fontfamily{helvetica}\selectfont\,two extremities of} seg\,\}
+                  ver->cell_behind_within [ tri->boundary ] = seg
+      add_cell_behind_above ( tri, seg )
+         for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
+            seg->cell_behind_within [ msh ] = tri
+\end{Verbatim}
+
+Below is a sketch of the reverse process of removing a segment from the boundary of a triangle.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+seg->cut_from_bdry_of ( tri )
+   tri->cut_from_my_bdry ( seg )
+      remove_cell_behind_above ( tri, seg )
+         for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
+            seg->cell_behind_within .erase ( msh )
+      seg->remove_from_bdry ( tri->boundary )
+         tri->boundary->remove_***_seg ( seg, \textcolor{tag}{tag}::mesh_is_bdry )
+            for \azul{ver} in \{\mbox{\fontfamily{helvetica}\selectfont\,two extremities of} seg\,\}
+               ver->cell_behind_within .erase ( tri->boundary )
+            break_deep_connections_1d ( seg, tri->boundary, \textcolor{tag}{tag}::mesh_is_bdry )
+               for \azul{ver} in \{\mbox{\fontfamily{helvetica}\selectfont\,two extremities of} seg\,\}
+                  unlink_face_from_msh ( ver, seg, tri->boundary, *, * )
+                     remove_link ( ver, tri->boundary, *, * )
+                        \mbox{\fontfamily{helvetica}\selectfont{}decrement one counter}
+                        if \mbox{\fontfamily{helvetica}\selectfont{}both counters zero}
+                           ver->meshes[1] .erase ( tri->boundary )
+                           tri->boundary->cells[0] .remove ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} Fuzzy
+                  unlink_face_from_higher ( ver, tri, *, * )
+                     for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
+                        remove_link ( ver, msh, *, * )
+                           \mbox{\fontfamily{helvetica}\selectfont{}decrement counters}
+                           if \mbox{\fontfamily{helvetica}\selectfont{}both counters zero}
+                              ver->meshes[d] .erase ( msh )
+                              msh->cells[0] .remove ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+               unlink_face_from_higher ( seg, tri, *, * )
+                  for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
+                     remove_link ( seg, msh, *, * )
+                        \mbox{\fontfamily{helvetica}\selectfont{}decrement counters}
+                        if \mbox{\fontfamily{helvetica}\selectfont{}both counters zero}
+                           seg->meshes[d] .erase ( msh )
+                           msh->cells[1] .remove ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+               remove_link_same_dim ( seg, tri->boundary )
+                  tri->boundary->cells[1] .remove ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} tri->boundary \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                  seg->meshes_same_dim .erase ( tri->boundary )
+\end{Verbatim}
 
 
           %------------------------------%
