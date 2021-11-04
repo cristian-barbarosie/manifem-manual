@@ -835,3 +835,78 @@ The garbage collector for cells and meshes (described in paragraph
 To turn it off, remove the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} compilation flag.
 
 
+          %------------------------%
+\section{~~Compiling your own files}\label{\numb section 11.\numb parag 16}
+          %------------------------%
+
+To use \maniFEM, visit {\small\tt https://github.com/cristian-barbarosie/manifem},
+choose a release and download all files to some directory in your computer.
+Latest code may be unstable, releases are stable.
+You can then run the examples in this manual :
+just {\small\tt make run-\ref{\numb section 1.\numb parag 1}}
+for the example in paragraph \ref{\numb section 1.\numb parag 1},
+{\small\tt make run-\ref{\numb section 2.\numb parag 6}}
+for the example in paragraph \ref{\numb section 2.\numb parag 6}, and so on.
+You will need a recent {\tt C++} compiler (we use {\tt g++}) and the {\tt make} utility.
+Under linux it should be easy to install them.
+It is not that easy to install and use them under Windows, but it is certainly possible,
+for instance \hbox{by using {\small\tt cygwin}}, available at {\small\tt https://www.cygwin.com/}.
+Some examples use the {\small\tt Eigen} library; just copy its source tree
+from {\small\tt http://eigen.tuxfamily.org/index.php?title=Main\_\,Page}
+to some place in your computer and be sure that
+path is mentioned in your {\small\tt Makefile}
+under the {\small\tt -I} flag of your compiler.
+You may also want to use {\tt gmsh}, available at {\small\tt http://gmsh.info/},
+for visualization purposes.
+
+We have chosen to put the library files in the root directory or the source code,
+as well as the {\small\tt Makefile}.
+The files containing the {\small\tt main} function for the examples in this manual are
+grouped under the {\small\tt examples-manual} directory.
+The {\small\tt Makefile} expects these {\small\tt main} files to be in that subdirectory
+and expects the source files of the library itself to be in the root directory.
+
+The user may naturally want to write their own {\small\tt main} files.
+There are three ways to do this.
+A quick solution is : the users create their own source files and save them in the root directory
+of {\maniFEM} under a name matching {\small\tt user-*.cpp}, then invoke {\small\tt make run-user-*}.
+
+The other two solutions consist in keeping \maniFEM's files separate from the files written
+by the user.
+Here is how to use statically linked object files.
+You must create a static library file, in the {\maniFEM} source code root directory,
+by issuing the command {\small\tt make static-lib}.
+Then, in your working directory, you should create a Makefile similar to the one below
+(assuming your code is in a file {\small\tt myprog.cpp}).
+After that, it suffices to issue the command {\small\tt make run}.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=Makefile,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+\cinza{# C++ compiler}
+\azul{CC} = g++
+
+\azul{manifem_dir} = \cinza{\mbox{\fontfamily{helvetica}\selectfont{}[the root directory of maniFEM]}}
+
+\cinza{# compiler flags}
+\cinza{#	CFLAGS = -c -I . -I $(HOME)/include/ -I $(manifem_dir) -std=c++17}
+\azul{CFLAGS} = -Wshadow -Wall -c -I . -I $(HOME)/include/  -I $(manifem_dir) -std=c++17
+\cinza{# CFLAGS = -DMANIFEM_COLLECT_CM -Wshadow -Wall -c -I . -I $(HOME)/include/  -I $(manifem_dir) -std=c++17}
+\cinza{# CFLAGS = -DMANIFEM_COLLECT_CM -DNDEBUG -O4 -c -I . -I $(HOME)/include/ -I $(manifem_dir) -std=c++17}
+\cinza{# CFLAGS = -DNDEBUG -c -O4 -I . -I $(HOME)/include/ -I $(manifem_dir) -std=c++17}
+\cinza{# CFLAGS = -DNDEBUG -c -I . -I $(HOME)/include/ -I $(manifem_dir) -std=c++17}
+
+\azul{%.o}: %.cpp
+	$(CC) $(CFLAGS) $^
+
+\azul{a.out} : myprog.o
+	$(CC) $^ -L$(manifem_dir) -lmaniFEM -o a.out
+
+\azul{run}: a.out
+	./$<
+\end{Verbatim}
+
+A third solution is to use dynamically linked object files, but this is slightly more complicated.
+See e.g.\ {\small\tt https://iq.opengenus.org/create-shared-library-in-cpp}
+
+

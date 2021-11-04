@@ -38,7 +38,7 @@ We can ask {\maniFEM} to progressively mesh the disk, starting from its boundary
 and adding triangles, one by one, until the disk is completely covered :
 
 \begin{figure} \centering
- \includegraphics[width=75mm]{disk-with-tri}
+ \includegraphics[width=85mm]{disk-with-tri}
  \caption{Circle built from patches, interior of disk meshed progressively}
  \label{\numb section 3.\numb fig 1}
 \end{figure}
@@ -150,7 +150,7 @@ Inner boundaries must have the reverse orientation :
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
- \includegraphics[width=80mm]{disk-with-hole}
+ \includegraphics[width=95mm]{disk-with-hole}
   \caption{Disk with a hole}
   \label{\numb section 3.\numb fig 2}
 \end{figure}
@@ -334,6 +334,11 @@ give more details.
 Here is an example of a compact surface given by a more complicated implicit equation.
 It can be vaguely described as a convolution between two tori.
 
+\begin{figure}[ht] \centering
+ \includegraphics[width=90mm]{two-tori}
+  \caption{Convolution between two tori}
+\end{figure}
+
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 7}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
@@ -352,11 +357,6 @@ It can be vaguely described as a convolution between two tori.
 
    \verm{Mesh} \azul{tori} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, 0.09 );
 \end{Verbatim}
-
-\begin{figure}[ht] \centering
- \includegraphics[width=80mm]{two-tori}
-  \caption{Convolution between two tori}
-\end{figure}
 
 Function {\small\tt \verm{smooth\_\,min}} gives a smooth approximation of the minimum between
 two or more {\small\tt \verm{Function}} objects.

@@ -3,10 +3,25 @@
 \chapter {~~{Frequently asked questions}}\label{\numb section 13}
             %--------------------------%
 
+          %------------------------------------------%
+\section{~~How do I compile my own {\tt main} files ?}\label{\numb section 13.\numb parag 1}
+          %------------------------------------------%
+
+See paragraph \ref{\numb section 11.\numb parag 16}.
+
+
+          %-----------------------------------------------------------------%
+\section{~~Is {\maniFEM} thread-safe ? Does it support parallel processing ?}
+          %-----------------------------------------------------------------%
+\label{\numb section 13.\numb parag 2}
+
+No.
+
+
           %-----------------------------------------------------%
 \section{~~What's the difference between a mesh and a manifold ?}
           %-----------------------------------------------------%
-\label{\numb section 13.\numb parag 1}
+\label{\numb section 13.\numb parag 3}
 
 A {\small\tt\verm{Mesh}} is a collection of {\small\tt\verm{Cell}}s of the
 same dimension.
@@ -29,7 +44,7 @@ see sections \ref{\numb section 7} and \ref{\numb section 8}.
   {\tt add\_\,to\_\,mesh}, or between {\tt cut\_\,from\_\,bdry\_\,of} and
   {\tt remove\_\,from\_\,mesh} ?}
           %-----------------------------------------------------%
-\label{\numb section 13.\numb parag 2}
+\label{\numb section 13.\numb parag 4}
 
 For adding a cell to a mesh which is the boundary of some other cell,
 you should use {\small\tt glue\_\,on\_\,bdry\_\,of} and {\small\tt cut\_\,from\_\,bdry\_\,of}.
@@ -40,22 +55,6 @@ it makes no difference, so you can use either.
 For instance, in {\small\tt\verm{Cell}} constructors and destructors
 we have chosen to use {\small\tt add\_\,to\_\,mesh} and {\small\tt remove\_\,from\_\,mesh}
 because they are slightly faster.
-
-
-          %-----------------------------------------------------------------%
-\section{~~Is {\maniFEM} thread-safe ? Does it support parallel processing ?}
-          %-----------------------------------------------------------------%
-\label{\numb section 13.\numb parag 3}
-
-No.
-
-
-          %-----------------------------------------------------------%
-\section{~~Will {\maniFEM} support parallel processing in the future ?}
-          %-----------------------------------------------------------%
-\label{\numb section 13.\numb parag 4}
-
-At the moment, this is not part of our plans.
 
 
           %----------------------------------------------------%
@@ -85,7 +84,6 @@ Similarly, in paragraph \ref{\numb section 7.\numb parag 15}, a statement like
 \noindent would produce a Klein surface if {\maniFEM} were not so stubbornly reliant on
 oriented meshes.
 
-\vfill\eject
 On the other hand, the statement
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
@@ -97,4 +95,13 @@ On the other hand, the statement
 
 \noindent would produce a projective plane if {\maniFEM} were not so reluctant of
 non-oriented objects.
+
+
+          %-----------------------------------------------------------%
+\section{~~Will {\maniFEM} support parallel processing in the future ?}
+          %-----------------------------------------------------------%
+\label{\numb section 13.\numb parag 6}
+
+At the moment, this is not part of our plans.
+
 

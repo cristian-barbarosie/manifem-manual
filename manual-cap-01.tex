@@ -65,7 +65,7 @@ int main ()
    rect_mesh.export_msh (\verde{"rectangle.msh"});
 
    \cinza{// Let's define a symbolic function to integrate}
-   \verm{Function} \azul{f} = x*x+\laranja{1}/(\laranja{5}+y);
+   \verm{Function} \azul{f} = x*x + \laranja{1}/(\laranja{5}+y);
    \cinza{// and compute its integral on the rectangle,}
    \cinza{// using Gauss quadrature with 9 points}
 
@@ -222,6 +222,9 @@ together with the corresponding orientation of its boundary.
 
 Paragraphs \ref{\numb section 1.\numb parag 3} and \ref{\numb section 3.\numb parag 18}
 show examples where the orientation of the boundary is important for joining meshes.
+In progressive mesh generation (described in section \ref{\numb section 3}) we often
+provide the boundary of the future mesh, whose orientation determines the output of the
+algorithm.
 
 Cells have a {\small\tt reverse} method returning the reversed cell.
 Segment {\small\tt \verm{Cell}}s have methods {\small\tt base} and {\small\tt tip} returning their extremities.
@@ -232,10 +235,12 @@ For instance :
    assert ( A.is_positive() );
    assert ( not A.reverse().is_positive() );
    assert ( A.reverse().reverse() == A );
+
    \verm{Cell} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B );
    \cinza{// here, AB is a segment Cell, not a Mesh}
    assert ( AB.base() == A.reverse() );
    assert ( AB.tip() == B );
+
    \verm{Cell} \azul{BA} = AB.reverse();
    assert ( BA.base() == B.reverse() );
    assert ( BA.tip() == A );
@@ -288,6 +293,7 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xy[\laranja{0}],  \azul{y} = xy[\laranja{1}];
+
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{-1.};  y(A) = \laranja{0.};
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  \laranja{0.};  y(B) = \laranja{0.};
    \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) =  \laranja{0.};  y(C) = \laranja{0.5};
@@ -306,9 +312,11 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
    \verm{Mesh} \azul{BG} ( \textcolor{tag}{tag}::segment, B.reverse(), G, \textcolor{tag}{tag}::divided_in, \laranja{12} );
    \verm{Mesh} \azul{GH} ( \textcolor{tag}{tag}::segment, G.reverse(), H, \textcolor{tag}{tag}::divided_in, \laranja{8} );
    \verm{Mesh} \azul{HC} ( \textcolor{tag}{tag}::segment, H.reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{12} );
+
    \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );
    \verm{Mesh} \azul{CEFD} ( \textcolor{tag}{tag}::rectangle, CE, EF, FD, CD.reverse() );
    \verm{Mesh} \azul{BGHC} ( \textcolor{tag}{tag}::rectangle, BG, GH, HC, BC.reverse() );
+
    \verm{Mesh} \azul{L_shaped} ( \textcolor{tag}{tag}::join, ABCD, CEFD, BGHC );
 \end{Verbatim}
 
@@ -331,9 +339,10 @@ from one mesh and has the opposite orientation when seen from the neighbour mesh
 If we do not respect these orientations, {\maniFEM} will be unable to {\small\tt join}
 these meshes.
 
+\vskip 3mm plus 2mm
 \begin{figure}[ht]  \centering
   \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \includegraphics[width=100mm]{L-crack}
+  \includegraphics[width=120mm]{L-crack}
   \caption{A zoom around {\small\tt C}}
   \label{\numb section 1.\numb fig 6}
 \end{figure}
@@ -386,6 +395,17 @@ See also paragraph \ref{\numb section 11.\numb parag 9}.
 
 We can also build meshes on triangular domains and {\small\tt join} them as we wish :
 
+\begin{figure}[ht] \centering
+  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \psfrag{E}{\tt\textcolor{textindraw}{E}}
+  \includegraphics[width=110mm]{three-tri}
+  \caption{Mesh obtained by {\small\tt join}ing three triangles}
+  \label{\numb section 1.\numb fig 7}
+\end{figure}
+
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 1.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
@@ -409,17 +429,6 @@ We can also build meshes on triangular domains and {\small\tt join} them as we w
 
    \verm{Mesh} \azul{three_tri} ( \textcolor{tag}{tag}::join, ABD, BCE, BED );
 \end{Verbatim}
-
-\begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
-  \psfrag{E}{\tt\textcolor{textindraw}{E}}
-  \includegraphics[width=130mm]{three-tri}
-  \caption{Mesh obtained by {\small\tt join}ing three triangles}
-  \label{\numb section 1.\numb fig 7}
-\end{figure}
 
 
           %-------------------------------%

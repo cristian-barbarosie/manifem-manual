@@ -450,7 +450,7 @@ If you want to run this example on your computer, it suffices to download three 
 ({\small\tt Makefile}, {\small\tt metric-tree-verbose.h} and
 {\small\tt test-\ref{\numb section 12.\numb parag 10}.cpp}) from\hfil\break
 {\small\tt https://github.com/cristian-barbarosie/manifem},\hfil\break
-then {\small\tt make run-test-\ref{\numb section 12.\numb parag 10}}.
+then {\small\tt make run-\ref{\numb section 12.\numb parag 10}}.
 
 
           %----------------------------------------%
@@ -474,8 +474,8 @@ And anyway, computing the distance by means of geodesics is not affordable (it i
 computationally).
 
 We have chosen the following work-out.
-We use a {\small\tt\verm{MetricTree}} with (the square of) the usual Euclidian distance (which is
-computationally cheap).
+We use a {\small\tt\verm{MetricTree}} with (the square of) the usual Euclidian distance
+(which is computationally cheap).
 This means that a call to {\small\tt\verm{MetricTree}:: ::find\_\,close\_\,neighbours\_\,of}
 will produce a list which is too large in the sense that it may contain points which are
 farther than the distance given as argument.
@@ -501,5 +501,6 @@ this way, the lower bound on the Rayleigh coefficient is simply the {\small\tt p
 If we provide only the sum $M$, {\maniFEM} will compute, at each step, the lower bound on the
 Rayleigh coefficient, which may be a heavy computational burden.
 When the metric is highly anisotropic, the list returned by method
-{\small\tt find\_\,close\_\,neighbours\_\,of} will be singnificantly larger than the correct, filtered, list.
+{\small\tt find\_\,close\_\,neighbours\_\,of} will be singnificantly larger than the correct,
+filtered, list.
 
