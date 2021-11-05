@@ -129,7 +129,7 @@ In \maniFEM, namespaces and class names begin with capital letter
 The namespace {\small\tt\textcolor{tag}{tag}} (or {\small\tt \verm{maniFEM}::tag} if you are not
 {\small\tt using namespace \verm{maniFEM}}) is an exception to the above rule.
 We prefer its name to have only lower case letters because we want it to be
-discrete. For instance, if we wrote {\small\tt\textcolor{tag}{tag}::divided\_\,in},
+discrete. For instance, if we wrote {\small\tt\textcolor{tag}{Tag}::divided\_\,in},
 the reader's eye would catch {\small\tt\textcolor{tag}{tag}} much before {\small\tt divided\_\,in};
 thus, {\small\tt\textcolor{tag}{tag}::divided\_\,in} is more readable.
 Of course, the final user has the choice of {\small\tt using namespace \textcolor{tag}{tag}}
@@ -366,9 +366,10 @@ For instance, when {\small\tt join}ing two meshes of the kind
 is the same as the first vertex (reversed) of the other mesh.
 Otherwise, the result will be a {\small\tt \verm{Mesh}::Fuzzy}.
 
-Methods {\small\tt\verm{Cell}::add\_\,to\_\,mesh} and
-{\small\tt\verm{Cell}::remove\_\,from\_\,mesh} accept as second argument a\break
-{\small\tt\textcolor{tag}{tag}::do\_\,not\_\,bother}.
+Methods \ \ {\small\tt\verm{Cell}::cut\_\,from\_\,bdry\_\,of},
+\ \ {\small\tt\verm{Cell}::glue\_\,on\_\,bdry\_\,of}, \ \ {\small\tt\verm{Cell}::add\_\,to\_\,mesh}
+\ \ and {\small\tt\verm{Cell}::remove\_\,from\_\,mesh}
+accept as second argument a {\small\tt\textcolor{tag}{tag}::do\_\,not\_\,bother}.
 This tag has no effect for a fuzzy mesh.
 For a connected one-dimensional mesh, the method without tag will take measures
 to ensure the connectivity of the mesh and will update the total number of segments.
@@ -377,6 +378,7 @@ By providing a {\small\tt\textcolor{tag}{tag}::do\_\,not\_\,bother}, the user in
 The user assumes responsibility for updating data members {\small\tt nb\_\,of\_\,segs},
 {\small\tt first\_\,ver} and {\small\tt last\_\,ver}..
 The same will apply to a high-dimensional connected mesh (object of current work).
+
 
           %-----------------------------%
 \section{~~Maximum topological dimension}\label{\numb section 11.\numb parag 7}
@@ -868,7 +870,7 @@ and expects the source files of the library itself to be in the root directory.
 
 The user may naturally want to write their own {\small\tt main} files.
 There are three ways to do this.
-A quick solution is : the users create their own source files and save them in the root directory
+A quick solution is : you create your own source files and save them in the root directory
 of {\maniFEM} under a name matching {\small\tt user-*.cpp}, then invoke {\small\tt make run-user-*}.
 
 The other two solutions consist in keeping \maniFEM's files separate from the files written
@@ -889,7 +891,7 @@ After that, it suffices to issue the command {\small\tt make run}.
 \azul{manifem_dir} = \cinza{\mbox{\fontfamily{helvetica}\selectfont{}[the root directory of maniFEM]}}
 
 \cinza{# compiler flags}
-\cinza{#	CFLAGS = -c -I . -I $(HOME)/include/ -I $(manifem_dir) -std=c++17}
+\cinza{# CFLAGS = -c -I . -I $(HOME)/include/ -I $(manifem_dir) -std=c++17}
 \azul{CFLAGS} = -Wshadow -Wall -c -I . -I $(HOME)/include/  -I $(manifem_dir) -std=c++17
 \cinza{# CFLAGS = -DMANIFEM_COLLECT_CM -Wshadow -Wall -c -I . -I $(HOME)/include/  -I $(manifem_dir) -std=c++17}
 \cinza{# CFLAGS = -DMANIFEM_COLLECT_CM -DNDEBUG -O4 -c -I . -I $(HOME)/include/ -I $(manifem_dir) -std=c++17}

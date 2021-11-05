@@ -473,9 +473,8 @@ a starting direction, thus saving some computational time.
 The code producing the spiral in paragraph \ref{\numb section 3.\numb parag 5}
 can be changed as below.
 
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 12}.cpp,rulecolor=\color{coment},
-   baselinestretch=0.94,framesep=2mm                                            ]
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                     ]
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) =    pi*pi;   y(A) =  0.;
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = 81*pi*pi;   y(B) =  0.;
    std::vector < double > \azul{direc} = \{ 0., 1. \};
@@ -496,7 +495,7 @@ We could specify in a similar fashion the orientation of {\small\tt circle} in p
 \ref{\numb section 3.\numb parag 2}, thus saving some computational time :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                                            ]
+   baselinestretch=0.94,framesep=2mm                     ]
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 1.;  y(A) = 0.;
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A,
                  \textcolor{tag}{tag}::towards, \{ 0., 1. \}, \textcolor{tag}{tag}::desired_length, 0.2 );
