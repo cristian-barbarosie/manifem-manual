@@ -177,7 +177,7 @@ We can think of an oriented polygon as having an arrow attached to each of it si
 or we can imagine a small oriented circle inside the polygon.
 
 \begin{figure} \centering
-  \includegraphics[width=110mm]{hemisphere-7}
+  \includegraphics[width=125mm]{hemisphere-7}
   \caption{Oriented meshes of dimension one and two}
   \label{\numb section 1.\numb fig 3}
 \end{figure}
@@ -210,11 +210,11 @@ Figure \ref{\numb section 1.\numb fig 4} shows two opposite orientations of a me
 together with the corresponding orientation of its boundary.
 
 \begin{figure}[ht] \centering
-\begin{subfigure}{71mm}\centering
-  \includegraphics[width=70mm]{oriented-annulus-1}
+\begin{subfigure}{76mm}\centering
+  \includegraphics[width=75mm]{oriented-annulus-1}
 \end{subfigure}  
-\begin{subfigure}{71mm}\centering
-  \includegraphics[width=70mm]{oriented-annulus-2}
+\begin{subfigure}{76mm}\centering
+  \includegraphics[width=75mm]{oriented-annulus-2}
 \end{subfigure}  
   \caption{Mesh with two opposite orientations}
   \label{\numb section 1.\numb fig 4}
@@ -235,7 +235,6 @@ For instance :
    assert ( A.is_positive() );
    assert ( not A.reverse().is_positive() );
    assert ( A.reverse().reverse() == A );
-
    \verm{Cell} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B );
    \cinza{// here, AB is a segment Cell, not a Mesh}
    assert ( AB.base() == A.reverse() );
@@ -303,14 +302,14 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
    \verm{Cell} \azul{G} ( \textcolor{tag}{tag}::vertex );  x(G) =  \laranja{1.};  y(G) = \laranja{0.};
    \verm{Cell} \azul{H} ( \textcolor{tag}{tag}::vertex );  x(H) =  \laranja{1.};  y(H) = \laranja{0.5};
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in,  \laranja{8} );
    \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, \laranja{8} );
-   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C.reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{7} );
+   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in,  \laranja{8} );
+   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C.reverse(), E, \textcolor{tag}{tag}::divided_in,  \laranja{7} );
    \verm{Mesh} \azul{EF} ( \textcolor{tag}{tag}::segment, E.reverse(), F, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{FD} ( \textcolor{tag}{tag}::segment, F.reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{7} );
+   \verm{Mesh} \azul{FD} ( \textcolor{tag}{tag}::segment, F.reverse(), D, \textcolor{tag}{tag}::divided_in,  \laranja{7} );
    \verm{Mesh} \azul{BG} ( \textcolor{tag}{tag}::segment, B.reverse(), G, \textcolor{tag}{tag}::divided_in, \laranja{12} );
-   \verm{Mesh} \azul{GH} ( \textcolor{tag}{tag}::segment, G.reverse(), H, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{GH} ( \textcolor{tag}{tag}::segment, G.reverse(), H, \textcolor{tag}{tag}::divided_in,  \laranja{8} );
    \verm{Mesh} \azul{HC} ( \textcolor{tag}{tag}::segment, H.reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{12} );
 
    \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );

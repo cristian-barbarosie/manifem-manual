@@ -127,7 +127,7 @@ Choosing the other orientation would result in an endless process of meshing the
 the disk.
 The process of choosing the right orientation implies some computational effort.
 The user can make things easier for {\maniFEM} either by attaching an orientation
-to the manifold {\small\tt circle\_\,manif} [this feature is not implemented yet] or
+to the manifold {\small\tt circle\_\,manif} (this feature is not implemented yet) or
 by providing the initial direction as shown in paragraph \ref{\numb section 3.\numb parag 12}.
 
 
@@ -195,7 +195,7 @@ Paragraphs \ref{\numb section 3.\numb parag 10} and \ref{\numb section 3.\numb p
 give more details.
 
 On the other hand, if the orientation matters for you, you can either attach an orientation
-to the manifold {\small\tt circle\_\,manif} [this feature is not implemented yet]
+to the manifold {\small\tt circle\_\,manif} (this feature is not implemented yet)
 or provide a starting point and an initial direction as shown in paragraph
 \ref{\numb section 3.\numb parag 12}.
 
@@ -871,7 +871,7 @@ thus, some previous knowledge about the geometry of the surface is needed.
 \end{Verbatim}
 
 \begin{figure} \centering
- \includegraphics[width=80mm]{sphere-cyl}
+ \includegraphics[width=100mm]{sphere-cyl}
   \caption{Sphere glued to cylinder}
   \label{\numb section 3.\numb fig 5}
 \end{figure}
@@ -921,16 +921,6 @@ With a few changes to the code in paragraph \ref{\numb section 3.\numb parag 18}
 we can cut two holes in the sphere and create a tunnel using the cylinder's wall.
 \medskip
 
-\begin{figure}[ht] \centering
-\if\production 1
- \includegraphics[width=94mm]{sphere-tunnel-cloud-im}
-\else
- \includegraphics[width=94mm]{sphere-tunnel-low-res}
-\fi
-  \caption{Sphere with tunnel}
-  \label{\numb section 3.\numb fig 7}
-\end{figure}
-
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
@@ -951,13 +941,26 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
    \verm{Mesh} \azul{piece_of_cyl} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, two_circles,
                        \textcolor{tag}{tag}::start:at, start_1, \textcolor{tag}{tag}::towards, \{ -1., 0., 0. \},
                        \textcolor{tag}{tag}::desired_length, seg_size                         );
+
    \verm{Mesh} \azul{two_circles_rev} ( \textcolor{tag}{tag}::join, circle_1, circle_2.reverse() );
+
    RR3.implicit ( x*x + y*y + z*z == rs*rs );
    \verm{Mesh} \azul{piece_of_sph} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, two_circles_rev,
                        \textcolor{tag}{tag}::start:at, start_1, \textcolor{tag}{tag}::towards, \{ 0., 0., -1. \},
                        \textcolor{tag}{tag}::desired_length, seg_size                         );
+
    \verm{Mesh} \azul{perf_sphere} ( \textcolor{tag}{tag}::join, piece_os_sph, piece_of_cyl );
 \end{Verbatim}
+
+\begin{figure}[ht] \centering
+\if\production 1
+ \includegraphics[width=94mm]{sphere-tunnel-cloud-im}
+\else
+ \includegraphics[width=94mm]{sphere-tunnel-low-res}
+\fi
+  \caption{Sphere with tunnel}
+  \label{\numb section 3.\numb fig 7}
+\end{figure}
 
 {\ManiFEM} deals well with a disconnected manifold like {\small\tt intersection}.
 Each of the constructors {\small\tt \verm{Mesh} circle\_\,1} and {\small\tt \verm{Mesh} circle\_\,2} meshes only
@@ -982,7 +985,7 @@ knowledge about these singularities.
 A typical example is the vertex of a cone.
 
 \begin{figure}[ht] \centering
- \includegraphics[width=85mm]{cone}
+ \includegraphics[width=90mm]{cone}
   \caption{A singularity (vertex)}
   \label{\numb section 3.\numb fig 8}
 \end{figure}
@@ -1020,12 +1023,6 @@ or \ref{\numb section 3.\numb parag 19}.
 We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb parag 19}
 (which is to be subsequently {\small\tt join}ed with a sphere with two holes).
 
-\begin{figure}[ht] \centering
- \includegraphics[width=85mm]{cyl}
-  \caption{A singularity (napkin)}
-  \label{\numb section 3.\numb fig 9}
-\end{figure}
-
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=code not working,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                  ]
@@ -1046,6 +1043,12 @@ We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb para
                        \textcolor{tag}{tag}::singular, V, \textcolor{tag}{tag}::desired_length, 0.1          );
 \end{Verbatim}
 
+\begin{figure}[ht] \centering
+ \includegraphics[width=85mm]{cyl}
+  \caption{A singularity (napkin)}
+  \label{\numb section 3.\numb fig 9}
+\end{figure}
+
 {\ManiFEM} accepts as {\small\tt \verm{Manifold}} a self-intersecting set like {\small\tt infinity}.
 However, in the {\small\tt \verm{Mesh}} constructor we must specify {\small\tt V} as singular point.
 
@@ -1062,6 +1065,12 @@ This is why we provide the two pieces of boundary separately.
 
 The {\small\tt desired\_\,length} may be a non-constant function.
 
+\begin{figure}[ht] \centering
+ \includegraphics[width=90mm]{disk-non-unif}
+  \caption{Non-uniform mesh}
+  \label{\numb section 3.\numb fig 10}
+\end{figure}
+
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 22}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
@@ -1074,12 +1083,6 @@ The {\small\tt desired\_\,length} may be a non-constant function.
    RR2.set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, d );
 \end{Verbatim}
-
-\begin{figure}[ht] \centering
- \includegraphics[width=90mm]{disk-non-unif}
-  \caption{Non-uniform mesh}
-  \label{\numb section 3.\numb fig 10}
-\end{figure}
 
 Compare with the mesh in paragraph \ref{\numb section 3.\numb parag 3}.
 
