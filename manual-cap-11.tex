@@ -233,6 +233,7 @@ the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} compilation option, explained in para
 \ref{\numb section 11.\numb parag 5}.
 
 \begin{figure}[ht] \centering
+ \psfrag{tag::Util::Core::Inactive}{{\small\tt\textcolor{tag}{tag}::Util::Core::Inactive}}
  \psfrag{tag::Util::Core}{{\small\tt\textcolor{tag}{tag}::Util::Core}}
  \psfrag{Mesh::Core}{{\small\tt\verm{Mesh}::Core}}
  \psfrag{Mesh::NotZeroDim}{{\small\tt\verm{Mesh}::NotZeroDim}}
@@ -296,8 +297,8 @@ show dotted lines where the inheritance relationship is subject to the
 {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} option.
 If you turn off the garbage collector, {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es
 will occupy less space in the computer's memory and your program will run slightly faster.
-However you should not turn it off if you do a lot of remeshing,
-or ghost cells and meshes will fill the computer's memory (this is known as ``memory leak'').
+But if you turn it off and your program does a lot of remeshing
+ghost cells and meshes will fill the computer's memory (this is known as ``memory leak'').
 
 In some examples, the garbage collector for cells and meshes does not work well :
 the cell counter does not reach zero, as it should, at the end of the program.
@@ -518,6 +519,7 @@ Often, {\small\tt tri->boundary} is a {\small\tt\verm{Mesh}::Connected::OneDim},
 not a {\small\tt\verm{Mesh}::Fuzzy}, but meshes {\small\tt msh} of dimension 2 or higher
 are usually {\small\tt Fuzzy}.
 
+\def\mypm{$\pm$}
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
 seg->glue_on_bdry_of ( tri )
    tri->glue_on_my_bdry ( seg )
@@ -526,7 +528,7 @@ seg->glue_on_bdry_of ( tri )
             make_deep_connections_1d ( seg, tri->boundary, \textcolor{tag}{tag}::mesh_is_bdry )
                add_link_same_dim ( seg, tri->boundary )
                   tri->boundary->cells[1] .push ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} tri->boundary \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
-                  seg->meshes_same_dim [ tri->boundary ] = ( 1 \mbox{\fontfamily{helvetica}\selectfont{}or} -1, wh )
+                  seg->meshes_same_dim [ tri->boundary ] = ( \mypm1, wh )
                link_face_to_higher ( seg, tri, *, * )
                   for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
                      add_link ( seg, msh, *, * )
