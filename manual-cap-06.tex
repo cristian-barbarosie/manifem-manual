@@ -166,7 +166,7 @@ values to the global matrix:
                   
          \cinza{// 'fe' is already docked on 'small_square'}
          \cinza{// so this will be the domain of integration}
-         matrix_A.coeffRef ( numbering[V.core]-1, numbering[W.core]-1 ) +=
+         matrix_A.coeffRef ( numbering[V]-1, numbering[W]-1 ) +=
             fe.integrate ( d_psiV_dx * d_psiW_dx + d_psiV_dy * d_psiW_dy );    \}  \}
 \end{Verbatim}
 
@@ -188,7 +188,7 @@ function.
    \verm{CellIterator} \azul{it} = BC.iterator ( \textcolor{tag}{tag}::over_vertices );
    for ( it.reset(); it.in_range(); it++ )
    \{   \verm{Cell} \azul{P} = *it;
-       size_t \azul{i} = numbering[P.core]-1;
+       size_t \azul{i} = numbering[P]-1;
        impose_value_of_unknown ( matrix_A, vector_b, i, y(P) );  \}
 \end{Verbatim}
 
@@ -268,12 +268,12 @@ part of the boundary where we need to integrate.
       fe_bdry.dock_on ( seg );
       \verm{Cell} \azul{V} = seg.base().reverse();
       assert ( V.is_positive() );
-      size_t \azul{i} = numbering[V.core]-1;
+      size_t \azul{i} = numbering[V]-1;
       \verm{Function} \azul{psiV} = fe_bdry.basis_function(V);
       vector_b[i] += fe_bdry.integrate ( heat_source * psiV );
       \verm{Cell} \azul{W} = seg.tip();
       assert ( W.is_positive() );
-      size_t \azul{j} = numbering[W.core]-1;
+      size_t \azul{j} = numbering[W]-1;
       \verm{Function} \azul{psiW} = fe_bdry.basis_function(W);
       vector_b[j] += fe_bdry.integrate ( heat_source * psiW );  \}
 \end{Verbatim}
@@ -290,11 +290,13 @@ This is object of on-going work.
 In previous examples we have built a {\small\tt map} for handling numbering of vertices.
 In this paragraph we show how to use instead the automatic numbering associated to the
 finite element itself.
-After declaring a finite element of type Lagrange with {\small\tt\textcolor{tag}{tag}::enumerate\_\,cells},
+After declaring a finite element of type Lagrange with
+{\small\tt\textcolor{tag}{tag}::enumerate\_\,cells},
 the process of creating new cells (vertices, in this specfic case) will be different.
-A new function will be added to the list of functions {\small\tt\verm{Cell}::init\_\,pos\_\,cell[0]},
-invoked by {\small\tt\verm{Cell}::Core} constructors (see paragraph
-\ref{\numb section 11.\numb parag 10}).
+A new function will be added to the list of functions
+{\small\tt\verm{Cell}::init\_\,pos\_\,cell[0]},
+invoked by {\small\tt\verm{Cell}::Core} constructors
+(see paragraph \ref{\numb section 11.\numb parag 10}).
 Space will be reserved for a {\small\tt size\_\,t} value for each vertex, and
 this value can be used for numbering vertices.
 
@@ -308,8 +310,8 @@ this value can be used for numbering vertices.
 
 In this approach, the access to the index of a given vertex is very fast (constant time)
 because the index is stored within the {\small\tt\verm{Cell}::Core}, so no search is needed.
-In contrast, when using a {\small\tt map} as shown in paragraph \ref{\numb section 6.\numb parag 2},
-a search is necessary through all vertices of the mesh.
+In contrast, when using a {\small\tt map} as shown in paragraph
+\ref{\numb section 6.\numb parag 2}, a search is necessary through all vertices of the mesh.
 Due to the implementation of the {\small\tt map} class in {\tt STL}, this search takes
 logarithmic time.
 The only advantage of the approach described in paragraph \ref{\numb section 6.\numb parag 2}

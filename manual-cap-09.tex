@@ -216,7 +216,7 @@ Often, we {\small\tt reset} an iterator only once, use it in a loop and then dis
 For this situation, a handy shortcut is to add the {\small\tt\textcolor{tag}{tag}::reset}
 to the constructor itself, as in the code excerpt below.
 This has the advantage that the name of the iterator gains local scope.
-[this feature is not yet implemented]
+(this feature is not yet implemented)
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
@@ -386,7 +386,8 @@ In \maniFEM, all cells and meshes are oriented.
 
 This can be confusing sometimes, so let's have a closer look at a particular example.
 
-Consider a mesh {\small\tt tri\_\,mesh} made of triangles, part of which is represented below.
+Consider a mesh {\small\tt tri\_\,mesh} made of triangles, part of which is represented
+in figure \ref{\numb section 9.\numb fig 2}.
 Unless requested otherwise, {\small\tt tri\_\,mesh} will be a positive mesh and all triangles
 composing it will also be positive.
 So, the triangles composing {\small\tt tri\_\,mesh} will have no reverse cell
@@ -397,7 +398,7 @@ So, the triangles composing {\small\tt tri\_\,mesh} will have no reverse cell
   \psfrag{B}{\tt\textcolor{textindraw}{B}}
   \psfrag{C}{\tt\textcolor{textindraw}{C}}
   \psfrag{D}{\tt\textcolor{textindraw}{D}}
-  \includegraphics[width=40mm]{malha-tri}
+  \includegraphics[width=55mm]{malha-tri}
   \caption{A (part of a) triangular mesh}
   \label{\numb section 9.\numb fig 2}
 \end{figure}
@@ -405,13 +406,17 @@ So, the triangles composing {\small\tt tri\_\,mesh} will have no reverse cell
 However, the segments must have reverse.
 Consider triangle {\small\tt ABC} for instance.
 Its boundary is made of three segments; let's look at {\small\tt AB} for example,
-a segment having {\small\tt A} as base and {\small\tt B} as tip.
+a segment having {\small\tt A} as base (or rather {\small\tt A.reverse()}) and
+{\small\tt B} as tip.
 Now, a triangle {\small\tt BAD} (no offense intended) also exists as part of
 {\small\tt tri\_\,mesh}.
 The boundary of {\small\tt BAD} is made of three segments, one of them being {\small\tt BA},
 which has {\small\tt B} as base and {\small\tt A} as tip.
 {\small\tt AB} and {\small\tt BA} are different {\small\tt \verm{Cell}} objects;
 each is the reverse of the other.
+They are not two wrappers for the same core, they have different cores.%
+\footnote {In contrast, negative meshes share the same core with their positive
+counterpart; see paragraph \ref{\numb section 11.\numb parag 4}.}
 One of them is considered positive and the other is considered negative.
 Which is which depends on which one was built first.
 So, all inner segments must have a reverse;
@@ -419,7 +424,8 @@ segments on the boundary of {\small\tt tri\_\,mesh} (not visible in figure
 \ref{\numb section 9.\numb fig 2}) will probably have no reverse.
 
 For points (vertices), the situation is even more complex.
-Segment {\small\tt AB} sees {\small\tt A} as negative because {\small\tt A} is its base,
+Segment {\small\tt AB} sees {\small\tt A} as negative because {\small\tt A} is its base
+(or rather {\small\tt A.reverse()}),
 but other segments like {\small\tt CA} see {\small\tt A} as positive.
 
 Let's look again at iterators described in paragraph \ref{\numb section 9.\numb parag 3}.
@@ -674,7 +680,7 @@ The segments will show up in a rahter unpredictable order.
 
 The orientation of the central cell is important in this case.
 In the above, we have provided a negative center, {\small\tt P.reverse()};
-thus, the iterator will produce segments {\small\tt seg} having {\small\tt P} as base
+thus, the iterator will produce segments {\small\tt\azul{seg}} having {\small\tt P} as base
 (or rather {\small\tt P.reverse()}) and pointing away from {\small\tt P}.
 In contrast, the iterator declared below, having {\small\tt P} as centrall cell,
 produces segments pointing towards {\small\tt P}.
@@ -692,8 +698,12 @@ If you want positive segments, add a {\small\tt\textcolor{tag}{tag}::force\_\,po
 {\small\tt\textcolor{tag}{tag}::around} in the declaration of {\small\tt it};
 in this case, some of the segments will point towards {\small\tt P},
 others will point away from {\small\tt P}.
-Note that, if you provide a {\small\tt\textcolor{tag}{tag}::force\_\,positive}, it makes no difference
+If you provide a {\small\tt\textcolor{tag}{tag}::force\_\,positive}, it makes no difference
 if you give {\small\tt P} or {\small\tt P.reverse()} as central cell in the constructor.
+
+Note that {\small\tt P} may be on the boundary of {\small\tt msh}.
+The iterator will produce, of course, only cells belonging to the mesh, including those
+on the boundary.
 
 If we want to run over squares or cubes having {\small\tt P} as vertex,
 the orientation of the ``center'' {\small\tt P} does not matter.
@@ -708,6 +718,8 @@ this will not change the behaviour of the iterator {\small\tt it} :
 \end{Verbatim}
 
 Such an iterator will produce positive two-dimensional cells.
+Again, if {\small\tt P} is the boundary of {\small\tt msh}, the iterator will produce
+only cells belonging to the mesh, including those on the boundary.
 
 If we ask for cubes, we will get cells oriented in accordance to the mesh {\small\tt msh}.
 Except in exotic examples, these cells will be positive, but if you want to be sure you
@@ -718,10 +730,6 @@ can always add the {\small\tt\textcolor{tag}{tag}::force\_\,positive} :
    \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 3, \textcolor{tag}{tag}::force_positive,
                                     \textcolor{tag}{tag}::around, P                                 );
 \end{Verbatim}
-
-Note that {\small\tt P} may be on the boundary of {\small\tt msh}.
-The iterator will produce, of course, only cells belonging to the mesh, including those
-on the boundary.
 
 Consider now the case when the co-dimension is two, that is, when we are centered at a vertex
 within a two-dimensional mesh, or at a segment within a three-dimensional mesh.
@@ -746,7 +754,8 @@ all squares sharing the vertex {\small\tt P}, linearly ordered.
 \end{Verbatim}
 
 If {\small\tt P} is at the boundary of {\small\tt msh}, the iteration process will begin
-with a square adjacent to the boundary and will also end by touching the boundary.
+with a square adjacent to the boundary and will end when it reaches again the boundary
+(which may happen at once if {\small\tt P} is a corner of the mesh).
 
 We can iterate over segments originating at {\small\tt P} (now the orientation of
 {\small\tt P} is important) as in:

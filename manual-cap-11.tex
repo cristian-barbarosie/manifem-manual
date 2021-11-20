@@ -57,7 +57,7 @@ only used in one source file.
 
 In the {\small\tt namespace \verm{maniFEM}} there are also many overloaded functions.
 Because they take arguments of specific type, they will not clash with names defined
-by the user.
+by the user or by other libraries.
 Examples are : {\small\tt\verm{smooth\_\,min}}, {\small\tt\verm{power}}, {\small\tt\verm{abs}},
 {\small\tt\verm{sin}}.
 
@@ -79,7 +79,7 @@ There are also functions like {\small\tt \verm{smooth\_\,min}} and also overload
 of common functions like {\small\tt\verm{power}}, {\small\tt \verm{sin}}, {\small\tt \verm{cos}}.
 The word {\small\tt \textcolor{tag}{tag}} deserves a special treatment.
 On one hand, it is directly exposed, on the other hand, we want it to be discrete.
-That's why we have chosen a \textcolor{tag}{blue grey} for {\small\tt \textcolor{tag}{tag}}s.
+That's why we have chosen a \textcolor{tag}{blue grey} for {\small\tt \textcolor{tag}{tag}}\hskip0.8pt s.
 
 Newly declared objects are shown in \azul{purple}.
 
@@ -94,7 +94,7 @@ Strings are \verde{dark green}.
 \section{~~Tags}\label{\numb section 11.\numb parag 3}
           %----%
 
-We use extensively {\small\tt\textcolor{tag}{tag}}s.
+We use extensively {\small\tt\textcolor{tag}{tag}}\hskip0.8pt s.
 These are {\tt C++} structures gathered in the {\small\tt namespace \textcolor{tag}{tag}}.
 Most of them contain no data; only their type is useful, at compile time.
 
@@ -115,22 +115,22 @@ the iterators behave very differently (see paragraphs \ref{\numb section 9.\numb
 \end{Verbatim}
 
 The above could be achieved by giving longer names to the functions, but we believe
-{\small\tt\textcolor{tag}{tag}}s make the code more readable.
+{\small\tt\textcolor{tag}{tag}}\hskip0.8pt s make the code more readable.
 Besides that, in the case of constructors, we do not have the choice of the name of the function
 (a constructor has the same name as its class).
-{\ManiFEM} uses {\small\tt\textcolor{tag}{tag}}s extensively for constructors, e.g.
+{\ManiFEM} uses {\small\tt\textcolor{tag}{tag}}\hskip0.8pt s extensively for constructors, e.g.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 10 );
 \end{Verbatim}
 
 In \maniFEM, namespaces and class names begin with capital letter
-(see paragraph \ref{\numb section 11.\numb parag 1})
+(see paragraph \ref{\numb section 11.\numb parag 1}).
 The namespace {\small\tt\textcolor{tag}{tag}} (or {\small\tt \verm{maniFEM}::tag} if you are not
 {\small\tt using namespace \verm{maniFEM}}) is an exception to the above rule.
 We prefer its name to have only lower case letters because we want it to be
 discrete. For instance, if we wrote {\small\tt\textcolor{tag}{Tag}::divided\_\,in},
-the reader's eye would catch {\small\tt\textcolor{tag}{tag}} much before {\small\tt divided\_\,in};
+the reader's eye would catch {\small\tt\textcolor{tag}{Tag}} much before {\small\tt divided\_\,in};
 thus, {\small\tt\textcolor{tag}{tag}::divided\_\,in} is more readable.
 Of course, the final user has the choice of {\small\tt using namespace \textcolor{tag}{tag}}
 but beware, it has many names which may conflict with the ones in your code.
