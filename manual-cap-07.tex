@@ -25,13 +25,33 @@ An unfolded mesh in $ \mathbb{R}^2 $ can be represented graphically, where verti
 from the torus are drawn more than once.
 
 One of the goals of {\maniFEM} is to deal with meshes on quotient manifolds.
-Different quotient operations can be used, with groups of translations of $ \mathbb{R}^2 $ but also
-with other groups of transformations.
+Different quotient operations can be used, with groups of translations of $ \mathbb{R}^2 $
+but also with other groups of transformations.
+In paragraphs \ref{\numb section 7.\numb parag 1} and \ref{\numb section 7.\numb parag 2}
+we deal with a one-dimensional manifold, equivalent to a circle.
+In paragraphs \ref{\numb section 7.\numb parag 3} and \ref{\numb section 7.\numb parag 16}
+the quotient manifold is isometric to a cylinder.
+In paragraphs \ref{\numb section 7.\numb parag 11} and \ref{\numb section 7.\numb parag 14}
+we get a manifold homeomorphic (topologically equivalent) to a cylinder
+if we eliminate the origin of the plane and we do not take into account that
+rotations overlap.
+In paragraphs \ref{\numb section 7.\numb parag 12} and \ref{\numb section 7.\numb parag 13}
+the mesh contains the origin which is a singular point, thus the manifold reaches
+the shape of a cone.
+In paragraphs \ref{\numb section 7.\numb parag 4} -- \ref{\numb section 7.\numb parag 10},
+\ref{\numb section 7.\numb parag 17} and \ref{\numb section 7.\numb parag 18}
+the quotient manifold is homeomorphic to a torus.
+The same holds for paragraph \ref{\numb section 7.\numb parag 15}
+if we eliminate the origin of the plane and we do not take into account that
+rotations overlap.
+Note that in paragraphs \ref{\numb section 7.\numb parag 14} and
+\ref{\numb section 7.\numb parag 15} the metric is not well-defined,
+so the manifold we are dealing with is not a Riemannian manifold.
 
 In paragraphs \ref{\numb section 7.\numb parag 3} -- \ref{\numb section 7.\numb parag 15},
 a quotient manifold is declared and then a mesh is built directly on this manifold.
-It is like holding a cylinder or a torus in your hand and drawing the mesh directly
-on the cylinder or torus.
+It is like holding a cylinder or a torus or a cone in your hand and drawing the mesh
+directly on the cylinder or torus or cone.
 In paragraphs \ref{\numb section 7.\numb parag 16} -- \ref{\numb section 7.\numb parag 18},
 a mesh is built in the usual Euclidian plane and then is folded.
 It is like drawing the mesh on a plane sheet of paper, then cutting the paper with a scissor
@@ -44,18 +64,19 @@ by glueing opposite faces.
           %--------------------------%
 
 Here is the closed curve $ \mathbb{R}/{\mathbb Z} $.
-We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified {\small\tt winding} number.
+We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified
+{\small\tt winding} number.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 1}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// begin with the one-dimensional line}
    \verm{Manifold} \azul{RR} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 1 );
-   \verm{Function} \azul{x} = RR.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{Function} \azul{x} = RR .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
 
    \cinza{// define an action on RR (a translation)}
    \verm{Manifold}::Action \azul{g} ( \textcolor{tag}{tag}::transforms, x, \textcolor{tag}{tag}::into, x+1. );
-   \verm{Manifold} \azul{circle} = RR.quotient ( g );
+   \verm{Manifold} \azul{circle} = RR .quotient ( g );
 
    \cinza{// one vertex is enough to start the process}
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.02;
@@ -91,11 +112,11 @@ this time in a less cumbersome manner.
    label=parag-\ref{\numb section 7.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 1 );
-   \verm{Function} \azul{theta} = RR.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{Function} \azul{theta} = RR .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
 
    const double \azul{pi} = 3.1415926536;
    \verm{Manifold}::Action \azul{g} ( \textcolor{tag}{tag}::transforms, theta, \textcolor{tag}{tag}::into, theta + 2*pi );
-   \verm{Manifold} \azul{circle} = RR.quotient ( g );
+   \verm{Manifold} \azul{circle} = RR .quotient ( g );
 
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  theta ( A ) = 0.;
    \verm{Mesh} \azul{loop} ( \textcolor{tag}{tag}::segment, A.reverse(), A, \textcolor{tag}{tag}::divided_in, 20, \textcolor{tag}{tag}::winding, g );
@@ -123,7 +144,7 @@ Here is how to build a (part of a) cylinder in $ \mathbb{R}^3 $ :
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
    \verm{Function} \azul{theta_z} =
-      RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+      RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{theta} = theta_z[0], \azul{z} = theta_z[1];
 
    const double \azul{pi} = 3.1415926536;
@@ -142,8 +163,8 @@ Here is how to build a (part of a) cylinder in $ \mathbb{R}^3 $ :
    \verm{Function} \azul{x} = \verm{cos}(theta), \azul{y} = \verm{sin}(theta);
 
    \cinza{// forget about theta; in future statements, x, y and z will be used}
-   cylinder_manif.set_coordinates ( x && y & z );
-   cylinder.export_msh (\verde{"cylinder.msh"});
+   cylinder_manif .set_coordinates ( x && y & z );
+   cylinder .export_msh (\verde{"cylinder.msh"});
 \end{Verbatim}
 
 The {\small\tt\textcolor{tag}{tag}::winding} in the constructor {\small\tt\verm{Mesh}
@@ -178,13 +199,13 @@ Here is the classical example of $ \mathbb{R}^2/{\mathbb Z}^2 $.
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// begin with the usual two-dimensional space}
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
 
    \cinza{// define two actions on RR2 (translations)}
    \verm{Manifold}::Action \azul{g_horiz} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+1.) && y ),
                     \azul{g_vert}  ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, x && (y+1.) );
-   \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g_horiz, g_vert );
+   \verm{Manifold} \azul{torus_manif} = RR2 .quotient ( g_horiz, g_vert );
 
    \cinza{// one vertex is enough to start the process}
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.02;  y(A) = 0.02;
@@ -199,12 +220,12 @@ Here is the classical example of $ \mathbb{R}^2/{\mathbb Z}^2 $.
 
    \cinza{// it would be meaningless to export 'square' as a msh file}
    \cinza{// we can however draw an unfolded mesh :}
-   torus.draw_ps ( \verde{"torus.eps"}, \textcolor{tag}{tag}::unfold,
+   torus .draw_ps ( \verde{"torus.eps"}, \textcolor{tag}{tag}::unfold,
                    \textcolor{tag}{tag}::over_region, -0.5 < x < 1.5, -0.2 < y < 1.2 );
 \end{Verbatim}
 
-The {\small\tt\textcolor{tag}{tag}::winding} in the constructor {\small\verm{Mesh}
-\azul{torus}} provides no specific information, it just warns {\maniFEM} that
+The {\small\tt\textcolor{tag}{tag}::winding} in the constructor {\small\tt\verm{Mesh}}
+{\small\tt\azul{torus}} provides no specific information, it just warns {\maniFEM} that
 we are on a quotient manifold and that it must take winding numbers into account.
 Specific information about the winding numbers is included in the two segments
 {\small\tt seg\_\,horiz} and {\small\tt seg\_\,vert}.
@@ -232,7 +253,7 @@ These numbers depend on the position of the vertex or segment and on the shape a
 of the viewing window.
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
   \includegraphics[width=94mm]{flat-torus-1.eps}
   \caption{A flat torus}
   \label{\numb section 7.\numb fig 1}
@@ -282,13 +303,13 @@ this time by using the quotient manifold $ \mathbb{R}^2/{\mathbb Z}^2 $ introduc
    label=parag-\ref{\numb section 7.\numb parag 5}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
-   \verm{Function} \azul{ab} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{Function} \azul{ab} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{alpha} = ab[0], \azul{beta} = ab[1];
 
    const double \azul{pi} = 3.1415926536;
    \verm{Manifold}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, ab, \textcolor{tag}{tag}::into, (alpha+2.*pi) && beta );
    \verm{Manifold}::Action \azul{g2} ( \textcolor{tag}{tag}::transforms, ab, \textcolor{tag}{tag}::into, alpha && (beta+2.*pi) );
-   \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
+   \verm{Manifold} \azul{torus_manif} = RR2 .quotient ( g1, g2 );
 
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  alpha(A) = 0.;  beta(A) = 0.;
    \verm{Mesh} \azul{seg_horiz} ( \textcolor{tag}{tag}::segment, A.reverse(), A,
@@ -296,7 +317,7 @@ this time by using the quotient manifold $ \mathbb{R}^2/{\mathbb Z}^2 $ introduc
    \verm{Mesh} \azul{seg_vert}  ( \textcolor{tag}{tag}::segment, A.reverse(), A,
                     \textcolor{tag}{tag}::divided_in, 20, \textcolor{tag}{tag}::winding, g2 );
    \verm{Mesh} \azul{torus} ( \textcolor{tag}{tag}::rectangle, seg_horiz, seg_vert,
-                seg_horiz.reverse(), seg_vert.reverse(), \textcolor{tag}{tag}::winding );
+                seg_horiz .reverse(), seg_vert .reverse(), \textcolor{tag}{tag}::winding );
 
    \cinza{// parametrize the doughnut}
    const double \azul{big_radius} = 3., \azul{small_radius} = 1.;
@@ -306,10 +327,10 @@ this time by using the quotient manifold $ \mathbb{R}^2/{\mathbb Z}^2 $ introduc
             \azul{z} = small_radius*\verm{sin}(beta);
 
    \cinza{// forget about alpha and beta :}
-   torus_manif.set_coordinates ( x && y && z );
+   torus_manif .set_coordinates ( x && y && z );
    \cinza{// in future statements (e.g. for graphical representation)}
    \cinza{// x, y and z will be used, not alpha nor beta :}
-   torus.export_msh (\verde{"torus.msh"});
+   torus .export_msh (\verde{"torus.msh"});
 \end{Verbatim}
 
 
@@ -329,19 +350,19 @@ shows several images of the same hole, due to the unfolding.
    baselinestretch=0.94,framesep=2mm                                            ]
    std::vector < \verm{Cell} > \azul{vec};
 
-   \verm{CellIterator} \azul{it} = torus.iterator
+   \verm{CellIterator} \azul{it} = torus .iterator
       ( \textcolor{tag}{tag}::over_cells, \textcolor{tag}{tag}::of_dim, 2, \textcolor{tag}{tag}::around, A );
-   for ( it.reset(); it.in_range(); it++ ) vec.push_back ( *it );
-   std::vector<\verm{Cell}>::iterator \azul{itv};
-   for ( itv = vec.begin(); itv != vec.end(); itv++ )
-   \{  \verm{Cell} \azul{sq} = *itv;  sq.remove_from_mesh ( torus );  \}
+   for ( it.reset(); it.in_range(); it++ ) vec .push_back ( *it );
+   std::vector < \verm{Cell} > ::iterator \azul{itv};
+   for ( itv = vec .begin(); itv != vec .end(); itv++ )
+   \{  \verm{Cell} \azul{sq} = *itv;  sq .remove_from_mesh ( torus );  \}
 
-   torus.draw_ps ( \verde{"torus.eps"}, \textcolor{tag}{tag}::unfold,
+   torus .draw_ps ( \verde{"torus.eps"}, \textcolor{tag}{tag}::unfold,
                    \textcolor{tag}{tag}::over_region, x*x + 2.*y*y < 3.5 );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
   \includegraphics[width=92mm]{flat-torus-2.eps}
   \caption{A flat torus with a hole}
   \label{\numb section 7.\numb fig 2}
@@ -361,7 +382,7 @@ a list of cells is used, both are OK).
 We can build a skew torus by simply choosing other actions on {\small\tt RR2}.
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
   \includegraphics[width=76mm]{flat-torus-3.eps}
   \caption{A skew flat torus}
   \label{\numb section 7.\numb fig 3}
@@ -372,7 +393,7 @@ We can build a skew torus by simply choosing other actions on {\small\tt RR2}.
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+1.) && (y+0.1) );
    \verm{Manifold}::Action \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+0.1) && (y+1.) );
-   \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
+   \verm{Manifold} \azul{torus_manif} = RR2 .quotient ( g1, g2 );
 \end{Verbatim}
 
 Again, we have added a shadow representing the periodicity cell, this time a parallelogram.
@@ -386,7 +407,7 @@ Here is a different example of a skew torus, this time meshed with square cells
 rather than skew parallelograms.
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
   \includegraphics[width=92mm]{flat-torus-4.eps}
   \caption{A different torus}
   \label{\numb section 7.\numb fig 4}
@@ -397,7 +418,7 @@ rather than skew parallelograms.
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+1.) && y ),
                     \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+0.5) && (y+1.) );
-   \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
+   \verm{Manifold} \azul{torus_manif} = RR2 .quotient ( g1, g2 );
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0. ;  y(A) = 0.;
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = 0.5;  y(B) = 0.;
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 5 );
@@ -422,12 +443,12 @@ The skew parallelogram can be called ``periodicity cell'';
 we call the other one ``representative domain''.
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{AB}{\tt\textcolor{textindraw}{AB}}
-  \psfrag{BAh}{\tt\textcolor{textindraw}{BA\_\,horiz}}
-  \psfrag{ABv}{\tt\textcolor{textindraw}{AB\_\,vert}}
-  \psfrag{BAv}{\tt\textcolor{textindraw}{BA\_\,vert}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{AB}{\small\tt\textcolor{textindraw}{AB}}
+  \psfrag{BAh}{\small\tt\textcolor{textindraw}{BA\_\,horiz}}
+  \psfrag{ABv}{\small\tt\textcolor{textindraw}{AB\_\,vert}}
+  \psfrag{BAv}{\small\tt\textcolor{textindraw}{BA\_\,vert}}
   \includegraphics[width=60mm]{torus-sketch.eps}
   \caption{Segment meshes used for building the torus}
   \label{\numb section 7.\numb fig 5}
@@ -446,7 +467,7 @@ building this torus.
 Here is an example of a torus built with two triangular patches.
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
   \includegraphics[width=120mm]{flat-torus-5.eps}
   \caption{A torus meshed with triangles}
   \label{\numb section 7.\numb fig 6}
@@ -457,7 +478,7 @@ Here is an example of a torus built with two triangular patches.
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+1.) && y ),
                     \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+0.5) && (y+0.866) );
-   \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
+   \verm{Manifold} \azul{torus_manif} = RR2 .quotient ( g1, g2 );
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.;  y(A) = 0.;
    \verm{Mesh} \azul{seg_horiz} ( \textcolor{tag}{tag}::segment, A.reverse(), A,
                     \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::winding, g1 ),
@@ -465,8 +486,8 @@ Here is an example of a torus built with two triangular patches.
                     \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::winding, g2 ),
         \azul{seg2}      ( \textcolor{tag}{tag}::segment, A.reverse(), A,
                     \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::winding, g2 - g1 );
-   \verm{Mesh} \azul{tri1} ( \textcolor{tag}{tag}::triangle, seg_horiz, seg2, seg1.reverse(), \textcolor{tag}{tag}::winding ),
-        \azul{tri2} ( \textcolor{tag}{tag}::triangle, seg_horiz.reverse(), seg2.reverse(), seg1, \textcolor{tag}{tag}::winding );
+   \verm{Mesh} \azul{tri1} ( \textcolor{tag}{tag}::triangle, seg_horiz, seg2, seg1 .reverse(), \textcolor{tag}{tag}::winding ),
+        \azul{tri2} ( \textcolor{tag}{tag}::triangle, seg_horiz .reverse(), seg2 .reverse(), seg1, \textcolor{tag}{tag}::winding );
    \verm{Mesh} \azul{torus} ( \textcolor{tag}{tag}::join, tri1, tri2 );
 \end{Verbatim}
 
@@ -512,7 +533,7 @@ In contrast, translations (used in previous paragraphs) are always invertible.
    \verm{Manifold}::Action \azul{rot} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into,
          ( cos_theta * x - sin_theta * y ) && ( sin_theta * x + cos_theta * y ) );
    \cinza{// and divide RR2 by the group generated by 'rot'}
-   \verm{Manifold} \azul{RR2_q} = RR2.quotient ( rot );
+   \verm{Manifold} \azul{RR2_q} = RR2 .quotient ( rot );
 
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.;  y(A) = 1.;
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = 0.;  y(B) = 2.;
@@ -521,12 +542,12 @@ In contrast, translations (used in previous paragraphs) are always invertible.
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 7 );  // no winding
    \verm{Mesh} \azul{BB} ( \textcolor{tag}{tag}::segment, B.reverse(), B, \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::winding, rot );
 
-   \verm{Mesh} \azul{sector} ( \textcolor{tag}{tag}::rectangle, AA, AB, BB, AB.reverse(), \textcolor{tag}{tag}::winding );
+   \verm{Mesh} \azul{sector} ( \textcolor{tag}{tag}::rectangle, AA, AB, BB, AB .reverse(), \textcolor{tag}{tag}::winding );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
   \includegraphics[width=90mm]{sector-1.eps}
   \caption{One rotation}
   \label{\numb section 7.\numb fig 7}
@@ -545,10 +566,12 @@ where many meshes are built in a {\small\tt for} loop then are joined to form an
 \section{~~A singular point}\label{\numb section 7.\numb parag 12}
           %----------------%
 
-An interesting question is whether we can extend the mesh to the origin
+An interesting question is whether we can extend the mesh up to the origin
 (see figure \ref{\numb section 7.\numb fig 7}).
 It should be stressed that, when dividing the plane $ \mathbb{R}^2 $ by a rotation,
 the origin represents a singularity.
+The rotation transforms an ordinay point into a different one,
+but the origin is mapped into itself.
 This quotient manifold is not locally Euclidian in the neighbourhood of the origin.
 The shape of this manifold around the origin is similar to the tip of a cone.
 When building a mesh of triangles having the origin as vertex,
@@ -557,10 +580,25 @@ and {\maniFEM} will take special care with that vertex.
 
 In this paragraph, we build two triangles and then {\small\tt join} them;
 figure \ref{\numb section 7.\numb fig 8} shows the unfolded mesh.
+The {\small\tt\textcolor{tag}{tag}::singular} is necessary when building
+{\small\tt tri\_\,2} but not for {\small\tt tri\_\,1}
+because the sides of {\small\tt tri\_\,1} have no winding.
 In paragraph \ref{\numb section 7.\numb parag 13}, we use only one triangular mesh.
 
+\begin{figure}[ht] \centering
+  \psfrag{O}{\small\tt\textcolor{textindraw}{O}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{S}{\small\tt\textcolor{textindraw}{S}}
+  \psfrag{T}{\small\tt\textcolor{textindraw}{T}}
+  \psfrag{U}{\small\tt\textcolor{textindraw}{T$^{\mbox{\small\tt *}}$}}
+  \includegraphics[width=120mm]{butterfly.eps}
+  \caption{A vertex similar to the one of a cone}
+  \label{\numb section 7.\numb fig 8}
+\end{figure}
+
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 11}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 12}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                             ]
    const double \azul{theta} = pi/2.;  // radians
    const double \azul{cos_theta} = std::cos ( theta ), \azul{sin_theta} = std::sin ( theta );
@@ -569,7 +607,7 @@ In paragraph \ref{\numb section 7.\numb parag 13}, we use only one triangular me
    \verm{Manifold}::Action \azul{rot} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into,
          ( cos_theta * x - sin_theta * y ) && ( sin_theta * x + cos_theta * y ) );
    \cinza{// and divide RR2 by the group generated by 'rot'}
-   \verm{Manifold} \azul{RR2_q} = RR2.quotient ( rot );
+   \verm{Manifold} \azul{RR2_q} = RR2 .quotient ( rot );
 
    \verm{Cell} \azul{O} ( \textcolor{tag}{tag}::vertex );  x(O) = 0. ;  y(O) = 0. ;
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 1. ;  y(A) = 0. ;
@@ -580,18 +618,60 @@ In paragraph \ref{\numb section 7.\numb parag 13}, we use only one triangular me
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 10 );  \cinza{// no winding}
    \verm{Mesh} \azul{BA} ( \textcolor{tag}{tag}::segment, B.reverse(), A, \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::winding, rot );
 
-   \verm{Mesh} \azul{tri_1} ( \textcolor{tag}{tag}::triangle, OA, AB, OB.reverse() );  \cinza{// no winding}
-   \verm{Mesh} \azul{tri_2} ( \textcolor{tag}{tag}::triangle, OB, BA, OA.reverse(), \textcolor{tag}{tag}::winding, \textcolor{tag}{tag}::singular, O );
+   \verm{Mesh} \azul{tri_1} ( \textcolor{tag}{tag}::triangle, OA, AB, OB .reverse() );  \cinza{// no winding}
+   \verm{Mesh} \azul{tri_2} ( \textcolor{tag}{tag}::triangle, OB, BA, OA .reverse(), \textcolor{tag}{tag}::winding, \textcolor{tag}{tag}::singular, O );
    \cinza{// on the last triangle, the one having O as vertex, the sum of windings is not zero}
-
    \verm{Mesh} \azul{sector} ( \textcolor{tag}{tag}::join, tri_1, tri_2 );
 \end{Verbatim}
 
+Usually, the sum of the winding numbers of the three sides of any triangle is zero.
+The triangle last built in this paragraph, {\small\tt OST$^{\mbox{\small\tt *}}$},
+does not obey to this rule.
+
 
           %-----------------------------%
-\section{~~Avoiding degenerate triangles}\label{\numb section 7.\numb parag 13}
+\section{~~Avoiding degenerate segments}\label{\numb section 7.\numb parag 13}
           %-----------------------------%
 
+In paragraph \ref{\numb section 7.\numb parag 12} we have built two triangular meshes
+and then we have {\small\tt join}ed them.
+
+It is possible to build a similar shape with only one triangular mesh.
+However, {\maniFEM} cannot build a segment like {\small\tt TT$^{\mbox{\small\tt *}}$},
+having the same vertex as base and as tip.
+This is why a new vertex is introduced near the origin and the two adjacent triangles
+are split (see figure \ref{\numb section 7.\numb fig 9}).
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 13}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                             ]
+   const double \azul{theta} = pi/3.;  // radians
+   const double \azul{cos_theta} = std::cos ( theta ), \azul{sin_theta} = std::sin ( theta );
+	
+   \cinza{// define an action on RR2 (a rotation)}
+   \verm{Manifold}::Action \azul{rot} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into,
+         ( cos_theta * x - sin_theta * y ) && ( sin_theta * x + cos_theta * y ) );
+   \cinza{// and divide RR2 by the group generated by 'rot'}
+   \verm{Manifold} \azul{RR2_q} = RR2 .quotient ( rot );
+
+   \verm{Cell} \azul{O} ( \textcolor{tag}{tag}::vertex );  x(O) = 0. ;  y(O) = 0. ;
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 1. ;  y(A) = 0. ;
+
+   \verm{Mesh} \azul{OA} ( \textcolor{tag}{tag}::segment, O.reverse(), A, \textcolor{tag}{tag}::divided_in, 10 );  \cinza{// no winding}
+   \verm{Mesh} \azul{AA} ( \textcolor{tag}{tag}::segment, A.reverse(), A, \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::winding, rot );
+
+   \verm{Mesh} \azul{sector} ( \textcolor{tag}{tag}::triangle, OA, AA, OA .reverse(), \textcolor{tag}{tag}::winding, \textcolor{tag}{tag}::singular, O );
+\end{Verbatim}
+
+\begin{figure}[ht] \centering
+  \psfrag{O}{\small\tt\textcolor{textindraw}{O}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{T}{\small\tt\textcolor{textindraw}{T}}
+  \psfrag{U}{\small\tt\textcolor{textindraw}{T$^{\mbox{\small\tt *}}$}}
+  \includegraphics[width=90mm]{sector-cut.eps}
+  \caption{A cone-like shape built with one triangular patch}
+  \label{\numb section 7.\numb fig 9}
+\end{figure}
 
 
           %-----------------------%
@@ -611,16 +691,19 @@ In contrast, translations are always invertible.
       ( 0.8 * sin_theta * x + 0.8 * cos_theta * y )    );
 
    // and divide RR2 by the group generated by g
-   \verm{Manifold} \azul{RR2_q} = RR2.quotient ( g );
+   \verm{Manifold} \azul{RR2_q} = RR2 .quotient ( g );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
   \includegraphics[width=100mm]{sector-2.eps}
   \caption{One linear transformation}
-  \label{\numb section 7.\numb fig 9}
+  \label{\numb section 7.\numb fig 10}
 \end{figure}
+
+Note that in this example the metric is not well-defined
+so the manifold we are dealing with is not a Riemannian manifold.
 
 
           %--------------------------%
@@ -643,7 +726,7 @@ In contrast, translations are always invertible and they commute.
    \verm{Manifold}::Action \azul{zoom} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, ( 2.*x ) && ( 2.*y ) );
 
    // divide RR2 by the group generated by \{ rot, zoom \}
-   \verm{Manifold} \azul{torus_manif} = RR2.quotient ( rot, zoom );
+   \verm{Manifold} \azul{torus_manif} = RR2 .quotient ( rot, zoom );
 
    // one vertex is enough to start the process
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.;  y(A) = 1.;
@@ -651,17 +734,20 @@ In contrast, translations are always invertible and they commute.
    \verm{Mesh} \azul{AA_vert} ( \textcolor{tag}{tag}::segment, A.reverse(), A,
                   \textcolor{tag}{tag}::divided_in, 7, \textcolor{tag}{tag}::winding, zoom );
 
-   \verm{Mesh} \azul{sector} ( \textcolor{tag}{tag}::rectangle, AA, AA_vert, AA.reverse(), AA_vert.reverse(),
+   \verm{Mesh} \azul{sector} ( \textcolor{tag}{tag}::rectangle, AA, AA_vert, AA .reverse(), AA_vert .reverse(),
                  \textcolor{tag}{tag}::winding                                                    );
 \end{Verbatim}
   
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
   \includegraphics[width=100mm]{sector-3.eps}
   \caption{Two linear transformations : a rotation and a zoom}
-  \label{\numb section 7.\numb fig 10}
+  \label{\numb section 7.\numb fig 11}
 \end{figure}
+
+Again, the metric is not well-defined (due to the zoom)
+so the manifold we are dealing with is not a Riemannian manifold.
 
 
           %---------------------------------%
@@ -671,8 +757,9 @@ In contrast, translations are always invertible and they commute.
 We can start with a usual mesh in the Euclidian plane and wrap it around a cylinder.
 Or we may call this operation ``wind'' or ``fold''.
 The outer boundary of the mesh must have two parallel segments of equal length and with
-the same number of segments (to be identified); the mesh may have many other details
-which do not interfere in the process.
+the same number of segments (to be identified).
+The mesh may have many other details (like the circular hole shown in figure
+\ref{\numb section 7.\numb fig 11}) which do not interfere in the process.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 16}.cpp,rulecolor=\color{coment},
@@ -694,15 +781,15 @@ which do not interfere in the process.
    \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, n );
    \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, n );
 
-   \verm{Manifold} \azul{circle} = RR2.implicit ( x*x + y*y == 1. );
+   \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == 1. );
    \verm{Mesh} \azul{inner}
       ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::entire_manifold, circle, \textcolor{tag}{tag}::desired_length, d );
 
-   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, AB, BC, CD, DA, inner.reverse() );
+   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, AB, BC, CD, DA, inner .reverse() );
    RR2.set_as_working_manifold();
    \verm{Mesh} \azul{square} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, d );
 
-   \verm{Mesh} \azul{cyl} = square.fold
+   \verm{Mesh} \azul{cyl} = square .fold
       ( \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, DA.reverse(), \textcolor{tag}{tag}::use_existing_vertices );
 \end{Verbatim}
 
@@ -713,13 +800,13 @@ builds a quotient manifold using this action then builds a new mesh on this quot
 by identifying the specified pair of segment meshes.
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=120mm]{cylinder-1.eps}
   \caption{Identifying a pair of opposite faces}
-  \label{\numb section 7.\numb fig 11}
+  \label{\numb section 7.\numb fig 12}
 \end{figure}
 
 The mesh {\small\tt\azul{cyl}} is entirely new and distinct from {\small\tt square},
@@ -752,9 +839,9 @@ It suffices to identify two pairs of opposite faces.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 17}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                             ]
-   \verm{Mesh} \azul{torus} = square.fold ( \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, CD.reverse(),
-                              \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, DA.reverse(),
-                              \textcolor{tag}{tag}::use_existing_vertices                 );
+   \verm{Mesh} \azul{torus} = square .fold ( \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, CD.reverse(),
+                               \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, DA.reverse(),
+                               \textcolor{tag}{tag}::use_existing_vertices                 );
 \end{Verbatim}
 
 
@@ -794,19 +881,19 @@ and treat it as if it were a hexagon :
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=140mm]{hexa-round-hole.eps}
   \caption{Hexagonal arrangement of a circular hole}
-  \label{\numb section 7.\numb fig 12}
+  \label{\numb section 7.\numb fig 13}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 17}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                             ]
-   \verm{Manifold} \azul{circle} = RR2.implicit ( x*x + y*y == 1. );
+   \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == 1. );
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::entire_manifold, circle,
                 \textcolor{tag}{tag}::desired_length, d                         );
 
@@ -815,13 +902,13 @@ and treat it as if it were a hexagon :
    RR2.set_as_working_manifold();
    \verm{Mesh} \azul{rectangle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, d );
 
-   \verm{Mesh} \azul{torus} = rectangle.fold ( \textcolor{tag}{tag}::identify, CD, \textcolor{tag}{tag}::with, FA.reverse(),
-                                 \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, EF.reverse(),
-                                 \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, DE.reverse(),
-                                 \textcolor{tag}{tag}::use_existing_vertices                 );
+   \verm{Mesh} \azul{torus} = rectangle .fold ( \textcolor{tag}{tag}::identify, CD, \textcolor{tag}{tag}::with, FA.reverse(),
+                                  \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, EF.reverse(),
+                                  \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, DE.reverse(),
+                                  \textcolor{tag}{tag}::use_existing_vertices                 );
 \end{Verbatim}
 
-Figure \ref{\numb section 7.\numb fig 12} shows the resulting mesh, together with the
+Figure \ref{\numb section 7.\numb fig 13} shows the resulting mesh, together with the
 periodicity cell.
 We recall that the same periodicity group (i.e., periodic arrangement) may be generated
 by different sets of generators and, consequently, may be viewed as originating
@@ -844,24 +931,24 @@ should work on quotient manifolds with only minimal changes.
 Here is how we see it working in the future.
 
 We begin by defining two closed curves (the boundaries of the two future holes),
-represented in Figure \ref{\numb section 7.\numb fig 13}.
+represented in Figure \ref{\numb section 7.\numb fig 14}.
 We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm         ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
    
    const double \azul{e} = 1.5;
-   \verm{Manifold} \azul{curve1} = RR2.implicit 
+   \verm{Manifold} \azul{curve1} = RR2 .implicit 
       ( \verm{smooth_min} ( 300.*\verm{power}((x+y)*(x+y),e) + \verm{power}((x-y-1.)*(x-y-1.),e),
                      300.*\verm{power}((x-y)*(x-y),e) + \verm{power}((x+y+1.)*(x+y+1.),e),
                      \textcolor{tag}{tag}::threshold, 1.5                     )  == 1. );
    \verm{Mesh} \azul{loop1} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, 0.05 );
       
    double \azul{a} = 0.15, \azul{b} = 0.82;
-   \verm{Manifold} \azul{curve2} = RR2.implicit 
+   \verm{Manifold} \azul{curve2} = RR2 .implicit 
       ( \verm{smooth_min} ( 300.*\verm{power}((x-a+y+b)*(x-a+y+b),e) +
                           \verm{power}((x-a-y-b-1.)*(x-a-y-b-1.),e),
                      300.*\verm{power}((x-2.-a-y-b)*(x-2.-a-y-b),e) +
@@ -869,17 +956,17 @@ We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
                      \textcolor{tag}{tag}::threshold, 1.5                           )  == 1. );
    \verm{Mesh} \azul{loop2} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, 0.05 );
 
-   \verm{Mesh} \azul{loops} ( \textcolor{tag}{tag}::join, loop1.reverse(), loop2.reverse() );                     
+   \verm{Mesh} \azul{loops} ( \textcolor{tag}{tag}::join, loop1 .reverse(), loop2 .reverse() );                     
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=90mm]{boomerang-1.eps}
   \caption{Two V-shaped loops}
-  \label{\numb section 7.\numb fig 13}
+  \label{\numb section 7.\numb fig 14}
 \end{figure}
 
 The {\small\tt loops} are reversed because they are going to be boundaries of holes
@@ -891,12 +978,12 @@ Define a torus manifold by means of two appropriate translations.
    rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm         ]
    \verm{Manifold}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+2.3) && y ),
                     \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, x && (y+1.4) );
-   \verm{Manifold} \azul{torus_manif} = RR2.quotient ( g1, g2 );
+   \verm{Manifold} \azul{torus_manif} = RR2 .quotient ( g1, g2 );
 \end{Verbatim}
 
 \vskip -2mm
 Then, fold the two curves around this torus; the result is shown (after unfolding) in figure
-\ref{\numb section 7.\numb fig 14}.
+\ref{\numb section 7.\numb fig 15}.
 Calling the {\small\tt\verm{Mesh}::fold} method with only one argument is quite different
 from what we have seen in paragraphs \ref{\numb section 7.\numb parag 16} and
 \ref{\numb section 7.\numb parag 17}.
@@ -907,24 +994,24 @@ the folding operation will use the geometry of this torus.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm         ]
-   \verm{Mesh} \azul{folded_loops} = loops.fold ( \textcolor{tag}{tag}::use_existing_vertices );
-   folded_loops.draw_ps (\verde{"VV.eps"}, \textcolor{tag}{tag}::unfold,
-                          \textcolor{tag}{tag}::over_region, -1.5 < x < 2.5, -2 < y < 0.5 );
+   \verm{Mesh} \azul{folded_loops} = loops .fold ( \textcolor{tag}{tag}::use_existing_vertices );
+   folded_loops .draw_ps (\verde{"VV.eps"}, \textcolor{tag}{tag}::unfold,
+                           \textcolor{tag}{tag}::over_region, -1.5 < x < 2.5, -2 < y < 0.5 );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=90mm]{boomerang-2.eps}
   \caption{Two V-shaped loops, folded then unfolded}
-  \label{\numb section 7.\numb fig 14}
+  \label{\numb section 7.\numb fig 15}
 \end{figure}
 
 When we declare the {\small\tt\azul{torus\_\,manif}}, we must use translations chosen with care,
 avoiding intersections of these curves with themselves or with each other during the subsequent
-{\small\tt fold\,}ing.
+\mbox{{\small\tt fold\hskip 0.2 pt}ing}.
 \ManiFEM{} does not check for such intersections, it is the user's resposibility to avoid them.
 
 Now call the progressive meshing algorithm.
@@ -936,18 +1023,18 @@ it meets the mesh on the other side of the torus.
    baselinestretch=0.94,framesep=2mm                                   ]
    \verm{Mesh} \azul{perforated} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, loops,
                      \textcolor{tag}{tag}::desired_length, 0.05              );
-   perforated.draw_ps (\verde{"perforated.eps"}, \textcolor{tag}{tag}::unfold,
-                        \textcolor{tag}{tag}::over_region, -1.5 < x < 2.5, -2 < y < 0.5 );
+   perforated .draw_ps (\verde{"perforated.eps"}, \textcolor{tag}{tag}::unfold,
+                         \textcolor{tag}{tag}::over_region, -1.5 < x < 2.5, -2 < y < 0.5 );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=130mm]{boomerang-3.eps}
   \caption{Periodically perforated plane, two V-shaped holes}
-  \label{\numb section 7.\numb fig 15}
+  \label{\numb section 7.\numb fig 16}
 \end{figure}
 
 This represents an example of a perforated material whose effective elastic behaviour
