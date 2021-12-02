@@ -15,10 +15,10 @@ and then compute the integral of a given function.
 Paragraph \ref{\numb section 1.\numb parag 3} shows a purely two-dimensional example.
 
 \begin{figure} \centering
-  \psfrag{SW}{\tt\textcolor{textindraw}{SW}}
-  \psfrag{NW}{\tt\textcolor{textindraw}{NW}}
-  \psfrag{SE}{\tt\textcolor{textindraw}{SE}}
-  \psfrag{NE}{\tt\textcolor{textindraw}{NE}}
+  \psfrag{SW}{\small\tt\textcolor{textindraw}{SW}}
+  \psfrag{NW}{\small\tt\textcolor{textindraw}{NW}}
+  \psfrag{SE}{\small\tt\textcolor{textindraw}{SE}}
+  \psfrag{NE}{\small\tt\textcolor{textindraw}{NE}}
   \includegraphics[width=95mm]{3d-rectangle}
   \caption{A twisted rectangular mesh}
   \label{\numb section 1.\numb fig 1}
@@ -38,31 +38,31 @@ int main ()
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    
    \cinza{// xyz is a map defined on our future mesh with values in RR3 :}
-   \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
 
    \cinza{// we can extract components of xyz using the [] operator}
-   \verm{Function} \azul{x} = xyz[\laranja{0}],  \azul{y} = xyz[\laranja{1}],  \azul{z} = xyz[\laranja{2}];
+   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
 
    \cinza{// Let's build a rectangular mesh. First, the four corners :}
-   \verm{Cell} \azul{SW} ( \textcolor{tag}{tag}::vertex );  x(SW) = \laranja{-1};  y(SW) = \laranja{0};  z(SW) = \laranja{0};
-   \verm{Cell} \azul{SE} ( \textcolor{tag}{tag}::vertex );  x(SE) =  \laranja{1};  y(SE) = \laranja{0};  z(SE) = \laranja{0};
-   \verm{Cell} \azul{NE} ( \textcolor{tag}{tag}::vertex );  x(NE) =  \laranja{1};  y(NE) = \laranja{1};  z(NE) = \laranja{0};
-   \verm{Cell} \azul{NW} ( \textcolor{tag}{tag}::vertex );  x(NW) = \laranja{-1};  y(NW) = \laranja{1};  z(NW) = \laranja{1};
+   \verm{Cell} \azul{SW} ( \textcolor{tag}{tag}::vertex );  x (SW) = \laranja{-1};  y (SW) = \laranja{0};  z (SW) = \laranja{0};
+   \verm{Cell} \azul{SE} ( \textcolor{tag}{tag}::vertex );  x (SE) =  \laranja{1};  y (SE) = \laranja{0};  z (SE) = \laranja{0};
+   \verm{Cell} \azul{NE} ( \textcolor{tag}{tag}::vertex );  x (NE) =  \laranja{1};  y (NE) = \laranja{1};  z (NE) = \laranja{0};
+   \verm{Cell} \azul{NW} ( \textcolor{tag}{tag}::vertex );  x (NW) = \laranja{-1};  y (NW) = \laranja{1};  z (NW) = \laranja{1};
    
-   \cinza{// we access the coordinates of a point using the () operator :}								
-   cout << \verde{"coordinates of NW : "} << x(NW) << \verde{" "} << y(NW) << \verde{" "} << z(NW) << endl;
+   \cinza{// we access the coordinates of a point using the () operator :}
+   cout << \verde{"coordinates of NW : "} << x (NW) << \verde{" "} << y (NW) << \verde{" "} << z (NW) << endl;
    \cinza{// now build the four sides of the rectangle :}
-   \verm{Mesh} \azul{south} ( \textcolor{tag}{tag}::segment, SW.reverse(), SE, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{east}  ( \textcolor{tag}{tag}::segment, SE.reverse(), NE, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{north} ( \textcolor{tag}{tag}::segment, NE.reverse(), NW, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{west}  ( \textcolor{tag}{tag}::segment, NW.reverse(), SW, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{south} ( \textcolor{tag}{tag}::segment, SW .reverse(), SE, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{east}  ( \textcolor{tag}{tag}::segment, SE .reverse(), NE, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{north} ( \textcolor{tag}{tag}::segment, NE .reverse(), NW, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{west}  ( \textcolor{tag}{tag}::segment, NW .reverse(), SW, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    
    \cinza{// and now the rectangle :}
    \verm{Mesh} \azul{rect_mesh} ( \textcolor{tag}{tag}::rectangle, south, east, north, west );
 
    \cinza{// We may want to visualize the resulting mesh.}
    \cinza{// Here is one way to export the mesh in the "msh" format :}
-   rect_mesh.export_msh (\verde{"rectangle.msh"});
+   rect_mesh .export_msh (\verde{"rectangle.msh"});
 
    \cinza{// Let's define a symbolic function to integrate}
    \verm{Function} \azul{f} = x*x + \laranja{1}/(\laranja{5}+y);
@@ -164,8 +164,8 @@ In such a tetrahedron, each segment must be seen as positive by one of the trian
 as negative by another one.
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
   \includegraphics[width=90mm]{oriented-cells.eps}
   \caption{Oriented segment, oriented pentagon}
   \label{\numb section 1.\numb fig 2}
@@ -232,18 +232,18 @@ For instance :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );
-   assert ( A.is_positive() );
-   assert ( not A.reverse().is_positive() );
-   assert ( A.reverse().reverse() == A );
-   \verm{Cell} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B );
+   assert ( A .is_positive() );
+   assert ( not A .reverse() .is_positive() );
+   assert ( A .reverse() .reverse() == A );
+   \verm{Cell} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B );
    \cinza{// here, AB is a segment Cell, not a Mesh}
-   assert ( AB.base() == A.reverse() );
-   assert ( AB.tip() == B );
+   assert ( AB .base() == A .reverse() );
+   assert ( AB .tip() == B );
 
-   \verm{Cell} \azul{BA} = AB.reverse();
-   assert ( BA.base() == B.reverse() );
-   assert ( BA.tip() == A );
-   assert ( BA().reverse() == AB );
+   \verm{Cell} \azul{BA} = AB .reverse();
+   assert ( BA .base() == B .reverse() );
+   assert ( BA .tip() == A );
+   assert ( BA .reverse() == AB );
 \end{Verbatim}
 
 Paragraph \ref{\numb section 9.\numb parag 5} gives more details about the orientation of cells.
@@ -273,14 +273,14 @@ This has the advantage that one can build more complex meshes from simple compon
 For instance, one can build an L-shaped mesh by joining three rectangular meshes :
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
-  \psfrag{E}{\tt\textcolor{textindraw}{E}}
-  \psfrag{F}{\tt\textcolor{textindraw}{F}}
-  \psfrag{G}{\tt\textcolor{textindraw}{G}}
-  \psfrag{H}{\tt\textcolor{textindraw}{H}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
+  \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
+  \psfrag{F}{\small\tt\textcolor{textindraw}{F}}
+  \psfrag{G}{\small\tt\textcolor{textindraw}{G}}
+  \psfrag{H}{\small\tt\textcolor{textindraw}{H}}
   \includegraphics[width=115mm]{L-shaped}
   \caption{An L-shaped mesh}
   \label{\numb section 1.\numb fig 5}
@@ -290,31 +290,31 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
    label=parag-\ref{\numb section 1.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy[\laranja{0}],  \azul{y} = xy[\laranja{1}];
+   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
 
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{-1.};  y(A) = \laranja{0.};
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  \laranja{0.};  y(B) = \laranja{0.};
-   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) =  \laranja{0.};  y(C) = \laranja{0.5};
-   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = \laranja{-1.};  y(D) = \laranja{0.5};
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{0.};  y(E) = \laranja{1.};
-   \verm{Cell} \azul{F} ( \textcolor{tag}{tag}::vertex );  x(F) = \laranja{-1.};  y(F) = \laranja{1.};
-   \verm{Cell} \azul{G} ( \textcolor{tag}{tag}::vertex );  x(G) =  \laranja{1.};  y(G) = \laranja{0.};
-   \verm{Cell} \azul{H} ( \textcolor{tag}{tag}::vertex );  x(H) =  \laranja{1.};  y(H) = \laranja{0.5};
-   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in,  \laranja{8} );
-   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in,  \laranja{8} );
-   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C.reverse(), E, \textcolor{tag}{tag}::divided_in,  \laranja{7} );
-   \verm{Mesh} \azul{EF} ( \textcolor{tag}{tag}::segment, E.reverse(), F, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{FD} ( \textcolor{tag}{tag}::segment, F.reverse(), D, \textcolor{tag}{tag}::divided_in,  \laranja{7} );
-   \verm{Mesh} \azul{BG} ( \textcolor{tag}{tag}::segment, B.reverse(), G, \textcolor{tag}{tag}::divided_in, \laranja{12} );
-   \verm{Mesh} \azul{GH} ( \textcolor{tag}{tag}::segment, G.reverse(), H, \textcolor{tag}{tag}::divided_in,  \laranja{8} );
-   \verm{Mesh} \azul{HC} ( \textcolor{tag}{tag}::segment, H.reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{12} );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{-1.};  y (A) = \laranja{0.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) =  \laranja{0.};  y (B) = \laranja{0.};
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) =  \laranja{0.};  y (C) = \laranja{0.5};
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = \laranja{-1.};  y (D) = \laranja{0.5};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{0.};  y (E) = \laranja{1.};
+   \verm{Cell} \azul{F} ( \textcolor{tag}{tag}::vertex );  x (F) = \laranja{-1.};  y (F) = \laranja{1.};
+   \verm{Cell} \azul{G} ( \textcolor{tag}{tag}::vertex );  x (G) =  \laranja{1.};  y (G) = \laranja{0.};
+   \verm{Cell} \azul{H} ( \textcolor{tag}{tag}::vertex );  x (H) =  \laranja{1.};  y (H) = \laranja{0.5};
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in,  \laranja{8} );
+   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C .reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D .reverse(), A, \textcolor{tag}{tag}::divided_in,  \laranja{8} );
+   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C .reverse(), E, \textcolor{tag}{tag}::divided_in,  \laranja{7} );
+   \verm{Mesh} \azul{EF} ( \textcolor{tag}{tag}::segment, E .reverse(), F, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{FD} ( \textcolor{tag}{tag}::segment, F .reverse(), D, \textcolor{tag}{tag}::divided_in,  \laranja{7} );
+   \verm{Mesh} \azul{BG} ( \textcolor{tag}{tag}::segment, B .reverse(), G, \textcolor{tag}{tag}::divided_in, \laranja{12} );
+   \verm{Mesh} \azul{GH} ( \textcolor{tag}{tag}::segment, G .reverse(), H, \textcolor{tag}{tag}::divided_in,  \laranja{8} );
+   \verm{Mesh} \azul{HC} ( \textcolor{tag}{tag}::segment, H .reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{12} );
 
    \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );
-   \verm{Mesh} \azul{CEFD} ( \textcolor{tag}{tag}::rectangle, CE, EF, FD, CD.reverse() );
-   \verm{Mesh} \azul{BGHC} ( \textcolor{tag}{tag}::rectangle, BG, GH, HC, BC.reverse() );
+   \verm{Mesh} \azul{CEFD} ( \textcolor{tag}{tag}::rectangle, CE, EF, FD, CD .reverse() );
+   \verm{Mesh} \azul{BGHC} ( \textcolor{tag}{tag}::rectangle, BG, GH, HC, BC .reverse() );
 
    \verm{Mesh} \azul{L_shaped} ( \textcolor{tag}{tag}::join, ABCD, CEFD, BGHC );
 \end{Verbatim}
@@ -323,8 +323,8 @@ Meshes in $ \mathbb{R}^2 $ like the one above may be exported in the {\small\tt 
 or directly drawn in {\small\tt PostScript}, by one of the two statements below
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   L_shaped.export_msh (\verde{"L-shaped.msh"});
-   L_shaped.draw_ps (\verde{"L-shaped.eps"});
+   L_shaped .export_msh (\verde{"L-shaped.msh"});
+   L_shaped .draw_ps (\verde{"L-shaped.eps"});
 \end{Verbatim}
 
 Note that, in \maniFEM, cells and meshes are oriented
@@ -340,7 +340,7 @@ these meshes.
 
 \vskip 3mm plus 2mm
 \begin{figure}[ht]  \centering
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
   \includegraphics[width=120mm]{L-crack}
   \caption{A zoom around {\small\tt C}}
   \label{\numb section 1.\numb fig 6}
@@ -395,11 +395,11 @@ See also paragraph \ref{\numb section 11.\numb parag 9}.
 We can also build meshes on triangular domains and {\small\tt join} them as we wish :
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
-  \psfrag{E}{\tt\textcolor{textindraw}{E}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
+  \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
   \includegraphics[width=110mm]{three-tri}
   \caption{Mesh obtained by {\small\tt join}ing three triangles}
   \label{\numb section 1.\numb fig 7}
@@ -408,23 +408,23 @@ We can also build meshes on triangular domains and {\small\tt join} them as we w
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 1.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{-1.} ;  y(A) = \laranja{0.};
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  \laranja{0.} ;  y(B) = \laranja{0.};
-   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) =  \laranja{1.} ;  y(C) = \laranja{0.};
-   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = \laranja{-0.5};  y(D) = \laranja{1.};
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{0.5};  y(E) = \laranja{1.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{-1.} ;  y (A) = \laranja{0.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) =  \laranja{0.} ;  y (B) = \laranja{0.};
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) =  \laranja{1.} ;  y (C) = \laranja{0.};
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = \laranja{-0.5};  y (D) = \laranja{1.};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{0.5};  y (E) = \laranja{1.};
 
-   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{8} );
-   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{8} );
-   \verm{Mesh} \azul{AD} ( \textcolor{tag}{tag}::segment, A.reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{8} );
-   \verm{Mesh} \azul{BD} ( \textcolor{tag}{tag}::segment, B.reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{8} );
-   \verm{Mesh} \azul{BE} ( \textcolor{tag}{tag}::segment, B.reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{8} );
-   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C.reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{8} );
-   \verm{Mesh} \azul{ED} ( \textcolor{tag}{tag}::segment, E.reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{AD} ( \textcolor{tag}{tag}::segment, A .reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{BD} ( \textcolor{tag}{tag}::segment, B .reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{BE} ( \textcolor{tag}{tag}::segment, B .reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{CE} ( \textcolor{tag}{tag}::segment, C .reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{8} );
+   \verm{Mesh} \azul{ED} ( \textcolor{tag}{tag}::segment, E .reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{8} );
 
-   \verm{Mesh} \azul{ABD} ( \textcolor{tag}{tag}::triangle, AB, BD, AD.reverse() );
-   \verm{Mesh} \azul{BCE} ( \textcolor{tag}{tag}::triangle, BC, CE, BE.reverse() );
-   \verm{Mesh} \azul{BED} ( \textcolor{tag}{tag}::triangle, BE, ED, BD.reverse() );
+   \verm{Mesh} \azul{ABD} ( \textcolor{tag}{tag}::triangle, AB, BD, AD .reverse() );
+   \verm{Mesh} \azul{BCE} ( \textcolor{tag}{tag}::triangle, BC, CE, BE .reverse() );
+   \verm{Mesh} \azul{BED} ( \textcolor{tag}{tag}::triangle, BE, ED, BD .reverse() );
 
    \verm{Mesh} \azul{three_tri} ( \textcolor{tag}{tag}::join, ABD, BCE, BED );
 \end{Verbatim}
@@ -439,19 +439,19 @@ It is possible to have triangles and quadrilaterals mixed in the same mesh :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 1.\numb parag 5}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Mesh} \azul{ABD} ( \textcolor{tag}{tag}::triangle, AB, BD, AD.reverse() );
-   \verm{Mesh} \azul{BCE} ( \textcolor{tag}{tag}::triangle, BC, CE, BE.reverse() );
-   \verm{Mesh} \azul{BEFD} ( \textcolor{tag}{tag}::quadrangle, BE, EF, FD, BD.reverse() );
+   \verm{Mesh} \azul{ABD} ( \textcolor{tag}{tag}::triangle, AB, BD, AD .reverse() );
+   \verm{Mesh} \azul{BCE} ( \textcolor{tag}{tag}::triangle, BC, CE, BE .reverse() );
+   \verm{Mesh} \azul{BEFD} ( \textcolor{tag}{tag}::quadrangle, BE, EF, FD, BD .reverse() );
    \verm{Mesh} \azul{two_tri_one_rect} ( \textcolor{tag}{tag}::join, ABD, BEFD, BCE );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
-  \psfrag{E}{\tt\textcolor{textindraw}{E}}
-  \psfrag{F}{\tt\textcolor{textindraw}{F}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
+  \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
+  \psfrag{F}{\small\tt\textcolor{textindraw}{F}}
   \includegraphics[width=110mm]{two-tri-one-rect}
   \caption{Mixed mesh}
   \label{\numb section 1.\numb fig 8}
@@ -481,8 +481,8 @@ while {\small\tt norm(A)} {\small\tt =} {\small\tt \laranja{1.}} produces a run-
 The {\small\tt \verm{Function}::deriv} method performs symbolic differentiation :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Function} \azul{norm_x} = norm.deriv ( x );
-   \verm{Function} \azul{norm_y} = norm.deriv ( y );
+   \verm{Function} \azul{norm_x} = norm .deriv ( x );
+   \verm{Function} \azul{norm_y} = norm .deriv ( y );
 \end{Verbatim}
 
 

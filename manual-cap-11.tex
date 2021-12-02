@@ -107,11 +107,11 @@ the iterators behave very differently (see paragraphs \ref{\numb section 9.\numb
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \cinza{// 'chain' is a one-dimensional Mesh}
-   \verm{CellIterator} \azul{it1} = chain.iterator ( \textcolor{tag}{tag}::over_vertices );
-   \verm{CellIterator} \azul{it2} = chain.iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
-   \verm{CellIterator} \azul{it3} = chain.iterator ( \textcolor{tag}{tag}::over_segments );
-   \verm{CellIterator} \azul{it4} = chain.iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
-   \verm{CellIterator} \azul{it5} = chain.iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::force_positive );
+   \verm{CellIterator} \azul{it1} = chain .iterator ( \textcolor{tag}{tag}::over_vertices );
+   \verm{CellIterator} \azul{it2} = chain .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
+   \verm{CellIterator} \azul{it3} = chain .iterator ( \textcolor{tag}{tag}::over_segments );
+   \verm{CellIterator} \azul{it4} = chain .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
+   \verm{CellIterator} \azul{it5} = chain .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::force_positive );
 \end{Verbatim}
 
 The above could be achieved by giving longer names to the functions, but we believe
@@ -121,7 +121,7 @@ Besides that, in the case of constructors, we do not have the choice of the name
 {\ManiFEM} uses {\small\tt\textcolor{tag}{tag}}\hskip0.8pt s extensively for constructors, e.g.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );
-   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, 10 );
 \end{Verbatim}
 
 In \maniFEM, namespaces and class names begin with capital letter

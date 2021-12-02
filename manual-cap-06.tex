@@ -84,23 +84,23 @@ boundary conditions.
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
-   \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
+   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{Function} \azul{x} = xy [0], \azul{y} = xy [1];
 
    \cinza{// declare the type of finite element}
    \verm{FiniteElement} \azul{fe}
       ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
-   \verm{Integrator} \azul{integ} = fe.set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::quad_4 );
+   \verm{Integrator} \azul{integ} = fe .set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::quad_4 );
 
    \cinza{// build a 10x12 mesh on a square domain}
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = 0.;   y(A) = 0.;
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = 1.;   y(B) = 0.;
-   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) = 1.;   y(C) = 1.;
-   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = 0.;   y(D) = 1.;
-   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B.reverse(), C, \textcolor{tag}{tag}::divided_in, 12 );
-   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C.reverse(), D, \textcolor{tag}{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D.reverse(), A, \textcolor{tag}{tag}::divided_in, 12 );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = 0.;   y (A) = 0.;
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = 1.;   y (B) = 0.;
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) = 1.;   y (C) = 1.;
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = 0.;   y (D) = 1.;
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in, 12 );
+   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C .reverse(), D, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D .reverse(), A, \textcolor{tag}{tag}::divided_in, 12 );
    \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );
 \end{Verbatim}
 \vskip 1mm
@@ -115,10 +115,10 @@ for numbering vertices.
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    std::map < Cell, size_t > \azul{numbering};
-   \verm{CellIterator} \azul{it} = ABCD.iterator ( \textcolor{tag}{tag}::over_vertices );
+   \verm{CellIterator} \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
    size_t \azul{counter} = 0;
-   for ( it.reset() ; it.in_range(); it++ )
-   \{  \verm{Cell} \azul{V} = *it;  numbering[V] = counter;  ++counter;  \}
+   for ( it .reset() ; it .in_range(); it++ )
+   \{  \verm{Cell} \azul{V} = *it;  numbering [V] = counter;  ++counter;  \}
 \end{Verbatim}
 \vskip 1mm
 
@@ -128,10 +128,10 @@ are declared as objects of the {\small\tt Eigen} library.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   size_t \azul{size_matrix} = ABCD.number_of ( \textcolor{tag}{tag}::vertices );
-   assert ( size_matrix == numbering.size() );
-   Eigen::SparseMatrix <double> \azul{matrix_A} ( size_matrix, size_matrix );
-   Eigen::VectorXd \azul{vector_b} ( size_matrix );  vector_b.setZero();
+   size_t \azul{size_matrix} = ABCD .number_of ( \textcolor{tag}{tag}::vertices );
+   assert ( size_matrix == numbering .size() );
+   Eigen::SparseMatrix < double > \azul{matrix_A} ( size_matrix, size_matrix );
+   Eigen::VectorXd \azul{vector_b} ( size_matrix );  vector_b .setZero();
 \end{Verbatim}
 \vskip 1mm
 
@@ -146,28 +146,28 @@ values to the global matrix:
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    // run over all square cells composing ABCD
-   \verm{CellIterator} \azul{it} = ABCD.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
-   for ( it.reset(); it.in_range(); it++ )
+   \verm{CellIterator} \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{small_square} = *it;
-      fe.dock_on ( small_square );
+      fe .dock_on ( small_square );
       // run twice over the four vertices of 'small_square'
-      \verm{CellIterator} \azul{it1} = small_square.boundary().iterator ( \textcolor{tag}{tag}::over_vertices );
-      \verm{CellIterator} \azul{it2} = small_square.boundary().iterator ( \textcolor{tag}{tag}::over_vertices );
-      for ( it1.reset(); it1.in_range(); it1++ )
-      for ( it2.reset(); it2.in_range(); it2++ )
+      \verm{CellIterator} \azul{it1} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
+      \verm{CellIterator} \azul{it2} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
+      for ( it1 .reset(); it1 .in_range(); it1++ )
+      for ( it2 .reset(); it2 .in_range(); it2++ )
       \{  \verm{Cell} \azul{V} = *it1, \azul{W} = *it2;
          \cinza{// V may be the same as W, no problem about that}
          \verm{Function} \azul{psiV} = fe.basis_function(V),
-                  \azul{psiW} = fe.basis_function(W),
-                  \azul{d_psiV_dx} = psiV.deriv(x),
-                  \azul{d_psiV_dy} = psiV.deriv(y),
-                  \azul{d_psiW_dx} = psiW.deriv(x),
-                  \azul{d_psiW_dy} = psiW.deriv(y);
+                  \azul{psiW} = fe .basis_function (W),
+                  \azul{d_psiV_dx} = psiV .deriv (x),
+                  \azul{d_psiV_dy} = psiV .deriv (y),
+                  \azul{d_psiW_dx} = psiW .deriv (x),
+                  \azul{d_psiW_dy} = psiW .deriv (y);
                   
          \cinza{// 'fe' is already docked on 'small_square'}
          \cinza{// so this will be the domain of integration}
-         matrix_A.coeffRef ( numbering[V]-1, numbering[W]-1 ) +=
-            fe.integrate ( d_psiV_dx * d_psiW_dx + d_psiV_dy * d_psiW_dy );    \}  \}
+         matrix_A .coeffRef ( numbering[V], numbering[W] ) +=
+            fe .integrate ( d_psiV_dx * d_psiW_dx + d_psiV_dy * d_psiW_dy );    \}  \}
 \end{Verbatim}
 
 In the above, {\small\tt coeffRef} is the method used by {\small\tt Eigen} to access elements of
@@ -185,10 +185,10 @@ function.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{CellIterator} \azul{it} = BC.iterator ( \textcolor{tag}{tag}::over_vertices );
-   for ( it.reset(); it.in_range(); it++ )
+   \verm{CellIterator} \azul{it} = BC .iterator ( \textcolor{tag}{tag}::over_vertices );
+   for ( it .reset(); it .in_range(); it++ )
    \{   \verm{Cell} \azul{P} = *it;
-       size_t \azul{i} = numbering[P]-1;
+       size_t \azul{i} = numbering [P];
        impose_value_of_unknown ( matrix_A, vector_b, i, y(P) );  \}
 \end{Verbatim}
 
@@ -199,19 +199,19 @@ We then use {\small\tt Eigen} to solve the system of linear equations :
    baselinestretch=0.94,framesep=2mm                                            ]
    Eigen::ConjugateGradient < Eigen::SparseMatrix <double>,
                               Eigen::Lower | Eigen::Upper  > \azul{cg};
-   cg.compute ( matrix_A );
-   Eigen::VectorXd \azul{u} = cg.solve ( vector_b );
+   cg .compute ( matrix_A );
+   Eigen::VectorXd \azul{u} = cg .solve ( vector_b );
 \end{Verbatim}
 
 And obtain the expected solution, shown in figure \ref{\numb section 6.\numb fig 1}.
 
 \begin{figure} \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=60mm]{square-Dirichlet}
-  \caption{Level lines}
+  \caption{Level lines of $u$}
   \label{\numb section 6.\numb fig 1}
 \end{figure}
 
@@ -256,26 +256,26 @@ part of the boundary where we need to integrate.
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe_bdry} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::segment,
                            \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
-   \verm{Integrator} \azul{integ_bdry} = fe_bdry.set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::seg_3 );
+   \verm{Integrator} \azul{integ_bdry} = fe_bdry .set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::seg_3 );
 
    \cinza{// ... assemble the matrix ...}
 
    \verm{Function} \azul{heat_source} = x+y;
    \cinza{// impose Neumann boundary conditions du/dn = heat_source :}
-   \verm{CellIterator} \azul{it} = DA.iterator ( \textcolor{tag}{tag}::over_segments );
-   for ( it.reset(); it.in_range(); it++ )
+   \verm{CellIterator} \azul{it} = DA .iterator ( \textcolor{tag}{tag}::over_segments );
+   for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{seg} = *it;
-      fe_bdry.dock_on ( seg );
-      \verm{Cell} \azul{V} = seg.base().reverse();
-      assert ( V.is_positive() );
-      size_t \azul{i} = numbering[V]-1;
-      \verm{Function} \azul{psiV} = fe_bdry.basis_function(V);
+      fe_bdry .dock_on ( seg );
+      \verm{Cell} \azul{V} = seg .base() .reverse();
+      assert ( V .is_positive() );
+      size_t \azul{i} = numbering [V];
+      \verm{Function} \azul{psiV} = fe_bdry .basis_function(V);
       vector_b[i] += fe_bdry.integrate ( heat_source * psiV );
       \verm{Cell} \azul{W} = seg.tip();
-      assert ( W.is_positive() );
-      size_t \azul{j} = numbering[W]-1;
-      \verm{Function} \azul{psiW} = fe_bdry.basis_function(W);
-      vector_b[j] += fe_bdry.integrate ( heat_source * psiW );  \}
+      assert ( W .is_positive() );
+      size_t \azul{j} = numbering [W];
+      \verm{Function} \azul{psiW} = fe_bdry .basis_function(W);
+      vector_b [j] += fe_bdry .integrate ( heat_source * psiW );  \}
 \end{Verbatim}
 
 One may object that there is no need for a 1D finite element, a 1D integrator should be enough.
@@ -305,7 +305,7 @@ this value can be used for numbering vertices.
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle,
                       \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1, \textcolor{tag}{tag}::enumerate_cells );
-   \verm{Cell}::Numbering & \azul{numbering} = fe.numbering ( \textcolor{tag}{tag}::vertices );
+   \verm{Cell}::Numbering & \azul{numbering} = fe .numbering ( \textcolor{tag}{tag}::vertices );
 \end{Verbatim}
 
 In this approach, the access to the index of a given vertex is very fast (constant time)
@@ -336,12 +336,12 @@ diagonal with ones, then erase them for existing vertices.
    label=parag-\ref{\numb section 6.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    for ( size_t \azul{i} = 0; i < size_matrix; i++ )
-      matrix_A.insert ( i, i ) = 1.;
-   \verm{CellIterator} \azul{it} = ABCD.iterator ( \textcolor{tag}{tag}::over_vertices );
-   for ( it.reset(); it.in_range(); it++ )
+      matrix_A .insert ( i, i ) = 1.;
+   \verm{CellIterator} \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
+   for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;
       size_t \azul{i} = numbering ( P );
-      matrix_A.coeffRef ( i, i ) = 0.;  \}
+      matrix_A .coeffRef ( i, i ) = 0.;  \}
 \end{Verbatim}
 
 The rest of the code is identical to paragraph \ref{\numb section 6.\numb parag 2}.
@@ -352,9 +352,9 @@ We simply assign the desired value to the numbering of each vertex :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm          ]
-   \verm{CellIterator} \azul{it} = ABCD.iterator ( \textcolor{tag}{tag}::over_vertices );
+   \verm{CellIterator} \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
    size_t \azul{counter} = 0;
-   for ( it.reset(); it.in_range(); it++ )
+   for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;
       numbering ( P ) = counter++;  \}
 \end{Verbatim}

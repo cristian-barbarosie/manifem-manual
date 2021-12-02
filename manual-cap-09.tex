@@ -19,7 +19,7 @@ For instance :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Cell} \azul{SW} ( \textcolor{tag}{tag}::vertex ); \cinza{// and the same for vertices SE, NE, NW}
-   \verm{Mesh} \azul{south} ( \textcolor{tag}{tag}::segment, SW.reverse(), SE, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{south} ( \textcolor{tag}{tag}::segment, SW .reverse(), SE, \textcolor{tag}{tag}::divided_in, 10 );
    \cinza{// similar declarations of east, north, west}
    \verm{Mesh} \azul{rectangle} ( \textcolor{tag}{tag}::rectangle, south, east, north, west );
 \end{Verbatim}
@@ -92,18 +92,18 @@ paragraph \ref{\numb section 11.\numb parag 4}.
    label=parag-\ref{\numb section 9.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FManifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
-   \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
+   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{Function} \azul{x} = xy [0], \azul{y} = xy [1];
 
    short int \azul{n_sectors} = 15;
-   double \azul{step_theta} = 8*atan(1.)/n_sectors;
+   double \azul{step_theta} = 8 * atan(1.) / n_sectors;
    short int \azul{radial_divisions} = 10;
    short int \azul{rot_divisions} = 5;
 
    \cinza{// start the process by building a segment}
-   \verm{Cell} \azul{ini_A} ( \textcolor{tag}{tag}::vertex );  x(ini_A) = 1.;  y(ini_A) = 0.;
-   \verm{Cell} \azul{ini_B} ( \textcolor{tag}{tag}::vertex );  x(ini_B) = 2.;  y(ini_B) = 0.;
-   \verm{Mesh} \azul{ini_seg} ( \textcolor{tag}{tag}::segment, ini_A.reverse(), ini_B,
+   \verm{Cell} \azul{ini_A} ( \textcolor{tag}{tag}::vertex );  x (ini_A) = 1.;  y (ini_A) = 0.;
+   \verm{Cell} \azul{ini_B} ( \textcolor{tag}{tag}::vertex );  x (ini_B) = 2.;  y (ini_B) = 0.;
+   \verm{Mesh} \azul{ini_seg} ( \textcolor{tag}{tag}::segment, ini_A .reverse(), ini_B,
                   \textcolor{tag}{tag}::divided_in, radial_divisions     );
    \verm{Mesh} \azul{prev_seg} = ini_seg;
    \verm{Cell} \azul{A} = ini_A,  \azul{B} = ini_B;
@@ -112,27 +112,27 @@ paragraph \ref{\numb section 11.\numb parag 4}.
    for ( short int \azul{i} = 1; i < n_sectors; i++ )
    \{  double \azul{theta} = i * step_theta;
       \cinza{// we build two new points}
-      \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex ); x(C) = \verm{cos}(theta);    y(C) = \verm{sin}(theta);
-      \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex ); x(D) = 2.*\verm{cos}(theta); y(D) = 2.*\verm{sin}(theta);
+      \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) = \verm{cos}(theta);     y (C) = \verm{sin}(theta);
+      \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = 2.*\verm{cos}(theta);  y (D) = 2.*\verm{sin}(theta);
       \cinza{// and three new segments}
-      \verm{Mesh} \azul{BD} ( \textcolor{tag}{tag}::segment, B.reverse(), D, \textcolor{tag}{tag}::divided_in, rot_divisions );
-      \verm{Mesh} \azul{DC} ( \textcolor{tag}{tag}::segment, D.reverse(), C, \textcolor{tag}{tag}::divided_in, radial_divisions );
-      \verm{Mesh} \azul{CA} ( \textcolor{tag}{tag}::segment, C.reverse(), A, \textcolor{tag}{tag}::divided_in, rot_divisions );
+      \verm{Mesh} \azul{BD} ( \textcolor{tag}{tag}::segment, B .reverse(), D, \textcolor{tag}{tag}::divided_in, rot_divisions );
+      \verm{Mesh} \azul{DC} ( \textcolor{tag}{tag}::segment, D .reverse(), C, \textcolor{tag}{tag}::divided_in, radial_divisions );
+      \verm{Mesh} \azul{CA} ( \textcolor{tag}{tag}::segment, C .reverse(), A, \textcolor{tag}{tag}::divided_in, rot_divisions );
       \verm{Mesh} \azul{quadr} ( \textcolor{tag}{tag}::quadrangle, prev_seg, BD, DC, CA );
-      sectors.push_back ( quadr );
-      prev_seg = DC.reverse();
+      sectors .push_back ( quadr );
+      prev_seg = DC .reverse();
       A = C;  B = D;                                                             \}
 
    \cinza{// we now build the last sector, thus closing the ring}
    \cinza{// prev_seg, A and B have rotated during the construction process}
    \cinza{// but ini_seg, ini_A and ini_B are the same, initial, ones}
-   \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::segment, B.reverse(), ini_B, \textcolor{tag}{tag}::divided_in, rot_divisions );
-   \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::segment, ini_A.reverse(), A, \textcolor{tag}{tag}::divided_in, rot_divisions );
-   \verm{Mesh} \azul{quadr} ( \textcolor{tag}{tag}::quadrangle, outer, ini_seg.reverse(), inner, prev_seg );
+   \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::segment, B .reverse(), ini_B, \textcolor{tag}{tag}::divided_in, rot_divisions );
+   \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::segment, ini_A .reverse(), A, \textcolor{tag}{tag}::divided_in, rot_divisions );
+   \verm{Mesh} \azul{quadr} ( \textcolor{tag}{tag}::quadrangle, outer, ini_seg .reverse(), inner, prev_seg );
    sectors.push_back ( quadr );
    
    \verm{Mesh} \azul{ring} ( \textcolor{tag}{tag}::join, sectors );
-   ring.export_msh (\verde{"ring.msh"});
+   ring .export_msh (\verde{"ring.msh"});
 \end{Verbatim}
 
 Note how we use a version of the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::join}
@@ -186,8 +186,8 @@ we can use a code like
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
-   for ( it.reset(); it.in_range(); it++ )
+   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{cll} = *it;  do_something_to (cll);  \}
 \end{Verbatim}
 
@@ -220,8 +220,8 @@ This has the advantage that the name of the iterator gains local scope.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   for ( \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::reset );
-         it.in_range(); it++                                                       )
+   for ( \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::reset );
+         it .in_range(); it++                                                       )
    \{  \verm{Cell} \azul{cll} = *it;  do_something_to (cll);  \}
 \end{Verbatim}
 
@@ -229,9 +229,9 @@ If we want to iterate over all vertices of the mesh, we can use
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 0 );
+   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 0 );
    \cinza{// or, equivalently :  CellIterator it = msh.iterator ( tag::over_vertices )}
-   for ( it.reset(); it.in_range(); it++ )
+   for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;  do_something_to (P);  \}
 \end{Verbatim}
 
@@ -239,9 +239,9 @@ If we want to iterate over all segments of the mesh, we can use
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1 );
-   \cinza{// or, equivalently :  CellIterator it = msh.iterator ( tag::over_segments )}
-   for ( it.reset(); it.in_range(); it++ )
+   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1 );
+   \cinza{// or, equivalently :  CellIterator it = msh .iterator ( tag::over_segments )}
+   for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{seg} = *it;  do_something_to (seg);  \}
 \end{Verbatim}
 
@@ -255,7 +255,7 @@ by adding a {\small\tt \textcolor{tag}{tag}::force\_\,positive} as in
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::force_positive );
+   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::force_positive );
 \end{Verbatim}
 
 Note that it is not safe to modify a mesh while iterating over its cells
@@ -268,12 +268,13 @@ dimension of the cells) we may use the method {\small\tt number\_\,of} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   size_t \azul{n} = msh.number_of ( \textcolor{tag}{tag}::cells_of_dim, 2 );
+   size_t \azul{n} = msh .number_of ( \textcolor{tag}{tag}::cells_of_dim, 2 );
 \end{Verbatim}
 
 \noindent Expression {\small\tt msh.number\_\,of}\hskip1pt{\small\tt (}\hskip1pt
 {\small\tt \textcolor{tag}{tag}::vertices}\hskip1pt{\small\tt )} is equivalent to
-\hbox{{\small\tt msh.number\_\,of}\hskip1pt{\small\tt (}\hskip1pt
+\hbox{{\small\tt msh.number\_\,of}\hski
+  p1pt{\small\tt (}\hskip1pt
 {\small\tt \textcolor{tag}{tag}::cells\_\,of\_\,dim,}\hskip1pt{\small\tt 0}\hskip1pt{\small\tt )}},
 while {\small\tt msh.number\_\,of}\hskip2pt{\small\tt
 (}\hskip2pt{\small\tt \textcolor{tag}{tag}::segments}\hskip2pt{\small\tt )} is equivalent to
@@ -303,21 +304,21 @@ The syntax is the same as the one described in pragraph \ref{\numb section 9.\nu
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Mesh} \azul{chain} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Mesh} \azul{chain} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, n );
    \cinza{// A and B are (positive) vertices, n is an integer}
    
-   \verm{CellIterator} \azul{it0} = chain.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 0 );
-   for ( it0.reset(); it0.in_range(); it0++ )
+   \verm{CellIterator} \azul{it0} = chain .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 0 );
+   for ( it0 .reset(); it0 .in_range(); it0++ )
    \{  \verm{Cell} \azul{P} = *it0;  do_something_to (P);  \}
 
-   \verm{CellIterator} \azul{it1} = chain.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1 );
-   for ( it1.reset(); it1.in_range(); it1++ )
+   \verm{CellIterator} \azul{it1} = chain .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1 );
+   for ( it1 .reset(); it1 .in_range(); it1++ )
    \{  \verm{Cell} \azul{seg} = *it1;  do_something_to (seg);  \}
    
    \cinza{// or, equivalently,}
-   \cinza{// CellIterator it0 = chain.iterator ( tag::over_vertices )}
-   \cinza{// CellIterator it1 = chain.iterator ( tag::over_segments )}
-   \cinza{// CellIterator it1 = chain.iterator ( tag::over_cells_of_max_dim )}
+   \cinza{// CellIterator it0 = chain .iterator ( tag::over_vertices )}
+   \cinza{// CellIterator it1 = chain .iterator ( tag::over_segments )}
+   \cinza{// CellIterator it1 = chain .iterator ( tag::over_cells_of_max_dim )}
 \end{Verbatim}
 
 If we want to start at a specific location, we can make a {\small\tt reset} call with
@@ -339,8 +340,8 @@ the {\small\tt \textcolor{tag}{tag}::backwards} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it1r} = chain.iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
-   \verm{CellIterator} \azul{it0r} = chain.iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
+   \verm{CellIterator} \azul{it1r} = chain .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
+   \verm{CellIterator} \azul{it0r} = chain .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
 \end{Verbatim}
 
 Connected one-dimensional meshes have methods {\small\tt first\_\,vertex},
@@ -369,14 +370,15 @@ If we want to make sure the vertices will come up in a linear order, we can add 
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it1} = chain.iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::require_order );
-   \verm{CellIterator} \azul{it0} = chain.iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::require_order );
+   \verm{CellIterator} \azul{it1} = chain .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::require_order );
+   \verm{CellIterator} \azul{it0} = chain .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::require_order );
 \end{Verbatim}
 
 If {\small\tt chain} does not support linear ordering, the above statements will produce
 (in {\small\tt DEBUG} mode) a run-time error rather than returning unordered iterators.
 Specifying {\small\tt\textcolor{tag}{tag}::backwards} also informs {\maniFEM} that you need
 linear ordering of cells, so you don't have to provide both tags.
+
 
           %----------------------------------%
 \section{~~Orientation of cells within a mesh}\label{\numb section 9.\numb parag 5}
@@ -394,10 +396,10 @@ So, the triangles composing {\small\tt tri\_\,mesh} will have no reverse cell
 (there is no need for such).
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=55mm]{malha-tri}
   \caption{A (part of a) triangular mesh}
   \label{\numb section 9.\numb fig 2}
@@ -437,9 +439,9 @@ We also understand that usually there is no difference between these two iterato
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it1} = tri_msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   \verm{CellIterator} \azul{it1} = tri_msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
    \verm{CellIterator} \azul{it2} =
-      tri_msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::force_positive );
+      tri_msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::force_positive );
 \end{Verbatim}
 
 \noindent because all triangles composing {\small\tt tri\_\,mesh} should be positive
@@ -459,9 +461,9 @@ depending on which segments happen to be positive :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it3} = ABC.boundary().iterator ( \textcolor{tag}{tag}::over_segments );
+   \verm{CellIterator} \azul{it3} = ABC .boundary() .iterator ( \textcolor{tag}{tag}::over_segments );
    \verm{CellIterator} \azul{it4} =
-      ABC.boundary().iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::force_positive );
+      ABC .boundary() .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::force_positive );
 \end{Verbatim}
 
 There is no difference between the two iterators below (both produce positive
@@ -469,16 +471,16 @@ points).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it5} = ABC.boundary().iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
-   \verm{CellIterator} \azul{it6} = ABC.boundary().reverse().iterator ( \textcolor{tag}{tag}::over_vertices );
+   \verm{CellIterator} \azul{it5} = ABC .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
+   \verm{CellIterator} \azul{it6} = ABC .boundary() .reverse() .iterator ( \textcolor{tag}{tag}::over_vertices );
 \end{Verbatim}
 
 However, the two iterators below are quite different.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it7} = ABC.boundary().iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
-   \verm{CellIterator} \azul{it8} = ABC.boundary().reverse().iterator ( \textcolor{tag}{tag}::over_segments );
+   \verm{CellIterator} \azul{it7} = ABC .boundary() .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
+   \verm{CellIterator} \azul{it8} = ABC .boundary() .reverse() .iterator ( \textcolor{tag}{tag}::over_segments );
 \end{Verbatim}
 
 Iterator {\small\tt it7} will produce segments {\small\tt AB}, {\small\tt CA}, {\small\tt BC}
@@ -504,12 +506,12 @@ Together with methods {\small\tt base} and {\small\tt tip} of class {\small\tt \
 a mesh.
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
-  \psfrag{hex_1}{\tt\textcolor{textindraw}{hex\_\,1}}
-  \psfrag{hex_2}{\tt\textcolor{textindraw}{hex\_\,2}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
+  \psfrag{hex_1}{\small\tt\textcolor{textindraw}{hex\_\,1}}
+  \psfrag{hex_2}{\small\tt\textcolor{textindraw}{hex\_\,2}}
   \includegraphics[width=40mm]{malha-hex}
   \caption{A mesh made of hexagons}
   \label{\numb section 9.\numb fig 3}
@@ -521,8 +523,8 @@ Pick one of them, at random :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it1} = hex_msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
-   it1.reset();  assert ( it1.in_range() );
+   \verm{CellIterator} \azul{it1} = hex_msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   it1 .reset();  assert ( it1 .in_range() );
    \verm{Cell} \azul{hex_1} = *it1;
 \end{Verbatim}
 
@@ -530,8 +532,8 @@ Now choose a random segment on the boundary of {\small\tt hex\_\,1} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it2} = hex_1.boundary().iterator ( \textcolor{tag}{tag}::over_segments );
-   it2.reset();  assert ( it2.in_range() );
+   \verm{CellIterator} \azul{it2} = hex_1 .boundary() .iterator ( \textcolor{tag}{tag}::over_segments );
+   it2 .reset();  assert ( it2 .in_range() );
    \verm{Cell} \azul{AB} = *it2;
 \end{Verbatim}
 
@@ -539,14 +541,14 @@ Take its tip :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{B} = AB.tip();
+   \verm{Cell} \azul{B} = AB .tip();
 \end{Verbatim}
 
 Suppose now we want the next segment, within the boundary of {\small\tt hex\_\,1} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{BC} = hex_1.boundary().cell_in_front_of ( B );
+   \verm{Cell} \azul{BC} = hex_1 .boundary() .cell_in_front_of ( B );
 \end{Verbatim}
 
 And now we may continue by taking the tip of {\small\tt BC} and then the segment
@@ -554,8 +556,8 @@ following it$\;$:
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{C} = BC.tip();
-   \verm{Cell} \azul{CD} = hex_1.boundary().cell_in_front_of ( C );
+   \verm{Cell} \azul{C} = BC .tip();
+   \verm{Cell} \azul{CD} = hex_1 .boundary() .cell_in_front_of ( C );
 \end{Verbatim}
 
 \noindent an so forth (this is how iterators over vertices and segments of connected
@@ -566,7 +568,7 @@ Within the mesh {\small\tt hex\_\,msh}, we can navigate towards a neighbour hexa
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{hex_2} = hex_msh.cell_in_front_of ( CD );
+   \verm{Cell} \azul{hex_2} = hex_msh .cell_in_front_of ( CD );
 \end{Verbatim}
 
 Since we have picked {\small\tt hex\_\,1} at random within {\small\tt hex\_\,msh},
@@ -603,7 +605,7 @@ Suppose you try to get a neighbour hexagon which does not exist :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{no_such_hex} = hex_msh.cell_in_front_of ( AB );
+   \verm{Cell} \azul{no_such_hex} = hex_msh .cell_in_front_of ( AB );
 \end{Verbatim}
 
 In {\small\tt DEBUG} mode, you will get an {\small\tt assertion error}.
@@ -616,8 +618,8 @@ You may check the existence of the neighbour cell by using a
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{possible_hex} = hex_msh.cell_in_front_of ( AB, \textcolor{tag}{tag}::may_not_exist );
-   if ( possible_hex.exists() ) do_something_to ( possible_hex );
+   \verm{Cell} \azul{possible_hex} = hex_msh .cell_in_front_of ( AB, \textcolor{tag}{tag}::may_not_exist );
+   if ( possible_hex .exists() ) do_something_to ( possible_hex );
    else cout << \verde{"no neighbour !"} << endl;
 \end{Verbatim}
 
@@ -671,10 +673,10 @@ The segments will show up in a rahter unpredictable order.
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Mesh} \azul{msh} ( \cinza{...} );  \cinza{// a mesh of cubes for instance}
    \verm{CellIterator} \azul{it} =  \cinza{// P is a positive vertex within msh}
-               msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P.reverse() );
+              msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P.reverse() );
    \cinza{// or, equivalently :}
    \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P.reverse() )}
-   for ( it.reset(); it.in_range(); it++ )
+   for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{seg} = *it;  do_something_to ( seg );   \}
 \end{Verbatim}
 
@@ -689,7 +691,7 @@ produces segments pointing towards {\small\tt P}.
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P );
    \cinza{// or, equivalently :}
-   \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P )}
+   \cinza{// CellIterator it = msh .iterator ( tag::over_segments, tag::around, P )}
 \end{Verbatim}
 
 In either case, since we are in a three-dimensional mesh, positive or negative segments
@@ -712,8 +714,8 @@ this will not change the behaviour of the iterator {\small\tt it} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::around, P );
-   for ( it.reset(); it.in_range(); it++ )
+   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::around, P );
+   for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );   \}
 \end{Verbatim}
 
@@ -727,8 +729,8 @@ can always add the {\small\tt\textcolor{tag}{tag}::force\_\,positive} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 3, \textcolor{tag}{tag}::force_positive,
-                                    \textcolor{tag}{tag}::around, P                                 );
+   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 3, \textcolor{tag}{tag}::force_positive,
+                                     \textcolor{tag}{tag}::around, P                                 );
 \end{Verbatim}
 
 Consider now the case when the co-dimension is two, that is, when we are centered at a vertex
@@ -750,7 +752,7 @@ all squares sharing the vertex {\small\tt P}, linearly ordered.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::around, P );
+   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::around, P );
 \end{Verbatim}
 
 If {\small\tt P} is at the boundary of {\small\tt msh}, the iteration process will begin
@@ -763,7 +765,7 @@ We can iterate over segments originating at {\small\tt P} (now the orientation o
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{CellIterator} \azul{it} = 
-               msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P.reverse() );
+               msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P.reverse() );
    \cinza{// or, equivalently :}
    \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P.reverse() )}
 \end{Verbatim}
@@ -773,8 +775,8 @@ supplementary arguments to the {\small\tt reset} method :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::around, P );
-   for ( it.reset ( \textcolor{tag}{tag}::start_at, sq ); it.in_range(); it++ )
+   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::around, P );
+   for ( it .reset ( \textcolor{tag}{tag}::start_at, sq ); it .in_range(); it++ )
    \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );   \}
 \end{Verbatim}
 
@@ -790,8 +792,8 @@ they produce vertices in a rather unpredictable order in a three-dimensional mes
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::around, P );
-   for ( it.reset(); it.in_range(); it++ )
+   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::around, P );
+   for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{Q} = *it;  do_something_to ( Q );   \}
 \end{Verbatim}
 
@@ -820,7 +822,7 @@ to the constructor, as in
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator
+   \verm{CellIterator} \azul{it} = msh .iterator
                  ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::do_not_build_cells, \textcolor{tag}{tag}::around, P );
 \end{Verbatim}
 
@@ -845,7 +847,7 @@ No new cell or mesh is created :
    \verm{Cell} \azul{A} = B;  \cinza{// B is a Cell}
    \verm{Cell} \azul{C} = *it;  \cinza{// 'it' is a CellIterator}
    \verm{Mesh} \azul{msh_copy} = msh;  \cinza{// msh is a Mesh}
-   \verm{Mesh} \azul{bd} = cll.boundary();  \cinza{// cll is a Cell of dimension 1 or higher}
+   \verm{Mesh} \azul{bd} = cll .boundary();  \cinza{// cll is a Cell of dimension 1 or higher}
 \end{Verbatim}
 
 Statements below search for an existing cell.
@@ -857,18 +859,18 @@ The {\small\tt DEBUG} mode is explained in paragraph \ref{\numb section 11.\numb
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{A_rev} = A.reverse ( \textcolor{tag}{tag}::surely_exists );  \cinza{//  A is a Cell}
+   \verm{Cell} \azul{A_rev} = A .reverse ( \textcolor{tag}{tag}::surely_exists );  \cinza{//  A is a Cell}
    \cinza{// or, equivalently :}
    \verm{Cell} \azul{A_rev} ( \textcolor{tag}{tag}::reverse_of, A, \textcolor{tag}{tag}::surely_exists );
 
-   \verm{Cell} \azul{tri1} = msh.cell_behind ( CD );  \cinza{//  CD is a Cell, a face within msh}
-   \verm{Cell} \azul{tri2} = msh.cell_in_front_of ( CD );
+   \verm{Cell} \azul{tri1} = msh .cell_behind ( CD );  \cinza{//  CD is a Cell, a face within msh}
+   \verm{Cell} \azul{tri2} = msh .cell_in_front_of ( CD );
    \cinza{// or, equivalently :}
    \verm{Cell} \azul{tri1} ( \textcolor{tag}{tag}::behind_face, CD, \textcolor{tag}{tag}::within_mesh, msh );
    \verm{Cell} \azul{tri2} ( \textcolor{tag}{tag}::in_front_of_face, CD, \textcolor{tag}{tag}::within_mesh, msh );
    \cinza{// or, equivalently :}
-   \verm{Cell} \azul{tri1} = msh.cell_behind ( CD, \textcolor{tag}{tag}::surely_exists );
-   \verm{Cell} \azul{tri2} = msh.cell_in_front_of ( CD, \textcolor{tag}{tag}::surely_exists );
+   \verm{Cell} \azul{tri1} = msh .cell_behind ( CD, \textcolor{tag}{tag}::surely_exists );
+   \verm{Cell} \azul{tri2} = msh .cell_in_front_of ( CD, \textcolor{tag}{tag}::surely_exists );
    \cinza{// or, equivalently :}
    \verm{Cell} \azul{tri1} ( \textcolor{tag}{tag}::behind_face, CD, \textcolor{tag}{tag}::within_mesh, msh, \textcolor{tag}{tag}::surely_exists );
    \verm{Cell} \azul{tri2} ( \textcolor{tag}{tag}::in_front_of_face, CD,
@@ -880,7 +882,7 @@ on-the-fly).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Mesh} \azul{rev_msh} = msh.reverse();  \cinza{// msh is a Mesh}
+   \verm{Mesh} \azul{rev_msh} = msh .reverse();  \cinza{// msh is a Mesh}
 \end{Verbatim}
 
 Statements below search for an existing cell.
@@ -892,13 +894,13 @@ of the returned cell using its method {\small\tt exists}, as illustrated in para
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{A_rev} = A.reverse ( \textcolor{tag}{tag}::may_not_exist );  \cinza{//  A is a Cell}
+   \verm{Cell} \azul{A_rev} = A .reverse ( \textcolor{tag}{tag}::may_not_exist );  \cinza{//  A is a Cell}
    \cinza{// or, equivalently :}
    \verm{Cell} \azul{A_rev} ( \textcolor{tag}{tag}::reverse_of, A, \textcolor{tag}{tag}::may_not_exist );
    
-   \verm{Cell} \azul{tri1} = msh.cell_behind ( CD, \textcolor{tag}{tag}::may_not_exist );
+   \verm{Cell} \azul{tri1} = msh .cell_behind ( CD, \textcolor{tag}{tag}::may_not_exist );
    \cinza{//  CD is a Cell, a face within msh}
-   \verm{Cell} \azul{tri2} = msh.cell_in_front_of ( CD, \textcolor{tag}{tag}::may_not_exist );
+   \verm{Cell} \azul{tri2} = msh .cell_in_front_of ( CD, \textcolor{tag}{tag}::may_not_exist );
    \cinza{// or, equivalently :}
    \verm{Cell} \azul{tri1} ( \textcolor{tag}{tag}::behind_face, CD, \textcolor{tag}{tag}::within_mesh, msh, \textcolor{tag}{tag}::may_not_exist );
    \verm{Cell} \azul{tri2}
@@ -910,11 +912,11 @@ If that object does not exist, it is built on-the-fly.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{A_rev} = A.reverse();  \cinza{// A is some Cell}
+   \verm{Cell} \azul{A_rev} = A .reverse();  \cinza{// A is some Cell}
    \cinza{// or, equivalentely :}
    \verm{Cell} \azul{A_rev} ( \textcolor{tag}{tag}::reverse_of, A );
    \cinza{// or, equivalentely :}
-   \verm{Cell} \azul{A_rev} = A.reverse ( \textcolor{tag}{tag}::build_if_not_exists );
+   \verm{Cell} \azul{A_rev} = A .reverse ( \textcolor{tag}{tag}::build_if_not_exists );
    \cinza{// or, equivalentely :}
    \verm{Cell} \azul{A_rev} ( \textcolor{tag}{tag}::reverse_of, A, \textcolor{tag}{tag}::build_if_not_exists );
 \end{Verbatim}
@@ -927,7 +929,7 @@ Statements below return a wrapper for a brand new cell or mesh :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );
-   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 15 );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, 15 );
    \cinza{// B is another vertex Cell}
    \verm{Mesh} \azul{ABC} ( \textcolor{tag}{tag}::triangle, AB, BC, CA );
    \cinza{//  BC and CA are segment Meshes, each having 15 segments Cells}

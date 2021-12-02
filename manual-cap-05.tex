@@ -13,9 +13,9 @@ Euclidian {\small\tt \verm{Manifold}} and then go on by building a coordinate sy
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Manifold} RR2 ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
-   \verm{Function} \azul{x} = xy[0], \azul{y} = xy[1];
+   \verm{Manifold} RR2 ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
+   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
 \end{Verbatim}
 
 See paragraph \numb section 11.\numb parag 3 for more details about tags.
@@ -29,28 +29,28 @@ initialization of {\small\tt \verm{Cell}}s.
 Since {\small\tt xy} is of type Lagrange of degree 1, each newly built vertex
 {\small\tt \verm{Cell}} will have memory space reserved for two {\small\tt double}
 precision numbers.
-If {\small\tt A} is a vertex {\small\tt \verm{Cell}}, an assignment like {\small\tt x(A) = 1.5}
+If {\small\tt A} is a vertex {\small\tt \verm{Cell}}, an assignment like {\small\tt x(A) = \laranja{1.5}}
 sets the value of the {\small\tt x} component of the {\small\tt \verm{Field}} associated to
 {\small\tt xy} at {\small\tt A}.
 
 If we declare {\small\tt xy} to be of type Lagrange of degree 2, not only future vertices will
 have space reserved for two {\small\tt double}s, but also future segments.
 So, we may assign the value of {\small\tt y} at the middle of segment {\small\tt AB} by using
-the syntax {\small\tt y(AB) = 0.75}.
+the syntax {\small\tt y(AB) = \laranja{0.75}}.
 
 {\small\tt \verm{Function}} objects allow for arithmetic expressions like in
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Function} \azul{norm} = \verm{power} ( x*x + y*y, 0.5 );
+   \verm{Function} \azul{norm} = \verm{power} ( x*x + y*y, \laranja{0.5} );
 \end{Verbatim}
 
 The {\small\tt deriv} method performs symbolic differentiation :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Function} \azul{norm_x} = norm.deriv ( x );
-   \verm{Function} \azul{norm_y} = norm.deriv ( y );
+   \verm{Function} \azul{norm_x} = norm .deriv ( x );
+   \verm{Function} \azul{norm_y} = norm .deriv ( y );
 \end{Verbatim}
 
 Functions can also be integrated, see section \numb section 6.

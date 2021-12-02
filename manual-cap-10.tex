@@ -20,19 +20,19 @@ One way to achieve this is
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 10.\numb parag 1}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   ABCD.remove_from_mesh ( msh );
-   \verm{Cell} \azul{AC} ( \textcolor{tag}{tag}::segment, A.reverse(), C );
-   \verm{Cell} \azul{ABC} ( \textcolor{tag}{tag}::triangle, AB, BC, AC.reverse() );
+   ABCD .remove_from_mesh ( msh );
+   \verm{Cell} \azul{AC} ( \textcolor{tag}{tag}::segment, A .reverse(), C );
+   \verm{Cell} \azul{ABC} ( \textcolor{tag}{tag}::triangle, AB, BC, AC .reverse() );
    \verm{Cell} \azul{CDA} ( \textcolor{tag}{tag}::triangle, CD, DA, AC );
-   ABC.add_to_mesh ( msh );
-   CDA.add_to_mesh ( msh );
+   ABC .add_to_mesh ( msh );
+   CDA .add_to_mesh ( msh );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\tt\textcolor{textindraw}{D}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=60mm]{malha-quadr}
   \caption{A (part of a) mesh of squares}
   \label{\numb section 10.\numb fig 1}
@@ -60,19 +60,19 @@ a new triangle to obtain the same result as in paragraph \ref{\numb section 10.\
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 10.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   CD.cut_from_bdry_of ( ABCD );
-   DA.cut_from_bdry_of ( ABCD );
+   CD .cut_from_bdry_of ( ABCD );
+   DA .cut_from_bdry_of ( ABCD );
    \cinza{// at this point, ABCD is a cell whose boundary is incomplete}
    \cinza{// it has only two sides and an opening}
    \cinza{// however, it still is part of 'msh'}
 
-   \verm{Cell} \azul{AC} ( \textcolor{tag}{tag}::segment, A.reverse(), C );
-   AC.reverse().glue_on_bdry_of ( ABCD );
+   \verm{Cell} \azul{AC} ( \textcolor{tag}{tag}::segment, A .reverse(), C );
+   AC .reverse() .glue_on_bdry_of ( ABCD );
    \cinza{// at this point, and in spite of its name, ABCD is no longer a square}
    \cinza{// it is a triangle, still part of 'msh'}
 
    \verm{Cell} \azul{CDA} ( \textcolor{tag}{tag}::triangle, CD, DA, AC );
-   CDA.add_to_mesh ( msh );
+   CDA .add_to_mesh ( msh );
 \end{Verbatim}
 
 
@@ -89,15 +89,15 @@ will occur).
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=incorrect code !,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
-   for ( it.reset(); it.in_range(); it++ )
+   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{square} = *it;
       if ( \cinza{... some criterion ...} )
-      \{  square.remove_from_mesh ( msh );
+      \{  square .remove_from_mesh ( msh );
          \cinza{// statement above opens the path to disaster}
          \cinza{// next time 'it' is incremented, we get undefined behaviour}
          \cinza{// we may add other cells afterwards, at no good}
-         some_other_cell.add_to_mesh ( msh );     \}   \}
+         some_other_cell .add_to_mesh ( msh );     \}   \}
 \end{Verbatim}
 
 We can circumvent this problem by creating a list of cells to be cut.
@@ -105,24 +105,24 @@ We can circumvent this problem by creating a list of cells to be cut.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 10.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   std::list<\verm{Cell}> list_of_squares;
+   std::list < \verm{Cell} > list_of_squares;
 
-   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
-   for ( it.reset(); it.in_range(); it++ )
+   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{square} = *it;
       if ( \cinza{ \mbox{\fontfamily{helvetica}\selectfont{}some criterion} } )  \cinza{// we decide to cut this square in halves}
-         list_of_squares.push_back ( square );  \}
+         list_of_squares .push_back ( square );  \}
 
-   for ( std::list<\verm{Cell}>::iterator \azul{it_square} = list_of_squares .begin(),
+   for ( std::list < \verm{Cell} > ::iterator \azul{it_square} = list_of_squares .begin(),
          it_square != list_of_squares .end(); it_square               )
    \{  \verm{Cell} \azul{square} = * it_square;
       \cinza{// according to the same criterion, choose a diagonal, here we cut along PR}
-      square.remove_from_mesh ( msh );
-      \verm{Cell} \azul{PR} ( \textcolor{tag}{tag}::segment, P.reverse(), R );
-      \verm{Cell} \azul{PQR} ( \textcolor{tag}{tag}::triangle, PQ, QR, PR.reverse() );
-      PQR.add_to_mesh ( msh );
+      square .remove_from_mesh ( msh );
+      \verm{Cell} \azul{PR} ( \textcolor{tag}{tag}::segment, P .reverse(), R );
+      \verm{Cell} \azul{PQR} ( \textcolor{tag}{tag}::triangle, PQ, QR, PR .reverse() );
+      PQR .add_to_mesh ( msh );
       \verm{Cell} \azul{RSP} ( \textcolor{tag}{tag}::triangle, RS, SP, PR );
-      RSP.add_to_mesh ( msh );                           \}
+      RSP .add_to_mesh ( msh );                           \}
 \end{Verbatim}
 
 
@@ -133,9 +133,9 @@ We can circumvent this problem by creating a list of cells to be cut.
 Sometimes the progressive meshing algorithm, presented in section \ref{\numb section 3},
 produces imperfect meshes.
 Recall that this algorithm produces meshes of triangles.
-For such a mesh to be considered of good quality, one may require each vertex
+For such a mesh to be considered of good quality, one may require each inner vertex
 to have six neighbour triangles, and thus six neighbour segments.
-This is not realistic for irregular shapes, but it is reasonable to require each vertex
+This is not realistic for arbitrary domains, but it is reasonable to require each vertex
 to have five, six or seven neighbours.
 In most cases, the algorithm fulfills this condition, but in rare cases we can see vertices
 with four or eight vertices (in extremely rare cases vertices with three neighbours show up).
@@ -172,8 +172,8 @@ inline bool \azul{flip_segment} ( \verm{Mesh} & \azul{msh}, \verm{Cell} & \azul{
 \{  \verm{Cell} \azul{tri2} = msh .cell_in_front_of ( seg, \textcolor{tag}{tag}::may_not_exist );
    if ( not tri2.exists() ) return false; 
    \verm{Cell} \azul{tri1} = msh .cell_behind ( seg, \textcolor{tag}{tag}::may_not_exist );
-   if ( not tri1.exists() ) return false;
-   \cinza{// or, equivalently :  if ( not seg.is_inner_to ( msh ) ) return false}
+   if ( not tri1 .exists() ) return false;
+   \cinza{// or, equivalently :  if ( not seg .is_inner_to ( msh ) ) return false}
 
    \verm{Cell} \azul{A} = seg .base() .reverse();
    \verm{Cell} \azul{B} = seg .tip();
