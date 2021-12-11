@@ -232,12 +232,13 @@ just once and then assembly the global matrix from it.
 It will surely be much faster.
 A second way to speed up the code is to add the option {\small\tt -dNDEBUG} to the compilation
 command in your {\small\tt Makefile} (see also paragraph \ref{\numb section 11.\numb parag 15}).
-The third (and soundest) solution is a deep optimization of the {\maniFEM} library,
-object of on-going work.
-A significant part of the symbolic calculations should be done just once,
-when the finite element is declared.
-Only a small chunk of symbolic computation will be performed at docking and
-later, when we build the elementary matrix.
+
+The third (and soundest) solution is a deep optimization of the {\maniFEM} library.
+A new type of finite elements (or, rather, integrators) is object of on-going work.
+These integrators perform a few symbolic calculations just once,
+typically right after they are declared.
+Only raw arithmetic operations are performed when the user actually requests the values
+of integrals in order to assembly the matrix.
 
 
           %---------------------------%
@@ -359,10 +360,12 @@ We simply assign the desired value to the numbering of each vertex :
       numbering ( P ) = counter++;  \}
 \end{Verbatim}
 
-However, the information from {\small\tt numbering.size()} will still be misleading
+This solution keeps the advantage of constant accesss time to the number of a vertex.
+However, the information from {\small\tt numbering.size()} will be misleading
 (it still takes into account the ``hidden'' vertices).
 You should use instead {\small\tt ABCD.number\_\,of} {\small\tt} {\small\tt (}
-{\small\tt \textcolor{tag}{tag}::vertices )}.
+{\small\tt \textcolor{tag}{tag}::vertices )}; this is the dimension you should use
+when declaring your global matrix.
 
 Note that both numbering methods (presented in paragraphs \ref{\numb section 6.\numb parag 2}
 and \ref{\numb section 6.\numb parag 4}) allow for retrieving

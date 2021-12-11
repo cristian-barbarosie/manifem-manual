@@ -8,7 +8,7 @@
 \def\manifemrelease{**.**}
 \def\manualversion{**.**}
 \let\production 0
-% \includeonly{manual-cap-01}
+\includeonly{manual-cap-11}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -329,7 +329,10 @@ a STSI interface instead of a list of connected interfaces.
 inequalities between {\small\tt\verm{Function}}s (partially done, see {\small\tt draw\_\,ps}
 with {\small\tt\textcolor{tag}{tag}::unfold}).
 
-\noindent Optimize finite elements as explained in paragraph \ref{\numb section 6.\numb parag 2}.
+\noindent Optimized finite elements are on their way,
+see at the end of paragraph \ref{\numb section 6.\numb parag 2}.
+They are called UFL-FFC and they work for a P1 triangle, some cases still missing.
+They should be extended to many other types of finite elements.
 
 \noindent The name {\small\tt\verm{CellIterator}} is ugly.
 I have chosen this name to hint that we are dealing with an iterator over cells.

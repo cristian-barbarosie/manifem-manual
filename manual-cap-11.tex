@@ -14,11 +14,12 @@ a guide through the source code.
           %--------------------------%
 
 All names in {\maniFEM} are wrapped into the namespace {\small\tt\verm{maniFEM}}.
-We recommend {\small\tt using namespace \verm{maniFEM}} in your code,
+We recommend {\small\tt using} {\small\tt namespace} {\small\tt\verm{maniFEM}} in your code,
 otherwise the text will become cumbersome.
 For instance, you will have to write {\small\tt\verm{maniFEM}::CellIterator} instead of
 {\small\tt\verm{CellIterator}}, and so on.
-We are {\small\tt using namespace \verm{maniFEM}} in the examples of this manual.
+We are {\small\tt using} {\small\tt namespace} {\small\tt\verm{maniFEM}} in the examples
+of this manual.
 
 As a general rule, namespaces and class names are written with capital initial
 letter$\;$:
@@ -35,8 +36,8 @@ This can be considered poor design; we endorse this criticism with no further co
 
 However, some class members and methods are intended to be used by the final user,
 while others are used in the internal implementation of the former.
-Classes \hbox{intended} for basic usage are directly exposed in {\small\tt namespace
-\verm{maniFEM}}, for instance
+Classes \hbox{intended} for basic usage are directly exposed in {\small\tt namespace}
+{\small\tt\verm{maniFEM}}, for instance
 {\small\tt\verm{Cell}}, {\small\tt\verm{Mesh}}, {\small\tt\verm{CellIterator}},
 {\small\tt\verm{Function}}, {\small\tt\verm{Manifold}}, {\small\tt\verm{VariationalFormulation}},
 {\small\tt\verm{Integrator}}, {\small\tt\verm{FiniteElement}}.
@@ -55,7 +56,7 @@ used the namespace {\small\tt\textcolor{tag}{tag}::Util} to keep names which did
 We have also used anonymous namespaces in order to hide names of functions which are
 only used in one source file.
 
-In the {\small\tt namespace \verm{maniFEM}} there are also many overloaded functions.
+In the {\small\tt namespace} {\small\tt\verm{maniFEM}} there are also many overloaded functions.
 Because they take arguments of specific type, they will not clash with names defined
 by the user or by other libraries.
 Examples are : {\small\tt\verm{smooth\_\,min}}, {\small\tt\verm{power}}, {\small\tt\verm{abs}},
@@ -69,14 +70,14 @@ Examples are : {\small\tt\verm{smooth\_\,min}}, {\small\tt\verm{power}}, {\small
 Throughout this manual, example {\tt C++} code is coloured according to the following
 conventions.
 
-Class names directly exposed in {\small\tt namespace \verm{maniFEM}} are shown in \verm{blue} :
-{\small\tt \verm{Cell}}, {\small\tt \verm{Mesh}}, {\small\tt \verm{CellIterator}},
-{\small\tt \verm{Function}}, {\small\tt \verm{Manifold}},
-{\small\tt \verm{VariationalFormulation}}, {\small\tt \verm{Integrator}},
-{\small\tt \verm{FiniteElement}}, the rarely needed {\small\tt \verm{Field}} and
-the even more rarely needed {\small\tt \verm{MeshIterator}} and {\small\tt\verm{MetricTree}}.
-There are also functions like {\small\tt \verm{smooth\_\,min}} and also overloaded versions
-of common functions like {\small\tt\verm{power}}, {\small\tt \verm{sin}}, {\small\tt \verm{cos}}.
+Class names directly exposed in {\small\tt namespace} {\small\tt\verm{maniFEM}} are shown in
+\verm{blue} : {\small\tt\verm{Cell}}, {\small\tt\verm{Mesh}}, {\small\tt\verm{CellIterator}},
+{\small\tt\verm{Function}}, {\small\tt\verm{Manifold}},
+{\small\tt\verm{VariationalFormulation}}, {\small\tt\verm{Integrator}},
+{\small\tt\verm{FiniteElement}}, the rarely needed {\small\tt\verm{Field}} and
+the even more rarely needed {\small\tt\verm{MeshIterator}} and {\small\tt\verm{MetricTree}}.
+There are also functions like {\small\tt\verm{smooth\_\,min}} and also overloaded versions
+of common functions like {\small\tt\verm{power}}, {\small\tt\verm{sin}}, {\small\tt\verm{cos}}.
 The word {\small\tt \textcolor{tag}{tag}} deserves a special treatment.
 On one hand, it is directly exposed, on the other hand, we want it to be discrete.
 That's why we have chosen a \textcolor{tag}{blue grey} for {\small\tt \textcolor{tag}{tag}}\hskip0.8pt s.
@@ -95,13 +96,15 @@ Strings are \verde{dark green}.
           %----%
 
 We use extensively {\small\tt\textcolor{tag}{tag}}\hskip0.8pt s.
-These are {\tt C++} structures gathered in the {\small\tt namespace \textcolor{tag}{tag}}.
+These are {\tt C++} structures gathered in the {\small\tt namespace}
+{\small\tt \textcolor{tag}{tag}}.
 Most of them contain no data; only their type is useful, at compile time.
 
-A {\small\tt\textcolor{tag}{tag}} is used to clearly distinguish between functions with the same name
-(overloaded functions).
+A {\small\tt\textcolor{tag}{tag}} is used to clearly distinguish between functions with
+the same name (overloaded functions).
 For instance, in the code excerpt below five {\small\tt\verm{CellIterator}}s are defined
-by means of different (overloaded) methods having the same name {\small\tt\verm{Mesh}::iterator});
+by means of different (overloaded) methods having the same name
+{\small\tt\verm{Mesh}::iterator});
 the iterators behave very differently (see paragraphs \ref{\numb section 9.\numb parag 3} and
 \ref{\numb section 9.\numb parag 4}).
 
@@ -126,17 +129,21 @@ Besides that, in the case of constructors, we do not have the choice of the name
 
 In \maniFEM, namespaces and class names begin with capital letter
 (see paragraph \ref{\numb section 11.\numb parag 1}).
-The namespace {\small\tt\textcolor{tag}{tag}} (or {\small\tt \verm{maniFEM}::tag} if you are not
-{\small\tt using namespace \verm{maniFEM}}) is an exception to the above rule.
+The namespace {\small\tt\textcolor{tag}{tag}} (or {\small\tt\verm{maniFEM}::tag} if you are not
+{\small\tt using} {\small\tt namespace} {\small\tt\verm{maniFEM}}) is an exception
+to the above rule.
 We prefer its name to have only lower case letters because we want it to be
 discrete. For instance, if we wrote {\small\tt\textcolor{tag}{Tag}::divided\_\,in},
-the reader's eye would catch {\small\tt\textcolor{tag}{Tag}} much before {\small\tt divided\_\,in};
+the reader's eye would catch {\small\tt\textcolor{tag}{Tag}} much before
+{\small\tt divided\_\,in};
 thus, {\small\tt\textcolor{tag}{tag}::divided\_\,in} is more readable.
-Of course, the final user has the choice of {\small\tt using namespace \textcolor{tag}{tag}}
-but beware, it has many names which may conflict with the ones in your code.
+Of course, the final user has the choice of {\small\tt using} {\small\tt namespace}
+{\small\tt\textcolor{tag}{tag}} but beware, it has many names which may conflict
+with the ones in your code.
 
 Most tags have only lower-case letters and underscores.
-The exceptions are proper names : {\small\tt \textcolor{tag}{tag}::Lagrange}, {\small\tt \textcolor{tag}{tag}::Euclid}.
+The exceptions are proper names : {\small\tt \textcolor{tag}{tag}::Lagrange},
+{\small\tt \textcolor{tag}{tag}::Euclid}.
 
 
           %------------------%
@@ -205,28 +212,30 @@ syntactic scope).
 We create them within some function and we want them to remain alive after returning
 to the main program.
 Also, they are unique entities, it does not make sense to copy them.
-This is why we have implemented {\small\tt \verm{Cell}} as a thin wrapper around
-{\small\tt \verm{Cell}::Core}
-with most methods of {\small\tt \verm{Cell}} being delegated to {\small\tt \verm{Cell}::Core}.
-When it goes out of its syntactic scope, the wrapper is destroyed but the {\small\tt \verm{Cell}::Core}
+This is why we have implemented {\small\tt\verm{Cell}} as a thin wrapper around
+{\small\tt\verm{Cell}::Core}
+with most methods of {\small\tt\verm{Cell}} being delegated to {\small\tt\verm{Cell}::Core}.
+When it goes out of its syntactic scope, the wrapper is destroyed but the {\small\tt\verm{Cell}::Core}
 object inside remains intact (unless there are no more wrappers for that core, as explained in
 paragraph \ref{\numb section 11.\numb parag 5}).
-Also, you can copy the wrapper as in {\small\tt \verm{Cell} A = B} or {\small\tt \verm{Mesh} BA = AB.reverse()}
+Also, you can copy the wrapper as in {\small\tt\verm{Cell}} {\small\tt A} {\small\tt =}
+{\small\tt B} or {\small\tt\verm{Mesh}} {\small\tt BA} {\small\tt =} {\small\tt AB.reverse()}
 but these operations do not create new core objects, they just give new names to
 already existing cells or meshes (paragraph \ref{\numb section 9.\numb parag 10} gives
 more details).
-You can think of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es as customized pointers towards
-{\small\tt \verm{Cell}::Core}s and {\small\tt \verm{Mesh}::Core}s, respectively.
+You can think of {\small\tt\verm{Cell}}s and {\small\tt\verm{Mesh}}es as customized pointers towards
+{\small\tt\verm{Cell}::Core}s and {\small\tt\verm{Mesh}::Core}s, respectively.
 
 Negative meshes contain no useful information; they appear mostly as boundaries
 of negative cells, sometimes as interfaces between subdomains of our mesh.
-Thus, there is no such class as {\small\tt \verm{Mesh}::Negative};
-all {\small\tt \verm{Mesh}::Core}s are positive.
-The wrapper class {\small\tt \verm{Mesh}} contains a pointer to a {\small\tt \verm{Mesh}::Core}
+Thus, there is no such class as {\small\tt\verm{Mesh}::Negative};
+all {\small\tt\verm{Mesh}::Core}s are positive.
+The wrapper class {\small\tt\verm{Mesh}} contains a pointer to a {\small\tt\verm{Mesh}::Core}
 and a flag telling it to reverse everything if the mesh is to be considered negative.
 Zero-dimensional meshes (boundaries of segments) are not stored at all.
 One-dimensional meshes have often a particular structure (they are chains of segments);
-when this happens they are implemented in a specialized class {\small\tt \verm{Mesh}::Connected::OneDim}.
+when this happens they are implemented in a specialized class
+{\small\tt\verm{Mesh}::Connected::OneDim}.
 % See the graph in figure \ref{\numb section 11.\numb fig 2}.
 The graph below shows these inheritance relations; dotted lines represent relations subject to
 the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} compilation option, explained in paragraph
@@ -287,15 +296,15 @@ care must be taken to break dependency cycles.
 
 Some programs consist only in building a mesh and never (or rarely) discarding cells.
 For such programs, there is no advantage in using a {\small\tt shared\_\,ptr}-like strategy.
-Thus, unlike for other {\maniFEM} objects, the garbage collector for {\small\tt \verm{Cell}}s and
-{\small\tt \verm{Mesh}}es can be turned off by erasing the option
+Thus, unlike for other {\maniFEM} objects, the garbage collector for {\small\tt\verm{Cell}}s and
+{\small\tt\verm{Mesh}}es can be turned off by erasing the option
 {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} in the {\small\tt Makefile}.
-Remember to {\small\tt make clean} and re-build your program;
+Remember to {\small\tt make} {\small\tt clean} and re-build your program;
 see also paragraph \ref{\numb section 11.\numb parag 15}.
 The graphs in figures \ref{\numb section 11.\numb fig 1} and \ref{\numb section 11.\numb fig 2}
 show dotted lines where the inheritance relationship is subject to the
 {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} option.
-If you turn off the garbage collector, {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es
+If you turn off the garbage collector, {\small\tt\verm{Cell}}s and {\small\tt\verm{Mesh}}es
 will occupy less space in the computer's memory and your program will run slightly faster.
 But if you turn it off and your program does a lot of remeshing
 ghost cells and meshes will fill the computer's memory (this is known as ``memory leak'').
@@ -311,7 +320,7 @@ paragraph \ref{\numb section 12.\numb parag 10}) which is not properly cleaned.
 \section{~~Different kinds of meshes}\label{\numb section 11.\numb parag 6}   
           %-------------------------%
 
-A {\small\tt \verm{Mesh}} wrapper contains a pointer to a {\small\tt \verm{Mesh}::Core}.
+A {\small\tt\verm{Mesh}} wrapper contains a pointer to a {\small\tt\verm{Mesh}::Core}.
 The latter is a polymorphic object; there are several different kinds of meshes
 which differ in their internal implementation; the wrapper provides a uniform interface
 to the user (making use of virtual methods of the core).
@@ -319,17 +328,17 @@ to the user (making use of virtual methods of the core).
 Negative meshes are temporary wrappers built on-the-fly.
 Their wrapper contains a pointer to a positive core mesh.
 
-Zero-dimensional meshes appear only as boundaries of segment {\small\tt \verm{Cell}}s.
+Zero-dimensional meshes appear only as boundaries of segment {\small\tt\verm{Cell}}s.
 They are temporary objects built on-the-fly.
 
-Some meshes are implemented as {\small\tt \verm{Mesh}::Fuzzy}.
+Some meshes are implemented as {\small\tt\verm{Mesh}::Fuzzy}.
 They have as attributes lists of cells of different dimensions;
 these lists have no particular order.
 Iterators over cells of {\small\tt Fuzzy} meshes simply run over the respective lists of cells.
 
 Other meshes are assumed to be connected and keep no lists of cells.
 Iterators over such meshes traverse the mesh beginning at a starting point (which is an attribute
-of class {\small\tt \verm{Mesh}:: ::Connected::***Dim}) and then using the neighbourhood relations
+of class {\small\tt\verm{Mesh}:: ::Connected::***Dim}) and then using the neighbourhood relations
 to move from one cell to another.
 
 One-dimensional connected meshes are a special case because their topology is peculiar;
@@ -338,15 +347,16 @@ Recall that all meshes in {\maniFEM} are oriented.
 A one-dimensional connected mesh can be a closed loop or an open chain of segments.
 In the latter case, there is a natural starting point (the first vertex or first segment).
 Iterators over such meshes are described in paragraph \ref{\numb section 9.\numb parag 4}.
-The {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::segment} builds an open
-{\small\tt \verm{Mesh}::Connected::OneDim}.
-Also, cell constructors with {\small\tt \textcolor{tag}{tag}::triangle} and {\small\tt \textcolor{tag}{tag}::quadrangle} produce cells
-whose boundary is a closed {\small\tt \verm{Mesh}::Connected::OneDim}.
+The {\small\tt\verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::segment}
+builds an open {\small\tt\verm{Mesh}::Connected::OneDim}.
+Also, cell constructors with {\small\tt \textcolor{tag}{tag}::triangle} and
+{\small\tt \textcolor{tag}{tag}::quadrangle} produce cells
+whose boundary is a closed {\small\tt\verm{Mesh}::Connected::OneDim}.
 
 Connected meshes of dimension two or higher are not yet implemented; for now,
-{\small\tt \verm{Mesh}} constructors with {\small\tt \textcolor{tag}{tag}::rectangle} or
+{\small\tt\verm{Mesh}} constructors with {\small\tt \textcolor{tag}{tag}::rectangle} or
 {\small\tt \textcolor{tag}{tag}::triangle} build a {\small\tt Fuzzy} mesh instead.
-A class {\small\tt \verm{Mesh}:: ::Connected::HighDim} is object of current work.
+A class {\small\tt\verm{Mesh}:: ::Connected::HighDim} is object of current work.
 We also intend to implement multiply connected meshes.
 
 {\small\tt STSI} meshes are object of current work (see the graph in figure
@@ -362,10 +372,10 @@ On the other hand, {\small\tt Fuzzy} meshes require more space in the computer's
 
 The kind of a certain mesh is not always completely obvious.
 For instance, when {\small\tt join}ing two meshes of the kind
-{\small\tt \verm{Mesh}::Connected::OneDim}, the result will be a
-{\small\tt \verm{Mesh}::Connected::OneDim} if the last vertex of one of the meshes
+{\small\tt\verm{Mesh}::Connected::OneDim}, the result will be a
+{\small\tt\verm{Mesh}::Connected::OneDim} if the last vertex of one of the meshes
 is the same as the first vertex (reversed) of the other mesh.
-Otherwise, the result will be a {\small\tt \verm{Mesh}::Fuzzy}.
+Otherwise, the result will be a {\small\tt\verm{Mesh}::Fuzzy}.
 
 Methods \ \ {\small\tt\verm{Cell}::cut\_\,from\_\,bdry\_\,of},
 \ \ {\small\tt\verm{Cell}::glue\_\,on\_\,bdry\_\,of}, \ \ {\small\tt\verm{Cell}::add\_\,to\_\,mesh}
@@ -388,7 +398,8 @@ The same will apply to a high-dimensional connected mesh (object of current work
 \leavevmode {\ManiFEM} assumes you will not build meshes of topological dimension
 above 3.
 If you want to play with higher-dimensional meshes, you must relax this assumption
-through the statement {\small\tt \verm{Mesh}::set\_\,max\_\,dim (}some-integer{\small\tt )}.
+through the statement {\small\tt\verm{Mesh}::set\_\,max\_\,dim}
+{\small\tt (}some-integer{\small\tt )}.
 
 On the other hand, you may want to decrease the expected dimension.
 Suppose you want to mesh surfaces in $ \mathbb{R}^3 $.
@@ -396,13 +407,14 @@ This means your maximum topological dimension will be 2
 (this has nothing to do with the geometric dimension, here 3).
 Then you may state your intention at the beginning of your program
 (before building any cell, before even declaring the first vertex) through
-the statement {\small\tt \verm{Mesh}::set\_\,max\_\,dim(2)}.
-This will decrease the size of the {\small\tt \verm{Cell}::Core} objects in your code,
+the statement {\small\tt\verm{Mesh}::set\_\,max\_\,dim(2)}.
+This will decrease the size of the {\small\tt\verm{Cell}::Core} objects in your code,
 thus saving some memory.
 
 But beware, if you try to build a mesh of dimension higher than the one expected by
-\maniFEM, you will get an {\small\tt assertion error} at run-time in {\small\tt DEBUG} mode,
-or some bizarre behaviour (often a {\small\tt segmentation fault}) in {\small\tt NDEBUG} mode.
+\maniFEM, you will get an {\small\tt assertion} {\small\tt error} at run-time in
+{\small\tt DEBUG} mode, or some bizarre behaviour (often a {\small\tt segmentation}
+{\small\tt fault}) in {\small\tt NDEBUG} mode.
 The {\small\tt DEBUG} mode is explained in paragraph \ref{\numb section 11.\numb parag 15}.
 
 The geometric dimension is set by simply declaring a Euclidian manifold and building
@@ -414,33 +426,33 @@ and \ref{\numb section 2.\numb parag 17}).
 \section{~~Cores of cells and meshes}\label{\numb section 11.\numb parag 8}
           %--------------------%
 
-As explained in paragraph \ref{\numb section 11.\numb parag 4}, the {\small\tt \verm{Cell}}
-class is just a thin wrapper around a {\small\tt \verm{Cell}::Core}.
-While it is possible and useful to copy {\small\tt \verm{Cell}}s (think of them as customized
-pointers to {\small\tt \verm{Cell}::Core}s), objects in the {\small\tt \verm{Cell}::Core}
+As explained in paragraph \ref{\numb section 11.\numb parag 4}, the {\small\tt\verm{Cell}}
+class is just a thin wrapper around a {\small\tt\verm{Cell}::Core}.
+While it is possible and useful to copy {\small\tt\verm{Cell}}s (think of them as customized
+pointers to {\small\tt\verm{Cell}::Core}s), objects in the {\small\tt\verm{Cell}::Core}
 class cannot be copied.
-Similarly, {\small\tt \verm{Mesh}} objects (wrappers) are customized pointers towards
-{\small\tt \verm{Mesh}::Core}s; the latter cannot be copied.
+Similarly, {\small\tt\verm{Mesh}} objects (wrappers) are customized pointers towards
+{\small\tt\verm{Mesh}::Core}s; the latter cannot be copied.
 
 The following classes of core cells are abstract and cannot be instantiated :
-{\small\tt \verm{Cell}::Core}, {\small\tt \verm{Cell}::Positive},
-{\small\tt \verm{Cell}::Core::Negative}, {\small\tt \verm{Cell}::Positive::NotVertex},
-{\small\tt \verm{Cell}::Negative::NotVertex}.
+{\small\tt\verm{Cell}::Core}, {\small\tt\verm{Cell}::Positive},
+{\small\tt\verm{Cell}::Core::Negative}, {\small\tt\verm{Cell}::Positive::NotVertex},
+{\small\tt\verm{Cell}::Negative::NotVertex}.
 
 The following classes of core cells can be instantiated :
-{\small\tt \verm{Cell}::Positive::Vertex}, {\small\tt \verm{Cell}::Negative:: ::Vertex},
-{\small\tt \verm{Cell}::Positive::Segment}, {\small\tt \verm{Cell}::Negative::Segment},
-{\small\tt \verm{Cell}::Positive::HighDim},\break
-{\small\tt \verm{Cell}::Negative::HighDim}.
+{\small\tt\verm{Cell}::Positive::Vertex}, {\small\tt\verm{Cell}::Negative:: ::Vertex},
+{\small\tt\verm{Cell}::Positive::Segment}, {\small\tt\verm{Cell}::Negative::Segment},
+{\small\tt\verm{Cell}::Positive::HighDim},\break
+{\small\tt\verm{Cell}::Negative::HighDim}.
 
-Classes {\small\tt \verm{Mesh}::Core} and {\small\tt \verm{Mesh}::NotZeroDim} are abstract
+Classes {\small\tt\verm{Mesh}::Core} and {\small\tt\verm{Mesh}::NotZeroDim} are abstract
 and cannot be instatiated.
 
-Classes {\small\tt \verm{Mesh}::ZeroDim}, {\small\tt \verm{Mesh}::Connected::OneDim} and
-{\small\tt \verm{Mesh}::Fuzzy} can be instantiated.
-Classes {\small\tt \verm{Mesh}::MultiplyConnected::OneDim},
-{\small\tt \verm{Mesh}::Connected::HighDim}, {\small\tt \verm{Mesh}::MultiplyConneted::HighDim}
-and {\small\tt \verm{Mesh}::STSI} are object of on-going work.
+Classes {\small\tt\verm{Mesh}::ZeroDim}, {\small\tt\verm{Mesh}::Connected::OneDim} and
+{\small\tt\verm{Mesh}::Fuzzy} can be instantiated.
+Classes {\small\tt\verm{Mesh}::MultiplyConnected::OneDim},
+{\small\tt\verm{Mesh}::Connected::HighDim}, {\small\tt\verm{Mesh}::MultiplyConneted::HighDim}
+and {\small\tt\verm{Mesh}::STSI} are object of on-going work.
 
 Note that there are no negative mesh cores.
 
@@ -453,32 +465,32 @@ inheritance relationships  subject to the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM}
 \section{~~Adding and removing cells or faces}\label{\numb section 11.\numb parag 9}
           %----------------------------------%
 
-At a high level, we build cells and meshes using the appropriate {\small\tt \verm{Cell}} and
-{\small\tt \verm{Mesh}} constructors.
-At low level, cells and meshes are built by methods {\small\tt \verm{Cell}::glue\_\,on\_\,bdry\_\,of},
-{\small\tt \verm{Cell}::cut\_\,from\_\,bdry\_\,of}, {\small\tt \verm{Cell}::add\_\,to\_\,mesh} and
-{\small\tt \verm{Cell}::remove\_\,from\_\,mesh}.
+At a high level, we build cells and meshes using the appropriate {\small\tt\verm{Cell}} and
+{\small\tt\verm{Mesh}} constructors.
+At low level, cells and meshes are built by methods {\small\tt\verm{Cell}::glue\_\,on\_\,bdry\_\,of},
+{\small\tt\verm{Cell}::cut\_\,from\_\,bdry\_\,of}, {\small\tt\verm{Cell}::add\_\,to\_\,mesh} and
+{\small\tt\verm{Cell}::remove\_\,from\_\,mesh}.
 
-The inlined method {\small\tt \verm{Cell}::glue\_\,on\_\,bdry\_\,of} is used for sticking a new
+The inlined method {\small\tt\verm{Cell}::glue\_\,on\_\,bdry\_\,of} is used for sticking a new
 {\small\tt face} on the
 boundary of an existing cell {\small\tt cll} (whose boundary is incomplete).
-It simply calls the inlined method \ {\small\tt \verm{Cell}::Core::glue\_\,on\_\,bdry\_\,of}
+It simply calls the inlined method \ {\small\tt\verm{Cell}::Core::glue\_\,on\_\,bdry\_\,of}
 which in turn calls the virtual method {\small\tt cll->glue\_\,on\_\,my\_\,bdry(face)}.
-Different methods {\small\tt \verm{Cell}::***::glue\_\,on\_\,my\_\,bdry} exist for different kinds of
+Different methods {\small\tt\verm{Cell}::***::glue\_\,on\_\,my\_\,bdry} exist for different kinds of
 cells but to summarize we state that {\small\tt glue\_\,on\_\,my\_\,bdry} first calls
 {\small\tt face->add\_\,to\_\,bdry} in order to add the face to the boundary of {\small\tt cll}
 then calls the inline function {\small\tt add\_\,cell\_\,behind\_\,above}.
 
-Method {\small\tt \verm{Cell}::Core::add\_\,to\_\,bdry} is virtual so it does different things for
+Method {\small\tt\verm{Cell}::Core::add\_\,to\_\,bdry} is virtual so it does different things for
 different kinds of cells but the common idea is that it calls another virtual method
-{\small\tt \verm{Mesh}::Core::add\_\,***} (the name depends on the type of cell being added).
+{\small\tt\verm{Mesh}::Core::add\_\,***} (the name depends on the type of cell being added).
 The latter calls an inline function {\small\tt make\_\,deep\_\,connections} (hidden in an anonymous
 namespace in {\small\tt mesh.cpp}) which updates fields
-{\small\tt \verm{Cell}::Positive::meshes}, {\small\tt \verm{Cell}::Positive***::meshes\_\,same\_\,dim} and
-{\small\tt \verm{Mesh}::Fuzzy::cells} for several pairs cell-mesh
+{\small\tt\verm{Cell}::Positive::meshes}, {\small\tt\verm{Cell}::Positive***::meshes\_\,same\_\,dim} and
+{\small\tt\verm{Mesh}::Fuzzy::cells} for several pairs cell-mesh
 (including cells of lower dimension and meshes of higher dimension).
-After that, {\small\tt \verm{Mesh}::Core::add\_\,***} updates neighbourhood relations
-coded in the map {\small\tt \verm{Cell}::Core:: ::cell\_\,behind\_\,within}.
+After that, {\small\tt\verm{Mesh}::Core::add\_\,***} updates neighbourhood relations
+coded in the map {\small\tt\verm{Cell}::Core:: ::cell\_\,behind\_\,within}.
 
 The inlined function {\small\tt add\_\,cell\_\,behind\_\,above} deals with
 the case when the cell (on whose boundary we are trying to glue a new face)
@@ -486,10 +498,10 @@ already belongs to some mesh(es).
 In that case, it updates the information in {\small\tt face->cell\_\,behind\_\,within}.
 
 If we want to add a cell to a mesh which is not a boundary of a cell (this happens
-frequently in {\small\tt \verm{Mesh}} constructors),
-we call the inlined method {\small\tt \verm{Cell}::add\_\,to} which calls the virtual method
-{\small\tt \verm{Cell}::Core::add\_\,to\_\,mesh} which is similar to {\small\tt \verm{Cell}::Core::add\_\,to\_\,bdry}
-described above.
+frequently in {\small\tt\verm{Mesh}} constructors),
+we call the inlined method {\small\tt\verm{Cell}::add\_\,to} which calls the virtual method
+{\small\tt\verm{Cell}::Core::add\_\,to\_\,mesh} which is similar to
+{\small\tt\verm{Cell}::Core::add\_\,to\_\,bdry} described above.
 
 In the constructor of a cell, since we are sure there are no meshes containing that cell
 (the cell is just being built),
@@ -498,12 +510,12 @@ we call method {\small\tt add\_\,to\_\,mesh} instead of {\small\tt glue\_\,on\_\
 
 Removing a face from the boundary of an existing cell, or removing a cell from a mesh
 which is not a boundary, implies a process similar to the one described above,
-with methods replaced by {\small\tt \verm{Cell}::cut\_\,from\_\,bdry\_\,of},
-{\small\tt \verm{Cell}::remove\_\,from\_\,mesh},
-{\small\tt \verm{Cell}::Core::cut\_\,from\_\,bdry\_\,of},
-{\small\tt \verm{Cell}::Core::cut\_\,from\_\,my\_\,bdry},
-{\small\tt \verm{Cell}::Core::remove\_\,from\_\,bdry}, {\small\tt \verm{Cell}::Core::remove\_\,from\_\,mesh},
-{\small\tt \verm{Mesh}::Core:remove\_\,***}, {\small\tt break\_\,deep\_\,connections},
+with methods replaced by {\small\tt\verm{Cell}::cut\_\,from\_\,bdry\_\,of},
+{\small\tt\verm{Cell}::remove\_\,from\_\,mesh},
+{\small\tt\verm{Cell}::Core::cut\_\,from\_\,bdry\_\,of},
+{\small\tt\verm{Cell}::Core::cut\_\,from\_\,my\_\,bdry},
+{\small\tt\verm{Cell}::Core::remove\_\,from\_\,bdry}, {\small\tt\verm{Cell}::Core::remove\_\,from\_\,mesh},
+{\small\tt\verm{Mesh}::Core:remove\_\,***}, {\small\tt break\_\,deep\_\,connections},
 {\small\tt remove\_\,cell\_\,behind\_\,above}.
 
 Below is a very rough sketch of the process of adding a segment to the boundary of a triangle.
@@ -692,12 +704,12 @@ variable [name] set but not used [-Wunused-but-set-variables]
 These are harmless warnings.
 
 Some variables are initialized but never used.
-When we create a {\small\tt \verm{Manifold}}, the constructor sets a global variable
-{\small\tt \verm{Manifold}::current}.
+When we create a {\small\tt\verm{Manifold}}, the constructor sets a global variable
+{\small\tt\verm{Manifold}::current}.
 Thus, {\maniFEM} can remember at any time the geometry of the space and it can choose the right
 interpolation and projection operations.
-From the compiler's viewpoint, that {\small\tt\verm{Manifold}} oject is never used again and so it issues
-a warning.
+From the compiler's viewpoint, that {\small\tt\verm{Manifold}} oject is never used again and
+so it issues a warning.
 
 Also, some functions are never used.
 They are there mainly for historical reasons.
@@ -708,7 +720,7 @@ I get endless warnings !
 \end{Verbatim}
 
 Warnings are harmless, but when they are too many they can be a nuisance.
-{\small\tt Eigen} produces quite a lot of them.
+On some computers, {\small\tt Eigen} produces quite a lot of them.
 You can turn warnings off by removing {\small\tt -W} options from your {\small\tt Makefile}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
@@ -728,10 +740,10 @@ cannot declare variable 'cll' to be of abstract type 'ManiFEM::tag::Util::CellCo
    or tag::Util::MeshCore or ManiFEM::Mesh::NotZeroDim                      --
 \end{Verbatim}
 
-Classes {\small\tt \verm{Cell}::Core}, {\small\tt\verm{Cell}::Positive},
+Classes {\small\tt\verm{Cell}::Core}, {\small\tt\verm{Cell}::Positive},
 {\small\tt\verm{Cell}::Negative}, {\small\tt\verm{Cell}::Positive::NotVertex},\hfil\break
-{\small\tt\verm{Cell}::Negative::NotVertex}, {\small\tt \verm{Mesh}::Core},
-{\small\tt \verm{Mesh}::NotZeroDim}are abstract and cannot be instantiated.
+{\small\tt\verm{Cell}::Negative::NotVertex}, {\small\tt\verm{Mesh}::Core},
+{\small\tt\verm{Mesh}::NotZeroDim}are abstract and cannot be instantiated.
 You must be more specific; {\small\tt\verm{Cell}::Positive::Vertex},
 {\small\tt\verm{Cell}::Negative::Vertex},\hfil\break
 {\small\tt\verm{Cell}::Positive::Segment},
@@ -805,9 +817,9 @@ Assertion 'a >= b' failed.
 
 You are trying to build meshes of dimension higher than those \maniFEM\ expects.
 Did you re-define this expectation through the statement
-{\small\tt \verm{Mesh}::set\_\,max\_\,dim} ?
+{\small\tt\verm{Mesh}::set\_\,max\_\,dim} ?
 Along your program, you may have different maximum topological dimensions (that is,
-you may use {\small\tt \verm{Mesh}::set\_\,max\_\,dim} several times) but, at each moment,
+you may use {\small\tt\verm{Mesh}::set\_\,max\_\,dim} several times) but, at each moment,
 you can only build meshes of dimension up to the value most recently defined.
 See paragraph \ref{\numb section 11.\numb parag 7}.
 \medskip
@@ -831,7 +843,7 @@ When you think your program is ready for shipping, you may want to speed it up
 by adding the {\small\tt -dNDEBUG} option to your compilation command
 (check your {\small\tt Makefile}).
 You may also want to add other optimization options like {\small\tt -O4}.
-Remember to {\small\tt make} {\small\tt  clean} before re-building your application.
+Remember to {\small\tt make} {\small\tt clean} before re-building your application.
 
 The garbage collector for cells and meshes (described in paragraph
 \ref{\numb section 11.\numb parag 5}) can be turned on by adding the
@@ -843,7 +855,7 @@ To turn it off, remove the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} compilation fl
 \section{~~Compiling your own files}\label{\numb section 11.\numb parag 16}
           %------------------------%
 
-To use \maniFEM, visit {\small\tt https://github.com/cristian-barbarosie/manifem},
+To use \maniFEM, you should go to {\small\tt https://github.com/cristian-barbarosie/manifem},
 choose a release and download all files to some directory in your computer.
 Latest code may be unstable, releases are stable.
 You can then run the examples in this manual :
@@ -854,16 +866,17 @@ for the example in paragraph \ref{\numb section 2.\numb parag 6}, and so on.
 You will need a recent {\tt C++} compiler (we use {\tt g++}) and the {\tt make} utility.
 Under linux it should be easy to install them.
 It is not that easy to install and use them under Windows, but it is certainly possible,
-for instance \hbox{by using {\small\tt cygwin}}, available at {\small\tt https://www.cygwin.com/}.
+for instance \hbox{by using {\small\tt cygwin}},
+available at {\small\tt https://www.cygwin.com/}.
 Some examples use the {\small\tt Eigen} library; just copy its source tree
-from {\small\tt http://eigen.tuxfamily.org/index.php?title=Main\_\,Page}
+from {\small\tt http://eigen.tuxfamily.org/index.php? title=Main\_\,Page}
 to some place in your computer and be sure that
 path is mentioned in your {\small\tt Makefile}
 under the {\small\tt -I} flag of your compiler.
 You may also want to use {\tt gmsh}, available at {\small\tt http://gmsh.info/},
 for visualization purposes.
 
-We have chosen to put the library files in the root directory or the source code,
+We have chosen to put the library files in the root directory of the source code,
 as well as the {\small\tt Makefile}.
 The files containing the {\small\tt main} function for the examples in this manual are
 grouped under the {\small\tt examples-manual} directory.
@@ -873,15 +886,16 @@ and expects the source files of the library itself to be in the root directory.
 The user may naturally want to write their own {\small\tt main} files.
 There are three ways to do this.
 A quick solution is : you create your own source files and save them in the root directory
-of {\maniFEM} under a name matching {\small\tt user-*.cpp}, then invoke {\small\tt make run-user-*}.
+of {\maniFEM} under a name matching {\small\tt user-*.cpp},
+then invoke {\small\tt make} {\small\tt run-user-*}.
 
 The other two solutions consist in keeping \maniFEM's files separate from the files written
 by the user.
 Here is how to use statically linked object files.
 You must create a static library file, in the {\maniFEM} source code root directory,
 by issuing the command {\small\tt make static-lib}.
-Then, in your working directory, you should create a Makefile similar to the one below
-(assuming your code is in a file {\small\tt myprog.cpp}).
+Then, in your working directory, you should create a {\small\tt Makefile} similar to
+the one below (assuming your code is in a file {\small\tt myprog.cpp}).
 After that, it suffices to issue the command {\small\tt make run}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -890,7 +904,7 @@ After that, it suffices to issue the command {\small\tt make run}.
 \cinza{# C++ compiler}
 \azul{CC} = g++
 
-\azul{manifem_dir} = \cinza{\mbox{\fontfamily{helvetica}\selectfont{}[the root directory of maniFEM]}}
+\azul{manifem_dir} = \cinza{\mbox{\fontfamily{helvetica}\selectfont{}the root directory of maniFEM}}
 
 \cinza{# compiler flags}
 \cinza{# CFLAGS = -c -I . -I $(HOME)/include/ -I $(manifem_dir) -std=c++17}
@@ -903,17 +917,28 @@ After that, it suffices to issue the command {\small\tt make run}.
 \azul{%.o}: %.cpp
 	$(CC) $(CFLAGS) $^
 
-\azul{a.out} : myprog.o
+\azul{a.out}: myprog.o
 	$(CC) $^ -L$(manifem_dir) -lmaniFEM -o a.out
 
 \azul{run}: a.out
 	./$<
 \end{Verbatim}
 
+You should be careful to use the same compilation options when compiling the library and
+when compiling your main file (see paragraph \ref{\numb section 11.\numb parag 15}).
+You may build two (or more) versions of the library, compiled with different options,
+and keep them by copying the file {\small\tt libmaniFEM.a} under appropriate names.
+Remember to {\small\tt make} {\small\tt clean} every time you want to re-build the library.
+Of course you should taylor your {\small\tt Makefile} (in your own working directory)
+by replacing the option {\small\tt -lmaniFEM} with the name of the particular version
+of the library you want to use.
+
 You may want to move files {\small\tt *.h} to your personal {\small\tt include} directory
 (or to a subdirectory there) and {\small\tt libmaniFEM.a} to some {\small\tt lib} directory.
 
-A third solution is to use dynamically linked object files, but this is slightly more complicated.
+
+A third solution is to use dynamically linked object files,
+but this is slightly more complicated.
 See e.g.\ {\small\tt https://iq.opengenus.org/create-shared-library-in-cpp}
 
 
