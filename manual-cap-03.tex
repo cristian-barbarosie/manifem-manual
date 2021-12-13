@@ -47,22 +47,22 @@ and adding triangles, one by one, until the disk is completely covered :
    label=parag-\ref{\numb section 3.\numb parag 1}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy[\laranja{0}],  \azul{y} = xy[\laranja{1}];
+   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
    
-   \verm{Manifold} \azul{circle_manif} = RR2.implicit ( x*x + y*y == \laranja{1.} );
+   \verm{Manifold} \azul{circle_manif} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    
-   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x(N) =  \laranja{0.};   y(N) =  \laranja{1.};
-   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x(W) = \laranja{-1.};   y(W) =  \laranja{0.};
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  \laranja{0.};   y(S) = \laranja{-1.};
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{1.};   y(E) =  \laranja{0.};
-   \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N.reverse(), W, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W.reverse(), S, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{SE} ( \textcolor{tag}{tag}::segment, S.reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{EN} ( \textcolor{tag}{tag}::segment, E.reverse(), N, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x (N) =  \laranja{0.};   y (N) =  \laranja{1.};
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};   y (W) =  \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) =  \laranja{0.};   y (S) = \laranja{-1.};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{1.};   y (E) =  \laranja{0.};
+   \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N .reverse(), W, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W .reverse(), S, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{SE} ( \textcolor{tag}{tag}::segment, S .reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{EN} ( \textcolor{tag}{tag}::segment, E .reverse(), N, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::join, NW, WS, SE, EN );
    
-   RR2.set_as_working_manifold();
+   RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle, \textcolor{tag}{tag}::desired_length, \laranja{0.157} );
 \end{Verbatim}
 
@@ -89,18 +89,18 @@ the circle manifold, then mesh the disk :
    label=parag-\ref{\numb section 3.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy[\laranja{0}],  \azul{y} = xy[\laranja{1}];
+   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
    
-   \verm{Manifold} \azul{circle_manif} = RR2.implicit ( x*x + y*y == \laranja{1.} );
+   \verm{Manifold} \azul{circle_manif} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive,
       \textcolor{tag}{tag}::entire_manifold, circle_manif, \textcolor{tag}{tag}::desired_length, \laranja{0.2} );
    \cinza{// we can omit the manifold; maniFEM will take the current working manifold :}
    \cinza{// Mesh circle ( tag::progressive, tag::desired_length, 0.2 );}
    
-   RR2.set_as_working_manifold();
+   RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle, \textcolor{tag}{tag}::desired_length, \laranja{0.2} );
-   disk.draw_ps (\verde{"disk.eps"});
+   disk .draw_ps (\verde{"disk.eps"});
 \end{Verbatim}
 
 The code above is quite comfortable for the user; he or she only needs to define
@@ -116,7 +116,7 @@ by providing a starting point :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{1.};  y(A) = \laranja{0.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{1.};  y (A) = \laranja{0.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A, \textcolor{tag}{tag}::desired_length, \laranja{0.2} );
 \end{Verbatim}
 
@@ -140,12 +140,12 @@ Inner boundaries must have the reverse orientation :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 3}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Manifold} \azul{circle} = RR2.implicit ( x*x + y*y == \laranja{1.} );
+   \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
-   \verm{Manifold} \azul{ellipse} = RR2.implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
+   \verm{Manifold} \azul{ellipse} = RR2 .implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
-   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner.reverse() );
-   RR2.set_as_working_manifold();
+   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner .reverse() );
+   RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
 
@@ -173,9 +173,9 @@ $ \mathbb{R}^3 $ introduced in paragraph \ref{\numb section 2.\numb parag 12} :
    label=parag-\ref{\numb section 3.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
-   \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xyz[\laranja{0}],  \azul{y} = xyz[\laranja{1}],  \azul{z} = xyz[\laranja{2}];
-   \verm{Manifold} \azul{circle_manif} = RR3.implicit ( x*x + y*y == \laranja{1.}, x*y == \laranja{4.}*z );
+   \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
+   \verm{Manifold} \azul{circle_manif} = RR3 .implicit ( x*x + y*y == \laranja{1.}, x*y == \laranja{4.}*z );
    
    \verm{Mesh} \azul{circle}
       ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::random_orientation );
@@ -216,18 +216,18 @@ spiral with a slightly different look and switch to progressive mesh generation.
    label=parag-\ref{\numb section 3.\numb parag 5}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy[\laranja{0}],  \azul{y} = xy[\laranja{1}];
+   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
    \verm{Function} \azul{r} = \verm{power} ( x*x + y*y, \laranja{0.25} );
    const double \azul{pi} = \laranja{3.14159};
    
-   RR2.implicit ( x*\verm{sin}(r) == y*\verm{cos}(r) );
+   RR2 .implicit ( x*\verm{sin}(r) == y*\verm{cos}(r) );
    \cinza{// we don't need to give a name to the implicit manifold}
    \cinza{// the Manifold constructor sets the manifold it builds as working manifold}
    \cinza{// after that, many methods use this working manifold by default}
    
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) =    pi*pi;   y(A) =  \laranja{0.};
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = \laranja{81}*pi*pi;   y(B) =  \laranja{0.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) =    pi*pi;   y (A) = \laranja{0.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{81}*pi*pi;   y (B) = \laranja{0.};
    \verm{Mesh} \azul{spiral} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A,
                  \textcolor{tag}{tag}::stop_at, B, \textcolor{tag}{tag}::desired_length, \laranja{1.} );
 \end{Verbatim}
@@ -268,7 +268,7 @@ Thus, if we want to mesh an arc of a circle, we can use a sequence of statements
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
 
-   RR2.implicit ( (x-x0)*(x-x0) + (y-y0)*(y-y0) == radius * radius );
+   RR2 .implicit ( (x-x0)*(x-x0) + (y-y0)*(y-y0) == radius * radius );
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  \cinza{// set x(A) and y(A)}
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  \cinza{// set x(B) and y(B)}
    \verm{Mesh} \azul{arc_of_circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A,
@@ -306,8 +306,8 @@ Code below builds a mesh on the sphere.
    label=parag-\ref{\numb section 3.\numb parag 6}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
-   \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xyz[\laranja{0}],  \azul{y} = xyz[\laranja{1}],  \azul{z} = xyz[\laranja{2}];
+   \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
    \verm{Manifold} \azul{sphere_manif} = RR3.implicit ( x*x + y*y + z*z == \laranja{1.} );
    \verm{Mesh} \azul{sphere} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
@@ -318,7 +318,7 @@ We can alleviate this burden simply by providing a starting point on the sphere 
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{1.};  y(A) = \laranja{0.};  z(A) = \laranja{0.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{1.};  y (A) = \laranja{0.};  z (A) = \laranja{0.};
    \verm{Mesh} \azul{sphere} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
 
@@ -343,8 +343,8 @@ It can be vaguely described as a convolution between two tori.
    label=parag-\ref{\numb section 3.\numb parag 7}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
-   \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xyz[\laranja{0}],  \azul{y} = xyz[\laranja{1}],  \azul{z} = xyz[\laranja{2}];
+   \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
 
    \verm{Function} \azul{f1} = x*x + y*y + \laranja{0.1};  \cinza{// we add 0.1 to avoid singularities}
    \verm{Function} \azul{f2} = \laranja{1.} - \verm{power} ( f1, \laranja{-0.5} );
@@ -352,7 +352,7 @@ It can be vaguely described as a convolution between two tori.
    \verm{Function} \azul{f3} = (x-\laranja{0.4})*(x-\laranja{0.4}) + z*z + \laranja{0.1};  \cinza{// we add 0.1 to avoid singularities}
    \verm{Function} \azul{f4} = \laranja{1.} - \verm{power} ( f3, \laranja{-0.5} );
    \verm{Function} \azul{d2} = y*y + f3 * f4 *f4;  \cinza{// squared distance to a circle in the xz plane}
-   \verm{Manifold} \azul{tori_manif} = RR3.implicit
+   \verm{Manifold} \azul{tori_manif} = RR3 .implicit
       ( \verm{smooth_min} ( d1, d2, \textcolor{tag}{tag}::threshold, \laranja{0.2} ) == \laranja{0.15} );
 
    \verm{Mesh} \azul{tori} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, 0.09 );
@@ -384,12 +384,12 @@ and build it progressively, using fewer lines of code.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Manifold} \azul{nut} = RR3.implicit ( x*x + y*y + z*z + \laranja{1.5}*x*y*z == \laranja{1.} );
-   \verm{Manifold} \azul{base} = nut.implicit ( x*x + \laranja{3.}*z == \laranja{0.} );
+   \verm{Manifold} \azul{nut} = RR3 .implicit ( x*x + y*y + z*z + \laranja{1.5}*x*y*z == \laranja{1.} );
+   \verm{Manifold} \azul{base} = nut .implicit ( x*x + \laranja{3.}*z == \laranja{0.} );
    \verm{Mesh} \azul{circle}  \cinza{// 'base' is used by default as working manifold}
       ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::random_orientation );
    
-   nut.set_as_working_manifold();
+   nut .set_as_working_manifold();
    \verm{Mesh} \azul{bumpy}  \cinza{// 'nut' is used as working manifold}
       ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
@@ -475,8 +475,8 @@ can be changed as below.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) =    pi*pi;   y(A) =  \laranja{0.};
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = \laranja{81}*pi*pi;   y(B) =  \laranja{0.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) =    pi*pi;  y (A) = \laranja{0.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{81}*pi*pi;  y (B) = \laranja{0.};
    std::vector < double > \azul{direc} = \{ \laranja{0.}, \laranja{1.} \};
    \verm{Mesh} \azul{spiral} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A, \textcolor{tag}{tag}::towards, direc,
                  \textcolor{tag}{tag}::stop_at, B, \textcolor{tag}{tag}::desired_length, 1.                 );
@@ -496,7 +496,7 @@ We could specify in a similar fashion the orientation of {\small\tt circle} in p
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{1.};  y(A) = \laranja{0.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{1.};  y (A) = \laranja{0.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A,
                  \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.} \}, \textcolor{tag}{tag}::desired_length, \laranja{0.2} );
 \end{Verbatim}
@@ -509,8 +509,8 @@ The same technique can be used for building the {\small\tt circle} in paragraph
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  \laranja{0.};   y(S) = \laranja{-1.};  z(S) = \laranja{0.};
-   \verm{Manifold} \azul{circle_manif} = RR3.implicit ( x*x + y*y == \laranja{1.}, x*y == \laranja{4.}*z );
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
+   \verm{Manifold} \azul{circle_manif} = RR3 .implicit ( x*x + y*y == \laranja{1.}, x*y == \laranja{4.}*z );
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, S,
                  \textcolor{tag}{tag}::towards, \{ \laranja{1.}, \laranja{0.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, \laranja{0.2} );
 \end{Verbatim}
@@ -649,10 +649,10 @@ Thus, in the code below we will obtain the upper hemisphere.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  \laranja{0.};  y(S) = \laranja{-1.};  z(S) =  \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, \{ \laranja{1.}, \laranja{0.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                                         );
-   nut.set_as_working_manifold();
+   nut .set_as_working_manifold();
    \verm{Mesh} \azul{bumpy} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle,
                 \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::inherent_orientation );
 \end{Verbatim}
@@ -661,10 +661,10 @@ Code below will produce the lower hemisphere.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );    x(S) =  \laranja{0.};  y(S) = \laranja{-1.};  z(S) =  \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, \{ \laranja{-1.},\laranja{ 0.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                                          );
-   nut.set_as_working_manifold();
+   nut .set_as_working_manifold();
    \verm{Mesh} \azul{bumpy} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle,
                 \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::inherent_orientation );
 \end{Verbatim}
@@ -677,10 +677,10 @@ Here, the word ``upwards'' is used in the sense of the right hand rule
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );    x(S) =  \laranja{0.};  y(S) = \laranja{-1.};  z(S) =  \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, \{ \laranja{1.}, \laranja{0.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                                         );
-   nut.set_as_working_manifold();
+   nut .set_as_working_manifold();
    \verm{Mesh} \azul{bumpy} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
 
@@ -689,10 +689,10 @@ in either case, the produced mesh will be oriented downwards.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );    x(S) =  \laranja{0.};  y(S) = \laranja{-1.};  z(S) =  \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, \{ \laranja{-1.}, \laranja{0.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                                          );
-   nut.set_as_working_manifold();
+   nut .set_as_working_manifold();
    \verm{Mesh} \azul{bumpy} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
 
@@ -707,7 +707,7 @@ The construction of {\small\tt bumpy} is uniquely determined by the orientation 
    \verm{Manifold} \azul{base} = nut.implicit ( x*x + 3.*z == 0. );
    \verm{Mesh} \azul{circle}
       ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::random_orientation );
-   nut.set_as_working_manifold();
+   nut .set_as_working_manifold();
    \verm{Mesh} \azul{bumpy} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle,
                 \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::inherent_orientation );
 \end{Verbatim}
@@ -727,11 +727,11 @@ in paragraphs \ref{\numb section 2.\numb parag 13}, \ref{\numb section 3.\numb p
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 15}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Cell} S ( \textcolor{tag}{tag}::vertex );    x(S) =  \laranja{0.};  y(S) = \laranja{-1.};  z(S) =  \laranja{0.};
+   \verm{Cell} S ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
    std::vector < double > \azul{tau} \{ \laranja{1.}, \laranja{0.}, \laranja{0.} \};
    \verm{Mesh} circle ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, tau,
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                               );
-   nut.set_as_working_manifold();
+   nut .set_as_working_manifold();
    std::vector < double > \azul{N} \{ \laranja{0.}, \laranja{0.}, \laranja{1.} \};
    \verm{Mesh} bumpy ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle,
                 \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, N,
@@ -792,17 +792,17 @@ Here is how to mesh the diamond-shaped domain in paragraph \ref{\numb section 2.
    label=parag-\ref{\numb section 3.\numb parag 17}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// we define the arcs NW, WS, SE and EN either as segments, like in}
-   RR2.implicit ( x*y + x - y == \laranja{-1.} );
+   RR2 .implicit ( x*y + x - y == \laranja{-1.} );
    \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N.reverse(), W, \textcolor{tag}{tag}::divided_in, \laranja{12} );
    
    \cinza{// or with tag::progressive like in}
-   RR2.implicit ( x*y - x - y ==  \laranja{1.} );
+   RR2 .implicit ( x*y - x - y ==  \laranja{1.} );
    \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, W, \textcolor{tag}{tag}::stop_at, S,
              \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
    \cinza{// ... //}
              
    \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, NW, WS, SE, EN );
-   RR2.set_as_working_manifold();
+   RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{diamond} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
 
@@ -833,16 +833,16 @@ thus, some previous knowledge about the geometry of the surface is needed.
    label=parag-\ref{\numb section 3.\numb parag 18}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
-   \verm{Function} \azul{xyz} = RR3.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xyz[\laranja{0}],  \azul{y} = xyz[\laranja{1}],  \azul{z} = xyz[\laranja{2}];
+   \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
 
    const double rs = \laranja{1.};    \cinza{// radius of the sphere}
    const double rc = \laranja{0.45};  \cinza{// radius of the cylinder}
    const double seg_size = \laranja{0.1};
 
-   \verm{Manifold} \azul{cylinder} = RR3.implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == rc*rc );
+   \verm{Manifold} \azul{cylinder} = RR3 .implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == rc*rc );
 
-   cylinder.implicit ( x == \laranja{1.5} );  \cinza{// we cut the cylinder on its right side}
+   cylinder .implicit ( x == \laranja{1.5} );  \cinza{// we cut the cylinder on its right side}
    \verm{Cell} \azul{start_1} ( \textcolor{tag}{tag}::vertex );
    x ( start_1 ) = \laranja{1.5};  y ( start_1 ) = \laranja{0.};  z ( start_1 ) = \laranja{0.5} + rc;
    \verm{Mesh} \azul{circle_1} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, start_1,
@@ -852,17 +852,17 @@ thus, some previous knowledge about the geometry of the surface is needed.
    \verm{Manifold} \azul{intersection} = cylinder.implicit ( x*x + y*y + z*z == rs*rs );
    \verm{Cell} \azul{start_2} ( \textcolor{tag}{tag}::vertex );
    x ( start_2 ) = \laranja{1.};  y ( start_2 ) = \laranja{0.};  z ( start_2 ) = \laranja{0.5} - rc;
-   intersection.project ( start_2 );
+   intersection .project ( start_2 );
    \verm{Mesh} \azul{circle_2} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, start_2,
                    \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{-1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
 
    \verm{Mesh} \azul{two_circles} ( \textcolor{tag}{tag}::join, circle_1, circle_2.reverse() );
-   cylinder.set_as_working_manifold();
+   cylinder .set_as_working_manifold();
    \verm{Mesh} \azul{piece_of_cyl} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, two_circles,
                        \textcolor{tag}{tag}::start_at, start_1, \textcolor{tag}{tag}::towards, \{ \laranja{-1.}, \laranja{0.}, \laranja{0.} \},
                        \textcolor{tag}{tag}::desired_length, seg_size                          );
 
-   RR3.implicit ( x*x + y*y + z*z == rs*rs );
+   RR3 .implicit ( x*x + y*y + z*z == rs*rs );
    \verm{Mesh} \azul{piece_of_sph} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle_2,
                        \textcolor{tag}{tag}::start_at, start_2, \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{0.}, \laranja{-1.} \},
                        \textcolor{tag}{tag}::desired_length, seg_size                         );
@@ -897,7 +897,7 @@ If we want to close the extremity of the cylinder, it suffices to add a few line
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   RR3.implicit ( x == \laranja{1.5} );
+   RR3 .implicit ( x == \laranja{1.5} );
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle_1.reverse(),
                \textcolor{tag}{tag}::start_at, start_1, \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{0.}, \laranja{-1.} \},
                \textcolor{tag}{tag}::desired_length, seg_size                         );
@@ -924,27 +924,27 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Manifold} \azul{cylinder} = RR3.implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == rc*rc );
-   \verm{Manifold} \azul{intersection} = cylinder.implicit ( x*x + y*y + z*z == rs*rs );
+   \verm{Manifold} \azul{cylinder} = RR3 .implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == rc*rc );
+   \verm{Manifold} \azul{intersection} = cylinder .implicit ( x*x + y*y + z*z == rs*rs );
    \verm{Cell} \azul{start_1} ( \textcolor{tag}{tag}::vertex );
    x ( start_1 ) = \laranja{1.};  y ( start_1 ) = \laranja{0.};  z ( start_1 ) = \laranja{0.5} - rc;
-   intersection.project ( start_1 );
+   intersection .project ( start_1 );
    \verm{Mesh} \azul{circle_1} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, start_1,
                    \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
    \verm{Cell} \azul{start_2} ( \textcolor{tag}{tag}::vertex );
    x ( start_2 ) = \laranja{-1.};  y ( start_2 ) = \laranja{0.};  z ( start_2 ) = \laranja{0.5} - rc;
-   intersection.project ( start_2 );
+   intersection .project ( start_2 );
    \verm{Mesh} \azul{circle_2} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, start_2,
                    \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
    \verm{Mesh} \azul{two_circles} ( \textcolor{tag}{tag}::join, circle_1.reverse(), circle_2 );
-   cylinder.set_as_working_manifold();
+   cylinder .set_as_working_manifold();
    \verm{Mesh} \azul{piece_of_cyl} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, two_circles,
                        \textcolor{tag}{tag}::start:at, start_1, \textcolor{tag}{tag}::towards, \{ \laranja{-1.}, \laranja{0.}, \laranja{0.} \},
                        \textcolor{tag}{tag}::desired_length, seg_size                         );
 
    \verm{Mesh} \azul{two_circles_rev} ( \textcolor{tag}{tag}::join, circle_1, circle_2.reverse() );
 
-   RR3.implicit ( x*x + y*y + z*z == rs*rs );
+   RR3 .implicit ( x*x + y*y + z*z == rs*rs );
    \verm{Mesh} \azul{piece_of_sph} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, two_circles_rev,
                        \textcolor{tag}{tag}::start:at, start_1, \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{0.}, \laranja{-1.} \},
                        \textcolor{tag}{tag}::desired_length, seg_size                         );
@@ -993,14 +993,14 @@ A typical example is the vertex of a cone.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=code not working,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                  ]
-   \verm{Manifold} \azul{cone_manif} = RR3.implicit ( x*x + y*x == z*z );
-   cone_manif.implicit ( z == \laranja{1.} );
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{1.};  y(A) = \laranja{0.};  z(A) = \laranja{1.};
+   \verm{Manifold} \azul{cone_manif} = RR3 .implicit ( x*x + y*x == z*z );
+   cone_manif .implicit ( z == \laranja{1.} );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{1.};  y (A) = \laranja{0.};  z (A) = \laranja{1.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A,
                  \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{-1.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}           );
-   cone_manif.set_as_working_manifold();
-   \verm{Cell} \azul{V} ( \textcolor{tag}{tag}::vertex );  x(V) = \laranja{0.};  y(V) = \laranja{0.};  z(V) = \laranja{0.};
+   cone_manif .set_as_working_manifold();
+   \verm{Cell} \azul{V} ( \textcolor{tag}{tag}::vertex );  x (V) = \laranja{0.};  y (V) = \laranja{0.};  z (V) = \laranja{0.};
    \verm{Mesh} \azul{cone} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle,
                \textcolor{tag}{tag}::start_at, A, \textcolor{tag}{tag}::towards, \{ \laranja{-1.}, \laranja{0.}, \laranja{-1.} \},
                \textcolor{tag}{tag}::singular, V, \textcolor{tag}{tag}::desired_length, \laranja{0.1}       );
@@ -1026,9 +1026,9 @@ We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb para
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=code not working,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                  ]
-   \verm{Manifold} \azul{cylinder} = RR3.implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == \laranja{0.25} );
-   \verm{Manifold} \azul{infinity} = cylinder.implicit ( x*x + y*y + z*z == \laranja{1.} );
-   \verm{Cell} \azul{V} ( \textcolor{tag}{tag}::vertex );  x(V) = \laranja{0.};  y(V) = \laranja{0.};  z(V) = \laranja{1.};
+   \verm{Manifold} \azul{cylinder} = RR3 .implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == \laranja{0.25} );
+   \verm{Manifold} \azul{infinity} = cylinder .implicit ( x*x + y*y + z*z == \laranja{1.} );
+   \verm{Cell} \azul{V} ( \textcolor{tag}{tag}::vertex );  x (V) = \laranja{0.};  y (V) = \laranja{0.};  z (V) = \laranja{1.};
    \verm{Mesh} \azul{circle_1} ( \textcolor{tag}{tag}::progressive,
                    \textcolor{tag}{tag}:: start_at, V, \textcolor{tag}{tag}::towards, \{ \laranja{1.}, \laranja{1.}, \laranja{0.} \},
                    \textcolor{tag}{tag}::singular, V, \textcolor{tag}{tag}::desired_length, \laranja{0.1}      );
@@ -1036,8 +1036,8 @@ We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb para
                    \textcolor{tag}{tag}:: start_at, V, \textcolor{tag}{tag}::towards, \{ \laranja{-1.}, \laranja{-1.}, \laranja{0.} \},
                    \textcolor{tag}{tag}::singular, V, \textcolor{tag}{tag}::desired_length, \laranja{0.1}        );
 
-   cylinder.set_as_working_manifold();
-   \verm{Cell} \azul{W} = circle_1.cell_in_front_of(V).tip();
+   cylinder .set_as_working_manifold();
+   \verm{Cell} \azul{W} = circle_1 .cell_in_front_of (V) .tip();
    \verm{Mesh} \azul{piece_of_cyl} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle_1, circle_2,
                        \textcolor{tag}{tag}::start_at, W, \textcolor{tag}{tag}::towards, \{ \laranja{-1.}, \laranja{1.}, \laranja{0.} \},
                        \textcolor{tag}{tag}::singular, V, \textcolor{tag}{tag}::desired_length, \laranja{0.1}          );
@@ -1075,12 +1075,12 @@ The {\small\tt desired\_\,length} may be a non-constant function.
    label=parag-\ref{\numb section 3.\numb parag 22}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Function} \azul{d} = \laranja{0.03} + \laranja{0.04} * ( (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9}) );
-   \verm{Manifold} \azul{circle} = RR2.implicit ( x*x + y*y == \laranja{1.} );
+   \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, d );
-   \verm{Manifold} \azul{ellipse} = RR2.implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
+   \verm{Manifold} \azul{ellipse} = RR2 .implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, d );
-   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner.reverse() );
-   RR2.set_as_working_manifold();
+   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner .reverse() );
+   RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, d );
 \end{Verbatim}
 
@@ -1114,17 +1114,17 @@ we see in the drawing), thus producing the same result as in paragraph
    label=code not working,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                   ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy[\laranja{0}],  \azul{y} = xy[\laranja{1}];
+   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
    \verm{Function} \azul{d} = \laranja{0.3} + \laranja{0.5} * ( (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9}) );
-   RR2.set_metric ( \laranja{1.} / d );
+   RR2 .set_metric ( \laranja{1.} / d );
    
-   \verm{Manifold} \azul{circle} = RR2.implicit ( x*x + y*y == \laranja{1.} );
+   \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
-   \verm{Manifold} \azul{ellipse} = RR2.implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
+   \verm{Manifold} \azul{ellipse} = RR2 .implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
-   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner.reverse() );
-   RR2.set_as_working_manifold();
+   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner .reverse() );
+   RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
 
@@ -1153,20 +1153,20 @@ $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for th
    label=code not working,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                  ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
-   \verm{Function} \azul{xy} = RR2.build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy[\laranja{0}],  \azul{y} = xy[\laranja{1}];
+   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
    \verm{Function} \azul{d} = \laranja{0.3} + (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9});
-   RR2.set_metric ( \laranja{1.} + \laranja{1.}/d, \laranja{-3.}/d, \laranja{1.} + \laranja{9.}/d );
+   RR2 .set_metric ( \laranja{1.} + \laranja{1.}/d, \laranja{-3.}/d, \laranja{1.} + \laranja{9.}/d );
    \cinza{// or, equivalently :}
    \cinza{// RR2.set_metric ( tag::principal_part, 1.,}
    \cinza{//                  tag::deviatoric_part, 1./d, \-3./d, 9./d );}
 
-   \verm{Manifold} \azul{circle} = RR2.implicit ( x*x + y*y == \laranja{1.} );
+   \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
-   \verm{Manifold} \azul{ellipse} = RR2.implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
+   \verm{Manifold} \azul{ellipse} = RR2 .implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
-   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner.reverse() );
-   RR2.set_as_working_manifold();
+   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner .reverse() );
+   RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
 
