@@ -350,7 +350,7 @@ shows several images of the same hole, due to the unfolding.
    baselinestretch=0.94,framesep=2mm                                            ]
    std::vector < \verm{Cell} > \azul{vec};
 
-   \verm{CellIterator} \azul{it} = torus .iterator
+   \verm{Mesh}::Iterator \azul{it} = torus .iterator
       ( \textcolor{tag}{tag}::over_cells, \textcolor{tag}{tag}::of_dim, 2, \textcolor{tag}{tag}::around, A );
    for ( it .reset(); it .in_range(); it++ ) vec .push_back ( *it );
    std::vector < \verm{Cell} > ::iterator \azul{itv};

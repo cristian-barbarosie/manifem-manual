@@ -100,13 +100,20 @@ However, {\maniFEM} can be used at a basic level by people with no deep knowledg
 
 Similar products (competitors) are : FreeFem++ ({\small\tt http://www3.freefem.org/}),
 FEniCS/ Dolphin ({\small\tt https://fenicsproject.org/}),
-deal.II ({\small\tt https://dealii.org/})
+deal.II ({\small\tt https://dealii.org/}),
+PETSc-FEM ({\small\tt https://cimec.org.ar/foswiki/Main/Cimec/PETScFEM})
 
 In its current version, release \manifemrelease, {\maniFEM} works well for mesh generation,
-including some meshes on quotient manifolds.
-Anisotropic meshing (paragraph \ref{\numb section 3.\numb parag 24}) and
-variational formulations (section \ref{\numb section 5}) are not yet implemented.
-Finite elements (section \ref{\numb section 6}) work in a rather rudimentary manner for now.
+including meshes on quotient manifolds.
+{\ManiFEM} deals well with one-dimensional meshes (including curves in R^2 and R^3)
+and two-dimensional meshes (including surfaces in R^3);
+three-dimensional meshes are object of current work.
+It is possible to build meshes with large variations in the element size;
+anisotropic Riemann metrics are object of current work.
+Lagrange finite elements of degree one are implemented for triangular and quadrangular cells;
+many other types of finite elements are still to be implemented.
+In the future, variational formulations will be implemented as C++ objects,
+thus allowing for compact and elegant code.
 A changelog is included at the end of this manual, before the index.
 To check which version of {\maniFEM} is installed in your computer,
 see at the beginning of the file {\small\tt maniFEM.h}.
@@ -284,8 +291,7 @@ paragraph \ref{\numb section 11.\numb parag 6}.
 \noindent Garbage collectors for cells and meshes work,
 paragraph \ref{\numb section 11.\numb parag 5}.
 
-\noindent Introduce iterators around a cell,
-paragraph \ref{\numb section 9.\numb parag 8}.
+\noindent Introduce iterators around a cell, paragraph \ref{\numb section 9.\numb parag 8}.
 
 \noindent Some examples about remeshing, section \ref{\numb section 10}.
 
@@ -312,6 +318,9 @@ paragraph \ref{\numb section 9.\numb parag 8}.
 Cone-like quotient manifolds, paragraphs \ref{\numb section 7.\numb parag 12} and
 \ref{\numb section 7.\numb parag 13}.
 
+\noindent Change name {\small\tt\verm{CellIterator}} to {\small\tt\verm{Mesh}::Iterator},
+thus exposing one less name in {\small\tt namespace \verm{maniFEM}}.
+
 
 \section*{To do}
 
@@ -334,15 +343,8 @@ see comments at the end of paragraph \ref{\numb section 6.\numb parag 2}.
 They are called UFL-FFC and they work for a P1 triangle, some cases still missing.
 They should be extended to many other types of finite elements.
 
-\noindent The name {\small\tt\verm{CellIterator}} is ugly.
-I have chosen this name to hint that we are dealing with an iterator over cells.
-If I choose to stick on this hint, I could change it to {\small\tt\verm{Cell}::Iterator}
-(thus exposing one less name in the {\small\tt namespace \verm{maniFEM}}).
-Another possibility is to follow the convention for {\tt STL} iterators :
-{\small\tt ContainerClass::iterator}.
-This would lead to the name {\small\tt\verm{Mesh}::Iterator} since a {\small\tt\verm{Mesh}}
-can be seen as a container for {\small\tt\verm{Cell}}s.
-Suggestions are welcome.
+\noindent I implemented a class for multi-indexed matrices
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

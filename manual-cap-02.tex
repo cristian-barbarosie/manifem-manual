@@ -639,7 +639,7 @@ The {\small\tt apple} manifold is no longer relevant.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 11}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{CellIterator} \azul{it} = fisalis .iterator ( \textcolor{tag}{tag}::over_vertices );
+   \verm{Mesh}::Iterator \azul{it} = fisalis .iterator ( \textcolor{tag}{tag}::over_vertices );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;
       x(P) *= \laranja{0.8};  y(P) *= \laranja{0.8};
@@ -663,7 +663,7 @@ Thus, the eight rims defined in the beginning are kept unchanged.
    std::vector < \verm{Mesh} > ::iterator \azul{it1};
    for ( it1 = lm .begin(); it1 != lm .end(); it1++ )
    \{  \verm{Mesh} \azul{sect} = *it1;
-      \verm{CellIterator} \azul{it2} = sect .iterator ( \textcolor{tag}{tag}::over_vertices );
+      \verm{Mesh}::Iterator \azul{it2} = sect .iterator ( \textcolor{tag}{tag}::over_vertices );
       for ( int \azul{i} = \laranja{1}; i < \laranja{20}; i++ )
       for ( it2 .reset(); it2 .in_range(); it2++ )
       \{  \verm{Cell} \azul{ver} = *it2;

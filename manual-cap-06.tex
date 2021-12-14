@@ -115,7 +115,7 @@ for numbering vertices.
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    std::map < Cell, size_t > \azul{numbering};
-   \verm{CellIterator} \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
+   \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
    size_t \azul{counter} = 0;
    for ( it .reset() ; it .in_range(); it++ )
    \{  \verm{Cell} \azul{V} = *it;  numbering [V] = counter;  ++counter;  \}
@@ -146,13 +146,13 @@ values to the global matrix:
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    // run over all square cells composing ABCD
-   \verm{CellIterator} \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{small_square} = *it;
       fe .dock_on ( small_square );
       // run twice over the four vertices of 'small_square'
-      \verm{CellIterator} \azul{it1} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
-      \verm{CellIterator} \azul{it2} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
+      \verm{Mesh}::Iterator \azul{it1} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
+      \verm{Mesh}::Iterator \azul{it2} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
       for ( it1 .reset(); it1 .in_range(); it1++ )
       for ( it2 .reset(); it2 .in_range(); it2++ )
       \{  \verm{Cell} \azul{V} = *it1, \azul{W} = *it2;
@@ -185,7 +185,7 @@ function.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{CellIterator} \azul{it} = BC .iterator ( \textcolor{tag}{tag}::over_vertices );
+   \verm{Mesh}::Iterator \azul{it} = BC .iterator ( \textcolor{tag}{tag}::over_vertices );
    for ( it .reset(); it .in_range(); it++ )
    \{   \verm{Cell} \azul{P} = *it;
        size_t \azul{i} = numbering [P];
@@ -263,7 +263,7 @@ part of the boundary where we need to integrate.
 
    \verm{Function} \azul{heat_source} = x+y;
    \cinza{// impose Neumann boundary conditions du/dn = heat_source :}
-   \verm{CellIterator} \azul{it} = DA .iterator ( \textcolor{tag}{tag}::over_segments );
+   \verm{Mesh}::Iterator \azul{it} = DA .iterator ( \textcolor{tag}{tag}::over_segments );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{seg} = *it;
       fe_bdry .dock_on ( seg );
@@ -338,7 +338,7 @@ diagonal with ones, then erase them for existing vertices.
    baselinestretch=0.94,framesep=2mm                                            ]
    for ( size_t \azul{i} = 0; i < size_matrix; i++ )
       matrix_A .insert ( i, i ) = 1.;
-   \verm{CellIterator} \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
+   \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;
       size_t \azul{i} = numbering ( P );
@@ -353,7 +353,7 @@ We simply assign the desired value to the numbering of each vertex :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm          ]
-   \verm{CellIterator} \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
+   \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
    size_t \azul{counter} = 0;
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;

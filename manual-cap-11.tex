@@ -16,8 +16,8 @@ a guide through the source code.
 All names in {\maniFEM} are wrapped into the namespace {\small\tt\verm{maniFEM}}.
 We recommend {\small\tt using} {\small\tt namespace} {\small\tt\verm{maniFEM}} in your code,
 otherwise the text will become cumbersome.
-For instance, you will have to write {\small\tt\verm{maniFEM}::CellIterator} instead of
-{\small\tt\verm{CellIterator}}, and so on.
+For instance, you will have to write {\small\tt\verm{maniFEM}::Mesh::Iterator} instead of
+{\small\tt\verm{Mesh}::Iterator}, and so on.
 We are {\small\tt using} {\small\tt namespace} {\small\tt\verm{maniFEM}} in the examples
 of this manual.
 
@@ -38,12 +38,15 @@ However, some class members and methods are intended to be used by the final use
 while others are used in the internal implementation of the former.
 Classes \hbox{intended} for basic usage are directly exposed in {\small\tt namespace}
 {\small\tt\verm{maniFEM}}, for instance
-{\small\tt\verm{Cell}}, {\small\tt\verm{Mesh}}, {\small\tt\verm{CellIterator}},
+{\small\tt\verm{Cell}}, {\small\tt\verm{Mesh}},
 {\small\tt\verm{Function}}, {\small\tt\verm{Manifold}}, {\small\tt\verm{VariationalFormulation}},
 {\small\tt\verm{Integrator}}, {\small\tt\verm{FiniteElement}}.
+Some names, although not directly exposed, are intended for basic use :
+{\small\tt\verm{Mesh}::Iterator}, {\small\tt\verm{Manifold}::Action},
+many {\small\tt\verm{tag}}s (see paragraph \ref{\numb section 11.\numb parag 3}).
 Classes not intended for the final user (at least not for the basic usage of \maniFEM)
 have been hidden inside the above mentioned names, e.g. {\small\tt\verm{Mesh}::Positive},
-\ {\small\tt\verm{CellIterator}::Over::SegsOfPosLoop::Positive},
+\ {\small\tt\verm{Mesh}::Iterator::Over::SegsOfPosLoop::Positive},
 \hbox{\small\tt\verm{Function}::CoupledWithField::Scalar}.
 Also, in the source code there are comments like
 
@@ -71,11 +74,11 @@ Throughout this manual, example {\tt C++} code is coloured according to the foll
 conventions.
 
 Class names directly exposed in {\small\tt namespace} {\small\tt\verm{maniFEM}} are shown in
-\verm{blue} : {\small\tt\verm{Cell}}, {\small\tt\verm{Mesh}}, {\small\tt\verm{CellIterator}},
+\verm{blue} : {\small\tt\verm{Cell}}, {\small\tt\verm{Mesh}},
 {\small\tt\verm{Function}}, {\small\tt\verm{Manifold}},
 {\small\tt\verm{VariationalFormulation}}, {\small\tt\verm{Integrator}},
 {\small\tt\verm{FiniteElement}}, the rarely needed {\small\tt\verm{Field}} and
-the even more rarely needed {\small\tt\verm{MeshIterator}} and {\small\tt\verm{MetricTree}}.
+the even more rarely needed {\small\tt\verm{MetricTree}}.
 There are also functions like {\small\tt\verm{smooth\_\,min}} and also overloaded versions
 of common functions like {\small\tt\verm{power}}, {\small\tt\verm{sin}}, {\small\tt\verm{cos}}.
 The word {\small\tt \textcolor{tag}{tag}} deserves a special treatment.
@@ -102,7 +105,7 @@ Most of them contain no data; only their type is useful, at compile time.
 
 A {\small\tt\textcolor{tag}{tag}} is used to clearly distinguish between functions with
 the same name (overloaded functions).
-For instance, in the code excerpt below five {\small\tt\verm{CellIterator}}s are defined
+For instance, in the code excerpt below five {\small\tt\verm{Mesh}::Iterator}s are defined
 by means of different (overloaded) methods having the same name
 {\small\tt\verm{Mesh}::iterator});
 the iterators behave very differently (see paragraphs \ref{\numb section 9.\numb parag 3} and
@@ -110,11 +113,11 @@ the iterators behave very differently (see paragraphs \ref{\numb section 9.\numb
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \cinza{// 'chain' is a one-dimensional Mesh}
-   \verm{CellIterator} \azul{it1} = chain .iterator ( \textcolor{tag}{tag}::over_vertices );
-   \verm{CellIterator} \azul{it2} = chain .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
-   \verm{CellIterator} \azul{it3} = chain .iterator ( \textcolor{tag}{tag}::over_segments );
-   \verm{CellIterator} \azul{it4} = chain .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
-   \verm{CellIterator} \azul{it5} = chain .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::force_positive );
+   \verm{Mesh}::Iterator \azul{it1} = chain .iterator ( \textcolor{tag}{tag}::over_vertices );
+   \verm{Mesh}::Iterator \azul{it2} = chain .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
+   \verm{Mesh}::Iterator \azul{it3} = chain .iterator ( \textcolor{tag}{tag}::over_segments );
+   \verm{Mesh}::Iterator \azul{it4} = chain .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
+   \verm{Mesh}::Iterator \azul{it5} = chain .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::force_positive );
 \end{Verbatim}
 
 The above could be achieved by giving longer names to the functions, but we believe
@@ -277,7 +280,7 @@ iterators, fields, functions, manifolds.
 
 Many objects in {\maniFEM} are implemented using a wrapper-core model.
 Examples are {\small\tt\verm{Cell}}s, {\small\tt\verm{Mesh}}es,
-{\small\tt\verm{CellIterator}}s, {\small\tt\verm{MeshIterator}}s, {\small\tt\verm{Manifold}}s,
+{\small\tt\verm{Mesh}::Iterator}s, {\small\tt\verm{Manifold}}s,
 {\small\tt\verm{Function}}s, {\small\tt\verm{FiniteElement}}s, {\small\tt\verm{Integrator}}s,%
 \break {\small\tt\verm{VariationalFormulation}}s.
 A garbage collector is implemented; all these classes inherit from

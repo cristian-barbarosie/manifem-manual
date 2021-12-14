@@ -186,7 +186,7 @@ we can use a code like
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{cll} = *it;  do_something_to (cll);  \}
 \end{Verbatim}
@@ -205,9 +205,9 @@ We have kept the syntax {\small\tt it++} for advancing an iterator in the proces
 running over cells, offering also the equivalent alteratives {\small\tt ++it} and
 {\small\tt it.advance()}.
 We have also kept the notation {\small\tt *it} for dereferencing a
-{\small\tt \verm{CellIterator}};
+{\small\tt \verm{Mesh}::Iterator};
 this operation returns a {\small\tt \verm{Cell}} object (a wrapper).
-Of course, dereferencing a {\small\tt \verm{CellIterator}} does not produce a new cell,
+Of course, dereferencing a {\small\tt \verm{Mesh}::Iterator} does not produce a new cell,
 just provides access to a previously built cell
 (with the slight exception described in paragraph \ref{\numb section 9.\numb parag 8};
 see also paragraph \ref{\numb section 9.\numb parag 10}).
@@ -220,7 +220,7 @@ This has the advantage that the name of the iterator gains local scope.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   for ( \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::reset );
+   for ( \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::reset );
          it .in_range(); it++                                                       )
    \{  \verm{Cell} \azul{cll} = *it;  do_something_to (cll);  \}
 \end{Verbatim}
@@ -229,7 +229,7 @@ If we want to iterate over all vertices of the mesh, we can use
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 0 );
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 0 );
    \cinza{// or, equivalently :  CellIterator it = msh.iterator ( tag::over_vertices )}
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;  do_something_to (P);  \}
@@ -239,7 +239,7 @@ If we want to iterate over all segments of the mesh, we can use
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1 );
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1 );
    \cinza{// or, equivalently :  CellIterator it = msh .iterator ( tag::over_segments )}
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{seg} = *it;  do_something_to (seg);  \}
@@ -255,7 +255,7 @@ by adding a {\small\tt \textcolor{tag}{tag}::force\_\,positive} as in
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::force_positive );
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::force_positive );
 \end{Verbatim}
 
 Note that it is not safe to modify a mesh while iterating over its cells
@@ -306,11 +306,11 @@ The syntax is the same as the one described in pragraph \ref{\numb section 9.\nu
    \verm{Mesh} \azul{chain} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, n );
    \cinza{// A and B are (positive) vertices, n is an integer}
    
-   \verm{CellIterator} \azul{it0} = chain .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 0 );
+   \verm{Mesh}::Iterator \azul{it0} = chain .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 0 );
    for ( it0 .reset(); it0 .in_range(); it0++ )
    \{  \verm{Cell} \azul{P} = *it0;  do_something_to (P);  \}
 
-   \verm{CellIterator} \azul{it1} = chain .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1 );
+   \verm{Mesh}::Iterator \azul{it1} = chain .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1 );
    for ( it1 .reset(); it1 .in_range(); it1++ )
    \{  \verm{Cell} \azul{seg} = *it1;  do_something_to (seg);  \}
    
@@ -339,8 +339,8 @@ the {\small\tt \textcolor{tag}{tag}::backwards} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it1r} = chain .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
-   \verm{CellIterator} \azul{it0r} = chain .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
+   \verm{Mesh}::Iterator \azul{it1r} = chain .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
+   \verm{Mesh}::Iterator \azul{it0r} = chain .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
 \end{Verbatim}
 
 Connected one-dimensional meshes have methods {\small\tt first\_\,vertex},
@@ -353,7 +353,7 @@ Note that {\small\tt \verm{Mesh}::first\_\,vertex} returns a negative vertex whi
 \ref{\numb section 1.\numb parag 2}).
 
 As explained in paragraph \ref{\numb section 9.\numb parag 10},
-de-referencing a {\small\tt \verm{CellIterator}} does not produce a new cell,
+de-referencing a {\small\tt \verm{Mesh}::Iterator} does not produce a new cell,
 just provides access to a previously built cell.
 
 Sometimes it may be not obvious for the user whether a certain {\small\tt \verm{Mesh}}
@@ -369,8 +369,8 @@ If we want to make sure the vertices will come up in a linear order, we can add 
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it1} = chain .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::require_order );
-   \verm{CellIterator} \azul{it0} = chain .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::require_order );
+   \verm{Mesh}::Iterator \azul{it1} = chain .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::require_order );
+   \verm{Mesh}::Iterator \azul{it0} = chain .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::require_order );
 \end{Verbatim}
 
 If {\small\tt chain} does not support linear ordering, the above statements will produce
@@ -438,8 +438,8 @@ We also understand that usually there is no difference between these two iterato
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it1} = tri_msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
-   \verm{CellIterator} \azul{it2} =
+   \verm{Mesh}::Iterator \azul{it1} = tri_msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   \verm{Mesh}::Iterator \azul{it2} =
       tri_msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::force_positive );
 \end{Verbatim}
 
@@ -460,8 +460,8 @@ depending on which segments happen to be positive :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it3} = ABC .boundary() .iterator ( \textcolor{tag}{tag}::over_segments );
-   \verm{CellIterator} \azul{it4} =
+   \verm{Mesh}::Iterator \azul{it3} = ABC .boundary() .iterator ( \textcolor{tag}{tag}::over_segments );
+   \verm{Mesh}::Iterator \azul{it4} =
       ABC .boundary() .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::force_positive );
 \end{Verbatim}
 
@@ -470,16 +470,16 @@ points).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it5} = ABC .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
-   \verm{CellIterator} \azul{it6} = ABC .boundary() .reverse() .iterator ( \textcolor{tag}{tag}::over_vertices );
+   \verm{Mesh}::Iterator \azul{it5} = ABC .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::backwards );
+   \verm{Mesh}::Iterator \azul{it6} = ABC .boundary() .reverse() .iterator ( \textcolor{tag}{tag}::over_vertices );
 \end{Verbatim}
 
 However, the two iterators below are quite different.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it7} = ABC .boundary() .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
-   \verm{CellIterator} \azul{it8} = ABC .boundary() .reverse() .iterator ( \textcolor{tag}{tag}::over_segments );
+   \verm{Mesh}::Iterator \azul{it7} = ABC .boundary() .iterator ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::backwards );
+   \verm{Mesh}::Iterator \azul{it8} = ABC .boundary() .reverse() .iterator ( \textcolor{tag}{tag}::over_segments );
 \end{Verbatim}
 
 Iterator {\small\tt it7} will produce segments {\small\tt AB}, {\small\tt CA}, {\small\tt BC}
@@ -522,7 +522,7 @@ Pick one of them, at random :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it1} = hex_msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   \verm{Mesh}::Iterator \azul{it1} = hex_msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
    it1 .reset();  assert ( it1 .in_range() );
    \verm{Cell} \azul{hex_1} = *it1;
 \end{Verbatim}
@@ -531,7 +531,7 @@ Now choose a random segment on the boundary of {\small\tt hex\_\,1} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it2} = hex_1 .boundary() .iterator ( \textcolor{tag}{tag}::over_segments );
+   \verm{Mesh}::Iterator \azul{it2} = hex_1 .boundary() .iterator ( \textcolor{tag}{tag}::over_segments );
    it2 .reset();  assert ( it2 .in_range() );
    \verm{Cell} \azul{AB} = *it2;
 \end{Verbatim}
@@ -671,7 +671,7 @@ The segments will show up in a rahter unpredictable order.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Mesh} \azul{msh} ( \cinza{...} );  \cinza{// a mesh of cubes for instance}
-   \verm{CellIterator} \azul{it} =  \cinza{// P is a positive vertex within msh}
+   \verm{Mesh}::Iterator \azul{it} =  \cinza{// P is a positive vertex within msh}
               msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P.reverse() );
    \cinza{// or, equivalently :}
    \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P.reverse() )}
@@ -688,7 +688,7 @@ produces segments pointing towards {\small\tt P}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P );
+   \verm{Mesh}::Iterator \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P );
    \cinza{// or, equivalently :}
    \cinza{// CellIterator it = msh .iterator ( tag::over_segments, tag::around, P )}
 \end{Verbatim}
@@ -713,7 +713,7 @@ this will not change the behaviour of the iterator {\small\tt it} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::around, P );
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::around, P );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );   \}
 \end{Verbatim}
@@ -728,7 +728,7 @@ can always add the {\small\tt\textcolor{tag}{tag}::force\_\,positive} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 3, \textcolor{tag}{tag}::force_positive,
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 3, \textcolor{tag}{tag}::force_positive,
                                      \textcolor{tag}{tag}::around, P                                 );
 \end{Verbatim}
 
@@ -751,7 +751,7 @@ all squares sharing the vertex {\small\tt P}, linearly ordered.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::around, P );
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::around, P );
 \end{Verbatim}
 
 If {\small\tt P} is at the boundary of {\small\tt msh}, the iteration process will begin
@@ -763,7 +763,7 @@ We can iterate over segments originating at {\small\tt P} (now the orientation o
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = 
+   \verm{Mesh}::Iterator \azul{it} = 
                msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P.reverse() );
    \cinza{// or, equivalently :}
    \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P.reverse() )}
@@ -774,7 +774,7 @@ supplementary arguments to the {\small\tt reset} method :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::around, P );
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2, \textcolor{tag}{tag}::around, P );
    for ( it .reset ( \textcolor{tag}{tag}::start_at, sq ); it .in_range(); it++ )
    \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );   \}
 \end{Verbatim}
@@ -791,21 +791,21 @@ they produce vertices in a rather unpredictable order in a three-dimensional mes
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::around, P );
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::around, P );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{Q} = *it;  do_something_to ( Q );   \}
 \end{Verbatim}
 
 If you need the cells to show up in a linear order but you are not familiar
 with the notion of co-dimension, you can add the {\small\tt\textcolor{tag}{tag}::require\_\,order}
-to the {\small\tt\verm{CellIterator}} constructor;
+to the {\small\tt\verm{Mesh}::Iterator} constructor;
 this way, if in {\small\tt DEBUG} mode, {\maniFEM} will produce a run-time error
 if that particular configuration is not compatible with linear ordering
 (that is, if the co-dimension of the central cell is not equal to two).
 Specifying {\small\tt\textcolor{tag}{tag}::backwards} also informs {\maniFEM} that you want
 linear ordering of cells, so you don't have to provide both tags.
 
-As a general rule, de-referencing a {\small\tt\verm{CellIterator}} does not build a new
+As a general rule, de-referencing a {\small\tt\verm{Mesh}::Iterator} does not build a new
 cell (it returns a new wrapper to an existing cell).
 Iterators around a cell, described in the present paragraph, are a slight exception to this
 rule.
@@ -821,7 +821,7 @@ to the constructor, as in
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{CellIterator} \azul{it} = msh .iterator
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator
                  ( \textcolor{tag}{tag}::over_segments, \textcolor{tag}{tag}::do_not_build_cells, \textcolor{tag}{tag}::around, P );
 \end{Verbatim}
 
@@ -920,7 +920,7 @@ If that object does not exist, it is built on-the-fly.
    \verm{Cell} \azul{A_rev} ( \textcolor{tag}{tag}::reverse_of, A, \textcolor{tag}{tag}::build_if_not_exists );
 \end{Verbatim}
 
-De-referencing a {\small\tt\verm{CellIterator}} returns (a new wrapper for) an existing cell;
+De-referencing a {\small\tt\verm{Mesh}::Iterator} returns (a new wrapper for) an existing cell;
 a slight exception to this rule is described in paragraph \ref{\numb section 9.\numb parag 8}.
 
 Statements below return a wrapper for a brand new cell or mesh :

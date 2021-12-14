@@ -89,7 +89,7 @@ will occur).
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=incorrect code !,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
-   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{square} = *it;
       if ( \cinza{... some criterion ...} )
@@ -107,7 +107,7 @@ We can circumvent this problem by creating a list of cells to be cut.
    baselinestretch=0.94,framesep=2mm]
    std::list < \verm{Cell} > list_of_squares;
 
-   \verm{CellIterator} \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{square} = *it;
       if ( \cinza{ \mbox{\fontfamily{helvetica}\selectfont{}some criterion} } )  \cinza{// we decide to cut this square in halves}
