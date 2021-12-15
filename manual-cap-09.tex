@@ -230,7 +230,7 @@ If we want to iterate over all vertices of the mesh, we can use
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 0 );
-   \cinza{// or, equivalently :  CellIterator it = msh.iterator ( tag::over_vertices )}
+   \cinza{// or, equivalently :  CellIterator it = msh .iterator ( tag::over_vertices )}
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;  do_something_to (P);  \}
 \end{Verbatim}
@@ -674,7 +674,7 @@ The segments will show up in a rahter unpredictable order.
    \verm{Mesh}::Iterator \azul{it} =  \cinza{// P is a positive vertex within msh}
               msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P.reverse() );
    \cinza{// or, equivalently :}
-   \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P.reverse() )}
+   \cinza{// CellIterator it = msh .iterator ( tag::over_segments, tag::around, P.reverse() )}
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{seg} = *it;  do_something_to ( seg );   \}
 \end{Verbatim}
@@ -688,7 +688,7 @@ produces segments pointing towards {\small\tt P}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Mesh}::Iterator \azul{it} = msh.iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P );
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P );
    \cinza{// or, equivalently :}
    \cinza{// CellIterator it = msh .iterator ( tag::over_segments, tag::around, P )}
 \end{Verbatim}
@@ -766,7 +766,7 @@ We can iterate over segments originating at {\small\tt P} (now the orientation o
    \verm{Mesh}::Iterator \azul{it} = 
                msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 1, \textcolor{tag}{tag}::around, P.reverse() );
    \cinza{// or, equivalently :}
-   \cinza{// CellIterator it = msh.iterator ( tag::over_segments, tag::around, P.reverse() )}
+   \cinza{// CellIterator it = msh .iterator ( tag::over_segments, tag::around, P.reverse() )}
 \end{Verbatim}
 
 If we want to start with a particular square {\small\tt sq}, we specify this by giving
