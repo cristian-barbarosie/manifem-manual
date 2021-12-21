@@ -291,22 +291,22 @@ This is object of on-going work.
 In previous examples we have built a {\small\tt map} for handling numbering of vertices.
 In this paragraph we show how to use instead the automatic numbering associated to the
 finite element itself.
-After declaring a finite element of type Lagrange with
-{\small\tt\textcolor{tag}{tag}::enumerate\_\,cells},
-the process of creating new cells (vertices, in this specfic case) will be different.
-A new function will be added to the list of functions
+The method {\small\tt\verm{FiniteElement}::build\_\,global\_\,numbering} creates
+an object which is similar to an {\small\tt std::map} but uses a different mechanism.
+It modifies the process of creating new cells (vertices, in this specfic case)
+by ading a new function to the list of functions
 {\small\tt\verm{Cell}::init\_\,pos\_\,cell[0]},
 invoked by {\small\tt\verm{Cell}::Core} constructors
 (see paragraph \ref{\numb section 11.\numb parag 10}).
 Space will be reserved for a {\small\tt size\_\,t} value for each vertex, and
-this value can be used for numbering vertices.
+this value will be used for numbering vertices.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle,
-                      \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1, \textcolor{tag}{tag}::enumerate_cells );
-   \verm{Cell}::Numbering & \azul{numbering} = fe .numbering ( \textcolor{tag}{tag}::vertices );
+                      \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{Cell}::Numbering & \azul{numbering} = fe .build_global_numbering ( \textcolor{tag}{tag}::vertices );
 \end{Verbatim}
 
 In this approach, the access to the index of a given vertex is very fast (constant time)
@@ -341,7 +341,7 @@ diagonal with ones, then erase them for existing vertices.
    \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;
-      size_t \azul{i} = numbering ( P );
+      size_t \azul{i} = numbering [P];
       matrix_A .coeffRef ( i, i ) = 0.;  \}
 \end{Verbatim}
 
@@ -357,7 +357,7 @@ We simply assign the desired value to the numbering of each vertex :
    size_t \azul{counter} = 0;
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;
-      numbering ( P ) = counter++;  \}
+      numbering [P] = counter++;  \}
 \end{Verbatim}
 
 This solution keeps the advantage of constant accesss time to the number of a vertex.
