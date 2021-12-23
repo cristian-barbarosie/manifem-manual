@@ -36,29 +36,42 @@ The authors of {\maniFEM} have tried to separate these two concepts
 as much as possible, especially because some users may want to use a {\small\tt \verm{FiniteElement}}
 with no master element, or an {\small\tt \verm{Integrator}} acting directly on the physical cell.
 
-Thus, there is a base class {\small\tt \verm{FiniteElement}} and a derived class
-{\small\tt \verm{FiniteElement}::withMaster} which keeps, as an extra attribute, the map transforming
+An object belonging to the {\small\tt class} {\small\tt\verm{FiniteElement}} is a mere wrapper
+for a {\small\tt\verm{FiniteElement}::Core}.
+Several subclasses of {\small\tt\verm{FiniteElement}::Core} exist for different
+kinds of finite elements.
+There is a {\small\tt class} {\small\tt\verm{FiniteElement}::WithMaster} with subclasses like
+{\small\tt\verm{FiniteElement}::WithMaster::Segment}, {\small\tt Triangle} and
+{\small\tt Quadrangle}.
+There is also a {\small\tt class} {\small\tt\verm{FiniteElement}::StandAlone} for elements
+with no master, having its own subclasses for different geometries of the cell.
+
+The final user does not need to worry about these details.
+He or she will declare {\small\tt\verm{FiniteElement}}s (wrappers) of different types
+by providing {\small\tt\textcolor{tag}{tag}}s to the constructor, as shown in
+subsequent paragraphs of this section.
+
+{\small\tt\verm{FiniteElement}}s with master keep as an attribute the map transforming
 the master element to the current physical cell.
 This map depends of course on the geometry of the cell and thus it must be computed from
 scratch each time we begin integrating on a new cell.
-We say that the {\small\tt \verm{FiniteElement}} is docked on a new {\small\tt \verm{Cell}};
+We say that the {\small\tt\verm{FiniteElement}} is docked on a new {\small\tt \verm{Cell}};
 the method {\small\tt dock\_\,on} performs this operation.
 This method is element-specific, each type of finite element having its own class.
 
-For instance, the class {\small\tt \verm{FiniteElement}::Lagrange\_\,Q1} is a class derived from
-{\small\tt \verm{FiniteElement}:: ::withMaster}.
-It will only {\small\tt dock\_\,on} quadrilaterals (two-dimensional {\small\tt \verm{Cell}}s
-with four sides).
+For instance, {\small\tt\verm{FiniteElement}}s declared with {\small\tt\textcolor{tag}{tag}%
+::quadrangle} will only {\small\tt dock\_\,on} quadrilaterals
+(two-dimensional {\small\tt\verm{Cell}}s with four sides).
 % Recall that in {\maniFEM} the vertices do not have necessarily any number attached.
-% When we create a {\small\tt \verm{FiniteElement}::Lagrange\_\,Q1} object, it will enumerate vertices
+% When we create a {\small\tt\verm{FiniteElement}::Lagrange\_\,Q1} object, it will enumerate vertices
 % of the mesh if a mesh exists already, and it will prepare the ground for vertices created
 % in the future to be enumerated, too.
 % This enumeration is useful to identify a vector of real numbers with the values
 % (at each vertex) of a function defined on the mesh.
-When docking on a cell, the {\small\tt \verm{FiniteElement}::Lagrange\_\,Q1} object will build four
+When docking on a cell, the {\small\tt\verm{FiniteElement}} object will build four
 ``shape functions'' and a transformation map (a diffeomorphism between a master element
 occuppying the square $ [-1, 1]^2 $ and the current cell).
-It will also build the jacobian of this transformation map.
+It will also build the jacobian of this transformation map (through symbolic differentiation).
 The four shape functions can be accessed through the method {\small\tt basis\_\,function},
 as shown in paragraph \ref{\numb section 6.\numb parag 2}.
 
@@ -145,12 +158,12 @@ values to the global matrix:
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
-   // run over all square cells composing ABCD
+   \cinza{// run over all square cells composing ABCD}
    \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{small_square} = *it;
       fe .dock_on ( small_square );
-      // run twice over the four vertices of 'small_square'
+      \cinza{// run twice over the four vertices of 'small_square'}
       \verm{Mesh}::Iterator \azul{it1} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
       \verm{Mesh}::Iterator \azul{it2} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
       for ( it1 .reset(); it1 .in_range(); it1++ )
@@ -377,3 +390,276 @@ For the example in paragraph \ref{\numb section 6.\numb parag 3}, you should add
 {\small\tt\textcolor{tag}{tag}::enumerate\_\,cells} when declaring {\small\tt fe} and not when
 declaring {\small\tt fe\_\,bdry} -- you don't want two independent mechanisms for numbering
 vertices, do you ?
+
+
+          %--------------------------%
+\section{~~Hand-coded finite elements}\label{\numb section 6.\numb parag 5}
+          %--------------------------%
+
+Paragraphs \ref{\numb section 6.\numb parag 3} -- \ref{\numb section 6.\numb parag 4}
+show finite element computations where we simply take the shape functions provided by
+the method {\small\tt\verm{FiniteElement}::basis\_\,function}, differentiate them
+symbolically and then integrate their product through a Gauss quadrature.
+This process involves a lot of symbolic computations at each docking operations and
+aftewards, which makes the whole process quite slow.
+
+In this section we show another type of finite elements.
+They are much faster at the cost of a slightly less elegant syntax.
+They do not use a master element.
+The quantities relevant for finite element analysis are hard-wired in the source code
+as arithmetic expressions
+of the coordinates of the vertices of the cell where the finite element will later dock.
+
+The finite element is declared by simply omitting the
+{\small\tt\textcolor{tag}{tag}::with\_\,master}; the integrator gets a
+{\small\tt\textcolor{tag}{tag}::hand\_\,coded}.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::rectangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{Integrator} \azul{integ} = fe .set_integrator ( \textcolor{tag}{tag}::hand_coded );
+\end{Verbatim}
+
+A hand-coded integrator requires an early declaration of the integrals we intend to compute.
+One or two abstract basis functions must be declared, then the method
+{\small\tt\verm{FiniteElement}::pre\_\,compute} is called
+with a list of arithmetic expressions
+involving these abstract basis functions and possibly their derivatives.
+Later, the user instructs the integrator to replace each of these abstract basis function
+by one of the shape functions provided by the method
+{\small\tt\verm{FiniteElement}::basis\_\,function}.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   \verm{Function} \azul{bf1} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe ),
+            \azul{bf2} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+                        \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x) +
+                                            bf1 .deriv(y) * bf2 .deriv(y)  \} );
+\end{Verbatim}
+
+The arithmetic expressions provided to {\small\tt pre\_\,compute} must obey to rather strict
+rules, described in paragraph \ref{\numb section 6.\numb parag 6}.
+
+The {\small\tt dock\_\,on} operation has the same syntax as before :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+      fe .dock_on ( small_square );
+\end{Verbatim}
+
+When we call the method {\small\tt dock\_\,on}, the integrator computes all integrals
+required by the user by means of {\small\tt pre\_\,compute}.
+These values are kept in an internal buffer; later, when we call the method
+{\small\tt integrate}, the computer simply retrieves the corresponding values from
+the internal buffer.
+
+The {\small\tt integrate} method has a syntax which is more complicated than the one
+we have seen in paragraphs \ref{\numb section 6.\numb parag 2} --
+\ref{\numb section 6.\numb parag 4}.
+We must provide the {\small\tt\textcolor{tag}{tag}::pre\_\,computed} and we must provide
+information about which shape function should replace {\small\tt bf1} and {\small\tt bf2}
+in the arithmetic expressions previously declared through {\small\tt pre\_\,compute}.
+If a list of several expressions has been provided to {\small\tt pre\_\,compute},
+they will be computed all at the same time.
+Thus, we must store the result in an {\small\tt std::vector} rahter than as a {\small\tt double}.
+We then recover each value as components of this vector (in this example there is only
+one component).
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+         \verm{Function} \azul{psi_V} = fe.basis_function(V),
+                  \azul{psi_W} = fe .basis_function (W);
+         std::vector < double > \azul{result} = fe .integrate 
+            ( \textcolor{tag}{tag}::pre_computed, \textcolor{tag}{tag}::replace, bf1, \textcolor{tag}{tag}::by, psi_V,
+                                 \textcolor{tag}{tag}::replace, bf2, \textcolor{tag}{tag}::by, psi_W );
+         matrix_A .coeffRef ( numbering[V], numbering[W] ) += result [0];
+\end{Verbatim}
+
+
+          %--------------------------------------%
+\section{~~More details on hand-coded integrators}\label{\numb section 6.\numb parag 6}
+          %--------------------------------------%
+
+Integrators declared with {\small\tt\textcolor{tag}{tag}::hand\_\,coded} are fast at the
+cost of a tedious internal implementation (relevant quantities are hard-wired in the code
+as arithmetic expressions of the coordinates of the vertices of the cell where the
+finite element will later be docked) and also at the cost of a slightly less elegant syntax.
+
+They work in a three-step process which we describe below.
+
+The first step is {\small\tt pre\_\,compute}, where the user provides a list of arithmetic
+expressions to be later integrated.
+These expressions involve one or two abstract basis functions which have no special meaning;
+they are mere place-holders for shape functions in the finite element and will be replaced
+by specific shape functions after the {\small\tt dock\_\,on} operation.
+
+The expressions listed in the last argument of {\small\tt pre\_\,compute} must obey to
+rather strict rules.
+They must be either linear expressions in one abstract basis function, possibly differentiated
+(first order derivatives only), or bi-linear expressions in two abstract basis functions,
+possibly differentiated (first order derivatives only).
+In the former case, we only provide one basis function, in the latter we provide two basis
+functions as arguments.
+We may mix the two, providing linear and bi-linear expressions in the same list;
+in this case, we provide two basis functions as arguments;
+the linear expressions must depend only on the first one.
+
+Below are some example invocations of {\small\tt pre\_\,compute} with one basis function :
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{Function} \azul{bf} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
+                        \textcolor{tag}{tag}::integral_of, \{ bf \}                  );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
+                        \textcolor{tag}{tag}::integral_of, \{ bf .deriv(x) \}        );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
+                        \textcolor{tag}{tag}::integral_of, \{ bf .deriv(x), bf .deriv(y) \} );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
+                        \textcolor{tag}{tag}::integral_of, \{ bf .deriv(y), bf \}    );
+\end{Verbatim}
+
+Below are some example invocations of {\small\tt pre\_\,compute} with two basis functions :
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{Function} \azul{bf1} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe ),
+            \azul{bf2} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+                        \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2 \}                );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+                        \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2, bf1 .deriv(x) * bf2 \} );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+                        \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2, bf1 .deriv(x) * bf2 .deriv(x) \} );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+                        \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2, bf1 .deriv(x) * bf2 .deriv(y) \} );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+                        \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x),
+                                            bf1 .deriv(x) * bf2 .deriv(y),
+                                            bf1 .deriv(y) * bf2 .deriv(x),
+                                            bf1 .deriv(y) * bf2 .deriv(y) \} );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+                        \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x),
+                                             bf1 * bf2, bf1 * bf2 .deriv(x)      \} );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+                        \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x) +
+                                            bf1 .deriv(y) * bf2 .deriv(y)   \} );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+                        \textcolor{tag}{tag}::integral_of, \{ bf1, bf1 * bf2  \} );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+                        \textcolor{tag}{tag}::integral_of, \{ bf1, bf1 .deriv(x), bf1 * bf2,
+                                            bf1 .deriv(x) * bf2 .deriv(x) +
+                                            bf1 .deriv(y) * bf2 .deriv(y)  \} );
+\end{Verbatim}
+
+Below are some example invocations of {\small\tt pre\_\,compute} which {\maniFEM} does not accept,
+for different reasons :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
+      \textcolor{tag}{tag}::integral_of, \{ bf + 1. \} );  \cinza{// WRONG, arithmetic expression not allowed}
+   integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
+      \textcolor{tag}{tag}::integral_of, \{ 2.* bf \} );  \cinza{// WRONG, arithmetic expression not allowed}
+   integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
+      \textcolor{tag}{tag}::integral_of, \{ bf + bf .deriv(x) \} );  \cinza{// WRONG, arithmetic expression not allowed}
+   integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
+      \textcolor{tag}{tag}::integral_of, \{ bf .deriv(x) + bf .deriv(y) \} );  \cinza{// WRONG, arithm expr not allowed}
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+      \textcolor{tag}{tag}::integral_of, \{ bf2 * bf1 \} );  \cinza{// WRONG, bf1 must be first}
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+      \textcolor{tag}{tag}::integral_of, \{ bf1 - bf2 \} );  \cinza{// WRONG, arithmetic expression not allowed}
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+      \textcolor{tag}{tag}::integral_of, \{ bf2, bf1 * bf2 \} );  \cinza{// WRONG, bf2 cannot appear in a linear expr}
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+      \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2 * bf2 \} );  \cinza{// WRONG, arithmetic expression not allowed}
+\end{Verbatim}
+
+{\ManiFEM} is under construction and many types of finite elements and of integrators are
+still missing.
+At present, hand-coded integrators can be used in association with finite elements shown below
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::triangle,   \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::rectangle,  \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::square,     \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+\end{Verbatim}
+Note that {\small\tt\textcolor{tag}{tag}::quadrangle} and
+{\small\tt\textcolor{tag}{tag}::quadrilateral} are synonymous.
+However, {\small\tt\textcolor{tag}{tag}::rectangle} and {\small\tt\textcolor{tag}{tag}::square}
+produce different integrators which take advantage of the particular geometry of the cell
+to perform efficient computations.
+
+Another limitation is that some integrators' implementation is still incomplete and they may
+reject some of the expressions listed above as correct.
+For instance, in paragraph \ref{\numb section 6.\numb parag 5} we have used a finite element
+declared with {\small\tt\textcolor{tag}{tag}::rectangle} which accepts the expression
+{\small\tt bf1.deriv(x)} {\small\tt *} {\small\tt bf2.deriv(x)}
+{\small\tt +} {\small\tt bf1.deriv(y)} {\small\tt *} {\small\tt bf2.deriv(y)}.
+Had we used instead a {\small\tt\textcolor{tag}{tag}::quadrangle}, the computer would
+reject this expression because the implementation of this integrator is still incomplete.
+We could have achieved the same result with a slight loss in efficiency by using
+{\small\tt\textcolor{tag}{tag}::quadrangle} and a vector {\small\tt\azul{result}} with two
+components :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{Integrator} \azul{integ} = fe .set_integrator ( \textcolor{tag}{tag}::hand_coded );
+
+   \verm{Function} \azul{bf1} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe ),
+            \azul{bf2} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+                        \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x),
+                                            bf1 .deriv(y) * bf2 .deriv(y)  \} );
+
+   \cinza{// run over all square cells composing ABCD}
+   \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   for ( it .reset(); it .in_range(); it++ )
+   \{  \verm{Cell} \azul{small_square} = *it;
+      fe .dock_on ( small_square );
+      \cinza{// run twice over the four vertices of 'small_square'}
+      \verm{Mesh}::Iterator \azul{it1} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
+      \verm{Mesh}::Iterator \azul{it2} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
+      for ( it1 .reset(); it1 .in_range(); it1++ )
+      for ( it2 .reset(); it2 .in_range(); it2++ )
+      \{  \verm{Cell} \azul{V} = *it1, \azul{W} = *it2;
+         \verm{Function} \azul{psi_V} = fe.basis_function(V),
+                  \azul{psi_W} = fe .basis_function (W);
+         std::vector < double > \azul{result} = fe .integrate 
+            ( \textcolor{tag}{tag}::pre_computed, \textcolor{tag}{tag}::replace, bf1, \textcolor{tag}{tag}::by, psi_V,
+                                 \textcolor{tag}{tag}::replace, bf2, \textcolor{tag}{tag}::by, psi_W );
+         matrix_A .coeffRef ( numbering[V], numbering[W] ) += result [0] + result [1];
+   \}  \}  \cinza{// end of for loops over vertices, end of for loop over cells}
+\end{Verbatim}
+
+A second step in using a hand-coded integrator is the {\small\tt dock\_\,on} operation.
+When we call this method, the integrator receives information about the current cell
+(particularly, the coordinates of the vertices)
+and computes the values of the expressions (hard-wired in the source code) giving the integrals
+requested by the user in the {\small\tt pre\_\,compute} step.
+It computes these values for all shape functions of that finite element
+(if {\small\tt pre\_\,compute} was called with one abstract basis function)
+or for all pairs of shape functions (if {\small\tt pre\_\,compute} was called with two
+abstract basis functions).
+These values are kept in an internal buffer for later use.
+
+The expressions hard-wired in the source code are, in some cases, inspired in the syntax of
+UFL\footnote{\small\tt https://fenics.readthedocs.io/projects/ufl/en/latest/}
+and the output of FFC\footnote{\small\tt https://fenics.readthedocs.io/projects/ffc/en/latest/}.
+In other cases, the expressions are bluntly and tediously computed by hand.
+Method {\small\tt\verm{FiniteElement}::info()} returns a multi-line string with information
+about the internal implementation of that finite element.
+You may call this method just after the declaration of the element and get generic information,
+or after {\small\tt pre\_\,compute} and get information specific to the expressions
+listed in the last argument of {\small\tt pre\_\,compute}.
+This method is only available in {\small\tt DEBUG} mode (described in paragraph
+\ref{\numb section 11.\numb parag 15}).
+
+The third step in using a hand-coded integrator is the invocation of the
+{\small\tt integrate} method which simply retrieves (from the internal buffer) values 
+associated with the provided shape functions.

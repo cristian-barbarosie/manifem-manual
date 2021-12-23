@@ -8,7 +8,7 @@
 \def\manifemrelease{**.**}
 \def\manualversion{**.**}
 \let\production 0
-\includeonly{}
+\includeonly{manual-cap-06}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -180,7 +180,7 @@ Since {\maniFEM} is under heavy development, some features are still missing, e.
 \ 3D meshing, many types of finite elements, compact syntax for abstract variational
 formulations.
 
-{\Manifem} relies on oriented cells and meshes.
+{\ManiFEM} relies on oriented cells and meshes.
 Some people may find it confusing (the distinction between positive cells and negative cells).
 
 
@@ -352,6 +352,9 @@ Cone-like quotient manifolds, paragraphs \ref{\numb section 7.\numb parag 12} an
 \noindent Change name {\small\tt\verm{CellIterator}} to {\small\tt\verm{Mesh}::Iterator},
 thus exposing one less name in {\small\tt namespace \verm{maniFEM}}.
 
+\noindent Optimized, hand-coded finite elements, paragraphs \ref{\numb section 6.\numb parag 5}
+and \ref{\numb section 6.\numb parag 6}.
+
 
 \section*{To do}
 
@@ -369,12 +372,8 @@ a STSI interface instead of a list of connected interfaces.
 inequalities between {\small\tt\verm{Function}}s (partially done, see {\small\tt draw\_\,ps}
 with {\small\tt\textcolor{tag}{tag}::unfold}).
 
-\noindent Optimized, hand-coded finite elements are on their way,
-see comments at the end of paragraph \ref{\numb section 6.\numb parag 2}.
-They work for P1 triangles and Q1 quadrangles (some cases still missing for quadrangles).
-They should be extended to many other types of finite elements.
-
-\noindent I implemented a class for multi-indexed matrices
+\noindent I implemented a class for multi-indexed matrices, should it be integrated into
+{\small\tt namespace} {\small\tt\verm{maniFEM}} ?
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
