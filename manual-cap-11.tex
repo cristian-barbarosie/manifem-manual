@@ -127,7 +127,7 @@ Besides that, in the case of constructors, we do not have the choice of the name
 {\ManiFEM} uses {\small\tt\textcolor{tag}{tag}}\hskip0.8pt s extensively for constructors, e.g.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );
-   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, 10 );
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10} );
 \end{Verbatim}
 
 In \maniFEM, namespaces and class names begin with capital letter
@@ -175,21 +175,6 @@ A positive cell and its negative counterpart (its {\small\tt reverse}) share som
 To save memory space, negative cells are implemented in different classes from
 positive cells, thus avoiding the storage of some of the redundant information.
 
-We want, however, to manipulate all these different cells through a uniform interface,
-which is where {\tt C++}'s inheritance and polymorphishm mechanisms come handy.
-Thus, there are classes {\small\tt\verm{Cell}::Positive::Vertex},
-{\small\tt\verm{Cell}::Positive::Segment} and {\small\tt\verm{Cell}::Positive::HighDim},
-all derived from {\small\tt\verm{Cell}::Positive}.
-And we have {\small\tt\verm{Cell}::Negative::Vertex},
-{\small\tt\verm{Cell}::Negative::Segment} and {\small\tt\verm{Cell}::Negative::HighDim},
-all derived from {\small\tt\verm{Cell}::Negative}.
-Both {\small\tt\verm{Cell}::Positive} and {\small\tt\verm{Cell}::Negative} are derived from
-{\small\tt\verm{Cell}::Core}.
-% See the graph in figure \ref{\numb section 11.\numb fig 1}.
-The graph below shows these inheritance relations; dotted lines represent relations subject to
-the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} compilation option, explained in paragraph
-\ref{\numb section 11.\numb parag 5}.
-
 \begin{figure}[ht] \centering
  \psfrag{tag::Util::Core::Inactive}{{\small\tt\textcolor{tag}{tag}::Util::Core::Inactive}}
  \psfrag{tag::Util::Core::DelegateDispose}{{\small\tt\textcolor{tag}{tag}::Util::Core::DelegateDispose}}
@@ -209,6 +194,21 @@ the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM} compilation option, explained in para
  \caption{Inheritance diagram for {\small\tt\verm{Cell}} cores}
  \label{\numb section 11.\numb fig 1}
 \end{figure}
+
+We want, however, to manipulate all these different cells through a uniform interface,
+which is where {\tt C++}'s inheritance and polymorphishm mechanisms come handy.
+Thus, there are classes {\small\tt\verm{Cell}::Positive::Vertex},
+{\small\tt\verm{Cell}::Positive::Segment} and {\small\tt\verm{Cell}::Positive::HighDim},
+all derived from {\small\tt\verm{Cell}::Positive}.
+And we have {\small\tt\verm{Cell}::Negative::Vertex},
+{\small\tt\verm{Cell}::Negative::Segment} and {\small\tt\verm{Cell}::Negative::HighDim},
+all derived from {\small\tt\verm{Cell}::Negative}.
+Both {\small\tt\verm{Cell}::Positive} and {\small\tt\verm{Cell}::Negative} are derived from
+{\small\tt\verm{Cell}::Core}.
+% See the graph in figure \ref{\numb section 11.\numb fig 1}.
+Figure \ref{\numb section 11.\numb fig 1} shows these inheritance relations;
+dotted lines represent relations subject to the {\small\tt -DMANIFEM\_\,COLLECT\_\,CM}
+compilation option, explained in paragraph \ref{\numb section 11.\numb parag 5}.
 
 On the other hand, we want cells and meshes to be persistent objects (not subject to
 syntactic scope).
@@ -542,15 +542,15 @@ seg->glue_on_bdry_of ( tri )
          tri->boundary->add_***_seg ( seg, \textcolor{tag}{tag}::mesh_is_bdry )
             make_deep_connections_1d ( seg, tri->boundary, \textcolor{tag}{tag}::mesh_is_bdry )
                add_link_same_dim ( seg, tri->boundary )
-                  tri->boundary->cells[1] .push ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} tri->boundary \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
-                  seg->meshes_same_dim [ tri->boundary ] = ( \mypm1, wh )
+                  tri->boundary->cells[\laranja{1}] .push ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} tri->boundary \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                  seg->meshes_same_dim [ tri->boundary ] = ( \laranja\mypm1, wh )
                link_face_to_higher ( seg, tri, *, * )
-                  for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
+                  for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= \laranja{2} \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
                      add_link ( seg, msh, *, * )
                         if seg \mbox{\fontfamily{helvetica}\selectfont{}already belongs} to msh
                            \mbox{\fontfamily{helvetica}\selectfont{}increment counters}
                         else
-                           msh->cells[1] .push ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                           msh->cells[\laranja{1}] .push ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
                            seg->meshes[d] [ msh ] = ( *, *, wh )
                for \azul{ver} in \{\mbox{\fontfamily{helvetica}\selectfont\,two extremities of} seg\,\}
                   link_face_to_msh ( ver, seg, tri->boundary, *, * )
@@ -558,21 +558,21 @@ seg->glue_on_bdry_of ( tri )
                         if ver \mbox{\fontfamily{helvetica}\selectfont{}already belongs to} tri->boundary
                            \mbox{\fontfamily{helvetica}\selectfont{}increment one counter}
                         else
-                           tri->boundary->cells[0] .push ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} Fuzzy
+                           tri->boundary->cells[\laranja{0}] .push ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} Fuzzy
                            ver->meshes[1] [ tri->boundary ] = ( *, *, wh )
                   link_face_to_higher ( ver, tri, *, * )
-                     for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
+                     for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= \laranja{2} \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
                         add_link ( ver, msh, *, * )
                            if ver \mbox{\fontfamily{helvetica}\selectfont{}already belongs to} msh
                               \mbox{\fontfamily{helvetica}\selectfont{}increment counters}
                            else
-                              msh->cells[0] .push ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                              msh->cells[\laranja{0}] .push ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
                               ver->meshes[d] [ msh ] = ( *, *, wh )
             add_cell_behind_below_***_seg ( seg, tri->boundary )
                for \azul{ver} in \{\mbox{\fontfamily{helvetica}\selectfont\,two extremities of} seg\,\}
                   ver->cell_behind_within [ tri->boundary ] = seg
       add_cell_behind_above ( tri, seg )
-         for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
+         for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \laranja{2} \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
             seg->cell_behind_within [ msh ] = tri
 \end{Verbatim}
 
@@ -582,7 +582,7 @@ Below is a sketch of the reverse process of removing a segment from the boundary
 seg->cut_from_bdry_of ( tri )
    tri->cut_from_my_bdry ( seg )
       remove_cell_behind_above ( tri, seg )
-         for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
+         for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= \laranja{2} \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
             seg->cell_behind_within .erase ( msh )
       seg->remove_from_bdry ( tri->boundary )
          tri->boundary->remove_***_seg ( seg, \textcolor{tag}{tag}::mesh_is_bdry )
@@ -594,24 +594,24 @@ seg->cut_from_bdry_of ( tri )
                      remove_link ( ver, tri->boundary, *, * )
                         \mbox{\fontfamily{helvetica}\selectfont{}decrement one counter}
                         if \mbox{\fontfamily{helvetica}\selectfont{}both counters zero}
-                           ver->meshes[1] .erase ( tri->boundary )
-                           tri->boundary->cells[0] .remove ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} Fuzzy
+                           ver->meshes[\laranja{1}] .erase ( tri->boundary )
+                           tri->boundary->cells[\laranja{0}] .remove ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} Fuzzy
                   unlink_face_from_higher ( ver, tri, *, * )
-                     for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
+                     for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= \laranja{2} \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
                         remove_link ( ver, msh, *, * )
                            \mbox{\fontfamily{helvetica}\selectfont{}decrement counters}
                            if \mbox{\fontfamily{helvetica}\selectfont{}both counters zero}
                               ver->meshes[d] .erase ( msh )
-                              msh->cells[0] .remove ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                              msh->cells[\laranja{0}] .remove ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
                unlink_face_from_higher ( seg, tri, *, * )
                   for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
                      remove_link ( seg, msh, *, * )
                         \mbox{\fontfamily{helvetica}\selectfont{}decrement counters}
                         if \mbox{\fontfamily{helvetica}\selectfont{}both counters zero}
                            seg->meshes[d] .erase ( msh )
-                           msh->cells[1] .remove ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                           msh->cells[\laranja{1}] .remove ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
                remove_link_same_dim ( seg, tri->boundary )
-                  tri->boundary->cells[1] .remove ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} tri->boundary \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                  tri->boundary->cells[\laranja{1}] .remove ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} tri->boundary \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
                   seg->meshes_same_dim .erase ( tri->boundary )
 \end{Verbatim}
 
@@ -633,7 +633,7 @@ For instance, the constructor of a {\small\tt\verm{FiniteElement}} with
 {\small\tt\textcolor{tag}{tag}::build\_\;enum} builds a new
 {\small\tt\verm{Cell}:: ::Numbering::Field} whose constructor
 adds a call to {\small\tt\verm{Cell}::Numbering::Field::set\_\,and\_\,increment} to
-the list {\small\tt\verm{Cell}::init\_\;pos\_\,cell[0]}.
+the list {\small\tt\verm{Cell}::init\_\;pos\_\,cell[\laranja{0}]}.
 This way, future vertices will receive automatically a {\small\tt size\_\,t} label, to be used
 by Lagrange finite elements.
 

@@ -254,7 +254,7 @@ of the viewing window.
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
-  \includegraphics[width=94mm]{flat-torus-1.eps}
+  \includegraphics[width=76mm]{flat-torus-1.eps}
   \caption{A flat torus}
   \label{\numb section 7.\numb fig 1}
 \end{figure}
@@ -264,7 +264,7 @@ In paragraphs \ref{\numb section 7.\numb parag 6} -- \ref{\numb section 7.\numb 
 we introduce an inhomogeneity (a small hole) in the mesh in order to turn the repetitive pattern
 more visible.
 
-The comment at the end of the code excerpt above says that it makes no sense to export
+The comment at the end of the above code excerpt says that it makes no sense to export
 {\small\tt torus} in {\small\tt msh} format.
 We can however build an unfolded mesh which lives in {\small\tt RR2} rather than in
 {\small\tt quotient\_\,manifold}, and this unfolded mesh accepts all methods of two-dimensional
@@ -280,7 +280,6 @@ vertex), you may think in terms of four squares instead :
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = 0.5;  y (B) = 0. ;
    \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) = 0.5;  y (C) = 0.5;
    \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = 0. ;  y (D) = 0.5;
-   
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, 5 ),
         \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in, 5 ),
         \azul{CD} ( \textcolor{tag}{tag}::segment, C .reverse(), D, \textcolor{tag}{tag}::divided_in, 5 ),
@@ -289,11 +288,12 @@ vertex), you may think in terms of four squares instead :
         \azul{CD1} ( \textcolor{tag}{tag}::segment, C .reverse(), D, \textcolor{tag}{tag}::divided_in, 5, \textcolor{tag}{tag}::winding, g_horiz ),
         \azul{CB2} ( \textcolor{tag}{tag}::segment, C .reverse(), B, \textcolor{tag}{tag}::divided_in, 5, \textcolor{tag}{tag}::winding, g_vert ),
         \azul{DA2} ( \textcolor{tag}{tag}::segment, D .reverse(), A, \textcolor{tag}{tag}::divided_in, 5, \textcolor{tag}{tag}::winding, g_vert );
+
    \verm{Mesh} \azul{sq1} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA ),
         \azul{sq2} ( \textcolor{tag}{tag}::rectangle, BA1, DA .reverse(), CD1 .reverse(),
-                           BC .reverse(), \textcolor{tag}{tag}::winding ),
+                              BC .reverse(), \textcolor{tag}{tag}::winding ),
         \azul{sq3} ( \textcolor{tag}{tag}::rectangle, DA2 .reverse(), CD .reverse(), CB2,
-                           AB .reverse(), \textcolor{tag}{tag}::winding ),
+                              AB .reverse(), \textcolor{tag}{tag}::winding ),
         \azul{sq4} ( \textcolor{tag}{tag}::rectangle, CD1, DA2, BA1 .reverse(), CB2 .reverse(), \textcolor{tag}{tag}::winding );
 	
    \verm{Mesh} \azul{torus} ( \textcolor{tag}{tag}::join, sq1, sq2, sq3, sq4 );
@@ -563,12 +563,13 @@ In contrast, translations (used in previous paragraphs) are always invertible.
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
   \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
-  \includegraphics[width=90mm]{sector-1.eps}
+  \includegraphics[width=95mm]{sector-1.eps}
   \caption{One rotation}
   \label{\numb section 7.\numb fig 7}
 \end{figure}
 
-We have drawn a ``representative domain'' but this is not entirely correct since
+In figure \ref{\numb section 7.\numb fig 7}
+we have drawn a ``representative domain'' but this is not entirely correct since
 rotations of this region with multiples of {\small\tt theta} close to $ 2k\pi $
 will overlap with the region.
 
@@ -607,7 +608,7 @@ In paragraph \ref{\numb section 7.\numb parag 13}, we use only one triangular me
   \psfrag{S}{\small\tt\textcolor{textindraw}{S}}
   \psfrag{T}{\small\tt\textcolor{textindraw}{T}}
   \psfrag{U}{\small\tt\textcolor{textindraw}{T$^{\mbox{\small\tt *}}$}}
-  \includegraphics[width=120mm]{butterfly.eps}
+  \includegraphics[width=130mm]{butterfly.eps}
   \caption{A vertex similar to the one of a cone}
   \label{\numb section 7.\numb fig 8}
 \end{figure}
@@ -635,8 +636,9 @@ In paragraph \ref{\numb section 7.\numb parag 13}, we use only one triangular me
 
    \verm{Mesh} \azul{tri_1} ( \textcolor{tag}{tag}::triangle, OA, AB, OB .reverse() );  \cinza{// no winding}
    \verm{Mesh} \azul{tri_2} ( \textcolor{tag}{tag}::triangle, OB, BA, OA .reverse(),
-                \textcolor{tag}{tag}::winding, \textcolor{tag}{tag}::singular, O );
-   \cinza{// on the last triangle, the one having O as vertex, the sum of windings is not zero}
+                \textcolor{tag}{tag}::winding, \textcolor{tag}{tag}::singular, O       );
+   \cinza{// on the last triangular cell, the one having O as vertex,}
+   \cinza{// the sum of windings is not zero}
 
    \verm{Mesh} \azul{sector} ( \textcolor{tag}{tag}::join, tri_1, tri_2 );
 \end{Verbatim}
@@ -678,7 +680,7 @@ are split (see figure \ref{\numb section 7.\numb fig 9}).
    \verm{Mesh} \azul{AA} ( \textcolor{tag}{tag}::segment, A .reverse(), A, \textcolor{tag}{tag}::divided_in, 10, \textcolor{tag}{tag}::winding, rot );
 
    \verm{Mesh} \azul{sector} ( \textcolor{tag}{tag}::triangle, OA, AA, OA .reverse(),
-                \textcolor{tag}{tag}::winding, \textcolor{tag}{tag}::singular, O );
+                \textcolor{tag}{tag}::winding, \textcolor{tag}{tag}::singular, O         );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -715,7 +717,7 @@ In contrast, translations are always invertible.
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
   \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
-  \includegraphics[width=100mm]{sector-2.eps}
+  \includegraphics[width=96mm]{sector-2.eps}
   \caption{One linear transformation}
   \label{\numb section 7.\numb fig 10}
 \end{figure}
@@ -878,7 +880,7 @@ it has the proportions of the rectangular shadow in figure \ref{\numb section 7.
 and treat it as if it were a hexagon :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 17}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 18}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                             ]
    const double \azul{d} = 0.13;
    const size_t \azul{n} = 1.5 / d, \azul{m} = 2.6 / d;
@@ -896,6 +898,14 @@ and treat it as if it were a hexagon :
    \verm{Mesh} \azul{DE} ( \textcolor{tag}{tag}::segment, D .reverse(), E, \textcolor{tag}{tag}::divided_in, n );
    \verm{Mesh} \azul{EF} ( \textcolor{tag}{tag}::segment, E .reverse(), F, \textcolor{tag}{tag}::divided_in, n );
    \verm{Mesh} \azul{FA} ( \textcolor{tag}{tag}::segment, F .reverse(), A, \textcolor{tag}{tag}::divided_in, m );
+
+   \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == 1. );
+   \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::entire_manifold, circle,
+                \textcolor{tag}{tag}::desired_length, d                         );
+
+   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, { AB, BC, CD, DE, EF, FA, inner .reverse() } );
+   RR2.set_as_working_manifold();
+   \verm{Mesh} \azul{rectangle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, d );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -903,23 +913,14 @@ and treat it as if it were a hexagon :
   \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
   \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
-  \includegraphics[width=140mm]{hexa-round-hole.eps}
+  \includegraphics[width=135mm]{hexa-round-hole.eps}
   \caption{Hexagonal arrangement of a circular hole}
   \label{\numb section 7.\numb fig 13}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 17}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 18}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                             ]
-   \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == 1. );
-   \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::entire_manifold, circle,
-                \textcolor{tag}{tag}::desired_length, d                         );
-
-   \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, { AB, BC, CD, DE, EF, FA, inner .reverse() } );
-
-   RR2.set_as_working_manifold();
-   \verm{Mesh} \azul{rectangle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, d );
-
    \verm{Mesh} \azul{torus} = rectangle .fold ( \textcolor{tag}{tag}::identify, CD, \textcolor{tag}{tag}::with, FA .reverse(),
                                   \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, EF .reverse(),
                                   \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, DE .reverse(),
@@ -1050,7 +1051,7 @@ it meets the mesh on the other side of the torus.
   \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
   \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
-  \includegraphics[width=130mm]{boomerang-3.eps}
+  \includegraphics[width=140mm]{boomerang-3.eps}
   \caption{Periodically perforated plane, two V-shaped holes}
   \label{\numb section 7.\numb fig 16}
 \end{figure}

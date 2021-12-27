@@ -742,7 +742,7 @@ If we define {\small\tt\azul N} as \catcode`<=1\catcode`>=2\catcode`{=12\catcode
 <\small\tt \laranja0\laranja.,> <\small\tt \laranja0\laranja.,> <\small\tt \laranja-\laranja1\laranja.> <\small\tt }>\catcode`<=12\catcode`>=12\catcode`{=1\catcode`}=2, we will obtain
 the lower half of the ``sphere'', still oriented upwards.
 
-If we define {\small\tt\azul tau} as \catcode`<=1\catcode`>=2\catcode`{=12\catcode`}=12<\small\tt {>
+If we define {\small\tt\azul{tau}} as \catcode`<=1\catcode`>=2\catcode`{=12\catcode`}=12<\small\tt {>
 <\small\tt \laranja-\laranja1\laranja.,> <\small\tt \laranja0\laranja.,> <\small\tt \laranja0\laranja.> <\small\tt }>\catcode`<=12\catcode`>=12\catcode`{=1\catcode`}=2, we will get a mesh
 oriented downwards.
 
@@ -793,7 +793,7 @@ Here is how to mesh the diamond-shaped domain in paragraph \ref{\numb section 2.
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// we define the arcs NW, WS, SE and EN either as segments, like in}
    RR2 .implicit ( x*y + x - y == \laranja{-1.} );
-   \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N.reverse(), W, \textcolor{tag}{tag}::divided_in, \laranja{12} );
+   \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N .reverse(), W, \textcolor{tag}{tag}::divided_in, \laranja{12} );
    
    \cinza{// or with tag::progressive like in}
    RR2 .implicit ( x*y - x - y ==  \laranja{1.} );
@@ -836,8 +836,8 @@ thus, some previous knowledge about the geometry of the surface is needed.
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
 
-   const double rs = \laranja{1.};    \cinza{// radius of the sphere}
-   const double rc = \laranja{0.45};  \cinza{// radius of the cylinder}
+   const double \azul{rs} = \laranja{1.};    \cinza{// radius of the sphere}
+   const double \azul{rc} = \laranja{0.45};  \cinza{// radius of the cylinder}
    const double seg_size = \laranja{0.1};
 
    \verm{Manifold} \azul{cylinder} = RR3 .implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == rc*rc );
@@ -849,18 +849,18 @@ thus, some previous knowledge about the geometry of the surface is needed.
                    \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
 
    \cinza{// we cut the cylinder on its left side with a sphere}
-   \verm{Manifold} \azul{intersection} = cylinder.implicit ( x*x + y*y + z*z == rs*rs );
+   \verm{Manifold} \azul{intersection} = cylinder .implicit ( x*x + y*y + z*z == rs*rs );
    \verm{Cell} \azul{start_2} ( \textcolor{tag}{tag}::vertex );
    x ( start_2 ) = \laranja{1.};  y ( start_2 ) = \laranja{0.};  z ( start_2 ) = \laranja{0.5} - rc;
    intersection .project ( start_2 );
    \verm{Mesh} \azul{circle_2} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, start_2,
                    \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{-1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
 
-   \verm{Mesh} \azul{two_circles} ( \textcolor{tag}{tag}::join, circle_1, circle_2.reverse() );
+   \verm{Mesh} \azul{two_circles} ( \textcolor{tag}{tag}::join, circle_1, circle_2 .reverse() );
    cylinder .set_as_working_manifold();
    \verm{Mesh} \azul{piece_of_cyl} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, two_circles,
                        \textcolor{tag}{tag}::start_at, start_1, \textcolor{tag}{tag}::towards, \{ \laranja{-1.}, \laranja{0.}, \laranja{0.} \},
-                       \textcolor{tag}{tag}::desired_length, seg_size                          );
+                       \textcolor{tag}{tag}::desired_length, seg_size                         );
 
    RR3 .implicit ( x*x + y*y + z*z == rs*rs );
    \verm{Mesh} \azul{piece_of_sph} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle_2,
@@ -898,7 +898,7 @@ If we want to close the extremity of the cylinder, it suffices to add a few line
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
    RR3 .implicit ( x == \laranja{1.5} );
-   \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle_1.reverse(),
+   \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle_1 .reverse(),
                \textcolor{tag}{tag}::start_at, start_1, \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{0.}, \laranja{-1.} \},
                \textcolor{tag}{tag}::desired_length, seg_size                         );
    \verm{Mesh} \azul{sphere_and_cylinder} ( \textcolor{tag}{tag}::join, piece_of_sph, piece_of_cyl, disk );
@@ -936,13 +936,13 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
    intersection .project ( start_2 );
    \verm{Mesh} \azul{circle_2} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, start_2,
                    \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
-   \verm{Mesh} \azul{two_circles} ( \textcolor{tag}{tag}::join, circle_1.reverse(), circle_2 );
+   \verm{Mesh} \azul{two_circles} ( \textcolor{tag}{tag}::join, circle_1 .reverse(), circle_2 );
    cylinder .set_as_working_manifold();
    \verm{Mesh} \azul{piece_of_cyl} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, two_circles,
                        \textcolor{tag}{tag}::start:at, start_1, \textcolor{tag}{tag}::towards, \{ \laranja{-1.}, \laranja{0.}, \laranja{0.} \},
                        \textcolor{tag}{tag}::desired_length, seg_size                         );
 
-   \verm{Mesh} \azul{two_circles_rev} ( \textcolor{tag}{tag}::join, circle_1, circle_2.reverse() );
+   \verm{Mesh} \azul{two_circles_rev} ( \textcolor{tag}{tag}::join, circle_1, circle_2 .reverse() );
 
    RR3 .implicit ( x*x + y*y + z*z == rs*rs );
    \verm{Mesh} \azul{piece_of_sph} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, two_circles_rev,
@@ -1017,7 +1017,7 @@ It should be regarded as a mere declaration of intentions.}
 
 Besides vertices like the one described in paragraph \ref{\numb section 3.\numb parag 20},
 another kind of singularity appears when we intersect two manifolds which have a tangency point.
-This happens if we choose {\small\tt rc = 0.5} in paragraph \ref{\numb section 3.\numb parag 18}
+This happens if we choose {\small\tt\azul{rc} = 0.5} in paragraph \ref{\numb section 3.\numb parag 18}
 or \ref{\numb section 3.\numb parag 19}.
 
 We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb parag 19}
@@ -1158,8 +1158,8 @@ $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for th
    \verm{Function} \azul{d} = \laranja{0.3} + (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9});
    RR2 .set_metric ( \laranja{1.} + \laranja{1.}/d, \laranja{-3.}/d, \laranja{1.} + \laranja{9.}/d );
    \cinza{// or, equivalently :}
-   \cinza{// RR2.set_metric ( tag::principal_part, 1.,}
-   \cinza{//                  tag::deviatoric_part, 1./d, \-3./d, 9./d );}
+   \cinza{// RR2 .set_metric ( tag::principal_part, 1.,}
+   \cinza{//                   tag::deviatoric_part, 1./d, \-3./d, 9./d );}
 
    \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );

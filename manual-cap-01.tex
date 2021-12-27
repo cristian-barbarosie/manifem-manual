@@ -71,14 +71,14 @@ int main ()
 
    \verm{FiniteElement} \azul{fe}
       ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   fe.set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::quad_9 );
+   fe .set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::quad_9 );
 
    \cinza{// code below does not work yet}
 
    \cinza{// cout << "integral of " << f.repr() << " = "}
-   \cinza{//      << fe.integrate ( f, tag::over, rect_mesh ) << endl;}
+   \cinza{//      << fe .integrate ( f, tag::over, rect_mesh ) << endl;}
    \cinza{// cout << "integral of " << g.repr() << " = "}
-   \cinza{//      << fe.integrate ( g, tag::over, rect_mesh ) << endl;}
+   \cinza{//      << fe .integrate ( g, tag::over, rect_mesh ) << endl;}
 
 \}  \cinza{// end of main}
 \end{Verbatim}

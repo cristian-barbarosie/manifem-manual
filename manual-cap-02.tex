@@ -1018,7 +1018,7 @@ for each vertex, space in the computer's memory for five {\small\tt double} valu
              \azul{alpha} = xyzab [\laranja{3}], \azul{beta} = xyzab [\laranja{4}];
    \cinza{// define a torus as a submanifold of RR5 :}
    const double \azul{big_radius} = \laranja{3}, \azul{small_radius} = \laranja{1};
-   \verm{Manifold} \azul{torus} = RR5.parametric
+   \verm{Manifold} \azul{torus} = RR5 .parametric
       ( x == ( big_radius + small_radius * \verm{cos}(beta) ) * \verm{cos}(alpha),
         y == ( big_radius + small_radius * \verm{cos}(beta) ) * \verm{sin}(alpha),
         z == small_radius * \verm{sin}(beta)                                );

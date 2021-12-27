@@ -393,7 +393,7 @@ If this is not the case for your {\small\tt Point}s, use pointers.
 Each node represents a point.
 Leaves have no special status.
 Each node has a rank which is an integer, possibly zero, possibly negative.
-Children of a node {\small\tt N} have rank equal to {\small\tt rank[N] - 1}.
+Children of a node {\small\tt N} have rank equal to {\small\tt rank[N] - \laranja{1}}.
 Nodes with rank zero have no special status.
 Leaves may have any rank, positive, zero or negative.
 There is a {\small\tt root} of course (a node with no parent).
@@ -409,14 +409,14 @@ In other words : zones overlap.
 
 {\small\tt dist[k]} is a geometric sequence with ratio {\small\tt ratio}.
 {\small\tt ratio} must be greater than two; we recommend some value between 5 and 10.
-So, {\small\tt dist[k] == ratio}$^{\hbox{\footnotesize\tt k }}${\small\tt dist[0]}.
+So, {\small\tt dist[k] == ratio}$^{\hbox{\footnotesize\tt k }}${\small\tt dist[\laranja{0}]}.
 Recall that {\small\tt k} may be negative.
 
 Besides the {\small\tt dist}ance, to each rank {\small\tt k} we associate a {\small\tt range}
 which represents the sum of distances of that rank and of all lower ranks.
 That is,
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   range[k] == dist[k] / ( 1 - 1 / ratio )\,; \ range[k] > dist[k].
+   range[k] == dist[k] / ( \laranja{1} - \laranja{1} / ratio )\,; \ range[k] > dist[k].
 \end{Verbatim}
 \noindent This means that an indirect descendant of a node {\small\tt N} cannot be farther than
 {\small\tt range[rank[N]]} from {\small\tt N}.

@@ -464,7 +464,7 @@ We must provide the {\small\tt\textcolor{tag}{tag}::pre\_\,computed} and we must
 information about which shape function should replace {\small\tt bf1} and {\small\tt bf2}
 in the arithmetic expressions previously declared through {\small\tt pre\_\,compute}.
 If a list of several expressions has been provided to {\small\tt pre\_\,compute},
-they will be computed all at the same time.
+they will be retrieved all at the same time.
 Thus, we must store the result in an {\small\tt std::vector} rahter than as a {\small\tt double}.
 We then recover each value as components of this vector (in this example there is only
 one component).
@@ -543,10 +543,10 @@ Below are some example invocations of {\small\tt pre\_\,compute} with two basis 
                                             bf1 .deriv(y) * bf2 .deriv(y) \} );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x),
-                                             bf1 * bf2, bf1 * bf2 .deriv(x)      \} );
+                                            bf1 * bf2, bf1 * bf2 .deriv(x) \} );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x) +
-                                            bf1 .deriv(y) * bf2 .deriv(y)   \} );
+                                            bf1 .deriv(y) * bf2 .deriv(y)  \} );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1, bf1 * bf2  \} );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
@@ -628,7 +628,7 @@ components :
       for ( it1 .reset(); it1 .in_range(); it1++ )
       for ( it2 .reset(); it2 .in_range(); it2++ )
       \{  \verm{Cell} \azul{V} = *it1, \azul{W} = *it2;
-         \verm{Function} \azul{psi_V} = fe.basis_function(V),
+         \verm{Function} \azul{psi_V} = fe .basis_function(V),
                   \azul{psi_W} = fe .basis_function (W);
          std::vector < double > \azul{result} = fe .integrate 
             ( \textcolor{tag}{tag}::pre_computed, \textcolor{tag}{tag}::replace, bf1, \textcolor{tag}{tag}::by, psi_V,
