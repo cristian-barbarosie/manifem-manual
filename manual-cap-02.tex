@@ -38,7 +38,7 @@ describe parametric manifolds.
           %----------------%
 
 Here is another way of meshing the same L-shaped domain as in paragraph
-\ref{\numb section 1.\numb parag 3} :
+\ref{\numb section 1.\numb parag 4} :
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
@@ -72,7 +72,7 @@ Here is another way of meshing the same L-shaped domain as in paragraph
 \end{Verbatim}
 
 The only difference between this mesh and the one presented in paragraph
-\ref{\numb section 1.\numb parag 3} is a slight distortion in the lower half of the domain,
+\ref{\numb section 1.\numb parag 4} is a slight distortion in the lower half of the domain,
 due to the non-uniform distribution of the vertices along {\small\tt HD}.
 
 Paragraph \ref{\numb section 11.\numb parag 2} explains the coloring conventions used in
@@ -111,7 +111,7 @@ We ask for one connected mesh, that is, the triangle and the rectangle must shar
 On a rectangular domain, we can build a mesh of triangles by using the {\small\tt \verm{Mesh}}
 constructor with {\small\tt \textcolor{tag}{tag}::rectangle}, providing as last argument the
 {\small\tt \textcolor{tag}{tag}::with\_\,triangles}.
-For instance, in the example \ref{\numb section 1.\numb parag 3},
+For instance, in the example \ref{\numb section 1.\numb parag 4},
 if we re-write the definition of {\small\tt BGHC} as
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
@@ -142,7 +142,7 @@ If we give the sides of the rectangle in a different order, like in
 
 \noindent the rectangles will be cut along the other diagonal (check it yourself).
 
-The mesh in paragraph \ref{\numb section 1.\numb parag 4} could have been built like this :
+The mesh in paragraph \ref{\numb section 1.\numb parag 5} could have been built like this :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \verm{Mesh} \azul{ABD} ( \textcolor{tag}{tag}::triangle, AB, BD, AD .reverse() );

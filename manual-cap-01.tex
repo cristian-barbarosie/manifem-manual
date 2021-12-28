@@ -12,7 +12,7 @@ This section is a quick tour through \maniFEM's capabilities.
 
 In this paragraph, we show how to build a rectangular mesh on a surface in $ \mathbb{R}^3 $ 
 and then compute the integral of a given function.
-Paragraph \ref{\numb section 1.\numb parag 3} shows a purely two-dimensional example.
+Paragraph \ref{\numb section 1.\numb parag 4} shows a purely two-dimensional example.
 
 \begin{figure} \centering
   \psfrag{SW}{\small\tt\textcolor{textindraw}{SW}}
@@ -103,7 +103,7 @@ See paragraph \ref{\numb section 11.\numb parag 3} for some details.
 
 When declaring a segment {\small\tt \verm{Mesh}}, we must {\small\tt reverse} the first vertex
 (paragraph \ref{\numb section 1.\numb parag 2} discusses the {\small\tt reverse} method).
-Paragraph \ref{\numb section 1.\numb parag 3} explains why we build
+Paragraph \ref{\numb section 1.\numb parag 4} explains why we build
 the rectangle based on its four sides rather than on its four vertices.
 
 Note that in this example we do not have exact control on the shape of the surface being meshed.
@@ -133,8 +133,8 @@ There are different kinds of meshes, some of them keep more information (lists o
 and are faster; others are slower but lighter in terms of memory occupied.
 See e.g. paragraph \ref{\numb section 11.\numb parag 6}.}
 
-A cell of dimension higher than zero is defined by its boundary, 
-which in turn is a mesh of lower dimension. 
+A cell of dimension $ d>0 $ is defined by its boundary, 
+which in turn is a mesh of dimension $ d-1 $. 
 The boundary of a segment is a (zero-dimensional) mesh made of two points.
 The boundary of a triangle is a one-dimensional mesh made of three segments.
 Thus, a segment is essentially a pair of points, a triangle is essentially a triplet of segments, and so on.
@@ -220,7 +220,7 @@ together with the corresponding orientation of its boundary.
   \label{\numb section 1.\numb fig 4}
 \end{figure}
 
-Paragraphs \ref{\numb section 1.\numb parag 3} and \ref{\numb section 3.\numb parag 18}
+Paragraphs \ref{\numb section 1.\numb parag 4} and \ref{\numb section 3.\numb parag 18}
 show examples where the orientation of the boundary is important for joining meshes.
 In progressive mesh generation (described in section \ref{\numb section 3}) we often
 provide the boundary of the future mesh, whose orientation determines the output of the
@@ -255,13 +255,64 @@ Coordinates are stored externally, see paragraph \ref{\numb section 5.\numb para
 
 {\small\tt \verm{Mesh}}es have a {\small\tt reverse} method, too.
 It is used mainly when we want to {\small\tt join} meshes having a common piece of boundary;
-see paragraphs \ref{\numb section 1.\numb parag 3}, \ref{\numb section 2.\numb parag 6},
+see paragraphs \ref{\numb section 1.\numb parag 4}, \ref{\numb section 2.\numb parag 6},
 \ref{\numb section 2.\numb parag 7}, \ref{\numb section 2.\numb parag 11},
 \ref{\numb section 3.\numb parag 17}, \ref{\numb section 3.\numb parag 18}.
 
 
+          %---------%
+\section{~~Functions}\label{\numb section 1.\numb parag 3}
+          %---------%
+
+Minimalist programs like the pieces of code presented in paragraph
+\ref{\numb section 1.\numb parag 2} work without declaring a {\small\tt\verm{Manifold}}
+and without {\small\tt\verm{Function}}s.
+However, any {\small\tt\verm{Mesh}} constructor will try to interpolate geometric coordinates
+based on the shape of the current {\small\tt\verm{Manifold}}.
+
+{\ManiFEM} uses {\small\tt\verm{Function}}s for several different purposes.
+{\small\tt\verm{Function}}s can be divided roughly in two categories.
+Some keep numeric values, like {\small\tt x}, {\small\tt y} and {\small\tt z}
+encountered in many places in this manual.
+After building such a function, for instance through the statement
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+\end{Verbatim}
+
+the process of creating a new vertex will change.
+Space in the computer's memory will be reserved for {\small\tt d} values of type {\small\tt double}
+({\small\tt d} being the dimension of the current {\small\tt\verm{Manifold}}) for each
+new vertex.
+{\small\tt\verm{Function}}s {\small\tt x}, {\small\tt y} and {\small\tt z} (components of
+{\small\tt xyz}) are mere handlers through which we access these values.
+
+Other {\small\tt\verm{Function}}s are not related with space in the computer's memory.
+For instance, there are arithmetic expressions like 
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Function} \azul{norm} = \verm{power} ( x*x + y*y + z*z, \laranja{0.5} );
+\end{Verbatim}
+
+We can still access the value of such a {\small\tt \verm{Function}} at a cell like in
+{\small\tt double} {\small\tt \azul{n}} {\small\tt =} {\small\tt norm(A)};
+the computer will return the value of the corresponding arithmetic expression,
+replacing the symbols {\small\tt x}, {\small\tt y} and {\small\tt z} by the corresponding
+values at cell {\small\tt A}.
+But it makes no sense to change the value of {\small\tt norm} at cell {\small\tt A}.
+Thus, pieces of code like {\small\tt x(A)} {\small\tt =} {\small\tt \laranja{1.}} work fine,
+while {\small\tt norm(A)} {\small\tt =} {\small\tt \laranja{1.}} produces a run-time error.
+
+The {\small\tt \verm{Function}::deriv} method performs symbolic differentiation :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Function} \azul{norm_x} = norm .deriv ( x );
+   \verm{Function} \azul{norm_y} = norm .deriv ( y );
+\end{Verbatim}
+
+
           %--------------%
-\section{~~Joining meshes}\label{\numb section 1.\numb parag 3}
+\section{~~Joining meshes}\label{\numb section 1.\numb parag 4}
           %--------------%
 
 The example in paragraph \ref{\numb section 1.\numb parag 1} could have been shortened
@@ -287,7 +338,7 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 1.\numb parag 3}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 1.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -380,7 +431,7 @@ Incidentally, note that the {\small\tt \verm{Mesh}} constructor with {\small\tt 
 any position for the vertices. 
 Thus, you can use it to build any quadrilateral; the inner vertices' coordinates are simply
 interpolated from the coordinates of vertices on the boundary, as shown in paragraphs
-\ref{\numb section 1.\numb parag 5} and \ref{\numb section 2.\numb parag 1}.
+\ref{\numb section 1.\numb parag 6} and \ref{\numb section 2.\numb parag 1}.
 This can be done even in more than two (geometric) dimensions, like in
 paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 2.\numb parag 7}.
 Here, tags {\small\tt rectangle}, {\small\tt quadrilateral} and {\small\tt quadrangle} can be used
@@ -390,7 +441,7 @@ See also paragraph \ref{\numb section 11.\numb parag 9}.
 
 
           %-----------------%
-\section{~~Triangular meshes}\label{\numb section 1.\numb parag 4}
+\section{~~Triangular meshes}\label{\numb section 1.\numb parag 5}
           %-----------------%
 
 We can also build meshes on triangular domains and {\small\tt join} them as we wish :
@@ -407,7 +458,7 @@ We can also build meshes on triangular domains and {\small\tt join} them as we w
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 1.\numb parag 4}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 1.\numb parag 5}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{-1.} ;  y (A) = \laranja{0.};
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) =  \laranja{0.} ;  y (B) = \laranja{0.};
@@ -432,13 +483,13 @@ We can also build meshes on triangular domains and {\small\tt join} them as we w
 
 
           %-------------------------------%
-\section{~~Mixing triangles and rectangles}\label{\numb section 1.\numb parag 5}
+\section{~~Mixing triangles and rectangles}\label{\numb section 1.\numb parag 6}
           %-------------------------------%
 
 It is possible to have triangles and quadrilaterals mixed in the same mesh :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 1.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 1.\numb parag 6}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm]
    \verm{Mesh} \azul{ABD} ( \textcolor{tag}{tag}::triangle, AB, BD, AD .reverse() );
    \verm{Mesh} \azul{BCE} ( \textcolor{tag}{tag}::triangle, BC, CE, BE .reverse() );
@@ -461,30 +512,5 @@ It is possible to have triangles and quadrilaterals mixed in the same mesh :
 Paragraphs \ref{\numb section 2.\numb parag 2} and \ref{\numb section 2.\numb parag 3}
 show other examples of mixed meshes.
 
-
-          %---------%
-\section{~~Functions}\label{\numb section 1.\numb parag 6}
-          %---------%
-
-Objects like {\small\tt xyz} and {\small\tt x} encountered in previous paragraphs
-are {\small\tt \verm{Function}} objects.
-They allow for arithmetic expressions like in
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Function} \azul{norm} = \verm{power} ( x*x + y*y, \laranja{0.5} );
-\end{Verbatim}
-
-We access the value of a {\small\tt \verm{Function}} at a cell like in {\small\tt double}
-{\small\tt \azul{n}} {\small\tt =} {\small\tt norm(A)}.
-We can also set this value but not for arithmetic expressions like {\small\tt norm}.
-Thus, pieces of code like {\small\tt x(A)} {\small\tt =} {\small\tt \laranja{1.}} work fine,
-while {\small\tt norm(A)} {\small\tt =} {\small\tt \laranja{1.}} produces a run-time error.
-
-The {\small\tt \verm{Function}::deriv} method performs symbolic differentiation :
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Function} \azul{norm_x} = norm .deriv ( x );
-   \verm{Function} \azul{norm_y} = norm .deriv ( y );
-\end{Verbatim}
 
 
