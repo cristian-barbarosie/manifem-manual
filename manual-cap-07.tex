@@ -160,7 +160,7 @@ Here is how to build a (part of a) cylinder in $ \mathbb{R}^3 $ :
 
    \verm{Mesh} \azul{cylinder} ( \textcolor{tag}{tag}::rectangle, AA, AB, BB, AB .reverse(), \textcolor{tag}{tag}::winding );
    \cinza{// define new coordinates x and y as arithmetic expressions of theta}
-   \verm{Function} \azul{x} = \verm{cos}(theta), \azul{y} = \verm{sin}(theta);
+   \verm{Function} \azul{x} = \verm{cos} (theta), \azul{y} = \verm{sin} (theta);
 
    \cinza{// forget about theta; in future statements, x, y and z will be used}
    cylinder_manif .set_coordinates ( x && y & z );
@@ -218,7 +218,7 @@ Here is the classical example of $ \mathbb{R}^2/{\mathbb Z}^2 $.
    \verm{Mesh} \azul{torus} ( \textcolor{tag}{tag}::rectangle, seg_horiz, seg_vert,
                 seg_horiz .reverse(), seg_vert .reverse(), \textcolor{tag}{tag}::winding );
 
-   \cinza{// it would be meaningless to export 'torus' as a msh file}
+   \cinza{// it would be meaningless to export 'torus' as msh file}
    \cinza{// we can however draw an unfolded mesh :}
    torus .draw_ps (\verde{"torus.eps"}, \textcolor{tag}{tag}::unfold,
                     \textcolor{tag}{tag}::over_region, -0.5 < x < 1.5, -0.2 < y < 1.2 );

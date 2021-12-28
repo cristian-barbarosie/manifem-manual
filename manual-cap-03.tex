@@ -618,7 +618,8 @@ The manifold {\small\tt nut} has a unique orientation consistent with the surrou
 space, just like those in paragraphs \ref{\numb section 3.\numb parag 6} and
 \ref{\numb section 3.\numb parag 7}, but the {\small\tt base} within it has not.
 This is why, when we build the {\small\tt circle}, we must provide a
-{\small\tt \textcolor{tag}{tag}::random\_\,orientation} as a last argument to the {\small\tt \verm{Mesh}} constructor,
+{\small\tt \textcolor{tag}{tag}::random\_\,orientation} as a last argument to the
+{\small\tt \verm{Mesh}} constructor,
 or specify the orientation by providing a starting point and a starting direction
 as described in paragraph \ref{\numb section 3.\numb parag 12}.
 
@@ -628,18 +629,20 @@ inherent orientation.
 It will start the meshing process on an arbitrary side of {\small\tt circle}, thus meshing
 unpredictably the upper or the lower {\small\tt bumpy} hemisphere.
 
-If we enforce the orientation by providing a {\small\tt \textcolor{tag}{tag}::inherent\_\,orientation} as a last
+If we enforce the orientation by providing a
+{\small\tt \textcolor{tag}{tag}::inherent\_\,orientation} as a last
 argument to the {\small\tt \verm{Mesh}} constructor of {\small\tt bumpy}, then {\maniFEM} will mesh
-(behind the curtains) both halves of the sphere; let's call them {\small\tt msh1} and {\small\tt msh2}.
+(behind the curtains) both halves of the sphere; let's call them {\small\tt msh1} and
+{\small\tt msh2}.
 Note that the {\small\tt circle} has already been built, so its orientation is given.
 Both {\small\tt msh1} and {\small\tt msh2} have {\small\tt circle} as boundary,
 which means that they have mutually incompatible orientations.
 They cannot be {\small\tt join}ed.
 But the reverse of any of them can be {\small\tt join}ed with the other one, the result being a
 mesh on the entire bumpy sphere.
-Two choices are possible : either {\small\tt msh1.reverse()} is {\small\tt join}ed with {\small\tt msh2}
-or {\small\tt msh1} is {\small\tt join}ed with {\small\tt msh2.reverse()}, resulting in two meshes on
-the same compact surface with opposite orientations.
+Two choices are possible : either {\small\tt msh1.reverse()} is {\small\tt join}ed with
+{\small\tt msh2} or {\small\tt msh1} is {\small\tt join}ed with {\small\tt msh2.reverse()},
+resulting in two meshes on the same compact surface with opposite orientations.
 One of these orientations is compatible with the intrinsic orientation of the surrounding space
 $ \mathbb{R}^3 $ and is called inherent orientation.
 If the first one is correctly oriented, {\small\tt msh2} will be returned;
@@ -1017,8 +1020,8 @@ It should be regarded as a mere declaration of intentions.}
 
 Besides vertices like the one described in paragraph \ref{\numb section 3.\numb parag 20},
 another kind of singularity appears when we intersect two manifolds which have a tangency point.
-This happens if we choose {\small\tt\azul{rc} = 0.5} in paragraph \ref{\numb section 3.\numb parag 18}
-or \ref{\numb section 3.\numb parag 19}.
+This happens if we choose {\small\tt\azul{rc} = \laranja{0.5}} in paragraph
+\ref{\numb section 3.\numb parag 18} or \ref{\numb section 3.\numb parag 19}.
 
 We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb parag 19}
 (which is to be subsequently {\small\tt join}ed with a sphere with two holes).

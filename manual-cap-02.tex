@@ -204,7 +204,7 @@ As an alternative, we might explicitly project them onto the {\small\tt hiperbol
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \verm{Cell} \azul{P} ( \textcolor{tag}{tag}::vertex );  x (P) = \laranja{0.6};  y (P) = \laranja{2.1};
-   hiperbola .project(P);
+   hiperbola .project (P);
 \end{Verbatim}
 
 \noindent In contrast, the {\small\tt\verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::segment}
@@ -465,7 +465,7 @@ Method {\small\tt set\_\,as\_\,working\_\,manifold} allows us to do that.
    \verm{Mesh} \azul{SE} ( \textcolor{tag}{tag}::segment, S .reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    \verm{Mesh} \azul{EN} ( \textcolor{tag}{tag}::segment, E .reverse(), N, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    
-   RR2.set_as_working_manifold();
+   RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::quadrangle, NW, WS, SE, EN );
 \end{Verbatim}
 
@@ -755,7 +755,7 @@ For the rest of the surface, we switch back to the two-dimensional manifold {\sm
    \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x (N) =  \laranja{0.};  y (N) =  \laranja{1.};  z (N) =  \laranja{0.};
    \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};  y (W) =  \laranja{0.};  z (W) =  \laranja{0.};
    \cinza{// no need to project S and N, they are already on 'base'}
-   base .project(E);  base .project(W);
+   base .project (E);  base .project (W);
    \verm{Cell} \azul{mSW} ( \textcolor{tag}{tag}::vertex );  x (mSW) = \laranja{-1.};  y (mSW) = \laranja{-1.};  z (mSW) = \laranja{0.};
    base .project ( mSW );  \cinza{// midway between S and W}
    \verm{Cell} \azul{mSE} ( \textcolor{tag}{tag}::vertex );  x (mSE) =  \laranja{1.};  y (mSE) = \laranja{-1.};  z (mSW) = \laranja{0.};
@@ -841,7 +841,7 @@ Below is an example.
   \caption{One-dimensional mesh in $ {\mathbb R}^2 $}
 \end{figure}
 
-The operator {\small\tt \&\&} joins two functions into one vector function.
+The operator {\small\tt \&\&} joins two functions into one vector-valued function.
 
 Note that, when defining points {\small\tt A} and {\small\tt B}, we only set the value of {\small\tt t}.
 Functions {\small\tt x} and {\small\tt y} are defined later, as arithmetic expressions in terms of

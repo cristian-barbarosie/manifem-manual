@@ -6,9 +6,22 @@
 
 Finite elments are still incipient in \maniFEM.
 Paragraph \ref{\numb section 6.\numb parag 1} discusses the concept of finite element
-and paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 4}
-give examples of rudimentary use.
+and paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 6}
+give examples of use.
 There is a lot of ongoing work on this subject.
+
+Finite elements in {\maniFEM} can be divided in two categories.
+Finite elements based on symbolic computations, using Gauss quadrature on a master element,
+are discussed in
+paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 4}.
+They are flexible (we can compute integrals of arbitrary expressions) but quite slow
+(because they rely strongly on symbolic manipulation of expressions).
+They can be interesting for dydactic purposes.%
+\footnote{They are also very useful for validating other types of finite elements.}
+Finite elements described in paragraphs \ref{\numb section 6.\numb parag 5} and
+\ref{\numb section 6.\numb parag 6} are much faster at the cost of a tedious internal
+implementation.
+Also, from the point of view of the final user, their syntax is slightly less elegant.
 
 
           %---------------%
@@ -18,7 +31,8 @@ There is a lot of ongoing work on this subject.
 The notion of a finite element is quite complex.
 The purpose of a {\small\tt \verm{FiniteElement}} is to build a list of functions, say, $ \psi $,
 defined on our mesh.
-The linear span of these functions will be a discretized Hilbert space.
+The linear span of these functions will be a finite-dimensional Hilbert space
+(the discretization of an infinite-dimensional Sobolev space).
 It is the {\small\tt \verm{FiniteElement}}'s job to replace, in the variational formulation,
 the unknown function by one $ \psi $, the test function by another $ \psi $ and,
 by evaluating the integrals, obtain the coefficients of a system of linear equations.
@@ -28,20 +42,20 @@ to transform back the vector produced by the solver into a function defined on o
 Computing each integral is a somewhat separate process; it's the job of an
 {\small\tt \verm{Integrator}}
 which could be a Gauss quadrature or some other procedure like symbolic integration.
-When a Gauss quadrature is used, the separation between a {\small\tt \verm{FiniteElement}}'s job
-and the {\small\tt \verm{Itegrator}}'s job is not very sharp because often the Gauss quadrature is
-perfomed not on the physical cell but rather on a master element which is built and
-handled by the {\small\tt \verm{FiniteElement}}.
+The separation between a {\small\tt \verm{FiniteElement}}'s job and
+the {\small\tt \verm{Itegrator}}'s job is not very sharp.
+For instance, the Gauss quadrature is often perfomed not on the physical cell but rather
+on a master element which is built and handled by the {\small\tt \verm{FiniteElement}}.
 The authors of {\maniFEM} have tried to separate these two concepts
-as much as possible, especially because some users may want to use a {\small\tt \verm{FiniteElement}}
+as much as possible, especially because we may want to use a {\small\tt \verm{FiniteElement}}
 with no master element, or an {\small\tt \verm{Integrator}} acting directly on the physical cell.
 
 An object belonging to the {\small\tt class} {\small\tt\verm{FiniteElement}} is a mere wrapper
-for a {\small\tt\verm{FiniteElement}::Core}.
+for a {\small\tt\verm{FiniteElement}::Core} (see paragraph \ref{\numb section 11.\numb parag 5}).
 Several subclasses of {\small\tt\verm{FiniteElement}::Core} exist for different
 kinds of finite elements.
 There is a {\small\tt class} {\small\tt\verm{FiniteElement}::WithMaster} with subclasses like
-{\small\tt\verm{FiniteElement}::WithMaster::Segment}, {\small\tt Triangle} and
+{\small\tt\verm{FiniteElement}::} {\small\tt::WithMaster::Segment}, {\small\tt Triangle} and
 {\small\tt Quadrangle}.
 There is also a {\small\tt class} {\small\tt\verm{FiniteElement}::StandAlone} for elements
 with no master, having its own subclasses for different geometries of the cell.
@@ -191,7 +205,7 @@ the exact solution will be $ u(x,y) = xy $).
 We use a function {\small\tt impose\_\,value\_\,of\_\,unknown} which changes the {\small\tt matrix\_\,A}
 and the {\small\tt vector\_\,b} in order to impose the Dirichlet condition {\small\tt u(i) = 
 some\_\,value}.
-See the source code in file {\small\tt main-\ref{\numb section 6.\numb parag 2}.cpp}
+See the source code in file {\small\tt examples-manual/parag-\ref{\numb section 6.\numb parag 2}.cpp}
 in the distribution tree for the definition of the {\small\tt impose\_\,value\_\,of\_\,unknown}
 function.
 
@@ -234,8 +248,7 @@ We are working hard to reach a more elegant, compact and high-level style.
 The user should have the possibility to declare the partial differential equation
 through a compact declaration of the corresponding variational formulation.
 
-Another limitation of {\maniFEM} is that, at present, finite element computations
-are rather slow.
+Another limitation of {\maniFEM} is that this type of finite element is rather slow.
 This is so because each docking operation implies a lot of symbolic calculations;
 the same happens when we differentiate and then integrate functions.
 There are three ways of circumventing this limitation.
@@ -247,7 +260,8 @@ A second way to speed up the code is to add the option {\small\tt -dNDEBUG} to t
 command in your {\small\tt Makefile} (see also paragraph \ref{\numb section 11.\numb parag 15}).
 
 The third (and soundest) solution is a deep optimization of the {\maniFEM} library.
-A new type of finite elements (or, rather, integrators) is object of on-going work.
+A new type of finite elements (or, rather, integrators) is presented in paragraphs
+{\numb section 6.\numb parag 5} and {\numb section 6.\numb parag 6}.
 These integrators perform a few symbolic calculations just once,
 typically right after they are declared.
 Only raw arithmetic operations are performed when the user actually requests the values
@@ -274,7 +288,7 @@ part of the boundary where we need to integrate.
 
    \cinza{// ... assemble the matrix ...}
 
-   \verm{Function} \azul{heat_source} = x+y;
+   \verm{Function} \azul{heat_source} = y*y;
    \cinza{// impose Neumann boundary conditions du/dn = heat_source :}
    \verm{Mesh}::Iterator \azul{it} = DA .iterator ( \textcolor{tag}{tag}::over_segments );
    for ( it .reset(); it .in_range(); it++ )
@@ -284,7 +298,7 @@ part of the boundary where we need to integrate.
       assert ( V .is_positive() );
       size_t \azul{i} = numbering [V];
       \verm{Function} \azul{psiV} = fe_bdry .basis_function(V);
-      vector_b[i] += fe_bdry.integrate ( heat_source * psiV );
+      vector_b [i] += fe_bdry .integrate ( heat_source * psiV );
       \verm{Cell} \azul{W} = seg.tip();
       assert ( W .is_positive() );
       size_t \azul{j} = numbering [W];
@@ -305,7 +319,7 @@ In previous examples we have built a {\small\tt map} for handling numbering of v
 In this paragraph we show how to use instead the automatic numbering associated to the
 finite element itself.
 The method {\small\tt\verm{FiniteElement}::build\_\,global\_\,numbering} creates
-an object which is similar to an {\small\tt std::map} but uses a different mechanism.
+an object which is similar to {\small\tt std::map} but uses a different mechanism.
 It modifies the process of creating new cells (vertices, in this specfic case)
 by ading a new function to the list of functions
 {\small\tt\verm{Cell}::init\_\,pos\_\,cell[0]},
@@ -335,12 +349,17 @@ Using the numbering associated to the finite element itself has the following di
 This automatic numbering process does not distinguish between vertices created at the user's
 request and other vertices used internally by different components of {\maniFEM};
 these vertices are invisible to the user.
-As a consequence, the numbering will not be contiguous.
+As a consequence, in some cases the numbering may be not contiguous.
 Lines of the global matrix corresponding to ``missing'' vertices are not significant in any way.
 Columns corresponding to missing vertices are not significant either (because they will only
 have zero entries).
 However, the solver of the linear system will complain that the matrix is singular.
-To circumvent this problem, we insert a non-zero value in the diagonal of the global matrix
+
+The user should check these two numbers : {\small\tt numbering} {\small\tt.size()} and
+{\small\tt ABCD}  {\small\tt .number\_\,of}  {\small\tt (}
+{\small\tt \textcolor{tag}{tag}::vertices}  {\small\tt )}.
+If they are not equal, measures must be taken.
+For instance, a non-zero value can be inserted in the diagonal of the global matrix
 at places corresponding to ``missing'' vertices.
 This is equivalent to imposing a Dirichlet boundary condition on those vertices.
 Since we have no way of running over the missing vertices, we first fill the entire
@@ -374,9 +393,9 @@ We simply assign the desired value to the numbering of each vertex :
 \end{Verbatim}
 
 This solution keeps the advantage of constant accesss time to the number of a vertex.
-However, the information from {\small\tt numbering.size()} will be misleading
+However, the information from {\small\tt numbering} {\small\tt .size()} will be misleading
 (it still takes into account the ``hidden'' vertices).
-You should use instead {\small\tt ABCD.number\_\,of} {\small\tt} {\small\tt (}
+You should use instead {\small\tt ABCD} {\small\tt .number\_\,of} {\small\tt (}
 {\small\tt \textcolor{tag}{tag}::vertices )}; this is the dimension you should use
 when declaring your global matrix.
 
@@ -396,15 +415,21 @@ vertices, do you ?
 \section{~~Hand-coded finite elements}\label{\numb section 6.\numb parag 5}
           %--------------------------%
 
-Paragraphs \ref{\numb section 6.\numb parag 3} -- \ref{\numb section 6.\numb parag 4}
+Paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 4}
 show finite element computations where we simply take the shape functions provided by
 the method {\small\tt\verm{FiniteElement}::basis\_\,function}, differentiate them
 symbolically and then integrate their product through a Gauss quadrature.
 This process involves a lot of symbolic computations at each docking operations and
 aftewards, which makes the whole process quite slow.
 
-In this section we show another type of finite elements.
+In this paragraph we present another type of finite elements.
 They are much faster at the cost of a slightly less elegant syntax.
+Also, they are less flexible; finite elements described in previous paragraphs can be used
+to compute integrals of very general expressions, e.g.\ {\small\tt fe.integrate} {\small\tt(}
+{\small\tt\verm{sin}} {\small\tt(x-y)} {\small\tt *} {\small\tt psi\_\,V.deriv(x)} {\small\tt +}
+{\small\tt\verm{cos}} {\small\tt(x-y)} {\small\tt *} {\small\tt psi\_\,V.deriv(y)} {\small\tt )}.
+Finite elements described in this paragraph and subsequent ones only compute integrals of
+of certain expressions, described in paragraph \ref{\numb section 6.\numb parag 6}.
 They do not use a master element.
 The quantities relevant for finite element analysis are hard-wired in the source code
 as arithmetic expressions
@@ -477,9 +502,10 @@ one component).
          std::vector < double > \azul{result} = fe .integrate 
             ( \textcolor{tag}{tag}::pre_computed, \textcolor{tag}{tag}::replace, bf1, \textcolor{tag}{tag}::by, psi_V,
                                  \textcolor{tag}{tag}::replace, bf2, \textcolor{tag}{tag}::by, psi_W );
+         assert ( result .size() ) == 1;
          matrix_A .coeffRef ( numbering[V], numbering[W] ) += result [0];
 \end{Verbatim}
-
+\vfil\eject
 
           %--------------------------------------%
 \section{~~More details on hand-coded integrators}\label{\numb section 6.\numb parag 6}
@@ -549,6 +575,7 @@ Below are some example invocations of {\small\tt pre\_\,compute} with two basis 
                                             bf1 .deriv(y) * bf2 .deriv(y)  \} );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1, bf1 * bf2  \} );
+
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1, bf1 .deriv(x), bf1 * bf2,
                                             bf1 .deriv(x) * bf2 .deriv(x) +
@@ -578,7 +605,7 @@ for different reasons :
       \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2 * bf2 \} );  \cinza{// WRONG, arithmetic expression not allowed}
 \end{Verbatim}
 
-{\ManiFEM} is under construction and many types of finite elements and of integrators are
+{\ManiFEM} is under construction and many types of finite elements and integrators are
 still missing.
 At present, hand-coded integrators can be used in association with finite elements shown below
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
@@ -633,6 +660,7 @@ components :
          std::vector < double > \azul{result} = fe .integrate 
             ( \textcolor{tag}{tag}::pre_computed, \textcolor{tag}{tag}::replace, bf1, \textcolor{tag}{tag}::by, psi_V,
                                  \textcolor{tag}{tag}::replace, bf2, \textcolor{tag}{tag}::by, psi_W );
+         assert ( result .size() ) == 2;
          matrix_A .coeffRef ( numbering[V], numbering[W] ) += result [0] + result [1];
    \}  \}  \cinza{// end of for loops over vertices, end of for loop over cells}
 \end{Verbatim}
@@ -654,8 +682,8 @@ and the output of FFC\footnote{\small\tt https://fenics.readthedocs.io/projects/
 In other cases, the expressions are bluntly and tediously computed by hand.
 Method {\small\tt\verm{FiniteElement}::info()} returns a multi-line string with information
 about the internal implementation of that finite element.
-You may call this method just after the declaration of the element and get generic information,
-or after {\small\tt pre\_\,compute} and get information specific to the expressions
+You may call this method just after the declaration of the element to get generic information,
+or after {\small\tt pre\_\,compute} to get information specific to the expressions
 listed in the last argument of {\small\tt pre\_\,compute}.
 This method is only available in {\small\tt DEBUG} mode (described in paragraph
 \ref{\numb section 11.\numb parag 15}).
@@ -663,3 +691,14 @@ This method is only available in {\small\tt DEBUG} mode (described in paragraph
 The third step in using a hand-coded integrator is the invocation of the
 {\small\tt integrate} method which simply retrieves (from the internal buffer) values 
 associated with the provided shape functions.
+The return value is a vector of {\small\tt double}s rather that a {\small\tt double}
+in order to attend to the case when the user requests more than one expression
+in the invocation of {\small\tt pre\_\,compute}.
+
+You can use a hand-coded integrator for performing certain computations,
+probably within a loop over the cells of your mesh, and then use the same integrator
+in another loop to perform different computations, involving integrals of other expressions.
+To achieve this, you simply call again the method {\small\tt\verm{Integrator}::pre\_\,compute}
+and provide another list of quantities whose integral you will need.
+You may use the same basis functions, they are mere place-holders which will be replaced
+by shape functions after the docking of the finite element on a cell.
