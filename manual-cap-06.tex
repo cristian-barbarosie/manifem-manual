@@ -101,11 +101,9 @@ Note also that these examples make use of the {\small\tt Eigen} library.
           %------------------------------------------------%
 \section{~~Laplace operator, Dirichlet boundary conditions}\label{\numb section 6.\numb parag 2}
           %------------------------------------------------%
-\vskip 1mm
 
 Let's look at an example about the Laplace operator with non-homogeneous Dirichlet
 boundary conditions.
-\vskip 1mm
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
@@ -130,13 +128,11 @@ boundary conditions.
    \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D .reverse(), A, \textcolor{tag}{tag}::divided_in, 12 );
    \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );
 \end{Verbatim}
-\vskip 1mm
 
 A finite element can handle by itself the numbering of vertices, as shown in paragraph
 \ref{\numb section 6.\numb parag 4}.
 For now, we prefer the conceptually simpler approach of building by hand a {\small\tt map}
 for numbering vertices.
-\vskip 1mm
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
@@ -147,7 +143,9 @@ for numbering vertices.
    for ( it .reset() ; it .in_range(); it++ )
    \{  \verm{Cell} \azul{V} = *it;  numbering [V] = counter;  ++counter;  \}
 \end{Verbatim}
-\vskip 1mm
+
+Paragraph \ref{\numb section 9.\numb parag 3} describe {\small\tt Iterator}s over
+cells of a {\small\tt\verm{Mesh}}.
 
 The matrix of the linear system and the vector holding the free coefficients
 are declared as objects of the {\small\tt Eigen} library.
@@ -160,14 +158,12 @@ are declared as objects of the {\small\tt Eigen} library.
    Eigen::SparseMatrix < double > \azul{matrix_A} ( size_matrix, size_matrix );
    Eigen::VectorXd \azul{vector_b} ( size_matrix );  vector_b .setZero();
 \end{Verbatim}
-\vskip 1mm
 
 We now run over all rectangular cells of {\small\tt ABCD}, dock the finite element
 on the current cell,
 compute integrals of the form $ \displaystyle \int\!\!\!\int {\partial \psi_i \over
 \partial x_\alpha} {\partial \psi_j \over \partial x_\beta} dx $ and add the obtained
 values to the global matrix:
-\vskip 1mm
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
@@ -310,6 +306,9 @@ One may object that there is no need for a 1D finite element, a 1D integrator sh
 We agree; the user should have the possibility to attach a 1D integrator to a 2D finite element.
 This is object of on-going work.
 
+Also, in this paragraph we switch to triangular finite elements (see the source code,
+file {\small\tt examples-manual/parag-6.3.cpp} in the distribution tree of \maniFEM).
+
 
           %------------------------------%
 \section{~~Automatic numberig of vertices}\label{\numb section 6.\numb parag 4}
@@ -325,7 +324,7 @@ by ading a new function to the list of functions
 {\small\tt\verm{Cell}::init\_\,pos\_\,cell[0]},
 invoked by {\small\tt\verm{Cell}::Core} constructors
 (see paragraph \ref{\numb section 11.\numb parag 10}).
-Space will be reserved for a {\small\tt size\_\,t} value for each vertex, and
+Space will be reserved for a {\small\tt size\_\,t} value for each new vertex, and
 this value will be used for numbering vertices.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -448,8 +447,8 @@ The finite element is declared by simply omitting the
 
 A hand-coded integrator requires an early declaration of the integrals we intend to compute.
 One or two abstract basis functions must be declared, then the method
-{\small\tt\verm{FiniteElement}::pre\_\,compute} is called
-with a list of arithmetic expressions
+{\small\tt\verm{Integrator}::pre\_\,compute} is called
+with a list of symbolic expressions
 involving these abstract basis functions and possibly their derivatives.
 Later, the user instructs the integrator to replace each of these abstract basis function
 by one of the shape functions provided by the method
@@ -465,7 +464,7 @@ by one of the shape functions provided by the method
                                             bf1 .deriv(y) * bf2 .deriv(y)  \} );
 \end{Verbatim}
 
-The arithmetic expressions provided to {\small\tt pre\_\,compute} must obey to rather strict
+The symbolic expressions provided to {\small\tt pre\_\,compute} must obey to rather strict
 rules, described in paragraph \ref{\numb section 6.\numb parag 6}.
 
 The {\small\tt dock\_\,on} operation has the same syntax as before :
@@ -487,7 +486,7 @@ we have seen in paragraphs \ref{\numb section 6.\numb parag 2} --
 \ref{\numb section 6.\numb parag 4}.
 We must provide the {\small\tt\textcolor{tag}{tag}::pre\_\,computed} and we must provide
 information about which shape function should replace {\small\tt bf1} and {\small\tt bf2}
-in the arithmetic expressions previously declared through {\small\tt pre\_\,compute}.
+in the symbolic expressions previously declared through {\small\tt pre\_\,compute}.
 If a list of several expressions has been provided to {\small\tt pre\_\,compute},
 they will be retrieved all at the same time.
 Thus, we must store the result in an {\small\tt std::vector} rahter than as a {\small\tt double}.
@@ -518,7 +517,7 @@ finite element will later be docked) and also at the cost of a slightly less ele
 
 They work in a three-step process which we describe below.
 
-The first step is {\small\tt pre\_\,compute}, where the user provides a list of arithmetic
+The first step is {\small\tt pre\_\,compute}, where the user provides a list of symbolic
 expressions to be later integrated.
 These expressions involve one or two abstract basis functions which have no special meaning;
 they are mere place-holders for shape functions in the finite element and will be replaced
@@ -532,7 +531,7 @@ possibly differentiated (first order derivatives only).
 In the former case, we only provide one basis function, in the latter we provide two basis
 functions as arguments.
 We may mix the two, providing linear and bi-linear expressions in the same list;
-in this case, we provide two basis functions as arguments;
+in this case, we must provide two basis functions as arguments;
 the linear expressions must depend only on the first one.
 
 Below are some example invocations of {\small\tt pre\_\,compute} with one basis function :
@@ -588,26 +587,26 @@ for different reasons :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
-      \textcolor{tag}{tag}::integral_of, \{ bf + 1. \} );  \cinza{// WRONG, arithmetic expression not allowed}
+      \textcolor{tag}{tag}::integral_of, \{ bf + 1. \} );  \cinza{// WRONG, symbolic expression not allowed}
    integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
-      \textcolor{tag}{tag}::integral_of, \{ 2.* bf \} );  \cinza{// WRONG, arithmetic expression not allowed}
+      \textcolor{tag}{tag}::integral_of, \{ 2.* bf \} );  \cinza{// WRONG, symbolic expression not allowed}
    integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
-      \textcolor{tag}{tag}::integral_of, \{ bf + bf .deriv(x) \} );  \cinza{// WRONG, arithmetic expression not allowed}
+      \textcolor{tag}{tag}::integral_of, \{ bf + bf .deriv(x) \} );  \cinza{// WRONG, symbolic expression not allowed}
    integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
-      \textcolor{tag}{tag}::integral_of, \{ bf .deriv(x) + bf .deriv(y) \} );  \cinza{// WRONG, arithm expr not allowed}
+      \textcolor{tag}{tag}::integral_of, \{ bf .deriv(x) + bf .deriv(y) \} );  \cinza{// WRONG, expr not allowed}
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
       \textcolor{tag}{tag}::integral_of, \{ bf2 * bf1 \} );  \cinza{// WRONG, bf1 must be first}
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
-      \textcolor{tag}{tag}::integral_of, \{ bf1 - bf2 \} );  \cinza{// WRONG, arithmetic expression not allowed}
+      \textcolor{tag}{tag}::integral_of, \{ bf1 - bf2 \} );  \cinza{// WRONG, symbolic expression not allowed}
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
       \textcolor{tag}{tag}::integral_of, \{ bf2, bf1 * bf2 \} );  \cinza{// WRONG, bf2 cannot appear in a linear expr}
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
-      \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2 * bf2 \} );  \cinza{// WRONG, arithmetic expression not allowed}
+      \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2 * bf2 \} );  \cinza{// WRONG, symbolic expression not allowed}
 \end{Verbatim}
 
 {\ManiFEM} is under construction and many types of finite elements and integrators are
 still missing.
-At present, hand-coded integrators can be used in association with finite elements shown below
+At present, hand-coded integrators can be used in association with finite elements listed below
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::triangle,   \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
@@ -615,6 +614,7 @@ At present, hand-coded integrators can be used in association with finite elemen
    \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::rectangle,  \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::square,     \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
 \end{Verbatim}
+
 Note that {\small\tt\textcolor{tag}{tag}::quadrangle} and
 {\small\tt\textcolor{tag}{tag}::quadrilateral} are synonymous.
 However, {\small\tt\textcolor{tag}{tag}::rectangle} and {\small\tt\textcolor{tag}{tag}::square}
@@ -676,9 +676,9 @@ or for all pairs of shape functions (if {\small\tt pre\_\,compute} was called wi
 abstract basis functions).
 These values are kept in an internal buffer for later use.
 
-The expressions hard-wired in the source code are, in some cases, inspired in the syntax of
-UFL\footnote{\small\tt https://fenics.readthedocs.io/projects/ufl/en/latest/}
-and the output of FFC\footnote{\small\tt https://fenics.readthedocs.io/projects/ffc/en/latest/}.
+The arithmetic expressions hard-wired in the source code are, in some cases, inspired
+in the syntax of UFL\footnote{\small\tt https://fenics.readthedocs.io/projects/ufl/en/latest/}
+and the output of FFC.\footnote{\small\tt https://fenics.readthedocs.io/projects/ffc/en/latest/}
 In other cases, the expressions are bluntly and tediously computed by hand.
 Method {\small\tt\verm{FiniteElement}::info()} returns a multi-line string with information
 about the internal implementation of that finite element.
@@ -696,8 +696,8 @@ in order to attend to the case when the user requests more than one expression
 in the invocation of {\small\tt pre\_\,compute}.
 
 You can use a hand-coded integrator for performing certain computations,
-probably within a loop over the cells of your mesh, and then use the same integrator
-in another loop to perform different computations, involving integrals of other expressions.
+probably within a loop over the cells of your mesh, and then use the same integrator in another loop
+to perform different computations, involving integrals of other symbolic expressions.
 To achieve this, you simply call again the method {\small\tt\verm{Integrator}::pre\_\,compute}
 and provide another list of quantities whose integral you will need.
 You may use the same basis functions, they are mere place-holders which will be replaced

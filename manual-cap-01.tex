@@ -66,6 +66,7 @@ int main ()
 
    \cinza{// Let's define a symbolic function to integrate}
    \verm{Function} \azul{f} = x*x + \laranja{1}/(\laranja{5}+y);
+
    \cinza{// and compute its integral on the rectangle,}
    \cinza{// using Gauss quadrature with 9 points}
 
@@ -177,7 +178,7 @@ We can think of an oriented polygon as having an arrow attached to each of it si
 or we can imagine a small oriented circle inside the polygon.
 
 \begin{figure} \centering
-  \includegraphics[width=125mm]{hemisphere-7}
+  \includegraphics[width=115mm]{hemisphere-7}
   \caption{Oriented meshes of dimension one and two}
   \label{\numb section 1.\numb fig 3}
 \end{figure}
@@ -210,11 +211,11 @@ Figure \ref{\numb section 1.\numb fig 4} shows two opposite orientations of a me
 together with the corresponding orientation of its boundary.
 
 \begin{figure}[ht] \centering
-\begin{subfigure}{76mm}\centering
-  \includegraphics[width=75mm]{oriented-annulus-1}
+\begin{subfigure}{75mm}\centering
+  \includegraphics[width=74mm]{oriented-annulus-1}
 \end{subfigure}  
-\begin{subfigure}{76mm}\centering
-  \includegraphics[width=75mm]{oriented-annulus-2}
+\begin{subfigure}{75mm}\centering
+  \includegraphics[width=74mm]{oriented-annulus-2}
 \end{subfigure}  
   \caption{Mesh with two opposite orientations}
   \label{\numb section 1.\numb fig 4}
@@ -235,8 +236,7 @@ For instance :
    assert ( A .is_positive() );
    assert ( not A .reverse() .is_positive() );
    assert ( A .reverse() .reverse() == A );
-   \verm{Cell} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B );
-   \cinza{// here, AB is a segment Cell, not a Mesh}
+   \verm{Cell} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B );  \cinza{// here, AB is a segment Cell, not a Mesh}
    assert ( AB .base() == A .reverse() );
    assert ( AB .tip() == B );
 
@@ -265,7 +265,8 @@ see paragraphs \ref{\numb section 1.\numb parag 4}, \ref{\numb section 2.\numb p
           %---------%
 
 Minimalist programs like the pieces of code presented in paragraph
-\ref{\numb section 1.\numb parag 2} work without declaring a {\small\tt\verm{Manifold}}
+\ref{\numb section 1.\numb parag 2} (consisting only of manipulation of
+{\small\tt\verm{Cell}}s) work without declaring a {\small\tt\verm{Manifold}}
 and without {\small\tt\verm{Function}}s.
 However, any {\small\tt\verm{Mesh}} constructor will try to interpolate geometric coordinates
 based on the shape of the current {\small\tt\verm{Manifold}}.
@@ -274,20 +275,33 @@ based on the shape of the current {\small\tt\verm{Manifold}}.
 {\small\tt\verm{Function}}s can be divided roughly in two categories.
 Some keep numeric values, like {\small\tt x}, {\small\tt y} and {\small\tt z}
 encountered in many places in this manual.
-After building such a function, for instance through the statement
+After building a function like
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
 \end{Verbatim}
 
-the process of creating a new vertex will change.
-Space in the computer's memory will be reserved for {\small\tt d} values of type {\small\tt double}
-({\small\tt d} being the dimension of the current {\small\tt\verm{Manifold}}) for each
-new vertex.
-{\small\tt\verm{Function}}s {\small\tt x}, {\small\tt y} and {\small\tt z} (components of
-{\small\tt xyz}) are mere handlers through which we access these values.
+\noindent the process of creating a new vertex will change.
+Space in the computer's memory will be reserved for {\small\tt d} values of type
+{\small\tt double} ({\small\tt d} being the dimension of the {\small\tt\verm{Manifold}},
+here {\small\tt RR3}) for each new vertex.
+The components of {\small\tt xyz} can be declared like in
 
-Other {\small\tt\verm{Function}}s are not related with space in the computer's memory.
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
+\end{Verbatim}
+
+\noindent They are mere handlers through which we access the above referred \ {\small\tt double}
+\ values, like in {\small\tt x(A)} {\small\tt =} {\small\tt \laranja{1.}}\ or
+{\small\tt double} {\small\tt \azul{sum}} {\small\tt =} {\small\tt x(A)} {\small\tt +}
+{\small\tt y(B)} {\small\tt +} {\small\tt z(C)}.
+Actually, the interaction between the {\small\tt\verm{Function}} object and the values
+associated to each vertex involves other layers, one of which is a {\small\tt\verm{Field}}
+object.
+In most cases, these layers are invisible to the final user.
+
+Other {\small\tt\verm{Function}}s are not related with space in the computer's memory
+(they have no subjacent {\small\tt\verm{Field}}).
 For instance, there are arithmetic expressions like 
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
@@ -300,15 +314,20 @@ the computer will return the value of the corresponding arithmetic expression,
 replacing the symbols {\small\tt x}, {\small\tt y} and {\small\tt z} by the corresponding
 values at cell {\small\tt A}.
 But it makes no sense to change the value of {\small\tt norm} at cell {\small\tt A}.
-Thus, pieces of code like {\small\tt x(A)} {\small\tt =} {\small\tt \laranja{1.}} work fine,
+Thus, statements like {\small\tt x(A)} {\small\tt =} {\small\tt \laranja{1.}} work fine,
 while {\small\tt norm(A)} {\small\tt =} {\small\tt \laranja{1.}} produces a run-time error.
 
-The {\small\tt \verm{Function}::deriv} method performs symbolic differentiation :
+The {\small\tt\verm{Function}::deriv} method performs symbolic differentiation :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \verm{Function} \azul{norm_x} = norm .deriv ( x );
    \verm{Function} \azul{norm_y} = norm .deriv ( y );
 \end{Verbatim}
+
+Integrals of {\small\tt\verm{Function}}s are computed by means of {\small\tt\verm{Integrator}}s,
+either alone or coupled with a {\small\tt\verm{FiniteElement}}.
+Section \ref{\numb section 6} gives more details.
+\vfil\eject
 
 
           %--------------%
@@ -433,7 +452,8 @@ Thus, you can use it to build any quadrilateral; the inner vertices' coordinates
 interpolated from the coordinates of vertices on the boundary, as shown in paragraphs
 \ref{\numb section 1.\numb parag 6} and \ref{\numb section 2.\numb parag 1}.
 This can be done even in more than two (geometric) dimensions, like in
-paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 2.\numb parag 7}.
+paragraphs \ref{\numb section 1.\numb parag 1}, \ref{\numb section 2.\numb parag 7} and
+\ref{\numb section 2.\numb parag 11}.
 Here, tags {\small\tt rectangle}, {\small\tt quadrilateral} and {\small\tt quadrangle} can be used
 interchangeably.
 
@@ -452,7 +472,7 @@ We can also build meshes on triangular domains and {\small\tt join} them as we w
   \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
-  \includegraphics[width=110mm]{three-tri}
+  \includegraphics[width=90mm]{three-tri}
   \caption{Mesh obtained by {\small\tt join}ing three triangles}
   \label{\numb section 1.\numb fig 7}
 \end{figure}
