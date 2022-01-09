@@ -1,12 +1,12 @@
 
-          %----------------------------------------------%
-\chapter{~~Fields, functions and variational formulations}\label{\numb section 5}
-          %----------------------------------------------%
+          %--------------------------------------%
+\chapter{~~Functions and variational formulations}\label{\numb section 5}
+          %--------------------------------------%
 
 
-          %--------------------%
-\section{~~Fields and functions}\label{\numb section 5.\numb parag 1}
-          %--------------------%
+          %---------%
+\section{~~Functions}\label{\numb section 5.\numb parag 1}
+          %---------%
 
 As the reader may have already noticed, all examples in {\maniFEM} begin by declaring a
 Euclidian {\small\tt \verm{Manifold}} and then go on by building a coordinate system :
@@ -22,23 +22,25 @@ See paragraph \ref{\numb section 11.\numb parag 3} for more details about tags.
 
 In the above, {\small\tt \verm{xy}} is a vector-valued {\small\tt \verm{Function}}
 with two components, {\small\tt x} and {\small\tt y}.
-The declaration of {\small\tt xy} starts a complex process; under the curtains
-{\maniFEM} declares a {\small\tt \verm{Field}} object associated to {\small\tt xy}.
+The declaration of {\small\tt\azul{xy}} starts a complex process; behind the curtains,
+{\maniFEM} builds a {\small\tt \verm{Field}} object associated to {\small\tt xy}.
 The {\small\tt \verm{Field}} object changes the behaviour of {\maniFEM} in what regards
 initialization of {\small\tt \verm{Cell}}s.
 Since {\small\tt xy} is of type Lagrange of degree 1, each newly built vertex
 {\small\tt \verm{Cell}} will have memory space reserved for two {\small\tt double}
 precision numbers.
-If {\small\tt A} is a vertex {\small\tt \verm{Cell}}, an assignment like {\small\tt x(A) = \laranja{1.5}}
-sets the value of the {\small\tt x} component of the {\small\tt \verm{Field}} associated to
-{\small\tt xy} at {\small\tt A}.
+If {\small\tt A} is a vertex {\small\tt \verm{Cell}}, an assignment like
+{\small\tt x(A) = \laranja{1.5}} sets the value of the {\small\tt x} component of the
+{\small\tt \verm{Field}} associated to {\small\tt xy} at {\small\tt A}.
+Note that negative vertices will have no coordinates, only positive vertices will.
 
 If we declare {\small\tt xy} to be of type Lagrange of degree 2, not only future vertices will
 have space reserved for two {\small\tt double}s, but also future segments.
 So, we may assign the value of {\small\tt y} at the middle of segment {\small\tt AB} by using
 the syntax {\small\tt y(AB) = \laranja{0.75}}.
+This feature is not yet implemented.
 
-{\small\tt \verm{Function}} objects allow for arithmetic expressions like in
+{\small\tt\verm{Function}} objects allow for arithmetic expressions like in
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
@@ -53,6 +55,6 @@ The {\small\tt deriv} method performs symbolic differentiation :
    \verm{Function} \azul{norm_y} = norm .deriv ( y );
 \end{Verbatim}
 
-Functions can also be integrated, see section \numb section 6.
+Functions can also be integrated, see section \ref{\numb section 6}.
 
 

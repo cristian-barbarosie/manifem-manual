@@ -6,20 +6,20 @@
 
 Finite elments are still incipient in \maniFEM.
 Paragraph \ref{\numb section 6.\numb parag 1} discusses the concept of finite element
-and paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 6}
+and paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 10}
 give examples of use.
 There is a lot of ongoing work on this subject.
 
 Finite elements in {\maniFEM} can be divided in two categories.
 Finite elements based on symbolic computations, using Gauss quadrature on a master element,
 are discussed in
-paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 4}.
+paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 8}.
 They are flexible (we can compute integrals of arbitrary expressions) but quite slow
 (because they rely strongly on symbolic manipulation of expressions).
 They can be interesting for dydactic purposes.%
 \footnote{They are also very useful for validating other types of finite elements.}
-Finite elements described in paragraphs \ref{\numb section 6.\numb parag 5} and
-\ref{\numb section 6.\numb parag 6} are much faster at the cost of a tedious internal
+Finite elements described in paragraphs \ref{\numb section 6.\numb parag 9} and
+\ref{\numb section 6.\numb parag 10} are much faster at the cost of a tedious internal
 implementation.
 Also, from the point of view of the final user, their syntax is slightly less elegant.
 
@@ -257,7 +257,7 @@ command in your {\small\tt Makefile} (see also paragraph \ref{\numb section 11.\
 
 The third (and soundest) solution is a deep optimization of the {\maniFEM} library.
 A new type of finite elements (or, rather, integrators) is presented in paragraphs
-{\numb section 6.\numb parag 5} and {\numb section 6.\numb parag 6}.
+\ref{\numb section 6.\numb parag 9} and \ref{\numb section 6.\numb parag 10}.
 These integrators perform a few symbolic calculations just once,
 typically right after they are declared.
 Only raw arithmetic operations are performed when the user actually requests the values
@@ -404,32 +404,205 @@ an index of a given vertex but not the other way around.
 If you need to retrieve a vertex from its index you should probably use 
 a vector of {\small\tt\verm{Cell}}s.
 
-For the example in paragraph \ref{\numb section 6.\numb parag 3}, you should add the
-{\small\tt\textcolor{tag}{tag}::enumerate\_\,cells} when declaring {\small\tt fe} and not when
-declaring {\small\tt fe\_\,bdry} -- you don't want two independent mechanisms for numbering
-vertices, do you ?
+
+          %-------------------------------------------------%
+\section{~~Triangular Lagrange finite elements of degree two}\label{\numb section 6.\numb parag 5}
+          %-------------------------------------------------%
+
+To get a quadratic Lagrange finite element, simply choose degree two; add also a 
+{\small\tt\textcolor{tag}{tag}::straight} to inform {\maniFEM} that you do not want
+a curved triangle.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   \verm{FiniteElement} \azul{fe2} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::triangle,
+                       \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight );
+\end{Verbatim}
+
+This finite element has six basis functions, associated to vertices and to sides :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+      fe2 .dock_on ( small_tri );
+      \cinza{//  for loop}  
+         \verm{Function} \azul{psi_V} = fe2 .basis_function ( V );   \cinza{// V is a vertex of small_tri}
+         \verm{Function} \azul{psi_seg} = fe2 .basis_function ( seg );  \cinza{// seg is a side of small_tri}
+\end{Verbatim}
+
+The user must provide positive vertices {\small\tt V} but oriented (possibly negative) segments
+{\small\tt seg} belonging to {\small\tt small\_\,tri} {\small\tt .boundary()}.
+
+It is worth noticing that, although we intend to work with degree two finite elements,
+the coordinate system {\small\tt\azul{xy}} is still declared with
+{\small\tt\textcolor{tag}{tag}::of\_\,degree,} {\small\tt\laranja{1}}
+(see the source code in file {\small\tt parag-\ref{\numb section 6.\numb parag 5}.cpp}
+in the distribution tree).
+This is so because we use straight triangles; if we wanted curved triangles, we should
+declare {\small\tt\azul{xy}} with {\small\tt\textcolor{tag}{tag}::of\_\,degree,}
+{\small\tt\laranja{2}}.
+Paragraph \ref{\numb section 5.\numb parag 1} gives more details.
+
+
+          %--------------------------------------------------%
+\section{~~Triangular Lagrange, degree two, incremental basis}
+          %--------------------------------------------------%
+\label{\numb section 6.\numb parag 6}
+
+We can add a {\small\tt\textcolor{tag}{tag}::incremental\_\,basis} :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 6.\numb parag 6}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   \verm{FiniteElement} \azul{fe2} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::triangle, \textcolor{tag}{tag}::Lagrange,
+                       \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight, \textcolor{tag}{tag}::incremental_basis );
+\end{Verbatim}
+
+This finite element is almost identical to the one presented in paragraph
+\ref{\numb section 6.\numb parag 5}.
+The six basis functions are not the same, but they span the same linear function space.
+
+The set of basis functions of this element contains the three basis functions of the
+Lagrange P1 element (associated to the three vertices).
+In addition, there are three basis functions associated to the three sides.
+
+The six basis functions of this finite element take the following values
+
+[include table]
+
+The difference relatively to the ``usual'' finite element described in paragraph
+\ref{\numb section 6.\numb parag 5} lies in the interpretation
+of the coefficients when we write a function $u$ as a linear combination of basis functions.
+If $ u = $ $ = \sum_{\mbox{\small\tt v}} u_{\mbox{\small\tt v}} \psi_{\mbox{\small\tt v}} +
+\sum_{\mbox{\small\tt s}} u_{\mbox{\small\tt s}} \psi_{\mbox{\small\tt s}} $
+({\small\tt v} being vertices, {\small\tt s} being segments), then $ u_{\mbox{\small\tt v}} =
+u(\mbox{\small\tt v}) $ but $ u_{\mbox{\small\tt s}} $ is not the value of $u$ at {\small\tt m};
+rather, $ u_{\mbox{\small\tt s}} = 4 u(\mbox{\small\tt m}) -2 (u(\mbox{\small\tt A}) +
+u(\mbox{\small\tt B})) $ (assuming {\small\tt m} is the middle point of segment {\small\tt s}
+$=$ {\small\tt AB}).
+This interpretation is used when imposing the Dirichlet boundary condition in the main file
+{\small\tt parag-\ref{\numb section 6.\numb parag 6}.cpp}.
+
+This finite element is especially useful in the context of quotient manifolds.
+
+
+          %---------------------------------------------------%
+\section{~~Quadrangular Lagrange finite elements of degree two}
+          %---------------------------------------------------%
+\label{\numb section 6.\numb parag 7}
+
+To get a bi-quadratic Lagrange finite element, simply choose degree two; add also a 
+{\small\tt\textcolor{tag}{tag}::straight} to inform {\maniFEM} that you do not want
+a curved quadrilateral.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 6.\numb parag 7}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   \verm{FiniteElement} \azul{fe2} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle,
+                       \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight );
+\end{Verbatim}
+
+This finite element has nine basis functions, associated to vertices, to sides, and to the
+quadrangular cell itself :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 6.\numb parag 7}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+      fe2 .dock_on ( small_square );
+      \cinza{//  for loop}  
+         \verm{Function} \azul{psi_V} = fe2 .basis_function ( V );   \cinza{// V is a vertex of small_square}
+         \verm{Function} \azul{psi_seg} = fe2 .basis_function ( seg );  \cinza{// seg is a side of small_square}
+      \verm{Function} \azul{psi_central} = fe2 .basis_function ( small_square );
+\end{Verbatim}
+
+The user must provide positive vertices {\small\tt V} but oriented (possibly negative) segments
+{\small\tt seg} belonging to {\small\tt small\_\,square} {\small\tt .boundary()}.
+The quadrangular cell {\small\tt small\_\,square} itself may be positive or negative.
+
+It is worth noticing that, although we intend to work with degree two finite elements,
+the coordinate system {\small\tt\azul{xy}} is still declared with
+{\small\tt\textcolor{tag}{tag}::of\_\,degree,} {\small\tt\laranja{1}}
+(see the source code in file {\small\tt parag-\ref{\numb section 6.\numb parag 7}.cpp}
+in the distribution tree).
+This is so because we use straight quadrangles; if we wanted curved quadrangles, we should
+declare {\small\tt\azul{xy}} with {\small\tt\textcolor{tag}{tag}::of\_\,degree,}
+{\small\tt\laranja{2}}.
+Paragraph \ref{\numb section 5.\numb parag 1} gives more details.
+
+
+          %----------------------------------------------------%
+\section{~~Quadrangular Lagrange, degree two, incremental basis}
+          %----------------------------------------------------%
+\label{\numb section 6.\numb parag 8}
+
+We can add a {\small\tt\textcolor{tag}{tag}::incremental\_\,basis} :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 6.\numb parag 8}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   \verm{FiniteElement} \azul{fe2} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange,
+                       \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight, \textcolor{tag}{tag}::incremental_basis );
+\end{Verbatim}
+
+This finite element is almost identical to the one presented in paragraph
+\ref{\numb section 6.\numb parag 7}.
+The nine basis functions are not the same, but they span the same linear function space.
+
+The set of basis functions of this element contains the four basis functions of the
+Lagrange Q1 element (associated to the four vertices).
+In addition, there are five basis functions associated to the four sides and to the
+quadrangular cell itself.
+
+The nine basis functions of this finite element take the following values
+
+[include table]
+
+The difference relatively to the ``usual'' finite element described in paragraph
+\ref{\numb section 6.\numb parag 7} lies in the interpretation
+of the coefficients when we write a function $u$ as a linear combination of basis functions.
+If $ u = \sum_{\mbox{\small\tt v}} u_{\mbox{\small\tt v}} \psi_{\mbox{\small\tt v}} +
+\sum_{\mbox{\small\tt s}} u_{\mbox{\small\tt s}} \psi_{\mbox{\small\tt s}} +
+u_{\mbox{\small\tt q}} \psi_{\mbox{\small\tt q}} $
+({\small\tt v} being vertices, {\small\tt s} being segments, {\small\tt q} being the quandrangular
+cell itself), then $ u_{\mbox{\small\tt v}} = u(\mbox{\small\tt v}) $.
+However, $ u_{\mbox{\small\tt s}} $ is not the value of $u$ at {\small\tt m};
+rather, $ u_{\mbox{\small\tt s}} = u(\mbox{\small\tt m}) / 2 - ( u(\mbox{\small\tt A}) +
+u(\mbox{\small\tt B}) ) / 4 $ (assuming {\small\tt m} is the middle point of segment
+{\small\tt s} $=$ {\small\tt AB}).
+On the other hand, $ u_{\mbox{\small\tt q}} = u(\mbox{\small\tt b}) -
+\sigma_{\mbox{\small\tt s}}/2 + \sigma_{\mbox{\small\tt v}}/4 $,
+where {\small\tt b} is the baricenter of cell {\small\tt q},
+$ \sigma_{\mbox{\small\tt s}} $ is the sum of the values of $u$ at middle point of sides of
+{\small\tt q} and $ \sigma_{\mbox{\small\tt v}} $ is the sum of the values of $u$ at vertices
+of cell {\small\tt q}.
+This interpretation is used when imposing the Dirichlet boundary condition in the main file
+{\small\tt parag-\ref{\numb section 6.\numb parag 8}.cpp}.
+
+This finite element is especially useful in the context of quotient manifolds.
 
 
           %--------------------------%
-\section{~~Hand-coded finite elements}\label{\numb section 6.\numb parag 5}
+\section{~~Hand-coded finite elements}\label{\numb section 6.\numb parag 9}
           %--------------------------%
 
-Paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 4}
+Paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 8}
 show finite element computations where we simply take the shape functions provided by
 the method {\small\tt\verm{FiniteElement}::basis\_\,function}, differentiate them
 symbolically and then integrate their product through a Gauss quadrature.
 This process involves a lot of symbolic computations at each docking operations and
 aftewards, which makes the whole process quite slow.
 
-In this paragraph we present another type of finite elements.
+In this paragraph we present another type of finite elements (or rather, integrators).
 They are much faster at the cost of a slightly less elegant syntax.
 Also, they are less flexible; finite elements described in previous paragraphs can be used
-to compute integrals of very general expressions, e.g.\ {\small\tt fe.integrate} {\small\tt(}
-{\small\tt\verm{sin}} {\small\tt(x-y)} {\small\tt *} {\small\tt psi\_\,V.deriv(x)} {\small\tt +}
-{\small\tt\verm{cos}} {\small\tt(x-y)} {\small\tt *} {\small\tt psi\_\,V.deriv(y)} {\small\tt )}.
-Finite elements described in this paragraph and subsequent ones only compute integrals of
-of certain expressions, described in paragraph \ref{\numb section 6.\numb parag 6}.
-They do not use a master element.
+to compute integrals of very general expressions, e.g.\ {\small\tt fe} {\small\tt .integrate}
+{\small\tt(} {\small\tt\verm{sin}} {\small\tt(x-y)} {\small\tt *} {\small\tt psi\_\,V.deriv(x)}
+{\small\tt +} {\small\tt\verm{cos}} {\small\tt(x-y)} {\small\tt *} {\small\tt psi\_\,V.deriv(y)}%
+~{\small\tt )}.
+Finite elements described in this paragraph and subsequent ones only compute integrals
+of certain expressions, described in paragraph \ref{\numb section 6.\numb parag 10}.
+They do not keep a diffeomorphism to a master element.
 The quantities relevant for finite element analysis are hard-wired in the source code
 as arithmetic expressions
 of the coordinates of the vertices of the cell where the finite element will later dock.
@@ -439,11 +612,15 @@ The finite element is declared by simply omitting the
 {\small\tt\textcolor{tag}{tag}::hand\_\,coded}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::rectangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Integrator} \azul{integ} = fe .set_integrator ( \textcolor{tag}{tag}::hand_coded );
 \end{Verbatim}
+
+Here we use a {\small\tt\textcolor{tag}{tag}::rectangle} instead of
+a {\small\tt\textcolor{tag}{tag}::quadrangle};
+paragraph \ref{\numb section 6.\numb parag 10} explains why.
 
 A hand-coded integrator requires an early declaration of the integrals we intend to compute.
 One or two abstract basis functions must be declared, then the method
@@ -455,7 +632,7 @@ by one of the shape functions provided by the method
 {\small\tt\verm{FiniteElement}::basis\_\,function}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Function} \azul{bf1} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe ),
             \azul{bf2} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe );
@@ -465,12 +642,12 @@ by one of the shape functions provided by the method
 \end{Verbatim}
 
 The symbolic expressions provided to {\small\tt pre\_\,compute} must obey to rather strict
-rules, described in paragraph \ref{\numb section 6.\numb parag 6}.
+rules, described in paragraph \ref{\numb section 6.\numb parag 10}.
 
 The {\small\tt dock\_\,on} operation has the same syntax as before :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
       fe .dock_on ( small_square );
 \end{Verbatim}
@@ -481,10 +658,12 @@ These values are kept in an internal buffer; later, when we call the method
 {\small\tt integrate}, the computer simply retrieves the corresponding values from
 the internal buffer.
 
-The {\small\tt integrate} method has a syntax which is more complicated than the one
-we have seen in paragraphs \ref{\numb section 6.\numb parag 2} --
-\ref{\numb section 6.\numb parag 4}.
-We must provide the {\small\tt\textcolor{tag}{tag}::pre\_\,computed} and we must provide
+The {\small\tt integrate} method has a syntax which is more complicated and less intuitive
+than the one we have seen in paragraphs \ref{\numb section 6.\numb parag 2} --
+\ref{\numb section 6.\numb parag 8}.
+We do not provide an expression; this has already been done by invoking method
+{\small\tt pre\_\,compute}.
+We just specify the {\small\tt\textcolor{tag}{tag}::pre\_\,computed} and provide
 information about which shape function should replace {\small\tt bf1} and {\small\tt bf2}
 in the symbolic expressions previously declared through {\small\tt pre\_\,compute}.
 If a list of several expressions has been provided to {\small\tt pre\_\,compute},
@@ -494,7 +673,7 @@ We then recover each value as components of this vector (in this example there i
 one component).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
          \verm{Function} \azul{psi_V} = fe.basis_function(V),
                   \azul{psi_W} = fe .basis_function (W);
@@ -504,10 +683,9 @@ one component).
          assert ( result .size() ) == 1;
          matrix_A .coeffRef ( numbering[V], numbering[W] ) += result [0];
 \end{Verbatim}
-\vfil\eject
 
           %--------------------------------------%
-\section{~~More details on hand-coded integrators}\label{\numb section 6.\numb parag 6}
+\section{~~More details on hand-coded integrators}\label{\numb section 6.\numb parag 10}
           %--------------------------------------%
 
 Integrators declared with {\small\tt\textcolor{tag}{tag}::hand\_\,coded} are fast at the
@@ -530,7 +708,7 @@ They must be either linear expressions in one abstract basis function, possibly 
 possibly differentiated (first order derivatives only).
 In the former case, we only provide one basis function, in the latter we provide two basis
 functions as arguments.
-We may mix the two, providing linear and bi-linear expressions in the same list;
+We may mix the two, including linear and bi-linear expressions in the same list;
 in this case, we must provide two basis functions as arguments;
 the linear expressions must depend only on the first one.
 
@@ -618,12 +796,14 @@ At present, hand-coded integrators can be used in association with finite elemen
 Note that {\small\tt\textcolor{tag}{tag}::quadrangle} and
 {\small\tt\textcolor{tag}{tag}::quadrilateral} are synonymous.
 However, {\small\tt\textcolor{tag}{tag}::rectangle} and {\small\tt\textcolor{tag}{tag}::square}
-produce different integrators which take advantage of the particular geometry of the cell
-to perform efficient computations.
+produce different finite elements; the integrators associated with them take advantage of
+the particular geometry of the cell to perform efficient computations.
+In the future, there will also be a finite element with
+{\small\tt\textcolor{tag}{tag}::parallelogram}.
 
 Another limitation is that some integrators' implementation is still incomplete and they may
 reject some of the expressions listed above as correct.
-For instance, in paragraph \ref{\numb section 6.\numb parag 5} we have used a finite element
+For instance, in paragraph \ref{\numb section 6.\numb parag 9} we have used a finite element
 declared with {\small\tt\textcolor{tag}{tag}::rectangle} which accepts the expression
 {\small\tt bf1.deriv(x)} {\small\tt *} {\small\tt bf2.deriv(x)}
 {\small\tt +} {\small\tt bf1.deriv(y)} {\small\tt *} {\small\tt bf2.deriv(y)}.
@@ -642,13 +822,15 @@ components :
             \azul{bf2} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x),
-                                            bf1 .deriv(y) * bf2 .deriv(y)  \} );
+                                            bf1 .deriv(y) * bf2 .deriv(y) \} );
 
+                                            
    \cinza{// run over all square cells composing ABCD}
    \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{small_square} = *it;
       fe .dock_on ( small_square );
+
       \cinza{// run twice over the four vertices of 'small_square'}
       \verm{Mesh}::Iterator \azul{it1} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
       \verm{Mesh}::Iterator \azul{it2} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
@@ -685,10 +867,10 @@ about the internal implementation of that finite element.
 You may call this method just after the declaration of the element to get generic information,
 or after {\small\tt pre\_\,compute} to get information specific to the expressions
 listed in the last argument of {\small\tt pre\_\,compute}.
-This method is only available in {\small\tt DEBUG} mode (described in paragraph
+The {\small\tt info} method is only available in {\small\tt DEBUG} mode (described in paragraph
 \ref{\numb section 11.\numb parag 15}).
 
-The third step in using a hand-coded integrator is the invocation of the
+A third step in using a hand-coded integrator is the invocation of the
 {\small\tt integrate} method which simply retrieves (from the internal buffer) values 
 associated with the provided shape functions.
 The return value is a vector of {\small\tt double}s rather that a {\small\tt double}
@@ -700,5 +882,5 @@ probably within a loop over the cells of your mesh, and then use the same integr
 to perform different computations, involving integrals of other symbolic expressions.
 To achieve this, you simply call again the method {\small\tt\verm{Integrator}::pre\_\,compute}
 and provide another list of quantities whose integral you will need.
-You may use the same basis functions, they are mere place-holders which will be replaced
+You may use the same abstract basis functions, they are mere place-holders which will be replaced
 by shape functions after the docking of the finite element on a cell.

@@ -221,7 +221,7 @@ This has the advantage that the name of the iterator gains local scope.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    for ( \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{2}, \textcolor{tag}{tag}::reset );
-         it .in_range(); it++                                                       )
+         it .in_range(); it++                                                        )
    \{  \verm{Cell} \azul{cll} = *it;  do_something_to (cll);  \}
 \end{Verbatim}
 
@@ -676,7 +676,7 @@ The segments will show up in a rahter unpredictable order.
    \cinza{// or, equivalently :}
    \cinza{// CellIterator it = msh .iterator ( tag::over_segments, tag::around, P.reverse() )}
    for ( it .reset(); it .in_range(); it++ )
-   \{  \verm{Cell} \azul{seg} = *it;  do_something_to ( seg );   \}
+   \{  \verm{Cell} \azul{seg} = *it;  do_something_to ( seg );  \}
 \end{Verbatim}
 
 The orientation of the central cell is important in this case.
@@ -715,7 +715,7 @@ this will not change the behaviour of the iterator {\small\tt it} :
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{2}, \textcolor{tag}{tag}::around, P );
    for ( it .reset(); it .in_range(); it++ )
-   \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );   \}
+   \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );  \}
 \end{Verbatim}
 
 Such an iterator will produce positive two-dimensional cells.
@@ -776,7 +776,7 @@ supplementary arguments to the {\small\tt reset} method :
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{2}, \textcolor{tag}{tag}::around, P );
    for ( it .reset ( \textcolor{tag}{tag}::start_at, sq ); it .in_range(); it++ )
-   \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );   \}
+   \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );  \}
 \end{Verbatim}
 
 Just like in paragraph \ref{\numb section 9.\numb parag 4}, beware : if {\small\tt P}
@@ -793,7 +793,7 @@ they produce vertices in a rather unpredictable order in a three-dimensional mes
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_vertices, \textcolor{tag}{tag}::around, P );
    for ( it .reset(); it .in_range(); it++ )
-   \{  \verm{Cell} \azul{Q} = *it;  do_something_to ( Q );   \}
+   \{  \verm{Cell} \azul{Q} = *it;  do_something_to ( Q );  \}
 \end{Verbatim}
 
 If you need the cells to show up in a linear order but you are not familiar

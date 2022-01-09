@@ -94,7 +94,7 @@ the circle manifold, then mesh the disk :
    
    \verm{Manifold} \azul{circle_manif} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive,
-      \textcolor{tag}{tag}::entire_manifold, circle_manif, \textcolor{tag}{tag}::desired_length, \laranja{0.2} );
+                 \textcolor{tag}{tag}::entire_manifold, circle_manif, \textcolor{tag}{tag}::desired_length, \laranja{0.2} );
    \cinza{// we can omit the manifold; maniFEM will take the current working manifold :}
    \cinza{// Mesh circle ( tag::progressive, tag::desired_length, 0.2 );}
    
@@ -382,8 +382,9 @@ Comments at the end of paragraph \ref{\numb section 3.\numb parag 6} apply here,
 We now look again at the surface in paragraph \ref{\numb section 2.\numb parag 13}
 and build it progressively, using fewer lines of code.
 
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 3.\numb parag 9}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{nut} = RR3 .implicit ( x*x + y*y + z*z + \laranja{1.5}*x*y*z == \laranja{1.} );
    \verm{Manifold} \azul{base} = nut .implicit ( x*x + \laranja{3.}*z == \laranja{0.} );
    \verm{Mesh} \azul{circle}  \cinza{// 'base' is used by default as working manifold}
@@ -733,12 +734,12 @@ in paragraphs \ref{\numb section 2.\numb parag 13}, \ref{\numb section 3.\numb p
    \verm{Cell} S ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
    std::vector < double > \azul{tau} \{ \laranja{1.}, \laranja{0.}, \laranja{0.} \};
    \verm{Mesh} circle ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, tau,
-                 \textcolor{tag}{tag}::desired_length, \laranja{0.1}                               );
+                 \textcolor{tag}{tag}::desired_length, \laranja{0.1}                              );
    nut .set_as_working_manifold();
    std::vector < double > \azul{N} \{ \laranja{0.}, \laranja{0.}, \laranja{1.} \};
    \verm{Mesh} bumpy ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle,
                 \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, N,
-                \textcolor{tag}{tag}::desired_length, \laranja{0.1}                 );
+                \textcolor{tag}{tag}::desired_length, \laranja{0.1}                );
 \end{Verbatim}
 
 If we define {\small\tt\azul N} as \catcode`<=1\catcode`>=2\catcode`{=12\catcode`}=12<\small\tt {>

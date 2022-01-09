@@ -102,6 +102,10 @@ objects belonging to the {\small\tt namespace \textcolor{tag}{tag}};
 we use them as arguments to many functions.
 See paragraph \ref{\numb section 11.\numb parag 3} for some details.
 
+Paragraph \ref{\numb section 5.\numb parag 1} explains why we build {\small\tt\verm{Function}}
+{\small\tt\azul{xyz}} with arguments {\small\tt\textcolor{tag}{tag}::Lagrange,}\hfil\break
+{\small\tt\textcolor{tag}{tag}::of\_\,degree,} {\small\tt\laranja{1}}.
+
 When declaring a segment {\small\tt \verm{Mesh}}, we must {\small\tt reverse} the first vertex
 (paragraph \ref{\numb section 1.\numb parag 2} discusses the {\small\tt reverse} method).
 Paragraph \ref{\numb section 1.\numb parag 4} explains why we build
@@ -226,6 +230,7 @@ show examples where the orientation of the boundary is important for joining mes
 In progressive mesh generation (described in section \ref{\numb section 3}) we often
 provide the boundary of the future mesh, whose orientation determines the output of the
 algorithm.
+\vfil\eject
 
 Cells have a {\small\tt reverse} method returning the reversed cell.
 Segment {\small\tt \verm{Cell}}s have methods {\small\tt base} and {\small\tt tip} returning their extremities.
@@ -251,7 +256,8 @@ See also paragraph \ref{\numb section 11.\numb parag 4}.
 
 Cells are topological entities; they carry no geometric information.
 In particular, points do not have coordinates.
-Coordinates are stored externally, see paragraph \ref{\numb section 5.\numb parag 1}.
+Coordinates are stored (semi-)externally, see paragraphs \ref{\numb section 5.\numb parag 1} and
+\ref{\numb section 13.\numb parag 6}.
 
 {\small\tt \verm{Mesh}}es have a {\small\tt reverse} method, too.
 It is used mainly when we want to {\small\tt join} meshes having a common piece of boundary;
@@ -316,6 +322,7 @@ values at cell {\small\tt A}.
 But it makes no sense to change the value of {\small\tt norm} at cell {\small\tt A}.
 Thus, statements like {\small\tt x(A)} {\small\tt =} {\small\tt \laranja{1.}} work fine,
 while {\small\tt norm(A)} {\small\tt =} {\small\tt \laranja{1.}} produces a run-time error.
+\vfil\eject
 
 The {\small\tt\verm{Function}::deriv} method performs symbolic differentiation :
 
@@ -327,7 +334,6 @@ The {\small\tt\verm{Function}::deriv} method performs symbolic differentiation :
 Integrals of {\small\tt\verm{Function}}s are computed by means of {\small\tt\verm{Integrator}}s,
 either alone or coupled with a {\small\tt\verm{FiniteElement}}.
 Section \ref{\numb section 6} gives more details.
-\vfil\eject
 
 
           %--------------%
@@ -371,6 +377,7 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
    \verm{Cell} \azul{F} ( \textcolor{tag}{tag}::vertex );  x (F) = \laranja{-1.};  y (F) = \laranja{1.};
    \verm{Cell} \azul{G} ( \textcolor{tag}{tag}::vertex );  x (G) =  \laranja{1.};  y (G) = \laranja{0.};
    \verm{Cell} \azul{H} ( \textcolor{tag}{tag}::vertex );  x (H) =  \laranja{1.};  y (H) = \laranja{0.5};
+
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in,  \laranja{8} );
    \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C .reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{10} );
@@ -446,18 +453,18 @@ the same 10 segments (reversed).
 Paragraph \ref{\numb section 9.\numb parag 2} shows a more complex use of the
 {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::join}.
 
-Incidentally, note that the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::rectangle} accepts
-any position for the vertices. 
+Incidentally, note that the {\small\tt \verm{Mesh}} constructor with
+{\small\tt \textcolor{tag}{tag}::rectangle} accepts any position for the vertices. 
 Thus, you can use it to build any quadrilateral; the inner vertices' coordinates are simply
 interpolated from the coordinates of vertices on the boundary, as shown in paragraphs
 \ref{\numb section 1.\numb parag 6} and \ref{\numb section 2.\numb parag 1}.
 This can be done even in more than two (geometric) dimensions, like in
 paragraphs \ref{\numb section 1.\numb parag 1}, \ref{\numb section 2.\numb parag 7} and
 \ref{\numb section 2.\numb parag 11}.
-Here, tags {\small\tt rectangle}, {\small\tt quadrilateral} and {\small\tt quadrangle} can be used
-interchangeably.
+Here, tags {\small\tt rectangle}, {\small\tt quadrilateral} and {\small\tt quadrangle}
+can be used interchangeably.
 
-See also paragraph \ref{\numb section 11.\numb parag 9}.
+An almost identical mesh is built in paragraph \ref{\numb section 2.\numb parag 1}.
 
 
           %-----------------%

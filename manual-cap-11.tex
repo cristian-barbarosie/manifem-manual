@@ -421,8 +421,8 @@ But beware, if you try to build a mesh of dimension higher than the one expected
 The {\small\tt DEBUG} mode is explained in paragraph \ref{\numb section 11.\numb parag 15}.
 
 The geometric dimension is set by simply declaring a Euclidian manifold and building
-a coordinate system on it (see e.g.\ paragraphs \ref{\numb section 1.\numb parag 1}
-and \ref{\numb section 2.\numb parag 17}).
+a coordinate system on it (see e.g.\ paragraphs \ref{\numb section 1.\numb parag 1},
+\ref{\numb section 2.\numb parag 17} and \ref{\numb section 5.\numb parag 1}).
 
 
           %--------------------%
@@ -629,9 +629,8 @@ which can be used to pass supplementary information to {\small\tt init\_\,pos\_\
 Attributes {\small\tt init\_\,neg\_\,cell} and {\small\tt data\_\,for\_\,init\_\,neg} fulfill
 a similar task when building negative cells.
 
-For instance, the constructor of a {\small\tt\verm{FiniteElement}} with
-{\small\tt\textcolor{tag}{tag}::build\_\;enum} builds a new
-{\small\tt\verm{Cell}:: ::Numbering::Field} whose constructor
+For \ instance, \ the method {\small\tt\verm{FiniteElement}::build\_\,global\_\,numbering}
+\ builds \ a \ new {\small\tt\verm{Cell}:: ::Numbering::Field} whose constructor
 adds a call to {\small\tt\verm{Cell}::Numbering::Field::set\_\,and\_\,increment} to
 the list {\small\tt\verm{Cell}::init\_\;pos\_\,cell[\laranja{0}]}.
 This way, future vertices will receive automatically a {\small\tt size\_\,t} label, to be used
@@ -672,7 +671,7 @@ same point.
 For me, a pair of braces should open at some point to the left and close at some point to the
 right, and the statements should be between them.
 That's how parentheses have been designed to be used.
-So I irreverently decided that my blocks will look like this.
+So I irreverently decided that my blocks will (often) look like this.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    for ( ... )
@@ -686,7 +685,7 @@ I am aware I am violating conventions which are almost universally accepted. Sor
 On the other hand, I am very fussy about indentation.
 I guess my mind has been formatted by Python.
 
-{\small\tt CellIterator}s obey to syntactic rules slightly different from the conventions for
+{\small\tt\verm{Mesh}::Iterator}s obey to syntactic rules slightly different from the conventions for
 iterators in the Standard Template Library.
 See paragraph \ref{\numb section 9.\numb parag 3}.
 
