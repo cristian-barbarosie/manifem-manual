@@ -177,20 +177,20 @@ $ \mathbb{R}^3 $ introduced in paragraph \ref{\numb section 2.\numb parag 12} :
    \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
    \verm{Manifold} \azul{circle_manif} = RR3 .implicit ( x*x + y*y == \laranja{1.}, x*y == \laranja{4.}*z );
    
-   \verm{Mesh} \azul{circle}
-      ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::random_orientation );
+   \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1},
+                 \textcolor{tag}{tag}::orientation, \textcolor{tag}{tag}::random              );
 \end{Verbatim}
 
 Unlike for the {\small\tt circle} in paragraph \ref{\numb section 3.\numb parag 2},
 there is no way to choose between the two possible orientations of this {\small\tt circle}.
 No one is more ``correct'' than the other.
-This is why {\maniFEM} requires a supplementary argument
-{\small\tt \textcolor{tag}{tag}::random\_\,orientation}
+This is why {\maniFEM} requires supplementary arguments
+{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::random}
 for the {\small\tt \verm{Mesh}} constructor.
 In other cases (e.g.\ for closed curves in $ \mathbb{R}^2 $) this supplementary argument
-is not mandatory; however, even then the user may choose to provide the argument
-{\small\tt \textcolor{tag}{tag}::random\_\,orientation}, thus sparing the computer from the burden of
-finding the right orientation.
+is not mandatory; however, even then the user may choose to provide the arguments
+{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::random},
+thus sparing the computer from the burden of finding the right orientation.
 Paragraphs \ref{\numb section 3.\numb parag 10} and \ref{\numb section 3.\numb parag 13}
 give more details.
 
@@ -355,7 +355,7 @@ It can be vaguely described as a convolution between two tori.
    \verm{Manifold} \azul{tori_manif} = RR3 .implicit
       ( \verm{smooth_min} ( d1, d2, \textcolor{tag}{tag}::threshold, \laranja{0.2} ) == \laranja{0.15} );
 
-   \verm{Mesh} \azul{tori} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, 0.09 );
+   \verm{Mesh} \azul{tori} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.09} );
 \end{Verbatim}
 
 Function {\small\tt \verm{smooth\_\,min}} gives a smooth approximation of the minimum between
@@ -388,7 +388,7 @@ and build it progressively, using fewer lines of code.
    \verm{Manifold} \azul{nut} = RR3 .implicit ( x*x + y*y + z*z + \laranja{1.5}*x*y*z == \laranja{1.} );
    \verm{Manifold} \azul{base} = nut .implicit ( x*x + \laranja{3.}*z == \laranja{0.} );
    \verm{Mesh} \azul{circle}  \cinza{// 'base' is used by default as working manifold}
-      ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::random_orientation );
+      ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::orientation, \textcolor{tag}{tag}::random );
    
    nut .set_as_working_manifold();
    \verm{Mesh} \azul{bumpy}  \cinza{// 'nut' is used as working manifold}
@@ -450,10 +450,11 @@ have no privileged orientation either.
 There is no way to decide which of its two possible orientations
 should be chosen; no one is more ``correct'' than the other.
 This is why {\maniFEM} will reject a tentative to define {\small\tt circle} without
-{\small\tt \textcolor{tag}{tag}::random\_\,orientation} as last argument to the {\small\tt \verm{Mesh}} constructor.
+{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::random}
+as last arguments to the {\small\tt \verm{Mesh}} constructor.
 A statement like {\small\tt \verm{Mesh}} {\small\tt circle} {\small\tt (}
 {\small\tt \textcolor{tag}{tag}::progressive,} {\small\tt\textcolor{tag}{tag}::desired\_\,length,}
-{\small\tt some\_\,value )}
+some\_\,value {\small\tt)}
 will produce a run-time error if the current working manifold has dimension 1 and
 the geometric dimension (that is, the number of coordinates) is 3.
 
@@ -480,7 +481,7 @@ can be changed as below.
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{81}*pi*pi;  y (B) = \laranja{0.};
    std::vector < double > \azul{direc} = \{ \laranja{0.}, \laranja{1.} \};
    \verm{Mesh} \azul{spiral} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A, \textcolor{tag}{tag}::towards, direc,
-                 \textcolor{tag}{tag}::stop_at, B, \textcolor{tag}{tag}::desired_length, 1.                 );
+                 \textcolor{tag}{tag}::stop_at, B, \textcolor{tag}{tag}::desired_length, \laranja{1.}                );
 \end{Verbatim}
 
 Note that the vector {\small\tt direc} is associated to the point {\small\tt A}.
@@ -541,11 +542,13 @@ Compact manifolds of co-dimension one (closed curves in $ \mathbb{R}^2 $,
 compact surfaces in $ \mathbb{R}^3 $) have a privileged orientation,
 compatible with the intrinsic orientation of the surrounding space;
 we call this orientation ``inherent''.
-{\ManiFEM} will choose it in some situations, unless we provide a
-{\small\tt \textcolor{tag}{tag}::random\_\,orientation} as argument to the {\small\tt \verm{Mesh}} constructor.
-We can enforce the requirement of finding the inherent orientation by providing a
-{\small\tt \textcolor{tag}{tag}::inherent\_\,orientation} as argument to the {\small\tt \verm{Mesh}} constructor;
-however, {\maniFEM} will consider this argument by default when we provide no stopping
+{\ManiFEM} will choose it in some situations, unless we provide
+{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::random}
+as arguments to the {\small\tt\verm{Mesh}} constructor.
+We can enforce the requirement of finding the inherent orientation by providing
+{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt \textcolor{tag}{tag}::inherent}
+as arguments to the {\small\tt \verm{Mesh}} constructor;
+however, {\maniFEM} will consider these arguments by default when we provide no stopping
 point (for one-dimensional meshes) or we provide no boundary (for two-dimensional meshes).
 In these cases, {\maniFEM} will assume that the manifold is compact and, if it has
 co-dimension one, the inherent orientation will be used.
@@ -568,12 +571,11 @@ Do not misuse this option; if you ask {\maniFEM} to find the inherent orientatio
 curve or of a non-compact surface, it will not complain but will hopelessly try to mesh
 the entire manifold, never stopping.
 For instance, in paragraph \ref{\numb section 3.\numb parag 5} it makes sense to enforce the
-{\small\tt inherent\_\,orientation} for the {\small\tt arc\_\,of\_\,circle} but not for the
+inherent orientation for the {\small\tt arc\_\,of\_\,circle} but not for the
 {\small\tt spiral}.
 Also, in paragraphs \ref{\numb section 3.\numb parag 18} and
-\ref{\numb section 3.\numb parag 19} it makes sense to enforce the
-{\small\tt inherent\_\,orientation} for the
-{\small\tt piece\_\,of\_\,sph} but not for the {\small\tt piece\_\,of\_\,cyl}.
+\ref{\numb section 3.\numb parag 19} it makes sense to enforce the inherent orientation
+for the {\small\tt piece\_\,of\_\,sph} but not for the {\small\tt piece\_\,of\_\,cyl}.
 
 Determining the intrinsic orientation of a Euclidian manifold is computationally
 very cheap.
@@ -618,9 +620,9 @@ Let us have a closer look at the code in paragraph \ref{\numb section 3.\numb pa
 The manifold {\small\tt nut} has a unique orientation consistent with the surrounding
 space, just like those in paragraphs \ref{\numb section 3.\numb parag 6} and
 \ref{\numb section 3.\numb parag 7}, but the {\small\tt base} within it has not.
-This is why, when we build the {\small\tt circle}, we must provide a
-{\small\tt \textcolor{tag}{tag}::random\_\,orientation} as a last argument to the
-{\small\tt \verm{Mesh}} constructor,
+This is why, when we build the {\small\tt circle}, we must provide
+{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt \textcolor{tag}{tag}::random}
+as last arguments to the {\small\tt \verm{Mesh}} constructor,
 or specify the orientation by providing a starting point and a starting direction
 as described in paragraph \ref{\numb section 3.\numb parag 12}.
 
@@ -630,11 +632,11 @@ inherent orientation.
 It will start the meshing process on an arbitrary side of {\small\tt circle}, thus meshing
 unpredictably the upper or the lower {\small\tt bumpy} hemisphere.
 
-If we enforce the orientation by providing a
-{\small\tt \textcolor{tag}{tag}::inherent\_\,orientation} as a last
-argument to the {\small\tt \verm{Mesh}} constructor of {\small\tt bumpy}, then {\maniFEM} will mesh
-(behind the curtains) both halves of the sphere; let's call them {\small\tt msh1} and
-{\small\tt msh2}.
+If we enforce the orientation by providing
+{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt \textcolor{tag}{tag}::inherent} as last
+arguments to the {\small\tt \verm{Mesh}} constructor of {\small\tt bumpy},
+then {\maniFEM} will mesh (behind the curtains) both halves of the sphere;
+let's call them {\small\tt msh1} and {\small\tt msh2}.
 Note that the {\small\tt circle} has already been built, so its orientation is given.
 Both {\small\tt msh1} and {\small\tt msh2} have {\small\tt circle} as boundary,
 which means that they have mutually incompatible orientations.
@@ -658,7 +660,7 @@ Thus, in the code below we will obtain the upper hemisphere.
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                                         );
    nut .set_as_working_manifold();
    \verm{Mesh} \azul{bumpy} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle,
-                \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::inherent_orientation );
+                \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::orientation, \textcolor{tag}{tag}::inherent );
 \end{Verbatim}
 
 Code below will produce the lower hemisphere.
@@ -670,7 +672,7 @@ Code below will produce the lower hemisphere.
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                                          );
    nut .set_as_working_manifold();
    \verm{Mesh} \azul{bumpy} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle,
-                \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::inherent_orientation );
+                \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::orientation, \textcolor{tag}{tag}::inherent );
 \end{Verbatim}
 
 Code below will unpredictably mesh the upper or the lower hemisphere;
@@ -710,10 +712,10 @@ The construction of {\small\tt bumpy} is uniquely determined by the orientation 
    \verm{Manifold} \azul{nut} = RR3.implicit ( x*x + y*y + z*z + \laranja{1.5}*x*y*z == \laranja{1.} );
    \verm{Manifold} \azul{base} = nut.implicit ( x*x + 3.*z == 0. );
    \verm{Mesh} \azul{circle}
-      ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::random_orientation );
+      ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::orientation, \textcolor{tag}{tag}::random );
    nut .set_as_working_manifold();
    \verm{Mesh} \azul{bumpy} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle,
-                \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::inherent_orientation );
+                \textcolor{tag}{tag}::desired_length, \laranja{0.1}, \textcolor{tag}{tag}::orientation, \textcolor{tag}{tag}::inherent );
 \end{Verbatim}
 
 
