@@ -4,6 +4,8 @@
           %-------------------%
 
 This section is a quick tour through \maniFEM's capabilities.
+There is also a gallery with several examples at
+{\small\tt http://manifem.rd.ciencias.ulisboa.pt/gallery.html}
 
 
           %---------------------%
@@ -19,7 +21,7 @@ Paragraph \ref{\numb section 1.\numb parag 4} shows a purely two-dimensional exa
   \psfrag{NW}{\small\tt\textcolor{textindraw}{NW}}
   \psfrag{SE}{\small\tt\textcolor{textindraw}{SE}}
   \psfrag{NE}{\small\tt\textcolor{textindraw}{NE}}
-  \includegraphics[width=95mm]{3d-rectangle}
+  \includegraphics[width=105mm]{3d-rectangle}
   \caption{A twisted rectangular mesh}
   \label{\numb section 1.\numb fig 1}
 \end{figure}
@@ -48,9 +50,9 @@ int main ()
    \verm{Cell} \azul{SE} ( \textcolor{tag}{tag}::vertex );  x (SE) =  \laranja{1};  y (SE) = \laranja{0};  z (SE) = \laranja{0};
    \verm{Cell} \azul{NE} ( \textcolor{tag}{tag}::vertex );  x (NE) =  \laranja{1};  y (NE) = \laranja{1};  z (NE) = \laranja{0};
    \verm{Cell} \azul{NW} ( \textcolor{tag}{tag}::vertex );  x (NW) = \laranja{-1};  y (NW) = \laranja{1};  z (NW) = \laranja{1};
-   
    \cinza{// we access the coordinates of a point using the () operator :}
    cout << \verde{"coordinates of NW : "} << x (NW) << \verde{" "} << y (NW) << \verde{" "} << z (NW) << endl;
+
    \cinza{// now build the four sides of the rectangle :}
    \verm{Mesh} \azul{south} ( \textcolor{tag}{tag}::segment, SW .reverse(), SE, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    \verm{Mesh} \azul{east}  ( \textcolor{tag}{tag}::segment, SE .reverse(), NE, \textcolor{tag}{tag}::divided_in, \laranja{10} );
@@ -62,7 +64,7 @@ int main ()
 
    \cinza{// We may want to visualize the resulting mesh.}
    \cinza{// Here is one way to export the mesh in the "msh" format :}
-   rect_mesh .export_msh (\verde{"rectangle.msh"});
+   rect_mesh .export_to_file ( \textcolor{tag}{tag}::msh, \verde{"rectangle.msh"});
 
    \cinza{// Let's define a symbolic function to integrate}
    \verm{Function} \azul{f} = x*x + \laranja{1}/(\laranja{5}+y);
@@ -75,7 +77,6 @@ int main ()
    fe .set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::quad_9 );
 
    \cinza{// code below does not work yet}
-
    \cinza{// cout << "integral of " << f.repr() << " = "}
    \cinza{//      << fe .integrate ( f, tag::over, rect_mesh ) << endl;}
    \cinza{// cout << "integral of " << g.repr() << " = "}
@@ -259,6 +260,25 @@ In particular, points do not have coordinates.
 Coordinates are stored (semi-)externally, see paragraphs \ref{\numb section 5.\numb parag 1} and
 \ref{\numb section 13.\numb parag 6}.
 
+Below we show a low-level way of building a two-dimensional mesh.
+We stress that there are shorter and more elegant mesh constructors, see paragraphs
+\ref{\numb section 1.\numb parag 1}, \ref{\numb section 1.\numb parag 4} --
+\ref{\numb section 1.\numb parag 6}, sections \ref{\numb section 2} and \ref{\numb section 3}.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );
+   \verm{Cell} \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C );
+   \verm{Cell} \azul{CA} ( \textcolor{tag}{tag}::segment, C .reverse(), A );
+   \verm{Cell} \azul{ABC} ( \textcolor{tag}{tag}::triangle, AB, BC, CA );
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );
+   \verm{Cell} \azul{AD} ( \textcolor{tag}{tag}::segment, A .reverse(), D );
+   \verm{Cell} \azul{DB} ( \textcolor{tag}{tag}::segment, D .reverse(), B );
+   \verm{Cell} \azul{BAD} ( \textcolor{tag}{tag}::triangle, AB .reverse(), AD, DB );
+   \verm{Mesh} \azul{msh} ( \textcolor{tag}{tag}::fuzzy, \textcolor{tag}{tag}::of_dim, \laranja{2} );
+   ABC .add_to_mesh ( msh );
+   BAD .add_to_mesh ( msh );
+\end{Verbatim}
+
 {\small\tt \verm{Mesh}}es have a {\small\tt reverse} method, too.
 It is used mainly when we want to {\small\tt join} meshes having a common piece of boundary;
 see paragraphs \ref{\numb section 1.\numb parag 4}, \ref{\numb section 2.\numb parag 6},
@@ -271,7 +291,7 @@ see paragraphs \ref{\numb section 1.\numb parag 4}, \ref{\numb section 2.\numb p
           %---------%
 
 Minimalist programs like the pieces of code presented in paragraph
-\ref{\numb section 1.\numb parag 2} (consisting only of manipulation of
+\ref{\numb section 1.\numb parag 2} (consisting mainly of manipulation of
 {\small\tt\verm{Cell}}s) work without declaring a {\small\tt\verm{Manifold}}
 and without {\small\tt\verm{Function}}s.
 However, any {\small\tt\verm{Mesh}} constructor will try to interpolate geometric coordinates
@@ -322,7 +342,6 @@ values at cell {\small\tt A}.
 But it makes no sense to change the value of {\small\tt norm} at cell {\small\tt A}.
 Thus, statements like {\small\tt x(A)} {\small\tt =} {\small\tt \laranja{1.}} work fine,
 while {\small\tt norm(A)} {\small\tt =} {\small\tt \laranja{1.}} produces a run-time error.
-\vfil\eject
 
 The {\small\tt\verm{Function}::deriv} method performs symbolic differentiation :
 
@@ -368,7 +387,6 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
-
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{-1.};  y (A) = \laranja{0.};
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) =  \laranja{0.};  y (B) = \laranja{0.};
    \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) =  \laranja{0.};  y (C) = \laranja{0.5};
@@ -400,7 +418,7 @@ Meshes in $ \mathbb{R}^2 $ like the one above may be exported in the {\small\tt 
 or directly drawn in {\small\tt PostScript}, by one of the two statements below
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   L_shaped .export_msh (\verde{"L-shaped.msh"});
+   L_shaped .export_to_file ( \textcolor{tag}{tag}::msh, \verde{"L-shaped.msh"});
    L_shaped .draw_ps (\verde{"L-shaped.eps"});
 \end{Verbatim}
 
@@ -415,7 +433,6 @@ from one mesh and has the opposite orientation when seen from the neighbour mesh
 If we do not respect these orientations, {\maniFEM} will be unable to {\small\tt join}
 these meshes.
 
-\vskip 3mm plus 2mm
 \begin{figure}[ht]  \centering
   \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
   \includegraphics[width=120mm]{L-crack}
@@ -436,8 +453,8 @@ not work properly.
 For instance, the two rectangles defined by
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, A, B, C, D, \laranja{10}, \laranja{8} );
-   \verm{Mesh} \azul{CEFD} ( \textcolor{tag}{tag}::rectangle, C, E, F, D, \laranja{7}, \laranja{10} );
+   \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, A, B, C, D, \textcolor{tag}{tag}::divided_in, \laranja{10}, \laranja{8} );
+   \verm{Mesh} \azul{CEFD} ( \textcolor{tag}{tag}::rectangle, C, E, F, D, \textcolor{tag}{tag}::divided_in, \laranja{7}, \laranja{10} );
 \end{Verbatim}
 
 \noindent cannot be joined%
@@ -465,6 +482,13 @@ Here, tags {\small\tt rectangle}, {\small\tt quadrilateral} and {\small\tt quadr
 can be used interchangeably.
 
 An almost identical mesh is built in paragraph \ref{\numb section 2.\numb parag 1}.
+
+This is a good place to mention that {\maniFEM} can also import a mesh from a file
+in {\small\tt msh} format:
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Mesh} \azul{msh} ( \textcolor{tag}{tag}::import, \textcolor{tag}{tag}::msh, \verde{"filename.msh"});
+\end{Verbatim}
 
 
           %-----------------%

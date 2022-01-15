@@ -132,7 +132,7 @@ paragraph \ref{\numb section 11.\numb parag 4}.
    sectors.push_back ( quadr );
    
    \verm{Mesh} \azul{ring} ( \textcolor{tag}{tag}::join, sectors );
-   ring .export_msh (\verde{"ring.msh"});
+   ring .export ( \textcolor{tag}{tag}::msh, \verde{"ring.msh"});
 \end{Verbatim}
 
 Note how we use a version of the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::join}

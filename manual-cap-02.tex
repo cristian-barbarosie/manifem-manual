@@ -178,7 +178,7 @@ The code below introduces a one-dimensional submanifold of $ \mathbb{R}^2 $ (a h
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) =  \laranja{3};     y (B) =  \laranja{0.333333333333};
    \verm{Mesh} \azul{arc_of_hiperbola} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{7} );
    arc_of_hiperbola .draw_ps (\verde{"hiperbola.eps"});
-   arc_of_hiperbola .export_msh (\verde{"hiperbola.msh"});
+   arc_of_hiperbola .export_to_file ( \textcolor{tag}{tag}::msh, \verde{"hiperbola.msh"});
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -970,7 +970,7 @@ Here is an example of a parametrized surface :
    torus .set_coordinates ( x && y && z );  \cinza{// forget about alpha and beta}
    \cinza{// in future statements (e.g. for graphical representation)}
    \cinza{// x, y and z will be used, not alpha nor beta :}
-   ABCD .export_msh (\verde{"torus.msh"});
+   ABCD .export_to_file ( \textcolor{tag}{tag}::msh, \verde{"torus.msh"});
 \end{Verbatim}
 
 Closing the torus in the cumbersome manner shown in paragraph
@@ -1046,7 +1046,7 @@ for each vertex, space in the computer's memory for five {\small\tt double} valu
 
    \cinza{// in future statements (e.g. for graphical representation)}
    \cinza{// x, y and z will be used, not alpha nor beta :}
-   ABCD .export_msh (\verde{"torus.msh"});
+   ABCD .export_to_file ( \textcolor{tag}{tag}::msh, \verde{"torus.msh"});
 \end{Verbatim}
 
 The {\small\tt \verm{Manifold}::parametric} method is similar to {\small\tt \verm{Manifold}::implicit},

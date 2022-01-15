@@ -226,8 +226,8 @@ spiral with a slightly different look and switch to progressive mesh generation.
    \cinza{// the Manifold constructor sets the manifold it builds as working manifold}
    \cinza{// after that, many methods use this working manifold by default}
    
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) =    pi*pi;   y (A) = \laranja{0.};
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{81}*pi*pi;   y (B) = \laranja{0.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) =     pi*pi;   y (A) = \laranja{0.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{81.}*pi*pi;   y (B) = \laranja{0.};
    \verm{Mesh} \azul{spiral} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A,
                  \textcolor{tag}{tag}::stop_at, B, \textcolor{tag}{tag}::desired_length, \laranja{1.} );
 \end{Verbatim}
@@ -1081,11 +1081,15 @@ The {\small\tt desired\_\,length} may be a non-constant function.
    label=parag-\ref{\numb section 3.\numb parag 22}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Function} \azul{d} = \laranja{0.03} + \laranja{0.04} * ( (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9}) );
+
    \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, d );
+
    \verm{Manifold} \azul{ellipse} = RR2 .implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, d );
+
    \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner .reverse() );
+
    RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, d );
 \end{Verbatim}
@@ -1122,14 +1126,18 @@ we see in the drawing), thus producing the same result as in paragraph
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+
    \verm{Function} \azul{d} = \laranja{0.3} + \laranja{0.5} * ( (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9}) );
    RR2 .set_metric ( \laranja{1.} / d );
    
    \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
+
    \verm{Manifold} \azul{ellipse} = RR2 .implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
+
    \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner .reverse() );
+
    RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
@@ -1161,6 +1169,7 @@ $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for th
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+
    \verm{Function} \azul{d} = \laranja{0.3} + (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9});
    RR2 .set_metric ( \laranja{1.} + \laranja{1.}/d, \laranja{-3.}/d, \laranja{1.} + \laranja{9.}/d );
    \cinza{// or, equivalently :}

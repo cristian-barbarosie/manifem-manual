@@ -126,7 +126,7 @@ this time in a less cumbersome manner.
 
    \cinza{// forget about theta; in future statements, x and y will be used}
    circle .set_coordinates ( x && y );
-   loop .export_msh (\verde{"circle.msh"});
+   loop .export_to_file ( \textcolor{tag}{tag}::msh, \verde{"circle.msh"});
 \end{Verbatim}
 
 In {\tt gmsh}, you must select {\small\tt Tools} $\to$ {\small\tt Options} $\to$
@@ -164,7 +164,7 @@ Here is how to build a (part of a) cylinder in $ \mathbb{R}^3 $ :
 
    \cinza{// forget about theta; in future statements, x, y and z will be used}
    cylinder_manif .set_coordinates ( x && y & z );
-   cylinder .export_msh (\verde{"cylinder.msh"});
+   cylinder .export_to_file ( \textcolor{tag}{tag}::msh, \verde{"cylinder.msh"});
 \end{Verbatim}
 
 The {\small\tt\textcolor{tag}{tag}::winding} in the constructor {\small\tt\verm{Mesh}
@@ -268,7 +268,7 @@ The comment at the end of the above code excerpt says that it makes no sense to 
 {\small\tt torus} in {\small\tt msh} format.
 We can however build an unfolded mesh which lives in {\small\tt RR2} rather than in
 {\small\tt torus\_\,manif}, and this unfolded mesh accepts all methods of two-dimensional
-meshes, including {\small\tt export\_\,msh}.
+meshes, including {\small\tt export\_\,to\_\,file}.
 Paragraph \ref{\numb section 7.\numb parag 6} shows an example.
 
 If you feel uncomfortable with this minimalist approach (of defining a square with only one
@@ -348,7 +348,7 @@ this time by using the quotient manifold $ \mathbb{R}^2/{\mathbb Z}^2 $ introduc
    torus_manif .set_coordinates ( x && y && z );
    \cinza{// in future statements (e.g. for graphical representation)}
    \cinza{// x, y and z will be used, not alpha nor beta :}
-   torus .export_msh (\verde{"torus.msh"});
+   torus .export_to_file ( \textcolor{tag}{tag}::msh, \verde{"torus.msh"});
 \end{Verbatim}
 
 
@@ -378,7 +378,7 @@ shows several images of the same hole, due to the unfolding.
                     \textcolor{tag}{tag}::over_region, x*x + 2.*y*y < 3.5 );
    \cinza{// or we can build a new, unfolded mesh and subsequently export as msh file}
    \verm{Mesh} \azul{unfolded} = torus .unfold ( \textcolor{tag}{tag}::over_region, x*x + 2.*y*y < 3.5 );
-   unfolded .export_msh ("torus.msh");
+   unfolded .export_to_file ( \textcolor{tag}{tag}::msh, "torus.msh");
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -399,7 +399,7 @@ In the spirit of the comment at the end of paragraph \ref{\numb section 7.\numb 
 it is worth explaining that, when we declare the {\small\tt\verm{Manifold}}
 {\small\tt\azul{torus\_\,manif}}, this becomes the current working manifold.
 Later, when we invoke the {\small\tt unfold} method, {\small\tt RR2} becomes again the current
-working manifold, so the last statement ({\small\tt export\_\,msh}) acts on {\small\tt RR2}.
+working manifold, so the last statement ({\small\tt export\_\,to\_\,file}) acts on {\small\tt RR2}.
 
 
           %-----------------%
@@ -821,9 +821,9 @@ The mesh may have many other details (like the circular hole shown in figure
       ( \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, DA .reverse(), \textcolor{tag}{tag}::use_existing_vertices );
 \end{Verbatim}
 
-The method {\small\tt\verm{Mesh}::fold} (which can also be used under the names
-{\small\tt\verm{Mesh}::wrap} or {\small\tt\verm{Mesh}::wind}) uses information
-from the geometry of the mesh to identify an action defining a periodicity group,
+The method {\small\tt\verm{Mesh}::fold} (which can also be used under the name
+{\small\tt\verm{Mesh}::wrap}) uses information from the geometry of the mesh
+to identify an action defining a periodicity group,
 builds a quotient manifold using this action then builds a new mesh on this quotient manifold
 by identifying the specified pair of segment meshes.
 This (nameless) quotient manifold becomes the current working manifold.

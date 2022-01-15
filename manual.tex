@@ -8,7 +8,7 @@
 \def\manifemrelease{22.**}
 \def\manualversion{22.**}
 \let\production 0
-\includeonly{manual-cap-03}
+\includeonly{manual-cap-01}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -97,7 +97,7 @@ It has no user-friendly interface nor graphic capabilities.
 The user should have some understanding of programming and of {\tt C++}.
 However, {\maniFEM} can be used at a basic level by people with no deep knowledge of
 {\tt C++}.
-
+A gallery of examples is available at {\small\tt http://manifem.rd.ciencias.ulisboa.pt/gallery.html}.
 After this introduction, you can find three lists showing {\maniFEM}'s competitors,
 as well as strong and weak points.
 
@@ -141,7 +141,7 @@ The home page of {\maniFEM} is {\small\tt http://manifem.rd.ciencias.ulisboa.pt}
 
 To use \maniFEM, visit {\small\tt https://github.com/cristian-barbarosie/manifem},
 choose a release and download all files to some directory in your computer.
-Latest code may be unstable, releases are stable.
+Current code may be unstable, releases are stable.
 You can then run the examples in this manual :
 just {\small\tt make run-\ref{\numb section 1.\numb parag 1}}
 for the example in paragraph \ref{\numb section 1.\numb parag 1},
@@ -388,6 +388,11 @@ and \ref{\numb section 6.\numb parag 10}.
 {\small\tt\textcolor{tag}{tag}::inherent\_\,orientation} into
 {\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::inherent} etc.
 
+\noindent Introduce constructor {\small\tt\verm{Mesh} \azul{msh} ( \textcolor{tag}{tag}::import, tag::msh, \verde{"filename.msh"})}.
+
+\noindent Change method name from {\small\tt\verm{Mesh}::export\_\,msh} to
+{\small\tt\verm{Mesh}::export\_\,to\_\,file}.
+          
 
 \section*{To do}
 
@@ -452,7 +457,7 @@ cylinder : \ref{\numb section 3.\numb parag 18}, \ref{\numb section 3.\numb para
 \ref{\numb section 7.\numb parag 3}, \ref{\numb section 7.\numb parag 16}
 
 \noindent
-{\small\tt\verm{Mesh}::export\_\,msh} : \ref{\numb section 1.\numb parag 4},
+{\small\tt\verm{Mesh}::export} : \ref{\numb section 1.\numb parag 4},
 \ref{\numb section 7.\numb parag 6}
 
 \noindent
@@ -484,7 +489,8 @@ errors : \ref{\numb section 11.\numb parag 13}, \ref{\numb section 11.\numb para
 finite element : section \ref{\numb section 6}
 
 \noindent
-folding a mesh around a cylinder or a torus : see winding a mesh
+folding a mesh around a cylinder or a torus : \ref{\numb section 7.\numb parag 16} --
+\ref{\numb section 7.\numb parag 18}
 
 \noindent
 {\small\tt \verm{Function}} : \ref{\numb section 1.\numb parag 3},
@@ -492,6 +498,9 @@ folding a mesh around a cylinder or a torus : see winding a mesh
 
 \noindent
 garbage collector : \ref{\numb section 11.\numb parag 5}
+
+\noindent
+importing a mesh from a file : \ref{\numb section 1.\numb parag 4}
 
 \noindent
 {\small\tt\verm{Mesh}::Iterator::in\_\,range} : \ref{\numb section 9.\numb parag 3}
@@ -623,6 +632,9 @@ random orientation of a {\small\tt\verm{Mesh}} : \ref{\numb section 3.\numb para
 \ref{\numb section 3.\numb parag 14}
 
 \noindent
+reading a mesh from a file, see importing a mesh from a file
+
+\noindent
 reverse cell or mesh : see orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es
 
 \noindent
@@ -666,14 +678,13 @@ unfolding a mesh : \ref{\numb section 7.\numb parag 4}, \ref{\numb section 7.\nu
 unwinding a mesh : see unfolding a mesh
 
 \noindent
-winding a mesh around a cylinder or a torus : \ref{\numb section 7.\numb parag 16} --
-\ref{\numb section 7.\numb parag 18}
-
-\noindent
 wrapper : \ref{\numb section 9.\numb parag 1}, \ref{\numb section 9.\numb parag 10},
 \ref{\numb section 11.\numb parag 4}
 
 \noindent
-wrapping a mesh around a cylinder or a torus : see winding a mesh
+wrapping a mesh around a cylinder or a torus : see folding a mesh
+
+\noindent
+writing a mesh to a file, see {\small\tt\verm{Mesh}::export}
 
 \end{document}
