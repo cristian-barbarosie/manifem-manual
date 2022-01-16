@@ -98,8 +98,8 @@ The user should have some understanding of programming and of {\tt C++}.
 However, {\maniFEM} can be used at a basic level by people with no deep knowledge of
 {\tt C++}.
 A gallery of examples is available at {\small\tt http://manifem.rd.ciencias.ulisboa.pt/gallery.html}.
-After this introduction, you can find three lists showing {\maniFEM}'s competitors,
-as well as strong and weak points.
+At the end of section \ref{\numb section 1}, you can find three lists showing
+{\maniFEM}'s competitors, as well as strong and weak points.
 
 In its current version, release \manifemrelease, {\maniFEM} works well for mesh generation,
 including meshes on quotient manifolds.
@@ -148,58 +148,6 @@ for the example in paragraph \ref{\numb section 1.\numb parag 1},
 {\small\tt make run-\ref{\numb section 2.\numb parag 6}}
 for the example in paragraph \ref{\numb section 2.\numb parag 6}, and so on.
 Paragraph \ref{\numb section 11.\numb parag 16} gives more details.
-\vfil\eject
-
-
-\section*{Similar products (competitors)}
-
-deal.II : {\small\tt https://dealii.org/}
-
-FEniCS/ Dolphin : {\small\tt https://fenicsproject.org/}
-
-FreeFem++ : {\small\tt http://www3.freefem.org/}
-
-GetFEM : {\small\tt https://getfem.org/download.html}
-
-MFEM : {\small\tt https://opensourcelibs.com/lib/mfem}
-
-OFELI : {\small\tt http://ofeli.org/}
-
-PETSc-FEM : {\small\tt https://cimec.org.ar/foswiki/Main/Cimec/PETScFEM}
-
-PolyFEM : {\small\tt https://github.com/polyfem/polyfem}
-
-
-\section*{Strong points}
-
-{\ManiFEM} offers a flexible and general approach for defining meshes on manifolds
-(sections \ref{\numb section 2} and \ref{\numb section 3}).
-Meshes on quotient manifolds (section \ref{\numb section 7}) are handy for solving
-problems with periodic boundary conditions.
-
-One of the goals of {\maniFEM} is to make remeshing easy for end users.
-Thus, meshes can be manipulated (cells can be added and removed) using intuitive commands
-(section \ref{\numb section 10}).
-
-In {\maniFEM}, the user defines finite elements using a clear and intuitive syntax.
-Some types of finite elements are rather slow; they are interesting for dydactic purposes.
-Fast versions are available; they use a slightly less clear syntax.
-
-The manual is clear and presents many examples.
-
-
-\section*{Weak points}
-
-{\ManiFEM} is not ready for parallel processing.
-
-Some finite elements are slow (but fast versions are available).
-
-Since {\maniFEM} is under heavy development, some features are still missing, e.g.%
-\ 3D meshing, many types of finite elements, compact syntax for abstract variational
-formulations.
-
-{\ManiFEM} relies on oriented cells and meshes.
-Some people may find it confusing (the distinction between positive cells and negative cells).
 \vfil\eject
 
 
@@ -388,11 +336,12 @@ and \ref{\numb section 6.\numb parag 10}.
 {\small\tt\textcolor{tag}{tag}::inherent\_\,orientation} into
 {\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::inherent} etc.
 
-\noindent Introduce constructor {\small\tt\verm{Mesh} \azul{msh} ( \textcolor{tag}{tag}::import, tag::msh, \verde{"filename.msh"})}.
-
-\noindent Change method name from {\small\tt\verm{Mesh}::export\_\,msh} to
+\noindent Introduce constructor {\small\tt\verm{Mesh}} {\small\tt \azul{msh}} {\small\tt (}
+{\small\tt\textcolor{tag}{tag}::import,} {\small\tt \textcolor{tag}{tag}::msh,}
+{\small\tt\verde{"filename.msh"})}.
+\noindent Rename {\small\tt\verm{Mesh}::export\_\,msh} to
 {\small\tt\verm{Mesh}::export\_\,to\_\,file}.
-          
+Switch to {\small\tt gmsh} version 4 format.          
 
 \section*{To do}
 
@@ -457,10 +406,6 @@ cylinder : \ref{\numb section 3.\numb parag 18}, \ref{\numb section 3.\numb para
 \ref{\numb section 7.\numb parag 3}, \ref{\numb section 7.\numb parag 16}
 
 \noindent
-{\small\tt\verm{Mesh}::export} : \ref{\numb section 1.\numb parag 4},
-\ref{\numb section 7.\numb parag 6}
-
-\noindent
 dimension of a cell or mesh : \ref{\numb section 1.\numb parag 2},
 \ref{\numb section 11.\numb parag 4}, \ref{\numb section 11.\numb parag 7}
 
@@ -479,8 +424,9 @@ errors : \ref{\numb section 11.\numb parag 13}, \ref{\numb section 11.\numb para
 {\small\tt\verm{Cell}::exists} : \ref{\numb section 9.\numb parag 7}
 
 \noindent
-{\small\tt\verm{Mesh}::export\_\,msh} : \ref{\numb section 1.\numb parag 1},
-\ref{\numb section 1.\numb parag 4}
+{\small\tt\verm{Mesh}::export\_\,to\_\,file} : \ref{\numb section 1.\numb parag 1},
+\ref{\numb section 1.\numb parag 2}, \ref{\numb section 1.\numb parag 4},
+\ref{\numb section 7.\numb parag 6}
 
 \noindent
 {\small\tt \verm{Field}} : \ref{\numb section 5.\numb parag 1}
@@ -543,7 +489,7 @@ m-tree : \ref{\numb section 12.\numb parag 10}
 
 \noindent
 manifold, Euclidian : all over the place\hfil\break
-\hglue 15mm (any code using {\maniFEM} must begin by declaring a Euclidian manifold)
+\hglue 9mm (any code using {\maniFEM} must begin by declaring a Euclidian manifold)
 
 \noindent
 manifold, defined by an implicit equation :
@@ -597,7 +543,7 @@ orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es :
 \ref{\numb section 1.\numb parag 2}, \ref{\numb section 1.\numb parag 4},
 \ref{\numb section 3.\numb parag 18}, \ref{\numb section 9.\numb parag 1},
 \ref{\numb section 9.\numb parag 5}, \ref{\numb section 11.\numb parag 8},\hfil\break
-\hglue 15mm see also intrinsic orientation, inherent orientation, random orientation
+\hglue 9mm see also intrinsic orientation, inherent orientation, random orientation
 
 \noindent
 orientation of a {\small\tt \verm{Manifold}} : \ref{\numb section 3.\numb parag 10}
@@ -609,7 +555,7 @@ parallel processing : \ref{\numb section 13.\numb parag 2}, \ref{\numb section 1
 parametric manifold : see manifold, parametric
 
 \noindent
-progressive mesh generation : section \ref{\numb section 3},
+progressive mesh generation : section \ref{\numb section 3}, \ref{\numb section 7.\numb parag 19},
 \ref{\numb section 12.\numb parag 5} -- \ref{\numb section 12.\numb parag 8},
 \ref{\numb section 12.\numb parag 11}
 
@@ -685,6 +631,6 @@ wrapper : \ref{\numb section 9.\numb parag 1}, \ref{\numb section 9.\numb parag 
 wrapping a mesh around a cylinder or a torus : see folding a mesh
 
 \noindent
-writing a mesh to a file, see {\small\tt\verm{Mesh}::export}
+writing a mesh to a file, see {\small\tt\verm{Mesh}::export\_\,to\_\,file}
 
 \end{document}

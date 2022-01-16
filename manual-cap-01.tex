@@ -294,7 +294,7 @@ Minimalist programs like the pieces of code presented in paragraph
 \ref{\numb section 1.\numb parag 2} (consisting mainly of manipulation of
 {\small\tt\verm{Cell}}s) work without declaring a {\small\tt\verm{Manifold}}
 and without {\small\tt\verm{Function}}s.
-However, any {\small\tt\verm{Mesh}} constructor will try to interpolate geometric coordinates
+However, most {\small\tt\verm{Mesh}} constructors will try to interpolate geometric coordinates
 based on the shape of the current {\small\tt\verm{Manifold}}.
 
 {\ManiFEM} uses {\small\tt\verm{Function}}s for several different purposes.
@@ -564,4 +564,58 @@ Paragraphs \ref{\numb section 2.\numb parag 2} and \ref{\numb section 2.\numb pa
 show other examples of mixed meshes.
 
 
+          %------------------------------%
+\section{~~Similar products (competitors)}\label{\numb section 1.\numb parag 7}
+          %------------------------------%
 
+deal.II : {\small\tt https://dealii.org/}
+
+FEniCS/ Dolphin : {\small\tt https://fenicsproject.org/}
+
+FreeFem++ : {\small\tt http://www3.freefem.org/}
+
+GetFEM : {\small\tt https://getfem.org/download.html}
+
+MFEM : {\small\tt https://opensourcelibs.com/lib/mfem}
+
+OFELI : {\small\tt http://ofeli.org/}
+
+PETSc-FEM : {\small\tt https://cimec.org.ar/foswiki/Main/Cimec/PETScFEM}
+
+PolyFEM : {\small\tt https://github.com/polyfem/polyfem}
+
+
+          %-------------%
+\section{~~Strong points}\label{\numb section 1.\numb parag 8}
+          %-------------%
+
+{\ManiFEM} offers a flexible and general approach for defining meshes on manifolds
+(sections \ref{\numb section 2} and \ref{\numb section 3}).
+Meshes on quotient manifolds (section \ref{\numb section 7}) are handy for solving
+problems with periodic boundary conditions.
+
+One of the goals of {\maniFEM} is to make remeshing easy for end users.
+Thus, meshes can be manipulated (cells can be added and removed) using intuitive commands
+(section \ref{\numb section 10}).
+
+In {\maniFEM}, the user defines finite elements using a clear and intuitive syntax.
+Some types of finite elements are rather slow; they are interesting for dydactic purposes.
+Fast versions are available; they use a slightly less clear syntax.
+
+The manual is clear and presents many examples.
+
+
+          %-----------%
+\section{~~Weak points}\label{\numb section 1.\numb parag 9}
+          %-----------%
+
+{\ManiFEM} is not ready for parallel processing.
+
+Some finite elements are slow (but fast versions are available).
+
+Since {\maniFEM} is under heavy development, some features are still missing, e.g.%
+\ 3D meshing, many types of finite elements, compact syntax for abstract variational
+formulations.
+
+{\ManiFEM} relies on oriented cells and meshes.
+Some people may find it confusing (the distinction between positive cells and negative cells).
