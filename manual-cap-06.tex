@@ -29,26 +29,26 @@ Also, from the point of view of the final user, their syntax is slightly less el
           %---------------%
 
 The notion of a finite element is quite complex.
-The purpose of a {\small\tt \verm{FiniteElement}} is to build a list of functions, say, $ \psi $,
+The purpose of a {\small\tt\verm{FiniteElement}} is to build a list of functions, say, $ \psi $,
 defined on our mesh.
 The linear span of these functions will be a finite-dimensional Hilbert space
 (the discretization of an infinite-dimensional Sobolev space).
-It is the {\small\tt \verm{FiniteElement}}'s job to replace, in the variational formulation,
+It is the {\small\tt\verm{FiniteElement}}'s job to replace, in the variational formulation,
 the unknown function by one $ \psi $, the test function by another $ \psi $ and,
 by evaluating the integrals, obtain the coefficients of a system of linear equations.
 Some external solver will then solve the system, and it is the job of the finite element
 to transform back the vector produced by the solver into a function defined on our mesh.
 
 Computing each integral is a somewhat separate process; it's the job of an
-{\small\tt \verm{Integrator}}
+{\small\tt\verm{Integrator}}
 which could be a Gauss quadrature or some other procedure like symbolic integration.
-The separation between a {\small\tt \verm{FiniteElement}}'s job and
-the {\small\tt \verm{Itegrator}}'s job is not very sharp.
+The separation between a {\small\tt\verm{FiniteElement}}'s job and
+the {\small\tt\verm{Itegrator}}'s job is not very sharp.
 For instance, the Gauss quadrature is often perfomed not on the physical cell but rather
-on a master element which is built and handled by the {\small\tt \verm{FiniteElement}}.
+on a master element which is built and handled by the {\small\tt\verm{FiniteElement}}.
 The authors of {\maniFEM} have tried to separate these two concepts
-as much as possible, especially because we may want to use a {\small\tt \verm{FiniteElement}}
-with no master element, or an {\small\tt \verm{Integrator}} acting directly on the physical cell.
+as much as possible, especially because we may want to use a {\small\tt\verm{FiniteElement}}
+with no master element, or an {\small\tt\verm{Integrator}} acting directly on the physical cell.
 
 An object belonging to the {\small\tt class} {\small\tt\verm{FiniteElement}} is a mere wrapper
 for a {\small\tt\verm{FiniteElement}::Core} (see paragraph \ref{\numb section 11.\numb parag 5}).
@@ -69,7 +69,7 @@ subsequent paragraphs of this section.
 the master element to the current physical cell.
 This map depends of course on the geometry of the cell and thus it must be computed from
 scratch each time we begin integrating on a new cell.
-We say that the {\small\tt\verm{FiniteElement}} is docked on a new {\small\tt \verm{Cell}};
+We say that the {\small\tt\verm{FiniteElement}} is docked on a new {\small\tt\verm{Cell}};
 the method {\small\tt dock\_\,on} performs this operation.
 This method is element-specific, each type of finite element having its own class.
 
@@ -88,6 +88,12 @@ occuppying the square $ [-1, 1]^2 $ and the current cell).
 It will also build the jacobian of this transformation map (through symbolic differentiation).
 The four shape functions can be accessed through the method {\small\tt basis\_\,function},
 as shown in paragraph \ref{\numb section 6.\numb parag 2}.
+
+{\ManiFEM} distinguishes between cells (which are geometric entities) and finite elements.
+We may have different finite elements whose geometry is the same.
+For instance, we may have triangular Lagrange finite elemens of different degrees;
+they will all {\small\tt dock\_\,on} the same triangular cell.
+See e.g.\ paragraph \ref{\numb section 6.\numb parag 5}.
 
 It should be stressed that the approach presented in this section is rather low-level.
 We are working hard to make {\maniFEM} understand statements describing variational
@@ -169,10 +175,11 @@ values to the global matrix:
    label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// run over all square cells composing ABCD}
-   \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells, \textcolor{tag}{tag}::of_max_dim );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{small_square} = *it;
       fe .dock_on ( small_square );
+
       \cinza{// run twice over the four vertices of 'small_square'}
       \verm{Mesh}::Iterator \azul{it1} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
       \verm{Mesh}::Iterator \azul{it2} = small_square .boundary() .iterator ( \textcolor{tag}{tag}::over_vertices );
@@ -214,6 +221,7 @@ function.
        size_t \azul{i} = numbering [P];
        impose_value_of_unknown ( matrix_A, vector_b, i, y(P) );  \}
 \end{Verbatim}
+\vfil\eject
 
 We then use {\small\tt Eigen} to solve the system of linear equations :
 
@@ -238,8 +246,8 @@ And obtain the expected solution, shown in figure \ref{\numb section 6.\numb fig
   \label{\numb section 6.\numb fig 1}
 \end{figure}
 
-We stress again that this example shows a rather rudimentary way of using finite elements in
-\maniFEM.
+We stress again that the examples in this section show a rather rudimentary way of
+using finite elements in \maniFEM.
 We are working hard to reach a more elegant, compact and high-level style.
 The user should have the possibility to declare the partial differential equation
 through a compact declaration of the corresponding variational formulation.
@@ -256,7 +264,7 @@ A second way to speed up the code is to add the option {\small\tt -dNDEBUG} to t
 command in your {\small\tt Makefile} (see also paragraph \ref{\numb section 11.\numb parag 15}).
 
 The third (and soundest) solution is a deep optimization of the {\maniFEM} library.
-A new type of finite elements (or, rather, integrators) is presented in paragraphs
+A different type of finite elements (or, rather, integrators) is presented in paragraphs
 \ref{\numb section 6.\numb parag 9} and \ref{\numb section 6.\numb parag 10}.
 These integrators perform a few symbolic calculations just once,
 typically right after they are declared.
@@ -331,7 +339,7 @@ this value will be used for numbering vertices.
    label=parag-\ref{\numb section 6.\numb parag 4}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle,
-                      \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+                      \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1  );
    \verm{Cell}::Numbering & \azul{numbering} = fe .build_global_numbering ( \textcolor{tag}{tag}::vertices );
 \end{Verbatim}
 
@@ -356,7 +364,7 @@ However, the solver of the linear system will complain that the matrix is singul
 
 The user should check these two numbers : {\small\tt numbering} {\small\tt.size()} and
 {\small\tt ABCD}  {\small\tt .number\_\,of}  {\small\tt (}
-{\small\tt \textcolor{tag}{tag}::vertices}  {\small\tt )}.
+{\small\tt\textcolor{tag}{tag}::vertices}  {\small\tt )}.
 If they are not equal, measures must be taken.
 For instance, a non-zero value can be inserted in the diagonal of the global matrix
 at places corresponding to ``missing'' vertices.
@@ -395,7 +403,7 @@ This solution keeps the advantage of constant accesss time to the number of a ve
 However, the information from {\small\tt numbering} {\small\tt .size()} will be misleading
 (it still takes into account the ``hidden'' vertices).
 You should use instead {\small\tt ABCD} {\small\tt .number\_\,of} {\small\tt (}
-{\small\tt \textcolor{tag}{tag}::vertices )}; this is the dimension you should use
+{\small\tt\textcolor{tag}{tag}::vertices )}; this is the dimension you should use
 when declaring your global matrix.
 
 Note that both numbering methods (presented in paragraphs \ref{\numb section 6.\numb parag 2}
@@ -420,7 +428,13 @@ a curved triangle.
                        \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight );
 \end{Verbatim}
 
-This finite element has six basis functions, associated to vertices and to sides :
+This finite element has six basis functions, associated to vertices and to sides.
+Note that, although the user may imagine the finite element having nodes at the middle of
+each side, the {\small\tt\verm{Cell}} on which the element is docked is still a regular triangle.
+This cell has only three vertices and three sides.
+This is why three of the six basis functions are associated to vertices (zero-dimensional cells)
+while the other three are associated to sides (one-dimensional cells).
+See also paragraph \ref{\numb section 5.\numb parag 1}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
@@ -590,8 +604,9 @@ Paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb par
 show finite element computations where we simply take the shape functions provided by
 the method {\small\tt\verm{FiniteElement}::basis\_\,function}, differentiate them
 symbolically and then integrate their product through a Gauss quadrature.
-This process involves a lot of symbolic computations at each docking operations and
-aftewards, which makes the whole process quite slow.
+This process is simple and clear from the user's viewpoint.
+However, it involves a lot of symbolic computations at each docking operation and aftewards;
+thus, it is quite slow.
 
 In this paragraph we present another type of finite elements (or rather, integrators).
 They are much faster at the cost of a slightly less elegant syntax.
@@ -735,6 +750,7 @@ Below are some example invocations of {\small\tt pre\_\,compute} with two basis 
                         \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2 \}                );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2, bf1 .deriv(x) * bf2 \} );
+
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2, bf1 .deriv(x) * bf2 .deriv(x) \} );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
@@ -752,7 +768,6 @@ Below are some example invocations of {\small\tt pre\_\,compute} with two basis 
                                             bf1 .deriv(y) * bf2 .deriv(y)  \} );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1, bf1 * bf2  \} );
-
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1, bf1 .deriv(x), bf1 * bf2,
                                             bf1 .deriv(x) * bf2 .deriv(x) +
@@ -824,7 +839,6 @@ components :
                         \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x),
                                             bf1 .deriv(y) * bf2 .deriv(y) \} );
 
-                                            
    \cinza{// run over all square cells composing ABCD}
    \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
    for ( it .reset(); it .in_range(); it++ )

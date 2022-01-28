@@ -6,10 +6,11 @@
 Section \ref{\numb section 2} shows how to build meshes by joining together several regular meshes
 (triangles or quadrangles), like patches.
 The present section explains how to build a mesh by gradually adding cells, on by one.
-We call this approach ``progressive mesh generation''.
+We call this approach ``progressive mesh generation''
+(another possible name is ``frontal method'').
 In some cases, the process starts with a given interface and adds triangles, one by one,
 moving and deforming the interface, until it shrinks and disappears.
-In some cases (like in paragraphs \ref{\numb section 3.\numb parag 2},
+In other cases (like in paragraphs \ref{\numb section 3.\numb parag 2},
 \ref{\numb section 3.\numb parag 4}, \ref{\numb section 3.\numb parag 6},
 \ref{\numb section 3.\numb parag 7}) we begin with nothing at all;
 {\maniFEM} finds a starting point by itself.
@@ -20,7 +21,7 @@ Meshing of three-dimensional domains will be implemented in the future and will 
 cells.
 
 Progressive mesh generation follows the shape of the current working manifold (the most recently
-declared {\small\tt \verm{Manifold}} object) by {\small\tt project}ing each newly constructed vertex
+declared {\small\tt\verm{Manifold}} object) by {\small\tt project}ing each newly constructed vertex
 on that manifold.
 Recall that in this manual we use the term ``manifold'' to mean a manifold without boundary.
 
@@ -31,8 +32,8 @@ Recall that in this manual we use the term ``manifold'' to mean a manifold witho
 
 Paragraph \ref{\numb section 2.\numb parag 9} shows how to build a mesh over a disk,
 but the quality of the mesh is quite poor.
-This is so because the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::quadrangle} treats the
-disk as a (much) deformed rectangle.
+This is so because the {\small\tt\verm{Mesh}} constructor with
+{\small\tt\textcolor{tag}{tag}::quadrangle} treats the disk as a (much) deformed rectangle.
 
 We can ask {\maniFEM} to progressively mesh the disk, starting from its boundary (a circle)
 and adding triangles, one by one, until the disk is completely covered :
@@ -75,7 +76,7 @@ this requirement).
 
 Paragraph \ref{\numb section 11.\numb parag 2} explains the coloring conventions observed
 in this manual for {\tt C++} code.
-Paragraph \ref{\numb section 11.\numb parag 3} gives details about {\small\tt \textcolor{tag}{tag}}s.
+Paragraph \ref{\numb section 11.\numb parag 3} gives details about {\small\tt\textcolor{tag}{tag}}s.
 
 
           %----------------%
@@ -167,7 +168,7 @@ explain how {\maniFEM} chooses the orientation of closed curves.
           %--------------------------------%
 
 We may apply the same {\small\tt progressive} algorithm for meshing the circle in
-$ \mathbb{R}^3 $ introduced in paragraph \ref{\numb section 2.\numb parag 12} :
+$ \mathbb{R}^3 $ introduced in paragraph \ref{\numb section 2.\numb parag 13} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 4}.cpp,rulecolor=\color{coment},
@@ -186,13 +187,16 @@ there is no way to choose between the two possible orientations of this {\small\
 No one is more ``correct'' than the other.
 This is why {\maniFEM} requires supplementary arguments
 {\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::random}
-for the {\small\tt \verm{Mesh}} constructor.
-In other cases (e.g.\ for closed curves in $ \mathbb{R}^2 $) this supplementary argument
-is not mandatory; however, even then the user may choose to provide the arguments
-{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::random},
+for the {\small\tt\verm{Mesh}} constructor.
+In other cases (e.g.\ for closed curves in $ \mathbb{R}^2 $) these supplementary arguments
+are not mandatory; however, even then the user may choose to provide them,
 thus sparing the computer from the burden of finding the right orientation.
 Paragraphs \ref{\numb section 3.\numb parag 10} and \ref{\numb section 3.\numb parag 13}
 give more details.
+
+The term ``random'' should not be interpreted in the probabilistic sense.
+The orientation of such a mesh is not a random variable, not even a pseudo-random one.
+Is it just difficult to predict.
 
 On the other hand, if the orientation matters for you, you can either attach an orientation
 to the manifold {\small\tt circle\_\,manif} (this feature is not implemented yet)
@@ -209,7 +213,7 @@ we have meshed the entire closed curve {\small\tt circle}.
 If we only want a piece of a curve, we must specify two points, one for starting and
 the other one for stopping.
 
-Looking at the example in paragraph \ref{\numb section 2.\numb parag 14}, let us define a
+Looking at the example in paragraph \ref{\numb section 2.\numb parag 15}, let us define a
 spiral with a slightly different look and switch to progressive mesh generation.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -228,8 +232,8 @@ spiral with a slightly different look and switch to progressive mesh generation.
    
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) =     pi*pi;   y (A) = \laranja{0.};
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{81.}*pi*pi;   y (B) = \laranja{0.};
-   \verm{Mesh} \azul{spiral} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A,
-                 \textcolor{tag}{tag}::stop_at, B, \textcolor{tag}{tag}::desired_length, \laranja{1.} );
+   \verm{Mesh} \azul{spiral} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A, \textcolor{tag}{tag}::stop_at, B,
+                 \textcolor{tag}{tag}::desired_length, \laranja{1.}, \textcolor{tag}{tag}::shortest_path         );
 \end{Verbatim}
 
 \begin{figure} \centering
@@ -242,15 +246,15 @@ spiral with a slightly different look and switch to progressive mesh generation.
 
 Figure \ref{\numb section 3.\numb fig 3} shows the resulting mesh.
 
-Unlike in paragraph \ref{\numb section 2.\numb parag 14}, we define the spiral through
+Unlike in paragraph \ref{\numb section 2.\numb parag 15}, we define the spiral through
 an implicit equation.
 Had we chosen the (natural) definition {\small\tt r = \verm{power} ( x*x + y*y, 0.5 )},
-the very same spiral as in paragraph \ref{\numb section 2.\numb parag 14} would have been
+the very same spiral as in paragraph \ref{\numb section 2.\numb parag 15} would have been
 obtained.
 For aesthetic reasons, we have chosen a different definition of {\small\tt r}, thus obtaining
 a different spacing between the arcs of the spiral.
 
-Another noteworthy difference from paragraph \ref{\numb section 2.\numb parag 14} is that
+Another noteworthy difference from paragraph \ref{\numb section 2.\numb parag 15} is that
 vertices are distributed uniformly along the spiral (with respect to the distance
 in the surrounding space $ \mathbb{R}^2 $).
 The segments are too small to be seen in the figure.
@@ -258,8 +262,9 @@ The segments are too small to be seen in the figure.
 Note that there are two ways to go along the spiral starting from {\small\tt A}.
 One of them will eventually stumble upon the stopping point {\small\tt B} while
 the other one will never meet {\small\tt B}.
-{\ManiFEM} has no means to guess which way it should start building the mesh,
-so it performs a preliminary search in both directions.
+{\ManiFEM} has no means to guess which way it should start building the mesh;
+the {\small\tt\textcolor{tag}{tag}::shortest\_\,path} instructs it
+to perform a preliminary search in both directions.
 The one that first meets {\small\tt B} wins and the mesh is subsequently built along
 the winning direction.
 
@@ -272,7 +277,7 @@ Thus, if we want to mesh an arc of a circle, we can use a sequence of statements
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  \cinza{// set x(A) and y(A)}
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  \cinza{// set x(B) and y(B)}
    \verm{Mesh} \azul{arc_of_circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A,
-                        \textcolor{tag}{tag}::stop_at, B, \textcolor{tag}{tag}::desired_length, some_value );
+                        \textcolor{tag}{tag}::stop_at, B, \textcolor{tag}{tag}::desired_length, \mbox{\fontfamily{helvetica}\selectfont{}some\_\,value} );
 \end{Verbatim}
 
 However, if we choose {\small\tt A} and {\small\tt B} diametrally opposed, {\maniFEM} will
@@ -358,8 +363,8 @@ It can be vaguely described as a convolution between two tori.
    \verm{Mesh} \azul{tori} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.09} );
 \end{Verbatim}
 
-Function {\small\tt \verm{smooth\_\,min}} gives a smooth approximation of the minimum between
-two or more {\small\tt \verm{Function}} objects.
+Function {\small\tt\verm{smooth\_\,min}} gives a smooth approximation of the minimum between
+two or more {\small\tt\verm{Function}} objects.
 It is equal to the true minimum if the difference between the two values is higher, in
 absolute value, than the provided threshold.
 When the difference is smaller than the threshold, it gives a $ C^1 $ interpolation between
@@ -379,7 +384,7 @@ Comments at the end of paragraph \ref{\numb section 3.\numb parag 6} apply here,
 \section{~~A bumpy hemisphere}\label{\numb section 3.\numb parag 9}
           %------------------%
 
-We now look again at the surface in paragraph \ref{\numb section 2.\numb parag 13}
+We now look again at the surface in paragraph \ref{\numb section 2.\numb parag 14}
 and build it progressively, using fewer lines of code.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -397,7 +402,8 @@ and build it progressively, using fewer lines of code.
 
 In this example, the issue of the orientation can be really tricky.
 An orientation of the {\small\tt circle} is chosen at random.
-Also, {\maniFEM} will randomly choose to mesh the upper or the lower hemisphere.
+As a consequence of this random choice, {\maniFEM} will unpredictably mesh the upper or
+the lower hemisphere.
 Paragraphs \ref{\numb section 3.\numb parag 10}, \ref{\numb section 3.\numb parag 13} and
 \ref{\numb section 3.\numb parag 14} give more details.
 
@@ -438,27 +444,29 @@ which is compatible with the intrinsic orientation of the surrounding space.
 We call this orientation {\small\tt inherent}; paragraph \ref{\numb section 3.\numb parag 13}
 discusses this topic.
 
-Open curves (like the spiral in paragraps \ref{\numb section 3.\numb parag 5} and
-\ref{\numb section 3.\numb parag 12}) have no privileged orientation.
+Open curves (like the {\small\tt\azul{spiral}} in paragraphs \ref{\numb section 3.\numb parag 5} and
+\ref{\numb section 3.\numb parag 12}), as well as non-compact manifolds
+(like the {\small\tt\azul{cylinder}} in paragraphs \ref{\numb section 3.\numb parag 18} and
+\ref{\numb section 3.\numb parag 19}), have no privileged orientation.
 If we don't specify an orientation, these manifolds are considered not oriented.
 If we don't specify a starting direction, {\maniFEM} will perform a preliminary search
 in both directions and choose the one that first meets the stopping point.
 
 Closed curves in $ \mathbb{R}^3 $ like the {\small\tt circle} in paragraphs
 \ref{\numb section 3.\numb parag 4} and \ref{\numb section 3.\numb parag 9}
-have no privileged orientation either.
+have no privileged orientation either (because they have co-dimension two).
 There is no way to decide which of its two possible orientations
 should be chosen; no one is more ``correct'' than the other.
-This is why {\maniFEM} will reject a tentative to define {\small\tt circle} without
+This is why {\maniFEM} will reject a tentative to define {\small\tt\azul{circle}} without
 {\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::random}
-as last arguments to the {\small\tt \verm{Mesh}} constructor.
-A statement like {\small\tt \verm{Mesh}} {\small\tt circle} {\small\tt (}
-{\small\tt \textcolor{tag}{tag}::progressive,} {\small\tt\textcolor{tag}{tag}::desired\_\,length,}
+as last arguments to the {\small\tt\verm{Mesh}} constructor.
+A statement like {\small\tt\verm{Mesh}} {\small\tt circle} {\small\tt (}
+{\small\tt\textcolor{tag}{tag}::progressive,} {\small\tt\textcolor{tag}{tag}::desired\_\,length,}
 some\_\,value {\small\tt)}
 will produce a run-time error if the current working manifold has dimension 1 and
 the geometric dimension (that is, the number of coordinates) is 3.
 
-The options given to the constructor of {\small\tt \verm{Mesh} bumpy} in paragraph
+The options given to the constructor of {\small\tt\verm{Mesh} bumpy} in paragraph
 \ref{\numb section 3.\numb parag 9} are discussed in paragraph
 \ref{\numb section 3.\numb parag 14}.
 
@@ -484,7 +492,8 @@ can be changed as below.
                  \textcolor{tag}{tag}::stop_at, B, \textcolor{tag}{tag}::desired_length, \laranja{1.}                );
 \end{Verbatim}
 
-Note that the vector {\small\tt direc} is associated to the point {\small\tt A}.
+Note that the vector {\small\tt direc} is associated to the point {\small\tt A}
+(is tangent to the manifold at point {\small\tt A}).
 
 Recall that open curves have no ``default'' (or ``inherent'') orientation.
 {\ManiFEM} uses the vector {\small\tt direc} as an indication about where to go.
@@ -529,10 +538,11 @@ discussion to paragraph \ref{\numb section 3.\numb parag 14}.
 Euclidian manifolds have an intrinsic orientation given by the natural order of the
 coordinates.
 {\ManiFEM} will always use this orientation when the working manifold is Euclidian.
-We can enforce the requirement of using the intrinsic orientation by providing a
-{\small\tt \textcolor{tag}{tag}::intrinsinc\_\,orien\-tation} as argument to the {\small\tt \verm{Mesh}} constructor.
-However, this argument is not necessary; {\maniFEM} will consider it by default.
-This happens for the {\small\tt disk} in paragraphs \ref{\numb section 3.\numb parag 1} and
+We can enforce the requirement of using the intrinsic orientation by providing
+{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::intrinsic}
+as arguments to the {\small\tt\verm{Mesh}} constructor.
+However, these arguments are not necessary; {\maniFEM} will consider them by default.
+This happens for the {\small\tt\azul{disk}} in paragraphs \ref{\numb section 3.\numb parag 1} and
 \ref{\numb section 3.\numb parag 2}, for the diamond in
 paragraph \ref{\numb section 3.\numb parag 17} and for the annulus in paragraphs
 \ref{\numb section 3.\numb parag 3}, \ref{\numb section 3.\numb parag 22}
@@ -542,40 +552,43 @@ Compact manifolds of co-dimension one (closed curves in $ \mathbb{R}^2 $,
 compact surfaces in $ \mathbb{R}^3 $) have a privileged orientation,
 compatible with the intrinsic orientation of the surrounding space;
 we call this orientation ``inherent''.
+Such a manifold cuts the surrounding space in two regions, one of them being bounded;
+the ``inherent'' orientation is the one pointing towards the unbounded region;
+intuitively speaking, it points ``outwards''.
 {\ManiFEM} will choose it in some situations, unless we provide
 {\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::random}
 as arguments to the {\small\tt\verm{Mesh}} constructor.
 We can enforce the requirement of finding the inherent orientation by providing
-{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt \textcolor{tag}{tag}::inherent}
-as arguments to the {\small\tt \verm{Mesh}} constructor;
+{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::inherent}
+as arguments to the {\small\tt\verm{Mesh}} constructor;
 however, {\maniFEM} will consider these arguments by default when we provide no stopping
 point (for one-dimensional meshes) or we provide no boundary (for two-dimensional meshes).
 In these cases, {\maniFEM} will assume that the manifold is compact and, if it has
 co-dimension one, the inherent orientation will be used.
-This happens for the {\small\tt circle} in paragraph \ref{\numb section 3.\numb parag 2},
-for the {\small\tt sphere} in paragraph \ref{\numb section 3.\numb parag 6} and for the
-{\small\tt tori} in paragraph \ref{\numb section 3.\numb parag 7}.
+This happens for the {\small\tt\azul{circle}} in paragraph \ref{\numb section 3.\numb parag 2},
+for the {\small\tt\azul{sphere}} in paragraph \ref{\numb section 3.\numb parag 6} and for the
+{\small\tt\azul{tori}} in paragraph \ref{\numb section 3.\numb parag 7}.
 
 If we do provide a stopping point, or a boundary, {\maniFEM} has no means to know in
 advance whether the manifold
 is compact or not, so it will not try to find the inherent orientation.
-This happens for the {\small\tt spiral} and for the {\small\tt arc\_\,of\_\,circle} in paragraph
-\ref{\numb section 3.\numb parag 5}, for the {\small\tt bumpy} hemisphere in paragraph
-\ref{\numb section 3.\numb parag 9}, for the {\small\tt piece\_\,of\_\,cyl} and
-{\small\tt piece\_\,of\_\,sph} in paragraphs \ref{\numb section 3.\numb parag 18} and
+This happens for the {\small\tt\azul{spiral}} and for the {\small\tt\azul{arc\_\,of\_\,circle}}
+in paragraph \ref{\numb section 3.\numb parag 5}, for the {\small\tt\azul{bumpy}} hemisphere
+in paragraph \ref{\numb section 3.\numb parag 9}, for the {\small\tt\azul{piece\_\,of\_\,cyl}} and
+{\small\tt\azul{piece\_\,of\_\,sph}} in paragraphs \ref{\numb section 3.\numb parag 18} and
 \ref{\numb section 3.\numb parag 19} and others.
 In these situations, we may require specifically the inherent orientation
-by providing the {\small\tt \textcolor{tag}{tag}::inherent\_\,orientation} as last argument to the
-{\small\tt \verm{Mesh}} constructor.
+by providing the {\small\tt\textcolor{tag}{tag}::orientation,}
+{\small\tt\textcolor{tag}{tag}::inherent} arguments to the {\small\tt\verm{Mesh}} constructor.
 Do not misuse this option; if you ask {\maniFEM} to find the inherent orientation of an open
 curve or of a non-compact surface, it will not complain but will hopelessly try to mesh
 the entire manifold, never stopping.
 For instance, in paragraph \ref{\numb section 3.\numb parag 5} it makes sense to enforce the
-inherent orientation for the {\small\tt arc\_\,of\_\,circle} but not for the
-{\small\tt spiral}.
+inherent orientation for the {\small\tt\azul{arc\_\,of\_\,circle}} but not for the
+{\small\tt\azul{spiral}}.
 Also, in paragraphs \ref{\numb section 3.\numb parag 18} and
 \ref{\numb section 3.\numb parag 19} it makes sense to enforce the inherent orientation
-for the {\small\tt piece\_\,of\_\,sph} but not for the {\small\tt piece\_\,of\_\,cyl}.
+for the {\small\tt\azul{piece\_\,of\_\,sph}} but not for the {\small\tt\azul{piece\_\,of\_\,cyl}}.
 
 Determining the intrinsic orientation of a Euclidian manifold is computationally
 very cheap.
@@ -590,9 +603,9 @@ on the disk, with no need to provide any specific information about the orientat
 Behind the curtains, {\maniFEM} builds a mesh on {\small\tt circle\_\,manif} with
 an initially arbitrary orientation, then checks its consistency
 within the surrounding manifold and, if necessary, switches the orientation of the produced mesh.
-Then, again, the orientation of the boundary (together with the intrinsic orientation of
-the surrounding space {\small\tt RR2}) defines whether the interior or the exterior of the
-disk is to be meshed.
+Later, when we ask {\maniFEM} to mesh the {\small\tt\azul{disk}}, the orientation of the boundary
+(together with the intrinsic orientation of the surrounding space {\small\tt RR2})
+defines whether the interior or the exterior of the disk is to be meshed.
 
 A similar process happens for compact surfaces in $ \mathbb{R}^3 $ like those
 considered in paragraphs \ref{\numb section 3.\numb parag 6} and
@@ -601,15 +614,15 @@ except that checking the orientation of a compact surface has a computational co
 considerably higher than for a closed curve in $ \mathbb{R}^2 $.
 
 You can save some computing time if you specify the orientation
-yourself, either by providing more information to the {\small\tt \verm{Mesh}} constructor as shown
+yourself, either by providing more information to the {\small\tt\verm{Mesh}} constructor as shown
 in paragraph \ref{\numb section 3.\numb parag 15} or by attaching this information to
 the manifold itself (this feature is not implemented yet).
 % in order to alleviate the computational burden
  
-If the orientation is not important for you, you can add to the {\small\tt \verm{Mesh}} constructor
-the last argument {\small\tt \textcolor{tag}{tag}::random\_\,orientation} and {\maniFEM} will not waste
+If the orientation is not important for you, you can add to the {\small\tt\verm{Mesh}} constructor
+the arguments {\small\tt\textcolor{tag}{tag}::orientation,}
+{\small\tt\textcolor{tag}{tag}::random} and {\maniFEM} will not waste
 computing time to find the inherent orientation.
-\vskip 1mm
 
           %-------------------------------%
 \section{~~Revisiting the bumpy hemisphere}\label{\numb section 3.\numb parag 14}
@@ -621,8 +634,8 @@ The manifold {\small\tt nut} has a unique orientation consistent with the surrou
 space, just like those in paragraphs \ref{\numb section 3.\numb parag 6} and
 \ref{\numb section 3.\numb parag 7}, but the {\small\tt base} within it has not.
 This is why, when we build the {\small\tt circle}, we must provide
-{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt \textcolor{tag}{tag}::random}
-as last arguments to the {\small\tt \verm{Mesh}} constructor,
+{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::random}
+as last arguments to the {\small\tt\verm{Mesh}} constructor,
 or specify the orientation by providing a starting point and a starting direction
 as described in paragraph \ref{\numb section 3.\numb parag 12}.
 
@@ -633,8 +646,8 @@ It will start the meshing process on an arbitrary side of {\small\tt circle}, th
 unpredictably the upper or the lower {\small\tt bumpy} hemisphere.
 
 If we enforce the orientation by providing
-{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt \textcolor{tag}{tag}::inherent} as last
-arguments to the {\small\tt \verm{Mesh}} constructor of {\small\tt bumpy},
+{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::inherent} as last
+arguments to the {\small\tt\verm{Mesh}} constructor of {\small\tt bumpy},
 then {\maniFEM} will mesh (behind the curtains) both halves of the sphere;
 let's call them {\small\tt msh1} and {\small\tt msh2}.
 Note that the {\small\tt circle} has already been built, so its orientation is given.
@@ -727,7 +740,7 @@ In paragraph \ref{\numb section 3.\numb parag 12} we have seen how we can specif
 of propagation of the mesh for one-dimensional manifolds.
 A similar approach can be taken for two-dimensional meshes.
 For instance, code below will mesh the upper half of the ``bumpy hemisphere'' already considered
-in paragraphs \ref{\numb section 2.\numb parag 13}, \ref{\numb section 3.\numb parag 9} and
+in paragraphs \ref{\numb section 2.\numb parag 14}, \ref{\numb section 3.\numb parag 9} and
 \ref{\numb section 3.\numb parag 14}, oriented upwards.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -745,11 +758,12 @@ in paragraphs \ref{\numb section 2.\numb parag 13}, \ref{\numb section 3.\numb p
 \end{Verbatim}
 
 If we define {\small\tt\azul N} as \catcode`<=1\catcode`>=2\catcode`{=12\catcode`}=12<\small\tt {>
-<\small\tt \laranja0\laranja.,> <\small\tt \laranja0\laranja.,> <\small\tt \laranja-\laranja1\laranja.> <\small\tt }>\catcode`<=12\catcode`>=12\catcode`{=1\catcode`}=2, we will obtain
+<\small\tt\laranja0\laranja.,> <\small\tt\laranja0\laranja.,>
+<\small\tt \laranja-\laranja1\laranja.> <\small\tt }>\catcode`<=12\catcode`>=12\catcode`{=1\catcode`}=2, we will obtain
 the lower half of the ``sphere'', still oriented upwards.
 
 If we define {\small\tt\azul{tau}} as \catcode`<=1\catcode`>=2\catcode`{=12\catcode`}=12<\small\tt {>
-<\small\tt \laranja-\laranja1\laranja.,> <\small\tt \laranja0\laranja.,> <\small\tt \laranja0\laranja.> <\small\tt }>\catcode`<=12\catcode`>=12\catcode`{=1\catcode`}=2, we will get a mesh
+<\small\tt\laranja-\laranja1\laranja.,> <\small\tt\laranja0\laranja.,> <\small\tt\laranja0\laranja.> <\small\tt }>\catcode`<=12\catcode`>=12\catcode`{=1\catcode`}=2, we will get a mesh
 oriented downwards.
 
 
@@ -792,7 +806,7 @@ In contrast, {\maniFEM} is ``at ease'' when meshing the disk in paragraph
 {\ManiFEM} can deal with non-smooth domains.
 The user must define separately smooth pieces of the boundary and then join them.
 
-Here is how to mesh the diamond-shaped domain in paragraph \ref{\numb section 2.\numb parag 10}.
+Here is how to mesh the diamond-shaped domain in paragraph \ref{\numb section 2.\numb parag 11}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 17}.cpp,rulecolor=\color{coment},
@@ -969,8 +983,9 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
 \end{figure}
 
 {\ManiFEM} deals well with a disconnected manifold like {\small\tt intersection}.
-Each of the constructors {\small\tt \verm{Mesh} circle\_\,1} and {\small\tt \verm{Mesh} circle\_\,2} meshes only
-a connected component of {\small\tt intersection}, depending on the starting point we provide.
+Each of the constructors {\small\tt\verm{Mesh} circle\_\,1} and {\small\tt\verm{Mesh} circle\_\,2}
+meshes only a connected component of {\small\tt intersection}, depending on the starting point
+we provide.
 
 Had we chosen a cylinder of diameter $1$, a singular point would have appeared;
 the two ``circles'' would touch at point $ (0,0,1) $.
@@ -1055,13 +1070,19 @@ We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb para
   \label{\numb section 3.\numb fig 9}
 \end{figure}
 
-{\ManiFEM} accepts as {\small\tt \verm{Manifold}} a self-intersecting set like {\small\tt infinity}.
-However, in the {\small\tt \verm{Mesh}} constructor we must specify {\small\tt V} as singular point.
+{\ManiFEM} accepts as {\small\tt\verm{Manifold}} a self-intersecting set like {\small\tt infinity}.
+In {\maniFEM}, an implicit manifold is simply a level set of one or two symbolic expressions
+involving the coordinates of the surrounding, Euclidean manifold.
+However, in the neighbourhood of a singularity, the equation(s) are degenerate and certain
+parts of {\maniFEM} do not work as expected.
+In particular, the projection algorithm onto the manifold may fail to converge.
+By specifying (in the {\small\tt\verm{Mesh}} constructor) {\small\tt V} as singular point,
+we tell {\maniFEM} that it must take special care in that neighbourhood.
 
 Unlike in paragraph \ref{\numb section 3.\numb parag 19}, here we cannot {\small\tt join} the
 two meshes {\small\tt circle\_\,1} and {\small\tt circle\_\,2}.
 {\ManiFEM} is unable to join two closed polygonal lines having a vertex in common;
-in other words, it does not handle self-intersecting {\small\tt \verm{Mesh}}es.
+in other words, it does not handle self-intersecting {\small\tt\verm{Mesh}}es.
 This is why we provide the two pieces of boundary separately.
 
 
@@ -1201,5 +1222,5 @@ This result cannot be achieved using the approach of paragraph
 \section{~~Future work}\label{\numb section 3.\numb parag 25}
           %-----------%
 
-It would be nice to define domains using inequalities between {\small\tt \verm{Function}}s.
+It would be nice to define domains using inequalities between {\small\tt\verm{Function}}s.
 

@@ -1,20 +1,22 @@
 
-          %-----------------%
-\chapter{~~More on manifolds}\label{\numb section 8}
-          %-----------------%
+          %-----------%
+\chapter{~~Miscellanea}\label{\numb section 8}
+          %-----------%
 
-This section gives some details on the notion of manifold in \maniFEM.
+This section gives informations which do not fit in other sections of the manual.
+
+
+          %------------%
+\section{~~On manifolds}\label{\numb section 8.\numb parag 1}
+          %------------%
+
+This paragraph gives some details on the notion of manifold in \maniFEM.
 
 Let us begin by recalling that, in this manual, we use the term ``manifold'' to refer to
 a manifold without boundary.
 Of course we will only mesh a bounded domain of the manifold, so most meshes will have a boundary.
 We may also mesh an entire compact manifold like a circle or a sphere or a torus;
 such a mesh will have no boundary.
-
-
-          %-----------------------------------------%
-\section{~~Projecting points on an implicit manifold}\label{\numb section 8.\numb parag 1}
-          %-----------------------------------------%
 
 In many examples we consider a submanifold of $ \mathbb{R}^n $ defined by an implicit equation
 (or by several implicit equations).
@@ -33,5 +35,5 @@ The user should take this limitation into account.
 Many {\small\tt Mesh} constructors project vertices on the current working manifold
 {\small\tt Manifold::working} wihtout the user's assistance.
 On the other hand, vertices can be explicitly {\small\tt project}ed if necessary.
-Paragraphs \ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb parag 13},
+Paragraphs \ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb parag 14},
 \ref{\numb section 3.\numb parag 2} -- \ref{\numb section 3.\numb parag 9} show such examples.

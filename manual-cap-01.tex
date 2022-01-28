@@ -98,8 +98,9 @@ Launch the program through the command
 a file {\small\tt rectangle.msh} should appear in the working directory.
 You may view the mesh using the software {\tt gmsh}.
 
-Expressions like {\small\tt \textcolor{tag}{tag}::of\_\,dim} and {\small\tt \textcolor{tag}{tag}::vertex} are
-objects belonging to the {\small\tt namespace \textcolor{tag}{tag}};
+Expressions like {\small\tt\textcolor{tag}{tag}::of\_\,dim} and
+{\small\tt\textcolor{tag}{tag}::vertex} are
+objects belonging to the {\small\tt namespace} {\small\tt\textcolor{tag}{tag}};
 we use them as arguments to many functions.
 See paragraph \ref{\numb section 11.\numb parag 3} for some details.
 
@@ -107,7 +108,7 @@ Paragraph \ref{\numb section 5.\numb parag 1} explains why we build {\small\tt\v
 {\small\tt\azul{xyz}} with arguments {\small\tt\textcolor{tag}{tag}::Lagrange,}\hfil\break
 {\small\tt\textcolor{tag}{tag}::of\_\,degree,} {\small\tt\laranja{1}}.
 
-When declaring a segment {\small\tt \verm{Mesh}}, we must {\small\tt reverse} the first vertex
+When declaring a segment {\small\tt\verm{Mesh}}, we must {\small\tt reverse} the first vertex
 (paragraph \ref{\numb section 1.\numb parag 2} discusses the {\small\tt reverse} method).
 Paragraph \ref{\numb section 1.\numb parag 4} explains why we build
 the rectangle based on its four sides rather than on its four vertices.
@@ -233,8 +234,15 @@ provide the boundary of the future mesh, whose orientation determines the output
 algorithm.
 \vfil\eject
 
+{\ManiFEM} distinguishes between cells (which are geometric entities) and finite elements.
+We may have different finite elements whose geometry is the same.
+For instance, we may have triangular Lagrange finite elemens of different degrees;
+they will all dock on the same triangular cell.
+Paragraph \ref{\numb section 6.\numb parag 1} gives more details.
+
 Cells have a {\small\tt reverse} method returning the reversed cell.
-Segment {\small\tt \verm{Cell}}s have methods {\small\tt base} and {\small\tt tip} returning their extremities.
+Segment {\small\tt\verm{Cell}}s have methods {\small\tt base} and {\small\tt tip}
+returning their extremities.
 For instance :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
@@ -282,7 +290,7 @@ We stress that there are shorter and more elegant mesh constructors, see paragra
 {\small\tt \verm{Mesh}}es have a {\small\tt reverse} method, too.
 It is used mainly when we want to {\small\tt join} meshes having a common piece of boundary;
 see paragraphs \ref{\numb section 1.\numb parag 4}, \ref{\numb section 2.\numb parag 6},
-\ref{\numb section 2.\numb parag 7}, \ref{\numb section 2.\numb parag 11},
+\ref{\numb section 2.\numb parag 7}, \ref{\numb section 2.\numb parag 12},
 \ref{\numb section 3.\numb parag 17}, \ref{\numb section 3.\numb parag 18}.
 
 
@@ -311,7 +319,7 @@ After building a function like
 Space in the computer's memory will be reserved for {\small\tt d} values of type
 {\small\tt double} ({\small\tt d} being the dimension of the {\small\tt\verm{Manifold}},
 here {\small\tt RR3}) for each new vertex.
-The components of {\small\tt xyz} can be declared like in
+The components of {\small\tt xyz} can be extracted like in
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
@@ -334,14 +342,14 @@ For instance, there are arithmetic expressions like
    \verm{Function} \azul{norm} = \verm{power} ( x*x + y*y + z*z, \laranja{0.5} );
 \end{Verbatim}
 
-We can still access the value of such a {\small\tt \verm{Function}} at a cell like in
+We can still access the value of such a {\small\tt\verm{Function}} at a cell like in
 {\small\tt double} {\small\tt \azul{n}} {\small\tt =} {\small\tt norm(A)};
 the computer will return the value of the corresponding arithmetic expression,
 replacing the symbols {\small\tt x}, {\small\tt y} and {\small\tt z} by the corresponding
 values at cell {\small\tt A}.
 But it makes no sense to change the value of {\small\tt norm} at cell {\small\tt A}.
-Thus, statements like {\small\tt x(A)} {\small\tt =} {\small\tt \laranja{1.}} work fine,
-while {\small\tt norm(A)} {\small\tt =} {\small\tt \laranja{1.}} produces a run-time error.
+Thus, statements like {\small\tt x(A)} {\small\tt =} {\small\tt\laranja{1.}} work fine,
+while {\small\tt norm(A)} {\small\tt =} {\small\tt\laranja{1.}} produces a run-time error.
 
 The {\small\tt\verm{Function}::deriv} method performs symbolic differentiation :
 
@@ -448,7 +456,7 @@ as a pair of magnets.
 If their polarities are not opposite, the two meshes will not cling.
 
 Note also that if we define the rectangles based on their vertices instead of their sides, 
-the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::join} will
+the {\small\tt\verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::join} will
 not work properly. 
 For instance, the two rectangles defined by
 
@@ -477,7 +485,7 @@ interpolated from the coordinates of vertices on the boundary, as shown in parag
 \ref{\numb section 1.\numb parag 6} and \ref{\numb section 2.\numb parag 1}.
 This can be done even in more than two (geometric) dimensions, like in
 paragraphs \ref{\numb section 1.\numb parag 1}, \ref{\numb section 2.\numb parag 7} and
-\ref{\numb section 2.\numb parag 11}.
+\ref{\numb section 2.\numb parag 12}.
 Here, tags {\small\tt rectangle}, {\small\tt quadrilateral} and {\small\tt quadrangle}
 can be used interchangeably.
 
@@ -576,6 +584,8 @@ FreeFem++ : {\small\tt http://www3.freefem.org/}
 
 GetFEM : {\small\tt https://getfem.org/download.html}
 
+gmsh : {\small\tt http://gmsh.info}
+
 MFEM : {\small\tt https://opensourcelibs.com/lib/mfem}
 
 OFELI : {\small\tt http://ofeli.org/}
@@ -613,8 +623,8 @@ The manual is clear and presents many examples.
 
 Some finite elements are slow (but fast versions are available).
 
-Since {\maniFEM} is under heavy development, some features are still missing, e.g.%
-\ 3D meshing, many types of finite elements, compact syntax for abstract variational
+Since {\maniFEM} is under heavy development, some features are still missing,
+e.g.\ 3D meshing, many types of finite elements, compact syntax for abstract variational
 formulations.
 
 {\ManiFEM} relies on oriented cells and meshes.

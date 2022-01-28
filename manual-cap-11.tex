@@ -402,7 +402,7 @@ The same will apply to a high-dimensional connected mesh (object of current work
 above 3.
 If you want to play with higher-dimensional meshes, you must relax this assumption
 through the statement {\small\tt\verm{Mesh}::set\_\,max\_\,dim}
-{\small\tt (}some-integer{\small\tt )}.
+{\small\tt (}some\_\,integer{\small\tt )}.
 
 On the other hand, you may want to decrease the expected dimension.
 Suppose you want to mesh surfaces in $ \mathbb{R}^3 $.
@@ -422,7 +422,7 @@ The {\small\tt DEBUG} mode is explained in paragraph \ref{\numb section 11.\numb
 
 The geometric dimension is set by simply declaring a Euclidian manifold and building
 a coordinate system on it (see e.g.\ paragraphs \ref{\numb section 1.\numb parag 1},
-\ref{\numb section 2.\numb parag 17} and \ref{\numb section 5.\numb parag 1}).
+\ref{\numb section 2.\numb parag 18} and \ref{\numb section 5.\numb parag 1}).
 
 
           %--------------------%
@@ -795,7 +795,7 @@ Note that, if {\small\tt seg} is a segment (a one-dimensional cell), then
 So, you probably need to use {\small\tt seg.base().reverse()} instead.
 Iterators over cells of maximum dimension (that is, of dimension equal to the dimension
 of the mesh) produce oriented cells (which may be positive or negative).
-Consider using the {\small\tt \textcolor{tag}{tag}::force\_\,positive}.
+Consider using the {\small\tt\textcolor{tag}{tag}::force\_\,positive}.
 See paragraphs \ref{\numb section 9.\numb parag 3} and \ref{\numb section 9.\numb parag 4}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
@@ -826,7 +826,7 @@ you can only build meshes of dimension up to the value most recently defined.
 See paragraph \ref{\numb section 11.\numb parag 7}.
 \medskip
 
-If {\tt gmsh} shows an empty drawing, go to {\small\tt Tools} $\to$ {\small\tt Options} $\to$
+If {\small\tt gmsh} shows an empty drawing, go to {\small\tt Tools} $\to$ {\small\tt Options} $\to$
 {\small\tt Mesh}.
 For viewing one-dimensional meshes, you need to select {\small\tt 1D Elements}.
 
@@ -862,11 +862,11 @@ To use \maniFEM, you should go to {\small\tt https://github.com/cristian-barbaro
 choose a release and download all files to some directory in your computer.
 Current code may be unstable, releases are stable.
 You can then run the examples in this manual :
-just {\small\tt make run-\ref{\numb section 1.\numb parag 1}}
+just {\small\tt make} {\small\tt run-\ref{\numb section 1.\numb parag 1}}
 for the example in paragraph \ref{\numb section 1.\numb parag 1},
-{\small\tt make run-\ref{\numb section 2.\numb parag 6}}
+{\small\tt make} {\small\tt run-\ref{\numb section 2.\numb parag 6}}
 for the example in paragraph \ref{\numb section 2.\numb parag 6}, and so on.
-You will need a recent {\tt C++} compiler (we use {\tt g++}) and the {\tt make} utility.
+You will need a recent {\tt C++} compiler (we use {\small\tt g++}) and the {\small\tt make} utility.
 Under linux it should be easy to install them.
 It is not that easy to install and use them under Windows, but it is certainly possible,
 for instance \hbox{by using {\small\tt cygwin}},
@@ -879,7 +879,7 @@ under the {\small\tt -I} flag of your compiler.
 You may also want to use {\tt gmsh}, available at {\small\tt http://gmsh.info/},
 for visualization purposes.
 
-We have chosen to put the library files in the root directory of the source code,
+We have chosen to put the source files of {\maniFEM} in the root directory of the source tree,
 as well as the {\small\tt Makefile}.
 The files containing the {\small\tt main} function for the examples in this manual are
 grouped under the {\small\tt examples-manual} directory.
@@ -896,10 +896,10 @@ The other two solutions consist in keeping \maniFEM's files separate from the fi
 by the user.
 Here is how to use statically linked object files.
 You must create a static library file, in the {\maniFEM} source code root directory,
-by issuing the command {\small\tt make static-lib}.
+by issuing the command {\small\tt make} {\small\tt static-lib}.
 Then, in your working directory, you should create a {\small\tt Makefile} similar to
 the one below (assuming your code is in a file {\small\tt myprog.cpp}).
-After that, it suffices to issue the command {\small\tt make run}.
+After that, it suffices to issue the command {\small\tt make} {\small\tt run}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=Makefile,rulecolor=\color{coment},
@@ -936,8 +936,8 @@ Of course you should taylor your {\small\tt Makefile} (in your own working direc
 by replacing the option {\small\tt -lmaniFEM} with the name of the particular version
 of the library you want to use.
 
-You may want to copy or move files {\small\tt *.h} to your personal {\small\tt include} directory
-(or to a subdirectory there) and {\small\tt libmaniFEM.a} to some {\small\tt lib} directory.
+You may want to copy or move files {\small\tt *.h} to your personal (or to a system-wide)
+{\small\tt include} directory and {\small\tt libmaniFEM.a} to some {\small\tt lib} directory.
 
 A third solution is to use dynamically linked object files,
 but this is slightly more complicated.

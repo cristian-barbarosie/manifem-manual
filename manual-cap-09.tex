@@ -137,7 +137,7 @@ paragraph \ref{\numb section 11.\numb parag 4}.
 
 Note how we use a version of the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::join}
 taking as argument a vector of {\small\tt \verm{Mesh}}es; we have already seen it in paragraphs
-\ref{\numb section 2.\numb parag 7} and \ref{\numb section 2.\numb parag 11}.
+\ref{\numb section 2.\numb parag 7} and \ref{\numb section 2.\numb parag 12}.
 
 We might have set curved boundaries by using a submanifold of $ \mathbb{R}^2 $, like in paragraph
 \ref{\numb section 2.\numb parag 9}.
@@ -384,7 +384,6 @@ linear ordering of cells, so you don't have to provide both tags.
           %----------------------------------%
 
 In \maniFEM, all cells and meshes are oriented.
-
 This can be confusing sometimes, so let's have a closer look at a particular example.
 
 Consider a mesh {\small\tt tri\_\,mesh} made of triangles, part of which is represented
@@ -393,6 +392,20 @@ Unless requested otherwise, {\small\tt tri\_\,mesh} will be a positive mesh and 
 composing it will also be positive.
 So, the triangles composing {\small\tt tri\_\,mesh} will have no reverse cell
 (there is no need for such).
+
+The above assertion that all triangles are positive should not be interpreted geometrically.
+As an extreme example, there may be no coordinates at all in our program
+(see paragraph \ref{\numb section 1.\numb parag 2} and comments at the beginning of paragraph
+\ref{\numb section 1.\numb parag 3}).
+Or, the mesh {\small\tt tri\_\,mesh} may live in a high dimensional space where it is
+impossible to distinguish between a ``positively oriented'' triangle and a ``negatively
+oriented'' one.
+When we say that a cell is positive we simply mean that it has been declared earlier than
+its {\small\tt reverse}.
+A positive cell may have no {\small\tt reverse} at all.
+A negative cell has been declared after its positive counterpart so it has necessarily a
+{\small\tt reverse}.
+See also paragraph \ref{\numb section 9.\numb parag 10}.
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
