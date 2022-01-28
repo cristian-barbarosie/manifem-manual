@@ -911,7 +911,7 @@ build a closed curve :
    \cinza{// now close the curve in a not very elegant manner}
    \verm{Mesh} \azul{small_piece} ( \textcolor{tag}{tag}::segment, B .reverse(), A, \textcolor{tag}{tag}::divided_in, \laranja{1} );
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::join, incomplete_circle, small_piece );
-   \cinza{// define new coordinates on circle_manif as expressions of t :}
+   \cinza{// define new coordinates x and y as expressions of t :}
    \verm{Function} \azul{x} = \verm{cos}(t), \azul{y} = \verm{sin}(t);
    \verm{Manifold} \azul{RR2} ( tag::Euclid, \textcolor{tag}{tag}::of_dimension, \laranja{2} );
    RR2 .set_coordinates ( x && y );
@@ -937,7 +937,7 @@ On the other hand, if we only want a visual illusion of a closed circle, we may 
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{20} );
    \cinza{// gives the illusion of a closed circle}
 
-   \cinza{// define new coordinates on circle_manif as expressions of t :}
+   \cinza{// define new coordinates x and y as expressions of t :}
    \verm{Function} \azul{x} = \verm{cos}(t), \azul{y} = \verm{sin}(t);
    \verm{Manifold} \azul{RR2} ( tag::Euclid, \textcolor{tag}{tag}::of_dimension, \laranja{2} );
    RR2 .set_coordinates ( x && y );

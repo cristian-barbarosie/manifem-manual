@@ -130,8 +130,27 @@ Examples are presented in paragraphs \ref{\numb section 1.\numb parag 5},
 \ref{\numb section 1.\numb parag 6} and \ref{\numb section 2.\numb parag 6}.
 
 
+          %------------------------%
+\section{~~Building a mesh of cubes}\label{\numb section 12.\numb parag 5}
+          %------------------------%
+
+Work in progress.
+
+\begin{figure}[ht] \centering
+  \psfrag{S}{\small\tt\textcolor{textindraw}{ver\_\,south}}
+  \psfrag{N}{\small\tt\textcolor{textindraw}{ver\_\,north}}
+  \psfrag{E}{\small\tt\textcolor{textindraw}{ver\_\,east}}
+  \psfrag{W}{\small\tt\textcolor{textindraw}{ver\_\,west}}
+  \psfrag{up}{\small\tt\textcolor{textindraw}{ver\_\,up}}
+  \includegraphics[width=105mm]{build-cube.eps}
+  \caption{Meshing a cube}
+  \label{\numb section 12.\numb fig 3}
+\end{figure}
+
+
+
           %---------------------------%
-\section{~~Progressive mesh generation}\label{\numb section 12.\numb parag 5}
+\section{~~Progressive mesh generation}\label{\numb section 12.\numb parag 6}
           %---------------------------%
 
 Several constructors {\small\tt \verm{Mesh}::Mesh} {\small\tt(}
@@ -139,6 +158,7 @@ Several constructors {\small\tt \verm{Mesh}::Mesh} {\small\tt(}
 they build a mesh on a given manifold starting with almost nothing.
 More precisely, they start with the boundary of the future mesh, then they
 move this interface with small steps, building the mesh behind it like a spider.
+This may be called ``frontal method''.
 Actually, if the manifold is compact (like the sphere or the torus) and we want to mesh
 all of it, there will be no boundary.
 In this case we can start the process by providing nothing more than the manifold itself.
@@ -155,23 +175,23 @@ newly created vertices on the working manifold, as explained in paragraph
 
 The initial interface may be disconnected.
 Even if the initial interface is connected, it may become disconnected during the meshing
-process, if it touches itself (paragraph \ref{\numb section 12.\numb parag 8}
+process, if it touches itself (paragraph \ref{\numb section 12.\numb parag 9}
 discusses this event).
 
 Detecting such touching points requires evaluating the distance between many pairs of points.
 This may become extremely time consuming, unless special care is taken to organize points
 belonging to the interface in a hierarchy allowing one to eliminate many pairs of points
 from the evaluation process.
-Paragraph \ref{\numb section 12.\numb parag 10} describes this hierarchy.
+Paragraph \ref{\numb section 12.\numb parag 11} describes this hierarchy.
 
 The next few paragraphs describe specific parts of this process of progressive mesh generation.
 
 
           %-----------%
-\section{~~The normals}\label{\numb section 12.\numb parag 6}
+\section{~~The normals}\label{\numb section 12.\numb parag 7}
           %-----------%
 
-The meshing process described in paragraph \ref{\numb section 12.\numb parag 5} uses a set of
+The meshing process described in paragraph \ref{\numb section 12.\numb parag 6} uses a set of
 normal vectors.
 Each segment in the interface has associated to it
 a vector tangent to the working manifold and normal to the interface (we can
@@ -186,22 +206,22 @@ Actually, at the beginning of the process only one segment has an associated nor
 the current connected component of the interface.
 This means that, if there are other connected components, they will have no normal vectors.
 When the current connected component of the interface touches other connected components
-(this event is discussed in paragraph \ref{\numb section 12.\numb parag 8}), {\maniFEM}
+(this event is discussed in paragraph \ref{\numb section 12.\numb parag 9}), {\maniFEM}
 % aproveita a oportunidade para ...
 propagates the normal vectors to the new connected component.
 
 Each time a new segment is added to the interface (this happens in situations described in
-paragraphs \ref{\numb section 12.\numb parag 7} and \ref{\numb section 12.\numb parag 8}),
+paragraphs \ref{\numb section 12.\numb parag 8} and \ref{\numb section 12.\numb parag 9}),
 the normal associated to the new segment must be computed (propagated from neighbour
 segments).
 
 
           %-----------------%
-\section{~~Filling triangles}\label{\numb section 12.\numb parag 7}
+\section{~~Filling triangles}\label{\numb section 12.\numb parag 8}
           %-----------------%
 
 Perhaps the simplest part of the meshing process described in paragraph
-\ref{\numb section 12.\numb parag 5} is just walking along the interface and
+\ref{\numb section 12.\numb parag 6} is just walking along the interface and
 adding new triangles.
 
 A trivial case is when an angle is encountered which is close to $ 60^\circ $
@@ -210,7 +230,7 @@ Then we only have to fill the space with a new triangle.
 Of course, before creating this new triangle a new segment {\small\tt AB} must be created
 (no new vertex is needed).
 Two old segments must be removed from the interface and the new one must be added.
-Its normal must be computed (see paragraph \ref{\numb section 12.\numb parag 6}).
+Its normal must be computed (see paragraph \ref{\numb section 12.\numb parag 7}).
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
@@ -225,7 +245,7 @@ Its normal must be computed (see paragraph \ref{\numb section 12.\numb parag 6})
   \includegraphics[width=55mm]{fill-angle-120}
 \end{subfigure}  
   \caption{Filling a $ 60^\circ $ angle and a $ 120^\circ $ angle}
-  \label{\numb section 12.\numb fig 3}
+  \label{\numb section 12.\numb fig 4}
 \end{figure}
 
 A more complicated situation is when an angle is encountered which is close to $ 120^\circ $
@@ -240,7 +260,7 @@ to the interface (their normals must be computed).
 Special situations must be dealt with.
 For instance, if one or both neighbour angles are also close to $ 120^\circ $,
 we must take more vertices into account when we place the newly created vertex {\small\tt P};
-figure \ref{\numb section 12.\numb fig 4} shows such situations.
+figure \ref{\numb section 12.\numb fig 5} shows such situations.
 
 \begin{figure}[ht] \centering
 \begin{subfigure}{60mm}\centering
@@ -250,29 +270,29 @@ figure \ref{\numb section 12.\numb fig 4} shows such situations.
   \includegraphics[width=45mm]{fill-angle-120-b}
 \end{subfigure}  
   \caption{Two adjacent $ 120^\circ $ angles}
-  \label{\numb section 12.\numb fig 4}
+  \label{\numb section 12.\numb fig 5}
 \end{figure}
 
 Finally, if all angles of the current connected component of the interface are wide,
 we may want to create a triangle ``out of the blue'', like in figure
-\ref{\numb section 12.\numb fig 5}.
+\ref{\numb section 12.\numb fig 6}.
 
 \begin{figure}[ht] \centering
   \includegraphics[width=45mm]{fill-blue}
   \caption{Creating a new triangle}
-  \label{\numb section 12.\numb fig 5}
+  \label{\numb section 12.\numb fig 6}
 \end{figure}
 
 Every time a new vertex is created, we must check whether it came close to another
 zone of the interface and take action as described in paragraph
-\ref{\numb section 12.\numb parag 8}.
+\ref{\numb section 12.\numb parag 9}.
 
 
           %----------------------%
-\section{~~Touching the interface}\label{\numb section 12.\numb parag 8}
+\section{~~Touching the interface}\label{\numb section 12.\numb parag 9}
           %----------------------%
 
-During the meshing process described in paragraph \ref{\numb section 12.\numb parag 5},
+During the meshing process described in paragraph \ref{\numb section 12.\numb parag 6},
 distinct zones of the moving interface may
 come close to each other and the algorithm will eventually put them in contact.
 Figure below shows the situation just prior to the contact.
@@ -280,7 +300,7 @@ The two zones may belong to different connected components of the interface,
 as in the configuration shown below on the left.
 In this case, the two components will merge, producing a new chain.
 The normal vectors will be propagated to the segments which did not have an associated
-normal vector (see paragraph \ref{\numb section 12.\numb parag 6}).
+normal vector (see paragraph \ref{\numb section 12.\numb parag 7}).
 But it may also happen that they are part of the same connected component,
 see the drawing below on the right.
 In this case, the current chain will split in two.
@@ -293,10 +313,10 @@ In this case, the current chain will split in two.
   \includegraphics[width=52mm]{touching-interf-2}
 \end{subfigure}  
   \caption{When the interface touches itself}
-  \label{\numb section 12.\numb fig 6}
+  \label{\numb section 12.\numb fig 7}
 \end{figure}
 
-Paragraphs \ref{\numb section 12.\numb parag 10} and \ref{\numb section 12.\numb parag 11}
+Paragraphs \ref{\numb section 12.\numb parag 11} and \ref{\numb section 12.\numb parag 12}
 explain how the {\small\tt\verm{MetricTree}} optimizes the process of checking whether a
 certain vertex has come close to other vertices.
 
@@ -319,20 +339,20 @@ while in the other drawing a Z-shaped connection is created.
   \includegraphics[width=65mm]{connect-Z}
 \end{subfigure}  
   \caption{An S-shaped connection on the right, a Z-shaped connection on the left}
-  \label{\numb section 12.\numb fig 7}
+  \label{\numb section 12.\numb fig 8}
 \end{figure}
 
 
           %------------------%
-\section{~~\cinza{[empty]}}\label{\numb section 12.\numb parag 9}
+\section{~~\cinza{[empty]}}\label{\numb section 12.\numb parag 10}
           %------------------%
 
 
 %---------%
-\section{~~The cloud}\label{\numb section 12.\numb parag 10}
+\section{~~The cloud}\label{\numb section 12.\numb parag 11}
           %---------%
 
-During the mesh generation process described in paragraph \ref{\numb section 12.\numb parag 5},
+During the mesh generation process described in paragraph \ref{\numb section 12.\numb parag 6},
 we have to check frequently the distance between
 some vertex on the evolving interface and all other vertices of the interface
 (including other connected components).
@@ -448,17 +468,17 @@ burden.
 
 If you want to run this example on your computer, it suffices to download three files
 ({\small\tt Makefile}, {\small\tt metric-tree-verbose.h} and
-{\small\tt test-\ref{\numb section 12.\numb parag 10}.cpp}) from\hfil\break
+{\small\tt test-\ref{\numb section 12.\numb parag 11}.cpp}) from\hfil\break
 {\small\tt https://github.com/cristian-barbarosie/manifem},\hfil\break
-then {\small\tt make run-\ref{\numb section 12.\numb parag 10}}.
+then {\small\tt make run-\ref{\numb section 12.\numb parag 11}}.
 
 
           %----------------------------------------%
-\section{~~The cloud in progressive mesh generation}\label{\numb section 12.\numb parag 11}
+\section{~~The cloud in progressive mesh generation}\label{\numb section 12.\numb parag 12}
           %----------------------------------------%
 
 The use of {\small\tt\verm{MetricTree}} for progressive mesh generation (described in paragraph
-\ref{\numb section 12.\numb parag 5}, with examples in section \ref{\numb section 3})
+\ref{\numb section 12.\numb parag 6}, with examples in section \ref{\numb section 3})
 is tricky when we are meshing a submanifold of $ \mathbb{R}^n $
 (a curve in $ \mathbb{R}^2 $ or $ \mathbb{R}^3 $, a surface in $ \mathbb{R}^3 $)
 because there are two distances we must deal with.
