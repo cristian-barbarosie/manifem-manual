@@ -34,7 +34,7 @@ where {\small\tt A} is a {\small\tt \verm{Cell}::Negative::Vertex} and {\small\t
 {\small\tt \verm{Cell}::Positive::Vertex}.
 
 Note that the interpolation operation is a method belonging to {\small\tt working\_\,manifold}
-(an object of the class {\small\tt Manifold}).
+(an object of the class {\small\tt\verm{Manifold}}).
 For a Euclidian manifold, this is just a convex combination of the values of the coordinates.
 However, for other manifolds it may be a more complex operation.
 For an implicit manifold, it involves a projection operation, as explained in paragraph
@@ -45,8 +45,9 @@ For an implicit manifold, it involves a projection operation, as explained in pa
 \section{~~Building a rectangular mesh}\label{\numb section 12.\numb parag 3}
           %---------------------------%
 
-Constructor {\small\tt \verm{Mesh}::Mesh} {\small\tt(} {\small\tt\textcolor{tag}{tag}::rectangle,...)}
-calls the {\small\tt\verm{Mesh}::build} method with {\small\tt \textcolor{tag}{tag}::rectangle}.
+Constructor {\small\tt \verm{Mesh}::Mesh} {\small\tt(}
+{\small\tt\textcolor{tag}{tag}::rectangle,...)} calls the {\small\tt\verm{Mesh}::build} method
+with {\small\tt \textcolor{tag}{tag}::} {\small\tt::rectangle}.
 This method, defined in {\small\tt global.cpp}, builds a rectangular mesh from its
 four sides (which are one-dimensional meshes, more precisely, open chains of segments).
 No need to provide the number of divisions, the four sides already have their internal divisions.
@@ -54,6 +55,15 @@ Of course, opposite sides should have the same number of (segment) cells.
 
 Paragraphs \ref{\numb section 1.\numb parag 4}, \ref{\numb section 1.\numb parag 5} and
 many others (e.g. in section \ref{\numb section 2}) show the use of this constructor.
+
+{\ManiFEM} chooses the orientation of the mesh based on the orientation of the four sides,
+as provided by the user.
+These orientations must be mutually compatible, e.g.\ last vertex of a side must be equal to
+the ({\small\tt reverse} of) the first vertex of the side following it.
+If we switch all four orientations, {\maniFEM} will produce the same two-dimensional mesh
+with opposite orientation.
+If we switch the orientation of some, but not all, of the sides, {\maniFEM} will complain
+that the orientations are not compatible with each other.
 
 Actually, the name {\small\tt rectangle} is misleading.
 Perhaps a better name would be {\small\tt quadrangle} but even this is not general enough to
@@ -72,7 +82,7 @@ interchangeably.
   \psfrag{east}{\small\tt\textcolor{textindraw}{east}}
   \psfrag{north}{\small\tt\textcolor{textindraw}{north}}
   \psfrag{west}{\small\tt\textcolor{textindraw}{west}}
-  \includegraphics[width=90mm]{fig-rectangle}
+  \includegraphics[width=85mm]{fig-rectangle}
   \caption{Meshing a rectangle}
   \label{\numb section 12.\numb fig 1}
 \end{figure}
@@ -91,7 +101,7 @@ Paragraph \ref{\numb section 2.\numb parag 7} shows an example where the interpo
 consists of a convex combination followed by a projection.
 For a manifold defined through an external parameter, the convex combination is performed
 on the external parameter and then the space coordinates are computed accordingly
-(paragraph \ref{\numb section 2.\numb parag 18} shows such a situation).
+(paragraph \ref{\numb section 2.\numb parag 19} shows such a situation).
 
 Providing a {\small\tt \textcolor{tag}{tag}::with\_\,triangles} makes the constructor cut each rectangle
 in halves; results are shown in paragraphs \ref{\numb section 2.\numb parag 3} and
@@ -117,7 +127,7 @@ the boundary of the triangle, as shown in figure below.
   \psfrag{Q_BC}{\small\tt\textcolor{textindraw}{Q\_\,BC}}
   \psfrag{P_CA}{\small\tt\textcolor{textindraw}{P\_\,CA}}
   \psfrag{Q_CA}{\small\tt\textcolor{textindraw}{Q\_\,CA}}
-  \includegraphics[width=75mm]{fig-triangle}
+  \includegraphics[width=70mm]{fig-triangle}
   \caption{Meshing a triangle}
   \label{\numb section 12.\numb fig 2}
 \end{figure}
@@ -128,6 +138,10 @@ the fact that we interpolate from six vertices compensates that.
 
 Examples are presented in paragraphs \ref{\numb section 1.\numb parag 5},
 \ref{\numb section 1.\numb parag 6} and \ref{\numb section 2.\numb parag 6}.
+
+Just like for a rectangular mesh (see paragraph \ref{\numb section 12.\numb parag 3}),
+{\maniFEM} chooses the orientation of the mesh based on the orientation of the three sides,
+as provided by the user.
 
 
           %------------------------%
@@ -182,7 +196,7 @@ Detecting such touching points requires evaluating the distance between many pai
 This may become extremely time consuming, unless special care is taken to organize points
 belonging to the interface in a hierarchy allowing one to eliminate many pairs of points
 from the evaluation process.
-Paragraph \ref{\numb section 12.\numb parag 11} describes this hierarchy.
+Paragraph \ref{\numb section 12.\numb parag 10} describes this hierarchy.
 
 The next few paragraphs describe specific parts of this process of progressive mesh generation.
 
@@ -316,7 +330,7 @@ In this case, the current chain will split in two.
   \label{\numb section 12.\numb fig 7}
 \end{figure}
 
-Paragraphs \ref{\numb section 12.\numb parag 11} and \ref{\numb section 12.\numb parag 12}
+Paragraphs \ref{\numb section 12.\numb parag 10} and \ref{\numb section 12.\numb parag 11}
 explain how the {\small\tt\verm{MetricTree}} optimizes the process of checking whether a
 certain vertex has come close to other vertices.
 
@@ -343,13 +357,8 @@ while in the other drawing a Z-shaped connection is created.
 \end{figure}
 
 
-          %------------------%
-\section{~~\cinza{[empty]}}\label{\numb section 12.\numb parag 10}
-          %------------------%
-
-
-%---------%
-\section{~~The cloud}\label{\numb section 12.\numb parag 11}
+           %---------%
+\section{~~The cloud}\label{\numb section 12.\numb parag 10}
           %---------%
 
 During the mesh generation process described in paragraph \ref{\numb section 12.\numb parag 6},
@@ -428,7 +437,7 @@ of {\small\tt N}.
 In other words : zones overlap.
 
 {\small\tt dist[k]} is a geometric sequence with ratio {\small\tt ratio}.
-{\small\tt ratio} must be greater than two; we recommend some value between 5 and 10.
+{\small\tt ratio} must be greater than two; we recommend some value between five and ten.
 So, {\small\tt dist[k] == ratio}$^{\hbox{\footnotesize\tt k }}${\small\tt dist[\laranja{0}]}.
 Recall that {\small\tt k} may be negative.
 
@@ -455,11 +464,11 @@ This method takes two arguments : a {\small\tt Point} (drawn in red) and a dista
 It returns a list (drawn in blue) of all {\small\tt Node}s in the cloud which are close enough
 to the red point (closer than the given distance).
 It is irrelevant whether the red point belongs to the cloud or not;
-if it belongs, it will be returned as element of the list.
+in figure \ref{\numb section 11.\numb fig 3} it does not.
 
 Figure \ref{\numb section 11.\numb fig 3} shows grey dots at nodes which have been analysed
 during the process of {\small\tt find\_\,close\_\,neighbours}
-x(their distance to the red dot has been computed).
+(their distance to the red dot has been computed).
 Lines without a dot represent nodes in the {\small\tt\verm{MetricTree}} which have not even been
 looked at because their parent has decided (based on the triangular inequality)
 that they cannot be close enough to the red dot.
@@ -468,13 +477,13 @@ burden.
 
 If you want to run this example on your computer, it suffices to download three files
 ({\small\tt Makefile}, {\small\tt metric-tree-verbose.h} and
-{\small\tt test-\ref{\numb section 12.\numb parag 11}.cpp}) from\hfil\break
+{\small\tt test-\ref{\numb section 12.\numb parag 10}.cpp}) from\hfil\break
 {\small\tt https://github.com/cristian-barbarosie/manifem},\hfil\break
-then {\small\tt make run-\ref{\numb section 12.\numb parag 11}}.
+then {\small\tt make run-\ref{\numb section 12.\numb parag 10}}.
 
 
           %----------------------------------------%
-\section{~~The cloud in progressive mesh generation}\label{\numb section 12.\numb parag 12}
+\section{~~The cloud in progressive mesh generation}\label{\numb section 12.\numb parag 11}
           %----------------------------------------%
 
 The use of {\small\tt\verm{MetricTree}} for progressive mesh generation (described in paragraph

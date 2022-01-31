@@ -168,7 +168,7 @@ explain how {\maniFEM} chooses the orientation of closed curves.
           %--------------------------------%
 
 We may apply the same {\small\tt progressive} algorithm for meshing the circle in
-$ \mathbb{R}^3 $ introduced in paragraph \ref{\numb section 2.\numb parag 13} :
+$ \mathbb{R}^3 $ introduced in paragraph \ref{\numb section 2.\numb parag 14} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 4}.cpp,rulecolor=\color{coment},
@@ -213,7 +213,7 @@ we have meshed the entire closed curve {\small\tt circle}.
 If we only want a piece of a curve, we must specify two points, one for starting and
 the other one for stopping.
 
-Looking at the example in paragraph \ref{\numb section 2.\numb parag 15}, let us define a
+Looking at the example in paragraph \ref{\numb section 2.\numb parag 16}, let us define a
 spiral with a slightly different look and switch to progressive mesh generation.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -246,15 +246,15 @@ spiral with a slightly different look and switch to progressive mesh generation.
 
 Figure \ref{\numb section 3.\numb fig 3} shows the resulting mesh.
 
-Unlike in paragraph \ref{\numb section 2.\numb parag 15}, we define the spiral through
+Unlike in paragraph \ref{\numb section 2.\numb parag 16}, we define the spiral through
 an implicit equation.
 Had we chosen the (natural) definition {\small\tt r = \verm{power} ( x*x + y*y, 0.5 )},
-the very same spiral as in paragraph \ref{\numb section 2.\numb parag 15} would have been
+the very same spiral as in paragraph \ref{\numb section 2.\numb parag 16} would have been
 obtained.
 For aesthetic reasons, we have chosen a different definition of {\small\tt r}, thus obtaining
 a different spacing between the arcs of the spiral.
 
-Another noteworthy difference from paragraph \ref{\numb section 2.\numb parag 15} is that
+Another noteworthy difference from paragraph \ref{\numb section 2.\numb parag 16} is that
 vertices are distributed uniformly along the spiral (with respect to the distance
 in the surrounding space $ \mathbb{R}^2 $).
 The segments are too small to be seen in the figure.
@@ -276,8 +276,8 @@ Thus, if we want to mesh an arc of a circle, we can use a sequence of statements
    RR2 .implicit ( (x-x0)*(x-x0) + (y-y0)*(y-y0) == radius * radius );
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  \cinza{// set x(A) and y(A)}
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  \cinza{// set x(B) and y(B)}
-   \verm{Mesh} \azul{arc_of_circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A,
-                        \textcolor{tag}{tag}::stop_at, B, \textcolor{tag}{tag}::desired_length, \mbox{\fontfamily{helvetica}\selectfont{}some\_\,value} );
+   \verm{Mesh} \azul{arc_of_circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, A, \textcolor{tag}{tag}::stop_at, B,
+                        \textcolor{tag}{tag}::desired_length, \mbox{\fontfamily{helvetica}\selectfont{}some\_\,value}, \textcolor{tag}{tag}::shortest_path  );
 \end{Verbatim}
 
 However, if we choose {\small\tt A} and {\small\tt B} diametrally opposed, {\maniFEM} will
@@ -357,6 +357,7 @@ It can be vaguely described as a convolution between two tori.
    \verm{Function} \azul{f3} = (x-\laranja{0.4})*(x-\laranja{0.4}) + z*z + \laranja{0.1};  \cinza{// we add 0.1 to avoid singularities}
    \verm{Function} \azul{f4} = \laranja{1.} - \verm{power} ( f3, \laranja{-0.5} );
    \verm{Function} \azul{d2} = y*y + f3 * f4 *f4;  \cinza{// squared distance to a circle in the xz plane}
+
    \verm{Manifold} \azul{tori_manif} = RR3 .implicit
       ( \verm{smooth_min} ( d1, d2, \textcolor{tag}{tag}::threshold, \laranja{0.2} ) == \laranja{0.15} );
 
@@ -384,7 +385,7 @@ Comments at the end of paragraph \ref{\numb section 3.\numb parag 6} apply here,
 \section{~~A bumpy hemisphere}\label{\numb section 3.\numb parag 9}
           %------------------%
 
-We now look again at the surface in paragraph \ref{\numb section 2.\numb parag 14}
+We now look again at the surface in paragraph \ref{\numb section 2.\numb parag 15}
 and build it progressively, using fewer lines of code.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -740,7 +741,7 @@ In paragraph \ref{\numb section 3.\numb parag 12} we have seen how we can specif
 of propagation of the mesh for one-dimensional manifolds.
 A similar approach can be taken for two-dimensional meshes.
 For instance, code below will mesh the upper half of the ``bumpy hemisphere'' already considered
-in paragraphs \ref{\numb section 2.\numb parag 14}, \ref{\numb section 3.\numb parag 9} and
+in paragraphs \ref{\numb section 2.\numb parag 15}, \ref{\numb section 3.\numb parag 9} and
 \ref{\numb section 3.\numb parag 14}, oriented upwards.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -849,6 +850,12 @@ and then {\small\tt join}ing them.
 The edges must be built first;
 thus, some previous knowledge about the geometry of the surface is needed.
 
+\begin{figure} \centering
+ \includegraphics[width=97mm]{sphere-cyl}
+  \caption{Sphere glued to cylinder}
+  \label{\numb section 3.\numb fig 5}
+\end{figure}
+
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 18}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                            ]
@@ -886,21 +893,8 @@ thus, some previous knowledge about the geometry of the surface is needed.
    \verm{Mesh} \azul{piece_of_sph} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, circle_2,
                        \textcolor{tag}{tag}::start_at, start_2, \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{0.}, \laranja{-1.} \},
                        \textcolor{tag}{tag}::desired_length, seg_size                         );
-                       
    \verm{Mesh} \azul{sphere_and_cylinder} ( \textcolor{tag}{tag}::join, piece_of_sph, piece_of_cyl );
 \end{Verbatim}
-
-\begin{figure} \centering
- \includegraphics[width=100mm]{sphere-cyl}
-  \caption{Sphere glued to cylinder}
-  \label{\numb section 3.\numb fig 5}
-\end{figure}
-
-\begin{figure}[ht] \centering
- \includegraphics[width=100mm]{crack}
-  \caption{Zoom around the joint}
-  \label{\numb section 3.\numb fig 6}
-\end{figure}
 
 Note how the orientation is important (see paragraphs \ref{\numb section 1.\numb parag 2}
 and \ref{\numb section 1.\numb parag 4}).
@@ -912,6 +906,12 @@ we see that the common boundary has a certain orientation when seen from the cyl
 has the opposite orientation when seen from the sphere.
 If we do not respect these orientations, {\maniFEM} will be unable to {\small\tt join} the two
 meshes.
+
+\begin{figure}[ht] \centering
+ \includegraphics[width=100mm]{crack}
+  \caption{Zoom around the joint}
+  \label{\numb section 3.\numb fig 6}
+\end{figure}
 
 If we want to close the extremity of the cylinder, it suffices to add a few lines of code$\,$:
 
@@ -1049,6 +1049,7 @@ We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb para
    baselinestretch=0.94,framesep=2mm                                  ]
    \verm{Manifold} \azul{cylinder} = RR3 .implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == \laranja{0.25} );
    \verm{Manifold} \azul{infinity} = cylinder .implicit ( x*x + y*y + z*z == \laranja{1.} );
+
    \verm{Cell} \azul{V} ( \textcolor{tag}{tag}::vertex );  x (V) = \laranja{0.};  y (V) = \laranja{0.};  z (V) = \laranja{1.};
    \verm{Mesh} \azul{circle_1} ( \textcolor{tag}{tag}::progressive,
                    \textcolor{tag}{tag}:: start_at, V, \textcolor{tag}{tag}::towards, \{ \laranja{1.}, \laranja{1.}, \laranja{0.} \},
@@ -1110,7 +1111,6 @@ The {\small\tt desired\_\,length} may be a non-constant function.
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, d );
 
    \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner .reverse() );
-
    RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, d );
 \end{Verbatim}
@@ -1153,7 +1153,6 @@ we see in the drawing), thus producing the same result as in paragraph
    
    \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
-
    \verm{Manifold} \azul{ellipse} = RR2 .implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 
@@ -1184,6 +1183,12 @@ The arguments of {\small\tt set\_\,metric} are $ m_{11} $, $ m_{12} $ and $ m_{2
 for two dimensions,
 $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for three dimensions.
 
+\begin{figure} \centering
+ \includegraphics[width=90mm]{disk-anisotrop}
+  \caption{Anisotropic mesh}
+  \label{\numb section 3.\numb fig 11}
+\end{figure}
+
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=code not working,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                  ]
@@ -1196,21 +1201,15 @@ $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for th
    \cinza{// or, equivalently :}
    \cinza{// RR2 .set_metric ( tag::principal_part, 1.,}
    \cinza{//                   tag::deviatoric_part, 1./d, \-3./d, 9./d );}
-
    \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
    \verm{Manifold} \azul{ellipse} = RR2 .implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
    \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner .reverse() );
+
    RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
-
-\begin{figure} \centering
- \includegraphics[width=90mm]{disk-anisotrop}
-  \caption{Anisotropic mesh}
-  \label{\numb section 3.\numb fig 11}
-\end{figure}
 
 Compare with the mesh in paragraph \ref{\numb section 3.\numb parag 3}.
 

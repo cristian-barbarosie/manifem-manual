@@ -59,13 +59,6 @@ But it makes no sense to change the value of {\small\tt norm} at cell {\small\tt
 Thus, statements like {\small\tt x(A)} {\small\tt =} {\small\tt\laranja{1.}} work fine,
 while {\small\tt norm(A)} {\small\tt =} {\small\tt\laranja{1.}} produces a run-time error.
 
-{\small\tt\verm{Function}} objects allow for arithmetic expressions like in
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Function} \azul{norm} = \verm{power} ( x*x + y*y, \laranja{0.5} );
-\end{Verbatim}
-
 The {\small\tt deriv} method performs symbolic differentiation :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,

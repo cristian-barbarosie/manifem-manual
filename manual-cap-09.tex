@@ -137,7 +137,7 @@ paragraph \ref{\numb section 11.\numb parag 4}.
 
 Note how we use a version of the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::join}
 taking as argument a vector of {\small\tt \verm{Mesh}}es; we have already seen it in paragraphs
-\ref{\numb section 2.\numb parag 7} and \ref{\numb section 2.\numb parag 12}.
+\ref{\numb section 2.\numb parag 7} and \ref{\numb section 2.\numb parag 13}.
 
 We might have set curved boundaries by using a submanifold of $ \mathbb{R}^2 $, like in paragraph
 \ref{\numb section 2.\numb parag 9}.
@@ -560,7 +560,7 @@ Suppose now we want the next segment, within the boundary of {\small\tt hex\_\,1
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{BC} = hex_1 .boundary() .cell_in_front_of ( B );
+   \verm{Cell} \azul{BC} = hex_1 .boundary() .cell_in_front_of (B);
 \end{Verbatim}
 
 And now we may continue by taking the tip of {\small\tt BC} and then the segment
@@ -569,12 +569,25 @@ following it$\;$:
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Cell} \azul{C} = BC .tip();
-   \verm{Cell} \azul{CD} = hex_1 .boundary() .cell_in_front_of ( C );
+   \verm{Cell} \azul{CD} = hex_1 .boundary() .cell_in_front_of (C);
 \end{Verbatim}
 
 \noindent an so forth (this is how iterators over vertices and segments of connected
 one-dimensional meshes, described in paragraph \ref{\numb section 9.\numb parag 4},
 are implemented internally).
+
+If you want to go backwards, you should be aware that the {\small\tt base} of a segment
+is a negative vertex.
+Thus, an expression like {\small\tt hex\_\,1} {\small\tt .boundary()}
+{\small\tt .cell\_\,in\_\,front\_\,of} {\small\tt (} {\small\tt BC} {\small\tt .base()}
+{\small\tt )} will produce an execution error;
+{\small\tt BC.base()} is not equal to {\small\tt B} but to {\small\tt B.reverse()}.
+Thus, to obtain {\small\tt AB} you should use {\small\tt hex\_\,1} {\small\tt .boundary()}
+{\small\tt .cell\_\,behind} {\small\tt (} {\small\tt B} {\small\tt )} or {\small\tt hex\_\,1}
+{\small\tt .boundary()} {\small\tt .cell\_\,behind}\break
+{\small\tt (} {\small\tt BC} {\small\tt .base()} {\small\tt .reverse()} {\small\tt )}.
+Recall that {\small\tt hex\_\,1} {\small\tt .boundary()} {\small\tt .cell\_\,in\_\,front\_\,of}
+{\small\tt (B)} is {\small\tt BC}.
 
 Within the mesh {\small\tt hex\_\,msh}, we can navigate towards a neighbour hexagon :
 
@@ -596,14 +609,15 @@ a neighbour cell and thus avoid errors at execution time.
 Note that faces point outwards.
 For instance, {\small\tt CD} belongs to the boundary of {\small\tt hex\_\,1} and points
 outwards, towards {\small\tt hex\_\,2}.
-Thus, {\small\tt hex\_\,msh.cell\_\,in\_\,front\_\,of(CD)} produces {\small\tt hex\_\,2}.
-On the other hand, {\small\tt hex\_\,msh.cell\_\,behind(CD)} is {\small\tt hex\_\,1}.
+Thus, {\small\tt hex\_\,msh} {\small\tt .cell\_\,in\_\,front\_\,of} {\small\tt (} {\small\tt CD} {\small\tt )} produces {\small\tt hex\_\,2}.
+On the other hand, {\small\tt hex\_\,msh} {\small\tt .cell\_\,behind} {\small\tt (} {\small\tt CD} {\small\tt )} is {\small\tt hex\_\,1}.
 
 Note also that {\small\tt CD} does not belong to the boundary of {\small\tt hex\_\,2}.
-If we take {\small\tt hex\_\,2.boundary(). .cell\_\,in\_\,front\_\,of(D)} we will obtain not
-{\small\tt CD} but its reverse, a distinct cell which we may call {\small\tt DC}.
-We have that {\small\tt hex\_\,msh.cell\_\,in\_\,front\_\,of(DC)} is {\small\tt hex\_\,1} and
-{\small\tt hex\_\,msh.cell\_\,behind(DC)} is {\small\tt hex\_\,2}.
+If we take {\small\tt hex\_\,2.boundary(). .cell\_\,in\_\,front\_\,of} {\small\tt (D)}
+we will obtain not {\small\tt CD} but its reverse, a distinct cell which we may call {\small\tt DC}.
+We have that {\small\tt hex\_\,msh} {\small\tt .cell\_\,in\_\,front\_\,of} {\small\tt (}
+{\small\tt DC} {\small\tt )} is {\small\tt hex\_\,1} and {\small\tt hex\_\,msh}
+{\small\tt .cell\_\,behind} {\small\tt (} {\small\tt DC} {\small\tt )} is {\small\tt hex\_\,2}.
 Between {\small\tt CD} and {\small\tt DC}, one is positive and the other is negative;
 which is which is not very important for the user.
 

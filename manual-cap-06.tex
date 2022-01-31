@@ -10,6 +10,12 @@ and paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb
 give examples of use.
 There is a lot of ongoing work on this subject.
 
+{\ManiFEM} distinguishes between cells (which are geometric entities) and finite elements.
+We may have different finite elements whose geometry is the same.
+For instance, we may have triangular Lagrange finite elemens of different degrees;
+they will all {\small\tt dock\_\,on} the same triangular cell.
+See e.g.\ paragraph \ref{\numb section 6.\numb parag 5}.
+
 Finite elements in {\maniFEM} can be divided in two categories.
 Finite elements based on symbolic computations, using Gauss quadrature on a master element,
 are discussed in
@@ -28,7 +34,7 @@ Also, from the point of view of the final user, their syntax is slightly less el
 \section{~~Finite elements}\label{\numb section 6.\numb parag 1}
           %---------------%
 
-The notion of a finite element is quite complex.
+The notion of finite element is quite complex.
 The purpose of a {\small\tt\verm{FiniteElement}} is to build a list of functions, say, $ \psi $,
 defined on our mesh.
 The linear span of these functions will be a finite-dimensional Hilbert space
@@ -88,12 +94,6 @@ occuppying the square $ [-1, 1]^2 $ and the current cell).
 It will also build the jacobian of this transformation map (through symbolic differentiation).
 The four shape functions can be accessed through the method {\small\tt basis\_\,function},
 as shown in paragraph \ref{\numb section 6.\numb parag 2}.
-
-{\ManiFEM} distinguishes between cells (which are geometric entities) and finite elements.
-We may have different finite elements whose geometry is the same.
-For instance, we may have triangular Lagrange finite elemens of different degrees;
-they will all {\small\tt dock\_\,on} the same triangular cell.
-See e.g.\ paragraph \ref{\numb section 6.\numb parag 5}.
 
 It should be stressed that the approach presented in this section is rather low-level.
 We are working hard to make {\maniFEM} understand statements describing variational
