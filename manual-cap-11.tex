@@ -422,7 +422,7 @@ The {\small\tt DEBUG} mode is explained in paragraph \ref{\numb section 11.\numb
 
 The geometric dimension is set by simply declaring a Euclidian manifold and building
 a coordinate system on it (see e.g.\ paragraphs \ref{\numb section 1.\numb parag 1},
-\ref{\numb section 2.\numb parag 19} and \ref{\numb section 5.\numb parag 1}).
+\ref{\numb section 2.\numb parag 20} and \ref{\numb section 5.\numb parag 1}).
 
 
           %--------------------%
@@ -713,6 +713,9 @@ interpolation and projection operations.
 From the compiler's viewpoint, that {\small\tt\verm{Manifold}} oject is never used again and
 so it issues a warning.
 
+Sometimes, an {\small\tt\verm{Integrator}} is declared but never formally used,
+the integration command being delegated to the associated {\small\tt\verm{FiniteElement}}.
+
 Also, some functions are never used.
 They are there mainly for historical reasons.
 They have not been erased yet because part of their code may still be used in the future.
@@ -879,12 +882,13 @@ under the {\small\tt -I} flag of your compiler.
 You may also want to use {\tt gmsh}, available at {\small\tt http://gmsh.info/},
 for visualization purposes.
 
-We have chosen to put the source files of {\maniFEM} in the root directory of the source tree,
-as well as the {\small\tt Makefile}.
-The files containing the {\small\tt main} function for the examples in this manual are
-grouped under the {\small\tt examples-manual} directory.
+The source files of {\maniFEM} are grouped in the directory {\small\tt src};
+the {\small\tt Makefile} is in the root directory of the source tree,
+together with some other utility files.
+The source code of the {\small\tt main} function for the examples in this manual can be
+found in the {\small\tt examples-manual} directory.
 The {\small\tt Makefile} expects these {\small\tt main} files to be in that subdirectory
-and expects the source files of the library itself to be in the root directory.
+and expects the source files of the library itself to be in the {\small\tt src} directory.
 
 The user may naturally want to write their own {\small\tt main} files.
 There are three ways to do this.
@@ -925,6 +929,8 @@ After that, it suffices to issue the command {\small\tt make} {\small\tt run}.
 
 \azul{run}: a.out
 	./$<
+
+.SECONDARY:
 \end{Verbatim}
 
 You should be careful to use the same compilation options when compiling the library and

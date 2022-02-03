@@ -7,8 +7,8 @@
 
 \def\manifemrelease{22.02}
 \def\manualversion{22.02}
-\let\production 0
-\includeonly{manual-cap-05,manual-cap-06}
+\let\production 1
+% \includeonly{manual-cap-02}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -332,7 +332,7 @@ and \ref{\numb section 6.\numb parag 10}.
 
 \section*{22.02}
 
-\noindent In progressive mesh generation, change
+\noindent In progressive mesh generation (section \ref{\numb section 3}), change
 {\small\tt\textcolor{tag}{tag}::inherent\_\,orientation} into
 {\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::inherent} etc.
 Introduce {\small\tt\textcolor{tag}{tag}::shortest\_\,path}.
@@ -345,12 +345,20 @@ Introduce {\small\tt\textcolor{tag}{tag}::shortest\_\,path}.
 Switch to {\small\tt gmsh} version 4 format.          
 
 \noindent Introduce constructor {\small\tt\verm{Mesh}} {\small\tt \azul{msh}} {\small\tt (}
-{\small\tt\textcolor{tag}{tag}::cube,} {\small\tt ...} {\small\tt )}.
+{\small\tt\textcolor{tag}{tag}::cube,} {\small\tt ...} {\small\tt )}, paragraphs
+\ref{\numb section 1.\numb parag 7}, \ref{\numb section 2.\numb parag 12} and
+\ref{\numb section 2.\numb parag 15}.
+
+\noindent Gather source files under {\small\tt src} directory.
 
 
 \section*{To do}
 
-\noindent 3D meshing
+\noindent Implement constructor {\small\tt\verm{Mesh}} {\small\tt \azul{msh}} {\small\tt (}
+{\small\tt\textcolor{tag}{tag}::cube,} {\small\tt ...,} {\small\tt\textcolor{tag}{tag}::winding}
+{\small\tt )}.
+
+\noindent 3D meshing of more general shapes
 
 \noindent Implement a type {\small\tt\verm{Mesh}::Composed} for importing from 
 {\small\tt msh} files.
@@ -512,8 +520,8 @@ manifold, defined by an implicit equation :
 section \ref{\numb section 3}
 
 \noindent
-manifold, parametric : \ref{\numb section 2.\numb parag 16},
-\ref{\numb section 2.\numb parag 17}
+manifold, parametric : \ref{\numb section 2.\numb parag 17},
+\ref{\numb section 2.\numb parag 18}
 
 \noindent
 manifold, quotient : section \ref{\numb section 7}
@@ -615,7 +623,7 @@ segment {\small\tt \verm{Mesh}}es :
 \noindent
 {\small\tt set\_\,as\_\,working\_\,manifold} :
 \ref{\numb section 2.\numb parag 9} -- \ref{\numb section 2.\numb parag 13},
-\ref{\numb section 2.\numb parag 15}, \ref{\numb section 3.\numb parag 1},
+\ref{\numb section 2.\numb parag 16}, \ref{\numb section 3.\numb parag 1},
 \ref{\numb section 3.\numb parag 2}, \ref{\numb section 3.\numb parag 3},
 \ref{\numb section 3.\numb parag 9},
 \ref{\numb section 3.\numb parag 14} -- \ref{\numb section 3.\numb parag 24}
@@ -627,7 +635,7 @@ source text coloring : \ref{\numb section 11.\numb parag 2}
 {\small\tt\textcolor{tag}{tag}}\hskip0.5pt s : \ref{\numb section 11.\numb parag 3}
 
 \noindent
-torus : \ref{\numb section 2.\numb parag 18}, \ref{\numb section 2.\numb parag 7},
+torus : \ref{\numb section 2.\numb parag 19}, \ref{\numb section 2.\numb parag 7},
 \ref{\numb section 3.\numb parag 7},
 \ref{\numb section 7.\numb parag 4} -- \ref{\numb section 7.\numb parag 10},
 \ref{\numb section 7.\numb parag 17}

@@ -24,7 +24,8 @@ For instance :
    \verm{Mesh} \azul{rectangle} ( \textcolor{tag}{tag}::rectangle, south, east, north, west );
 \end{Verbatim}
 
-Paragraph \ref{\numb section 11.\numb parag 3} gives more details about {\small\tt\textcolor{tag}{tag}}s.
+Paragraph \ref{\numb section 11.\numb parag 3} gives more details about
+{\small\tt\textcolor{tag}{tag}}s.
 
 Internally, {\maniFEM} implements cells and meshes as persistent objects, built
 using the {\small\tt new} operator and thus having no syntactic scope.
@@ -51,7 +52,7 @@ Paragraph \ref{\numb section 9.\numb parag 10} gives a complete list.
 Recall that, in \maniFEM, cells and meshes are oriented.
 When a cell is declared, it is built as positive and has no reverse.
 Its reverse is a negative cell and will be built only if necessary.
-Cells have a method {\small\tt reverse} which does the following.
+Cells have a method {\small\tt reverse} which, invoked without arguments, does the following.
 It checks if the reverse object has already been built; if yes, it returns that object;
 otherwise, it builds the reverse cell on-the-fly and returns it.
 Paragraph \ref{\numb section 9.\numb parag 5} gives a more detailed explanation about
@@ -154,9 +155,9 @@ roughly a list of cells.
 Internally, {\maniFEM} keeps lists of cells of each dimension, up the the maximum
 dimension which is the dimension of the mesh.
 Thus, if {\small\tt msh} is a {\small\tt \verm{Mesh}} object, modelling a
-mesh of triangles, then {\small\tt msh.core->cells[0]} is a list of (wrappers) of
-each vertex of that mesh, {\small\tt msh.core->cells[1]} is a list of (wrappers) of
-each segment and {\small\tt msh.core->cells[2]} is a list of (wrappers) of each triangle.
+mesh of triangles, then {\small\tt msh.core->cells[\laranja{0}]} is a list of (wrappers) of
+each vertex of that mesh, {\small\tt msh.core->cells[\laranja{1}]} is a list of (wrappers) of
+each segment and {\small\tt msh.core->cells[\laranja{2}]} is a list of (wrappers) of each triangle.
 
 Thus, if we want to iterate over all segments of a mesh, we could use an
 {\small\tt std::list<\verm{Cell}>:: ::iterator}.
@@ -187,11 +188,13 @@ we can use a code like
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{2} );
+   \cinza{// or, equivalently :  Mesh::Iterator it = msh .iterator ( tag::over_cells, tag::of_max_dim )}
    for ( it .reset(); it .in_range(); it++ )
-   \{  \verm{Cell} \azul{cll} = *it;  do_something_to (cll);  \}
+   \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );  \}
 \end{Verbatim}
 
-Paragraph \ref{\numb section 11.\numb parag 3} gives some details about {\small\tt\textcolor{tag}{tag}}s.
+Paragraph \ref{\numb section 11.\numb parag 3} gives some details about
+{\small\tt\textcolor{tag}{tag}}s.
 
 In the above code you may note that these iterators obey to syntactic conventions
 slightly different from the ones in the Standard Template Library.
@@ -222,7 +225,7 @@ This has the advantage that the name of the iterator gains local scope.
    baselinestretch=0.94,framesep=2mm                      ]
    for ( \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{2}, \textcolor{tag}{tag}::reset );
          it .in_range(); it++                                                        )
-   \{  \verm{Cell} \azul{cll} = *it;  do_something_to (cll);  \}
+   \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );  \}
 \end{Verbatim}
 
 If we want to iterate over all vertices of the mesh, we can use
@@ -230,7 +233,7 @@ If we want to iterate over all vertices of the mesh, we can use
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{0} );
-   \cinza{// or, equivalently :  CellIterator it = msh .iterator ( tag::over_vertices )}
+   \cinza{// or, equivalently :  Mesh::Iterator it = msh .iterator ( tag::over_vertices )}
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;  do_something_to (P);  \}
 \end{Verbatim}
@@ -240,9 +243,9 @@ If we want to iterate over all segments of the mesh, we can use
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{1} );
-   \cinza{// or, equivalently :  CellIterator it = msh .iterator ( tag::over_segments )}
+   \cinza{// or, equivalently :  Mesh::Iterator it = msh .iterator ( tag::over_segments )}
    for ( it .reset(); it .in_range(); it++ )
-   \{  \verm{Cell} \azul{seg} = *it;  do_something_to (seg);  \}
+   \{  \verm{Cell} \azul{seg} = *it;  do_something_to ( seg );  \}
 \end{Verbatim}
 
 Note that an iterator running through cells of maximum dimension, that is, of dimension equal
@@ -255,7 +258,7 @@ by adding a {\small\tt \textcolor{tag}{tag}::force\_\,positive} as in
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{2}, \textcolor{tag}{tag}::force_positive );
+   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells, \textcolor{tag}{tag}::of_max_dim, \textcolor{tag}{tag}::force_positive );
 \end{Verbatim}
 
 Note that it is not safe to modify a mesh while iterating over its cells
@@ -312,12 +315,12 @@ The syntax is the same as the one described in pragraph \ref{\numb section 9.\nu
 
    \verm{Mesh}::Iterator \azul{it1} = chain .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{1} );
    for ( it1 .reset(); it1 .in_range(); it1++ )
-   \{  \verm{Cell} \azul{seg} = *it1;  do_something_to (seg);  \}
+   \{  \verm{Cell} \azul{seg} = *it1;  do_something_to ( seg );  \}
    
    \cinza{// or, equivalently,}
-   \cinza{// CellIterator it0 = chain .iterator ( tag::over_vertices )}
-   \cinza{// CellIterator it1 = chain .iterator ( tag::over_segments )}
-   \cinza{// CellIterator it1 = chain .iterator ( tag::over_cells_of_max_dim )}
+   \cinza{// Mesh::Iterator it0 = chain .iterator ( tag::over_vertices )}
+   \cinza{// Mesh::Iterator it1 = chain .iterator ( tag::over_segments )}
+   \cinza{// Mesh::Iterator it1 = chain .iterator ( tag::over_cells, tag::of_max_dim )}
 \end{Verbatim}
 
 If we want to start at a specific location, we can make a {\small\tt reset} call with
@@ -451,9 +454,9 @@ We also understand that usually there is no difference between these two iterato
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Mesh}::Iterator \azul{it1} = tri_msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{2} );
+   \verm{Mesh}::Iterator \azul{it1} = tri_msh .iterator ( \textcolor{tag}{tag}::over_cells, \textcolor{tag}{tag}::of_max_dim );
    \verm{Mesh}::Iterator \azul{it2} =
-      tri_msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{2}, \textcolor{tag}{tag}::force_positive );
+      tri_msh .iterator ( \textcolor{tag}{tag}::over_cells, \textcolor{tag}{tag}::of_max_dim, \textcolor{tag}{tag}::force_positive );
 \end{Verbatim}
 
 \noindent because all triangles composing {\small\tt tri\_\,mesh} should be positive
@@ -535,7 +538,7 @@ Pick one of them, at random :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Mesh}::Iterator \azul{it1} = hex_msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{2} );
+   \verm{Mesh}::Iterator \azul{it1} = hex_msh .iterator ( \textcolor{tag}{tag}::over_cells, \textcolor{tag}{tag}::of_max_dim );
    it1 .reset();  assert ( it1 .in_range() );
    \verm{Cell} \azul{hex_1} = *it1;
 \end{Verbatim}
@@ -701,7 +704,7 @@ The segments will show up in a rahter unpredictable order.
    \verm{Mesh}::Iterator \azul{it} =  \cinza{// P is a positive vertex within msh}
               msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{1}, \textcolor{tag}{tag}::around, P.reverse() );
    \cinza{// or, equivalently :}
-   \cinza{// CellIterator it = msh .iterator ( tag::over_segments, tag::around, P.reverse() )}
+   \cinza{// Mesh::Iterator it = msh .iterator ( tag::over_segments, tag::around, P.reverse() )}
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{seg} = *it;  do_something_to ( seg );  \}
 \end{Verbatim}
@@ -717,7 +720,7 @@ produces segments pointing towards {\small\tt P}.
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{1}, \textcolor{tag}{tag}::around, P );
    \cinza{// or, equivalently :}
-   \cinza{// CellIterator it = msh .iterator ( tag::over_segments, tag::around, P )}
+   \cinza{// Mesh::Iterator it = msh .iterator ( tag::over_segments, tag::around, P )}
 \end{Verbatim}
 
 In either case, since we are in a three-dimensional mesh, positive or negative segments
@@ -793,7 +796,7 @@ We can iterate over segments originating at {\small\tt P} (now the orientation o
    \verm{Mesh}::Iterator \azul{it} = 
                msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{1}, \textcolor{tag}{tag}::around, P.reverse() );
    \cinza{// or, equivalently :}
-   \cinza{// CellIterator it = msh .iterator ( tag::over_segments, tag::around, P.reverse() )}
+   \cinza{// Mesh::Iterator it = msh .iterator ( tag::over_segments, tag::around, P.reverse() )}
 \end{Verbatim}
 
 If we want to start with a particular square {\small\tt sq}, we specify this by giving
@@ -871,7 +874,7 @@ No new cell or mesh is created :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Cell} \azul{A} = B;  \cinza{// B is a Cell}
-   \verm{Cell} \azul{C} = *it;  \cinza{// 'it' is a CellIterator}
+   \verm{Cell} \azul{C} = *it;  \cinza{// 'it' is a Mesh::Iterator}
    \verm{Mesh} \azul{msh_copy} = msh;  \cinza{// msh is a Mesh}
    \verm{Mesh} \azul{bd} = cll .boundary();  \cinza{// cll is a Cell of dimension 1 or higher}
 \end{Verbatim}

@@ -32,8 +32,67 @@ This algoritm converges only if the initial guess (that is, the coordinates of t
 trying to project) is close enough to the manifold.
 The user should take this limitation into account.
 
-Many {\small\tt Mesh} constructors project vertices on the current working manifold
-{\small\tt Manifold::working} wihtout the user's assistance.
+Many {\small\tt\verm{Mesh}} constructors project vertices on the current working manifold
+{\small\tt\verm{Manifold}::working} wihtout the user's assistance.
 On the other hand, vertices can be explicitly {\small\tt project}ed if necessary.
-Paragraphs \ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb parag 15},
+Paragraphs \ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb parag 16},
 \ref{\numb section 3.\numb parag 2} -- \ref{\numb section 3.\numb parag 9} show such examples.
+
+
+          %--------------------------------------%
+\section{~~Exchanging information with {\tt gmsh}}\label{\numb section 8.\numb parag 2}
+          %--------------------------------------%
+
+{\small\tt gmsh} is a complex software and does much more than drawing meshes.
+In this paragraph we show how {\maniFEM} can take advantage of {\small\tt gmsh}'s capabilities
+for writing and reading back complex meshes.
+
+To fix ideas, let us focus on the example in paragraph \ref{\numb section 3.\numb parag 18},
+where a mesh called {\small\tt sphere\_\,and\_} {\small\tt\_\,cylinder} is built.
+We can save this mesh using method {\small\tt\verm{Mesh}::export\_\,to\_\,file}, then use
+{\small\tt gmsh} to draw it.
+But if we want to re-use this mesh in another {\maniFEM} program, the declaration
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                     ]
+   \verm{Mesh} \azul{sphere_and_cylinder} ( \textcolor{tag}{tag}::import, \textcolor{tag}{tag}::msh, \verde{"filename.msh"});
+\end{Verbatim}
+
+\noindent may be insufficient for our needs.
+You see, in the original program (the one presented in paragraph
+\ref{\numb section 3.\numb parag 18}) we had at our disposal not only the {\small\tt\verm{Mesh}}
+object {\small\tt sphere\_\,and\_\,cylinder} but also other {\tt C++} objects like
+{\small\tt piece\_\,of\_\,sph}, {\small\tt piece\_\,of\_\,cyl}, {\small\tt two\_\,circles},
+{\small\tt circle\_\,1} and {\small\tt circle\_\,2}.
+Depending on our intentions, these objects may be useful.
+For instance, we may want to iterate over all segments of {\small\tt circle\_\,1} in order to
+impose some boundary condition.
+Or, we may want to {\small\tt join} the mesh {\small\tt sphere\_\,and\_\,cylinder} to some
+other mesh (say, another sphere).
+In order for the {\small\tt join} operation to work well, we must build that other
+mesh starting from {\small\tt circle\_\,1} as boundary.
+If you don't understand the previous statement, you may want to read again paragraphs
+\ref{\numb section 1.\numb parag 4} and \ref{\numb section 3.\numb parag 18}.
+
+The problem is, in the second {\maniFEM} program, the one which {\small\tt import}s the mesh
+{\small\tt sphere\_\,and\_} {\small\tt\_\,cylinder} from an {\small\tt msh} file,
+we do not have access to the {\small\tt circle\_\,1} object.
+True, we can recover it by testing each segment of {\small\tt sphere\_\,and\_\,cylinder}
+(or rather, both extremities of each segment) against the equation {\small\tt x} {\small\tt ==}
+{\small\tt\laranja{1.5}}, but this not elegant.
+It would be nice to extract, from one {\small\tt msh} file, several related
+{\small\tt\verm{Mesh}} objects.
+And this is only possible if we save, in the first {\maniFEM} program, more precise information
+than merely one large {\small\tt\verm{Mesh}} object.
+
+Luckily, the {\small\tt msh} file format allows one to specify regions of a mesh
+either through {\small\tt EntityTag}s (which are integer numbers)
+or through {\small\tt PhysicalName}s (which are strings).
+{\ManiFEM} takes advantage of these features so save (and later recover) several
+{\small\tt\verm{Mesh}}es, components of one large {\small\tt\verm{Mesh}}, in (and from)
+one {\small\tt msh} file.
+
+In the future, a class {\small\tt\verm{Mesh}::Composed} will be implemented which will
+allow the user to save, using a clear and elegant syntax, components of a {\small\tt\verm{Mesh}}
+and later retrieve them  from an {\small\tt msh} file.
+

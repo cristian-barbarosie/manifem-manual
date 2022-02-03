@@ -101,7 +101,7 @@ Paragraph \ref{\numb section 2.\numb parag 7} shows an example where the interpo
 consists of a convex combination followed by a projection.
 For a manifold defined through an external parameter, the convex combination is performed
 on the external parameter and then the space coordinates are computed accordingly
-(paragraph \ref{\numb section 2.\numb parag 19} shows such a situation).
+(paragraph \ref{\numb section 2.\numb parag 20} shows such a situation).
 
 Providing a {\small\tt \textcolor{tag}{tag}::with\_\,triangles} makes the constructor cut each rectangle
 in halves; results are shown in paragraphs \ref{\numb section 2.\numb parag 3} and
@@ -148,7 +148,13 @@ as provided by the user.
 \section{~~Building a mesh of cubes}\label{\numb section 12.\numb parag 5}
           %------------------------%
 
-Work in progress.
+The process of meshing a cube is similar to meshing a square; it is done layer by layer.
+Unlike for a square, where we have used an {\small\tt std::list} of {\small\tt\verm{Cell}}s
+{\small\tt horizon}, here we use a {\small\tt\verm{Mesh}} {\small\tt front} which
+keeps the newly built faces.
+The advantage of using a {\small\tt\verm{Mesh}} instead of a {\small\tt list} of
+{\small\tt\verm{Cell}}s is that we can navigate through is as described in paragraph
+\ref{\numb section 9.\numb parag 6}.
 
 \begin{figure}[ht] \centering
   \psfrag{S}{\small\tt\textcolor{textindraw}{ver\_\,south}}
@@ -283,7 +289,7 @@ figure \ref{\numb section 12.\numb fig 5} shows such situations.
 \begin{subfigure}{50mm}\centering
   \includegraphics[width=45mm]{fill-angle-120-b}
 \end{subfigure}  
-  \caption{Two adjacent $ 120^\circ $ angles}
+  \caption{Adjacent $ 120^\circ $ angles}
   \label{\numb section 12.\numb fig 5}
 \end{figure}
 
