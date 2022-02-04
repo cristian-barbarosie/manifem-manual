@@ -622,7 +622,8 @@ then six squares, then finally invoke the {\small\tt\verm{Mesh}} constructor wit
   \label{\numb section 1.\numb fig 9}
 \end{figure}
 
-Just like for two-dimensional meshes, the orientation of the resulting mesh is determined
+
+Just like for two-dimensional rectangular meshes, the orientation of the resulting mesh is determined
 by the orientation of the six faces, as provided by the user.
 These orientations must be mutually compatible.
 
@@ -636,8 +637,13 @@ This was done using the following options of {\small\tt gmsh}: {\small\tt Tools}
 {\small\tt Clipping} $\to$ {\small\tt Mesh} $\to$ {\small\tt Planes} $\to$
 {\small\tt Keep whole elements}, $ A = 1, B = -0.2, C = -0.3, D = 0.1 $.
 
+Just like for two-dimensional rectangular meshes, vertices may be in any position in the space,
+the space may have more than three dimensions, edges and faces may be curved.
 Paragraphs \ref{\numb section 2.\numb parag 12} and \ref{\numb section 2.\numb parag 15} show a
 fancier use of the {\small\tt\verm{Mesh}} constructor with {\small\tt\textcolor{tag}{tag}::cube}.
+
+
+
 
 
           %------------------------------%
