@@ -8,7 +8,7 @@
 \def\manifemrelease{22.**}
 \def\manualversion{22.**}
 \let\production 0
-\includeonly{manual-cap-03}
+\includeonly{manual-cap-12}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -84,10 +84,10 @@
 This document describes \maniFEM, a {\tt C++} library for solving partial differential equations
 through the finite element method.
 The name comes from ``finite elements on manifolds''. 
-{\ManiFEM} has been designed with the goal of coping with very general meshes,
+{\ManiFEM} was designed with the goal of coping with very general meshes,
 in particular meshes on Riemannian manifolds, even manifolds which cannot be embedded
 in $ {\mathbb R}^3 $, like the torus $ {\mathbb R}^2/{\mathbb Z}^2 $.
-Also, {\maniFEM} has been written with the goal of being conceptually clear
+Also, {\maniFEM} was written with the goal of being conceptually clear
 and easy to read.
 We hope it will prove particularly useful for people who want fine control on the mesh,
 e.g.\ for implementing their own meshing or remeshing algorithms.
@@ -308,7 +308,7 @@ paragraph \ref{\numb section 11.\numb parag 5}.
 \section*{21.11}
 
 \noindent Folding (or wrapping) of a mesh around a cylinder or a torus, paragraphs
-\ref{\numb section 7.\numb parag 16} -- \ref{\numb section 7.\numb parag 18}.
+\ref{\numb section 7.\numb parag 16} -- \ref{\numb section 7.\numb parag 19}.
 
 
 \section*{21.12}
@@ -334,13 +334,13 @@ and \ref{\numb section 6.\numb parag 10}.
 
 \noindent In progressive mesh generation (section \ref{\numb section 3}), change
 {\small\tt\textcolor{tag}{tag}::inherent\_\,orientation} into
-{\small\tt\textcolor{tag}{tag}::orientation,} {\small\tt\textcolor{tag}{tag}::inherent} etc.
+{\small\tt\textcolor{tag}{tag}::} {\small\tt::orientation,} {\small\tt\textcolor{tag}{tag}::inherent} etc.
 Introduce {\small\tt\textcolor{tag}{tag}::shortest\_\,path}.
 
 \noindent Introduce constructor {\small\tt\verm{Mesh}} {\small\tt \azul{msh}} {\small\tt (}
 {\small\tt\textcolor{tag}{tag}::import,} {\small\tt \textcolor{tag}{tag}::msh,}
 {\small\tt\verde{"filename.msh"})}.
-\noindent Rename {\small\tt\verm{Mesh}::export\_\,msh} to
+\noindent Rename {\small\tt\verm{Mesh}::} {\small\tt::export\_\,msh} to
 {\small\tt\verm{Mesh}::export\_\,to\_\,file}.
 Switch to {\small\tt gmsh} version 4 format.          
 
@@ -354,7 +354,7 @@ Switch to {\small\tt gmsh} version 4 format.
 
 \section*{22.03}
 
-Fix nasty bug in progressive mesh generation.
+\noindent Fix nasty bug in progressive mesh generation.
 
 
 \section*{To do}
@@ -363,7 +363,7 @@ Fix nasty bug in progressive mesh generation.
 {\small\tt\textcolor{tag}{tag}::cube,} {\small\tt ...,} {\small\tt\textcolor{tag}{tag}::winding}
 {\small\tt )}.
 
-\noindent 3D meshing of more general shapes
+\noindent 3D meshing of more general shapes (progressive, with tetrahedra)
 
 \noindent Implement a type {\small\tt\verm{Mesh}::Composed} for importing from 
 {\small\tt msh} files.
@@ -464,7 +464,7 @@ finite element : section \ref{\numb section 6}
 
 \noindent
 folding a mesh around a cylinder or a torus : \ref{\numb section 7.\numb parag 16} --
-\ref{\numb section 7.\numb parag 18}
+\ref{\numb section 7.\numb parag 19}
 
 \noindent
 {\small\tt \verm{Function}} : \ref{\numb section 1.\numb parag 3},
@@ -583,7 +583,7 @@ parallel processing : \ref{\numb section 13.\numb parag 2}, \ref{\numb section 1
 parametric manifold : see manifold, parametric
 
 \noindent
-progressive mesh generation : section \ref{\numb section 3}, \ref{\numb section 7.\numb parag 19},
+progressive mesh generation : section \ref{\numb section 3}, \ref{\numb section 7.\numb parag 20},
 \ref{\numb section 12.\numb parag 6} -- \ref{\numb section 12.\numb parag 9},
 \ref{\numb section 12.\numb parag 11}
 

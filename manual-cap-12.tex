@@ -20,12 +20,12 @@ It contains mainly drawings which document specific parts of \maniFEM.
 
 One of the simplest meshes is an open chain of segments.
 The {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::segment}
-calls the {\small\tt\verm{Mesh}::build} method with {\small\tt \textcolor{tag}{tag}::segment}.
+calls themethod {\small\tt\verm{Mesh}::build} with {\small\tt \textcolor{tag}{tag}::segment}.
 This method is defined in
 {\small\tt global.cpp}, receives two vertices (a negative one and a positive one)
 and the desired number of segments and builds the chain.
-New vertices are built by using the constructor\hfil\break
-{\small\tt \verm{Cell}} {\small\tt(} {\small\tt\textcolor{tag}{tag}::vertex} {\small\tt)}.
+New vertices are built by using the {\small\tt \verm{Cell}} constructor with
+{\small\tt\textcolor{tag}{tag}::vertex}.
 Space coordinates of each new vertex are defined by interpolating the coordinates of the
 two extremities of the chain.
 New segments are built by means of constructor {\small\tt \verm{Cell}} {\small\tt(}
@@ -40,13 +40,24 @@ However, for other manifolds it may be a more complex operation.
 For an implicit manifold, it involves a projection operation, as explained in paragraph
 \ref{\numb section 8.\numb parag 1}.
 
+This constructor builds a {\small\tt\verm{Mesh}::Connected::OneDim}
+(see paragraph \ref{\numb section 11.\numb parag 6}).
+Thus, we can later retrieve the starting vertex through methods
+{\small\tt\verm{Mesh}::first\_\,vertex} (which provides a negative vertex {\small\tt\verm{Cell}})
+and {\small\tt\verm{Mesh}::last\_\,vertex} (which provides a positive vertex {\small\tt\verm{Cell}}).
+
+For meshing curves on a quotient manifold, supplementary arguments must be given :
+a {\small\tt\textcolor{tag}{tag}::winding} followed by the winding number of the segment
+to be built.
+If this winding number is zero, these supplementary arguments may be omitted.
+Several examples are shown in section \ref{\numb section 7}.
 
           %---------------------------%
 \section{~~Building a rectangular mesh}\label{\numb section 12.\numb parag 3}
           %---------------------------%
 
 Constructor {\small\tt \verm{Mesh}::Mesh} {\small\tt(}
-{\small\tt\textcolor{tag}{tag}::rectangle,...)} calls the {\small\tt\verm{Mesh}::build} method
+{\small\tt\textcolor{tag}{tag}::rectangle,...)} calls the method {\small\tt\verm{Mesh}::build}
 with {\small\tt \textcolor{tag}{tag}::} {\small\tt::rectangle}.
 This method, defined in {\small\tt global.cpp}, builds a rectangular mesh from its
 four sides (which are one-dimensional meshes, more precisely, open chains of segments).
@@ -59,7 +70,7 @@ many others (e.g. in section \ref{\numb section 2}) show the use of this constru
 {\ManiFEM} chooses the orientation of the mesh based on the orientation of the four sides,
 as provided by the user.
 These orientations must be mutually compatible, e.g.\ last vertex of a side must be equal to
-the ({\small\tt reverse} of) the first vertex of the side following it.
+(the {\small\tt reverse} of) the first vertex of the side following it.
 If we switch all four orientations, {\maniFEM} will produce the same two-dimensional mesh
 with opposite orientation.
 If we switch the orientation of some, but not all, of the sides, {\maniFEM} will complain
@@ -72,6 +83,9 @@ describe the constructor's ability to build curved patches like the ones shown i
 \ref{\numb section 2.\numb parag 11}.
 Tags {\small\tt rectangle}, {\small\tt quadrangle} and {\small\tt quadrilateral} can be used
 interchangeably.
+However, high distortions (e.g.\ high curvature) of the four sides should be avoided;
+you should use either smaller patches, to be subsequently {\small\tt join}ed,
+or progressive mesh generation if you are willing to accept triangles instead of quadrilaterals.
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
@@ -91,21 +105,31 @@ The coordinates of each new vertex are defined by interpolating the coordinates 
 on the four given sides, as shown in figure \ref{\numb section 12.\numb fig 1}.
 The complicated formula for the coefficients (involving $ \alpha^3 $ and $ \beta^3 $) is there
 to ensure a smooth transition for the distribution of inner vertices in the case of non-uniform
-distribution along one or several sides.
-Paragraphs \ref{\numb section 2.\numb parag 1}, \ref{\numb section 2.\numb parag 9} and
-\ref{\numb section 2.\numb parag 11} show examples where this is useful.
+distribution along one or several sides, or to the case of curved sides.
+Paragraphs \ref{\numb section 2.\numb parag 1}, \ref{\numb section 2.\numb parag 9},
+\ref{\numb section 2.\numb parag 11} and \ref{\numb section 2.\numb parag 16} show
+examples where this is useful.
 
 The remarks made in paragraph \ref{\numb section 12.\numb parag 2} about
 the interpolation operation hold here.
-Paragraph \ref{\numb section 2.\numb parag 7} shows an example where the interpolation operation
+Paragraphs \ref{\numb section 2.\numb parag 7}, \ref{\numb section 2.\numb parag 11} and
+\ref{\numb section 2.\numb parag 13} show examples where the interpolation operation
 consists of a convex combination followed by a projection.
 For a manifold defined through an external parameter, the convex combination is performed
 on the external parameter and then the space coordinates are computed accordingly
 (paragraph \ref{\numb section 2.\numb parag 20} shows such a situation).
 
-Providing a {\small\tt \textcolor{tag}{tag}::with\_\,triangles} makes the constructor cut each rectangle
-in halves; results are shown in paragraphs \ref{\numb section 2.\numb parag 3} and
-\ref{\numb section 2.\numb parag 8}.
+Providing a {\small\tt \textcolor{tag}{tag}::with\_\,triangles} makes the constructor
+cut each rectangle in halves; results are shown in paragraphs \ref{\numb section 2.\numb parag 3}
+and \ref{\numb section 2.\numb parag 8}.
+
+For meshing domains of a quotient manifold, a supplementary argument
+{\small\tt\textcolor{tag}{tag}::winding} must be given.
+No need to provide any winding number, this information is already contained in the four sides.
+Examples are shown in paragraphs \ref{\numb section 7.\numb parag 3} --
+\ref{\numb section 7.\numb parag 8}, \ref{\numb section 7.\numb parag 10},
+\ref{\numb section 7.\numb parag 11}, \ref{\numb section 7.\numb parag 14},
+\ref{\numb section 7.\numb parag 15}.
 
 
           %--------------------------%
@@ -143,6 +167,18 @@ Just like for a rectangular mesh (see paragraph \ref{\numb section 12.\numb para
 {\maniFEM} chooses the orientation of the mesh based on the orientation of the three sides,
 as provided by the user.
 
+These three sides may be curves in the plane $ \mathbb{R}^2 $ or in the space $ \mathbb{R}^3 $
+(or even in higher dimensional spaces).
+However, high distortions (e.g.\ high curvature) of the sides should be avoided;
+you should use either smaller patches, to be susbequently {\small\tt join}ed,
+or progressive mesh generation.
+
+For meshing domains of a quotient manifold, a supplementary argument
+{\small\tt\textcolor{tag}{tag}::winding} must be given.
+No need to provide any winding number, this information is already contained in the three sides.
+Examples are shown in paragraphs \ref{\numb section 7.\numb parag 9},
+\ref{\numb section 7.\numb parag 12}, \ref{\numb section 7.\numb parag 13}.
+
 
           %------------------------%
 \section{~~Building a mesh of cubes}\label{\numb section 12.\numb parag 5}
@@ -153,7 +189,7 @@ Unlike for a square, where we have used an {\small\tt std::list} of {\small\tt\v
 {\small\tt horizon}, here we use a {\small\tt\verm{Mesh}} {\small\tt front} which
 keeps the newly built faces.
 The advantage of using a {\small\tt\verm{Mesh}} instead of a {\small\tt list} of
-{\small\tt\verm{Cell}}s is that we can navigate through is as described in paragraph
+{\small\tt\verm{Cell}}s is that we can navigate through it as described in paragraph
 \ref{\numb section 9.\numb parag 6}.
 
 \begin{figure}[ht] \centering
@@ -167,6 +203,25 @@ The advantage of using a {\small\tt\verm{Mesh}} instead of a {\small\tt list} of
   \label{\numb section 12.\numb fig 3}
 \end{figure}
 
+Just like for a rectangular mesh (see paragraph \ref{\numb section 12.\numb parag 3}) or for
+a triangular one (see paragraph \ref{\numb section 12.\numb parag 4}),
+{\maniFEM} chooses the orientation of the mesh based on the orientation of the six faces,
+as provided by the user.
+
+The six faces may be curved.
+However, faces with high distortions (e.g.\ high curvature) should be avoided;
+you should use smaller patches, to be subsequently {\small\tt join}ed.
+Progressive mesh generation is not yet implemented for volumes.
+
+The following remark is in order.
+It is possible to fill a big triangle with many small identical triangles, as shown in paragraph
+\ref{\numb section 12.\numb parag 4}.
+It is possible to fill a big rectangle with many small identical rectangles, as shown in paragraph
+\ref{\numb section 12.\numb parag 3}.
+It is possible to fill a big cube with many small cubes, as shown in the present paragraph.
+But it is not possible to fill, say, a big regular tetrahedron with many small regular tetrahedra.
+This is why there is no {\small\tt\verm{Mesh}} constructor with
+{\small\tt\textcolor{tag}{tag}::tetrahedron}.
 
 
           %---------------------------%
@@ -176,12 +231,21 @@ The advantage of using a {\small\tt\verm{Mesh}} instead of a {\small\tt list} of
 Several constructors {\small\tt \verm{Mesh}::Mesh} {\small\tt(}
 {\small\tt\textcolor{tag}{tag}::progressive,...)} are defined in {\small\tt progressive.cpp};
 they build a mesh on a given manifold starting with almost nothing.
-More precisely, they start with the boundary of the future mesh, then they
-move this interface with small steps, building the mesh behind it like a spider.
+For a one-dimensional manifold, a mesh of segments is built.
+For a two-dimensional manifold, triangular cells are used.
+Progressive mesh generation is not yet implemented for volumes.
+
+Progressive mesh generation on a two-dimensional manifold starts with the boundary of
+the future mesh, then moves this interface with small steps, building the mesh behind it
+like a spider.
 This may be called ``frontal method''.
 Actually, if the manifold is compact (like the sphere or the torus) and we want to mesh
 all of it, there will be no boundary.
-In this case we can start the process by providing nothing more than the manifold itself.
+In this case we can start the process by providing nothing more than the manifold itself
+(or not even that -- the current working manifold will be meshed in this case).
+The mesh must follow the shape of the manifold; this is achieved by {\small\tt project}ing
+newly created vertices on the working manifold, as explained in paragraph
+\ref{\numb section 8.\numb parag 1}.
 Section \ref{\numb section 3} gives several examples.
 
 This is a complex process, much more complex than building a regular mesh of rectangles
@@ -189,16 +253,12 @@ This is a complex process, much more complex than building a regular mesh of rec
 in paragraph \ref{\numb section 12.\numb parag 4}).
 The constructor delegates the job to the function {\small\tt progressive\_\,construct}.
 
-The mesh must follow the shape of the manifold; this is achieved by {\small\tt project}ing
-newly created vertices on the working manifold, as explained in paragraph
-\ref{\numb section 8.\numb parag 1}.
-
 The initial interface may be disconnected.
 Even if the initial interface is connected, it may become disconnected during the meshing
 process, if it touches itself (paragraph \ref{\numb section 12.\numb parag 9}
 discusses this event).
 
-Detecting such touching points requires evaluating the distance between many pairs of points.
+Detecting such touching points requires the evaluation of the distance between many pairs of points.
 This may become extremely time consuming, unless special care is taken to organize points
 belonging to the interface in a hierarchy allowing one to eliminate many pairs of points
 from the evaluation process.

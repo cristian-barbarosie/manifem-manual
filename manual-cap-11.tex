@@ -327,6 +327,9 @@ A {\small\tt\verm{Mesh}} wrapper contains a pointer to a {\small\tt\verm{Mesh}::
 The latter is a polymorphic object; there are several different kinds of meshes
 which differ in their internal implementation; the wrapper provides a uniform interface
 to the user (making use of virtual methods of the core).
+The graph in figure \ref{\numb section 11.\numb fig 2}, paragraph
+\ref{\numb section 11.\numb parag 4}, shows the inheritance relations between different types
+of {\small\tt\verm{Mesh}::Core}s.
 
 Negative meshes are temporary wrappers built on-the-fly.
 Their wrapper contains a pointer to a positive core mesh.
@@ -362,8 +365,8 @@ Connected meshes of dimension two or higher are not yet implemented; for now,
 A class {\small\tt\verm{Mesh}:: ::Connected::HighDim} is object of current work.
 We also intend to implement multiply connected meshes.
 
-{\small\tt STSI} meshes are object of current work (see the graph in figure
-\ref{\numb section 11.\numb fig 2}); the name means ``self-touching or self-intersecting'' meshes.
+{\small\tt STSI} meshes are object of current work; the name means
+``self-touching or self-intersecting'' meshes.
 They will be used internally to implement iterators over connected high-dimensional meshes,
 and for progressive meshing (described in section \ref{\numb section 3}).
 

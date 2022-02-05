@@ -39,7 +39,7 @@ In paragraphs \ref{\numb section 7.\numb parag 12} and \ref{\numb section 7.\num
 the mesh contains the origin which is a singular point, thus the manifold reaches
 the shape of a cone.
 In paragraphs \ref{\numb section 7.\numb parag 4} -- \ref{\numb section 7.\numb parag 10},
-\ref{\numb section 7.\numb parag 17} and \ref{\numb section 7.\numb parag 18}
+\ref{\numb section 7.\numb parag 17} and \ref{\numb section 7.\numb parag 19}
 the quotient manifold is homeomorphic to a torus.
 The same holds for paragraph \ref{\numb section 7.\numb parag 15}
 if we eliminate the origin of the plane and we do not take into account that
@@ -52,7 +52,7 @@ In paragraphs \ref{\numb section 7.\numb parag 3} -- \ref{\numb section 7.\numb 
 a quotient manifold is declared and then a mesh is built directly on this manifold.
 It is like holding a cylinder or a torus or a cone in your hand and drawing the mesh
 directly on the cylinder or torus or cone.
-In paragraphs \ref{\numb section 7.\numb parag 16} -- \ref{\numb section 7.\numb parag 18},
+In paragraphs \ref{\numb section 7.\numb parag 16} -- \ref{\numb section 7.\numb parag 19},
 a mesh is built in the usual Euclidian plane and then is folded.
 It is like drawing the mesh on a plane sheet of paper, then cutting the paper with a scissor
 along the boundary of the mesh and then folding the resulting piece of paper
@@ -303,7 +303,7 @@ you may think in terms of four squares instead :
 \end{Verbatim}
 
 For those readers who want to understand what's happening behind the curtains,
-it is worth mentioning that, when we declare the {\small\tt\verm{Manifold}}
+it is worth mentioning that, after the declaration of the {\small\tt\verm{Manifold}}
 {\small\tt\azul{torus\_\,manif}}, the current working manifold is no longer {\small\tt RR2}
 ({\small\tt torus\_\,manif} becomes the working manifold).
 However, {\small\tt x} and {\small\tt y} are the same, coordinates defined on {\small\tt RR2}
@@ -632,7 +632,7 @@ In paragraph \ref{\numb section 7.\numb parag 13}, we use only one triangular me
   \psfrag{T}{\small\tt\textcolor{textindraw}{T}}
   \psfrag{U}{\small\tt\textcolor{textindraw}{T$^{\mbox{\small\tt *}}$}}
   \includegraphics[width=120mm]{butterfly.eps}
-  \caption{A vertex similar to the one of a cone}
+  \caption{A vertex similar to that of a cone}
   \label{\numb section 7.\numb fig 8}
 \end{figure}
 
@@ -894,6 +894,29 @@ It suffices to identify two pairs of opposite faces.
 If we want to obtain the hexagonal periodicity referred in paragraph
 \ref{\numb section 7.\numb parag 9}, we can literally take a hexagon and
 identify three pairs of opposite faces.
+
+
+Figure \ref{\numb section 7.\numb fig 13} shows the resulting mesh, together with the
+periodicity cell.
+We recall that the same periodicity group (i.e., periodic arrangement) may be generated
+by different sets of generators and, consequently, may be viewed as originating
+from different periodicity cells.
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
+  \includegraphics[width=125mm]{hexa-round-hole.eps}
+  \caption{Hexagonal arrangement of a star-shaped hole}
+  \label{\numb section 7.\numb fig 13}
+\end{figure}
+
+
+          %---------------------------------%
+\section{~~Treating a rectangle as a hexagon}\label{\numb section 7.\numb parag 19}
+          %---------------------------------%
+
 Actually, we can even take a rectangle%
 \footnote{This rectangle is somewhat similar to the square in paragraph
 \ref{\numb section 7.\numb parag 8}.
@@ -902,7 +925,7 @@ it has the proportions of the rectangular shadow in figure \ref{\numb section 7.
 and treat it as if it were a hexagon :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 18}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 19}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                             ]
    const double \azul{d} = \laranja{0.13};
    const size_t \azul{n} = \laranja{1.5} / d, \azul{m} = \laranja{2.6} / d;
@@ -933,11 +956,11 @@ and treat it as if it were a hexagon :
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=125mm]{hexa-round-hole.eps}
   \caption{Hexagonal arrangement of a circular hole}
-  \label{\numb section 7.\numb fig 13}
+  \label{\numb section 7.\numb fig 14}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 18}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 19}.cpp,rulecolor=\color{coment},
    baselinestretch=0.94,framesep=2mm                                             ]
    \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, \{ AB, BC, CD, DE, EF, FA, inner .reverse() \} );
 
@@ -950,17 +973,14 @@ and treat it as if it were a hexagon :
                                   \textcolor{tag}{tag}::use_existing_vertices                  );
 \end{Verbatim}
 
-Figure \ref{\numb section 7.\numb fig 13} shows the resulting mesh, together with the
-periodicity cell.
-We recall that the same periodicity group (i.e., periodic arrangement) may be generated
-by different sets of generators and, consequently, may be viewed as originating
-from different periodicity cells.
+Figure \ref{\numb section 7.\numb fig 14} shows the resulting mesh, roughly the same as in
+figure \ref{\numb section 7.\numb fig 13}.
 
 
                  %-----------------------------------------%
 \section{~~\cinza{Progressive meshing on quotient manifolds}}
                  %-----------------------------------------%
-\label{\numb section 7.\numb parag 19}
+\label{\numb section 7.\numb parag 20}
 
 \vskip 2mm plus 2mm
 {\normalfont\bfseries The code described in this paragraph does not work yet.
@@ -973,7 +993,7 @@ should work on quotient manifolds with only minimal changes.
 Here is how we see it working in the future.
 
 We begin by defining two closed curves (the boundaries of the two future holes),
-represented in Figure \ref{\numb section 7.\numb fig 14}.
+represented in Figure \ref{\numb section 7.\numb fig 15}.
 We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -1008,7 +1028,7 @@ We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=95mm]{boomerang-1.eps}
   \caption{Two V-shaped loops}
-  \label{\numb section 7.\numb fig 14}
+  \label{\numb section 7.\numb fig 15}
 \end{figure}
 
 The {\small\tt loops} are reversed because they are going to be boundaries of holes
@@ -1026,7 +1046,7 @@ Define a torus manifold by means of two appropriate translations.
 
 \vskip -2mm
 Then, fold the two curves around this torus; the result is shown (after unfolding) in figure
-\ref{\numb section 7.\numb fig 15}.
+\ref{\numb section 7.\numb fig 16}.
 Calling the {\small\tt\verm{Mesh}::fold} method with only one argument is quite different
 from what we have seen in paragraphs \ref{\numb section 7.\numb parag 16} and
 \ref{\numb section 7.\numb parag 17}.
@@ -1049,7 +1069,7 @@ the folding operation will use the geometry of this torus.
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=95mm]{boomerang-2.eps}
   \caption{Two V-shaped loops, folded then unfolded}
-  \label{\numb section 7.\numb fig 15}
+  \label{\numb section 7.\numb fig 16}
 \end{figure}
 
 When we declare the {\small\tt\azul{torus\_\,manif}}, we must use translations chosen with care,
@@ -1078,7 +1098,7 @@ it meets the mesh on the other side of the torus.
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=140mm]{boomerang-3.eps}
   \caption{Periodically perforated plane, two V-shaped holes}
-  \label{\numb section 7.\numb fig 16}
+  \label{\numb section 7.\numb fig 17}
 \end{figure}
 
 This represents an example of a perforated material whose effective elastic behaviour
