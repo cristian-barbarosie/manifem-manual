@@ -213,6 +213,11 @@ However, faces with high distortions (e.g.\ high curvature) should be avoided;
 you should use smaller patches, to be subsequently {\small\tt join}ed.
 Progressive mesh generation is not yet implemented for volumes.
 
+For meshing domains of a quotient manifold, a supplementary argument
+{\small\tt\textcolor{tag}{tag}::winding} must be given.
+No need to provide any winding number, this information is already contained in the six faces
+(or rather, in the twelve edges).
+
 The following remark is in order.
 It is possible to fill a big triangle with many small identical triangles, as shown in paragraph
 \ref{\numb section 12.\numb parag 4}.
