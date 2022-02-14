@@ -894,23 +894,53 @@ It suffices to identify two pairs of opposite faces.
 If we want to obtain the hexagonal periodicity referred in paragraph
 \ref{\numb section 7.\numb parag 9}, we can literally take a hexagon and
 identify three pairs of opposite faces.
-
-
-Figure \ref{\numb section 7.\numb fig 13} shows the resulting mesh, together with the
-periodicity cell.
-We recall that the same periodicity group (i.e., periodic arrangement) may be generated
-by different sets of generators and, consequently, may be viewed as originating
-from different periodicity cells.
+In this paragraph we begin by meshing a hexagonal domain with a star-shaped hole,
+as shown in figure \ref{\numb section 7.\numb fig 13}.
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
   \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
   \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
-  \includegraphics[width=125mm]{hexa-round-hole.eps}
-  \caption{Hexagonal arrangement of a star-shaped hole}
+  \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
+  \psfrag{F}{\small\tt\textcolor{textindraw}{F}}
+  \psfrag{AA}{\small\tt\textcolor{textindraw}{AA}}
+  \psfrag{BB}{\small\tt\textcolor{textindraw}{BB}}
+  \psfrag{CC}{\small\tt\textcolor{textindraw}{CC}}
+  \psfrag{DD}{\small\tt\textcolor{textindraw}{DD}}
+  \psfrag{EE}{\small\tt\textcolor{textindraw}{EE}}
+  \psfrag{FF}{\small\tt\textcolor{textindraw}{FF}}
+  \includegraphics[width=70mm]{hexagon-bdry.eps}
+  \caption{A star-shaped hole}
   \label{\numb section 7.\numb fig 13}
 \end{figure}
+
+Then we invoke method {\small\tt\verm{Mesh}::fold} and identify opposite faces :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 18}.cpp,rulecolor=\color{coment},
+   baselinestretch=0.94,framesep=2mm                                             ]
+   \verm{Mesh} \azul{torus} = hexa .fold ( \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, DE .reverse(),
+                             \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, EF .reverse(),
+                             \textcolor{tag}{tag}::identify, CD, \textcolor{tag}{tag}::with, FA .reverse(),
+                             \textcolor{tag}{tag}::use_existing_vertices                  );
+\end{Verbatim}
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
+  \includegraphics[width=135mm]{repeated-balls.eps}
+  \caption{Hexagonal arrangement of a star-shaped hole}
+  \label{\numb section 7.\numb fig 14}
+\end{figure}
+
+Figure \ref{\numb section 7.\numb fig 14} shows the resulting mesh, together with the
+periodicity cell.
+We recall that the same periodicity group (i.e., periodic arrangement) may be generated
+by different sets of generators and, consequently, may be viewed as originating
+from different periodicity cells.
 
 
           %---------------------------------%
@@ -923,6 +953,7 @@ Actually, we can even take a rectangle%
 It is different in that it has a round hole and different aspect ratio --
 it has the proportions of the rectangular shadow in figure \ref{\numb section 7.\numb fig 6}.}
 and treat it as if it were a hexagon :
+\vskip 3mm
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 19}.cpp,rulecolor=\color{coment},
@@ -956,7 +987,7 @@ and treat it as if it were a hexagon :
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=125mm]{hexa-round-hole.eps}
   \caption{Hexagonal arrangement of a circular hole}
-  \label{\numb section 7.\numb fig 14}
+  \label{\numb section 7.\numb fig 15}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -973,7 +1004,7 @@ and treat it as if it were a hexagon :
                                   \textcolor{tag}{tag}::use_existing_vertices                  );
 \end{Verbatim}
 
-Figure \ref{\numb section 7.\numb fig 14} shows the resulting mesh, roughly the same as in
+Figure \ref{\numb section 7.\numb fig 15} shows the resulting mesh, roughly the same as in
 figure \ref{\numb section 7.\numb fig 13}.
 
 
@@ -993,7 +1024,7 @@ should work on quotient manifolds with only minimal changes.
 Here is how we see it working in the future.
 
 We begin by defining two closed curves (the boundaries of the two future holes),
-represented in Figure \ref{\numb section 7.\numb fig 15}.
+represented in Figure \ref{\numb section 7.\numb fig 16}.
 We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -1028,7 +1059,7 @@ We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=95mm]{boomerang-1.eps}
   \caption{Two V-shaped loops}
-  \label{\numb section 7.\numb fig 15}
+  \label{\numb section 7.\numb fig 16}
 \end{figure}
 
 The {\small\tt loops} are reversed because they are going to be boundaries of holes
@@ -1046,7 +1077,7 @@ Define a torus manifold by means of two appropriate translations.
 
 \vskip -2mm
 Then, fold the two curves around this torus; the result is shown (after unfolding) in figure
-\ref{\numb section 7.\numb fig 16}.
+\ref{\numb section 7.\numb fig 17}.
 Calling the {\small\tt\verm{Mesh}::fold} method with only one argument is quite different
 from what we have seen in paragraphs \ref{\numb section 7.\numb parag 16} and
 \ref{\numb section 7.\numb parag 17}.
@@ -1069,7 +1100,7 @@ the folding operation will use the geometry of this torus.
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=95mm]{boomerang-2.eps}
   \caption{Two V-shaped loops, folded then unfolded}
-  \label{\numb section 7.\numb fig 16}
+  \label{\numb section 7.\numb fig 17}
 \end{figure}
 
 When we declare the {\small\tt\azul{torus\_\,manif}}, we must use translations chosen with care,
@@ -1098,7 +1129,7 @@ it meets the mesh on the other side of the torus.
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=140mm]{boomerang-3.eps}
   \caption{Periodically perforated plane, two V-shaped holes}
-  \label{\numb section 7.\numb fig 17}
+  \label{\numb section 7.\numb fig 18}
 \end{figure}
 
 This represents an example of a perforated material whose effective elastic behaviour

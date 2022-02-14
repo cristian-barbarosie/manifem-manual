@@ -8,7 +8,7 @@
 \def\manifemrelease{22.**}
 \def\manualversion{22.**}
 \let\production 0
-\includeonly{manual-cap-12}
+\includeonly{manual-cap-07}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -358,6 +358,15 @@ Switch to {\small\tt gmsh} version 4 format.
 
 
 \section*{To do}
+
+Implement zero-dimensional {\small\tt\verm{Manifold}}s, useful for projecting vertices.
+
+Implement a {\small\tt\verm{Cell}} constructor for vertices which sets the coordinates,
+using the current working {\small\tt\verm{Manifold}}.
+For a Euclidian manifold, simply sets the values of the coordinates.
+For an implicit manifold, projects the vertex.
+For a parametric manifold, we olny provide values for the parameters.
+For a quotient manifold, we set coordinates on the original Euclidian manifold.
 
 \noindent Implement constructor {\small\tt\verm{Mesh}} {\small\tt \azul{msh}} {\small\tt (}
 {\small\tt\textcolor{tag}{tag}::cube,} {\small\tt ...,} {\small\tt\textcolor{tag}{tag}::winding}
