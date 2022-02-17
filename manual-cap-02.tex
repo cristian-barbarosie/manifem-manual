@@ -13,23 +13,23 @@ by progressively adding triangular cells, one by one.
 
 Paragraphs \ref{\numb section 2.\numb parag 4} and \ref{\numb section 2.\numb parag 5}
 deal with one-dimensional meshes (curves) in $ \mathbb{R}^2 $,
-paragraphs \ref{\numb section 2.\numb parag 14}, \ref{\numb section 2.\numb parag 17} and
-\ref{\numb section 2.\numb parag 18} show curves in $ \mathbb{R}^3 $,
+paragraphs \ref{\numb section 2.\numb parag 15}, \ref{\numb section 2.\numb parag 18} and
+\ref{\numb section 2.\numb parag 19} show curves in $ \mathbb{R}^3 $,
 paragraphs \ref{\numb section 2.\numb parag 1}, \ref{\numb section 2.\numb parag 2},
 \ref{\numb section 2.\numb parag 3}, \ref{\numb section 2.\numb parag 9},
 \ref{\numb section 2.\numb parag 10} and \ref{\numb section 2.\numb parag 11} show plane domains
 (two-dimensional meshes in $ \mathbb{R}^2 $),
 while paragraphs \ref{\numb section 2.\numb parag 6}, \ref{\numb section 2.\numb parag 7},
-\ref{\numb section 2.\numb parag 8}, \ref{\numb section 2.\numb parag 13},
-\ref{\numb section 2.\numb parag 16}, \ref{\numb section 2.\numb parag 19} and
-\ref{\numb section 2.\numb parag 20} focus on two-dimensional meshes
+\ref{\numb section 2.\numb parag 8}, \ref{\numb section 2.\numb parag 14},
+\ref{\numb section 2.\numb parag 17}, \ref{\numb section 2.\numb parag 20} and
+\ref{\numb section 2.\numb parag 21} focus on two-dimensional meshes
 in $ \mathbb{R}^3 $ (surfaces).
-Paragraphs \ref{\numb section 2.\numb parag 12} and \ref{\numb section 2.\numb parag 15} show
+Paragraphs \ref{\numb section 2.\numb parag 13} and \ref{\numb section 2.\numb parag 16} show
 a volumic mesh, made of cubic cells.
 
-Paragraphs \ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb parag 16}
+Paragraphs \ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb parag 17}
 are about manifolds defined implicitly as level sets;
-paragraphs \ref{\numb section 2.\numb parag 17} -- \ref{\numb section 2.\numb parag 20}
+paragraphs \ref{\numb section 2.\numb parag 18} -- \ref{\numb section 2.\numb parag 21}
 describe parametric manifolds.
 
 
@@ -55,7 +55,7 @@ Here is another way of meshing the same L-shaped domain as in paragraph
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 1}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 1}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Mesh} \azul{AG} ( \textcolor{tag}{tag}::segment, A .reverse(), G, \textcolor{tag}{tag}::divided_in, \laranja{22} );
    \verm{Mesh} \azul{GH} ( \textcolor{tag}{tag}::segment, G .reverse(), H, \textcolor{tag}{tag}::divided_in,  \laranja{8} );
@@ -166,7 +166,7 @@ using the method {\small\tt implicit} of the Euclidian manifold.
 The code below introduces a one-dimensional submanifold of $ \mathbb{R}^2 $ (a hiperbola).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 4}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 4}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -225,6 +225,15 @@ As an alternative, we might explicitly project them onto the {\small\tt hiperbol
 {\small\tt\textcolor{tag}{tag}::segment} builds points in the surrounding space {\small\tt RR2}
 and then projects them onto the {\small\tt hiperbola} without the user's assistance.
 
+There is also a {\small\tt\verm{Cell}} constructor with {\small\tt\textcolor{tag}{tag}::of\_\,coords}
+and {\small\tt\textcolor{tag}{tag}::project}.
+This constructor not only sets the values of {\small\tt x} and {\small\tt y} but also
+performs, under the curtains, a projection on the current working {\small\tt\verm{Manifold}} :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Cell} \azul{P} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.6}, \laranja{2.1} \}, \textcolor{tag}{tag}::project );
+\end{Verbatim}
+
 
           %----------------------------------------%
 \section{~~A circle defined by four curved segments}\label{\numb section 2.\numb parag 5}
@@ -244,7 +253,7 @@ We can define several arcs of curve and {\small\tt join} them, thus obtaining a 
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 5}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x (N) =  \laranja{0.};  y (N) =  \laranja{1.};
    \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};  y (W) =  \laranja{0.};
@@ -287,7 +296,7 @@ Let's look at a surface in $ \mathbb{R}^3 $ :
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 6}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 6}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -322,13 +331,13 @@ Let's look at a surface in $ \mathbb{R}^3 $ :
    \verm{Mesh} \azul{hemisphere} ( \textcolor{tag}{tag}::join, ENup, NWup, WSup, SEup );
 \end{Verbatim}
 
-Again, when we define individual points {\small\tt E}, {\small\tt N}, {\small\tt W},
-{\small\tt S} and {\small\tt up} we must be careful to provide coordinates on the
+Again, when we define individual points {\small\tt\azul E}, {\small\tt\azul N}, {\small\tt\azul W},
+{\small\tt\azul S} and {\small\tt\azul{up}} we must be careful to provide coordinates on the
 {\small\tt sphere} (or {\small\tt project} them explicitly as shown in paragraph
 \ref{\numb section 2.\numb parag 7}).
 In contrast, the {\small\tt\verm{Mesh}} constructors with {\small\tt\textcolor{tag}{tag}::segment},
 {\small\tt\textcolor{tag}{tag}::quadrangle} and {\small\tt\textcolor{tag}{tag}::triangle}
-build points in the surrounding space ($ \mathbb{R}^2 $ or $ \mathbb{R}^3 $) and
+build inner points in the surrounding space ($ \mathbb{R}^2 $ or $ \mathbb{R}^3 $) and
 then project them onto the current manifold without the user's assistance (paragraph
 \ref{\numb section 8.\numb parag 1} describes this projection operation).
 As a side effect, within each triangle ({\small\tt ENup}, {\small\tt NWup} and so forth),
@@ -355,7 +364,7 @@ we must use smaller patches in order to get a mesh of good quality.
 Below we use twelve rectangles to get a bumpy hemisphere.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 7}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 7}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} nut = RR3 .implicit ( x*x + y*y + z*z + \laranja{1.5}*x*y*z == \laranja{1.} );
 
@@ -426,7 +435,7 @@ Since points like {\small\tt mSW} and {\small\tt mSE} have been placed initially
 there is no guarantee that they lie in the plane $ z = 0 $ (they probably don't).
 We notice an angle between {\small\tt W\_\,mSW} and {\small\tt S\_\,mSW} at {\small\tt mSW}.
 
-Paragraph \ref{\numb section 2.\numb parag 16} shows a way to control the shape of the segments
+Paragraph \ref{\numb section 2.\numb parag 17} shows a way to control the shape of the segments
 {\small\tt S\_\,mSW}, {\small\tt S\_\,mSE} and so on.
 
 Section \ref{\numb section 3} shows other ways of meshing a surface.
@@ -460,8 +469,8 @@ and switch back to the original {\small\tt RR2} manifold.
 Method {\small\tt set\_\,as\_\,working\_\,manifold} allows us to do that.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 9}.cpp,rulecolor=\color{coment},
-   baselinestretch=0.94,framesep=2mm]
+   label=parag-\ref{\numb section 2.\numb parag 9}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                             ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
@@ -472,6 +481,14 @@ Method {\small\tt set\_\,as\_\,working\_\,manifold} allows us to do that.
    \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};  y (W) =  \laranja{0.};
    \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) =  \laranja{0.};  y (S) = \laranja{-1.};
    \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{1.};  y (E) =  \laranja{0.};
+
+   \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N .reverse(), W, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W .reverse(), S, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{SE} ( \textcolor{tag}{tag}::segment, S .reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{EN} ( \textcolor{tag}{tag}::segment, E .reverse(), N, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   
+   RR2 .set_as_working_manifold();
+   \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::quadrangle, NW, WS, SE, EN );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -483,18 +500,6 @@ Method {\small\tt set\_\,as\_\,working\_\,manifold} allows us to do that.
   \caption{A disk treated as a rectangle}
   \label{\numb section 2.\numb fig 9}
 \end{figure}
-
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 9}.cpp,rulecolor=\color{coment},
-   baselinestretch=0.94,framesep=2mm]
-   \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N .reverse(), W, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W .reverse(), S, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{SE} ( \textcolor{tag}{tag}::segment, S .reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   \verm{Mesh} \azul{EN} ( \textcolor{tag}{tag}::segment, E .reverse(), N, \textcolor{tag}{tag}::divided_in, \laranja{10} );
-   
-   RR2 .set_as_working_manifold();
-   \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::quadrangle, NW, WS, SE, EN );
-\end{Verbatim}
 
 The mesh (shown in figure \ref{\numb section 2.\numb fig 9}) is of poor quality;
 we obtain quadrilaterals having a wide angle near {\small\tt S}, {\small\tt N}, {\small\tt E}
@@ -545,7 +550,7 @@ this time with four arcs of hiperbola.
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 11}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 11}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -572,11 +577,71 @@ this time with four arcs of hiperbola.
 Paragraph \ref{\numb section 3.\numb parag 17} shows another way of meshing the same domain.
 
 
+          %--------------------------%
+\section{~~Zero-dimensional manifolds}\label{\numb section 2.\numb parag 12}
+          %--------------------------%
+
+This may sound strange, but we can define zero-dimensional manifolds and
+such manifolds may even be useful.
+
+In this paragraph, we define two parabolas, one having vertical axis and the other one with
+horizontal axis.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 2.\numb parag 12}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm]
+   \verm{Manifold} \azul{parab_vert}  = RR2 .implicit ( y == x * x - \laranja{2.} );
+   \verm{Manifold} \azul{parab_horiz} = RR2 .implicit ( x == y * y - \laranja{2.} );
+\end{Verbatim}
+
+We want to mesh the region contained between these two parabolas (a curved quadrilateral).
+Just like in paragraphs \ref{\numb section 2.\numb parag 10} and \ref{\numb section 2.\numb parag 11},
+we must start with the four corners.
+We could certainly compute their coordinates by hand, but we can also ask {\maniFEM} to do that.
+We define a zero-dimensional manifold which in this case consists in four points
+(the intersection between the two parabolas) :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 2.\numb parag 12}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm]
+   \verm{Manifold} \azul{four_points} = parab_vert .implicit ( x == y * y - \laranja{2.} );
+\end{Verbatim}
+
+Then we build points and project them explicitly onto this manifold.
+The projection will (usually) find the closest point to the given one, so we only need to define
+initial coordinates in the desired zone of the plane.
+Of course, it is better to give initial positions close to the desired point;
+this way the projection algorithm will find more easily its target.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{-1.};  y (A) = \laranja{-1.};
+   four_points .project (A);
+\end{Verbatim}
+
+Equivalently, we can use a constructor with {\small\tt\textcolor{tag}{tag}::of\_\,coords} and
+{\small\tt\textcolor{tag}{tag}::project}.
+This constructor not only sets the values of {\small\tt x} and {\small\tt y} but also
+performs, under the curtains, a projection on the current working {\small\tt\verm{Manifold}} :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 2.\numb parag 12}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm]
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{1.}, \laranja{-1.} \}, \textcolor{tag}{tag}::project );
+\end{Verbatim}
+
+\begin{figure}[ht] \centering
+  \psfrag{S}{\small\tt\textcolor{textindraw}{S}}
+  \includegraphics[width=90mm]{two-parab}
+  \caption{A curved quadrilateral}
+  \label{\numb section 2.\numb fig 12}
+\end{figure}
+
+
           %-----------------------------------%
-\section{~~A three-dimensional star-like shape}\label{\numb section 2.\numb parag 12}
+\section{~~A three-dimensional star-like shape}\label{\numb section 2.\numb parag 13}
           %-----------------------------------%
 
-Here is a three-dimensional version of the diamond :
+Here is a three-dimensional version of the diamond.
 
 \begin{figure}[ht] \centering
   \psfrag{S}{\small\tt\textcolor{textindraw}{S}}
@@ -585,10 +650,10 @@ Here is a three-dimensional version of the diamond :
   \psfrag{W}{\small\tt\textcolor{textindraw}{W}}
   \includegraphics[width=90mm]{cube-star}
   \caption{A 3D diamond}
-  \label{\numb section 2.\numb fig 12}
+  \label{\numb section 2.\numb fig 13}
 \end{figure}
 
-In figure \ref{\numb section 2.\numb fig 12}, some layers have been removed so that the reader
+In figure \ref{\numb section 2.\numb fig 13}, some layers have been removed so that the reader
 can see inner cells.
 This was done using the following options of {\small\tt gmsh}: {\small\tt Tools} $\to$
 {\small\tt Clipping} $\to$ {\small\tt Mesh} $\to$ {\small\tt Planes} $\to$
@@ -598,14 +663,14 @@ Comments in paragraph \ref{\numb section 1.\numb parag 7} apply.
 
 
           %----------------%
-\section{~~An organic shape}\label{\numb section 2.\numb parag 13}
+\section{~~An organic shape}\label{\numb section 2.\numb parag 14}
           %----------------%
 
 This paragraph describes a surface meant to mimic the shape of a physalis fruit.
 
 %\begin{figure}[h!]\centering
 %  \includegraphics[width=85mm]{empty}
-%  \caption{Dry physalis, with fruit inside}\label{\numb section 2.\numb fig 13}
+%  \caption{Dry physalis, with fruit inside}\label{\numb section 2.\numb fig 14}
 %\end{figure}
 
 \begin{figure}[ht]\centering
@@ -616,34 +681,34 @@ This paragraph describes a surface meant to mimic the shape of a physalis fruit.
 \psfrag{photo}{[photo of a physalis]}
 \centerline{\includegraphics[width=100mm]{fake-physalis}}
 \fi
-  \caption{Dry physalis, with fruit inside}\label{\numb section 2.\numb fig 13}
+  \caption{Dry physalis, with fruit inside}\label{\numb section 2.\numb fig 14}
 \end{figure}
 %\vfil\eject
 
 We begin by defining a revolution surface in $ \mathbb{R}^3 $ :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 13}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 14}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Function} \azul{r2} = x*x + y*y + z*z;
    const double \azul{pi} = \laranja{3.1415926536};
    \verm{Manifold} \azul{apple} = RR3 .implicit ( \verm{power}(r2,\laranja{0.5}) * \verm{sin}(r2-pi/\laranja{6.}) == z );
 \end{Verbatim}
 
-This surface has the shape shown in figure \ref{\numb section 2.\numb fig 14},
+This surface has the shape shown in figure \ref{\numb section 2.\numb fig 15},
 which does not resemble a physalis fruit.
 
 \begin{figure}[ht] \centering
   \includegraphics[width=60mm]{fisalis-manif}
   \caption{A compact manifold resembling an apple}
-  \label{\numb section 2.\numb fig 14}
+  \label{\numb section 2.\numb fig 15}
 \end{figure}
 
 Instead of meshing the {\small\tt apple} surface, we just build eight curves immersed in it
 (each curve joins {\small\tt A} to {\small\tt D} and is made of three shorter curves) :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 13}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 14}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{0.};  y (A) = \laranja{0.};  z (A) = std::sqrt ( \laranja{2.}*pi/\laranja{3.} );
    \verm{Cell} \azul{B1} ( \textcolor{tag}{tag}::vertex );  x (B1) = \laranja{1.};  y (B1) = \laranja{0.};  z (B1) = \laranja{1.};
@@ -661,7 +726,7 @@ Then we switch back to {\small\tt RR3} (thus leaving the {\small\tt apple} manif
 transversal segments, as well as triangular and quadrangular patches :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 13}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 14}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    RR3 .set_as_working_manifold();
    \verm{Mesh} \azul{B1B2} ( \textcolor{tag}{tag}::segment, B1 .reverse(), B2, \textcolor{tag}{tag}::divided_in, \laranja{10} );
@@ -679,7 +744,7 @@ transversal segments, as well as triangular and quadrangular patches :
 
 We then join all patches :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 13}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 14}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Mesh} \azul{sect1} ( \textcolor{tag}{tag}::join, AB1B2, B1C1C2B2, C1DC2 );
    \verm{Mesh} \azul{sect2} ( \textcolor{tag}{tag}::join, AB2B3, B2C2C3B3, C2DC3 );
@@ -689,9 +754,9 @@ We then join all patches :
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
-  \includegraphics[width=50mm]{fisalis-round}
+  \includegraphics[width=60mm]{fisalis-round}
   \caption{Not yet a physalis}
-  \label{\numb section 2.\numb fig 15}
+  \label{\numb section 2.\numb fig 16}
 \end{figure}
 
 This shape is still not satisfactory, so we apply a deformation in $ \mathbb{R}^3 $ in order to
@@ -699,7 +764,7 @@ get a sharper tip.
 The {\small\tt apple} manifold is no longer relevant.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 13}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 14}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Mesh}::Iterator \azul{it} = fisalis .iterator ( \textcolor{tag}{tag}::over_vertices );
    for ( it .reset(); it .in_range(); it++ )
@@ -719,8 +784,14 @@ Note that each baricenter operation is relative to a sector and it applies only 
 vertices, so the boundary of the sector is not changed.
 Thus, the eight rims defined in the beginning are kept unchanged.
 
+\begin{figure}[ht] \centering
+  \includegraphics[width=70mm]{fisalis}
+  \caption{Meshing a chinese lantern}
+  \label{\numb section 2.\numb fig 17}
+\end{figure}
+
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 13}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 14}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    std::vector < \verm{Mesh} > ::iterator \azul{it1};
    for ( it1 = lm .begin(); it1 != lm .end(); it1++ )
@@ -732,37 +803,21 @@ Thus, the eight rims defined in the beginning are kept unchanged.
          if ( ver .is_inner_to ( sect ) )  sect .baricenter ( ver );  \}  \}
 \end{Verbatim}
 
-And we are happy with the final result, shown in figure \ref{\numb section 2.\numb fig 16}.
-
-\begin{figure}[ht] \centering
-  \includegraphics[width=80mm]{fisalis}
-  \caption{Meshing a chinese lantern}
-  \label{\numb section 2.\numb fig 16}
-\end{figure}
+And we are happy with the final result, shown in figure \ref{\numb section 2.\numb fig 17}.
 
 An animation related to this example is available at\hfil\break
 {\small\tt http://manifem.rd.ciencias.ulisboa.pt/apple-to-physalis.gif}
 
 
           %-----------------------------------%
-\section{~~A manifold defined by two equations}\label{\numb section 2.\numb parag 14}
+\section{~~A manifold defined by two equations}\label{\numb section 2.\numb parag 15}
           %-----------------------------------%
 
 We can define a one-dimensional submanifold of $ \mathbb{R}^3 $ by two implicit equations :
 \medskip
 
-\begin{figure}[ht] \centering
-  \psfrag{S}{\small\tt\textcolor{textindraw}{S}}
-  \psfrag{N}{\small\tt\textcolor{textindraw}{N}}
-  \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
-  \psfrag{W}{\small\tt\textcolor{textindraw}{W}}
-  \includegraphics[width=75mm]{circle-3d}
-  \caption{One-dimensional mesh in $ {\mathbb R}^3 $}
-  \label{\numb section 2.\numb fig 17}
-\end{figure}
-
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 14}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 15}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -783,14 +838,24 @@ We can define a one-dimensional submanifold of $ \mathbb{R}^3 $ by two implicit 
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::join, SE, EN, NW, WS );
 \end{Verbatim}
 
+\begin{figure}[ht] \centering
+  \psfrag{S}{\small\tt\textcolor{textindraw}{S}}
+  \psfrag{N}{\small\tt\textcolor{textindraw}{N}}
+  \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
+  \psfrag{W}{\small\tt\textcolor{textindraw}{W}}
+  \includegraphics[width=85mm]{circle-3d}
+  \caption{One-dimensional mesh in $ {\mathbb R}^3 $}
+  \label{\numb section 2.\numb fig 18}
+\end{figure}
+
 Paragraph \ref{\numb section 3.\numb parag 4} shows another way of meshing the same loop.
 
 
           %---------%
-\section{~~Exercise}\label{\numb section 2.\numb parag 15}
+\section{~~Exercise}\label{\numb section 2.\numb parag 16}
           %---------%
 
-In paragraph \ref{\numb section 2.\numb parag 12} we have built twelve segments embedded in
+In paragraph \ref{\numb section 2.\numb parag 13} we have built twelve segments embedded in
 two-dimensional manifolds.
 This means that, a priori, we do not control precisely the shape of these segments,
 they are projections of straight segments onto the respective surface.
@@ -799,7 +864,7 @@ manifolds which the segments must follow), while obtaining exactly the same 3d s
 
 
           %------------------------------%
-\section{~~A submanifold of a submanifold}\label{\numb section 2.\numb parag 16}
+\section{~~A submanifold of a submanifold}\label{\numb section 2.\numb parag 17}
           %------------------------------%
 
 An implicit manifold has submanifolds.
@@ -810,16 +875,17 @@ For the rest of the surface, we switch back to the two-dimensional manifold {\sm
 \medskip
 
 \begin{figure}[ht] \centering
-  \includegraphics[width=90mm]{bumpy}
+  \includegraphics[width=95mm]{bumpy}
   \caption{A shell}
-  \label{\numb section 2.\numb fig 18}
+  \label{\numb section 2.\numb fig 19}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 16}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 17}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{nut} = RR3 .implicit ( x*x + y*y + z*z + \laranja{1.5}*x*y*z == \laranja{1.} );
    int \azul{n} = \laranja{10};
+
    \cinza{// first build the base (a closed curve)}
    \verm{Manifold} \azul{base} = nut .implicit ( x*x + \laranja{3.}*z == \laranja{0.} );
 
@@ -843,7 +909,6 @@ For the rest of the surface, we switch back to the two-dimensional manifold {\sm
    \verm{Mesh} \azul{N_mNW} ( \textcolor{tag}{tag}::segment, N .reverse(), mNW, \textcolor{tag}{tag}::divided_in, n );
    \verm{Mesh} \azul{W_mSW} ( \textcolor{tag}{tag}::segment, W .reverse(), mSW, \textcolor{tag}{tag}::divided_in, n );
    \verm{Mesh} \azul{W_mNW} ( \textcolor{tag}{tag}::segment, W .reverse(), mNW, \textcolor{tag}{tag}::divided_in, n );
-
    \cinza{// we are done with the base, now switch back to 'nut'}
    nut .set_as_working_manifold();
    \cinza{// more points :}
@@ -873,17 +938,17 @@ fewer lines of code.
 
 
           %-------------------------------%
-\section{~~Parametric manifolds -- a curve}\label{\numb section 2.\numb parag 17}
+\section{~~Parametric manifolds -- a curve}\label{\numb section 2.\numb parag 18}
           %-------------------------------%
 
-Paragraphs \ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb parag 16} describe
+Paragraphs \ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb parag 17} describe
 manifolds defined through implicit equations, that is, level sets in $ \mathbb{R}^2 $ or
 $ \mathbb{R}^3 $.
 Another way of defining a submanifold is through a parametrization.
 Below is an example.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 17}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 18}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \cinza{// at the beginning, we define 'spiral' as a straight line}
    \verm{Manifold} \azul{spiral} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{1} );
@@ -911,7 +976,7 @@ Below is an example.
   \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
   \includegraphics[width=80mm]{spiral}
   \caption{One-dimensional mesh in $ {\mathbb R}^2 $}
-  \label{\numb section 2.\numb fig 19}
+  \label{\numb section 2.\numb fig 20}
 \end{figure}
 
 The operator {\small\tt \&\&} joins two functions into one vector-valued function.
@@ -944,14 +1009,14 @@ producing equidistant vertices.
 
 
           %----------------%
-\section{~~Closing a circle}\label{\numb section 2.\numb parag 18}
+\section{~~Closing a circle}\label{\numb section 2.\numb parag 19}
           %----------------%
 
-In the approach of paragraph \ref{\numb section 2.\numb parag 17}, it is possible but cumbersome to
+In the approach of paragraph \ref{\numb section 2.\numb parag 18}, it is possible but cumbersome to
 build a closed curve :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 18}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 19}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{circle_manif} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{1} );
    \verm{Function} \azul{t} = circle_manif .build_coordinate_system
@@ -999,19 +1064,13 @@ On the other hand, if we only want a visual illusion of a closed circle, we may 
 
 
           %---------------------------------%
-\section{~~Parametric manifolds -- a surface}\label{\numb section 2.\numb parag 19}
+\section{~~Parametric manifolds -- a surface}\label{\numb section 2.\numb parag 20}
           %---------------------------------%
 
 Here is an example of a parametrized surface :
 
-\begin{figure}[ht] \centering
-  \includegraphics[width=105mm]{torus}
-  \caption{Incomplete torus}
-  \label{\numb section 2.\numb fig 20}
-\end{figure}
-
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 19}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 20}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{torus} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{alpha_beta} =
@@ -1049,8 +1108,14 @@ Here is an example of a parametrized surface :
    ABCD .export_to_file ( \textcolor{tag}{tag}::msh, \verde{"torus.msh"});
 \end{Verbatim}
 
+\begin{figure}[ht] \centering
+  \includegraphics[width=105mm]{torus}
+  \caption{Incomplete torus}
+  \label{\numb section 2.\numb fig 21}
+\end{figure}
+
 Closing the torus in the cumbersome manner shown in paragraph
-\ref{\numb section 2.\numb parag 18} is possible but not practical.
+\ref{\numb section 2.\numb parag 19} is possible but not practical.
 Paragraph \ref{\numb section 7.\numb parag 5} shows a more elegant solution.
 
 If we only want a visual illusion of a closed surface, we may use the code below
@@ -1072,7 +1137,7 @@ If we only want a visual illusion of a closed surface, we may use the code below
 
 
           %-----------------------------------------%
-\section{~~Starting with a high-dimensional manifold}\label{\numb section 2.\numb parag 20}
+\section{~~Starting with a high-dimensional manifold}\label{\numb section 2.\numb parag 21}
           %-----------------------------------------%
 
 Instead of starting with a manifold having only the parameter(s), we may start with a
@@ -1084,14 +1149,13 @@ There is a disadvantage however, regarding performance : {\maniFEM} will reserve
 for each vertex, space in the computer's memory for five {\small\tt double} values.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 2.\numb parag 20}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 2.\numb parag 21}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR5} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{5} );
    \verm{Function} \azul{xyzab} = RR5 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-
    \cinza{// extract components of xyzab :}
    \verm{Function} \azul{x} = xyzab [\laranja{0}], \azul{y} = xyzab [\laranja{1}], \azul{z} = xyzab [\laranja{2}],
-             \azul{alpha} = xyzab [\laranja{3}], \azul{beta} = xyzab [\laranja{4}];
+            \azul{alpha} = xyzab [\laranja{3}], \azul{beta} = xyzab [\laranja{4}];
 
    \cinza{// define a torus as a submanifold of RR5 :}
    const double \azul{big_radius} = \laranja{3}, \azul{small_radius} = \laranja{1};
@@ -1099,7 +1163,6 @@ for each vertex, space in the computer's memory for five {\small\tt double} valu
       ( x == ( big_radius + small_radius * \verm{cos}(beta) ) * \verm{cos}(alpha),
         y == ( big_radius + small_radius * \verm{cos}(beta) ) * \verm{sin}(alpha),
         z == small_radius * \verm{sin}(beta)                               );
-        
    \cinza{// define four corners :}
    const double \azul{pi} = \laranja{3.1415926536};
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  alpha (A) = \laranja{0.};       beta (A) = \laranja{0.};
@@ -1127,9 +1190,9 @@ for each vertex, space in the computer's memory for five {\small\tt double} valu
 
 The {\small\tt\verm{Manifold}::parametric} method is similar to {\small\tt\verm{Manifold}::implicit},
 presented in paragraphs \ref{\numb section 2.\numb parag 4} --
-\ref{\numb section 2.\numb parag 16}.
+\ref{\numb section 2.\numb parag 17}.
 The only difference is that by using {\small\tt parametric} we declare an explicit dependence%
-\footnote {Perhaps {\small\tt explicit} would be a better name than {\small\tt parametric};
+\footnote{{} Perhaps {\small\tt explicit} would be a better name than {\small\tt parametric};
 unfortunately, that word is reserved in {\small\tt C++}.}
 of the coordinates (here, {\small\tt x}, {\small\tt y} and {\small\tt z}) upon the parameters
 (here, {\small\tt alpha} and {\small\tt beta}).

@@ -5,10 +5,10 @@
 \usepackage{typearea}
 \areaset[1cm]{158mm}{234mm}
 
-\def\manifemrelease{22.**}
-\def\manualversion{22.**}
+\def\manifemrelease{22.03}
+\def\manualversion{22.03}
 \let\production 0
-\includeonly{manual-cap-07}
+\includeonly{manual-cap-03}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -42,9 +42,11 @@
 
 \definecolor{manif}{rgb}{0., 0., 0.5}
 \definecolor{tag}{rgb}{0.07, 0.07, 0.3}
-\definecolor{tag}{rgb}{0.12, 0.12, 0.4}
-\definecolor{coment}{rgb}{0.3, 0.3, 0.3}
-\definecolor{nova}{rgb}{0.55, 0., 0.2}
+\definecolor{tag}{rgb}{0.1, 0.1, 0.35}
+\definecolor{coment}{rgb}{0.4, 0.4, 0.4}
+\definecolor{comentsec}{rgb}{0.6, 0.6, 0.6}
+\definecolor{moldura}{rgb}{0.3, 0.3, 0.3}
+\definecolor{nova}{rgb}{0.35, 0., 0.2}
 \definecolor{incl}{rgb}{0.3, 0.2, 0.1}
 \definecolor{string}{rgb}{0.1, 0.25, 0.}
 \definecolor{textindraw}{rgb}{0., 0.37, 0.}
@@ -54,6 +56,7 @@
 % \definecolor{manif}{rgb}{0.6, 0.1, 0.1}
 % \definecolor{numero}{rgb}{0.7, 0.4, 0.}
 \newcommand\azul[1]{\textcolor{nova}{#1}}
+\newcommand\cinzasec[1]{\textcolor{comentsec}{#1}}
 \newcommand\cinza[1]{\textcolor{coment}{#1}}
 \newcommand\verm[1]{\textcolor{manif}{#1}}
 \newcommand\verde[1]{\textcolor{string}{#1}}
@@ -97,7 +100,7 @@ It has no user-friendly interface nor graphic capabilities.
 The user should have some understanding of programming and of {\tt C++}.
 However, {\maniFEM} can be used at a basic level by people with no deep knowledge of
 {\tt C++}.
-A gallery of examples is available at {\small\tt http://manifem.rd.ciencias.ulisboa.pt/gallery.html}.
+A gallery of examples is available at {\small\tt http://manifem.rd.ciencias.ulisboa.pt/gallery/}.
 At the end of section \ref{\numb section 1}, you can find three lists showing
 {\maniFEM}'s competitors, as well as strong and weak points.
 
@@ -106,7 +109,7 @@ including meshes on quotient manifolds.
 {\ManiFEM} deals well with one-dimensional meshes (including curves in $ {\mathbb R}^2 $ and
 $ {\mathbb R}^3 $) and two-dimensional meshes (including surfaces in $ {\mathbb R}^3 $);
 three-dimensional meshing is limited to cubic cells
-(paragraphs \ref{\numb section 1.\numb parag 7} and \ref{\numb section 2.\numb parag 12}).
+(paragraphs \ref{\numb section 1.\numb parag 7} and \ref{\numb section 2.\numb parag 13}).
 It is possible to build meshes with large variations in the element size;
 anisotropic Riemann metrics are object of current work.
 Lagrange finite elements of degree one and two are implemented for triangular and quadrangular
@@ -172,7 +175,7 @@ Shows how to build meshes by joining simple shapes, like patches, some of them o
 \subparagraph*{\ref{\numb section 3} \ Progressive mesh generation; knitting}
 Shows how to build meshes starting from their boundary alone, some of them on manifolds.
 
-\subparagraph*{\ref{\numb section 4} \ \cinza{[empty]}}
+\subparagraph*{\ref{\numb section 4} \ \cinzasec{[empty]}}
 
 \subparagraph*{\ref{\numb section 5} \ Fields, functions and variational formulations}
 Some details about functions, a lot of work to do.
@@ -346,8 +349,8 @@ Switch to {\small\tt gmsh} version 4 format.
 
 \noindent Introduce constructor {\small\tt\verm{Mesh}} {\small\tt \azul{msh}} {\small\tt (}
 {\small\tt\textcolor{tag}{tag}::cube,} {\small\tt ...} {\small\tt )}, paragraphs
-\ref{\numb section 1.\numb parag 7}, \ref{\numb section 2.\numb parag 12} and
-\ref{\numb section 2.\numb parag 15}.
+\ref{\numb section 1.\numb parag 7}, \ref{\numb section 2.\numb parag 13} and
+\ref{\numb section 2.\numb parag 16}.
 
 \noindent Gather source files under {\small\tt src} directory.
 
@@ -356,6 +359,11 @@ Switch to {\small\tt gmsh} version 4 format.
 
 \noindent Fix nasty bug in progressive mesh generation.
 
+\noindent 3D torus, made of cubic cells (not yet documented)
+
+\noindent {\small\tt\verm{Cell}} constructor with {\small\tt\textcolor{tag}{tag}::vertex},
+{\small\tt\textcolor{tag}{tag}::of\_\,coords}, {\small\tt\textcolor{tag}{tag}::project}.
+          
 
 \section*{To do}
 
@@ -534,8 +542,8 @@ manifold, defined by an implicit equation :
 section \ref{\numb section 3}
 
 \noindent
-manifold, parametric : \ref{\numb section 2.\numb parag 17},
-\ref{\numb section 2.\numb parag 18}
+manifold, parametric : \ref{\numb section 2.\numb parag 18},
+\ref{\numb section 2.\numb parag 19}
 
 \noindent
 manifold, quotient : section \ref{\numb section 7}
@@ -636,8 +644,8 @@ segment {\small\tt \verm{Mesh}}es :
 
 \noindent
 {\small\tt set\_\,as\_\,working\_\,manifold} :
-\ref{\numb section 2.\numb parag 9} -- \ref{\numb section 2.\numb parag 13},
-\ref{\numb section 2.\numb parag 16}, \ref{\numb section 3.\numb parag 1},
+\ref{\numb section 2.\numb parag 9} -- \ref{\numb section 2.\numb parag 14},
+\ref{\numb section 2.\numb parag 17}, \ref{\numb section 3.\numb parag 1},
 \ref{\numb section 3.\numb parag 2}, \ref{\numb section 3.\numb parag 3},
 \ref{\numb section 3.\numb parag 9},
 \ref{\numb section 3.\numb parag 14} -- \ref{\numb section 3.\numb parag 25}
@@ -649,7 +657,7 @@ source text coloring : \ref{\numb section 11.\numb parag 2}
 {\small\tt\textcolor{tag}{tag}}\hskip0.5pt s : \ref{\numb section 11.\numb parag 3}
 
 \noindent
-torus : \ref{\numb section 2.\numb parag 19}, \ref{\numb section 2.\numb parag 7},
+torus : \ref{\numb section 2.\numb parag 20}, \ref{\numb section 2.\numb parag 7},
 \ref{\numb section 3.\numb parag 7},
 \ref{\numb section 7.\numb parag 4} -- \ref{\numb section 7.\numb parag 10},
 \ref{\numb section 7.\numb parag 17}

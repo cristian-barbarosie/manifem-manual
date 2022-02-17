@@ -18,7 +18,7 @@ squares in two triangles, cutting it along one of its diagonals.
 One way to achieve this is
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 10.\numb parag 1}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 10.\numb parag 1}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    ABCD .remove_from_mesh ( msh );
    \verm{Cell} \azul{AC} ( \textcolor{tag}{tag}::segment, A .reverse(), C );
@@ -58,7 +58,7 @@ by transforming it into a triangle, without removing it from {\small\tt msh}, th
 a new triangle to obtain the same result as in paragraph \ref{\numb section 10.\numb parag 1}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 10.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 10.\numb parag 2}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    CD .cut_from_bdry_of ( ABCD );
    DA .cut_from_bdry_of ( ABCD );
@@ -87,7 +87,7 @@ For instance, code below gives undefined behaviour (often, a {\small\tt segmenta
 will occur).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=incorrect code !,rulecolor=\color{coment},
+   label=incorrect code !,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{2} );
    for ( it .reset(); it .in_range(); it++ )
@@ -103,7 +103,7 @@ will occur).
 We can circumvent this problem by creating a list of cells to be cut.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 10.\numb parag 3}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 10.\numb parag 3}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    std::list < \verm{Cell} > list_of_squares;
 
@@ -156,7 +156,7 @@ After ``flipping'' the blue segment, the red vertex will have five neighbours.
 Below is the code performing the ``flip'' operation.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 10.\numb parag 3}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 10.\numb parag 3}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
 inline bool \azul{flip_segment} ( \verm{Mesh} & \azul{msh}, \verm{Cell} & \azul{seg} )
 

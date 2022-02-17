@@ -7,7 +7,7 @@
 The roots of {\maniFEM} go back to a PhD thesis in 2002
 % (or even earlier, to a Master thesis in 1997)
 where finite elements on a torus were implemented in {\small\tt FORTRAN}.%
-\footnote{See % C.~Barbarosie, Optimization of perforated domains through homogenization,
+\footnote {{} See % C.~Barbarosie, Optimization of perforated domains through homogenization,
 % Structural Optimization 14, 1997
 C.~Barbarosie, Shape optimization of periodic structures,
 Computers \& Structures 30, 2003}
@@ -15,7 +15,7 @@ The torus is meant as a mere quotient manifold between $ \mathbb{R}^2 $ and a gr
 translations of $ \mathbb{R}^2 $ with two generators;
 you may think of it as $ {\mathbb R}^2/{\mathbb Z}^2 $.
 It should be stressed that this manifold is not the usual ``doughnut'' built in paragraph
-\ref{\numb section 2.\numb parag 19}.
+\ref{\numb section 2.\numb parag 20}.
 These two manifolds are homeomorphic (topologically equivalent) but they are not isometric,
 that is, their geometry differ.
 The quotient torus is a Riemann manifold with no curvature; it is locally Euclidian
@@ -39,7 +39,8 @@ In paragraphs \ref{\numb section 7.\numb parag 12} and \ref{\numb section 7.\num
 the mesh contains the origin which is a singular point, thus the manifold reaches
 the shape of a cone.
 In paragraphs \ref{\numb section 7.\numb parag 4} -- \ref{\numb section 7.\numb parag 10},
-\ref{\numb section 7.\numb parag 17} and \ref{\numb section 7.\numb parag 19}
+\ref{\numb section 7.\numb parag 17}, \ref{\numb section 7.\numb parag 18} and
+\ref{\numb section 7.\numb parag 19}
 the quotient manifold is homeomorphic to a torus.
 The same holds for paragraph \ref{\numb section 7.\numb parag 15}
 if we eliminate the origin of the plane and we do not take into account that
@@ -54,8 +55,8 @@ It is like holding a cylinder or a torus or a cone in your hand and drawing the 
 directly on the cylinder or torus or cone.
 In paragraphs \ref{\numb section 7.\numb parag 16} -- \ref{\numb section 7.\numb parag 19},
 a mesh is built in the usual Euclidian plane and then is folded.
-It is like drawing the mesh on a plane sheet of paper, then cutting the paper with a scissor
-along the boundary of the mesh and then folding the resulting piece of paper
+It is like drawing the mesh on a plane sheet of paper, then cutting the paper with a pair of
+scissors along the boundary of the mesh and then folding the resulting piece of paper
 by glueing opposite faces.
 
 
@@ -68,7 +69,7 @@ We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified
 {\small\tt winding} number.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 1}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 1}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// begin with the one-dimensional line}
    \verm{Manifold} \azul{RR} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{1} );
@@ -105,11 +106,11 @@ See paragraph \ref{\numb section 11.\numb parag 1}.
 \section{~~A curved circle}\label{\numb section 7.\numb parag 2}
           %---------------%
 
-We are now in a position to resume the example in paragraph \ref{\numb section 2.\numb parag 18},
+We are now in a position to resume the example in paragraph \ref{\numb section 2.\numb parag 19},
 this time in a less cumbersome manner.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 2}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{1} );
    \verm{Function} \azul{theta} = RR .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -141,7 +142,7 @@ In {\tt gmsh}, you must select {\small\tt Tools} $\to$ {\small\tt Options} $\to$
 Here is how to build a (part of a) cylinder in $ \mathbb{R}^3 $ :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 3}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 3}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{theta_z} =
@@ -196,7 +197,7 @@ defining the translations.
 Here is the classical example of $ \mathbb{R}^2/{\mathbb Z}^2 $.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 4}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 4}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// begin with the usual two-dimensional space}
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
@@ -316,12 +317,12 @@ those provided in the last statement (invocation of {\small\tt draw\_\,ps}) woul
 \section{~~A curved torus}\label{\numb section 7.\numb parag 5}
           %--------------%
 
-We are now in a position to resume the example in paragraph \ref{\numb section 2.\numb parag 19},
+We are now in a position to resume the example in paragraph \ref{\numb section 2.\numb parag 20},
 this time by using the quotient manifold $ \mathbb{R}^2/{\mathbb Z}^2 $ introduced in paragraph
 \ref{\numb section 7.\numb parag 4}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 5}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{ab} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -368,7 +369,7 @@ We stress that this mesh has only one hole; figure \ref{\numb section 7.\numb fi
 shows several images of the same hole, due to the unfolding.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 6}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 6}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    std::vector < \verm{Cell} > \azul{vec};
    \verm{Mesh}::Iterator \azul{it} = torus .iterator
@@ -422,7 +423,7 @@ We can build a skew torus by simply choosing other actions on {\small\tt RR2}.
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 7}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 7}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+\laranja{1.}) && (y+\laranja{0.1}) );
    \verm{Manifold}::Action \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+\laranja{0.1}) && (y+\laranja{1.}) );
@@ -447,7 +448,7 @@ rather than skew parallelograms.
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 8}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 8}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+\laranja{1.}) && y ),
                     \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+\laranja{0.5}) && (y+\laranja{1.}) );
@@ -460,7 +461,7 @@ rather than skew parallelograms.
    \verm{Mesh} \azul{BA_vert}  ( \textcolor{tag}{tag}::segment, B .reverse(), A, \textcolor{tag}{tag}::divided_in, \laranja{10},
                    \textcolor{tag}{tag}::winding, g2                                   );
    \verm{Mesh} \azul{AB_vert}  ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10},
-                   \textcolor{tag}{tag}::winding, g2 - g1 );
+                   \textcolor{tag}{tag}::winding, g2 - g1                              );
    \verm{Mesh} \azul{sq1} ( \textcolor{tag}{tag}::rectangle, AB, BA_vert, BA_horiz .reverse(), AB_vert .reverse(),
               \textcolor{tag}{tag}::winding                                                         );
    \verm{Mesh} \azul{sq2} ( \textcolor{tag}{tag}::rectangle, BA_vert .reverse(), BA_horiz, AB_vert, AB .reverse(),
@@ -500,7 +501,7 @@ building this torus.
 Here is an example of a torus built with two triangular patches.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 9}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 9}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+\laranja{1.}) && y ),
                     \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+\laranja{0.5}) && (y+\laranja{0.866}) );
@@ -561,7 +562,7 @@ It is the user's responsibility to provide an invertible transformation.
 In contrast, translations (used in previous paragraphs) are always invertible.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 11}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 11}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    const double \azul{theta} = \laranja{1.};  // radians
    const double \azul{cos_theta} = std::cos ( theta ), \azul{sin_theta} = std::sin ( theta );
@@ -637,7 +638,7 @@ In paragraph \ref{\numb section 7.\numb parag 13}, we use only one triangular me
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 12}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 12}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    const double \azul{theta} = pi/\laranja{2.};  // radians
    const double \azul{cos_theta} = std::cos ( theta ), \azul{sin_theta} = std::sin ( theta );
@@ -684,7 +685,7 @@ This is why a new vertex is introduced near the origin and the two adjacent tria
 are split (see figure \ref{\numb section 7.\numb fig 9}).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 13}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 13}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    const double \azul{theta} = pi/\laranja{3.};  \cinza{// radians}
    const double \azul{cos_theta} = std::cos ( theta ), \azul{sin_theta} = std::sin ( theta );
@@ -721,7 +722,7 @@ It is the user's responsibility to provide an invertible transformation.
 In contrast, translations are always invertible.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 14}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 14}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    // define an action on RR2 (a linear map)
    \verm{Manifold}::Action \azul{g} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into,
@@ -741,7 +742,7 @@ In contrast, translations are always invertible.
 \end{figure}
 
 Note that in this example the metric is not well-defined
-so the manifold we are dealing with is not a Riemannian manifold.
+so the manifold we are dealing with is Riemannian.
 
 
           %--------------------------%
@@ -754,7 +755,7 @@ to make sure that they commute.
 In contrast, translations are always invertible and they commute.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 15}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 15}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    // define two actions on RR2
    // a rotation
@@ -785,7 +786,7 @@ In contrast, translations are always invertible and they commute.
 \end{figure}
 
 Again, the metric is not well-defined (due to the zoom)
-so the manifold we are dealing with is not a Riemannian manifold.
+so the manifold we are dealing with is not Riemannian.
 
 
           %---------------------------------%
@@ -800,7 +801,7 @@ The mesh may have many other details (like the circular hole shown in figure
 \ref{\numb section 7.\numb fig 12}) which do not interfere in the process.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 16}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 16}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -879,7 +880,7 @@ a torus.
 It suffices to identify two pairs of opposite faces.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 17}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 17}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    \verm{Mesh} \azul{torus} = square .fold ( \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, CD .reverse(),
                                \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, DA .reverse(),
@@ -896,6 +897,10 @@ If we want to obtain the hexagonal periodicity referred in paragraph
 identify three pairs of opposite faces.
 In this paragraph we begin by meshing a hexagonal domain with a star-shaped hole,
 as shown in figure \ref{\numb section 7.\numb fig 13}.
+
+We use a {\small\tt\verm{Function}} as {\small\tt\textcolor{tag}{tag}::desired\_\,length}
+(rather than a constant {\small\tt double} value) in order to obtain a finer mesh near the
+re-entrant corners {\small\tt AA}, {\small\tt BB} and so on.
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
@@ -918,7 +923,7 @@ as shown in figure \ref{\numb section 7.\numb fig 13}.
 Then we invoke method {\small\tt\verm{Mesh}::fold} and identify opposite faces :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 18}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 18}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    \verm{Mesh} \azul{torus} = hexa .fold ( \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, DE .reverse(),
                              \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, EF .reverse(),
@@ -948,7 +953,7 @@ from different periodicity cells.
           %---------------------------------%
 
 Actually, we can even take a rectangle%
-\footnote{This rectangle is somewhat similar to the square in paragraph
+\footnote {{} This rectangle is somewhat similar to the square in paragraph
 \ref{\numb section 7.\numb parag 8}.
 It is different in that it has a round hole and different aspect ratio --
 it has the proportions of the rectangular shadow in figure \ref{\numb section 7.\numb fig 6}.}
@@ -956,7 +961,7 @@ and treat it as if it were a hexagon :
 \vskip 3mm
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 19}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 19}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    const double \azul{d} = \laranja{0.13};
    const size_t \azul{n} = \laranja{1.5} / d, \azul{m} = \laranja{2.6} / d;
@@ -991,7 +996,7 @@ and treat it as if it were a hexagon :
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 19}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 7.\numb parag 19}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, \{ AB, BC, CD, DE, EF, FA, inner .reverse() \} );
 
@@ -1004,13 +1009,12 @@ and treat it as if it were a hexagon :
                                   \textcolor{tag}{tag}::use_existing_vertices                  );
 \end{Verbatim}
 
-Figure \ref{\numb section 7.\numb fig 15} shows the resulting mesh, roughly the same as in
-figure \ref{\numb section 7.\numb fig 13}.
+Figure \ref{\numb section 7.\numb fig 15} shows the resulting mesh.
 
 
-                 %-----------------------------------------%
-\section{~~\cinza{Progressive meshing on quotient manifolds}}
-                 %-----------------------------------------%
+                    %-----------------------------------------%
+\section{~~\cinzasec{Progressive meshing on quotient manifolds}}
+                    %-----------------------------------------%
 \label{\numb section 7.\numb parag 20}
 
 \vskip 2mm plus 2mm
@@ -1028,7 +1032,7 @@ represented in Figure \ref{\numb section 7.\numb fig 16}.
 We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm         ]
+   rulecolor=\color{moldura},baselinestretch=0.94,framesep=2mm         ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
@@ -1069,7 +1073,7 @@ in the mesh (the mesh will be on the exterior of each curve).
 Define a torus manifold by means of two appropriate translations.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm         ]
+   rulecolor=\color{moldura},baselinestretch=0.94,framesep=2mm         ]
    \verm{Manifold}::Action \azul{g1} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+\laranja{2.3}) && y ),
                     \azul{g2} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, x && (y+\laranja{1.4}) );
    \verm{Manifold} \azul{torus_manif} = RR2 .quotient ( g1, g2 );
@@ -1087,7 +1091,7 @@ Here, it is the other way around : a quotient manifold has already been declared
 the folding operation will use the geometry of this torus.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm         ]
+   rulecolor=\color{moldura},baselinestretch=0.94,framesep=2mm         ]
    \verm{Mesh} \azul{folded_loops} = loops .fold ( \textcolor{tag}{tag}::use_existing_vertices );
    folded_loops .draw_ps (\verde{"VV.eps"}, \textcolor{tag}{tag}::unfold,
                            \textcolor{tag}{tag}::over_region, \laranja{-1.5} < x < \laranja{2.5}, \laranja{-2} < y < \laranja{0.5} );
@@ -1113,7 +1117,7 @@ The algorithm starts from the given boundary and creates new triangles until
 it meets the mesh on the other side of the torus.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=code not working,rulecolor=\color{coment},
+   label=code not working,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                   ]
    \verm{Mesh} \azul{perforated} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::boundary, loops,
                      \textcolor{tag}{tag}::desired_length, \laranja{0.05}              );

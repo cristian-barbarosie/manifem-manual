@@ -27,7 +27,7 @@ Paragraph \ref{\numb section 1.\numb parag 4} shows a purely two-dimensional exa
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 1.\numb parag 1}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 1.\numb parag 1}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
 #include \verde{"maniFEM.h"}
 
@@ -46,10 +46,13 @@ int main ()
    \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
 
    \cinza{// Let's build a rectangular mesh. First, the four corners :}
-   \verm{Cell} \azul{SW} ( \textcolor{tag}{tag}::vertex );  x (SW) = \laranja{-1};  y (SW) = \laranja{0};  z (SW) = \laranja{0};
-   \verm{Cell} \azul{SE} ( \textcolor{tag}{tag}::vertex );  x (SE) =  \laranja{1};  y (SE) = \laranja{0};  z (SE) = \laranja{0};
-   \verm{Cell} \azul{NE} ( \textcolor{tag}{tag}::vertex );  x (NE) =  \laranja{1};  y (NE) = \laranja{1};  z (NE) = \laranja{0};
-   \verm{Cell} \azul{NW} ( \textcolor{tag}{tag}::vertex );  x (NW) = \laranja{-1};  y (NW) = \laranja{1};  z (NW) = \laranja{1};
+   \verm{Cell} \azul{SW} ( \textcolor{tag}{tag}::vertex );  x (SW) = \laranja{-1.};  y (SW) = \laranja{0.};  z (SW) = \laranja{0.};
+   \verm{Cell} \azul{SE} ( \textcolor{tag}{tag}::vertex );  x (SE) =  \laranja{1.};  y (SE) = \laranja{0.};  z (SE) = \laranja{0.};
+   \verm{Cell} \azul{NE} ( \textcolor{tag}{tag}::vertex );  x (NE) =  \laranja{1.};  y (NE) = \laranja{1.};  z (NE) = \laranja{0.};
+   \verm{Cell} \azul{NW} ( \textcolor{tag}{tag}::vertex );  x (NW) = \laranja{-1.};  y (NW) = \laranja{1.};  z (NW) = \laranja{1.};
+   \cinza{// alternative syntax for declaring a vertex :}
+   \cinza{// Cell SW ( tag::vertex, tag::of_coords, \{ -1., 0., 0. \} )}
+   
    \cinza{// we access the coordinates of a point using the () operator :}
    cout << \verde{"coordinates of NW : "} << x (NW) << \verde{" "} << y (NW) << \verde{" "} << z (NW) << endl;
 
@@ -248,8 +251,9 @@ The {\small\tt reverse} method is explained below.
 If we switch the orientation of one side only, {\maniFEM} will complain that
 the orientations are not compatible with each other.
 
-Paragraphs \ref{\numb section 1.\numb parag 4} and \ref{\numb section 3.\numb parag 18}
-show examples where the orientation of the common boundary is important for joining meshes.
+In paragraphs \ref{\numb section 1.\numb parag 4} and \ref{\numb section 3.\numb parag 18},
+special attention is given to the orientation of the common boundary of meshes to be
+subsequently joined.
 In progressive mesh generation (described in section \ref{\numb section 3}) we often
 provide the boundary of the future mesh, whose orientation determines the output of the
 algorithm.
@@ -291,7 +295,7 @@ Coordinates are stored (semi-)externally, see paragraphs \ref{\numb section 5.\n
 {\small\tt \verm{Mesh}}es have a {\small\tt reverse} method, too.
 It is used mainly when we want to {\small\tt join} meshes having a common piece of boundary;
 see paragraphs \ref{\numb section 1.\numb parag 4}, \ref{\numb section 2.\numb parag 6},
-\ref{\numb section 2.\numb parag 7}, \ref{\numb section 2.\numb parag 13},
+\ref{\numb section 2.\numb parag 7}, \ref{\numb section 2.\numb parag 14},
 \ref{\numb section 3.\numb parag 17}, \ref{\numb section 3.\numb parag 18}.
 
 Below we show a low-level way of building a tiny mesh, made of two triangles only.
@@ -410,20 +414,21 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 1.\numb parag 4}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 1.\numb parag 4}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
 
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{-1.};  y (A) = \laranja{0.};
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) =  \laranja{0.};  y (B) = \laranja{0.};
-   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) =  \laranja{0.};  y (C) = \laranja{0.5};
-   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = \laranja{-1.};  y (D) = \laranja{0.5};
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{0.};  y (E) = \laranja{1.};
-   \verm{Cell} \azul{F} ( \textcolor{tag}{tag}::vertex );  x (F) = \laranja{-1.};  y (F) = \laranja{1.};
-   \verm{Cell} \azul{G} ( \textcolor{tag}{tag}::vertex );  x (G) =  \laranja{1.};  y (G) = \laranja{0.};
-   \verm{Cell} \azul{H} ( \textcolor{tag}{tag}::vertex );  x (H) =  \laranja{1.};  y (H) = \laranja{0.5};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{0.} \} );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{0.} \} );
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.},  \laranja{0.} \} );
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.},  \laranja{0.5} \} );
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{0.5} \} );
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.},  \laranja{1.} \} );
+   \verm{Cell} \azul{F} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{1.} \} );
+   \verm{Cell} \azul{G} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{1.},  \laranja{0.} \} );
+   \verm{Cell} \azul{H} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{1.},  \laranja{0.5} \} );
 
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in,  \laranja{8} );
@@ -487,7 +492,7 @@ For instance, the two rectangles defined by
 \end{Verbatim}
 
 \noindent cannot be joined%
-\footnote {Actually, they can be joined but the resulting mesh will have
+\footnote {{} Actually, they can be joined but the resulting mesh will have
 a crack along {\small\tt CD} -- probably not what the user wants.}
 because the side {\small\tt CD} of {\small\tt ABCD} has nothing to do with the side 
 {\small\tt DC} of {\small\tt CEFD}.
@@ -506,7 +511,7 @@ interpolated from the coordinates of vertices on the boundary, as shown in parag
 \ref{\numb section 1.\numb parag 6} and \ref{\numb section 2.\numb parag 1}.
 This can be done even in more than two (geometric) dimensions, like in
 paragraphs \ref{\numb section 1.\numb parag 1}, \ref{\numb section 2.\numb parag 7} and
-\ref{\numb section 2.\numb parag 13}.
+\ref{\numb section 2.\numb parag 14}.
 Here, tags {\small\tt rectangle}, {\small\tt quadrilateral} and {\small\tt quadrangle}
 can be used interchangeably.
 
@@ -538,7 +543,7 @@ We can also build meshes on triangular domains and {\small\tt join} them as we w
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 1.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 1.\numb parag 5}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{-1.} ;  y (A) = \laranja{0.};
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) =  \laranja{0.} ;  y (B) = \laranja{0.};
@@ -569,7 +574,7 @@ We can also build meshes on triangular domains and {\small\tt join} them as we w
 It is possible to have triangles and quadrilaterals mixed in the same mesh :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 1.\numb parag 6}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 1.\numb parag 6}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Mesh} \azul{ABD} ( \textcolor{tag}{tag}::triangle, AB, BD, AD .reverse() );
    \verm{Mesh} \azul{BCE} ( \textcolor{tag}{tag}::triangle, BC, CE, BE .reverse() );
@@ -605,7 +610,7 @@ then six squares, then finally invoke the {\small\tt\verm{Mesh}} constructor wit
 {\small\tt\textcolor{tag}{tag}::hexahedron})
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 1.\numb parag 7}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 1.\numb parag 7}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Mesh cube} ( \textcolor{tag}{tag}::cube, ABCD, HGFE, BFGC, DHEA, CGHD, AEFB );
 \end{Verbatim}
@@ -639,7 +644,7 @@ This was done using the following options of {\small\tt gmsh}: {\small\tt Tools}
 
 Just like for two-dimensional rectangular meshes, vertices may be in any position in the space,
 the space may have more than three dimensions, edges and faces may be curved.
-Paragraphs \ref{\numb section 2.\numb parag 12} and \ref{\numb section 2.\numb parag 15} show a
+Paragraphs \ref{\numb section 2.\numb parag 13} and \ref{\numb section 2.\numb parag 16} show a
 fancier use of the {\small\tt\verm{Mesh}} constructor with {\small\tt\textcolor{tag}{tag}::cube}.
 
 

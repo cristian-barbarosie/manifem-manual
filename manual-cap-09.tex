@@ -90,7 +90,7 @@ paragraph \ref{\numb section 11.\numb parag 4}.
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 9.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 9.\numb parag 2}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FManifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -138,7 +138,7 @@ paragraph \ref{\numb section 11.\numb parag 4}.
 
 Note how we use a version of the {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::join}
 taking as argument a vector of {\small\tt \verm{Mesh}}es; we have already seen it in paragraphs
-\ref{\numb section 2.\numb parag 7} and \ref{\numb section 2.\numb parag 13}.
+\ref{\numb section 2.\numb parag 7} and \ref{\numb section 2.\numb parag 14}.
 
 We might have set curved boundaries by using a submanifold of $ \mathbb{R}^2 $, like in paragraph
 \ref{\numb section 2.\numb parag 9}.
@@ -420,7 +420,7 @@ See also paragraph \ref{\numb section 9.\numb parag 10}.
   \label{\numb section 9.\numb fig 2}
 \end{figure}
 
-However, the segments must have reverse.
+However, the segments in figure \ref{\numb section 9.\numb fig 2} must have reverse.
 Consider triangle {\small\tt ABC} for instance.
 Its boundary is made of three segments; let's look at {\small\tt AB} for example,
 a segment having {\small\tt A} as base (or rather {\small\tt A.reverse()}) and
@@ -432,7 +432,7 @@ which has {\small\tt B} as base and {\small\tt A} as tip.
 {\small\tt AB} and {\small\tt BA} are different {\small\tt \verm{Cell}} objects;
 each is the reverse of the other.
 They are not two wrappers for the same core, they have different cores.%
-\footnote {In contrast, negative meshes share the same core with their positive
+\footnote {{} In contrast, negative meshes share the same core with their positive
 counterpart; see paragraph \ref{\numb section 11.\numb parag 4}.}
 One of them is considered positive and the other is considered negative.
 Which is which depends on which one was built first.
@@ -857,7 +857,7 @@ to the constructor, as in
 
 
           %--------------------%
-\section{~~\cinza{[empty]}}\label{\numb section 9.\numb parag 9}
+\section{~~\cinzasec{[empty]}}\label{\numb section 9.\numb parag 9}
           %--------------------%
 
 

@@ -45,7 +45,7 @@ and adding triangles, one by one, until the disk is completely covered :
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 1}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 1}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -87,7 +87,7 @@ Instead of building the circle by joining four (curved) segments, we can mesh di
 the circle manifold, then mesh the disk :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 2}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -139,7 +139,7 @@ by providing the initial direction as shown in paragraph \ref{\numb section 3.\n
 Inner boundaries must have the reverse orientation :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 3}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 3}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
@@ -168,10 +168,10 @@ explain how {\maniFEM} chooses the orientation of closed curves.
           %--------------------------------%
 
 We may apply the same {\small\tt progressive} algorithm for meshing the circle in
-$ \mathbb{R}^3 $ introduced in paragraph \ref{\numb section 2.\numb parag 14} :
+$ \mathbb{R}^3 $ introduced in paragraph \ref{\numb section 2.\numb parag 15} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 4}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 4}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -213,11 +213,11 @@ we have meshed the entire closed curve {\small\tt circle}.
 If we only want a piece of a curve, we must specify two points, one for starting and
 the other one for stopping.
 
-Looking at the example in paragraph \ref{\numb section 2.\numb parag 17}, let us define a
+Looking at the example in paragraph \ref{\numb section 2.\numb parag 18}, let us define a
 spiral with a slightly different look and switch to progressive mesh generation.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 5}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -246,15 +246,15 @@ spiral with a slightly different look and switch to progressive mesh generation.
 
 Figure \ref{\numb section 3.\numb fig 3} shows the resulting mesh.
 
-Unlike in paragraph \ref{\numb section 2.\numb parag 17}, we define the spiral through
+Unlike in paragraph \ref{\numb section 2.\numb parag 18}, we define the spiral through
 an implicit equation.
 Had we chosen the (natural) definition {\small\tt r = \verm{power} ( x*x + y*y, 0.5 )},
-the very same spiral as in paragraph \ref{\numb section 2.\numb parag 17} would have been
+the very same spiral as in paragraph \ref{\numb section 2.\numb parag 18} would have been
 obtained.
 For aesthetic reasons, we have chosen a different definition of {\small\tt r}, thus obtaining
 a different spacing between the arcs of the spiral.
 
-Another noteworthy difference from paragraph \ref{\numb section 2.\numb parag 17} is that
+Another noteworthy difference from paragraph \ref{\numb section 2.\numb parag 18} is that
 vertices are distributed uniformly along the spiral (with respect to the distance
 in the surrounding space $ \mathbb{R}^2 $).
 The segments are too small to be seen in the figure.
@@ -308,7 +308,7 @@ of segments.
 Code below builds a mesh on the sphere.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 6}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 6}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -345,7 +345,7 @@ It can be vaguely described as a convolution between two tori.
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 7}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 7}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -379,18 +379,18 @@ Comments at the end of paragraph \ref{\numb section 3.\numb parag 6} apply here,
 {\maniFEM} must find a starting point and the right orientation.
 
 
-\section{~~\cinza{[empty]}}\label{\numb section 3.\numb parag 8}
+\section{~~\cinzasec{[empty]}}\label{\numb section 3.\numb parag 8}
 
 
           %------------------%
 \section{~~A bumpy hemisphere}\label{\numb section 3.\numb parag 9}
           %------------------%
 
-We now look again at the surface in paragraph \ref{\numb section 2.\numb parag 16}
+We now look again at the surface in paragraph \ref{\numb section 2.\numb parag 17}
 and build it progressively, using fewer lines of code.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 9}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 9}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{nut} = RR3 .implicit ( x*x + y*y + z*z + \laranja{1.5}*x*y*z == \laranja{1.} );
    \verm{Manifold} \azul{base} = nut .implicit ( x*x + \laranja{3.}*z == \laranja{0.} );
@@ -473,7 +473,7 @@ The options given to the constructor of {\small\tt\verm{Mesh} bumpy} in paragrap
 \ref{\numb section 3.\numb parag 14}.
 
 
-\section{~~\cinza{[empty]}}\label{\numb section 3.\numb parag 11}
+\section{~~\cinzasec{[empty]}}\label{\numb section 3.\numb parag 11}
 
 
           %------------------------%
@@ -671,6 +671,7 @@ Thus, in the code below we will obtain the upper hemisphere.
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
+
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, \{ \laranja{1.}, \laranja{0.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                                         );
    nut .set_as_working_manifold();
@@ -742,15 +743,15 @@ In paragraph \ref{\numb section 3.\numb parag 12} we have seen how we can specif
 of propagation of the mesh for one-dimensional manifolds.
 A similar approach can be taken for two-dimensional meshes.
 For instance, code below will mesh the upper half of the ``bumpy hemisphere'' already considered
-in paragraphs \ref{\numb section 2.\numb parag 16}, \ref{\numb section 3.\numb parag 9} and
+in paragraphs \ref{\numb section 2.\numb parag 17}, \ref{\numb section 3.\numb parag 9} and
 \ref{\numb section 3.\numb parag 14}, oriented upwards.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 15}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 15}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Cell} S ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
    std::vector < double > \azul{tau} \{ \laranja{1.}, \laranja{0.}, \laranja{0.} \};
-   \verm{Mesh} circle ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, tau,
+   \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, tau,
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                              );
    nut .set_as_working_manifold();
    std::vector < double > \azul{N} \{ \laranja{0.}, \laranja{0.}, \laranja{1.} \};
@@ -811,7 +812,7 @@ The user must define separately smooth pieces of the boundary and then join them
 Here is how to mesh the diamond-shaped domain in paragraph \ref{\numb section 2.\numb parag 11}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 17}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 17}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// we define the arcs NW, WS, SE and EN either as segments, like in}
    RR2 .implicit ( x*y + x - y == \laranja{-1.} );
@@ -838,14 +839,14 @@ and then {\small\tt join}ing them.
 The edges must be built first;
 thus, some previous knowledge about the geometry of the surface is needed.
 
-\begin{figure} \centering
+\begin{figure}[ht] \centering
  \includegraphics[width=94mm]{sphere-cyl}
   \caption{Sphere glued to cylinder}
   \label{\numb section 3.\numb fig 5}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 18}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 18}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -896,7 +897,7 @@ If we do not respect these orientations, {\maniFEM} will be unable to {\small\tt
 meshes.
 
 \begin{figure}[ht] \centering
- \includegraphics[width=90mm]{crack}
+ \includegraphics[width=100mm]{crack}
   \caption{Zoom around the joint}
   \label{\numb section 3.\numb fig 6}
 \end{figure}
@@ -956,8 +957,8 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
 \medskip
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{coment},
-   baselinestretch=0.94,framesep=2mm                                            ]
+   label=parag-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
    \verm{Manifold} \azul{cylinder} = RR3 .implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == rc*rc );
 
    \verm{Manifold} \azul{intersection} = cylinder .implicit ( x*x + y*y + z*z == rs*rs );
@@ -968,27 +969,27 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
    intersection .project ( start_2 );
    \verm{Mesh} \azul{circle_2} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, start_2,
                    \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
-
-   \verm{Cell} \azul{start_3} ( \textcolor{tag}{tag}::vertex );
-   x ( start_3 ) = \laranja{-1.};  y ( start_3 ) = \laranja{0.};  z ( start_3 ) = \laranja{0.5} - rc;
-   intersection .project ( start_3 );
-   \verm{Mesh} \azul{circle_3} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, start_3,
-                   \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
 \if\production 1
- \includegraphics[width=94mm]{sphere-tunnel-cloud-im}
+ \includegraphics[width=85mm]{sphere-tunnel-cloud-im}
 \else
- \includegraphics[width=94mm]{sphere-tunnel-low-res}
+ \includegraphics[width=85mm]{sphere-tunnel-low-res}
 \fi
   \caption{Sphere with tunnel}
   \label{\numb section 3.\numb fig 7}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{coment},
-   baselinestretch=0.94,framesep=2mm                                            ]
+   label=parag-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
+   \verm{Cell} \azul{start_3} ( \textcolor{tag}{tag}::vertex );
+   x ( start_3 ) = \laranja{-1.};  y ( start_3 ) = \laranja{0.};  z ( start_3 ) = \laranja{0.5} - rc;
+   intersection .project ( start_3 );
+   \verm{Mesh} \azul{circle_3} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, start_3,
+                   \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
+
    \verm{Mesh} \azul{two_circles} ( \textcolor{tag}{tag}::join, circle_2 .reverse(), circle_3 );
 
    cylinder .set_as_working_manifold();
@@ -1016,7 +1017,7 @@ This is a situation which {\maniFEM} cannot handle yet; it is discussed in parag
 
 
           %-------------------------%
-\section{~~Exporting a composed mesh}\label{\numb section 3.\numb parag 20}
+\section{~~Two intersecting tori}\label{\numb section 3.\numb parag 20}
           %-------------------------%
 
 Going back to the two tori in paragraph \ref{\numb section 3.\numb parag 7},
@@ -1024,15 +1025,15 @@ we now build the edges first and obtain a sharp, precise cut
 (forget about {\small\tt\verm{smooth\_\,min}}).
 
 \begin{figure}[ht] \centering
- \includegraphics[width=90mm]{two-tori-sharp}
+ \includegraphics[width=79mm]{two-tori-sharp}
   \caption{Sharp edges}
   \label{\numb section 3.\numb fig 8}
 \end{figure}
 
 
-                  %------------%
-\section{~~\cinza{Singularities}}\label{\numb section 3.\numb parag 21}
-                  %------------%
+                    %------------%
+\section{~~\cinzasec{Singularities}}\label{\numb section 3.\numb parag 21}
+                    %------------%
 
 {\normalfont\bfseries The code described in this paragraph does not work yet.
 It should be regarded as a mere declaration of intentions.}
@@ -1049,7 +1050,7 @@ A typical example is the vertex of a cone.
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=code not working,rulecolor=\color{coment},
+   label=code not working,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                  ]
    \verm{Manifold} \azul{cone_manif} = RR3 .implicit ( x*x + y*x == z*z );
    cone_manif .implicit ( z == \laranja{1.} );
@@ -1065,9 +1066,9 @@ A typical example is the vertex of a cone.
 \end{Verbatim}
 
 
-                 %--------------------%
-\section{~~\cinza{Singularities, again}}\label{\numb section 3.\numb parag 22}
-                 %--------------------%
+                    %--------------------%
+\section{~~\cinzasec{Singularities, again}}\label{\numb section 3.\numb parag 22}
+                    %--------------------%
 
 {\normalfont\bfseries The code described in this paragraph does not work yet.
 It should be regarded as a mere declaration of intentions.}
@@ -1082,7 +1083,7 @@ We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb para
 (which is to be subsequently {\small\tt join}ed with a sphere with two holes).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=code not working,rulecolor=\color{coment},
+   label=code not working,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                  ]
    \verm{Manifold} \azul{cylinder} = RR3 .implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == \laranja{0.25} );
    \verm{Manifold} \azul{infinity} = cylinder .implicit ( x*x + y*y + z*z == \laranja{1.} );
@@ -1137,7 +1138,7 @@ The {\small\tt desired\_\,length} may be a non-constant function.
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 23}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 3.\numb parag 23}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Function} \azul{d} = \laranja{0.03} + \laranja{0.04} * ( (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9}) );
 
@@ -1160,9 +1161,9 @@ Also, {\small\tt desired\_\,length} should be a reasonably smooth function;
 sharp variations should be avoided.
 
 
-                 %---------------------------%
-\section{~~\cinza{Changing the Riemann metric}}\label{\numb section 3.\numb parag 24}
-                 %---------------------------%
+                    %---------------------------%
+\section{~~\cinzasec{Changing the Riemann metric}}\label{\numb section 3.\numb parag 24}
+                    %---------------------------%
  
 {\normalfont\bfseries The code described in this paragraph does not work yet.
 It should be regarded as a mere declaration of intentions.}
@@ -1179,7 +1180,7 @@ we see in the drawing), thus producing the same result as in paragraph
 \ref{\numb section 3.\numb parag 23}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=code not working,rulecolor=\color{coment},
+   label=code not working,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                   ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -1204,9 +1205,9 @@ the one described here) can be used interchangeably.
 It is possible to use both in the same code, but the code will become rather obscure.
 
 
-                 %------------------%
-\section{~~\cinza{Anisotropic metric}}\label{\numb section 3.\numb parag 25}
-                 %------------------%
+                    %------------------%
+\section{~~\cinzasec{Anisotropic metric}}\label{\numb section 3.\numb parag 25}
+                    %------------------%
 
 {\normalfont\bfseries The code described in this paragraph does not work yet.
 It should be regarded as a mere declaration of intentions.}
@@ -1220,14 +1221,14 @@ The arguments of {\small\tt set\_\,metric} are $ m_{11} $, $ m_{12} $ and $ m_{2
 for two dimensions,
 $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for three dimensions.
 
-\begin{figure} \centering
+\begin{figure}[ht] \centering
  \includegraphics[width=90mm]{disk-anisotrop}
   \caption{Anisotropic mesh}
   \label{\numb section 3.\numb fig 12}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=code not working,rulecolor=\color{coment},
+   label=code not working,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                  ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );

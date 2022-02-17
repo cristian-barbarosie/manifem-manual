@@ -23,7 +23,7 @@ paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb par
 They are flexible (we can compute integrals of arbitrary expressions) but quite slow
 (because they rely strongly on symbolic manipulation of expressions).
 They can be interesting for dydactic purposes.%
-\footnote{They are also very useful for validating other types of finite elements.}
+\footnote {{} They are also very useful for validating other types of finite elements.}
 Finite elements described in paragraphs \ref{\numb section 6.\numb parag 9} and
 \ref{\numb section 6.\numb parag 10} are much faster at the cost of a tedious internal
 implementation.
@@ -112,7 +112,7 @@ Let's look at an example about the Laplace operator with non-homogeneous Dirichl
 boundary conditions.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
@@ -141,7 +141,7 @@ For now, we prefer the conceptually simpler approach of building by hand a {\sma
 for numbering vertices.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    std::map < \verm{Cell}, size_t > \azul{numbering};
    \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
@@ -157,7 +157,7 @@ The matrix of the linear system and the vector holding the free coefficients
 are declared as objects of the {\small\tt Eigen} library.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    size_t \azul{size_matrix} = ABCD .number_of ( \textcolor{tag}{tag}::vertices );
    assert ( size_matrix == numbering .size() );
@@ -172,7 +172,7 @@ compute integrals of the form $ \displaystyle \int\!\!\!\int {\partial \psi_i \o
 values to the global matrix:
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// run over all square cells composing ABCD}
    \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells, \textcolor{tag}{tag}::of_max_dim );
@@ -213,20 +213,20 @@ in the distribution tree for the definition of the {\small\tt impose\_\,value\_\
 function.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Mesh}::Iterator \azul{it} = BC .iterator ( \textcolor{tag}{tag}::over_vertices );
    for ( it .reset(); it .in_range(); it++ )
-   \{   \verm{Cell} \azul{P} = *it;
-       size_t \azul{i} = numbering [P];
-       impose_value_of_unknown ( matrix_A, vector_b, i, y(P) );  \}
+   \{  \verm{Cell} \azul{P} = *it;
+      size_t \azul{i} = numbering [P];
+      impose_value_of_unknown ( matrix_A, vector_b, i, y(P) );  \}
 \end{Verbatim}
 \vfil\eject
 
 We then use {\small\tt Eigen} to solve the system of linear equations :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    Eigen::ConjugateGradient < Eigen::SparseMatrix <double>,
                               Eigen::Lower | Eigen::Upper  > \azul{cg};
@@ -284,7 +284,7 @@ We do this by declaring a 1D finite element which we then dock on each segment o
 part of the boundary where we need to integrate.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe_bdry} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::segment,
                            \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
@@ -336,7 +336,7 @@ Space will be reserved for a {\small\tt size\_\,t} value for each new vertex, an
 this value will be used for numbering vertices.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 4}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 4}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle,
                       \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1  );
@@ -373,7 +373,7 @@ Since we have no way of running over the missing vertices, we first fill the ent
 diagonal with ones, then erase them for existing vertices.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 4}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 4}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    for ( size_t \azul{i} = 0; i < size_matrix; i++ )
       matrix_A .insert ( i, i ) = 1.;
@@ -391,7 +391,7 @@ with the correct dimension (equal to the number of vertices in the mesh {\small\
 We simply assign the desired value to the numbering of each vertex :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   rulecolor=\color{coment},baselinestretch=0.94,framesep=2mm          ]
+   rulecolor=\color{moldura},baselinestretch=0.94,framesep=2mm          ]
    \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
    size_t \azul{counter} = 0;
    for ( it .reset(); it .in_range(); it++ )
@@ -422,7 +422,7 @@ To get a quadratic Lagrange finite element, simply choose degree two; add also a
 a curved triangle.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe2} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::triangle,
                        \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight );
@@ -437,7 +437,7 @@ while the other three are associated to sides (one-dimensional cells).
 See also paragraph \ref{\numb section 5.\numb parag 1}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
       fe2 .dock_on ( small_tri );
       \cinza{//  for loop}  
@@ -467,7 +467,7 @@ Paragraph \ref{\numb section 5.\numb parag 1} gives more details.
 We can add a {\small\tt\textcolor{tag}{tag}::incremental\_\,basis} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 6}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 6}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe2} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::triangle, \textcolor{tag}{tag}::Lagrange,
                        \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight, \textcolor{tag}{tag}::incremental_basis );
@@ -511,7 +511,7 @@ To get a bi-quadratic Lagrange finite element, simply choose degree two; add als
 a curved quadrilateral.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 7}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 7}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe2} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle,
                        \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight );
@@ -521,7 +521,7 @@ This finite element has nine basis functions, associated to vertices, to sides, 
 quadrangular cell itself :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 7}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 7}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
       fe2 .dock_on ( small_square );
       \cinza{//  for loop}  
@@ -553,7 +553,7 @@ Paragraph \ref{\numb section 5.\numb parag 1} gives more details.
 We can add a {\small\tt\textcolor{tag}{tag}::incremental\_\,basis} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 8}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 8}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe2} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange,
                        \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight, \textcolor{tag}{tag}::incremental_basis );
@@ -627,7 +627,7 @@ The finite element is declared by simply omitting the
 {\small\tt\textcolor{tag}{tag}::hand\_\,coded}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::rectangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
    \verm{Integrator} \azul{integ} = fe .set_integrator ( \textcolor{tag}{tag}::hand_coded );
@@ -647,7 +647,7 @@ by one of the shape functions provided by the method
 {\small\tt\verm{FiniteElement}::basis\_\,function}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Function} \azul{bf1} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe ),
             \azul{bf2} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe );
@@ -662,7 +662,7 @@ rules, described in paragraph \ref{\numb section 6.\numb parag 10}.
 The {\small\tt dock\_\,on} operation has the same syntax as before :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
       fe .dock_on ( small_square );
 \end{Verbatim}
@@ -688,7 +688,7 @@ We then recover each value as components of this vector (in this example there i
 one component).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{coment},
+   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
          \verm{Function} \azul{psi_V} = fe.basis_function(V),
                   \azul{psi_W} = fe .basis_function (W);
@@ -873,8 +873,8 @@ abstract basis functions).
 These values are kept in an internal buffer for later use.
 
 The arithmetic expressions hard-wired in the source code are, in some cases, inspired
-in the syntax of UFL\footnote{\small\tt https://fenics.readthedocs.io/projects/ufl/en/latest/}
-and the output of FFC.\footnote{\small\tt https://fenics.readthedocs.io/projects/ffc/en/latest/}
+in the syntax of UFL\footnote {{} \small\tt https://fenics.readthedocs.io/projects/ufl/en/latest/}
+and the output of FFC.\footnote {{} \small\tt https://fenics.readthedocs.io/projects/ffc/en/latest/}
 In other cases, the expressions are bluntly and tediously computed by hand.
 Method {\small\tt\verm{FiniteElement}::info()} returns a multi-line string with information
 about the internal implementation of that finite element.
