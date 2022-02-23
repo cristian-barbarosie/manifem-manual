@@ -383,7 +383,6 @@ Below we use twelve rectangles to get a bumpy hemisphere.
    \verm{Cell} \azul{mSWup} ( \textcolor{tag}{tag}::vertex );  x (mSWup) = \laranja{-1.};  y (mSWup) = \laranja{-1.};  z (mSWup) = \laranja{1.};
    nut .project ( mSWup );  \cinza{// somewhere between S, W and up}
    \cinza{// ... and so forth ...}
-
    \cinza{// now build segments :}
    int \azul{n} = \laranja{10};
    \verm{Mesh} \azul{W_mSW}  ( \textcolor{tag}{tag}::segment, W .reverse(), mSW,  \textcolor{tag}{tag}::divided_in, n );
@@ -416,7 +415,7 @@ Below we use twelve rectangles to get a bumpy hemisphere.
   \psfrag{mSEup}{\small\tt\textcolor{textindraw}{mSEup}}
   \psfrag{up}{\small\tt\textcolor{textindraw}{up}}
   \psfrag{mWSup}{\small\tt\textcolor{textindraw}{mWSup}}
-  \includegraphics[width=90mm]{hemisphere-2}
+  \includegraphics[width=95mm]{hemisphere-2}
   \caption{Here we have {\small\tt join}ed twelve rectangles}
   \label{\numb section 2.\numb fig 7}
 \end{figure}
@@ -450,7 +449,7 @@ in order to obtain the mesh shown in figure \ref{\numb section 2.\numb fig 8}.
 (Hint: have a look at paragraph \ref{\numb section 2.\numb parag 3}.)
 
 \begin{figure}[ht] \centering
-  \includegraphics[width=85mm]{hemisphere-1}
+  \includegraphics[width=90mm]{hemisphere-1}
   \caption{Using triangular cells}
   \label{\numb section 2.\numb fig 8}
 \end{figure}
@@ -496,7 +495,7 @@ Method {\small\tt set\_\,as\_\,working\_\,manifold} allows us to do that.
   \psfrag{N}{\small\tt\textcolor{textindraw}{N}}
   \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
   \psfrag{W}{\small\tt\textcolor{textindraw}{W}}
-  \includegraphics[width=70mm]{disk}
+  \includegraphics[width=67mm]{disk}
   \caption{A disk treated as a rectangle}
   \label{\numb section 2.\numb fig 9}
 \end{figure}
@@ -526,7 +525,7 @@ Mesh the entire disk by joining six triangular meshes.
   \psfrag{N}{\small\tt\textcolor{textindraw}{N}}
   \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
   \psfrag{W}{\small\tt\textcolor{textindraw}{W}}
-  \includegraphics[width=85mm]{half-disk}
+  \includegraphics[width=86mm]{half-disk}
   \caption{Half disk}
   \label{\numb section 2.\numb fig 10}
 \end{figure}
@@ -555,7 +554,6 @@ this time with four arcs of hiperbola.
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
-
    \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x (N) =  \laranja{0.};  y (N) =  \laranja{1.};
    \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};  y (W) =  \laranja{0.};
    \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) =  \laranja{0.};  y (S) = \laranja{-1.};

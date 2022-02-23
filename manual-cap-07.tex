@@ -26,34 +26,36 @@ from the torus are drawn more than once.
 
 One of the goals of {\maniFEM} is to deal with meshes on quotient manifolds.
 Different quotient operations can be used, with groups of translations of $ \mathbb{R}^2 $
-but also with other groups of transformations.
+or $ \mathbb{R}^3 $ but also with other groups of transformations.
 In paragraphs \ref{\numb section 7.\numb parag 1} and \ref{\numb section 7.\numb parag 2}
 we deal with a one-dimensional manifold, equivalent to a circle.
-In paragraphs \ref{\numb section 7.\numb parag 3} and \ref{\numb section 7.\numb parag 16}
+In paragraphs \ref{\numb section 7.\numb parag 3} and \ref{\numb section 7.\numb parag 19}
 the quotient manifold is isometric to a cylinder.
-In paragraphs \ref{\numb section 7.\numb parag 11} and \ref{\numb section 7.\numb parag 14}
+In paragraphs \ref{\numb section 7.\numb parag 14} and \ref{\numb section 7.\numb parag 17}
 we get a manifold homeomorphic (topologically equivalent) to a cylinder
 if we eliminate the origin of the plane and we do not take into account that
 rotations overlap.
-In paragraphs \ref{\numb section 7.\numb parag 12} and \ref{\numb section 7.\numb parag 13}
+In paragraphs \ref{\numb section 7.\numb parag 15} and \ref{\numb section 7.\numb parag 16}
 the mesh contains the origin which is a singular point, thus the manifold reaches
 the shape of a cone.
 In paragraphs \ref{\numb section 7.\numb parag 4} -- \ref{\numb section 7.\numb parag 10},
-\ref{\numb section 7.\numb parag 17}, \ref{\numb section 7.\numb parag 18} and
-\ref{\numb section 7.\numb parag 19}
+\ref{\numb section 7.\numb parag 20}, \ref{\numb section 7.\numb parag 21} and
+\ref{\numb section 7.\numb parag 22}
 the quotient manifold is homeomorphic to a torus.
-The same holds for paragraph \ref{\numb section 7.\numb parag 15}
+The same holds for paragraph \ref{\numb section 7.\numb parag 18}
 if we eliminate the origin of the plane and we do not take into account that
 rotations overlap.
-Note that in paragraphs \ref{\numb section 7.\numb parag 14} and
-\ref{\numb section 7.\numb parag 15} the metric is not well-defined,
+Paragraphs \ref{\numb section 7.\numb parag 11} -- \ref{\numb section 7.\numb parag 13} deal with
+three-dimensional examples (volumic meshes).
+Note that in paragraphs \ref{\numb section 7.\numb parag 17} and
+\ref{\numb section 7.\numb parag 18} the metric is not well-defined,
 so the manifold we are dealing with is not a Riemannian manifold.
 
-In paragraphs \ref{\numb section 7.\numb parag 3} -- \ref{\numb section 7.\numb parag 15},
+In paragraphs \ref{\numb section 7.\numb parag 3} -- \ref{\numb section 7.\numb parag 18},
 a quotient manifold is declared and then a mesh is built directly on this manifold.
 It is like holding a cylinder or a torus or a cone in your hand and drawing the mesh
 directly on the cylinder or torus or cone.
-In paragraphs \ref{\numb section 7.\numb parag 16} -- \ref{\numb section 7.\numb parag 19},
+In paragraphs \ref{\numb section 7.\numb parag 19} -- \ref{\numb section 7.\numb parag 22},
 a mesh is built in the usual Euclidian plane and then is folded.
 It is like drawing the mesh on a plane sheet of paper, then cutting the paper with a pair of
 scissors along the boundary of the mesh and then folding the resulting piece of paper
@@ -74,7 +76,6 @@ We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified
    \cinza{// begin with the one-dimensional line}
    \verm{Manifold} \azul{RR} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{1} );
    \verm{Function} \azul{x} = RR .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-
    \cinza{// define an action on RR (a translation)}
    \verm{Manifold}::Action \azul{g} ( \textcolor{tag}{tag}::transforms, x, \textcolor{tag}{tag}::into, x+\laranja{1.} );
    \verm{Manifold} \azul{circle} = RR .quotient (g);
@@ -493,7 +494,6 @@ Figure \ref{\numb section 7.\numb fig 5} shows the four segment meshes {\small\t
 building this torus.
 
 
-
           %------------------------%
 \section{~~Using triangular patches}\label{\numb section 7.\numb parag 9}
           %------------------------%
@@ -533,7 +533,7 @@ Due to the shape of one of these shadows, this periodic arrangement is often cal
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
-  \includegraphics[width=120mm]{flat-torus-5.eps}
+  \includegraphics[width=110mm]{flat-torus-5.eps}
   \caption{A torus meshed with triangles}
   \label{\numb section 7.\numb fig 6}
 \end{figure}
@@ -549,8 +549,158 @@ Build the mesh shown in figure \ref{\numb section 7.\numb fig 6}
 \ref{\numb section 2.\numb parag 8}.)
 
 
+          %-------------------------------------------%
+\section{~~Three dimensions, one periodicity direction}\label{\numb section 7.\numb parag 11}
+          %-------------------------------------------%
+
+If a two-dimensional flat torus is already difficult to imagine,
+a three-dimensional one is a real challenge to our capacity of abstraction.
+Just like a two-dimensional flat torus is no more than a parallelogram whose opposite faces
+have been identified, a three-dimensional one is a cube whose opposite faces have been identified.
+
+To begin with, let us focus on one pair of opposite faces only.
+We will obtain a structure repeated in only one direction of the space.
+This is achieved by defining a periodicity group with one generator only.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 11}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                             ]
+   \verm{Manifold}::Action \azul{gx} ( \textcolor{tag}{tag}::transforms, xyz, \textcolor{tag}{tag}::into, (x+\laranja{2.}) && y && z );
+   \verm{Manifold} \azul{torus_manif} = RR3 .quotient ( gx );
+\end{Verbatim}
+
+We mesh a cube with a spheric hole in the center.
+We do this by {\small\tt join}ing six 3D meshes (with cubic cells).
+
+For building the six initial vertices on the sphere (corners of the future meshes),
+we build zero-dimensional {\small\tt\verm{Manifold}}s and then use a
+{\small\tt\verm{Cell}} constructor with {\small\tt\textcolor{tag}{tag}::project} :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 11}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                             ]
+   const double \azul{r2} = \laranja{0.2};
+   \verm{Manifold} \azul{sphere} = RR3 .implicit ( x*x + y*y + z*z == r2 );
+
+   \verm{Manifold} \azul{points_AA_GG} = sphere .implicit ( x == y, x == z );
+   \verm{Cell} \azul{AA} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-0.5}, \laranja{-0.5}, \laranja{-0.5} \}, \textcolor{tag}{tag}::project );
+   \verm{Cell} \azul{GG} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{  \laranja{0.5},  \laranja{0.5},  \laranja{0.5} \}, \textcolor{tag}{tag}::project );
+\end{Verbatim}
+
+\begin{figure}[ht] \centering
+  \includegraphics[width=110mm]{torus-of-cubes-1d.eps}
+  \caption{Three-dimensional cube repeated in one direction}
+  \label{\numb section 7.\numb fig 7}
+\end{figure}
+
+The resulting mesh cannot be represented graphically; an unfolded mesh is shown in
+figure \ref{\numb section 7.\numb fig 7}.
+Note that the unfolded mesh would be unbounded had we not cut it with two inequalities~:
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 11}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                             ]
+   \verm{Mesh} \azul{torus_unfolded} = torus .unfold
+      ( \textcolor{tag}{tag}::over_region, x*x + \laranja{2.}*y*y + \laranja{3.}*z*z < \laranja{10.}, \laranja{5.}*z + x < \laranja{0.4} );
+\end{Verbatim}
+
+Comments at the end of paragraph \ref{\numb section 7.\numb parag 13} about the early declaration of the
+{\small\tt\verm{Manifold}} {\small\tt\azul{torus\_\,manif}} apply here, too.
+
+
+          %--------------------------------------------%
+\section{~~Three dimensions, two periodicity directions}\label{\numb section 7.\numb parag 12}
+          %--------------------------------------------%
+
+By defining a periodicity group with two generators, we obtain a structure repeated in the
+horizontal plane :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 12}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                             ]
+   \verm{Manifold}::Action \azul{gx} ( \textcolor{tag}{tag}::transforms, xyz, \textcolor{tag}{tag}::into, (x+\laranja{2.}) && y && z );
+   \verm{Manifold}::Action \azul{gy} ( \textcolor{tag}{tag}::transforms, xyz, \textcolor{tag}{tag}::into, x && (y+\laranja{2.}) && z );
+   \verm{Manifold} \azul{torus_manif} = RR3 .quotient ( gx, gy );
+\end{Verbatim}
+
+\begin{figure}[ht] \centering
+  \includegraphics[width=110mm]{torus-of-cubes-2d.eps}
+  \caption{Three-dimensional cube repeated in two directions}
+  \label{\numb section 7.\numb fig 8}
+\end{figure}
+
+Comments at the end of paragraph \ref{\numb section 7.\numb parag 13} about the early declaration of the
+{\small\tt\verm{Manifold}} {\small\tt\azul{torus\_\,manif}} apply here, too.
+
+
+          %--------------------------------------------%
+\section{~~Three dimensions, three periodicity directions}\label{\numb section 7.\numb parag 13}
+          %--------------------------------------------%
+
+Finally, with a periodicity group generated by three translations, we obtain a periodic structure
+which fills the entire three-dimensional space :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 12}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                             ]
+   \verm{Manifold}::Action \azul{gx} ( \textcolor{tag}{tag}::transforms, xyz, \textcolor{tag}{tag}::into, (x+\laranja{2.}) && y && z );
+   \verm{Manifold}::Action \azul{gy} ( \textcolor{tag}{tag}::transforms, xyz, \textcolor{tag}{tag}::into, x && (y+\laranja{2.}) && z );
+   \verm{Manifold}::Action \azul{gz} ( \textcolor{tag}{tag}::transforms, xyz, \textcolor{tag}{tag}::into, x && y && (z+\laranja{2.}) );
+   \verm{Manifold} \azul{torus_manif} = RR3 .quotient ( gx, gy, gz );
+\end{Verbatim}
+
+\begin{figure}[ht] \centering
+  \includegraphics[width=110mm]{torus-of-cubes-3d.eps}
+  \caption{Three-dimensional cube repeated in three directions}
+  \label{\numb section 7.\numb fig 9}
+\end{figure}
+
+One may ask : why do we declare the {\small\tt\verm{Manifold}} {\small\tt\azul{torus\_\,manif}} first,
+then we buld the 2D meshes on the inner sphere (the boundary of the hole) with no winding ?
+Since these segments have no winding, couldn't we postpone the declaration of
+{\small\tt\azul{torus\_\,manif}} for later, after having meshed the six quadrangles composing the sphere ?
+
+The answer to the above question is negative, but the reason is not easy to explain.
+Although segments on the sphere (like the ones composing the polygonal line {\small\tt AABB})
+have zero winding number, they must nevertheless be treated as lying in the quotient manifold
+rather than in {\small\tt RR3} or in some submanifold of it like the {\small\tt sphere}.
+This is necessary because {\small\tt\verm{Mesh}} constructors like
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                      ]
+   \verm{Mesh} \azul{cube_ABCD} ( \textcolor{tag}{tag}::cube, ABCD, ABCD_s .reverse(),
+                               ABBA .reverse(), CDDC .reverse(),
+                               DAAD .reverse(), BCCB .reverse(), \textcolor{tag}{tag}::winding );
+\end{Verbatim}
+
+\noindent treat all faces they receive as arguments as lying in a quotient manifold
+(last argument {\small\tt\textcolor{tag}{tag}::winding} instructs them so).
+So, they expect all segments to have a winding number, be it zero or not.
+
+The declaration of a quotient manifold changes the behaviour of {\small\tt\verm{Cell}} constructors.
+After such a declaration, the constructor of a segment (which is a one-dimensional
+{\small\tt\verm{Cell}}) will reserve space in the computer memory for a winding number
+associated to that segment.
+By ``winding number'' we mean one {\small\tt short} {\small\tt int} if the periodicity group
+has one generator, two {\small\tt short} {\small\tt int}s if the periodicity group has two
+generators, three {\small\tt short} {\small\tt int}s in the present case.
+
+Another legitimate question is : how can we look at equations like {\small\tt x*x} {\small\tt +}
+{\small\tt y*y} {\small\tt +} {\small\tt z*z} {\small\tt ==} {\small\tt r2}
+(in the declaration of the {\small\tt\azul{sphere}} manifold) if the current working manifold
+is not {\small\tt RR3} but its quotient {\small\tt torus\_\,manif} ?
+The coordinates on a quotient manifold are multi-functions for which such an equation
+does not make sense.
+First, note that we define the {\small\tt\azul{sphere}} manifold by invoking the
+{\small\tt implicit} method of {\small\tt RR3}, not of {\small\tt torus\_\,manif}.
+Moreover, the symbols {\small\tt x}, {\small\tt y} and {\small\tt z} do not change their meaning
+when we declare a new manifold, they are still the functions initially declared as coordinates
+on the Euclidian manifold {\small\tt RR3}.
+This has already been explained at the end of paragraph \ref{\numb section 7.\numb parag 4}.
+See also comments at the end of paragraph \ref{\numb section 7.\numb parag 6}.
+
           %----------%
-\section{~~A rotation}\label{\numb section 7.\numb parag 11}
+\section{~~A rotation}\label{\numb section 7.\numb parag 14}
           %----------%
 
 Actions are not limited to translations.
@@ -562,7 +712,7 @@ It is the user's responsibility to provide an invertible transformation.
 In contrast, translations (used in previous paragraphs) are always invertible.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 11}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 7.\numb parag 14}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    const double \azul{theta} = \laranja{1.};  // radians
    const double \azul{cos_theta} = std::cos ( theta ), \azul{sin_theta} = std::sin ( theta );
@@ -589,10 +739,10 @@ In contrast, translations (used in previous paragraphs) are always invertible.
   \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
   \includegraphics[width=90mm]{sector-1.eps}
   \caption{One rotation}
-  \label{\numb section 7.\numb fig 7}
+  \label{\numb section 7.\numb fig 10}
 \end{figure}
 
-In figure \ref{\numb section 7.\numb fig 7}
+In figure \ref{\numb section 7.\numb fig 10}
 we have drawn a ``representative domain'' but this is not entirely correct since
 rotations of this region with multiples of {\small\tt theta} close to $ 2k\pi $
 will overlap with the region.
@@ -603,11 +753,11 @@ where many meshes are built in a {\small\tt for} loop then are joined to form an
 
 
           %----------------%
-\section{~~A singular point}\label{\numb section 7.\numb parag 12}
+\section{~~A singular point}\label{\numb section 7.\numb parag 15}
           %----------------%
 
 An interesting question is whether we can extend the mesh up to the origin
-(see figure \ref{\numb section 7.\numb fig 7}).
+(see figure \ref{\numb section 7.\numb fig 10}).
 It should be stressed that, when dividing the plane $ \mathbb{R}^2 $ by a rotation,
 the origin represents a singularity.
 The rotation transforms an ordinay point into a different one,
@@ -619,26 +769,14 @@ we must provide the {\small\tt\textcolor{tag}{tag}::singular}
 and {\maniFEM} will take special care with that vertex.
 
 In this paragraph, we build two triangles and then {\small\tt join} them;
-figure \ref{\numb section 7.\numb fig 8} shows the unfolded mesh.
+figure \ref{\numb section 7.\numb fig 11} shows the unfolded mesh.
 The {\small\tt\textcolor{tag}{tag}::singular} is necessary when building
 {\small\tt tri\_\,2} but not for {\small\tt tri\_\,1}
 because the sides of {\small\tt tri\_\,1} have no winding.
-In paragraph \ref{\numb section 7.\numb parag 13}, we use only one triangular mesh.
-
-\begin{figure}[ht] \centering
-  \psfrag{O}{\small\tt\textcolor{textindraw}{O}}
-  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
-  \psfrag{S}{\small\tt\textcolor{textindraw}{S}}
-  \psfrag{T}{\small\tt\textcolor{textindraw}{T}}
-  \psfrag{U}{\small\tt\textcolor{textindraw}{T$^{\mbox{\small\tt *}}$}}
-  \includegraphics[width=120mm]{butterfly.eps}
-  \caption{A vertex similar to that of a cone}
-  \label{\numb section 7.\numb fig 8}
-\end{figure}
+In paragraph \ref{\numb section 7.\numb parag 16}, we use only one triangular mesh.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 12}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 7.\numb parag 15}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    const double \azul{theta} = pi/\laranja{2.};  // radians
    const double \azul{cos_theta} = std::cos ( theta ), \azul{sin_theta} = std::sin ( theta );
@@ -666,26 +804,38 @@ In paragraph \ref{\numb section 7.\numb parag 13}, we use only one triangular me
    \verm{Mesh} \azul{sector} ( \textcolor{tag}{tag}::join, tri_1, tri_2 );
 \end{Verbatim}
 
+\begin{figure}[ht] \centering
+  \psfrag{O}{\small\tt\textcolor{textindraw}{O}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{S}{\small\tt\textcolor{textindraw}{S}}
+  \psfrag{T}{\small\tt\textcolor{textindraw}{T}}
+  \psfrag{U}{\small\tt\textcolor{textindraw}{T$^{\mbox{\small\tt *}}$}}
+  \includegraphics[width=120mm]{butterfly.eps}
+  \caption{A vertex similar to that of a cone}
+  \label{\numb section 7.\numb fig 11}
+\end{figure}
+
 Usually, the sum of the winding numbers of the three sides of any triangle is zero.
 The triangle last built in this paragraph, {\small\tt OST$^{\mbox{\small\tt *}}$},
 does not obey to this rule.
 
 
           %-----------------------------%
-\section{~~Avoiding degenerate segments}\label{\numb section 7.\numb parag 13}
+\section{~~Avoiding degenerate segments}\label{\numb section 7.\numb parag 16}
           %-----------------------------%
 
-In paragraph \ref{\numb section 7.\numb parag 12} we have built two triangular meshes
+In paragraph \ref{\numb section 7.\numb parag 15} we have built two triangular meshes
 and then we have {\small\tt join}ed them.
 
 It is possible to build a similar shape with only one triangular mesh.
 However, {\maniFEM} cannot build a segment like {\small\tt TT$^{\mbox{\small\tt *}}$},
 having the same vertex as base and as tip.
 This is why a new vertex is introduced near the origin and the two adjacent triangles
-are split (see figure \ref{\numb section 7.\numb fig 9}).
+are split (see figure \ref{\numb section 7.\numb fig 12}).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 13}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 7.\numb parag 16}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    const double \azul{theta} = pi/\laranja{3.};  \cinza{// radians}
    const double \azul{cos_theta} = std::cos ( theta ), \azul{sin_theta} = std::sin ( theta );
@@ -709,12 +859,12 @@ are split (see figure \ref{\numb section 7.\numb fig 9}).
   \psfrag{U}{\small\tt\textcolor{textindraw}{T$^{\mbox{\small\tt *}}$}}
   \includegraphics[width=90mm]{sector-cut.eps}
   \caption{A cone-like shape built with one triangular patch}
-  \label{\numb section 7.\numb fig 9}
+  \label{\numb section 7.\numb fig 12}
 \end{figure}
 
 
           %-----------------------%
-\section{~~A linear transformation}\label{\numb section 7.\numb parag 14}
+\section{~~A linear transformation}\label{\numb section 7.\numb parag 17}
           %-----------------------%
 
 Actions can be arbitrary linear transformations.
@@ -722,7 +872,7 @@ It is the user's responsibility to provide an invertible transformation.
 In contrast, translations are always invertible.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 14}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 7.\numb parag 17}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    // define an action on RR2 (a linear map)
    \verm{Manifold}::Action \azul{g} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into,
@@ -738,15 +888,15 @@ In contrast, translations are always invertible.
   \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
   \includegraphics[width=96mm]{sector-2.eps}
   \caption{One linear transformation}
-  \label{\numb section 7.\numb fig 10}
+  \label{\numb section 7.\numb fig 13}
 \end{figure}
 
 Note that in this example the metric is not well-defined
-so the manifold we are dealing with is Riemannian.
+so the manifold we are dealing with is not Riemannian.
 
 
           %--------------------------%
-\section{~~Two linear transformations}\label{\numb section 7.\numb parag 15}
+\section{~~Two linear transformations}\label{\numb section 7.\numb parag 18}
           %--------------------------%
 
 Here is an example with two linear transformations.
@@ -755,7 +905,7 @@ to make sure that they commute.
 In contrast, translations are always invertible and they commute.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 15}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 7.\numb parag 18}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    // define two actions on RR2
    // a rotation
@@ -782,7 +932,7 @@ In contrast, translations are always invertible and they commute.
   \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
   \includegraphics[width=105mm]{sector-3.eps}
   \caption{Two linear transformations : a rotation and a zoom}
-  \label{\numb section 7.\numb fig 11}
+  \label{\numb section 7.\numb fig 14}
 \end{figure}
 
 Again, the metric is not well-defined (due to the zoom)
@@ -790,7 +940,7 @@ so the manifold we are dealing with is not Riemannian.
 
 
           %---------------------------------%
-\section{~~Wrapping a mesh around a cylinder}\label{\numb section 7.\numb parag 16}
+\section{~~Wrapping a mesh around a cylinder}\label{\numb section 7.\numb parag 19}
           %---------------------------------%
 
 We can start with a usual mesh in the Euclidian plane and wrap it around a cylinder.
@@ -798,10 +948,10 @@ Or we may call this operation ``wind'' or ``fold''.
 The outer boundary of the mesh must have two parallel segments of equal length and with
 the same number of segments (to be identified).
 The mesh may have many other details (like the circular hole shown in figure
-\ref{\numb section 7.\numb fig 12}) which do not interfere in the process.
+\ref{\numb section 7.\numb fig 15}) which do not interfere in the process.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 16}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 7.\numb parag 19}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -847,9 +997,9 @@ does the opposite : it sets the Euclidian manifold as working.
   \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
   \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
-  \includegraphics[width=120mm]{cylinder-1.eps}
+  \includegraphics[width=125mm]{cylinder-1.eps}
   \caption{Identifying a pair of opposite faces}
-  \label{\numb section 7.\numb fig 12}
+  \label{\numb section 7.\numb fig 15}
 \end{figure}
 
 The mesh {\small\tt\azul{cyl}} is entirely new and distinct from {\small\tt square},
@@ -871,16 +1021,17 @@ This event is discussed in paragraph \ref{\numb section 13.\numb parag 5}.
 
 
           %------------------------------%
-\section{~~Wrapping a mesh around a torus}\label{\numb section 7.\numb parag 17}
+\section{~~Wrapping a mesh around a torus}\label{\numb section 7.\numb parag 20}
           %------------------------------%
 
-A process similar to the one described in paragraph \ref{\numb section 7.\numb parag 16}
+A process similar to the one described in paragraph \ref{\numb section 7.\numb parag 19}
 can be used to ``wrap'' a mesh (having a parallelogram as outer boundary) around
 a torus.
 It suffices to identify two pairs of opposite faces.
+\vskip 5mm
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 17}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 7.\numb parag 20}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    \verm{Mesh} \azul{torus} = square .fold ( \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, CD .reverse(),
                                \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, DA .reverse(),
@@ -889,18 +1040,19 @@ It suffices to identify two pairs of opposite faces.
 
 
           %--------------------------------%
-\section{~~Identifying three pairs of sides}\label{\numb section 7.\numb parag 18}
+\section{~~Identifying three pairs of sides}\label{\numb section 7.\numb parag 21}
           %--------------------------------%
 
 If we want to obtain the hexagonal periodicity referred in paragraph
 \ref{\numb section 7.\numb parag 9}, we can literally take a hexagon and
 identify three pairs of opposite faces.
 In this paragraph we begin by meshing a hexagonal domain with a star-shaped hole,
-as shown in figure \ref{\numb section 7.\numb fig 13}.
+as shown in figure \ref{\numb section 7.\numb fig 16}.
 
-We use a {\small\tt\verm{Function}} as desired length
+We provide a {\small\tt\verm{Function}} as desired length
 (rather than a constant {\small\tt double} value) in order to obtain a finer mesh near the
-re-entrant corners {\small\tt AA}, {\small\tt BB} and so on.
+re-entrant corners {\small\tt AA}, {\small\tt BB} and so on
+(see also paragraph \ref{\numb section 3.\numb parag 23}).
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
@@ -915,15 +1067,15 @@ re-entrant corners {\small\tt AA}, {\small\tt BB} and so on.
   \psfrag{DD}{\small\tt\textcolor{textindraw}{DD}}
   \psfrag{EE}{\small\tt\textcolor{textindraw}{EE}}
   \psfrag{FF}{\small\tt\textcolor{textindraw}{FF}}
-  \includegraphics[width=70mm]{hexagon-bdry.eps}
+  \includegraphics[width=85mm]{hexagon-bdry.eps}
   \caption{A star-shaped hole}
-  \label{\numb section 7.\numb fig 13}
+  \label{\numb section 7.\numb fig 16}
 \end{figure}
 
 Then we invoke method {\small\tt\verm{Mesh}::fold} and identify opposite faces :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 18}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 7.\numb parag 21}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    \verm{Mesh} \azul{torus} = hexa .fold ( \textcolor{tag}{tag}::identify, AB, \textcolor{tag}{tag}::with, DE .reverse(),
                              \textcolor{tag}{tag}::identify, BC, \textcolor{tag}{tag}::with, EF .reverse(),
@@ -938,18 +1090,18 @@ Then we invoke method {\small\tt\verm{Mesh}::fold} and identify opposite faces :
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=135mm]{repeated-balls.eps}
   \caption{Hexagonal arrangement of a star-shaped hole}
-  \label{\numb section 7.\numb fig 14}
+  \label{\numb section 7.\numb fig 17}
 \end{figure}
 
-Figure \ref{\numb section 7.\numb fig 14} shows the resulting mesh, together with the
-periodicity cell.
+Figure \ref{\numb section 7.\numb fig 17} shows an unfolding of the resulting mesh,
+together with the periodicity cell.
 We recall that the same periodicity group (i.e., periodic arrangement) may be generated
 by different sets of generators and, consequently, may be viewed as originating
 from different periodicity cells.
 
 
           %---------------------------------%
-\section{~~Treating a rectangle as a hexagon}\label{\numb section 7.\numb parag 19}
+\section{~~Treating a rectangle as a hexagon}\label{\numb section 7.\numb parag 22}
           %---------------------------------%
 
 Actually, we can even take a rectangle%
@@ -961,7 +1113,7 @@ and treat it as if it were a hexagon :
 \vskip 3mm
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 19}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 7.\numb parag 22}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    const double \azul{d} = \laranja{0.13};
    const size_t \azul{n} = \laranja{1.5} / d, \azul{m} = \laranja{2.6} / d;
@@ -972,7 +1124,6 @@ and treat it as if it were a hexagon :
    \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) =  \laranja{1.5};  y (D) =  \laranja{1.3};
    \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{0.} ;  y (E) =  \laranja{1.3};
    \verm{Cell} \azul{F} ( \textcolor{tag}{tag}::vertex );  x (F) = \laranja{-1.5};  y (F) =  \laranja{1.3};
-
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, n );
    \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in, n );
    \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C .reverse(), D, \textcolor{tag}{tag}::divided_in, m );
@@ -992,11 +1143,11 @@ and treat it as if it were a hexagon :
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=115mm]{hexa-round-hole.eps}
   \caption{Hexagonal arrangement of a circular hole}
-  \label{\numb section 7.\numb fig 15}
+  \label{\numb section 7.\numb fig 18}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 19}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 7.\numb parag 22}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                             ]
    \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, \{ AB, BC, CD, DE, EF, FA, inner .reverse() \} );
 
@@ -1009,13 +1160,14 @@ and treat it as if it were a hexagon :
                                   \textcolor{tag}{tag}::use_existing_vertices                  );
 \end{Verbatim}
 
-Figure \ref{\numb section 7.\numb fig 15} shows the resulting mesh.
+Figure \ref{\numb section 7.\numb fig 18} shows the resulting mesh.
+\vfil\eject
 
 
                     %-----------------------------------------%
 \section{~~\cinzasec{Progressive meshing on quotient manifolds}}
                     %-----------------------------------------%
-\label{\numb section 7.\numb parag 20}
+\label{\numb section 7.\numb parag 23}
 
 \vskip 2mm plus 2mm
 {\normalfont\bfseries The code described in this paragraph does not work yet.
@@ -1028,7 +1180,7 @@ should work on quotient manifolds with only minimal changes.
 Here is how we see it working in the future.
 
 We begin by defining two closed curves (the boundaries of the two future holes),
-represented in Figure \ref{\numb section 7.\numb fig 16}.
+represented in Figure \ref{\numb section 7.\numb fig 19}.
 We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -1063,7 +1215,7 @@ We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=95mm]{boomerang-1.eps}
   \caption{Two V-shaped loops}
-  \label{\numb section 7.\numb fig 16}
+  \label{\numb section 7.\numb fig 19}
 \end{figure}
 
 The {\small\tt loops} are reversed because they are going to be boundaries of holes
@@ -1081,10 +1233,10 @@ Define a torus manifold by means of two appropriate translations.
 
 \vskip -2mm
 Then, fold the two curves around this torus; the result is shown (after unfolding) in figure
-\ref{\numb section 7.\numb fig 17}.
+\ref{\numb section 7.\numb fig 20}.
 Calling the {\small\tt\verm{Mesh}::fold} method with only one argument is quite different
-from what we have seen in paragraphs \ref{\numb section 7.\numb parag 16} and
-\ref{\numb section 7.\numb parag 17}.
+from what we have seen in paragraphs \ref{\numb section 7.\numb parag 19} and
+\ref{\numb section 7.\numb parag 20}.
 There, the geometry of the manifold (the actions defining the group) were computed from
 the geometry of the given mesh.
 Here, it is the other way around : a quotient manifold has already been declared and
@@ -1104,7 +1256,7 @@ the folding operation will use the geometry of this torus.
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=95mm]{boomerang-2.eps}
   \caption{Two V-shaped loops, folded then unfolded}
-  \label{\numb section 7.\numb fig 17}
+  \label{\numb section 7.\numb fig 20}
 \end{figure}
 
 When we declare the {\small\tt\azul{torus\_\,manif}}, we must use translations chosen with care,
@@ -1133,7 +1285,7 @@ it meets the mesh on the other side of the torus.
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=140mm]{boomerang-3.eps}
   \caption{Periodically perforated plane, two V-shaped holes}
-  \label{\numb section 7.\numb fig 18}
+  \label{\numb section 7.\numb fig 21}
 \end{figure}
 
 This represents an example of a perforated material whose effective elastic behaviour

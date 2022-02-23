@@ -436,7 +436,7 @@ together with the intrinsic orientation of the surrounding space,
 it determines on which side of the circle the mesh will be propagated.
 Had we built the segments {\small\tt NW}, {\small\tt WS}, {\small\tt SE} and {\small\tt EN} in the
 opposite direction (that is, {\small\tt WN}, {\small\tt SW}, {\small\tt ES} and {\small\tt NE})
-the program would have tried to mesh the exterior of the disk, never stopping.
+the program would try to mesh the exterior of the disk, never stopping.
 
 Compact manifolds of co-dimension one (closed curves in $ \mathbb{R}^2 $,
 compact surfaces in $ \mathbb{R}^3 $) are an exception among implicit manifolds.
@@ -665,13 +665,13 @@ One of these orientations is compatible with the intrinsic orientation of the su
 $ \mathbb{R}^3 $ and is called inherent orientation.
 If the first one is correctly oriented, {\small\tt msh2} will be returned;
 if the second one is correctly oriented, {\small\tt msh1} will be returned.
+\vfil\eject
 
 Thus, in the code below we will obtain the upper hemisphere.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
-
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::progressive, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, \{ \laranja{1.}, \laranja{0.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                                         );
    nut .set_as_working_manifold();
@@ -1129,7 +1129,7 @@ This is why we provide the two pieces of boundary separately.
 \section{~~Non-uniform meshing}\label{\numb section 3.\numb parag 23}
           %-------------------%
 
-The {\small\tt desired\_\,length} may be a non-constant function.
+The desired length may be a non-constant function.
 
 \begin{figure}[ht] \centering
  \includegraphics[width=90mm]{disk-non-unif}
@@ -1155,10 +1155,9 @@ The {\small\tt desired\_\,length} may be a non-constant function.
 
 Compare with the mesh in paragraph \ref{\numb section 3.\numb parag 3}.
 
-It is the user's responsibility to provide a {\small\tt desired\_\,length} which takes positive
-values at all points of the future mesh.
-Also, {\small\tt desired\_\,length} should be a reasonably smooth function;
-sharp variations should be avoided.
+It is the user's responsibility to provide a length {\small\tt d} which takes positive values
+at all points of the future mesh.
+Also, {\small\tt d} should be a reasonably smooth function; sharp variations should be avoided.
 
 
                     %---------------------------%
@@ -1252,7 +1251,7 @@ $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for th
 Compare with the mesh in paragraph \ref{\numb section 3.\numb parag 3}.
 
 This result cannot be achieved using the approach of paragraph
-\ref{\numb section 3.\numb parag 23} (by setting a non-constant {\small\tt desired\_\,length}).
+\ref{\numb section 3.\numb parag 23} (by setting a non-constant desired length).
 
 
           %-----------%

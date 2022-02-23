@@ -329,8 +329,7 @@ and without {\small\tt\verm{Function}}s.
 However, most {\small\tt\verm{Mesh}} constructors will try to interpolate geometric coordinates
 based on the shape of the current {\small\tt\verm{Manifold}}.
 
-{\ManiFEM} uses {\small\tt\verm{Function}}s for several different purposes.
-{\small\tt\verm{Function}}s can be divided roughly in two categories.
+{\small\tt\verm{Function}}s in {\maniFEM} can be divided roughly in two categories.
 Some keep numeric values, like {\small\tt x}, {\small\tt y} and {\small\tt z}
 encountered in many places in this manual.
 After building a function like
@@ -399,27 +398,12 @@ first corners, then sides and then the plane region.
 This has the advantage that one can build more complex meshes from simple components. 
 For instance, one can build an L-shaped mesh by joining three rectangular meshes :
 
-\begin{figure}[ht] \centering
-  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
-  \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
-  \psfrag{F}{\small\tt\textcolor{textindraw}{F}}
-  \psfrag{G}{\small\tt\textcolor{textindraw}{G}}
-  \psfrag{H}{\small\tt\textcolor{textindraw}{H}}
-  \includegraphics[width=115mm]{L-shaped}
-  \caption{An L-shaped mesh}
-  \label{\numb section 1.\numb fig 5}
-\end{figure}
-
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 1.\numb parag 4}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
-
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{0.} \} );
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{0.} \} );
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.},  \laranja{0.} \} );
@@ -447,6 +431,20 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
 
    \verm{Mesh} \azul{L_shaped} ( \textcolor{tag}{tag}::join, ABCD, CEFD, BGHC );
 \end{Verbatim}
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
+  \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
+  \psfrag{F}{\small\tt\textcolor{textindraw}{F}}
+  \psfrag{G}{\small\tt\textcolor{textindraw}{G}}
+  \psfrag{H}{\small\tt\textcolor{textindraw}{H}}
+  \includegraphics[width=115mm]{L-shaped}
+  \caption{An L-shaped mesh}
+  \label{\numb section 1.\numb fig 5}
+\end{figure}
 
 Meshes in $ \mathbb{R}^2 $ like the one above may be exported in the {\small\tt msh} format
 or directly drawn in {\small\tt PostScript}, by one of the two statements below
@@ -612,7 +610,7 @@ then six squares, then finally invoke the {\small\tt\verm{Mesh}} constructor wit
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 1.\numb parag 7}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Mesh cube} ( \textcolor{tag}{tag}::cube, ABCD, HGFE, BFGC, DHEA, CGHD, AEFB );
+   \verm{Mesh} \azul{cube} ( \textcolor{tag}{tag}::cube, ABCD, HGFE, BFGC, DHEA, CGHD, AEFB );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering

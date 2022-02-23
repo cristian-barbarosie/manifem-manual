@@ -128,8 +128,8 @@ For meshing domains of a quotient manifold, a supplementary argument
 No need to provide any winding number, this information is already contained in the four sides.
 Examples are shown in paragraphs \ref{\numb section 7.\numb parag 3} --
 \ref{\numb section 7.\numb parag 8}, \ref{\numb section 7.\numb parag 10},
-\ref{\numb section 7.\numb parag 11}, \ref{\numb section 7.\numb parag 14},
-\ref{\numb section 7.\numb parag 15}.
+\ref{\numb section 7.\numb parag 14}, \ref{\numb section 7.\numb parag 17},
+\ref{\numb section 7.\numb parag 18}.
 
 
           %--------------------------%
@@ -177,7 +177,7 @@ For meshing domains of a quotient manifold, a supplementary argument
 {\small\tt\textcolor{tag}{tag}::winding} must be given.
 No need to provide any winding number, this information is already contained in the three sides.
 Examples are shown in paragraphs \ref{\numb section 7.\numb parag 9},
-\ref{\numb section 7.\numb parag 12}, \ref{\numb section 7.\numb parag 13}.
+\ref{\numb section 7.\numb parag 15}, \ref{\numb section 7.\numb parag 16}.
 
 
           %------------------------%
@@ -191,6 +191,10 @@ keeps the newly built faces.
 The advantage of using a {\small\tt\verm{Mesh}} instead of a {\small\tt list} of
 {\small\tt\verm{Cell}}s is that we can navigate through it as described in paragraph
 \ref{\numb section 9.\numb parag 6}.
+When we are on a quotient manifold (situations signaled by the {\small\tt\textcolor{tag}{tag}::winding}),
+the six faces  provided as arguments may we in very awkward positions;
+this makes it impossible to use one {\small\tt\verm{Mesh}} {\small\tt front} and we have
+to use three distinct meshes instead.
 
 \begin{figure}[ht] \centering
   \psfrag{S}{\small\tt\textcolor{textindraw}{ver\_\,south}}
