@@ -62,8 +62,9 @@ only used in one source file.
 In the {\small\tt namespace} {\small\tt\verm{maniFEM}} there are also many overloaded functions.
 Because they take arguments of specific type, they will not clash with names defined
 by the user or by other libraries.
-Examples are : {\small\tt\verm{smooth\_\,min}}, {\small\tt\verm{power}}, {\small\tt\verm{abs}},
-{\small\tt\verm{sin}}.
+Examples are : {\small\tt\verm{min}}, {\small\tt\verm{max}}, {\small\tt\verm{smooth\_\,min}},
+{\small\tt\verm{smooth\_\,max}}, {\small\tt\verm{power}}, {\small\tt\verm{abs}}, {\small\tt\verm{sign}},
+{\small\tt\verm{sin}}, {\small\tt\verm{cos}}.
 
 
           %-------------%
@@ -368,7 +369,7 @@ We also intend to implement multiply connected meshes.
 {\small\tt STSI} meshes are object of current work; the name means
 ``self-touching or self-intersecting'' meshes.
 They will be used internally to implement iterators over connected high-dimensional meshes,
-and for progressive meshing (described in section \ref{\numb section 3}).
+and for frontal meshing (described in section \ref{\numb section 3}).
 
 Iterators over cells of a {\small\tt Fuzzy} mesh are fast because they simply run over the
 list of cells of given dimension.
@@ -546,7 +547,7 @@ seg->glue_on_bdry_of ( tri )
             make_deep_connections_1d ( seg, tri->boundary, \textcolor{tag}{tag}::mesh_is_bdry )
                add_link_same_dim ( seg, tri->boundary )
                   tri->boundary->cells[\laranja{1}] .push ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} tri->boundary \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
-                  seg->meshes_same_dim [ tri->boundary ] = ( \laranja\mypm1, wh )
+                  seg->meshes_same_dim [ tri->boundary ] = ( \laranja{\mypm 1}, wh )
                link_face_to_higher ( seg, tri, *, * )
                   for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= \laranja{2} \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
                      add_link ( seg, msh, *, * )

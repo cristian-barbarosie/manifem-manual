@@ -187,7 +187,7 @@ values to the global matrix:
       for ( it2 .reset(); it2 .in_range(); it2++ )
       \{  \verm{Cell} \azul{V} = *it1, \azul{W} = *it2;
          \cinza{// V may be the same as W, no problem about that}
-         \verm{Function} \azul{psiV} = fe.basis_function(V),
+         \verm{Function} \azul{psiV} = fe .basis_function(V),
                   \azul{psiW} = fe .basis_function (W),
                   \azul{d_psiV_dx} = psiV .deriv (x),
                   \azul{d_psiV_dy} = psiV .deriv (y),
@@ -690,7 +690,7 @@ one component).
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
-         \verm{Function} \azul{psi_V} = fe.basis_function(V),
+         \verm{Function} \azul{psi_V} = fe .basis_function(V),
                   \azul{psi_W} = fe .basis_function (W);
          std::vector < double > \azul{result} = fe .integrate 
             ( \textcolor{tag}{tag}::pre_computed, \textcolor{tag}{tag}::replace, bf1, \textcolor{tag}{tag}::by, psi_V,

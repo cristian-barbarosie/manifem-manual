@@ -85,7 +85,7 @@ Tags {\small\tt rectangle}, {\small\tt quadrangle} and {\small\tt quadrilateral}
 interchangeably.
 However, high distortions (e.g.\ high curvature) of the four sides should be avoided;
 you should use either smaller patches, to be subsequently {\small\tt join}ed,
-or progressive mesh generation if you are willing to accept triangles instead of quadrilaterals.
+or frontal mesh generation if you are willing to accept triangles instead of quadrilaterals.
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
@@ -171,7 +171,7 @@ These three sides may be curves in the plane $ \mathbb{R}^2 $ or in the space $ 
 (or even in higher dimensional spaces).
 However, high distortions (e.g.\ high curvature) of the sides should be avoided;
 you should use either smaller patches, to be susbequently {\small\tt join}ed,
-or progressive mesh generation.
+or frontal mesh generation.
 
 For meshing domains of a quotient manifold, a supplementary argument
 {\small\tt\textcolor{tag}{tag}::winding} must be given.
@@ -202,7 +202,7 @@ to use three distinct meshes instead.
   \psfrag{E}{\small\tt\textcolor{textindraw}{ver\_\,east}}
   \psfrag{W}{\small\tt\textcolor{textindraw}{ver\_\,west}}
   \psfrag{up}{\small\tt\textcolor{textindraw}{ver\_\,up}}
-  \includegraphics[width=105mm]{build-cube.eps}
+  \includegraphics[width=100mm]{build-cube.eps}
   \caption{Meshing a cube}
   \label{\numb section 12.\numb fig 3}
 \end{figure}
@@ -215,7 +215,7 @@ as provided by the user.
 The six faces may be curved.
 However, faces with high distortions (e.g.\ high curvature) should be avoided;
 you should use smaller patches, to be subsequently {\small\tt join}ed.
-Progressive mesh generation is not yet implemented for volumes.
+Frontal mesh generation is not yet implemented for volumes.
 
 For meshing domains of a quotient manifold, a supplementary argument
 {\small\tt\textcolor{tag}{tag}::winding} must be given.
@@ -233,18 +233,18 @@ This is why there is no {\small\tt\verm{Mesh}} constructor with
 {\small\tt\textcolor{tag}{tag}::tetrahedron}.
 
 
-          %---------------------------%
-\section{~~Progressive mesh generation}\label{\numb section 12.\numb parag 6}
-          %---------------------------%
+          %-----------------------%
+\section{~~Frontal mesh generation}\label{\numb section 12.\numb parag 6}
+          %-----------------------%
 
 Several constructors {\small\tt \verm{Mesh}::Mesh} {\small\tt(}
-{\small\tt\textcolor{tag}{tag}::progressive,...)} are defined in {\small\tt progressive.cpp};
+{\small\tt\textcolor{tag}{tag}::frontal,...)} are defined in {\small\tt frontal.cpp};
 they build a mesh on a given manifold starting with almost nothing.
 For a one-dimensional manifold, a mesh of segments is built.
 For a two-dimensional manifold, triangular cells are used.
-Progressive mesh generation is not yet implemented for volumes.
+Frontal mesh generation is not yet implemented for volumes.
 
-Progressive mesh generation on a two-dimensional manifold starts with the boundary of
+Frontal mesh generation on a two-dimensional manifold starts with the boundary of
 the future mesh, then moves this interface with small steps, building the mesh behind it
 like a spider.
 This may be called ``frontal method''.
@@ -274,7 +274,7 @@ Points belonging to the interface are organized in a hierarchy allowing one
 to eliminate many pairs of points from the evaluation process.
 Paragraph \ref{\numb section 12.\numb parag 10} describes this hierarchy.
 
-The next few paragraphs describe specific parts of this process of progressive mesh generation.
+The next few paragraphs describe specific parts of this process of frontal mesh generation.
 
 
           %-----------%
@@ -488,7 +488,7 @@ show up in the returned list, disguised as a {\small\tt Node}).
 The user can recover (a copy of) the {\small\tt Point} from a {\small\tt Node} using the attribute
 {\small\tt point}.
 We have not implemented a method for finding the $n$ nodes closest to a given point
-(we do not need such an operation for progressive mesh generation).
+(we do not need such an operation for frontal mesh generation).
 
 It is assumed that {\small\tt Point}s are cheap to copy.
 If this is not the case for your {\small\tt Point}s, use pointers.
@@ -558,11 +558,11 @@ If you want to run this example on your computer, it suffices to download three 
 then {\small\tt make run-\ref{\numb section 12.\numb parag 10}}.
 
 
-          %----------------------------------------%
-\section{~~The cloud in progressive mesh generation}\label{\numb section 12.\numb parag 11}
-          %----------------------------------------%
+          %------------------------------------%
+\section{~~The cloud in frontal mesh generation}\label{\numb section 12.\numb parag 11}
+          %------------------------------------%
 
-The use of {\small\tt\verm{MetricTree}} for progressive mesh generation (described in paragraph
+The use of {\small\tt\verm{MetricTree}} for frontal mesh generation (described in paragraph
 \ref{\numb section 12.\numb parag 6}, with examples in section \ref{\numb section 3})
 is tricky when we are meshing a submanifold of $ \mathbb{R}^n $
 (a curve in $ \mathbb{R}^2 $ or $ \mathbb{R}^3 $, a surface in $ \mathbb{R}^3 $)

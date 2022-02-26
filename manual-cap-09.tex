@@ -24,6 +24,8 @@ For instance :
    \verm{Mesh} \azul{rectangle} ( \textcolor{tag}{tag}::rectangle, south, east, north, west );
 \end{Verbatim}
 
+Paragraph \ref{\numb section 11.\numb parag 2} explains the coloring conventions observed
+in this manual for {\tt C++} code.
 Paragraph \ref{\numb section 11.\numb parag 3} gives more details about
 {\small\tt\textcolor{tag}{tag}}s.
 
@@ -113,8 +115,10 @@ paragraph \ref{\numb section 11.\numb parag 4}.
    for ( short int \azul{i} = \laranja{1}; i < n_sectors; i++ )
    \{  double \azul{theta} = i * step_theta;
       \cinza{// we build two new points}
-      \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) = \verm{cos}(theta);     y (C) = \verm{sin}(theta);
-      \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = \laranja{2.}*\verm{cos}(theta);  y (D) = \laranja{2.}*\verm{sin}(theta);
+      \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );
+      x (C) =    std::cos(theta);  y (C) =    std::sin(theta);
+      \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );
+      x (D) = \laranja{2.}*std::cos(theta);  y (D) = \laranja{2.}*std::sin(theta);
       \cinza{// and three new segments}
       \verm{Mesh} \azul{BD} ( \textcolor{tag}{tag}::segment, B .reverse(), D, \textcolor{tag}{tag}::divided_in, rot_divisions );
       \verm{Mesh} \azul{DC} ( \textcolor{tag}{tag}::segment, D .reverse(), C, \textcolor{tag}{tag}::divided_in, radial_divisions );
