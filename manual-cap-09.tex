@@ -633,7 +633,7 @@ which is which is not very important for the user.
 \section{~~Navigating at the boundary of a mesh}\label{\numb section 9.\numb parag 7}
           %------------------------------------%
 
-Consider the example in paragraph \ref{\numb section 9.\numb parag 6}.
+Consider again the mesh in paragraph \ref{\numb section 9.\numb parag 6}.
 Suppose you try to get a neighbour hexagon which does not exist :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
@@ -762,8 +762,8 @@ can always add the {\small\tt\textcolor{tag}{tag}::force\_\,positive} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{3}, \textcolor{tag}{tag}::force_positive,
-                                       \textcolor{tag}{tag}::around, P                                 );
+  \verm{Mesh}::Iterator \azul{it} = msh .iterator
+     ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{3}, \textcolor{tag}{tag}::force_positive, \textcolor{tag}{tag}::around, P );
 \end{Verbatim}
 
 Consider now the case when the co-dimension is two, that is, when we are centered at a vertex

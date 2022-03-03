@@ -448,6 +448,27 @@ See also paragraph \ref{\numb section 5.\numb parag 1}.
 The user must provide positive vertices {\small\tt V} but oriented (possibly negative) segments
 {\small\tt seg} belonging to {\small\tt small\_\,tri} {\small\tt .boundary()}.
 
+Table below shows the values taken by the six shape functions at relevant points in the triangle.
+
+\begin{center}\begin{tabular}{ | c | c | c | c | c | c | c | c | }
+  \hline
+  & {\small\tt A} & {\small\tt B} & {\small\tt C} & midpoint of {\small\tt AB} &
+  midpoint of {\small\tt BC} & midpoint of {\small\tt CA}
+  \\ \hline
+  $ \psi_{\mbox{\small\tt A}} $ & 1 & 0 & 0 & 0 & 0 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt B}} $ & 0 & 1 & 0 & 0 & 0 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt C}} $ & 0 & 0 & 1 & 0 & 0 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt AB}} $ & 0 & 0 & 0 & 1 & 0 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt BC}} $ & 0 & 0 & 0 & 0 & 1 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt CA}} $ & 0 & 0 & 0 & 0 & 0 & 1
+  \\ \hline
+\end{tabular}\end{center}
+
 It is worth noticing that, although we intend to work with degree two finite elements,
 the coordinate system {\small\tt\azul{xy}} is still declared with
 {\small\tt\textcolor{tag}{tag}::of\_\,degree,} {\small\tt\laranja{1}}
@@ -480,15 +501,33 @@ The six basis functions are not the same, but they span the same linear function
 The set of basis functions of this element contains the three basis functions of the
 Lagrange P1 element (associated to the three vertices).
 In addition, there are three basis functions associated to the three sides.
+\vfil\eject
 
 The six basis functions of this finite element take the following values
 
-[include table]
+\begin{center}\begin{tabular}{ | c || c | c | c | c | c | c | c | }
+  \hline
+  & {\small\tt A} & {\small\tt B} & {\small\tt C} & midpoint of {\small\tt AB} &
+  midpoint of {\small\tt BC} & midpoint of {\small\tt CA}
+  \\ \hline\hline
+  $ \psi_{\mbox{\small\tt A}} $ & 1 & 0 & 0 & 0.5 & 0 & 0.5
+  \\ \hline
+  $ \psi_{\mbox{\small\tt B}} $ & 0 & 1 & 0 & 0.5 & 0.5 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt C}} $ & 0 & 0 & 1 & 0 & 0.5 & 0.5
+  \\ \hline
+  $ \psi_{\mbox{\small\tt AB}} $ & 0 & 0 & 0 & 0.25 & 0 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt BC}} $ & 0 & 0 & 0 & 0 & 0.25 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt CA}} $ & 0 & 0 & 0 & 0 & 0 & 0.25
+  \\ \hline
+\end{tabular}\end{center}
 
 The difference relatively to the ``usual'' finite element described in paragraph
 \ref{\numb section 6.\numb parag 5} lies in the interpretation
 of the coefficients when we write a function $u$ as a linear combination of basis functions.
-If $ u = $ $ = \sum_{\mbox{\small\tt v}} u_{\mbox{\small\tt v}} \psi_{\mbox{\small\tt v}} +
+If $ u = \sum_{\mbox{\small\tt v}} u_{\mbox{\small\tt v}} \psi_{\mbox{\small\tt v}} +
 \sum_{\mbox{\small\tt s}} u_{\mbox{\small\tt s}} \psi_{\mbox{\small\tt s}} $
 ({\small\tt v} being vertices, {\small\tt s} being segments), then $ u_{\mbox{\small\tt v}} =
 u(\mbox{\small\tt v}) $ but $ u_{\mbox{\small\tt s}} $ is not the value of $u$ at {\small\tt m};
@@ -534,6 +573,33 @@ The user must provide positive vertices {\small\tt V} but oriented (possibly neg
 {\small\tt seg} belonging to {\small\tt small\_\,square} {\small\tt .boundary()}.
 The quadrangular cell {\small\tt small\_\,square} itself may be positive or negative.
 
+Table below shows the values taken by the nine shape functions at relevant points in the quadrangle.
+
+\begin{center}\begin{tabular}{ | c || c | c | c | c | c | c | c | c | c | c | }
+  \hline
+  & {\small\tt A} & {\small\tt B} & {\small\tt C} & {\small\tt D} & mid of {\small\tt AB} &
+  mid of {\small\tt BC} & mid of {\small\tt CD} & mid of {\small\tt DA} & center
+  \\ \hline\hline
+  $ \psi_{\mbox{\small\tt A}} $ & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt B}} $ & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt C}} $ & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt D}} $ & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt AB}} $ & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt BC}} $ & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt CD}} $ & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt DA}} $ & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0
+  \\ \hline
+  $ \psi_{\mbox{\small\tt q}} $ & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1
+  \\ \hline
+\end{tabular}\end{center}
+
 It is worth noticing that, although we intend to work with degree two finite elements,
 the coordinate system {\small\tt\azul{xy}} is still declared with
 {\small\tt\textcolor{tag}{tag}::of\_\,degree,} {\small\tt\laranja{1}}
@@ -570,7 +636,30 @@ quadrangular cell itself.
 
 The nine basis functions of this finite element take the following values
 
-[include table]
+\begin{center}\begin{tabular}{ | c || c | c | c | c | c | c | c | c | c | c | }
+  \hline
+  & {\small\tt A} & {\small\tt B} & {\small\tt C} & {\small\tt D} & mid of {\small\tt AB} &
+  mid of {\small\tt BC} & mid of {\small\tt CD} & mid of {\small\tt DA} & center
+  \\ \hline\hline
+  $ \psi_{\mbox{\small\tt A}} $ & 1 & 0 & 0 & 0 & 0.5 & 0 & 0 & 0.5 & 0.25
+  \\ \hline
+  $ \psi_{\mbox{\small\tt B}} $ & 0 & 1 & 0 & 0 & 0.5 & 0.5 & 0 & 0 & 0.25
+  \\ \hline
+  $ \psi_{\mbox{\small\tt C}} $ & 0 & 0 & 1 & 0 & 0 & 0.5 & 0.5 & 0 & 0.25
+  \\ \hline
+  $ \psi_{\mbox{\small\tt D}} $ & 0 & 0 & 0 & 1 & 0 & 0 & 0.5 & 0.5 & 0.25
+  \\ \hline
+  $ \psi_{\mbox{\small\tt AB}} $ & 0 & 0 & 0 & 0 & 2 & 0 & 0 & 0 & 1
+  \\ \hline
+  $ \psi_{\mbox{\small\tt BC}} $ & 0 & 0 & 0 & 0 & 0 & 2 & 0 & 0 & 1
+  \\ \hline
+  $ \psi_{\mbox{\small\tt CD}} $ & 0 & 0 & 0 & 0 & 0 & 0 & 2 & 0 & 1
+  \\ \hline
+  $ \psi_{\mbox{\small\tt DA}} $ & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 2 & 1
+  \\ \hline
+  $ \psi_{\mbox{\small\tt q}} $ & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1
+  \\ \hline
+\end{tabular}\end{center}
 
 The difference relatively to the ``usual'' finite element described in paragraph
 \ref{\numb section 6.\numb parag 7} lies in the interpretation
@@ -750,19 +839,18 @@ Below are some example invocations of {\small\tt pre\_\,compute} with two basis 
                         \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2 \}                );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2, bf1 .deriv(x) * bf2 \} );
-
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2, bf1 .deriv(x) * bf2 .deriv(x) \} );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1 * bf2, bf1 .deriv(x) * bf2 .deriv(y) \} );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x),
+                                            bf1 * bf2, bf1 * bf2 .deriv(x) \} );
+   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
+                        \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x),
                                             bf1 .deriv(x) * bf2 .deriv(y),
                                             bf1 .deriv(y) * bf2 .deriv(x),
                                             bf1 .deriv(y) * bf2 .deriv(y) \} );
-   integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
-                        \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x),
-                                            bf1 * bf2, bf1 * bf2 .deriv(x) \} );
    integ .pre_compute ( \textcolor{tag}{tag}::for_given, \textcolor{tag}{tag}::basis_functions, bf1, bf2,
                         \textcolor{tag}{tag}::integral_of, \{ bf1 .deriv(x) * bf2 .deriv(x) +
                                             bf1 .deriv(y) * bf2 .deriv(y)  \} );

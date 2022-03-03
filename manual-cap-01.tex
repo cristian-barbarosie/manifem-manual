@@ -138,7 +138,7 @@ roughly a list of two-dimensional cells (quadrilaterals), but lists of segments 
 are also kept.
 This represents quite some amount of redundant information, but it is useful e.g.\ for
 quickly sweeping over all vertices of a mesh.%
-\footnote {Actually, the implementation details are more complicated.
+\footnote {{} Actually, the implementation details are more complicated.
 There are different kinds of meshes, some of them keep more information (lists of cells)
 and are faster; others are slower but lighter in terms of memory occupied.
 See e.g. paragraph \ref{\numb section 11.\numb parag 6}.}
@@ -246,7 +246,7 @@ If we switch all four orientations, we will obtain the same mesh with the opposi
 This can be done either by changing the declaration of each side (switching the first vertex with
 the last) or by replacing (in the above declaration of {\small\tt\azul{rect\_\,mesh}})
 {\small\tt south} by {\small\tt south} {\small\tt .reverse()},
-{\small\tt east} by {\small\tt east} {\small\tt .reverse()} and so on.
+{\small\tt east} by {\small\tt east.} {\small\tt .reverse()} and so on.
 The {\small\tt reverse} method is explained below.
 If we switch the orientation of one side only, {\maniFEM} will complain that
 the orientations are not compatible with each other.
@@ -377,8 +377,8 @@ while {\small\tt norm(A)} {\small\tt =} {\small\tt\laranja{1.}} produces a run-t
 The {\small\tt\verm{Function}::deriv} method performs symbolic differentiation :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Function} \azul{norm_x} = norm .deriv ( x );
-   \verm{Function} \azul{norm_y} = norm .deriv ( y );
+   \verm{Function} \azul{norm_x} = norm .deriv (x);
+   \verm{Function} \azul{norm_y} = norm .deriv (y);
 \end{Verbatim}
 
 Integrals of {\small\tt\verm{Function}}s are computed by means of {\small\tt\verm{Integrator}}s,
@@ -508,8 +508,9 @@ Thus, you can use it to build any quadrilateral; the inner vertices' coordinates
 interpolated from the coordinates of vertices on the boundary, as shown in paragraphs
 \ref{\numb section 1.\numb parag 6} and \ref{\numb section 2.\numb parag 1}.
 This can be done even in more than two (geometric) dimensions, like in
-paragraphs \ref{\numb section 1.\numb parag 1}, \ref{\numb section 2.\numb parag 7} and
-\ref{\numb section 2.\numb parag 14}.
+paragraphs \ref{\numb section 1.\numb parag 1}, \ref{\numb section 2.\numb parag 7},
+\ref{\numb section 2.\numb parag 9}, \ref{\numb section 2.\numb parag 11} and
+\ref{\numb section 2.\numb parag 12}.
 Here, tags {\small\tt rectangle}, {\small\tt quadrilateral} and {\small\tt quadrangle}
 can be used interchangeably.
 

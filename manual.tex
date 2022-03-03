@@ -1,14 +1,19 @@
 
 
-%\documentclass{report}
-\documentclass[a4paper]{scrreprt}
+% \documentclass{report}
+
+\documentclass[a4paper,oneside]{scrbook}
+\pagestyle{plain}
+
+% \documentclass[a4paper]{scrreprt}
 \usepackage{typearea}
 \areaset[1cm]{158mm}{234mm}
+% \usepackage{scrlayer-scrpage}
 
 \def\manifemrelease{22.03}
 \def\manualversion{22.03}
-\let\production 0
-% \includeonly{manual-cap-12}
+\let\production 1
+% \includeonly{manual-cap-01}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -76,9 +81,11 @@
 
 \begin{document}
 
+\frontmatter
 \begin{titlepage}
 \maketitle
 \end{titlepage}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -201,8 +208,7 @@ Various implementation detais, programming style, compilation options, frequent 
 \subparagraph*{\ref{\numb section 12} \ Internal details}
 Mainly drawings intended to support the developer in understanding the source code.
 
-\subparagraph*{\ref{\numb section 13} \ Frequently asked questions}
-Frequently asked questions
+\subparagraph*{\ref{\numb section 13} \ Frequently asked questions} \hglue 2cm
 \vfil\eject
 
 
@@ -250,6 +256,7 @@ This manual is licensed under the
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\mainmatter
 
 \include{manual-cap-01}
 \include{manual-cap-02}
@@ -267,6 +274,7 @@ This manual is licensed under the
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\backmatter
 
 \addchap{Changelog}
 
@@ -358,6 +366,7 @@ Switch to {\small\tt gmsh} version 4 format.
 \section*{22.03}
 
 \noindent Fix nasty bug in progressive mesh generation.
+Still not entirely stable, needs more work.
 
 \noindent 3D torus, made of cubic cells, paragraphs \ref{\numb section 7.\numb parag 11} --
 \ref{\numb section 7.\numb parag 13}.
@@ -368,7 +377,11 @@ Switch to {\small\tt gmsh} version 4 format.
 \noindent Zero-dimensional {\small\tt\verm{Manifold}}s, paragraphs
 \ref{\numb section 2.\numb parag 12} and \ref{\numb section 7.\numb parag 11}.
 
-Change {\small\tt\textcolor{tag}{tag}::progressive} into {\small\tt\textcolor{tag}{tag}::frontal}.
+\noindent Change {\small\tt\textcolor{tag}{tag}::progressive} into
+{\small\tt\textcolor{tag}{tag}::frontal}.
+
+\noindent STSI meshes work in an incipient setting.
+
 
 
 \section*{To do}
@@ -396,8 +409,8 @@ on STSI (self-touching or self-intersecting) meshes.
 a STSI interface instead of a list of connected interfaces.
 
 \noindent Define regions in a manifold (i.e.\ manifolds with boundary) by means of
-inequalities between {\small\tt\verm{Function}}s (partially done, see {\small\tt draw\_\,ps}
-with {\small\tt\textcolor{tag}{tag}::unfold}).
+inequalities between {\small\tt\verm{Function}}s (partially done, see {\small\tt\verm{Mesh}::unfold}
+and {\small\tt\verm{Mesh}::draw\_\,ps} with {\small\tt\textcolor{tag}{tag}::unfold}).
 
 \noindent I implemented a class for multi-indexed matrices, should it be integrated into
 {\small\tt namespace} {\small\tt\verm{maniFEM}}\;?
@@ -409,7 +422,7 @@ with {\small\tt\textcolor{tag}{tag}::unfold}).
 \addchap{Index}
 
 \noindent
-{\small\tt\verm{Cell}::belongs\_\,to} : 
+{\small\tt\verm{Cell}::\underbar{belongs}\_\,to} : 
 
 \noindent
 boundary of a cell : \ref{\numb section 1.\numb parag 2}
@@ -418,8 +431,8 @@ boundary of a cell : \ref{\numb section 1.\numb parag 2}
 cell : \ref{\numb section 1.\numb parag 2}, \ref{\numb section 9.\numb parag 1}
 
 \noindent
-{\small\tt\verm{Mesh}::cell\_\,in\_\,front\_\,of},
-{\small\tt\verm{Mesh}::cell\_\,behind} : \ref{\numb section 9.\numb parag 6},
+{\small\tt\verm{Mesh}::\underbar{cell}\_\,in\_\,front\_\,of},
+{\small\tt\verm{Mesh}::\underbar{cell}\_\,behind} : \ref{\numb section 9.\numb parag 6},
 \ref{\numb section 9.\numb parag 7}
 
 \noindent
@@ -436,7 +449,7 @@ compilation process : \ref{\numb section 11.\numb parag 13},
 \ref{\numb section 11.\numb parag 15}, \ref{\numb section 11.\numb parag 16}
 
 \noindent
-cone : \ref{\numb section 3.\numb parag 21}, \ref{\numb section 7.\numb parag 15},
+cone : \ref{\numb section 3.\numb parag 20}, \ref{\numb section 7.\numb parag 15},
 \ref{\numb section 7.\numb parag 16}
 
 \noindent
@@ -452,22 +465,22 @@ docking (of a finite element on a cell) :
 \ref{\numb section 6.\numb parag 1} -- \ref{\numb section 6.\numb parag 3}
 
 \noindent
-{\small\tt\verm{Mesh}::draw\_\,ps} : \ref{\numb section 1.\numb parag 4},
+{\small\tt\verm{Mesh}::\underbar{draw}\_\,ps} : \ref{\numb section 1.\numb parag 4},
 \ref{\numb section 7.\numb parag 4}
 
 \noindent
 errors : \ref{\numb section 11.\numb parag 13}, \ref{\numb section 11.\numb parag 14}
 
 \noindent
-{\small\tt\verm{Cell}::exists} : \ref{\numb section 9.\numb parag 7}
+{\small\tt\verm{Cell}::\underbar{exists}} : \ref{\numb section 9.\numb parag 7}
 
 \noindent
-{\small\tt\verm{Mesh}::export\_\,to\_\,file} : \ref{\numb section 1.\numb parag 1},
+{\small\tt\verm{Mesh}::\underbar{export}\_\,to\_\,file} : \ref{\numb section 1.\numb parag 1},
 \ref{\numb section 1.\numb parag 2}, \ref{\numb section 1.\numb parag 4},
 \ref{\numb section 7.\numb parag 6}
 
 \noindent
-{\small\tt\verm{Mesh}::fold} :
+{\small\tt\verm{Mesh}::\underbar{fold}} :
 \ref{\numb section 7.\numb parag 19} -- \ref{\numb section 7.\numb parag 19}
 
 \noindent
@@ -496,7 +509,7 @@ garbage collector : \ref{\numb section 11.\numb parag 5}
 importing a mesh from a file : \ref{\numb section 1.\numb parag 4}
 
 \noindent
-{\small\tt\verm{Mesh}::Iterator::in\_\,range} : \ref{\numb section 9.\numb parag 3}
+{\small\tt\verm{Mesh}::Iterator::\underbar{in}\_\,range} : \ref{\numb section 9.\numb parag 3}
 
 \noindent
 inherent orientation of a {\small\tt\verm{Mesh}} : \ref{\numb section 3.\numb parag 13},
@@ -585,7 +598,7 @@ negative {\small\tt \verm{Cell}} or {\small\tt \verm{Mesh}} :
 see orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es
 
 \noindent
-{\small\tt\verm{Mesh}::number\_\,of} : {\numb section 9.\numb parag 3}
+{\small\tt\verm{Mesh}::\underbar{number}\_\,of} : {\numb section 9.\numb parag 3}
 
 \noindent
 numbering of vertices :
@@ -635,7 +648,7 @@ reading a mesh from a file, see importing a mesh from a file
 reverse cell or mesh : see orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es
 
 \noindent
-{\small\tt\verm{Cell}::reverse}, {\small\tt\verm{Mesh}::reverse} :
+{\small\tt\verm{Cell}::\underbar{reverse}}, {\small\tt\verm{Mesh}::\underbar{reverse}} :
 see orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es
 
 \noindent
@@ -654,7 +667,7 @@ segment {\small\tt \verm{Mesh}}es :
 \ref{\numb section 2.\numb parag 17}, \ref{\numb section 3.\numb parag 1},
 \ref{\numb section 3.\numb parag 2}, \ref{\numb section 3.\numb parag 3},
 \ref{\numb section 3.\numb parag 9},
-\ref{\numb section 3.\numb parag 14} -- \ref{\numb section 3.\numb parag 25}
+\ref{\numb section 3.\numb parag 14} -- \ref{\numb section 3.\numb parag 24}
 
 \noindent
 source text coloring : \ref{\numb section 11.\numb parag 2}
@@ -665,7 +678,7 @@ source text coloring : \ref{\numb section 11.\numb parag 2}
 \noindent
 {\small\tt\textcolor{tag}{tag}::desired\_\,length} :
 \ref{\numb section 3.\numb parag 1} -- \ref{\numb section 3.\numb parag 7},
-\ref{\numb section 3.\numb parag 23}
+\ref{\numb section 3.\numb parag 22}
 
 \noindent
 {\small\tt\textcolor{tag}{tag}::do\_\,not\_\,bother} :
@@ -696,6 +709,9 @@ source text coloring : \ref{\numb section 11.\numb parag 2}
 {\small\tt\textcolor{tag}{tag}::unfold} : \ref{\numb section 7.\numb parag 4}
 
 \noindent
+{\small\tt\textcolor{tag}{tag}::Util} : \ref{\numb section 11.\numb parag 1}
+  
+\noindent
 {\small\tt\textcolor{tag}{tag}::vertex} : \ref{\numb section 1.\numb parag 1},
 \ref{\numb section 2.\numb parag 12}
   
@@ -706,7 +722,11 @@ torus : \ref{\numb section 2.\numb parag 20}, \ref{\numb section 2.\numb parag 7
 \ref{\numb section 7.\numb parag 20}
 
 \noindent
-unfolding a mesh : \ref{\numb section 7.\numb parag 4}, \ref{\numb section 7.\numb parag 6}
+unfolding a mesh : \ref{\numb section 7.\numb parag 4}, \ref{\numb section 7.\numb parag 6},
+\ref{\numb section 7.\numb parag 11}
+
+\noindent
+{\small\tt\verm{Mesh}::\underbar{unfold}}, see unfolding a mesh
 
 \noindent
 unwinding a mesh : see unfolding a mesh
@@ -720,5 +740,6 @@ wrapping a mesh around a cylinder or a torus : see folding a mesh
 
 \noindent
 writing a mesh to a file, see {\small\tt\verm{Mesh}::export\_\,to\_\,file}
+
 
 \end{document}

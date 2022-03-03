@@ -371,8 +371,7 @@ When the difference is smaller than the threshold, it gives a $ C^1 $ interpolat
 the two values.
 
 If we want sharp edges, we must build the edges first as explained in paragraphs
-\ref{\numb section 3.\numb parag 18}, \ref{\numb section 3.\numb parag 19} and
-\ref{\numb section 3.\numb parag 20}.
+\ref{\numb section 3.\numb parag 18} and \ref{\numb section 3.\numb parag 19}.
 
 Comments at the end of paragraph \ref{\numb section 3.\numb parag 6} apply here, too :
 {\maniFEM} must find a starting point and the right orientation.
@@ -546,8 +545,8 @@ However, these arguments are not necessary; {\maniFEM} will consider them by def
 This happens for the {\small\tt\azul{disk}} in paragraphs \ref{\numb section 3.\numb parag 1} and
 \ref{\numb section 3.\numb parag 2}, for the diamond in
 paragraph \ref{\numb section 3.\numb parag 17} and for the annulus in paragraphs
-\ref{\numb section 3.\numb parag 3}, \ref{\numb section 3.\numb parag 23}
-and \ref{\numb section 3.\numb parag 25}.
+\ref{\numb section 3.\numb parag 3}, \ref{\numb section 3.\numb parag 22}
+and \ref{\numb section 3.\numb parag 24}.
 
 Compact manifolds of co-dimension one (closed curves in $ \mathbb{R}^2 $,
 compact surfaces in $ \mathbb{R}^3 $) have a privileged orientation,
@@ -784,8 +783,8 @@ when compared to the segment size.
 In this respect, the example in paragraph \ref{\numb section 3.\numb parag 3} is also
 ``on the edge''.
 In contrast, {\maniFEM} is ``at ease'' when meshing the same domain with other options,
-like in paragraphs \ref{\numb section 3.\numb parag 23}, \ref{\numb section 3.\numb parag 24}
-or \ref{\numb section 3.\numb parag 25}.
+like in paragraphs \ref{\numb section 3.\numb parag 22}, \ref{\numb section 3.\numb parag 23}
+or \ref{\numb section 3.\numb parag 24}.
 
 Sharp edges and singularities must be dealt with as described in subsequent paragraphs.
 
@@ -819,11 +818,11 @@ Here is how to mesh the diamond-shaped domain in paragraph \ref{\numb section 2.
    
    \cinza{// or with tag::frontal like in}
    RR2 .implicit ( x*y - x - y ==  \laranja{1.} );
-   \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, W, \textcolor{tag}{tag}::stop_at, S, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
+   \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, W, \textcolor{tag}{tag}::stop_at, S,
+             \textcolor{tag}{tag}::desired_length, \laranja{0.1}               );
    \cinza{// ... //}
              
    \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, NW, WS, SE, EN );
-
    RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{diamond} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
@@ -921,7 +920,7 @@ a constructor like
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
    \verm{Mesh} \azul{circle_2} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::desired_length, seg_size,
-                   \textcolor{tag}{tag}::orientation, \textcolor{tag}{tag}::random                   );
+                   \textcolor{tag}{tag}::orientation, \textcolor{tag}{tag}::random               );
 \end{Verbatim}
 
 \noindent and {\maniFEM} would mesh one connected component of the manifold {\small\tt intersection}
@@ -944,7 +943,7 @@ $ (0,0,1) $.
 At that point, the two equations defining the {\small\tt intersection} manifold would be
 degenerate (the Jacobian matrix would not have full rank).
 This is a situation which {\maniFEM} cannot handle yet; it is discussed in paragraph
-\ref{\numb section 3.\numb parag 22}.
+\ref{\numb section 3.\numb parag 21}.
 
 
           %------------------%
@@ -1012,26 +1011,11 @@ we provide.
 Had we chosen a cylinder of diameter $1$, a singular point would appear;
 the two ``circles'' would touch at point $ (0,0,1) $.
 This is a situation which {\maniFEM} cannot handle yet; it is discussed in paragraph
-\ref{\numb section 3.\numb parag 22}.
-
-
-          %-------------------------%
-\section{~~Two intersecting tori}\label{\numb section 3.\numb parag 20}
-          %-------------------------%
-
-Going back to the two tori in paragraph \ref{\numb section 3.\numb parag 7},
-we now build the edges first and obtain a sharp, precise cut
-(forget about {\small\tt\verm{smooth\_\,min}}).
-
-\begin{figure}[ht] \centering
- \includegraphics[width=79mm]{two-tori-sharp}
-  \caption{Sharp edges}
-  \label{\numb section 3.\numb fig 8}
-\end{figure}
+\ref{\numb section 3.\numb parag 21}.
 
 
                     %------------%
-\section{~~\cinzasec{Singularities}}\label{\numb section 3.\numb parag 21}
+\section{~~\cinzasec{Singularities}}\label{\numb section 3.\numb parag 20}
                     %------------%
 
 {\normalfont\bfseries The code described in this paragraph does not work yet.
@@ -1066,14 +1050,14 @@ A typical example is the vertex of a cone.
 
 
                     %--------------------%
-\section{~~\cinzasec{Singularities, again}}\label{\numb section 3.\numb parag 22}
+\section{~~\cinzasec{Singularities, again}}\label{\numb section 3.\numb parag 21}
                     %--------------------%
 
 {\normalfont\bfseries The code described in this paragraph does not work yet.
 It should be regarded as a mere declaration of intentions.}
 \medskip
 
-Besides vertices like the one described in paragraph \ref{\numb section 3.\numb parag 21},
+Besides vertices like the one described in paragraph \ref{\numb section 3.\numb parag 20},
 another kind of singularity appears when we intersect two manifolds which have a tangency point.
 This happens if we choose {\small\tt\azul{rc} = \laranja{0.5}} in paragraph
 \ref{\numb section 3.\numb parag 18} or \ref{\numb section 3.\numb parag 19}.
@@ -1125,7 +1109,7 @@ This is why we provide the two pieces of boundary separately.
 
 
           %-------------------%
-\section{~~Non-uniform meshing}\label{\numb section 3.\numb parag 23}
+\section{~~Non-uniform meshing}\label{\numb section 3.\numb parag 22}
           %-------------------%
 
 The desired length may be a non-constant function.
@@ -1137,7 +1121,7 @@ The desired length may be a non-constant function.
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 23}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 3.\numb parag 22}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Function} \azul{d} = \laranja{0.03} + \laranja{0.04} * ( (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9}) );
 
@@ -1159,8 +1143,23 @@ at all points of the future mesh.
 Also, {\small\tt d} should be a reasonably smooth function; sharp variations should be avoided.
 
 
+          %-------------------------%
+% \section{~~Two intersecting tori}\label{\numb section 3.\numb parag 22}
+          %-------------------------%
+
+% Going back to the two tori in paragraph \ref{\numb section 3.\numb parag 7},
+% we now build the edges first and obtain a sharp, precise cut
+% (forget about {\small\tt\verm{smooth\_\,min}}).
+
+% \begin{figure}[ht] \centering
+%  \includegraphics[width=79mm]{two-tori-sharp}
+%   \caption{Sharp edges}
+%   \label{\numb section 3.\numb fig 8}
+% \end{figure}
+
+
                     %---------------------------%
-\section{~~\cinzasec{Changing the Riemann metric}}\label{\numb section 3.\numb parag 24}
+\section{~~\cinzasec{Changing the Riemann metric}}\label{\numb section 3.\numb parag 23}
                     %---------------------------%
  
 {\normalfont\bfseries The code described in this paragraph does not work yet.
@@ -1175,7 +1174,7 @@ As a consequence, the meshing algorithm, while trying to build a mesh of constan
 {\small\tt desired\_\,length}, will choose shorter segments in the proximity of the narrow zone
 (because the length measured by the Riemann metric will be larger than the length
 we see in the drawing), thus producing the same result as in paragraph
-\ref{\numb section 3.\numb parag 23}.
+\ref{\numb section 3.\numb parag 22}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=code not working,rulecolor=\color{moldura},
@@ -1198,20 +1197,20 @@ we see in the drawing), thus producing the same result as in paragraph
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
 
-These two approaches (the one described in paragraph \ref{\numb section 3.\numb parag 23} and
+These two approaches (the one described in paragraph \ref{\numb section 3.\numb parag 22} and
 the one described here) can be used interchangeably.
 It is possible to use both in the same code, but the code will become rather obscure.
 
 
                     %------------------%
-\section{~~\cinzasec{Anisotropic metric}}\label{\numb section 3.\numb parag 25}
+\section{~~\cinzasec{Anisotropic metric}}\label{\numb section 3.\numb parag 24}
                     %------------------%
 
 {\normalfont\bfseries The code described in this paragraph does not work yet.
 It should be regarded as a mere declaration of intentions.}
 \medskip
 
-The technique described in paragraph \ref{\numb section 3.\numb parag 24} can be generalized to
+The technique described in paragraph \ref{\numb section 3.\numb parag 23} can be generalized to
 an anisotropic Riemann metric.
 We define the metric by means of a square matrix $M$.
 $M$ must be symmetric positive definite.
@@ -1250,11 +1249,11 @@ $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for th
 Compare with the mesh in paragraph \ref{\numb section 3.\numb parag 3}.
 
 This result cannot be achieved using the approach of paragraph
-\ref{\numb section 3.\numb parag 23} (by setting a non-constant desired length).
+\ref{\numb section 3.\numb parag 22} (by setting a non-constant desired length).
 
 
           %-----------%
-\section{~~Future work}\label{\numb section 3.\numb parag 26}
+\section{~~Future work}\label{\numb section 3.\numb parag 25}
           %-----------%
 
 It would be nice to define domains using inequalities between {\small\tt\verm{Function}}s.

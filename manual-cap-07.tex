@@ -728,7 +728,7 @@ In contrast, translations (used in previous paragraphs) are always invertible.
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = \laranja{0.};  y(B) = \laranja{2.};
 
    \verm{Mesh} \azul{AA} ( \textcolor{tag}{tag}::segment, A.reverse(), A, \textcolor{tag}{tag}::divided_in, \laranja{10}, \textcolor{tag}{tag}::winding, -rot );
-   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{7} );  // no winding
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{7} );  \cinza{// no winding}
    \verm{Mesh} \azul{BB} ( \textcolor{tag}{tag}::segment, B.reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10}, \textcolor{tag}{tag}::winding, rot );
 
    \verm{Mesh} \azul{sector} ( \textcolor{tag}{tag}::rectangle, AA, AB, BB, AB .reverse(), \textcolor{tag}{tag}::winding );
@@ -1052,7 +1052,7 @@ as shown in figure \ref{\numb section 7.\numb fig 16}.
 We provide a {\small\tt\verm{Function}} as desired length
 (rather than a constant {\small\tt double} value) in order to obtain a finer mesh near the
 re-entrant corners {\small\tt AA}, {\small\tt BB} and so on
-(see also paragraph \ref{\numb section 3.\numb parag 23}).
+(see also paragraph \ref{\numb section 3.\numb parag 22}).
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}

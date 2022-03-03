@@ -175,7 +175,7 @@ The code below introduces a one-dimensional submanifold of $ \mathbb{R}^2 $ (a h
    \verm{Manifold} \azul{hiperbola} = RR2 .implicit ( x*y == \laranja{1.} );
    
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{0.5};   y (A) = \laranja{2.};
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{3};     y (B) = \laranja{0.333333333333};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{3.};    y (B) = \laranja{0.333333333333};
 
    \verm{Mesh} \azul{arc_of_hiperbola} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{7} );
 
@@ -221,10 +221,6 @@ As an alternative, we might explicitly project them onto the {\small\tt hiperbol
    hiperbola .project (P);
 \end{Verbatim}
 
-\noindent In contrast, the {\small\tt\verm{Mesh}} constructor with
-{\small\tt\textcolor{tag}{tag}::segment} builds points in the surrounding space {\small\tt RR2}
-and then projects them onto the {\small\tt hiperbola} without the user's assistance.
-
 There is also a {\small\tt\verm{Cell}} constructor with {\small\tt\textcolor{tag}{tag}::of\_\,coords}
 and {\small\tt\textcolor{tag}{tag}::project}.
 This constructor not only sets the values of {\small\tt x} and {\small\tt y} but also
@@ -233,6 +229,10 @@ performs, under the curtains, a projection on the current working {\small\tt\ver
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \verm{Cell} \azul{P} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.6}, \laranja{2.1} \}, \textcolor{tag}{tag}::project );
 \end{Verbatim}
+
+Also, the {\small\tt\verm{Mesh}} constructor with
+{\small\tt\textcolor{tag}{tag}::segment} builds points in the surrounding space {\small\tt RR2}
+and then projects them onto the {\small\tt hiperbola} without the user's assistance.
 
 
           %----------------------------------------%
