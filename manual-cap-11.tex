@@ -546,7 +546,7 @@ seg->glue_on_bdry_of ( tri )
          tri->boundary->add_***_seg ( seg, \textcolor{tag}{tag}::mesh_is_bdry )
             make_deep_connections_1d ( seg, tri->boundary, \textcolor{tag}{tag}::mesh_is_bdry )
                add_link_same_dim ( seg, tri->boundary )
-                  tri->boundary->cells[\laranja{1}] .push ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} tri->boundary \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                  tri->boundary->cells[\laranja{1}] .push ( seg )  \cinza{// \mbox{\fontfamily{helvetica}\selectfont{}if} tri->boundary \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy}
                   seg->meshes_same_dim [ tri->boundary ] = ( \laranja{\mypm 1}, wh )
                link_face_to_higher ( seg, tri, *, * )
                   for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= \laranja{2} \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
@@ -554,7 +554,7 @@ seg->glue_on_bdry_of ( tri )
                         if seg \mbox{\fontfamily{helvetica}\selectfont{}already belongs} to msh
                            \mbox{\fontfamily{helvetica}\selectfont{}increment counters}
                         else
-                           msh->cells[\laranja{1}] .push ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                           msh->cells[\laranja{1}] .push ( seg )  \cinza{// \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy}
                            seg->meshes[d] [ msh ] = ( *, *, wh )
                for \azul{ver} in \{\mbox{\fontfamily{helvetica}\selectfont\,two extremities of} seg\,\}
                   link_face_to_msh ( ver, seg, tri->boundary, *, * )
@@ -562,7 +562,7 @@ seg->glue_on_bdry_of ( tri )
                         if ver \mbox{\fontfamily{helvetica}\selectfont{}already belongs to} tri->boundary
                            \mbox{\fontfamily{helvetica}\selectfont{}increment one counter}
                         else
-                           tri->boundary->cells[\laranja{0}] .push ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} Fuzzy
+                           tri->boundary->cells[\laranja{0}] .push ( ver )  \cinza{// \mbox{\fontfamily{helvetica}\selectfont{}if} Fuzzy}
                            ver->meshes[1] [ tri->boundary ] = ( *, *, wh )
                   link_face_to_higher ( ver, tri, *, * )
                      for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= \laranja{2} \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
@@ -570,7 +570,7 @@ seg->glue_on_bdry_of ( tri )
                            if ver \mbox{\fontfamily{helvetica}\selectfont{}already belongs to} msh
                               \mbox{\fontfamily{helvetica}\selectfont{}increment counters}
                            else
-                              msh->cells[\laranja{0}] .push ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                              msh->cells[\laranja{0}] .push ( ver )  \cinza{// \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy}
                               ver->meshes[d] [ msh ] = ( *, *, wh )
             add_cell_behind_below_***_seg ( seg, tri->boundary )
                for \azul{ver} in \{\mbox{\fontfamily{helvetica}\selectfont\,two extremities of} seg\,\}
@@ -599,23 +599,23 @@ seg->cut_from_bdry_of ( tri )
                         \mbox{\fontfamily{helvetica}\selectfont{}decrement one counter}
                         if \mbox{\fontfamily{helvetica}\selectfont{}both counters zero}
                            ver->meshes[\laranja{1}] .erase ( tri->boundary )
-                           tri->boundary->cells[\laranja{0}] .remove ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} Fuzzy
+                           tri->boundary->cells[\laranja{0}] .remove ( ver )  \cinza{// \mbox{\fontfamily{helvetica}\selectfont{}if} Fuzzy}
                   unlink_face_from_higher ( ver, tri, *, * )
                      for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= \laranja{2} \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
                         remove_link ( ver, msh, *, * )
                            \mbox{\fontfamily{helvetica}\selectfont{}decrement counters}
                            if \mbox{\fontfamily{helvetica}\selectfont{}both counters zero}
                               ver->meshes[d] .erase ( msh )
-                              msh->cells[\laranja{0}] .remove ( ver )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                              msh->cells[\laranja{0}] .remove ( ver )  \cinza{// \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy}
                unlink_face_from_higher ( seg, tri, *, * )
                   for \azul{msh} in \{\mbox{\fontfamily{helvetica}\selectfont\,meshes of dimension} \azul{d} >= 2 \mbox{\fontfamily{helvetica}\selectfont{}containing} tri\,\}
                      remove_link ( seg, msh, *, * )
                         \mbox{\fontfamily{helvetica}\selectfont{}decrement counters}
                         if \mbox{\fontfamily{helvetica}\selectfont{}both counters zero}
                            seg->meshes[d] .erase ( msh )
-                           msh->cells[\laranja{1}] .remove ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                           msh->cells[\laranja{1}] .remove ( seg )  \cinza{// \mbox{\fontfamily{helvetica}\selectfont{}if} msh \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy}
                remove_link_same_dim ( seg, tri->boundary )
-                  tri->boundary->cells[\laranja{1}] .remove ( seg )  // \mbox{\fontfamily{helvetica}\selectfont{}if} tri->boundary \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy
+                  tri->boundary->cells[\laranja{1}] .remove ( seg )  \cinza{// \mbox{\fontfamily{helvetica}\selectfont{}if} tri->boundary \mbox{\fontfamily{helvetica}\selectfont{}is} Fuzzy}
                   seg->meshes_same_dim .erase ( tri->boundary )
 \end{Verbatim}
 

@@ -9,9 +9,9 @@ of \maniFEM.
 It contains mainly drawings which document specific parts of \maniFEM.
 
 
-          %-------------------%
-\section{~~\cinzasec{[empty]}}\label{\numb section 12.\numb parag 1}
-          %-------------------%
+          %-----------%
+\section{~~\cinzasec{empty}}\label{\numb section 12.\numb parag 1}
+          %-----------%
 
 
           %----------------------------%
@@ -19,7 +19,7 @@ It contains mainly drawings which document specific parts of \maniFEM.
           %----------------------------%
 
 One of the simplest meshes is an open chain of segments.
-The {\small\tt \verm{Mesh}} constructor with {\small\tt \textcolor{tag}{tag}::segment}
+The {\small\tt \verm{Mesh}} constructor with {\small\tt\textcolor{tag}{tag}::segment}
 calls themethod {\small\tt\verm{Mesh}::build} with {\small\tt \textcolor{tag}{tag}::segment}.
 This method is defined in
 {\small\tt global.cpp}, receives two vertices (a negative one and a positive one)
@@ -191,8 +191,8 @@ keeps the newly built faces.
 The advantage of using a {\small\tt\verm{Mesh}} instead of a {\small\tt list} of
 {\small\tt\verm{Cell}}s is that we can navigate through it as described in paragraph
 \ref{\numb section 9.\numb parag 6}.
-When we are on a quotient manifold (situations signaled by the {\small\tt\textcolor{tag}{tag}::winding}),
-the six faces  provided as arguments may we in very awkward positions;
+When we are on a quotient manifold (situation signaled by the {\small\tt\textcolor{tag}{tag}::winding}),
+the six faces  provided as arguments may be in very awkward positions;
 this makes it impossible to use one {\small\tt\verm{Mesh}} {\small\tt front} and we have
 to use three distinct meshes instead.
 
@@ -247,7 +247,6 @@ Frontal mesh generation is not yet implemented for volumes.
 Frontal mesh generation on a two-dimensional manifold starts with the boundary of
 the future mesh, then moves this interface with small steps, building the mesh behind it
 like a spider.
-This may be called ``frontal method''.
 Actually, if the manifold is compact (like the sphere or the torus) and we want to mesh
 all of it, there will be no boundary.
 In this case we can start the process by providing nothing more than the manifold itself
@@ -269,7 +268,7 @@ discusses this event).
 
 Detecting such touching points requires the evaluation of the distance
 between many pairs of points.
-This may become extremely time consuming, unless special care is taken
+This may become extremely time consuming, unless special care is taken.
 Points belonging to the interface are organized in a hierarchy allowing one
 to eliminate many pairs of points from the evaluation process.
 Paragraph \ref{\numb section 12.\numb parag 10} describes this hierarchy.
@@ -530,20 +529,20 @@ Again, the reverse may be false.
 \begin{figure}[ht] \centering
   \includegraphics[width=110mm]{metric-tree}
   \caption{Metric tree}
-  \label{\numb section 11.\numb fig 3}
+  \label{\numb section 12.\numb fig 9}
 \end{figure}
 
-Figure \ref{\numb section 11.\numb fig 3} shows a cloud of (randomly generated) points in
+Figure \ref{\numb section 12.\numb fig 9} shows a cloud of (randomly generated) points in
 $ \mathbb{R}^2 $ organized in a {\small\tt\verm{MetricTree}}.
 It also illustrates the process of {\small\tt find\_\,close\_\,neighbours\_\,of} a given point.
 This method takes two arguments : a {\small\tt Point} (drawn in red) and a distance.
 It returns a list (drawn in blue) of all {\small\tt Node}s in the cloud which are close enough
 to the red point (closer than the given distance).
 It is irrelevant whether the red point belongs to the cloud or not;
-in figure \ref{\numb section 11.\numb fig 3} it does not.
+in figure \ref{\numb section 12.\numb fig 9} it does not.
 
-Figure \ref{\numb section 11.\numb fig 3} shows grey dots at nodes which have been analysed
-during the process of {\small\tt find\_\,close\_} {\small\tt\_\,neighbours}
+Figure \ref{\numb section 12.\numb fig 9} shows grey dots at nodes which have been analysed
+during the process of {\small\tt find\_\,close\_\,neighbours}
 (their distance to the red dot has been computed).
 Lines without a dot represent nodes in the {\small\tt\verm{MetricTree}} which have not even been
 looked at because their parent has decided (based on the triangular inequality)
@@ -608,4 +607,113 @@ Rayleigh coefficient, which may be a heavy computational burden.
 When the metric is highly anisotropic, the list returned by method
 {\small\tt find\_\,close\_\,neighbours\_\,of} will be singnificantly larger than the correct,
 filtered, list.
+
+
+          %-----------%
+\section{~~STSI meshes}\label{\numb section 12.\numb parag 12}
+          %-----------%
+
+Usually, meshes in {\maniFEM} belong to one of the classes {\small\tt\verm{Mesh}::Connected::OneDim} or
+{\small\tt\verm{Mesh}::Fuzzy}.
+Neither of these classes is able to reach a configuration like {\small\tt AFBCDEFG} in
+figure \ref{\numb section 12.\numb fig 10} (a) or like {\small\tt AFEDCBFG} in figure
+\ref{\numb section 12.\numb fig 10} (b) or like the double coffee filter in figure
+\ref{\numb section 12.\numb fig 10} (c).
+The internal implementation of neighbourhood relations requires that each {\small\tt face} in a mesh
+have exactly two neighbours, one behind {\small\tt face} and another one in front of {\small\tt face}.
+This does not happen for vertex {\small\tt F} in figure \ref{\numb section 12.\numb fig 10} (a) (b),
+nor for segments along {\small\tt AB} in figure \ref{\numb section 12.\numb fig 10} (c).
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
+  \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
+  \psfrag{F}{\small\tt\textcolor{textindraw}{F}}
+  \psfrag{G}{\small\tt\textcolor{textindraw}{G}}
+  \includegraphics[width=40mm]{stsi-1}\hskip3mm
+  \includegraphics[width=40mm]{stsi-2}
+  \includegraphics[width=55mm]{filter}
+  \centerline{(a)\hskip40mm (b)\hskip45mm (c)\hglue 15mm}
+  \caption{Self-crossing, self-touching meshes}
+  \label{\numb section 12.\numb fig 10}
+\end{figure}
+
+We have implemented a different class called {\small\tt\verm{Mesh}::STSI} which is more
+flexible with respect to neighbourhood relations.
+The name comes from ``self-touching, self-intersecting meshes''.
+It can reach the shape of all meshes shown in figure \ref{\numb section 12.\numb fig 10}.
+
+This class is not intended for the final user of \maniFEM.
+It will be used internally in the implementation of iterators over high-dimensional connected meshes
+and in frontal mesh generation.
+
+If {\small\tt msh} is a {\small\tt\verm{Mesh}} having a {\small\tt\verm{Mesh}::STSI} core,
+a statement like
+{\small\tt cll} {\small\tt .add\_\,to\_\,mesh} {\small\tt (} {\small\tt msh} {\small\tt )}
+will do things that depend on the configuration of faces of {\small\tt cll}.
+If these faces do not belong already to {\small\tt msh}, or if they do belong but have only one
+neighbour, the same steps as for a {\small\tt\verm{Mesh}::Fuzzy} will be taken.%
+If a {\small\tt face} has already two neighbour cells within {\small\tt msh}, that face will receive
+a special treatment.
+{\small\tt msh} will be erased from {\small\tt face} {\small\tt .core->cell\_\,behind\_\,within}
+and an entry will be created for {\small\tt face} in {\small\tt msh} {\small\tt .core->singular}.
+A statement like {\small\tt cll} {\small\tt .remove\_\,from\_\,mesh} {\small\tt (} {\small\tt msh}
+{\small\tt )} will do the reverse.
+In ``normal'' situations (i.e.\ for faces having one or two neighbour cells within {\small\tt msh})
+it will behave just like for a {\small\tt\verm{Mesh}::Fuzzy}.
+If the {\small\tt face} is already singular, it may revert it to the ``normal'' configuration.
+Statements above are imprecise because they do not take orientations into account.
+
+For instance, take a mesh {\small\tt msh} initially empty to which we shall add successivly
+four segments around an ``origin'' {\small\tt O}, then remove two of them :
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Mesh} \azul{msh} ( \textcolor{tag}{tag}::stsi, \textcolor{tag}{tag}::of_dimension, 1 );
+   OA .add_to_mesh ( msh );
+   BO .add_to_mesh ( msh );
+   OC .add_to_mesh ( msh );
+   DO .add_to_mesh ( msh );
+   BO .remove_from_mesh ( msh );
+   OC .remove_from_mesh ( msh );
+\end{Verbatim}
+After the first two insertions, {\small\tt msh} has a structure identical to a
+{\small\tt\verm{Mesh}::Fuzzy} (in spite of having a {\small\tt\verm{Mesh}::STSI} core).
+That is, {\small\tt msh} {\small\tt .core->singular} is an empty map.
+{\small\tt BO} is follwed by {\small\tt OA}.
+After inserting {\small\tt OC}, vertex {\small\tt O} becomes singular;
+however, {\small\tt BO} is still follwed by {\small\tt OA} while {\small\tt OC} stays ``alone''.
+The fourth statement links {\small\tt DO} to {\small\tt OC} (rather than to {\small\tt OA})
+simply because {\small\tt OC} has no predecessor and is eager to gain one.
+After removing {\small\tt BO}, {\small\tt OA} remains ``alone''.
+After removing {\small\tt OC}, {\maniFEM} links the two ``orphans'' {\small\tt DO} and
+{\small\tt OA} and the mesh returns to a state similar to a {\small\tt Fuzzy} mesh.
+
+In other words, the connections between cells in a {\small\tt STSI} mesh depend on the order
+of insertions and removals.
+In some situations it is desirable to have more control on the connections in a {\small\tt STSI} mesh;
+this is why we are currently working on new methods, dedicated to {\small\tt STSI} meshes.
+These new methods will allow the user to write code like the one below.
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
+   \verm{Mesh} \azul{msh} ( \textcolor{tag}{tag}::stsi, \textcolor{tag}{tag}::of_dimension, 1 );
+   OA .add_to_mesh ( msh );
+   BO .add_to_mesh ( msh );
+   msh .break_neighb_rels ( tag::around, O );
+   OC .add_to_mesh ( msh, \textcolor{tag}{tag}::no_neighb_rels );
+   DO .add_to_mesh ( msh, \textcolor{tag}{tag}::no_neighb_rels );
+   msh .make_neighb_rels ( BO, O, OC );
+   msh .make_neighb_rels ( DO, O, OA );
+   assert ( msh .neighb_rels_ok ( \textcolor{tag}{tag}::around, O ) );
+\end{Verbatim}
+The last statement asserts there are no pairs of ``orphans'' which could be paired.
+
+
+\begin{figure}[ht] \centering
+  \includegraphics[width=70mm]{yo-yo}
+  \caption{Double cone}
+  \label{\numb section 12.\numb fig 11}
+\end{figure}
+
+Incidentally, note that {\small\tt Fuzzy} meshes can take the shape shown in figure
+\ref{\numb section 12.\numb fig 11}.
 
