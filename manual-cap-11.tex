@@ -55,7 +55,7 @@ Also, in the source code there are comments like
 \end{Verbatim}
 
 In an effort not to expose too many names in the {\small\tt\verm{maniFEM}} namespace, we have
-used the namespace {\small\tt\textcolor{tag}{tag}::Util} to keep names which did not fit elsewhere.
+used the namespace {\small\tt\verm{tag}::Util} to keep names which did not fit elsewhere.
 We have also used anonymous namespaces in order to hide names of functions which are
 only used in one source file.
 
@@ -82,7 +82,7 @@ Class names directly exposed in {\small\tt namespace} {\small\tt\verm{maniFEM}} 
 the even more rarely needed {\small\tt\verm{MetricTree}}.
 There are also functions like {\small\tt\verm{smooth\_\,min}} and also overloaded versions
 of common functions like {\small\tt\verm{power}}, {\small\tt\verm{sin}}, {\small\tt\verm{cos}}.
-The word {\small\tt \textcolor{tag}{tag}} deserves a special treatment.
+The word {\small\tt\verm{tag}} deserves a special treatment.
 On one hand, it is directly exposed, on the other hand, we want it to be discrete.
 That's why we have chosen a \textcolor{tag}{blue grey} for {\small\tt \textcolor{tag}{tag}}\hskip0.8pt s.
 
@@ -101,7 +101,7 @@ Strings are \verde{dark green}.
 
 We use extensively {\small\tt\textcolor{tag}{tag}}\hskip0.8pt s.
 These are {\tt C++} structures gathered in the {\small\tt namespace}
-{\small\tt \textcolor{tag}{tag}}.
+{\small\tt\verm{tag}}.
 Most of them contain no data; only their type is useful, at compile time.
 
 A {\small\tt\textcolor{tag}{tag}} is used to clearly distinguish between functions with
@@ -133,7 +133,7 @@ Besides that, in the case of constructors, we do not have the choice of the name
 
 In \maniFEM, namespaces and class names begin with capital letter
 (see paragraph \ref{\numb section 11.\numb parag 1}).
-The namespace {\small\tt\textcolor{tag}{tag}} (or {\small\tt\verm{maniFEM}::tag} if you are not
+The namespace {\small\tt\verm{tag}} (or {\small\tt\verm{maniFEM}::tag} if you are not
 {\small\tt using} {\small\tt namespace} {\small\tt\verm{maniFEM}}) is an exception
 to the above rule.
 We prefer its name to have only lower case letters because we want it to be
@@ -142,7 +142,7 @@ the reader's eye would catch {\small\tt\textcolor{tag}{Tag}} much before
 {\small\tt divided\_\,in};
 thus, {\small\tt\textcolor{tag}{tag}::divided\_\,in} is more readable.
 Of course, the final user has the choice of {\small\tt using} {\small\tt namespace}
-{\small\tt\textcolor{tag}{tag}} but beware, it has many names which may conflict
+{\small\tt\verm{tag}} but beware, it has many names which may conflict
 with the ones in your code.
 
 Most tags have only lower-case letters and underscores.
@@ -272,7 +272,7 @@ Constructors for wrapper classes act as factory functions for the core object.
 According to their arguments, they build different core objects.
 
 Other objects have been implemented using the same logic of wrappers and core objects :
-iterators, fields, functions, manifolds.
+iterators, fields, functions, manifolds, integrators, finite elements.
 
 
           %--------------------------------------%
@@ -284,15 +284,29 @@ Examples are {\small\tt\verm{Cell}}s, {\small\tt\verm{Mesh}}es,
 {\small\tt\verm{Mesh}::Iterator}s, {\small\tt\verm{Manifold}}s,
 {\small\tt\verm{Function}}s, {\small\tt\verm{FiniteElement}}s, {\small\tt\verm{Integrator}}s,%
 \break {\small\tt\verm{VariationalFormulation}}s.
-A garbage collector is implemented; all these classes inherit from
+A garbage collector is implemented; many of these classes inherit from
 {\small\tt \textcolor{tag}{tag}::Util::Wrapper} and
-their cores inherit from {\small\tt \textcolor{tag}{tag}::Util::Core}.
+their cores inherit from {\small\tt\textcolor{tag}{tag}::Util::Core}.
 Wrappers contain a pointer to a core; each core keeps a counter of wrappers pointing to it.
 The destructor of a wrapper decrements the counter and destroys the core if the counter
 reaches zero.
 It's like a {\small\tt shared\_\,ptr}.
 
-Cells and meshes depend on each other in a complicated manner.
+{\small\tt\verm{FiniteElements}} and {\small\tt\verm{Integrators}} depend on each other
+in a complicated manner.
+The user may choose to declare an {\small\tt\verm{Integrator}};
+a {\small\tt\verm{FiniteElement}} will be built behind the scenes;
+this happens in paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 6.\numb parag *}.
+Or, they may choose to declare a {\small\tt\verm{FiniteElement}} and later build an
+{\small\tt\verm{Integrator}} by invoking the method {\small\tt\verm{FiniteElement}::set\_\,integrator};
+this happens in paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 8}.
+In the former case, the {\small\tt\verm{Integrator}} is responsible for keeping the
+{\small\tt\verm{FiniteElement}} alive and later for destroying it.
+In the latter case, it is the other way around.
+This is why we have implemented a dedicated garbage collector which behaves on most occasions
+like a {\small\tt shared\_\,ptr} but sometimes like a {\small\tt weak\_\,ptr}.
+
+Cells and meshes depend on each other in a complicated manner, too.
 A cell keeps its boundary (which is a mesh) alive.
 A mesh keeps its component cells alive.
 A negative cell keeps alive its positive counterpart but the reverse does not hold;
@@ -315,8 +329,7 @@ ghost cells and meshes will fill the computer's memory (this is known as ``memor
 
 In some examples, the garbage collector for cells and meshes does not work well :
 the cell counter does not reach zero, as it should, at the end of the program.
-In some cases, this happens because the finite elements are not properly destroyed.
-In other cases, it has to do with the {\small\tt\verm{MetricTree}} (described in
+This has to do with the {\small\tt\verm{MetricTree}} (described in
 paragraph \ref{\numb section 12.\numb parag 10}) which is not properly cleaned.
 
 
@@ -688,6 +701,10 @@ I am aware I am violating conventions which are almost universally accepted. Sor
 
 On the other hand, I am very fussy about indentation.
 I guess my mind has been formatted by Python.
+
+I do not use the {\small\tt auto} keyword in the source code of \maniFEM.
+I find that explicitly declaring the type of each variable makes the code more readable,
+at the price of increasing its size a little.
 
 {\small\tt\verm{Mesh}::Iterator}s obey to syntactic rules slightly different from the conventions for
 iterators in the Standard Template Library.

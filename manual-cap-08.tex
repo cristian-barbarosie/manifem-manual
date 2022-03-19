@@ -6,14 +6,11 @@
 This section gives informations which do not fit in other sections of the manual.
 
 
-          %------------%
-\section{~~On manifolds}\label{\numb section 8.\numb parag 1}
-          %------------%
+          %---------------------------------%
+\section{~~Projecting a vertex on a manifold}\label{\numb section 8.\numb parag 1}
+          %---------------------------------%
 
-This paragraph gives some details on the notion of manifold in \maniFEM.
-
-Let us begin by recalling that, in this manual, we use the term ``manifold'' to refer to
-a manifold without boundary.
+We recall that, in this manual, we use the term ``manifold'' to refer to a manifold without boundary.
 Of course we will only mesh a bounded domain of the manifold, so most meshes will have a boundary.
 We may also mesh an entire compact manifold like a circle or a sphere or a torus;
 such a mesh will have no boundary.
@@ -51,8 +48,38 @@ Paragraphs \ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb par
 \ref{\numb section 3.\numb parag 2} -- \ref{\numb section 3.\numb parag 9} show such examples.
 
 
+          %---------------------%
+\section{~~On quotient manifolds}\label{\numb section 8.\numb parag 2}
+          %---------------------%
+
+Section \ref{\numb section 7} is devoted to meshes on quotient manifolds.
+
+Usually, a quotient manifold is defined by means of orbits of the ``periodicity'' group.
+The manifolds considered in paragraphs \ref{\numb section 7.\numb parag 14} --
+\ref{\numb section 7.\numb parag 18} cannot be defined this way if their angle is not a
+divisor of $ 2\pi $.
+This can be easily circumvented; it suffices to consider only a neighbourhood of a representative
+domain instead of the entire $ \mathbb{R}^2 $.
+In the case of a singular point (paragraphs \ref{\numb section 7.\numb parag 15} and
+\ref{\numb section 7.\numb parag 16}) the above refered neighbourhood should not contain
+the singularity.
+
+When we divide a Riemannian manifold (in particular, the Euclidian space $ \mathbb{R}^n $)
+by a group of isometries, the resulting (quotient) manifold inherits naturally a Riemann metric.
+This is not true for the manifolds considered in paragraphs \ref{\numb section 7.\numb parag 17}
+and \ref{\numb section 7.\numb parag 18} -- the actions are not isometries.
+In other words, we identify a pair of sides (of the representative domain) having different lengths,
+so the quotient operation is no longer compatible with the metric in $ \mathbb{R}^2 $.
+Thus, these quotient manifolds do not inherit a Riemann metric.
+They are valid as differentiable manifolds but not as Riemann manifolds.
+Length and area are not well-defined in these examples.
+Since they are compact, these manifolds can be viewed as uniform spaces%
+\footnote {{} see e.g.\ Corollary 30 in Chapter 6 of J.L.~Kelley, General Topology, Van Nostrad, 1955}
+but not as metric spaces.
+
+
           %--------------------------------------%
-\section{~~Exchanging information with {\tt gmsh}}\label{\numb section 8.\numb parag 2}
+\section{~~Exchanging information with {\tt gmsh}}\label{\numb section 8.\numb parag 3}
           %--------------------------------------%
 
 {\small\tt gmsh} is a complex software and does much more than drawing meshes.

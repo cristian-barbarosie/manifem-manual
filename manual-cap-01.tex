@@ -50,11 +50,14 @@ int main ()
    \verm{Cell} \azul{SE} ( \textcolor{tag}{tag}::vertex );  x (SE) =  \laranja{1.};  y (SE) = \laranja{0.};  z (SE) = \laranja{0.};
    \verm{Cell} \azul{NE} ( \textcolor{tag}{tag}::vertex );  x (NE) =  \laranja{1.};  y (NE) = \laranja{1.};  z (NE) = \laranja{0.};
    \verm{Cell} \azul{NW} ( \textcolor{tag}{tag}::vertex );  x (NW) = \laranja{-1.};  y (NW) = \laranja{1.};  z (NW) = \laranja{1.};
-   \cinza{// alternative syntax for declaring a vertex :}
+   \cinza{// alternative syntax for declaring vertices :}
    \cinza{// Cell SW ( tag::vertex, tag::of_coords, \{ -1., 0., 0. \} )}
+   \cinza{// Cell SE ( tag::vertex, tag::of_coords, \{  1., 0., 0. \} )}
+   \cinza{// Cell NE ( tag::vertex, tag::of_coords, \{  1., 1., 0. \} )}
+   \cinza{// Cell NW ( tag::vertex, tag::of_coords, \{ -1., 1., 1. \} )}
    
    \cinza{// we access the coordinates of a point using the () operator :}
-   cout << \verde{"coordinates of NW : "} << x (NW) << \verde{" "} << y (NW) << \verde{" "} << z (NW) << endl;
+   cout << \verde{"coordinates of NW : "} << x(NW) << \verde{" "} << y(NW) << \verde{" "} << z(NW) << endl;
 
    \cinza{// now build the four sides of the rectangle :}
    \verm{Mesh} \azul{south} ( \textcolor{tag}{tag}::segment, SW .reverse(), SE, \textcolor{tag}{tag}::divided_in, \laranja{10} );
@@ -65,25 +68,18 @@ int main ()
    \cinza{// and now the rectangle :}
    \verm{Mesh} \azul{rect_mesh} ( \textcolor{tag}{tag}::rectangle, south, east, north, west );
 
-   \cinza{// We may want to visualize the resulting mesh.}
-   \cinza{// Here is one way to export the mesh in the "msh" format :}
+   \cinza{// we may want to visualize the resulting mesh}
+   \cinza{// here is one way to export the mesh in the "msh" format :}
    rect_mesh .export_to_file ( \textcolor{tag}{tag}::msh, \verde{"rectangle.msh"});
 
-   \cinza{// Let's define a symbolic function to integrate}
+   \cinza{// let's define a symbolic function}
    \verm{Function} \azul{f} = x*x + \laranja{1}/(\laranja{5}+y);
 
    \cinza{// and compute its integral on the rectangle,}
-   \cinza{// using Gauss quadrature with 9 points}
+   \cinza{// using, in each rectangular cell, Gauss quadrature with 9 points :}
+   \verm{Integrator} \azul{integr} ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::quad_9 );
 
-   \verm{FiniteElement} \azul{fe}
-      ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   fe .set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::quad_9 );
-
-   \cinza{// code below does not work yet}
-   \cinza{// cout << "integral of " << f.repr() << " = "}
-   \cinza{//      << fe .integrate ( f, tag::over, rect_mesh ) << endl;}
-   \cinza{// cout << "integral of " << g.repr() << " = "}
-   \cinza{//      << fe .integrate ( g, tag::over, rect_mesh ) << endl;}
+   cout << \verde{"integral of f "} << integr ( f, \textcolor{tag}{tag}::on, rect_mesh ) << endl;
 
 \}  \cinza{// end of main}
 \end{Verbatim}
@@ -103,7 +99,7 @@ You may view the mesh using the software {\tt gmsh}.
 
 Expressions like {\small\tt\textcolor{tag}{tag}::of\_\,dim} and
 {\small\tt\textcolor{tag}{tag}::vertex} are
-objects belonging to the {\small\tt namespace} {\small\tt\textcolor{tag}{tag}};
+objects belonging to the {\small\tt namespace} {\small\tt\verm{tag}};
 we use them as arguments to many functions.
 See paragraph \ref{\numb section 11.\numb parag 3} for some details.
 

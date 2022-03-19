@@ -312,7 +312,6 @@ Let's look at a surface in $ \mathbb{R}^3 $ :
    \verm{Cell} \azul{up} ( \textcolor{tag}{tag}::vertex );  x (up)=  \laranja{0.};  y (up)=  \laranja{0.};  z (up)= \laranja{1.};
 
    int \azul{n} = \laranja{15};
-
    \verm{Mesh} \azul{EN} ( \textcolor{tag}{tag}::segment, E .reverse(), N, \textcolor{tag}{tag}::divided_in, n );
    \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N .reverse(), W, \textcolor{tag}{tag}::divided_in, n );
    \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W .reverse(), S, \textcolor{tag}{tag}::divided_in, n );
@@ -390,6 +389,7 @@ Below we use twelve rectangles to get a bumpy hemisphere.
    \verm{Mesh} \azul{W_mWup} ( \textcolor{tag}{tag}::segment, W .reverse(), mWup, \textcolor{tag}{tag}::divided_in, n );
    \verm{Mesh} \azul{S_mSW}  ( \textcolor{tag}{tag}::segment, S .reverse(), mSW,  \textcolor{tag}{tag}::divided_in, n );
    \cinza{// ... and so forth ...}
+
    \cinza{// now the twelve rectangles :}
    \verm{Mesh} \azul{rect_W_SW}  ( \textcolor{tag}{tag}::quadrangle,
       mSW_mSWup, mWup_mSWup .reverse(), W_mWup .reverse(), W_mSW );
@@ -593,7 +593,7 @@ horizontal axis.
 \end{Verbatim}
 
 We want to mesh the region contained between these two parabolas (a curved quadrilateral).
-Just like in paragraphs \ref{\numb section 2.\numb parag 10} and \ref{\numb section 2.\numb parag 11},
+Just like in paragraphs \ref{\numb section 2.\numb parag 9} and \ref{\numb section 2.\numb parag 11},
 we must start with the four corners.
 We could certainly compute their coordinates by hand, but we can also ask {\maniFEM} to do that.
 We define a zero-dimensional manifold which in this case consists in four points

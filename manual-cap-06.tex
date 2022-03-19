@@ -35,7 +35,8 @@ Also, from the point of view of the final user, their syntax is slightly less el
           %---------------%
 
 The notion of finite element is quite complex.
-The purpose of a {\small\tt\verm{FiniteElement}} is to build a list of functions, say, $ \psi $,
+At global level (that is, at the level of the entire mesh),
+he purpose of a {\small\tt\verm{FiniteElement}} is to build a list of functions, say, $ \psi $,
 defined on our mesh.
 The linear span of these functions will be a finite-dimensional Hilbert space
 (the discretization of an infinite-dimensional Sobolev space).
@@ -44,6 +45,10 @@ the unknown function by one $ \psi $, the test function by another $ \psi $ and,
 by evaluating the integrals, obtain the coefficients of a system of linear equations.
 Some external solver will then solve the system, and it is the job of the finite element
 to transform back the vector produced by the solver into a function defined on our mesh.
+
+Often, we view finite elements as acting at cell level.
+According to this view, the finite element's job is to build a local matrix, to be later
+assembled into a global matrix.
 
 Computing each integral is a somewhat separate process; it's the job of an
 {\small\tt\verm{Integrator}}
@@ -70,14 +75,21 @@ The final user does not need to worry about these details.
 He or she will declare {\small\tt\verm{FiniteElement}}s (wrappers) of different types
 by providing {\small\tt\textcolor{tag}{tag}}s to the constructor, as shown in
 subsequent paragraphs of this section.
+In some cases, when we only want to compute integrals of certains functions
+(like in paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 6.\numb parag *}),
+it is enough to declare an {\small\tt\verm{Integrator}}.
+{\ManiFEM} will create, invisibly to the user, a finite element compatible with that
+integrator.
 
 {\small\tt\verm{FiniteElement}}s with master keep as an attribute the map transforming
-the master element to the current physical cell.
+the master element into the current physical cell.
 This map depends of course on the geometry of the cell and thus it must be computed from
 scratch each time we begin integrating on a new cell.
 We say that the {\small\tt\verm{FiniteElement}} is docked on a new {\small\tt\verm{Cell}};
 the method {\small\tt dock\_\,on} performs this operation.
 This method is element-specific, each type of finite element having its own class.
+The docking may happen behind the scenes, like in paragraphs \ref{\numb section 1.\numb parag 1}
+and \ref{\numb section 6.\numb parag *}.
 
 For instance, {\small\tt\verm{FiniteElement}}s declared with {\small\tt\textcolor{tag}{tag}%
 ::quadrangle} will only {\small\tt dock\_\,on} quadrilaterals
@@ -89,11 +101,17 @@ For instance, {\small\tt\verm{FiniteElement}}s declared with {\small\tt\textcolo
 % This enumeration is useful to identify a vector of real numbers with the values
 % (at each vertex) of a function defined on the mesh.
 When docking on a cell, the {\small\tt\verm{FiniteElement}} object will build four
-``shape functions'' and a transformation map (a diffeomorphism between a master element
-occuppying the square $ [-1, 1]^2 $ and the current cell).
-It will also build the jacobian of this transformation map (through symbolic differentiation).
+``shape functions'' and a transformation map.
 The four shape functions can be accessed through the method {\small\tt basis\_\,function},
 as shown in paragraph \ref{\numb section 6.\numb parag 2}.
+If the current cell lies within a two-dimensional manifold, the above referred map will be
+a diffeomorphism between a master element occuppying the square $ [-1, 1]^2 $ and the cell.
+The jacobian of this transformation map is also comupted, through symbolic differentiation.
+If the current cell is immersed in a higher-dimensional manifold (like in paragraph
+\ref{\numb section 1.\numb parag 1}), the above referred map is not a diffeomorphism but
+a mere immersion and the set of available operations is more limited.
+For instance, we will not be able to differentiate a shape function with respect to a geometric
+coordinate because the shape functions are only defined in the current, two-dimensional, cell.
 
 It should be stressed that the approach presented in this section is rather low-level.
 We are working hard to make {\maniFEM} understand statements describing variational
@@ -102,6 +120,37 @@ When this part of the code is done, the programming style will become much more 
 and compact.
 
 Note also that these examples make use of the {\small\tt Eigen} library.
+
+
+          %---------------------%
+\section{~~Integrating functions}\label{\numb section 6.\numb parag *}
+          %---------------------%
+
+To begin with, let us simply compute integrals of functions defined on a spherical mesh.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 6.\numb parag *}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                            ]
+   \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
+   \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
+
+   \verm{Manifold} \azul{sphere_manif} = RR3.implicit ( x*x + y*y + z*z == \laranja{1.} );
+   \verm{Mesh} \azul{sphere} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
+
+   \verm{Integrator} \azul{integr} ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::tri_6 );
+
+   std::cout << \verde{"integral of 1 = "} << integr ( \laranja{1.}, \textcolor{tag}{tag}::on, sphere ) << std::endl;
+   std::cout << \verde{"integral of x = "} << integr ( x, \textcolor{tag}{tag}::on, sphere ) << std::endl;
+   std::cout << \verde{"integral of x*x = "} << integr ( x*x, \textcolor{tag}{tag}::on, sphere ) << std::endl;
+   std::cout << \verde{"integral of x*y = "} << integr ( x*y, \textcolor{tag}{tag}::on, sphere ) << std::endl;
+\end{Verbatim}
+
+Invisibly to the user, {\maniFEM} builds a {\small\tt\verm{FiniteElement}} compatible with the
+given {\small\tt\verm{Integrator}}, triangular Lagrange P1 in this case
+(recall that frontal meshing builds triangular cells).
+Paragraph \ref{\numb section 11.\numb parag 5} describes the lifecycle of a
+{\small\tt\verm{FiniteElement}} -- {\small\tt\verm{Integrator}} pair.
 
 
           %------------------------------------------------%
@@ -134,6 +183,9 @@ boundary conditions.
    \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D .reverse(), A, \textcolor{tag}{tag}::divided_in, 12 );
    \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );
 \end{Verbatim}
+
+Paragraph \ref{\numb section 11.\numb parag 5} describes the lifecycle of a
+{\small\tt\verm{FiniteElement}} -- {\small\tt\verm{Integrator}} pair.
 
 A finite element can handle by itself the numbering of vertices, as shown in paragraph
 \ref{\numb section 6.\numb parag 4}.
@@ -221,7 +273,6 @@ function.
       size_t \azul{i} = numbering [P];
       impose_value_of_unknown ( matrix_A, vector_b, i, y(P) );  \}
 \end{Verbatim}
-\vfil\eject
 
 We then use {\small\tt Eigen} to solve the system of linear equations :
 
@@ -254,7 +305,10 @@ through a compact declaration of the corresponding variational formulation.
 
 Another limitation of {\maniFEM} is that this type of finite element is rather slow.
 This is so because each docking operation implies a lot of symbolic calculations;
-the same happens when we differentiate and then integrate functions.
+the same happens when we differentiate base functions.
+The final operation, of finding the value of the integral, does not involve symbolic computations
+because it uses Gauss quadrature.
+
 There are three ways of circumventing this limitation.
 The first one is : if your mesh is made of identical finite elements
 (like the example in the present paragraph), you can compute the elementary matrix
