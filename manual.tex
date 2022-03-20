@@ -14,7 +14,7 @@
 \def\manifemrelease{22.04}
 \def\manualversion{22.04}
 \let\production 0
-\includeonly{manual-cap-06,manual-cap-11}
+\includeonly{manual-cap-02}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -334,14 +334,14 @@ Cone-like quotient manifolds, paragraphs \ref{\numb section 7.\numb parag 15} an
 \noindent Change {\small\tt\verm{CellIterator}} to {\small\tt\verm{Mesh}::Iterator},
 thus exposing one less name in {\small\tt namespace \verm{maniFEM}}.
 
-\noindent Fast (hand-coded) finite elements, paragraphs \ref{\numb section 6.\numb parag 9}
-and \ref{\numb section 6.\numb parag 10}.
+\noindent Fast (hand-coded) finite elements, paragraphs \ref{\numb section 6.\numb parag 10}
+and \ref{\numb section 6.\numb parag 11}.
 
 
 \section*{22.01}
 
-\noindent Lagrange finite elements of degree two, paragraphs \ref{\numb section 6.\numb parag 5}
--- \ref{\numb section 6.\numb parag 8}.
+\noindent Lagrange finite elements of degree two, paragraphs \ref{\numb section 6.\numb parag 6}
+-- \ref{\numb section 6.\numb parag 9}.
 
 
 \section*{22.02}
@@ -389,9 +389,9 @@ Still not entirely stable, needs more work.
 \section*{22.04}
 
 \noindent Specific garbage collector implemented for
-{\small\tt\verm{FiniteElement}} and {\small\tt\verm{Integrator}}.
+{\small\tt\verm{FiniteElement}}s and {\small\tt\verm{Integrator}}s.
 We can declare and use an integrator without bothering with the subjacent finite element,
-paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 6.\numb parag *}.
+paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 6.\numb parag 2}.
 
 
 \section*{To do}
@@ -468,8 +468,8 @@ dimension of a cell or mesh : \ref{\numb section 1.\numb parag 2},
 \ref{\numb section 11.\numb parag 4}, \ref{\numb section 11.\numb parag 7}
 
 \noindent
-docking (of a finite element on a cell) :
-\ref{\numb section 6.\numb parag 1} -- \ref{\numb section 6.\numb parag 3}
+docking (of a finite element on a cell), {\small\tt\verm{Mesh}::dock\_\,on} :
+section \ref{\numb section 6}
 
 \noindent
 {\small\tt\verm{Mesh}::\underbar{draw}\_\,ps} : \ref{\numb section 1.\numb parag 4},
@@ -610,7 +610,7 @@ see orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es
 
 \noindent
 numbering of vertices :
-\ref{\numb section 6.\numb parag 2}, \ref{\numb section 6.\numb parag 4}
+\ref{\numb section 6.\numb parag 3}, \ref{\numb section 6.\numb parag 5}
 
 \noindent
 oct-tree : \ref{\numb section 12.\numb parag 10}

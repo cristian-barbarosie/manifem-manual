@@ -88,7 +88,7 @@ That's why we have chosen a \textcolor{tag}{blue grey} for {\small\tt \textcolor
 
 Newly declared objects are shown in \azul{purple}.
 
-Numeric constants are \laranja{orange} (work in progress).
+Numeric constants are \laranja{orange}.
 
 Comments are \cinza{grey}.
 
@@ -296,10 +296,10 @@ It's like a {\small\tt shared\_\,ptr}.
 in a complicated manner.
 The user may choose to declare an {\small\tt\verm{Integrator}};
 a {\small\tt\verm{FiniteElement}} will be built behind the scenes;
-this happens in paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 6.\numb parag *}.
+this happens in paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 6.\numb parag 2}.
 Or, they may choose to declare a {\small\tt\verm{FiniteElement}} and later build an
 {\small\tt\verm{Integrator}} by invoking the method {\small\tt\verm{FiniteElement}::set\_\,integrator};
-this happens in paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 8}.
+this happens in paragraphs \ref{\numb section 6.\numb parag 3} -- \ref{\numb section 6.\numb parag 9}.
 In the former case, the {\small\tt\verm{Integrator}} is responsible for keeping the
 {\small\tt\verm{FiniteElement}} alive and later for destroying it.
 In the latter case, it is the other way around.
@@ -346,7 +346,7 @@ The graph in figure \ref{\numb section 11.\numb fig 2}, paragraph
 of {\small\tt\verm{Mesh}::Core}s.
 
 Negative meshes are temporary wrappers built on-the-fly.
-Their wrapper contains a pointer to a positive core mesh.
+Their wrapper contains a pointer to a positive mesh core.
 
 Zero-dimensional meshes appear only as boundaries of segment {\small\tt\verm{Cell}}s.
 They are temporary objects built on-the-fly.
@@ -379,8 +379,7 @@ Connected meshes of dimension two or higher are not yet implemented; for now,
 A class {\small\tt\verm{Mesh}:: ::Connected::HighDim} is object of current work.
 We also intend to implement multiply connected meshes.
 
-{\small\tt STSI} meshes are object of current work; the name means
-``self-touching or self-intersecting'' meshes.
+There are also {\small\tt STSI} meshes; the name means ``self-touching or self-intersecting'' meshes.
 They will be used internally to implement iterators over connected high-dimensional meshes,
 and for frontal meshing (described in section \ref{\numb section 3}).
 
@@ -427,7 +426,7 @@ This means your maximum topological dimension will be 2
 (this has nothing to do with the geometric dimension, here 3).
 Then you may state your intention at the beginning of your program
 (before building any cell, before even declaring the first vertex) through
-the statement {\small\tt\verm{Mesh}::set\_\,max\_\,dim(2)}.
+the statement {\small\tt\verm{Mesh}::set\_\,max\_\,dim (\laranja{2})}.
 This will decrease the size of the {\small\tt\verm{Cell}::Core} objects in your code,
 thus saving some memory.
 

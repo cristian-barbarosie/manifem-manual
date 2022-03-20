@@ -769,10 +769,10 @@ The {\small\tt apple} manifold is no longer relevant.
    \{  \verm{Cell} \azul{P} = *it;
       x(P) *= \laranja{0.8};  y(P) *= \laranja{0.8};
       if ( z(P) > \laranja{1.3} )
-      \{  x(P) = x(P) / ( \laranja{1.} + \laranja{300.} * std::pow ( z(P) - \laranja{1.3}, \laranja{3.} ) );
-         y(P) = y(P) / ( \laranja{1.} + \laranja{300.} * std::pow ( z(P) - \laranja{1.3}, \laranja{3.} ) );
-         z(P) = z(P) * ( \laranja{1.} + \laranja{10.} * ( z(P) - \laranja{1.3} ) * ( z(P) - \laranja{1.3} ) );  \}
-      if ( z(P) > \laranja{0.} ) z(P) *= \laranja{0.8};                                        \}
+      \{  x(P) /= \laranja{1.} + \laranja{300.} * std::pow ( z(P) - \laranja{1.3}, \laranja{3.} );
+         y(P) /= \laranja{1.} + \laranja{300.} * std::pow ( z(P) - \laranja{1.3}, \laranja{3.} );
+         z(P) *= \laranja{1.} + \laranja{10.} * ( z(P) - \laranja{1.3} ) * ( z(P) - \laranja{1.3} );  \}
+      if ( z(P) > \laranja{0.} ) z(P) *= \laranja{0.8};                             \}
 \end{Verbatim}
 
 Paragraph \ref{\numb section 9.\numb parag 3} explains the notion of an iterator over cells.

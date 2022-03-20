@@ -624,6 +624,7 @@ the arguments {\small\tt\textcolor{tag}{tag}::orientation,}
 {\small\tt\textcolor{tag}{tag}::random} and {\maniFEM} will not waste
 computing time to find the inherent orientation.
 
+
           %-------------------------------%
 \section{~~Revisiting the bumpy hemisphere}\label{\numb section 3.\numb parag 14}
           %-------------------------------%
@@ -798,6 +799,12 @@ If the variation were larger (or sharper) the algorithm might stop with some err
 In contrast, {\maniFEM} is ``at ease'' when meshing the disk in paragraph
 \ref{\numb section 3.\numb parag 2} because there the segments on the boundary have
 (approximately) constant length.
+
+This is a good place to mention that \maniFEM's frontal meshing algorithm is still not
+as robust as we would like it to be.
+In rare occasions, it reports as ``unmanageable'' certain geometric configurations which
+should be manageable.
+A fresh implementation is on its way.
 
 
           %------------%

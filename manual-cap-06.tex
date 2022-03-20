@@ -6,7 +6,7 @@
 
 Finite elments are still incipient in \maniFEM.
 Paragraph \ref{\numb section 6.\numb parag 1} discusses the concept of finite element
-and paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 10}
+and paragraphs \ref{\numb section 6.\numb parag 3} -- \ref{\numb section 6.\numb parag 11}
 give examples of use.
 There is a lot of ongoing work on this subject.
 
@@ -14,18 +14,18 @@ There is a lot of ongoing work on this subject.
 We may have different finite elements whose geometry is the same.
 For instance, we may have triangular Lagrange finite elemens of different degrees;
 they will all {\small\tt dock\_\,on} the same triangular cell.
-See e.g.\ paragraph \ref{\numb section 6.\numb parag 5}.
+See e.g.\ paragraph \ref{\numb section 6.\numb parag 6}.
 
 Finite elements in {\maniFEM} can be divided in two categories.
 Finite elements based on symbolic computations, using Gauss quadrature on a master element,
 are discussed in
-paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 8}.
+paragraphs \ref{\numb section 6.\numb parag 3} -- \ref{\numb section 6.\numb parag 9}.
 They are flexible (we can compute integrals of arbitrary expressions) but quite slow
 (because they rely strongly on symbolic manipulation of expressions).
 They can be interesting for dydactic purposes.%
 \footnote {{} They are also very useful for validating other types of finite elements.}
-Finite elements described in paragraphs \ref{\numb section 6.\numb parag 9} and
-\ref{\numb section 6.\numb parag 10} are much faster at the cost of a tedious internal
+Finite elements described in paragraphs \ref{\numb section 6.\numb parag 10} and
+\ref{\numb section 6.\numb parag 11} are much faster at the cost of a tedious internal
 implementation.
 Also, from the point of view of the final user, their syntax is slightly less elegant.
 
@@ -76,7 +76,7 @@ He or she will declare {\small\tt\verm{FiniteElement}}s (wrappers) of different 
 by providing {\small\tt\textcolor{tag}{tag}}s to the constructor, as shown in
 subsequent paragraphs of this section.
 In some cases, when we only want to compute integrals of certains functions
-(like in paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 6.\numb parag *}),
+(like in paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 6.\numb parag 2}),
 it is enough to declare an {\small\tt\verm{Integrator}}.
 {\ManiFEM} will create, invisibly to the user, a finite element compatible with that
 integrator.
@@ -89,7 +89,7 @@ We say that the {\small\tt\verm{FiniteElement}} is docked on a new {\small\tt\ve
 the method {\small\tt dock\_\,on} performs this operation.
 This method is element-specific, each type of finite element having its own class.
 The docking may happen behind the scenes, like in paragraphs \ref{\numb section 1.\numb parag 1}
-and \ref{\numb section 6.\numb parag *}.
+and \ref{\numb section 6.\numb parag 2}.
 
 For instance, {\small\tt\verm{FiniteElement}}s declared with {\small\tt\textcolor{tag}{tag}%
 ::quadrangle} will only {\small\tt dock\_\,on} quadrilaterals
@@ -103,7 +103,7 @@ For instance, {\small\tt\verm{FiniteElement}}s declared with {\small\tt\textcolo
 When docking on a cell, the {\small\tt\verm{FiniteElement}} object will build four
 ``shape functions'' and a transformation map.
 The four shape functions can be accessed through the method {\small\tt basis\_\,function},
-as shown in paragraph \ref{\numb section 6.\numb parag 2}.
+as shown in paragraph \ref{\numb section 6.\numb parag 3}.
 If the current cell lies within a two-dimensional manifold, the above referred map will be
 a diffeomorphism between a master element occuppying the square $ [-1, 1]^2 $ and the cell.
 The jacobian of this transformation map is also comupted, through symbolic differentiation.
@@ -123,13 +123,13 @@ Note also that these examples make use of the {\small\tt Eigen} library.
 
 
           %---------------------%
-\section{~~Integrating functions}\label{\numb section 6.\numb parag *}
+\section{~~Integrating functions}\label{\numb section 6.\numb parag 2}
           %---------------------%
 
 To begin with, let us simply compute integrals of functions defined on a spherical mesh.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag *}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
@@ -154,50 +154,51 @@ Paragraph \ref{\numb section 11.\numb parag 5} describes the lifecycle of a
 
 
           %------------------------------------------------%
-\section{~~Laplace operator, Dirichlet boundary conditions}\label{\numb section 6.\numb parag 2}
+\section{~~Laplace operator, Dirichlet boundary conditions}\label{\numb section 6.\numb parag 3}
           %------------------------------------------------%
 
 Let's look at an example about the Laplace operator with non-homogeneous Dirichlet
 boundary conditions.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, 2 );
-   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
-   \verm{Function} \azul{x} = xy [0], \azul{y} = xy [1];
+   \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
+   \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
 
    \cinza{// declare the type of finite element}
    \verm{FiniteElement} \azul{fe}
-      ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+      ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Integrator} \azul{integ} = fe .set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::quad_4 );
 
    \cinza{// build a 10x12 mesh on a square domain}
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = 0.;   y (A) = 0.;
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = 1.;   y (B) = 0.;
-   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) = 1.;   y (C) = 1.;
-   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = 0.;   y (D) = 1.;
-   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in, 12 );
-   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C .reverse(), D, \textcolor{tag}{tag}::divided_in, 10 );
-   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D .reverse(), A, \textcolor{tag}{tag}::divided_in, 12 );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{0.};   y (A) = \laranja{0.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{1.};   y (B) = \laranja{0.};
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) = \laranja{1.};   y (C) = \laranja{1.};
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = \laranja{0.};   y (D) = \laranja{1.};
+
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{12} );
+   \verm{Mesh} \azul{CD} ( \textcolor{tag}{tag}::segment, C .reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{10} );
+   \verm{Mesh} \azul{DA} ( \textcolor{tag}{tag}::segment, D .reverse(), A, \textcolor{tag}{tag}::divided_in, \laranja{12} );
+
    \verm{Mesh} \azul{ABCD} ( \textcolor{tag}{tag}::rectangle, AB, BC, CD, DA );
 \end{Verbatim}
 
-Paragraph \ref{\numb section 11.\numb parag 5} describes the lifecycle of a
-{\small\tt\verm{FiniteElement}} -- {\small\tt\verm{Integrator}} pair.
-
 A finite element can handle by itself the numbering of vertices, as shown in paragraph
-\ref{\numb section 6.\numb parag 4}.
+\ref{\numb section 6.\numb parag 5}.
 For now, we prefer the conceptually simpler approach of building by hand a {\small\tt map}
 for numbering vertices.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    std::map < \verm{Cell}, size_t > \azul{numbering};
+
    \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
-   size_t \azul{counter} = 0;
+   size_t \azul{counter} = \laranja{0};
+
    for ( it .reset() ; it .in_range(); it++ )
    \{  \verm{Cell} \azul{V} = *it;  numbering [V] = counter;  ++counter;  \}
 \end{Verbatim}
@@ -209,7 +210,7 @@ The matrix of the linear system and the vector holding the free coefficients
 are declared as objects of the {\small\tt Eigen} library.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    size_t \azul{size_matrix} = ABCD .number_of ( \textcolor{tag}{tag}::vertices );
    assert ( size_matrix == numbering .size() );
@@ -224,7 +225,7 @@ compute integrals of the form $ \displaystyle \int\!\!\!\int {\partial \psi_i \o
 values to the global matrix:
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \cinza{// run over all square cells composing ABCD}
    \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells, \textcolor{tag}{tag}::of_max_dim );
@@ -260,12 +261,12 @@ the exact solution will be $ u(x,y) = xy $).
 We use a function {\small\tt impose\_\,value\_\,of\_\,unknown} which changes the {\small\tt matrix\_\,A}
 and the {\small\tt vector\_\,b} in order to impose the Dirichlet condition {\small\tt u(i) = 
 some\_\,value}.
-See the source code in file {\small\tt examples-manual/parag-\ref{\numb section 6.\numb parag 2}.cpp}
+See the source code in file {\small\tt examples-manual/parag-\ref{\numb section 6.\numb parag 3}.cpp}
 in the distribution tree for the definition of the {\small\tt impose\_\,value\_\,of\_\,unknown}
 function.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Mesh}::Iterator \azul{it} = BC .iterator ( \textcolor{tag}{tag}::over_vertices );
    for ( it .reset(); it .in_range(); it++ )
@@ -277,7 +278,7 @@ function.
 We then use {\small\tt Eigen} to solve the system of linear equations :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 2}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    Eigen::ConjugateGradient < Eigen::SparseMatrix <double>,
                               Eigen::Lower | Eigen::Upper  > \azul{cg};
@@ -306,28 +307,30 @@ through a compact declaration of the corresponding variational formulation.
 Another limitation of {\maniFEM} is that this type of finite element is rather slow.
 This is so because each docking operation implies a lot of symbolic calculations;
 the same happens when we differentiate base functions.
-The final operation, of finding the value of the integral, does not involve symbolic computations
-because it uses Gauss quadrature.
+Even the final operation, of finding the value of the integral by using Gauss quadrature,
+involves some symbolic calculus because the integrands are kept in the computer's memory
+as trees of symbolic expressions, so just calculating the value of such a function at a given point
+is a rather slow operation.
 
 There are three ways of circumventing this limitation.
 The first one is : if your mesh is made of identical finite elements
 (like the example in the present paragraph), you can compute the elementary matrix
 just once and then assembly the global matrix from it.
 It will surely be much faster.
-A second way to speed up the code is to add the option {\small\tt -dNDEBUG} to the compilation
-command in your {\small\tt Makefile} (see also paragraph \ref{\numb section 11.\numb parag 15}).
+A second way to speed up the code is to add options {\small\tt -dNDEBUG} and {\small\tt -O4}
+to the compilation command in your {\small\tt Makefile}
+(see also paragraph \ref{\numb section 11.\numb parag 15}).
 
 The third (and soundest) solution is a deep optimization of the {\maniFEM} library.
-A different type of finite elements (or, rather, integrators) is presented in paragraphs
-\ref{\numb section 6.\numb parag 9} and \ref{\numb section 6.\numb parag 10}.
-These integrators perform a few symbolic calculations just once,
-typically right after they are declared.
+A different type of finite elements is presented in paragraphs
+\ref{\numb section 6.\numb parag 10} and \ref{\numb section 6.\numb parag 11}.
+They perform a few symbolic calculations just once, typically right after they are declared.
 Only raw arithmetic operations are performed when the user actually requests the values
 of integrals in order to assembly the matrix.
 
 
           %---------------------------%
-\section{~~Neumann boundary conditions}\label{\numb section 6.\numb parag 3}
+\section{~~Neumann boundary conditions}\label{\numb section 6.\numb parag 4}
           %---------------------------%
 
 Implementing zero Neumann boundary conditions does not imply any programming effort
@@ -338,10 +341,10 @@ We do this by declaring a 1D finite element which we then dock on each segment o
 part of the boundary where we need to integrate.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 3}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 4}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe_bdry} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::segment,
-                           \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+                           \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Integrator} \azul{integ_bdry} = fe_bdry .set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::seg_3 );
 
    \cinza{// ... assemble the matrix ...}
@@ -373,7 +376,7 @@ file {\small\tt examples-manual/parag-6.3.cpp} in the distribution tree of \mani
 
 
           %------------------------------%
-\section{~~Automatic numberig of vertices}\label{\numb section 6.\numb parag 4}
+\section{~~Automatic numberig of vertices}\label{\numb section 6.\numb parag 5}
           %------------------------------%
 
 In previous examples we have built a {\small\tt map} for handling numbering of vertices.
@@ -383,27 +386,27 @@ The method {\small\tt\verm{FiniteElement}::build\_\,global\_\,numbering} creates
 an object which is similar to {\small\tt std::map} but uses a different mechanism.
 It modifies the process of creating new cells (vertices, in this specfic case)
 by ading a new function to the list of functions
-{\small\tt\verm{Cell}::init\_\,pos\_\,cell[0]},
+{\small\tt\verm{Cell}::init\_\,pos\_\,cell[\laranja{0}]},
 invoked by {\small\tt\verm{Cell}::Core} constructors
 (see paragraph \ref{\numb section 11.\numb parag 10}).
 Space will be reserved for a {\small\tt size\_\,t} value for each new vertex, and
 this value will be used for numbering vertices.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 4}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle,
-                      \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1  );
+                      \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1}  );
    \verm{Cell}::Numbering & \azul{numbering} = fe .build_global_numbering ( \textcolor{tag}{tag}::vertices );
 \end{Verbatim}
 
 In this approach, the access to the index of a given vertex is very fast (constant time)
 because the index is stored within the {\small\tt\verm{Cell}::Core}, so no search is needed.
 In contrast, when using a {\small\tt map} as shown in paragraph
-\ref{\numb section 6.\numb parag 2}, a search is necessary through all vertices of the mesh.
+\ref{\numb section 6.\numb parag 3}, a search is necessary through all vertices of the mesh.
 Due to the implementation of the {\small\tt map} class in {\tt STL}, this search takes
 logarithmic time.
-The only advantage of the approach described in paragraph \ref{\numb section 6.\numb parag 2}
+The only advantage of the approach described in paragraph \ref{\numb section 6.\numb parag 3}
 is that the user has full contol of the numbering (see below).
 
 Using the numbering associated to the finite element itself has the following disadvantage.
@@ -417,8 +420,7 @@ have zero entries).
 However, the solver of the linear system will complain that the matrix is singular.
 
 The user should check these two numbers : {\small\tt numbering} {\small\tt.size()} and
-{\small\tt ABCD}  {\small\tt .number\_\,of}  {\small\tt (}
-{\small\tt\textcolor{tag}{tag}::vertices}  {\small\tt )}.
+{\small\tt ABCD}  {\small\tt .number\_\,of}  {\small\tt (\textcolor{tag}{tag}::vertices)}.
 If they are not equal, measures must be taken.
 For instance, a non-zero value can be inserted in the diagonal of the global matrix
 at places corresponding to ``missing'' vertices.
@@ -427,18 +429,18 @@ Since we have no way of running over the missing vertices, we first fill the ent
 diagonal with ones, then erase them for existing vertices.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 4}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
-   for ( size_t \azul{i} = 0; i < size_matrix; i++ )
-      matrix_A .insert ( i, i ) = 1.;
+   for ( size_t \azul{i} = \laranja{0}; i < size_matrix; i++ )
+      matrix_A .insert ( i, i ) = \laranja{1.};
    \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;
       size_t \azul{i} = numbering [P];
-      matrix_A .coeffRef ( i, i ) = 0.;  \}
+      matrix_A .coeffRef ( i, i ) = \laranja{0.};  \}
 \end{Verbatim}
 
-The rest of the code is identical to paragraph \ref{\numb section 6.\numb parag 2}.
+The rest of the code is identical to paragraph \ref{\numb section 6.\numb parag 3}.
 
 A different way around can be used, which allows the use of a {\small\tt matrix\_\,A}
 with the correct dimension (equal to the number of vertices in the mesh {\small\tt ABCD}).
@@ -447,7 +449,7 @@ We simply assign the desired value to the numbering of each vertex :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    rulecolor=\color{moldura},baselinestretch=0.94,framesep=2mm          ]
    \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_vertices );
-   size_t \azul{counter} = 0;
+   size_t \azul{counter} = \laranja{0};
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{P} = *it;
       numbering [P] = counter++;  \}
@@ -460,15 +462,15 @@ You should use instead {\small\tt ABCD} {\small\tt .number\_\,of} {\small\tt (}
 {\small\tt\textcolor{tag}{tag}::vertices )}; this is the dimension you should use
 when declaring your global matrix.
 
-Note that both numbering methods (presented in paragraphs \ref{\numb section 6.\numb parag 2}
-and \ref{\numb section 6.\numb parag 4}) allow for retrieving
+Note that both numbering methods (presented in paragraphs \ref{\numb section 6.\numb parag 3}
+and \ref{\numb section 6.\numb parag 5}) allow for retrieving
 an index of a given vertex but not the other way around.
 If you need to retrieve a vertex from its index you should probably use 
 a vector of {\small\tt\verm{Cell}}s.
 
 
           %-------------------------------------------------%
-\section{~~Triangular Lagrange finite elements of degree two}\label{\numb section 6.\numb parag 5}
+\section{~~Triangular Lagrange finite elements of degree two}\label{\numb section 6.\numb parag 6}
           %-------------------------------------------------%
 
 To get a quadratic Lagrange finite element, simply choose degree two; add also a 
@@ -476,10 +478,10 @@ To get a quadratic Lagrange finite element, simply choose degree two; add also a
 a curved triangle.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 6}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe2} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::triangle,
-                       \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight );
+                       \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{2}, \textcolor{tag}{tag}::straight );
 \end{Verbatim}
 
 This finite element has six basis functions, associated to vertices and to sides.
@@ -491,7 +493,7 @@ while the other three are associated to sides (one-dimensional cells).
 See also paragraph \ref{\numb section 5.\numb parag 1}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 5}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 6}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
       fe2 .dock_on ( small_tri );
       \cinza{//  for loop}  
@@ -526,7 +528,7 @@ Table below shows the values taken by the six shape functions at relevant points
 It is worth noticing that, although we intend to work with degree two finite elements,
 the coordinate system {\small\tt\azul{xy}} is still declared with
 {\small\tt\textcolor{tag}{tag}::of\_\,degree,} {\small\tt\laranja{1}}
-(see the source code in file {\small\tt parag-\ref{\numb section 6.\numb parag 5}.cpp}
+(see the source code in file {\small\tt parag-\ref{\numb section 6.\numb parag 6}.cpp}
 in the distribution tree).
 This is so because we use straight triangles; if we wanted curved triangles, we should
 declare {\small\tt\azul{xy}} with {\small\tt\textcolor{tag}{tag}::of\_\,degree,}
@@ -537,25 +539,24 @@ Paragraph \ref{\numb section 5.\numb parag 1} gives more details.
           %--------------------------------------------------%
 \section{~~Triangular Lagrange, degree two, incremental basis}
           %--------------------------------------------------%
-\label{\numb section 6.\numb parag 6}
+\label{\numb section 6.\numb parag 7}
 
 We can add a {\small\tt\textcolor{tag}{tag}::incremental\_\,basis} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 6}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 7}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe2} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::triangle, \textcolor{tag}{tag}::Lagrange,
-                       \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight, \textcolor{tag}{tag}::incremental_basis );
+                       \textcolor{tag}{tag}::of_degree, \laranja{2}, \textcolor{tag}{tag}::straight, \textcolor{tag}{tag}::incremental_basis );
 \end{Verbatim}
 
 This finite element is almost identical to the one presented in paragraph
-\ref{\numb section 6.\numb parag 5}.
+\ref{\numb section 6.\numb parag 6}.
 The six basis functions are not the same, but they span the same linear function space.
 
 The set of basis functions of this element contains the three basis functions of the
 Lagrange P1 element (associated to the three vertices).
 In addition, there are three basis functions associated to the three sides.
-\vfil\eject
 
 The six basis functions of this finite element take the following values
 
@@ -579,7 +580,7 @@ The six basis functions of this finite element take the following values
 \end{tabular}\end{center}
 
 The difference relatively to the ``usual'' finite element described in paragraph
-\ref{\numb section 6.\numb parag 5} lies in the interpretation
+\ref{\numb section 6.\numb parag 6} lies in the interpretation
 of the coefficients when we write a function $u$ as a linear combination of basis functions.
 If $ u = \sum_{\mbox{\small\tt v}} u_{\mbox{\small\tt v}} \psi_{\mbox{\small\tt v}} +
 \sum_{\mbox{\small\tt s}} u_{\mbox{\small\tt s}} \psi_{\mbox{\small\tt s}} $
@@ -589,7 +590,7 @@ rather, $ u_{\mbox{\small\tt s}} = 4 u(\mbox{\small\tt m}) -2 (u(\mbox{\small\tt
 u(\mbox{\small\tt B})) $ (assuming {\small\tt m} is the middle point of segment {\small\tt s}
 $=$ {\small\tt AB}).
 This interpretation is used when imposing the Dirichlet boundary condition in the main file
-{\small\tt parag-\ref{\numb section 6.\numb parag 6}.cpp}.
+{\small\tt parag-\ref{\numb section 6.\numb parag 7}.cpp}.
 
 This finite element is especially useful in the context of quotient manifolds.
 
@@ -597,24 +598,24 @@ This finite element is especially useful in the context of quotient manifolds.
           %---------------------------------------------------%
 \section{~~Quadrangular Lagrange finite elements of degree two}
           %---------------------------------------------------%
-\label{\numb section 6.\numb parag 7}
+\label{\numb section 6.\numb parag 8}
 
 To get a bi-quadratic Lagrange finite element, simply choose degree two; add also a 
 {\small\tt\textcolor{tag}{tag}::straight} to inform {\maniFEM} that you do not want
 a curved quadrilateral.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 7}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 8}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe2} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle,
-                       \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight );
+                       \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{2}, \textcolor{tag}{tag}::straight );
 \end{Verbatim}
 
 This finite element has nine basis functions, associated to vertices, to sides, and to the
 quadrangular cell itself :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 7}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 8}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
       fe2 .dock_on ( small_square );
       \cinza{//  for loop}  
@@ -657,7 +658,7 @@ Table below shows the values taken by the nine shape functions at relevant point
 It is worth noticing that, although we intend to work with degree two finite elements,
 the coordinate system {\small\tt\azul{xy}} is still declared with
 {\small\tt\textcolor{tag}{tag}::of\_\,degree,} {\small\tt\laranja{1}}
-(see the source code in file {\small\tt parag-\ref{\numb section 6.\numb parag 7}.cpp}
+(see the source code in file {\small\tt parag-\ref{\numb section 6.\numb parag 8}.cpp}
 in the distribution tree).
 This is so because we use straight quadrangles; if we wanted curved quadrangles, we should
 declare {\small\tt\azul{xy}} with {\small\tt\textcolor{tag}{tag}::of\_\,degree,}
@@ -668,19 +669,19 @@ Paragraph \ref{\numb section 5.\numb parag 1} gives more details.
           %----------------------------------------------------%
 \section{~~Quadrangular Lagrange, degree two, incremental basis}
           %----------------------------------------------------%
-\label{\numb section 6.\numb parag 8}
+\label{\numb section 6.\numb parag 9}
 
 We can add a {\small\tt\textcolor{tag}{tag}::incremental\_\,basis} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 8}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{FiniteElement} \azul{fe2} ( \textcolor{tag}{tag}::with_master, \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange,
-                       \textcolor{tag}{tag}::of_degree, 2, \textcolor{tag}{tag}::straight, \textcolor{tag}{tag}::incremental_basis );
+                       \textcolor{tag}{tag}::of_degree, \laranja{2}, \textcolor{tag}{tag}::straight, \textcolor{tag}{tag}::incremental_basis );
 \end{Verbatim}
 
 This finite element is almost identical to the one presented in paragraph
-\ref{\numb section 6.\numb parag 7}.
+\ref{\numb section 6.\numb parag 8}.
 The nine basis functions are not the same, but they span the same linear function space.
 
 The set of basis functions of this element contains the four basis functions of the
@@ -716,7 +717,7 @@ The nine basis functions of this finite element take the following values
 \end{tabular}\end{center}
 
 The difference relatively to the ``usual'' finite element described in paragraph
-\ref{\numb section 6.\numb parag 7} lies in the interpretation
+\ref{\numb section 6.\numb parag 8} lies in the interpretation
 of the coefficients when we write a function $u$ as a linear combination of basis functions.
 If $ u = \sum_{\mbox{\small\tt v}} u_{\mbox{\small\tt v}} \psi_{\mbox{\small\tt v}} +
 \sum_{\mbox{\small\tt s}} u_{\mbox{\small\tt s}} \psi_{\mbox{\small\tt s}} +
@@ -734,16 +735,16 @@ $ \sigma_{\mbox{\small\tt s}} $ is the sum of the values of $u$ at middle point 
 {\small\tt q} and $ \sigma_{\mbox{\small\tt v}} $ is the sum of the values of $u$ at vertices
 of cell {\small\tt q}.
 This interpretation is used when imposing the Dirichlet boundary condition in the main file
-{\small\tt parag-\ref{\numb section 6.\numb parag 8}.cpp}.
+{\small\tt parag-\ref{\numb section 6.\numb parag 9}.cpp}.
 
 This finite element is especially useful in the context of quotient manifolds.
 
 
           %--------------------------%
-\section{~~Hand-coded finite elements}\label{\numb section 6.\numb parag 9}
+\section{~~Hand-coded finite elements}\label{\numb section 6.\numb parag 10}
           %--------------------------%
 
-Paragraphs \ref{\numb section 6.\numb parag 2} -- \ref{\numb section 6.\numb parag 8}
+Paragraphs \ref{\numb section 6.\numb parag 3} -- \ref{\numb section 6.\numb parag 9}
 show finite element computations where we simply take the shape functions provided by
 the method {\small\tt\verm{FiniteElement}::basis\_\,function}, differentiate them
 symbolically and then integrate their product through a Gauss quadrature.
@@ -759,7 +760,7 @@ to compute integrals of very general expressions, e.g.\ {\small\tt fe} {\small\t
 {\small\tt +} {\small\tt\verm{cos}} {\small\tt(x-y)} {\small\tt *} {\small\tt psi\_\,V.deriv(y)}%
 ~{\small\tt )}.
 Finite elements described in this paragraph and subsequent ones only compute integrals
-of certain expressions, described in paragraph \ref{\numb section 6.\numb parag 10}.
+of certain expressions, described in paragraph \ref{\numb section 6.\numb parag 11}.
 They do not keep a diffeomorphism to a master element.
 The quantities relevant for finite element analysis are hard-wired in the source code
 as arithmetic expressions
@@ -770,15 +771,15 @@ The finite element is declared by simply omitting the
 {\small\tt\textcolor{tag}{tag}::hand\_\,coded}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 10}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::rectangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::rectangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Integrator} \azul{integ} = fe .set_integrator ( \textcolor{tag}{tag}::hand_coded );
 \end{Verbatim}
 
 Here we use a {\small\tt\textcolor{tag}{tag}::rectangle} instead of
 a {\small\tt\textcolor{tag}{tag}::quadrangle};
-paragraph \ref{\numb section 6.\numb parag 10} explains why.
+paragraph \ref{\numb section 6.\numb parag 11} explains why.
 
 A hand-coded integrator requires an early declaration of the integrals we intend to compute.
 One or two abstract basis functions must be declared, then the method
@@ -790,7 +791,7 @@ by one of the shape functions provided by the method
 {\small\tt\verm{FiniteElement}::basis\_\,function}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 10}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Function} \azul{bf1} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe ),
             \azul{bf2} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe );
@@ -800,12 +801,12 @@ by one of the shape functions provided by the method
 \end{Verbatim}
 
 The symbolic expressions provided to {\small\tt pre\_\,compute} must obey to rather strict
-rules, described in paragraph \ref{\numb section 6.\numb parag 10}.
+rules, described in paragraph \ref{\numb section 6.\numb parag 11}.
 
 The {\small\tt dock\_\,on} operation has the same syntax as before :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 10}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
       fe .dock_on ( small_square );
 \end{Verbatim}
@@ -817,8 +818,8 @@ These values are kept in an internal buffer; later, when we call the method
 the internal buffer.
 
 The {\small\tt integrate} method has a syntax which is more complicated and less intuitive
-than the one we have seen in paragraphs \ref{\numb section 6.\numb parag 2} --
-\ref{\numb section 6.\numb parag 8}.
+than the one we have seen in paragraphs \ref{\numb section 6.\numb parag 3} --
+\ref{\numb section 6.\numb parag 9}.
 We do not provide an expression; this has already been done by invoking method
 {\small\tt pre\_\,compute}.
 We just specify the {\small\tt\textcolor{tag}{tag}::pre\_\,computed} and provide
@@ -831,19 +832,19 @@ We then recover each value as components of this vector (in this example there i
 one component).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 6.\numb parag 9}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 6.\numb parag 10}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
          \verm{Function} \azul{psi_V} = fe .basis_function(V),
                   \azul{psi_W} = fe .basis_function (W);
          std::vector < double > \azul{result} = fe .integrate 
             ( \textcolor{tag}{tag}::pre_computed, \textcolor{tag}{tag}::replace, bf1, \textcolor{tag}{tag}::by, psi_V,
                                  \textcolor{tag}{tag}::replace, bf2, \textcolor{tag}{tag}::by, psi_W );
-         assert ( result .size() ) == 1;
-         matrix_A .coeffRef ( numbering[V], numbering[W] ) += result [0];
+         assert ( result .size() == \laranja{1} );
+         matrix_A .coeffRef ( numbering[V], numbering[W] ) += result [\laranja{0}];
 \end{Verbatim}
 
           %--------------------------------------%
-\section{~~More details on hand-coded integrators}\label{\numb section 6.\numb parag 10}
+\section{~~More details on hand-coded integrators}\label{\numb section 6.\numb parag 11}
           %--------------------------------------%
 
 Integrators declared with {\small\tt\textcolor{tag}{tag}::hand\_\,coded} are fast at the
@@ -922,9 +923,9 @@ for different reasons :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
    integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
-      \textcolor{tag}{tag}::integral_of, \{ bf + 1. \} );  \cinza{// WRONG, symbolic expression not allowed}
+      \textcolor{tag}{tag}::integral_of, \{ bf + \laranja{1.} \} );  \cinza{// WRONG, symbolic expression not allowed}
    integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
-      \textcolor{tag}{tag}::integral_of, \{ 2.* bf \} );  \cinza{// WRONG, symbolic expression not allowed}
+      \textcolor{tag}{tag}::integral_of, \{ \laranja{2.}* bf \} );  \cinza{// WRONG, symbolic expression not allowed}
    integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
       \textcolor{tag}{tag}::integral_of, \{ bf + bf .deriv(x) \} );  \cinza{// WRONG, symbolic expression not allowed}
    integ .pre_compute ( \textcolor{tag}{tag}::for_a_given, \textcolor{tag}{tag}::basis_function, bf,
@@ -944,10 +945,10 @@ still missing.
 At present, hand-coded integrators can be used in association with finite elements listed below
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::triangle,   \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
-   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
-   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::rectangle,  \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
-   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::square,     \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::triangle,   \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::rectangle,  \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::square,     \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
 \end{Verbatim}
 
 Note that {\small\tt\textcolor{tag}{tag}::quadrangle} and
@@ -960,7 +961,7 @@ In the future, there will also be a finite element with
 
 Another limitation is that some integrators' implementation is still incomplete and they may
 reject some of the expressions listed above as correct.
-For instance, in paragraph \ref{\numb section 6.\numb parag 9} we have used a finite element
+For instance, in paragraph \ref{\numb section 6.\numb parag 10} we have used a finite element
 declared with {\small\tt\textcolor{tag}{tag}::rectangle} which accepts the expression
 {\small\tt bf1.deriv(x)} {\small\tt *} {\small\tt bf2.deriv(x)}
 {\small\tt +} {\small\tt bf1.deriv(y)} {\small\tt *} {\small\tt bf2.deriv(y)}.
@@ -972,7 +973,7 @@ components :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, 1 );
+   \verm{FiniteElement} \azul{fe} ( \textcolor{tag}{tag}::quadrangle, \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Integrator} \azul{integ} = fe .set_integrator ( \textcolor{tag}{tag}::hand_coded );
 
    \verm{Function} \azul{bf1} ( \textcolor{tag}{tag}::basis_function, \textcolor{tag}{tag}::within, fe ),
@@ -982,7 +983,7 @@ components :
                                             bf1 .deriv(y) * bf2 .deriv(y) \} );
 
    \cinza{// run over all square cells composing ABCD}
-   \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, 2 );
+   \verm{Mesh}::Iterator \azul{it} = ABCD .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{2} );
    for ( it .reset(); it .in_range(); it++ )
    \{  \verm{Cell} \azul{small_square} = *it;
       fe .dock_on ( small_square );
@@ -998,8 +999,8 @@ components :
          std::vector < double > \azul{result} = fe .integrate 
             ( \textcolor{tag}{tag}::pre_computed, \textcolor{tag}{tag}::replace, bf1, \textcolor{tag}{tag}::by, psi_V,
                                  \textcolor{tag}{tag}::replace, bf2, \textcolor{tag}{tag}::by, psi_W );
-         assert ( result .size() ) == 2;
-         matrix_A .coeffRef ( numbering[V], numbering[W] ) += result [0] + result [1];
+         assert ( result .size() == \laranja{2} );
+         matrix_A .coeffRef ( numbering[V], numbering[W] ) += result [\laranja{0}] + result [\laranja{1}];
    \}  \}  \cinza{// end of for loops over vertices, end of for loop over cells}
 \end{Verbatim}
 
