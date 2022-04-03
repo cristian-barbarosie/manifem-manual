@@ -131,6 +131,9 @@ Besides that, in the case of constructors, we do not have the choice of the name
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10} );
 \end{Verbatim}
 
+There is a drawback to using {\small\tt\textcolor{tag}{tag}}s instead of choosing different names
+for functions : compilation error messages may become quite long.
+
 In \maniFEM, namespaces and class names begin with capital letter
 (see paragraph \ref{\numb section 11.\numb parag 1}).
 The namespace {\small\tt\verm{tag}} (or {\small\tt\verm{maniFEM}::tag} if you are not
