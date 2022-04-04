@@ -826,7 +826,7 @@ Here is how to mesh the diamond-shaped domain in paragraph \ref{\numb section 2.
    \cinza{// or with tag::frontal like in}
    RR2 .implicit ( x*y - x - y ==  \laranja{1.} );
    \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, W, \textcolor{tag}{tag}::stop_at, S,
-             \textcolor{tag}{tag}::desired_length, \laranja{0.1}               );
+             \textcolor{tag}{tag}::desired_length, \laranja{0.1}                        );
    \cinza{// ... //}
              
    \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, NW, WS, SE, EN );
@@ -972,8 +972,6 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
    \verm{Cell} \azul{start_2} ( \textcolor{tag}{tag}::vertex );
    x ( start_2 ) = \laranja{1.};  y ( start_2 ) = \laranja{0.};  z ( start_2 ) = \laranja{0.5} - rc;
    intersection .project ( start_2 );
-   \verm{Mesh} \azul{circle_2} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, start_2,
-                   \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
@@ -989,6 +987,9 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                              ]
+   \verm{Mesh} \azul{circle_2} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, start_2,
+                   \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
+
    \verm{Cell} \azul{start_3} ( \textcolor{tag}{tag}::vertex );
    x ( start_3 ) = \laranja{-1.};  y ( start_3 ) = \laranja{0.};  z ( start_3 ) = \laranja{0.5} - rc;
    intersection .project ( start_3 );
@@ -1043,11 +1044,13 @@ A typical example is the vertex of a cone.
    label=code not working,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                  ]
    \verm{Manifold} \azul{cone_manif} = RR3 .implicit ( x*x + y*x == z*z );
+
    cone_manif .implicit ( z == \laranja{1.} );
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{1.};  y (A) = \laranja{0.};  z (A) = \laranja{1.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, A,
                  \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{-1.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}       );
+
    cone_manif .set_as_working_manifold();
    \verm{Cell} \azul{V} ( \textcolor{tag}{tag}::vertex );  x (V) = \laranja{0.};  y (V) = \laranja{0.};  z (V) = \laranja{0.};
    \verm{Mesh} \azul{cone} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::boundary, circle,
@@ -1137,8 +1140,8 @@ The desired length may be a non-constant function.
 
    \verm{Manifold} \azul{ellipse} = RR2 .implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::desired_length, d );
-
    \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner .reverse() );
+
    RR2 .set_as_working_manifold();
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, d );
 \end{Verbatim}

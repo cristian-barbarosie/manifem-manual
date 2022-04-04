@@ -225,8 +225,9 @@ to the constructor itself, as in the code excerpt below.
 This has the advantage that the name of the iterator gains local scope.
 (this feature is not yet implemented)
 
-\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
-   baselinestretch=0.94,framesep=2mm                      ]
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=code not working,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                   ]
    for ( \verm{Mesh}::Iterator \azul{it} = msh .iterator ( \textcolor{tag}{tag}::over_cells_of_dim, \laranja{2}, \textcolor{tag}{tag}::reset );
          it .in_range(); it++                                                        )
    \{  \verm{Cell} \azul{cll} = *it;  do_something_to ( cll );  \}

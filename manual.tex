@@ -14,7 +14,7 @@
 \def\manifemrelease{22.04}
 \def\manualversion{22.04}
 \let\production 0
-% \includeonly{manual-cap-02}
+\includeonly{manual-cap-09}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -220,8 +220,6 @@ para a Ci\^encia e a Tecnologia (Portugal), through Faculdade de Ci\^encias da U
 de Lisboa and Centro de Matem\'atica, Aplica\c c\~oes Fundamentais e Investiga\c c\~ao
 Operacional, project UID/MAT/04561/2020.
 
-S\'ergio Lopes contributed to the source code.
-
 Anabela Silva contributed with drawings and source text coloring.
 
 Armando Machado contributed with comments in paragraph \ref{\numb section 8.\numb parag 2}.
@@ -394,6 +392,10 @@ Still not entirely stable, needs more work.
 {\small\tt\verm{FiniteElement}}s and {\small\tt\verm{Integrator}}s.
 We can declare and use an integrator without bothering with the subjacent finite element,
 paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 6.\numb parag 2}.
+
+Add {\small\tt\verm{Mesh}} constructor with {\small\tt\textcolor{tag}{tag}::quadrangle},
+{\small\tt\textcolor{tag}{tag}::winding}, {\small\tt\textcolor{tag}{tag}::singular},
+in the spirit of paragraph \ref{\numb section 7.\numb parag 16}.
 
 
 \section*{To do}
