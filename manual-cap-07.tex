@@ -284,9 +284,9 @@ you may think in terms of four squares instead :
    \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) = \laranja{0.5};  y (C) = \laranja{0.5};
    \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = \laranja{0.} ;  y (D) = \laranja{0.5};
 
-   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A.reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{5} ),
+   \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{5} ),
         \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{5} ),
-        \azul{CD} ( \textcolor{tag}{tag}::segment, C .reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{5}),
+        \azul{CD} ( \textcolor{tag}{tag}::segment, C .reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{5} ),
         \azul{DA} ( \textcolor{tag}{tag}::segment, D .reverse(), A, \textcolor{tag}{tag}::divided_in, \laranja{5} ),
         \azul{BA1} ( \textcolor{tag}{tag}::segment, B .reverse(), A, \textcolor{tag}{tag}::divided_in, \laranja{5}, \textcolor{tag}{tag}::winding, g_horiz ),
         \azul{CD1} ( \textcolor{tag}{tag}::segment, C .reverse(), D, \textcolor{tag}{tag}::divided_in, \laranja{5}, \textcolor{tag}{tag}::winding, g_horiz ),
@@ -1272,7 +1272,7 @@ it meets the mesh on the other side of the torus.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=code not working,rulecolor=\color{moldura},
-   baselinestretch=0.94,framesep=2mm                                   ]
+   baselinestretch=0.94,framesep=2mm                                  ]
    \verm{Mesh} \azul{perforated} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::boundary, loops,
                      \textcolor{tag}{tag}::desired_length, \laranja{0.05}          );
 
@@ -1293,3 +1293,164 @@ it meets the mesh on the other side of the torus.
 The resulting structure, shown in figure \ref{\numb section 7.\numb fig 21},
 represents an example of a perforated material whose effective elastic behaviour
 exhibits a negative Poisson coefficient.
+
+
+          %---------------------------%
+\section{~~Multi-functions, motivation}  \label{\numb section 7.\numb parag 24}
+          %---------------------------%
+
+Even if your mesh does not seem related to any quotient manifold, you may want to use multi-functions.
+
+Consider a circular mesh defined just as in paragraph \ref{\numb section 3.\numb parag 2}
+and a pair of functions $ (u,v) $ as below
+\footnote {{} This example is inspired in Exercise 2.4 from the book : C.\ Conca, J.\ Planchard,
+M.\ Vanninathan, Fluids and periodic structures, Wiley, 1995}
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 24}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
+   \verm{Manifold} \azul{circle_manif} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
+   \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::desired_length, \laranja{0.2} );
+  
+   \verm{Function} \azul{r} = \verm{sqrt} ( x*x + y*y );
+   \verm{Function} \azul{u} = \verm{sqrt} ( (x+r) / \laranja{2.} / r );
+   \verm{Function} \azul{v} = y / \verm{sqrt} ( \laranja{2.} * r * (x+r) );
+\end{Verbatim}
+
+The above is equivalent to taking the vector which points from the origin to the current point $ (x,y) $,
+writing it in the trigonometric form and dividing the angle by two.
+The resulting vector field is shown in figure \ref{\numb section 7.\numb fig 22}.
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
+  \includegraphics[width=70mm]{circle-conca.eps}
+  \caption{A rotating eigenvector}
+  \label{\numb section 7.\numb fig 22}
+\end{figure}
+
+We see that, after a complete loop around the circle,
+the vector meets its previous value with a change in sign.
+% This reminds us of a winding number.
+
+It is easy to imagine the same vector field defined in an annulus instead of a circle
+(see e.g.\ paragraph \ref{\numb section 9.\numb parag 2}).
+
+The above code works fine, but there is a disadvantage.
+If we want to differentiate this vector field, either through symbolic differentiation or by using
+finite differences or finite elements, we will get a very high value of the derivative at the point
+where the vector changes its sign.
+Next paragraphs show how multi-functions can help overcome this dilemma.
+
+
+          %---------------%
+\section{~~Multi-functions}  \label{\numb section 7.\numb parag 25}
+          %---------------%
+
+Let us define the circle with the aid of a quotient manifold, just like in paragraph
+\ref{\numb section 7.\numb parag 2}.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 25}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
+   \verm{Manifold} \azul{RR} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{1} );
+   \verm{Function} \azul{theta} = RR .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+
+   const double \azul{pi} = \laranja{3.1415926536};
+   \verm{Manifold}::Action \azul{g} ( \textcolor{tag}{tag}::transforms, theta, \textcolor{tag}{tag}::into, theta + \laranja{2.}*pi );
+   \verm{Manifold} \azul{circle_manif} = RR .quotient (g);
+
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  theta (A) = \laranja{0.};
+   \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::segment, A .reverse(), A, \textcolor{tag}{tag}::divided_in, \laranja{20}, \textcolor{tag}{tag}::winding, g );
+\end{Verbatim}
+
+We then define two functions {\small\tt\azul u} and {\small\tt\azul v} by dividing {\small\tt theta}
+by {\small\tt\laranja 2} :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 25}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
+   \verm{Function} \azul{u} = \verm{cos} ( theta / \laranja{2.});
+   \verm{Function} \azul{v} = \verm{sin} ( theta / \laranja{2.});
+\end{Verbatim}
+
+\noindent and build multi-functions by specifying that, after a complete loop {\small\tt g},
+they change sign :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 25}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
+   \verm{Function} \azul{u_mv} = u .make_multivalued ( \textcolor{tag}{tag}::through, g, \textcolor{tag}{tag}::becomes, -u );
+   \verm{Function} \azul{v_mv} = v .make_multivalued ( \textcolor{tag}{tag}::through, g, \textcolor{tag}{tag}::becomes, -v );
+\end{Verbatim}
+
+We compute the derivatives of {\small\tt u} and {\small\tt v} by finite differences.
+When we do not take windings into accout, we observe (as expected) a concentration at the point where
+the vector changes sign.
+With multi-functions, the computed derivative have constant magnitude.
+
+
+          %-------------------------------%
+\section{~~Eigenvectors as multi-functions}  \label{\numb section 7.\numb parag 26}
+          %-------------------------------%
+
+Perhaps more interesting than defining $u$ and $v$ through half of $ \theta $ is to compute directly
+the pair $ (u,v) $ as eigenvector of the matrix
+\footnote {{} Taken from Exercise 2.4 in the book : C.\ Conca, J.\ Planchard,
+M.\ Vanninathan, Fluids and periodic structures, Wiley, 1995}
+$$ A = \left(\begin{array}{rr} x & y \\ y & -x \end{array}\right)
+= \left(\begin{array}{rr} \cos\theta & \sin\theta \\ \sin\theta & -\cos\theta \end{array}\right) $$
+
+Since any eigenvector is subject to an arbitrary change in sign, we choose, at each vertex,
+the eigenvector which is closest to the one corresponding to the previous vertex.
+Without taking {\small\tt winding}s into account, this procedure does not work because,
+at the last segment, the signs are not compatible.
+
+With multi-functions, everything gets into place.
+
+
+          %------------------------%
+\section{~~Jump given by a rotation}  \label{\numb section 7.\numb parag 27}
+          %------------------------%
+
+In the above examples, the jump of the vector field after a complete loop was a change in sign,
+which can be viewed as a $ 180^\circ $ rotation.
+We can choose any angle instead of $ 180^\circ $.
+By doing this, we can no longer view this vector field as the eigenvector of a matrix.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 27}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
+   const double \azul{coef} = \laranja{0.3333};
+   \verm{Function} \azul{u} = \verm{cos} ( coef * theta );
+   \verm{Function} \azul{v} = \verm{sin} ( coef * theta );
+   \verm{Function} \azul{uv} = u && v;
+\end{Verbatim}
+
+The behaviour of the vector field after a complete loop is now more complicated and cannot
+be described separately for {\small\tt u} and for {\small\tt v} -- we must prescribe it
+for the pair {\small\tt uv} :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 27}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
+   const double \azul c = std::cos ( coef * \laranja{2.}* pi ), \azul s = std::sin ( coef * \laranja{2.}* pi );
+   \verm{Function} \azul{uv_mv} = uv .make_multivalued
+      ( tag::through, g, tag::becomes, ( c*u - s*v ) && ( s*u + c*v ) );
+\end{Verbatim}
+
+Figure \ref{\numb section 7.\numb fig 23} shows how this vector field looks like (with a
+coefficient of one-third).
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
+  \includegraphics[width=70mm]{circle-conca-coef.eps}
+  \caption{A rotating vector}
+  \label{\numb section 7.\numb fig 23}
+\end{figure}
+
