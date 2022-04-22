@@ -1389,7 +1389,7 @@ they change sign :
 We compute the derivatives of {\small\tt u} and {\small\tt v} by finite differences.
 When we do not take windings into accout, we observe (as expected) a concentration at the point where
 the vector changes sign.
-With multi-functions, the computed derivative have constant magnitude.
+With multi-functions, the computed derivative has constant magnitude.
 
 
           %-------------------------------%
@@ -1403,7 +1403,26 @@ M.\ Vanninathan, Fluids and periodic structures, Wiley, 1995}
 $$ A = \left(\begin{array}{rr} x & y \\ y & -x \end{array}\right)
 = \left(\begin{array}{rr} \cos\theta & \sin\theta \\ \sin\theta & -\cos\theta \end{array}\right) $$
 
-Since any eigenvector is subject to an arbitrary change in sign, we choose, at each vertex,
+This time, the {\small\tt\verm{Function}}s {\small\tt u} and {\small\tt v} will not be arithmetic
+expressions involving {\small\tt theta} (like in previous paragraps).
+They will be {\small\tt\verm{Function}}s holding {\small\tt double} values at each vertex :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 26}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
+   \verm{Function} \azul{uv} ( \textcolor{tag}{tag}::lives_on, \textcolor{tag}{tag}::vertices, \textcolor{tag}{tag}::has_size, \laranja{2} );
+   \verm{Function} \azul{u} = uv[\laranja{0}], \azul{v} = uv[\laranja{1}];
+\end{Verbatim}
+
+The declaration of {\small\tt\azul{uv}} must occur before any vertex is built.
+This declaration changes the behaviour of zero-dimensional {\small\tt\verm{Cell}}s;
+from now on, space for two more {\small\tt double} values will be reserved for each vertex,
+besides the space for the coordinate {\small\tt theta}.
+
+For a given $ 2\times 2 $ matrix, choosing an eigenvector implies two arbitrary choices :
+one between the eigenvectors, the second one between the signs
+(any eigenvector is subject to an arbitrary change in sign).
+At each vertex, we choose among four candidates
 the eigenvector which is closest to the one corresponding to the previous vertex.
 Without taking {\small\tt winding}s into account, this procedure does not work because,
 at the last segment, the signs are not compatible.
