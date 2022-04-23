@@ -1303,8 +1303,10 @@ Even if your mesh does not seem related to any quotient manifold, you may want t
 
 Consider a circular mesh defined just as in paragraph \ref{\numb section 3.\numb parag 2}
 and a pair of functions $ (u,v) $ as below
-\footnote {{} This example is inspired in Exercise 2.4 from the book : C.\ Conca, J.\ Planchard,
-M.\ Vanninathan, Fluids and periodic structures, Wiley, 1995}
+\footnote {{} This example is inspired in exercise 2.4 from the book : C.\ Conca, J.\ Planchard,
+M.\ Vanninathan, Fluids and periodic structures, Wiley, 1995. See also figure 8 in the paper :
+O.\ Pantz, K.\ Trabelsi, A post-treatment of the homogenized method for shape optimization,
+SIAM Journal on Control and Optimization 47, 2008.} % p.\ 1380-1398
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 24}.cpp,rulecolor=\color{moldura},
@@ -1327,7 +1329,7 @@ The resulting vector field is shown in figure \ref{\numb section 7.\numb fig 22}
   \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
   \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=70mm]{circle-conca.eps}
-  \caption{A rotating eigenvector}
+  \caption{A rotating vector}
   \label{\numb section 7.\numb fig 22}
 \end{figure}
 
@@ -1398,7 +1400,7 @@ With multi-functions, the computed derivative has constant magnitude.
 
 Perhaps more interesting than defining $u$ and $v$ through half of $ \theta $ is to compute directly
 the pair $ (u,v) $ as eigenvector of the matrix
-\footnote {{} Taken from Exercise 2.4 in the book : C.\ Conca, J.\ Planchard,
+\footnote {{} Taken from exercise 2.4 in the book : C.\ Conca, J.\ Planchard,
 M.\ Vanninathan, Fluids and periodic structures, Wiley, 1995}
 $$ A = \left(\begin{array}{rr} x & y \\ y & -x \end{array}\right)
 = \left(\begin{array}{rr} \cos\theta & \sin\theta \\ \sin\theta & -\cos\theta \end{array}\right) $$
@@ -1422,25 +1424,58 @@ besides the space for the coordinate {\small\tt theta}.
 For a given $ 2\times 2 $ matrix, choosing an eigenvector implies two arbitrary choices :
 one between the eigenvectors, the second one between the signs
 (any eigenvector is subject to an arbitrary change in sign).
-At each vertex, we choose among four candidates
-the eigenvector which is closest to the one corresponding to the previous vertex.
+At each vertex, we choose among these four candidates
+the one which is closest to the eigenvector chosen for the previous vertex.
 Without taking {\small\tt winding}s into account, this procedure does not work because,
 at the last segment, the signs are not compatible.
 
 With multi-functions, everything gets into place.
 
 
-          %------------------------%
-\section{~~Jump given by a rotation}  \label{\numb section 7.\numb parag 27}
-          %------------------------%
+          %---------------------%
+\section{~~Swapping eigenvectors}  \label{\numb section 7.\numb parag 27}
+          %---------------------%
 
-In the above examples, the jump of the vector field after a complete loop was a change in sign,
-which can be viewed as a $ 180^\circ $ rotation.
-We can choose any angle instead of $ 180^\circ $.
-By doing this, we can no longer view this vector field as the eigenvector of a matrix.
+Another interesting example is the matrix
+$$ A = \left(\begin{array}{cc} 1+x & y \\ y & -1-x \end{array}\right)
+= \left(\begin{array}{cc} 1+\cos\theta & \sin\theta \\ \sin\theta & -1-\cos\theta \end{array}\right) $$
+
+\begin{figure}[ht] \centering
+  \includegraphics[width=60mm]{circle-conca-swap.eps}
+  \caption{A rotating eigenvector}
+  \label{\numb section 7.\numb fig 23}
+\end{figure}
+
+The eigenvectors of this matrix rotate more slowly than the ones in paragraph
+\ref{\numb section 7.\numb parag 26}.
+This matrix is null at point $ (-1,0) $, so it has a double eigenvalue;
+this makes it possible for the eigenvectors to swap places.
+
+The behaviour of the vector field after a complete loop is now more complicated and cannot
+be described separately for {\small\tt u} and for {\small\tt v}; we must prescribe it
+for the pair {\small\tt uv} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 27}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
+   const double \azul{c} = std::cos ( coef * \laranja{2.}* pi ), \azul{s} = std::sin ( coef * \laranja{2.}* pi );
+   \verm{Function} \azul{uv_mv} = uv .make_multivalued ( \textcolor{tag}{tag}::through, g, \textcolor{tag}{tag}::becomes, (-v) && u );
+\end{Verbatim}
+
+
+          %------------------------%
+\section{~~Jump given by a rotation}  \label{\numb section 7.\numb parag 28}
+          %------------------------%
+
+In paragraphs \ref{\numb section 7.\numb parag 25} and \ref{\numb section 7.\numb parag 26},
+the jump of the vector field after a complete loop was a change in sign,
+which we may view as a $ 180^\circ $ rotation.
+In paragraph \ref{\numb section 7.\numb parag 27} there is a $ 90^\circ $ rotation.
+We can choose any other angle.
+By doing this, the vector field can no longer be viewed as the eigenvector of a matrix.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 7.\numb parag 28}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                              ]
    const double \azul{coef} = \laranja{0.3333};
    \verm{Function} \azul{u} = \verm{cos} ( coef * theta );
@@ -1448,28 +1483,23 @@ By doing this, we can no longer view this vector field as the eigenvector of a m
    \verm{Function} \azul{uv} = u && v;
 \end{Verbatim}
 
-The behaviour of the vector field after a complete loop is now more complicated and cannot
-be described separately for {\small\tt u} and for {\small\tt v} -- we must prescribe it
-for the pair {\small\tt uv} :
+Just like in paragraph \ref{\numb section 7.\numb parag 27}, we must prescribe the behaviour of
+the vector field for the pair {\small\tt uv}, not for its components :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 7.\numb parag 27}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 7.\numb parag 28}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                              ]
-   const double \azul c = std::cos ( coef * \laranja{2.}* pi ), \azul s = std::sin ( coef * \laranja{2.}* pi );
+   const double \azul{c} = std::cos ( coef * \laranja{2.}* pi ), \azul{s} = std::sin ( coef * \laranja{2.}* pi );
    \verm{Function} \azul{uv_mv} = uv .make_multivalued
-      ( tag::through, g, tag::becomes, ( c*u - s*v ) && ( s*u + c*v ) );
+      ( \textcolor{tag}{tag}::through, g, \textcolor{tag}{tag}::becomes, ( c*u - s*v ) && ( s*u + c*v ) );
 \end{Verbatim}
 
-Figure \ref{\numb section 7.\numb fig 23} shows how this vector field looks like (with a
-coefficient of one-third).
+Figure \ref{\numb section 7.\numb fig 24} shows
+the resulting vector field for a coefficient of one-third.
 
 \begin{figure}[ht] \centering
-  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
-  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
-  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
-  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=70mm]{circle-conca-coef.eps}
   \caption{A rotating vector}
-  \label{\numb section 7.\numb fig 23}
+  \label{\numb section 7.\numb fig 24}
 \end{figure}
 
