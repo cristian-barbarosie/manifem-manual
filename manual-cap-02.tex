@@ -602,7 +602,7 @@ We define a zero-dimensional manifold which in this case consists in four points
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 12}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Manifold} \azul{four_points} = parab_vert .implicit ( x == y * y - \laranja{2.} );
+   \verm{Manifold} \azul{four_points} ( \textcolor{tag}{tag}::intersection, parab_vert, parab_horiz );
 \end{Verbatim}
 
 Then we build points and project them explicitly onto this manifold.
@@ -628,7 +628,10 @@ performs, under the curtains, a projection on the current working {\small\tt\ver
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
-  \psfrag{S}{\small\tt\textcolor{textindraw}{S}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
   \includegraphics[width=90mm]{two-parab}
   \caption{A curved quadrilateral}
   \label{\numb section 2.\numb fig 12}
@@ -1190,7 +1193,7 @@ for each vertex, space in the computer's memory for five {\small\tt double} valu
 The {\small\tt\verm{Manifold}::parametric} method is similar to {\small\tt\verm{Manifold}::implicit},
 presented in paragraphs \ref{\numb section 2.\numb parag 4} --
 \ref{\numb section 2.\numb parag 17}.
-The only difference is that by using {\small\tt parametric} we declare an explicit dependence%
+The only difference is that by using {\small\tt parametric} we declare an explicit dependence$\,$%
 \footnote{{} Perhaps {\small\tt explicit} would be a better name than {\small\tt parametric};
 unfortunately, that word is reserved in {\small\tt C++}.}
 of the coordinates (here, {\small\tt x}, {\small\tt y} and {\small\tt z}) upon the parameters

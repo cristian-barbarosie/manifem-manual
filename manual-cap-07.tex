@@ -1106,7 +1106,7 @@ from different periodicity cells.
 \section{~~Treating a rectangle as a hexagon}\label{\numb section 7.\numb parag 22}
           %---------------------------------%
 
-Actually, we can even take a rectangle%
+Actually, we can even take a rectangle$\,$%
 \footnote {{} This rectangle is somewhat similar to the square in paragraph
 \ref{\numb section 7.\numb parag 8}.
 It is different in that it has a round hole and different aspect ratio --
@@ -1302,7 +1302,7 @@ exhibits a negative Poisson coefficient.
 Even if your mesh does not seem related to any quotient manifold, you may want to use multi-functions.
 
 Consider a circular mesh defined just as in paragraph \ref{\numb section 3.\numb parag 2}
-and a pair of functions $ (u,v) $ as below
+and a pair of functions $ (u,v) $ as below$\,$%
 \footnote {{} This example is inspired in exercise 2.4 from the book : C.\ Conca, J.\ Planchard,
 M.\ Vanninathan, Fluids and periodic structures, Wiley, 1995. See also figure 8 in the paper :
 O.\ Pantz, K.\ Trabelsi, A post-treatment of the homogenized method for shape optimization,
@@ -1399,7 +1399,7 @@ With multi-functions, the computed derivative has constant magnitude.
           %-------------------------------%
 
 Perhaps more interesting than defining $u$ and $v$ through half of $ \theta $ is to compute directly
-the pair $ (u,v) $ as eigenvector of the matrix
+the pair $ (u,v) $ as eigenvector of the matrix$\,$%
 \footnote {{} Taken from exercise 2.4 in the book : C.\ Conca, J.\ Planchard,
 M.\ Vanninathan, Fluids and periodic structures, Wiley, 1995}
 $$ A = \left(\begin{array}{rr} x & y \\ y & -x \end{array}\right)
@@ -1417,7 +1417,7 @@ They will be {\small\tt\verm{Function}}s holding {\small\tt double} values at ea
 \end{Verbatim}
 
 The declaration of {\small\tt\azul{uv}} must occur before any vertex is built.
-This declaration changes the behaviour of zero-dimensional {\small\tt\verm{Cell}}s;
+This declaration changes the behaviour of constructors of zero-dimensional {\small\tt\verm{Cell}}s;
 from now on, space for two more {\small\tt double} values will be reserved for each vertex,
 besides the space for the coordinate {\small\tt theta}.
 

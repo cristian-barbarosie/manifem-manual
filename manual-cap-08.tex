@@ -23,18 +23,17 @@ This projection operation is achieved by solving
 the equation (or system of equations) defining the submanifold.
 
 If the manifold is defined by one or two implicit equations,
-these equations are solved numerically by using a Newton-like algorithm.
+these equations are solved numerically by using a Newton-like algorithm.$\,$%
 \footnote {{} See e.g.\ appendix B in the paper : C.~Barbarosie, A.M.~Toader, S.~Lopes,
 A gradient-type algorithm for constrained optimization with application to microstructure optimization,
 Discrete and Continuous Dynamical Systems series B, 25, p.\ 1729-1755, 2020}
-This algoritm converges only if the initial guess (that is, the coordinates of the point we are
-trying to project) is close enough to the manifold.
-The user should take this limitation into account.
 For two equations, the inverse of the Jacobian matrix is computed by simply applying the definition
 (quotients of 2x2 determinants).
-
 If the manifold is defined by three implicit equations (often, this will be a zero-dimensional manifold),
 we prefer not to compute the inverse of a 3x3 matrix, so we apply a conjugate gradient method instead.
+These algoritms converge only if the initial guess (that is, the coordinates of the point we are
+trying to project) is close enough to the manifold.
+The user should take this limitation into account.
 
 The case of four or more implicit equations is not implemented.
 
@@ -73,7 +72,7 @@ Thus, these quotient manifolds do not inherit a Riemann metric.
 They are valid as differentiable manifolds but not as Riemann manifolds.
 Length and area are not well-defined in these examples.
 Since they are compact, these manifolds can be viewed as uniform spaces.%
-\footnote {{} see e.g.\ corollary 30 in Chapter 6 of J.L.~Kelley, General Topology, Van Nostrad, 1955}
+\footnote {{} see e.g.\ corollary 30 in chapter 6 of J.L.~Kelley, General Topology, Van Nostrad, 1955}
 
 
           %--------------------------------------%
