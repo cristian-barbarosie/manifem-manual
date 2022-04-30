@@ -353,7 +353,7 @@ It can be vaguely described as a convolution between two tori.
    \verm{Function} \azul{f1} = \verm{max} ( x*x + y*y, \laranja{0.1} );  \cinza{// we cut by 0.1 to avoid singularities}
    \verm{Function} \azul{f2} = \laranja{1.} - \verm{power} ( f1, \laranja{-0.5} );
    \verm{Function} \azul{d1} = z*z + f1 * f2 * f2;  \cinza{// squared distance to a circle in the xy plane}
-   \verm{Function} \azul{f3} = \verm{max} (x-\laranja{0.4})*(x-\laranja{0.4}) + z*z, \laranja{0.1} );
+   \verm{Function} \azul{f3} = \verm{max} ( (x-\laranja{0.4})*(x-\laranja{0.4}) + z*z, \laranja{0.1} );
    \verm{Function} \azul{f4} = \laranja{1.} - \verm{power} ( f3, \laranja{-0.5} );
    \verm{Function} \azul{d2} = y*y + f3 * f4 *f4;  \cinza{// squared distance to a circle in the xz plane}
 
@@ -371,7 +371,7 @@ When the difference is smaller than the threshold, it gives a $ C^1 $ interpolat
 the two values.
 
 If we want sharp edges, we must build the edges first as explained in paragraphs
-\ref{\numb section 3.\numb parag 18} and \ref{\numb section 3.\numb parag 19}.
+\ref{\numb section 3.\numb parag 19} and \ref{\numb section 3.\numb parag 20}.
 
 Comments at the end of paragraph \ref{\numb section 3.\numb parag 6} apply here, too :
 {\maniFEM} must find a starting point and the right orientation.
@@ -446,8 +446,8 @@ discusses this topic.
 
 Open curves (like the {\small\tt\azul{spiral}} in paragraphs \ref{\numb section 3.\numb parag 5} and
 \ref{\numb section 3.\numb parag 12}), as well as non-compact manifolds
-(like the {\small\tt\azul{cylinder}} in paragraphs \ref{\numb section 3.\numb parag 18} and
-\ref{\numb section 3.\numb parag 19}), have no privileged orientation.
+(like the {\small\tt\azul{cylinder}} in paragraphs \ref{\numb section 3.\numb parag 19} and
+\ref{\numb section 3.\numb parag 20}), have no privileged orientation.
 If we don't specify an orientation, these manifolds are considered not oriented.
 If we don't specify a starting direction, {\maniFEM} will perform a preliminary search
 in both directions and choose the one that first meets the stopping point.
@@ -545,8 +545,8 @@ However, these arguments are not necessary; {\maniFEM} will consider them by def
 This happens for the {\small\tt\azul{disk}} in paragraphs \ref{\numb section 3.\numb parag 1} and
 \ref{\numb section 3.\numb parag 2}, for the diamond in
 paragraph \ref{\numb section 3.\numb parag 17} and for the annulus in paragraphs
-\ref{\numb section 3.\numb parag 3}, \ref{\numb section 3.\numb parag 22}
-and \ref{\numb section 3.\numb parag 24}.
+\ref{\numb section 3.\numb parag 3}, \ref{\numb section 3.\numb parag 24}
+and \ref{\numb section 3.\numb parag 26}.
 
 Compact manifolds of co-dimension one (closed curves in $ \mathbb{R}^2 $,
 compact surfaces in $ \mathbb{R}^3 $) have a privileged orientation,
@@ -575,8 +575,8 @@ is compact or not, so it will not try to find the inherent orientation.
 This happens for the {\small\tt\azul{spiral}} and for the {\small\tt\azul{arc\_\,of\_\,circle}}
 in paragraph \ref{\numb section 3.\numb parag 5}, for the {\small\tt\azul{bumpy}} hemisphere
 in paragraph \ref{\numb section 3.\numb parag 9}, for the {\small\tt\azul{piece\_\,of\_\,cyl}} and
-{\small\tt\azul{piece\_\,of\_\,sph}} in paragraphs \ref{\numb section 3.\numb parag 18} and
-\ref{\numb section 3.\numb parag 19} and others.
+{\small\tt\azul{piece\_\,of\_\,sph}} in paragraphs \ref{\numb section 3.\numb parag 19} and
+\ref{\numb section 3.\numb parag 20} and others.
 In these situations, we may require specifically the inherent orientation
 by providing the {\small\tt\textcolor{tag}{tag}::orientation,}
 {\small\tt\textcolor{tag}{tag}::inherent} arguments to the {\small\tt\verm{Mesh}} constructor.
@@ -586,8 +586,8 @@ the entire manifold, never stopping.
 For instance, in paragraph \ref{\numb section 3.\numb parag 5} it makes sense to enforce the
 inherent orientation for the {\small\tt\azul{arc\_\,of\_\,circle}} but not for the
 {\small\tt\azul{spiral}}.
-Also, in paragraphs \ref{\numb section 3.\numb parag 18} and
-\ref{\numb section 3.\numb parag 19} it makes sense to enforce the inherent orientation
+Also, in paragraphs \ref{\numb section 3.\numb parag 19} and
+\ref{\numb section 3.\numb parag 20} it makes sense to enforce the inherent orientation
 for the {\small\tt\azul{piece\_\,of\_\,sph}} but not for the {\small\tt\azul{piece\_\,of\_\,cyl}}.
 
 Determining the intrinsic orientation of a Euclidian manifold is computationally
@@ -784,8 +784,8 @@ when compared to the segment size.
 In this respect, the example in paragraph \ref{\numb section 3.\numb parag 3} is also
 ``on the edge''.
 In contrast, {\maniFEM} is ``at ease'' when meshing the same domain with other options,
-like in paragraphs \ref{\numb section 3.\numb parag 22}, \ref{\numb section 3.\numb parag 23}
-or \ref{\numb section 3.\numb parag 24}.
+like in paragraphs \ref{\numb section 3.\numb parag 24}, \ref{\numb section 3.\numb parag 25}
+or \ref{\numb section 3.\numb parag 26}.
 
 Sharp edges and singularities must be dealt with as described in subsequent paragraphs.
 
@@ -835,8 +835,35 @@ Here is how to mesh the diamond-shaped domain in paragraph \ref{\numb section 2.
 \end{Verbatim}
 
 
+          %-------------------------%
+\section{~~Intersection of manifolds}\label{\numb section 3.\numb parag 18}
+          %-------------------------%
+
+For computing the position of corners, we can project on zero-dimensional manifolds
+(as already done in paragraph \ref{\numb section 2.\numb parag 12}) :
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 3.\numb parag 18}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
+   \verm{Manifold} \azul{big_circle_left}  = RR2 .implicit ( (x-\laranja{2.})*(x-\laranja{2.}) + y*y == \laranja{4.} );
+   \verm{Manifold} \azul{big_circle_right} = RR2 .implicit ( (x+\laranja{1.})*(x+\laranja{1.}) + y*y == \laranja{4.} );
+   \verm{Manifold} \azul{two_points} ( \textcolor{tag}{tag}::intersect, big_circle_left, big_circle_right );
+
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.},  \laranja{1.}\}, \textcolor{tag}{tag}::project );
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.}, \laranja{-1.}\}, \textcolor{tag}{tag}::project );
+\end{Verbatim}
+
+\begin{figure}[ht] \centering
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+ \includegraphics[width=120mm]{infinity}
+  \caption{An infinity-shaped mesh}
+  \label{\numb section 3.\numb fig 5}
+\end{figure}
+
+
           %-----------%
-\section{~~Sharp edges}\label{\numb section 3.\numb parag 18}
+\section{~~Sharp edges}\label{\numb section 3.\numb parag 19}
           %-----------%
 
 We can mesh surfaces with sharp edges, by building individually smooth pieces of surface
@@ -847,12 +874,12 @@ thus, some previous knowledge about the geometry of the surface is needed.
 \begin{figure}[ht] \centering
  \includegraphics[width=94mm]{sphere-cyl}
   \caption{Sphere glued to cylinder}
-  \label{\numb section 3.\numb fig 5}
+  \label{\numb section 3.\numb fig 6}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 18}.cpp,rulecolor=\color{moldura},
-   baselinestretch=0.94,framesep=2mm                                            ]
+   label=parag-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
@@ -860,8 +887,13 @@ thus, some previous knowledge about the geometry of the surface is needed.
    const double \azul{rs} = \laranja{1.};    \cinza{// radius of the sphere}
    const double \azul{rc} = \laranja{0.45};  \cinza{// radius of the cylinder}
    const double seg_size = \laranja{0.1};
+\end{Verbatim}
 
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
    \verm{Manifold} \azul{cylinder} = RR3 .implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == rc*rc );
+   \verm{Manifold} \azul{sphere} = RR3 .implicit ( x*x + y*y + z*z == rs*rs );
 
    cylinder .implicit ( x == \laranja{1.5} );  \cinza{// we cut the cylinder on its right side}
    \verm{Cell} \azul{start_1} ( \textcolor{tag}{tag}::vertex );
@@ -870,10 +902,10 @@ thus, some previous knowledge about the geometry of the surface is needed.
                    \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
 
    \cinza{// we cut the cylinder on its left side with a sphere}
-   \verm{Manifold} \azul{intersection} = cylinder .implicit ( x*x + y*y + z*z == rs*rs );
+   \verm{Manifold} \azul{interface} ( \textcolor{tag}{tag}::intersect, cylinder, sphere );
    \verm{Cell} \azul{start_2} ( \textcolor{tag}{tag}::vertex );
    x ( start_2 ) = \laranja{1.};  y ( start_2 ) = \laranja{0.};  z ( start_2 ) = \laranja{0.5} - rc;
-   intersection .project ( start_2 );
+   interface .project ( start_2 );
    \verm{Mesh} \azul{circle_2} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, start_2,
                    \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{-1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
 
@@ -882,7 +914,7 @@ thus, some previous knowledge about the geometry of the surface is needed.
    \verm{Mesh} \azul{piece_of_cyl} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::boundary, two_circles,
                        \textcolor{tag}{tag}::start_at, start_1, \textcolor{tag}{tag}::towards, \{ \laranja{-1.}, \laranja{0.}, \laranja{0.} \},
                        \textcolor{tag}{tag}::desired_length, seg_size                         );
-   RR3 .implicit ( x*x + y*y + z*z == rs*rs );
+   sphere .set_as_working_manifold();
    \verm{Mesh} \azul{piece_of_sph} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::boundary, circle_2,
                        \textcolor{tag}{tag}::start_at, start_2, \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{0.}, \laranja{-1.} \},
                        \textcolor{tag}{tag}::desired_length, seg_size                         );
@@ -895,21 +927,21 @@ and \ref{\numb section 1.\numb parag 4}).
 For meshing the piece of cylinder, we provide its future boundary which is the union of
 {\small\tt circle\_\,1} with {\small\tt circle\_\,2.reverse()}.
 For meshing the sphere, we provide {\small\tt circle\_\,2}.
-In figure \ref{\numb section 3.\numb fig 6}, where a crack has been opened artificially,
-we see that the common boundary has a certain orientation when seen from the cylinder and
-has the opposite orientation when seen from the sphere.
+In figure \ref{\numb section 3.\numb fig 7}, where a crack has been opened artificially,
+we see that the common boundary, {\small\tt circle\_\,2}, has a certain orientation when seen
+from the cylinder and has the opposite orientation when seen from the sphere.
 If we do not respect these orientations, {\maniFEM} will be unable to {\small\tt join} the two
 meshes.
 
 \begin{figure}[ht] \centering
  \includegraphics[width=100mm]{crack}
   \caption{Zoom around the joint}
-  \label{\numb section 3.\numb fig 6}
+  \label{\numb section 3.\numb fig 7}
 \end{figure}
 
-Note that {\small\tt intersection} is a disconnected manifold, made of two closed loops,
+Note that {\small\tt interface} is a disconnected manifold, made of two closed loops,
 one of them being {\small\tt circle\_\,2} (the other one shows up in
-paragraph \ref{\numb section 3.\numb parag 19} under the name {\small\tt circle\_\,3}).
+paragraph \ref{\numb section 3.\numb parag 20} under the name {\small\tt circle\_\,3}).
 We must provide detailed information to the {\small\tt\verm{Mesh}} constructor in order to
 obtain the correct loop with the correct orientation.
 A statement like
@@ -950,49 +982,50 @@ $ (0,0,1) $.
 At that point, the two equations defining the {\small\tt intersection} manifold would be
 degenerate (the Jacobian matrix would not have full rank).
 This is a situation which {\maniFEM} cannot handle yet; it is discussed in paragraph
-\ref{\numb section 3.\numb parag 21}.
+\ref{\numb section 3.\numb parag 23}.
 
 
           %------------------%
-\section{~~Sharp edges, again}\label{\numb section 3.\numb parag 19}
+\section{~~Sharp edges, again}\label{\numb section 3.\numb parag 20}
           %------------------%
 
-With a few changes to the code in paragraph \ref{\numb section 3.\numb parag 18},
+With a few changes to the code in paragraph \ref{\numb section 3.\numb parag 19},
 we can cut two holes in the sphere and create a tunnel using the cylinder's wall.
 \medskip
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 3.\numb parag 20}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                              ]
    \verm{Manifold} \azul{cylinder} = RR3 .implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == rc*rc );
+   \verm{Manifold} \azul{sphere} = RR3 .implicit ( x*x + y*y + z*z == rs*rs );
 
-   \verm{Manifold} \azul{intersection} = cylinder .implicit ( x*x + y*y + z*z == rs*rs );
+   \verm{Manifold} \azul{interface} ( \textcolor{tag}{tag}::intersect, cylinder, sphere );
 
    \cinza{// we choose names start_2 and circle_2 for consistency with previous paragraph}
    \verm{Cell} \azul{start_2} ( \textcolor{tag}{tag}::vertex );
    x ( start_2 ) = \laranja{1.};  y ( start_2 ) = \laranja{0.};  z ( start_2 ) = \laranja{0.5} - rc;
-   intersection .project ( start_2 );
+   interface .project ( start_2 );
 \end{Verbatim}
 
 \begin{figure}[ht] \centering
 \if\production 1
- \includegraphics[width=85mm]{sphere-tunnel-cloud-im}
+ \includegraphics[width=88mm]{sphere-tunnel-cloud-im}
 \else
- \includegraphics[width=85mm]{sphere-tunnel-low-res}
+ \includegraphics[width=88mm]{sphere-tunnel-low-res}
 \fi
   \caption{Sphere with tunnel}
-  \label{\numb section 3.\numb fig 7}
+  \label{\numb section 3.\numb fig 8}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 19}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 3.\numb parag 20}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                              ]
    \verm{Mesh} \azul{circle_2} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, start_2,
                    \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
 
    \verm{Cell} \azul{start_3} ( \textcolor{tag}{tag}::vertex );
    x ( start_3 ) = \laranja{-1.};  y ( start_3 ) = \laranja{0.};  z ( start_3 ) = \laranja{0.5} - rc;
-   intersection .project ( start_3 );
+   interface .project ( start_3 );
    \verm{Mesh} \azul{circle_3} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, start_3,
                    \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, seg_size );
 
@@ -1002,8 +1035,7 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
    \verm{Mesh} \azul{piece_of_cyl} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::boundary, two_circles,
                        \textcolor{tag}{tag}::start:at, start_2, \textcolor{tag}{tag}::towards, \{ \laranja{-1.}, \laranja{0.}, \laranja{0.} \},
                        \textcolor{tag}{tag}::desired_length, seg_size                         );
-
-   RR3 .implicit ( x*x + y*y + z*z == rs*rs );
+   sphere .set_as_working_manifold();
    \verm{Mesh} \azul{piece_of_sph} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::boundary, two_circles .reverse(),
                        \textcolor{tag}{tag}::start:at, start_2, \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{0.}, \laranja{-1.} \},
                        \textcolor{tag}{tag}::desired_length, seg_size                         );
@@ -1011,19 +1043,68 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
    \verm{Mesh} \azul{perf_sphere} ( \textcolor{tag}{tag}::join, piece_os_sph, piece_of_cyl );
 \end{Verbatim}
 
-{\ManiFEM} deals well with a disconnected manifold like {\small\tt intersection}.
+{\ManiFEM} deals well with a disconnected manifold like {\small\tt interface}.
 Each of the constructors {\small\tt\verm{Mesh} circle\_\,2} and {\small\tt\verm{Mesh} circle\_\,3}
-meshes only a connected component of {\small\tt intersection}, depending on the starting point
+meshes only a connected component of {\small\tt interface}, depending on the starting point
 we provide.
 
 Had we chosen a cylinder of diameter $1$, a singular point would appear;
 the two ``circles'' would touch at point $ (0,0,1) $.
 This is a situation which {\maniFEM} cannot handle yet; it is discussed in paragraph
-\ref{\numb section 3.\numb parag 21}.
+\ref{\numb section 3.\numb parag 23}.
+
+
+          %-------------------------%
+\section{~~Overlapping meshes}\label{\numb section 3.\numb parag 21}
+          %-------------------------%
+
+In \maniFEM, cells (including vertices) are independent of their geometric coordinates.
+We can build two distinct vertices {\small\tt O1} and {\small\tt O2}, both occupying
+the origin of {\small\tt RR2}.
+Similarly, {\small\tt A1} and {\small\tt A2} have the same geometric coordinates,
+although they are different {\small\tt\verm{Cell}} objects (with different cores).
+Also, segments {\small\tt O1A1} and {\small\tt O2A2} are superimposed.
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
+   label=parag-\ref{\numb section 3.\numb parag 21}.cpp,rulecolor=\color{moldura},
+   baselinestretch=0.94,framesep=2mm                                              ]
+   \verm{Cell} \azul{O1} ( \textcolor{tag}{tag}::vertex );  x(O1) = \laranja{0.};  y(O1) = \laranja{0.};
+   \verm{Cell} \azul{A1} ( \textcolor{tag}{tag}::vertex );  x(A1) = \laranja{1.};  y(A1) = \laranja{0.};
+   \verm{Mesh} \azul{O1A1} ( \textcolor{tag}{tag}::segment, O1 .reverse(), A1, \textcolor{tag}{tag}::divided_in, n );
+   \verm{Cell} \azul{O2} ( \textcolor{tag}{tag}::vertex );  x(O2) = \laranja{0.};  y(O2) = \laranja{0.};
+   \verm{Cell} \azul{A2} ( \textcolor{tag}{tag}::vertex );  x(A2) = \laranja{1.};  y(A2) = \laranja{0.};
+   \verm{Mesh} \azul{O2A2} ( \textcolor{tag}{tag}::segment, O2 .reverse(), A2, \textcolor{tag}{tag}::divided_in, n );
+\end{Verbatim}
+
+We can take advantage of this peculiarity of {\maniFEM} and build meshes which pass more than once
+in the same region of the space (they overlap themselves).
+In this paragraph, we build a mesh by {\small\tt join}ing four half-annuli.
+
+\begin{figure}[ht] \centering
+  \psfrag{O}{\small\tt\textcolor{textindraw}{O}}
+  \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
+  \psfrag{B}{\small\tt\textcolor{textindraw}{B}}
+  \psfrag{C}{\small\tt\textcolor{textindraw}{C}}
+  \psfrag{D}{\small\tt\textcolor{textindraw}{D}}
+  \psfrag{E}{\small\tt\textcolor{textindraw}{E}}
+ \includegraphics[width=115mm]{infinity-overlap}
+  \caption{A self-overlapping mesh}
+  \label{\numb section 3.\numb fig 10}
+\end{figure}
+
+The result, shown in figure \ref{\numb section 3.\numb fig 10},
+is not two overlapping annuli, it is an infinity-shaped strip.
+The boundary of this mesh has two connected components.
+Each of these components is a (self-intersecting) smooth curve.
+Due to the overlapping, it is impossible to distinguish between an ``inner'' boundary
+and an ``outer'' one.
+In contrast, the mesh built in paragraph \ref{\numb section 3.\numb parag 18}
+has a boundary made of three connected components : two inner circles
+and an outer boundary with two re-entrant corners.
 
 
                     %------------%
-\section{~~\cinzasec{Singularities}}\label{\numb section 3.\numb parag 20}
+\section{~~\cinzasec{Singularities}}\label{\numb section 3.\numb parag 22}
                     %------------%
 
 {\normalfont\bfseries The code described in this paragraph does not work yet.
@@ -1035,9 +1116,9 @@ knowledge about these singularities.
 A typical example is the vertex of a cone.
 
 \begin{figure}[ht] \centering
- \includegraphics[width=90mm]{cone}
+ \includegraphics[width=85mm]{cone}
   \caption{A singularity (vertex)}
-  \label{\numb section 3.\numb fig 9}
+  \label{\numb section 3.\numb fig 11}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -1060,19 +1141,19 @@ A typical example is the vertex of a cone.
 
 
                     %--------------------%
-\section{~~\cinzasec{Singularities, again}}\label{\numb section 3.\numb parag 21}
+\section{~~\cinzasec{Singularities, again}}\label{\numb section 3.\numb parag 23}
                     %--------------------%
 
 {\normalfont\bfseries The code described in this paragraph does not work yet.
 It should be regarded as a mere declaration of intentions.}
 \medskip
 
-Besides vertices like the one described in paragraph \ref{\numb section 3.\numb parag 20},
+Besides vertices like the one described in paragraph \ref{\numb section 3.\numb parag 22},
 another kind of singularity appears when we intersect two manifolds which have a tangency point.
 This happens if we choose {\small\tt\azul{rc} = \laranja{0.5}} in paragraph
-\ref{\numb section 3.\numb parag 18} or \ref{\numb section 3.\numb parag 19}.
+\ref{\numb section 3.\numb parag 19} or \ref{\numb section 3.\numb parag 20}.
 
-We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb parag 19}
+We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb parag 20}
 (which is to be subsequently {\small\tt join}ed with a sphere with two holes).
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -1099,7 +1180,7 @@ We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb para
 \begin{figure}[ht] \centering
  \includegraphics[width=85mm]{cyl}
   \caption{A singularity (napkin)}
-  \label{\numb section 3.\numb fig 10}
+  \label{\numb section 3.\numb fig 12}
 \end{figure}
 
 {\ManiFEM} accepts as {\small\tt\verm{Manifold}} a self-intersecting set like {\small\tt infinity}.
@@ -1111,33 +1192,26 @@ In particular, the projection algorithm onto the manifold may fail to converge.
 By specifying (in the {\small\tt\verm{Mesh}} constructor) {\small\tt V} as singular point,
 we tell {\maniFEM} that it must take special care in that neighbourhood.
 
-Unlike in paragraph \ref{\numb section 3.\numb parag 19}, here we cannot {\small\tt join} the
+Unlike in paragraph \ref{\numb section 3.\numb parag 20}, here we cannot {\small\tt join} the
 two meshes {\small\tt circle\_\,1} and {\small\tt circle\_\,2}.
 {\ManiFEM} is unable to join two closed polygonal lines having a vertex in common;
 in other words, it does not handle self-intersecting {\small\tt\verm{Mesh}}es.
 This is why we provide the two pieces of boundary separately.
-
+% refer STSI meshes
 
           %-------------------%
-\section{~~Non-uniform meshing}\label{\numb section 3.\numb parag 22}
+\section{~~Non-uniform meshing}\label{\numb section 3.\numb parag 24}
           %-------------------%
 
 The desired length may be a non-constant function.
 
-\begin{figure}[ht] \centering
- \includegraphics[width=90mm]{disk-non-unif}
-  \caption{Non-uniform mesh}
-  \label{\numb section 3.\numb fig 11}
-\end{figure}
-
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
-   label=parag-\ref{\numb section 3.\numb parag 22}.cpp,rulecolor=\color{moldura},
+   label=parag-\ref{\numb section 3.\numb parag 24}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Function} \azul{d} = \laranja{0.03} + \laranja{0.04} * ( (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9}) );
 
    \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::desired_length, d );
-
    \verm{Manifold} \azul{ellipse} = RR2 .implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::desired_length, d );
    \verm{Mesh} \azul{bdry} ( \textcolor{tag}{tag}::join, outer, inner .reverse() );
@@ -1146,15 +1220,21 @@ The desired length may be a non-constant function.
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, d );
 \end{Verbatim}
 
-Compare with the mesh in paragraph \ref{\numb section 3.\numb parag 3}.
-
 It is the user's responsibility to provide a length {\small\tt d} which takes positive values
 at all points of the future mesh.
 Also, {\small\tt d} should be a reasonably smooth function; sharp variations should be avoided.
 
+\begin{figure}[ht] \centering
+ \includegraphics[width=90mm]{disk-non-unif}
+  \caption{Non-uniform mesh}
+  \label{\numb section 3.\numb fig 13}
+\end{figure}
+
+Compare with the mesh in paragraph \ref{\numb section 3.\numb parag 3}.
+
 
           %-------------------------%
-% \section{~~Two intersecting tori}\label{\numb section 3.\numb parag 22}
+% \section{~~Two intersecting tori}\label{\numb section 3.\numb parag 24}
           %-------------------------%
 
 % Going back to the two tori in paragraph \ref{\numb section 3.\numb parag 7},
@@ -1164,12 +1244,12 @@ Also, {\small\tt d} should be a reasonably smooth function; sharp variations sho
 % \begin{figure}[ht] \centering
 %  \includegraphics[width=79mm]{two-tori-sharp}
 %   \caption{Sharp edges}
-%   \label{\numb section 3.\numb fig 8}
+%   \label{\numb section 3.\numb fig 9}
 % \end{figure}
 
 
                     %---------------------------%
-\section{~~\cinzasec{Changing the Riemann metric}}\label{\numb section 3.\numb parag 23}
+\section{~~\cinzasec{Changing the Riemann metric}}\label{\numb section 3.\numb parag 25}
                     %---------------------------%
  
 {\normalfont\bfseries The code described in this paragraph does not work yet.
@@ -1184,7 +1264,7 @@ As a consequence, the meshing algorithm, while trying to build a mesh of constan
 {\small\tt desired\_\,length}, will choose shorter segments in the proximity of the narrow zone
 (because the length measured by the Riemann metric will be larger than the length
 we see in the drawing), thus producing the same result as in paragraph
-\ref{\numb section 3.\numb parag 22}.
+\ref{\numb section 3.\numb parag 24}.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=code not working,rulecolor=\color{moldura},
@@ -1192,12 +1272,11 @@ we see in the drawing), thus producing the same result as in paragraph
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
-
    \verm{Function} \azul{d} = \laranja{0.3} + \laranja{0.5} * ( (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9}) );
    RR2 .set_metric ( \laranja{1.} / d );
-   
    \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
+
    \verm{Manifold} \azul{ellipse} = RR2 .implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
    \verm{Mesh} \azul{inner} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 
@@ -1207,20 +1286,20 @@ we see in the drawing), thus producing the same result as in paragraph
    \verm{Mesh} \azul{disk} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::boundary, bdry, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
 
-These two approaches (the one described in paragraph \ref{\numb section 3.\numb parag 22} and
+These two approaches (the one described in paragraph \ref{\numb section 3.\numb parag 24} and
 the one described here) can be used interchangeably.
 It is possible to use both in the same code, but the code will become rather obscure.
 
 
                     %------------------%
-\section{~~\cinzasec{Anisotropic metric}}\label{\numb section 3.\numb parag 24}
+\section{~~\cinzasec{Anisotropic metric}}\label{\numb section 3.\numb parag 26}
                     %------------------%
 
 {\normalfont\bfseries The code described in this paragraph does not work yet.
 It should be regarded as a mere declaration of intentions.}
 \medskip
 
-The technique described in paragraph \ref{\numb section 3.\numb parag 23} can be generalized to
+The technique described in paragraph \ref{\numb section 3.\numb parag 25} can be generalized to
 an anisotropic Riemann metric.
 We define the metric by means of a square matrix $M$.
 $M$ must be symmetric positive definite.
@@ -1231,7 +1310,7 @@ $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for th
 \begin{figure}[ht] \centering
  \includegraphics[width=90mm]{disk-anisotrop}
   \caption{Anisotropic mesh}
-  \label{\numb section 3.\numb fig 12}
+  \label{\numb section 3.\numb fig 14}
 \end{figure}
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -1246,6 +1325,7 @@ $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for th
    \cinza{// or, equivalently :}
    \cinza{// RR2 .set_metric ( tag::principal_part, 1.,}
    \cinza{//                   tag::deviatoric_part, 1./d, -3./d, 9./d );}
+
    \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{outer} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
    \verm{Manifold} \azul{ellipse} = RR2 .implicit ( x*x + (y-\laranja{0.37})*(y-\laranja{0.37}) + \laranja{0.3}*x*y == \laranja{0.25} );
@@ -1259,11 +1339,11 @@ $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for th
 Compare with the mesh in paragraph \ref{\numb section 3.\numb parag 3}.
 
 This result cannot be achieved using the approach of paragraph
-\ref{\numb section 3.\numb parag 22} (by setting a non-constant desired length).
+\ref{\numb section 3.\numb parag 24} (by setting a non-constant desired length).
 
 
           %-----------%
-\section{~~Future work}\label{\numb section 3.\numb parag 25}
+\section{~~Future work}\label{\numb section 3.\numb parag 27}
           %-----------%
 
 It would be nice to define domains using inequalities between {\small\tt\verm{Function}}s.

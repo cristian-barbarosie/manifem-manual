@@ -14,7 +14,7 @@
 \def\manifemrelease{22.05}
 \def\manualversion{22.05}
 \let\production 0
-\includeonly{manual-cap-01}
+\includeonly{manual-cap-07}
 % \usepackage{showkeys}
 
 \usepackage{xcolor}
@@ -215,10 +215,10 @@ Mainly drawings intended to support the developer in understanding the source co
 
 \section*{Aknowledgements}
 
-Development of {\maniFEM} is supported by National Funding from FCT -- Funda\c c\~ao
-para a Ci\^encia e a Tecnologia (Portugal), through Faculdade de Ci\^encias da Universidade
-de Lisboa and Centro de Matem\'atica, Aplica\c c\~oes Fundamentais e Investiga\c c\~ao
-Operacional, project UID/MAT/04561/2020.
+Development of {\maniFEM} is supported by National Funding from FCT -- {\slshape Funda\c c\~ao
+para a Ci\^encia e a Tecnologia} (Portugal), through {\slshape Faculdade de Ci\^encias da Universidade
+de Lisboa} and {\slshape Centro de Matem\'atica, Aplica\c c\~oes Fundamentais e Investiga\c c\~ao
+Operacional}, project UID/MAT/04561/2020.
 
 Anabela Silva contributed with drawings and source text coloring.
 
@@ -393,7 +393,7 @@ Still not entirely stable, needs more work.
 We can declare and use an integrator without bothering with the subjacent finite element,
 paragraphs \ref{\numb section 1.\numb parag 1} and \ref{\numb section 6.\numb parag 2}.
 
-Add {\small\tt\verm{Mesh}} constructor with {\small\tt\textcolor{tag}{tag}::quadrangle},
+\noindent Add {\small\tt\verm{Mesh}} constructor with {\small\tt\textcolor{tag}{tag}::quadrangle},
 {\small\tt\textcolor{tag}{tag}::winding}, {\small\tt\textcolor{tag}{tag}::singular},
 in the spirit of paragraph \ref{\numb section 7.\numb parag 16}.
 
@@ -402,6 +402,11 @@ in the spirit of paragraph \ref{\numb section 7.\numb parag 16}.
 
 \noindent Multifunctions, paragraphs \ref{\numb section 7.\numb parag 24} -- \ref{\numb section 7.\numb parag 28}.
 
+\noindent Intersection of {\small\tt\verm{Manifold}}s, paragraphs \ref{\numb section 2.\numb parag 12},
+\ref{\numb section 3.\numb parag 18}, \ref{\numb section 3.\numb parag 19},
+\ref{\numb section 3.\numb parag 20}
+
+\noindent Overlapping meshes, paragraph \ref{\numb section 3.\numb parag 21}
 
 \section*{To do}
 
@@ -436,6 +441,12 @@ and {\small\tt\verm{Mesh}::draw\_\,ps} with {\small\tt\textcolor{tag}{tag}::unfo
 
 
 \addchap{Index}
+\definecolor{cinzaindex}{rgb}{0.4, 0.4, 0.4}
+\renewcommand\cinza[1]{\textcolor{cinzaindex}{#1}}
+
+A \cinza{gray} paragraph number indicates that that concept can be found not in the text of
+the manual but in the source code of that example.
+\bigskip
 
 \noindent
 {\small\tt\verm{Cell}::\underbar{belongs}\_\,to} : 
@@ -465,11 +476,11 @@ compilation process : \ref{\numb section 11.\numb parag 13},
 \ref{\numb section 11.\numb parag 15}, \ref{\numb section 11.\numb parag 16}
 
 \noindent
-cone : \ref{\numb section 3.\numb parag 20}, \ref{\numb section 7.\numb parag 15},
+cone : \ref{\numb section 3.\numb parag 22}, \ref{\numb section 7.\numb parag 15},
 \ref{\numb section 7.\numb parag 16}
 
 \noindent
-cylinder : \ref{\numb section 3.\numb parag 18}, \ref{\numb section 3.\numb parag 19},
+cylinder : \ref{\numb section 3.\numb parag 19}, \ref{\numb section 3.\numb parag 20},
 \ref{\numb section 7.\numb parag 3}, \ref{\numb section 7.\numb parag 19}
 
 \noindent
@@ -532,9 +543,16 @@ inherent orientation of a {\small\tt\verm{Mesh}} : \ref{\numb section 3.\numb pa
 \ref{\numb section 3.\numb parag 14}
 
 \noindent
+{\small\tt init\_\,cell} : \ref{\numb section 11.\numb parag 10}
+
+\noindent
 interpolation of coordinates :
 \ref{\numb section 2.\numb parag 4} -- \ref{\numb section 2.\numb parag 11},
 \ref{\numb section 12.\numb parag 2} -- \ref{\numb section 12.\numb parag 4}
+
+\noindent
+intersection of {\small\tt\verm{Manifold}}s : \ref{\numb section 2.\numb parag 12},
+\cinza{\ref{\numb section 3.\numb parag 16}}, \ref{\numb section 3.\numb parag 18}
 
 \noindent
 intrinsic orientation of a {\small\tt\verm{Mesh}} : \ref{\numb section 3.\numb parag 13},
@@ -543,9 +561,6 @@ intrinsic orientation of a {\small\tt\verm{Mesh}} : \ref{\numb section 3.\numb p
 \noindent
 iterators over cells : \ref{\numb section 9.\numb parag 3}, \ref{\numb section 9.\numb parag 5},
 \ref{\numb section 9.\numb parag 8}
-
-\noindent
-{\small\tt init\_\,cell} : \ref{\numb section 11.\numb parag 10}
 
 \noindent
 {\small\tt join}ing meshes : \ref{\numb section 1.\numb parag 4},
@@ -631,7 +646,7 @@ oct-tree : \ref{\numb section 12.\numb parag 10}
 \noindent
 orientation of {\small\tt \verm{Cell}}s and {\small\tt \verm{Mesh}}es :
 \ref{\numb section 1.\numb parag 2}, \ref{\numb section 1.\numb parag 4},
-\ref{\numb section 3.\numb parag 18}, \ref{\numb section 9.\numb parag 1},
+\ref{\numb section 3.\numb parag 19}, \ref{\numb section 9.\numb parag 1},
 \ref{\numb section 9.\numb parag 5}, \ref{\numb section 11.\numb parag 8},\hfil\break
 \hglue 9mm see also intrinsic orientation, inherent orientation, random orientation
 
@@ -688,7 +703,7 @@ segment {\small\tt \verm{Mesh}}es :
 \ref{\numb section 2.\numb parag 17}, \ref{\numb section 3.\numb parag 1},
 \ref{\numb section 3.\numb parag 2}, \ref{\numb section 3.\numb parag 3},
 \ref{\numb section 3.\numb parag 9},
-\ref{\numb section 3.\numb parag 14} -- \ref{\numb section 3.\numb parag 24}
+\ref{\numb section 3.\numb parag 14} -- \ref{\numb section 3.\numb parag 26}
 
 \noindent
 source text coloring : \ref{\numb section 11.\numb parag 2}
@@ -699,23 +714,27 @@ source text coloring : \ref{\numb section 11.\numb parag 2}
 \noindent
 {\small\tt\textcolor{tag}{tag}::desired\_\,length} :
 \ref{\numb section 3.\numb parag 1} -- \ref{\numb section 3.\numb parag 7},
-\ref{\numb section 3.\numb parag 22}
+\ref{\numb section 3.\numb parag 24}
 
 \noindent
 {\small\tt\textcolor{tag}{tag}::do\_\,not\_\,bother} :
 \ref{\numb section 10.\numb parag 4}, \ref{\numb section 11.\numb parag 6}
 
 \noindent
-{\small\tt\textcolor{tag}{tag}::join} :
-\ref{\numb section 1.\numb parag 4} -- \ref{\numb section 1.\numb parag 6},
-\ref{\numb section 2.\numb parag 1}, \ref{\numb section 2.\numb parag 2},
-\ref{\numb section 2.\numb parag 6}, \ref{\numb section 3.\numb parag 18}
-
-\noindent
 {\small\tt\textcolor{tag}{tag}::frontal} : section \ref{\numb section 3}
   
 \noindent
-{\small\tt\textcolor{tag}{tag}::project} : \ref{\numb section 2.\numb parag 12}
+{\small\tt\textcolor{tag}{tag}::intersect} : see intersection of {\small\tt\verm{Manifold}}s
+  
+\noindent
+{\small\tt\textcolor{tag}{tag}::join} :
+\ref{\numb section 1.\numb parag 4} -- \ref{\numb section 1.\numb parag 6},
+\ref{\numb section 2.\numb parag 1}, \ref{\numb section 2.\numb parag 2},
+\ref{\numb section 2.\numb parag 6}, \ref{\numb section 3.\numb parag 19}
+
+\noindent
+{\small\tt\textcolor{tag}{tag}::project} : \ref{\numb section 2.\numb parag 12},
+\ref{\numb section 3.\numb parag 18}
   
 \noindent
 {\small\tt\textcolor{tag}{tag}::rectangle} : \ref{\numb section 1.\numb parag 1},

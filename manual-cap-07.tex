@@ -16,7 +16,7 @@ you may think of it as $ {\mathbb R}^2/{\mathbb Z}^2 $.
 It should be stressed that this manifold is not the usual ``doughnut'' built in paragraph
 \ref{\numb section 2.\numb parag 20}.
 These two manifolds are homeomorphic (topologically equivalent) but they are not isometric,
-that is, their geometry differ.
+that is, their geometries differ.
 The quotient torus is a Riemann manifold with no curvature; it is locally Euclidian
 (that is, locally isometric to open sets of $ \mathbb{R}^2 $); we may call it ``flat torus''.
 It cannot be embedded in $ \mathbb{R}^3 $, much less be represented graphically.
@@ -32,8 +32,7 @@ In paragraphs \ref{\numb section 7.\numb parag 3} and \ref{\numb section 7.\numb
 the quotient manifold is isometric to a cylinder.
 In paragraphs \ref{\numb section 7.\numb parag 14} and \ref{\numb section 7.\numb parag 17}
 we get a manifold homeomorphic (topologically equivalent) to a cylinder
-if we eliminate the origin of the plane and we do not take into account that
-rotations overlap.
+if we eliminate a neigbourhood of the origin of the plane.
 In paragraphs \ref{\numb section 7.\numb parag 15} and \ref{\numb section 7.\numb parag 16}
 the mesh contains the origin which is a singular point, thus the manifold reaches
 the shape of a cone.
@@ -42,8 +41,7 @@ In paragraphs \ref{\numb section 7.\numb parag 4} -- \ref{\numb section 7.\numb 
 \ref{\numb section 7.\numb parag 22}
 the quotient manifold is homeomorphic to a torus.
 The same holds for paragraph \ref{\numb section 7.\numb parag 18}
-if we eliminate the origin of the plane and we do not take into account that
-rotations overlap.
+if we eliminate a neigbourhood of the origin of the plane.
 Paragraphs \ref{\numb section 7.\numb parag 11} -- \ref{\numb section 7.\numb parag 13} deal with
 three-dimensional examples (volumic meshes).
 Note that in paragraphs \ref{\numb section 7.\numb parag 17} and
@@ -75,6 +73,7 @@ We define it as a segment from {\small\tt A} to {\small\tt A}, with a specified
    \cinza{// begin with the one-dimensional line}
    \verm{Manifold} \azul{RR} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{1} );
    \verm{Function} \azul{x} = RR .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
+
    \cinza{// define an action on RR (a translation)}
    \verm{Manifold}::Action \azul{g} ( \textcolor{tag}{tag}::transforms, x, \textcolor{tag}{tag}::into, x+\laranja{1.} );
    \verm{Manifold} \azul{circle} = RR .quotient (g);
@@ -1054,7 +1053,7 @@ as shown in figure \ref{\numb section 7.\numb fig 16}.
 We provide a {\small\tt\verm{Function}} as desired length
 (rather than a constant {\small\tt double} value) in order to obtain a finer mesh near the
 re-entrant corners {\small\tt AA}, {\small\tt BB} and so on
-(see also paragraph \ref{\numb section 3.\numb parag 22}).
+(see also paragraph \ref{\numb section 3.\numb parag 24}).
 
 \begin{figure}[ht] \centering
   \psfrag{A}{\small\tt\textcolor{textindraw}{A}}
@@ -1417,7 +1416,8 @@ They will be {\small\tt\verm{Function}}s holding {\small\tt double} values at ea
 \end{Verbatim}
 
 The declaration of {\small\tt\azul{uv}} must occur before any vertex is built.
-This declaration changes the behaviour of constructors of zero-dimensional {\small\tt\verm{Cell}}s;
+This declaration changes the behaviour of constructors of zero-dimensional positive
+{\small\tt\verm{Cell}}s;
 from now on, space for two more {\small\tt double} values will be reserved for each vertex,
 besides the space for the coordinate {\small\tt theta}.
 
@@ -1448,7 +1448,7 @@ $$ A = \left(\begin{array}{cc} 1+x & y \\ y & -1-x \end{array}\right)
 
 The eigenvectors of this matrix rotate more slowly than the ones in paragraph
 \ref{\numb section 7.\numb parag 26}.
-This matrix is null at point $ (-1,0) $, so it has a double eigenvalue;
+This matrix is null at $ (x,y) = (-1,0) $, so it has a double eigenvalue;
 this makes it possible for the eigenvectors to swap places.
 
 The behaviour of the vector field after a complete loop is now more complicated and cannot
@@ -1458,7 +1458,6 @@ for the pair {\small\tt uv} :
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 7.\numb parag 27}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                              ]
-   const double \azul{c} = std::cos ( coef * \laranja{2.}* pi ), \azul{s} = std::sin ( coef * \laranja{2.}* pi );
    \verm{Function} \azul{uv_mv} = uv .make_multivalued ( \textcolor{tag}{tag}::through, g, \textcolor{tag}{tag}::becomes, (-v) && u );
 \end{Verbatim}
 

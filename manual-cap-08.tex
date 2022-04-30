@@ -83,7 +83,7 @@ Since they are compact, these manifolds can be viewed as uniform spaces.%
 In this paragraph we show how {\maniFEM} can take advantage of {\small\tt gmsh}'s capabilities
 for writing and reading back complex meshes.
 
-To fix ideas, let us focus on the example in paragraph \ref{\numb section 3.\numb parag 18},
+To fix ideas, let us focus on the example in paragraph \ref{\numb section 3.\numb parag 19},
 where a mesh called {\small\tt sphere\_\,and\_} {\small\tt\_\,cylinder} is built.
 We can save this mesh using method {\small\tt\verm{Mesh}::export\_\,to\_\,file}, then use
 {\small\tt gmsh} to draw it.
@@ -96,7 +96,7 @@ But if we want to re-use this mesh in another {\maniFEM} program, the declaratio
 
 \noindent may be insufficient for our needs.
 You see, in the original program (the one presented in paragraph
-\ref{\numb section 3.\numb parag 18}) we had at our disposal not only the {\small\tt\verm{Mesh}}
+\ref{\numb section 3.\numb parag 19}) we had at our disposal not only the {\small\tt\verm{Mesh}}
 object {\small\tt sphere\_\,and\_\,cylinder} but also other {\tt C++} objects like
 {\small\tt piece\_\,of\_\,sph}, {\small\tt piece\_\,of\_\,cyl}, {\small\tt two\_\,circles},
 {\small\tt circle\_\,1} and {\small\tt circle\_\,2}.
@@ -108,7 +108,7 @@ other mesh (say, another sphere).
 In order for the {\small\tt join} operation to work well, we must build that other
 mesh starting from {\small\tt circle\_\,1} as boundary.
 If you don't understand the previous statement, you may want to read again paragraphs
-\ref{\numb section 1.\numb parag 4} and \ref{\numb section 3.\numb parag 18}.
+\ref{\numb section 1.\numb parag 4} and \ref{\numb section 3.\numb parag 19}.
 
 The problem is, in the second {\maniFEM} program, the one which {\small\tt import}s the mesh
 {\small\tt sphere\_\,and\_} {\small\tt\_\,cylinder} from an {\small\tt msh} file,
