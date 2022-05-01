@@ -48,7 +48,7 @@ and adding triangles, one by one, until the disk is completely covered :
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
    
    \verm{Manifold} \azul{circle_manif} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    
@@ -90,7 +90,7 @@ the circle manifold, then mesh the disk :
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
    
    \verm{Manifold} \azul{circle_manif} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal,
@@ -174,7 +174,7 @@ $ \mathbb{R}^3 $ introduced in paragraph \ref{\numb section 2.\numb parag 15} :
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
+   \verm{Function} \azul{x} = xyz[\laranja{0}], \azul{y} = xyz[\laranja{1}], \azul{z} = xyz[\laranja{2}];
    \verm{Manifold} \azul{circle_manif} = RR3 .implicit ( x*x + y*y == \laranja{1.}, x*y == \laranja{4.}*z );
    
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::desired_length, \laranja{0.1},
@@ -220,7 +220,7 @@ spiral with a slightly different look and switch to frontal mesh generation.
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
    \verm{Function} \azul{r} = \verm{power} ( x*x + y*y, \laranja{0.25} );
    const double \azul{pi} = \laranja{3.14159};
    
@@ -311,7 +311,7 @@ Code below builds a mesh on the sphere.
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
+   \verm{Function} \azul{x} = xyz[\laranja{0}], \azul{y} = xyz[\laranja{1}], \azul{z} = xyz[\laranja{2}];
    \verm{Manifold} \azul{sphere_manif} = RR3.implicit ( x*x + y*y + z*z == \laranja{1.} );
    \verm{Mesh} \azul{sphere} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
@@ -348,7 +348,7 @@ It can be vaguely described as a convolution between two tori.
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
+   \verm{Function} \azul{x} = xyz[\laranja{0}], \azul{y} = xyz[\laranja{1}], \azul{z} = xyz[\laranja{2}];
 
    \verm{Function} \azul{f1} = \verm{max} ( x*x + y*y, \laranja{0.1} );  \cinza{// we cut by 0.1 to avoid singularities}
    \verm{Function} \azul{f2} = \laranja{1.} - \verm{power} ( f1, \laranja{-0.5} );
@@ -882,7 +882,7 @@ thus, some previous knowledge about the geometry of the surface is needed.
    baselinestretch=0.94,framesep=2mm                                              ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
+   \verm{Function} \azul{x} = xyz[\laranja{0}], \azul{y} = xyz[\laranja{1}], \azul{z} = xyz[\laranja{2}];
 
    const double \azul{rs} = \laranja{1.};    \cinza{// radius of the sphere}
    const double \azul{rc} = \laranja{0.45};  \cinza{// radius of the cylinder}
@@ -1009,7 +1009,7 @@ we can cut two holes in the sphere and create a tunnel using the cylinder's wall
 
 \begin{figure}[ht] \centering
 \if\production 1
- \includegraphics[width=88mm]{sphere-tunnel-cloud-im}
+ \includegraphics[width=85mm]{sphere-tunnel-cloud-im}
 \else
  \includegraphics[width=88mm]{sphere-tunnel-low-res}
 \fi
@@ -1271,7 +1271,7 @@ we see in the drawing), thus producing the same result as in paragraph
    baselinestretch=0.94,framesep=2mm                                   ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
    \verm{Function} \azul{d} = \laranja{0.3} + \laranja{0.5} * ( (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9}) );
    RR2 .set_metric ( \laranja{1.} / d );
    \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
@@ -1318,7 +1318,7 @@ $ m_{11} $, $ m_{12} $, $ m_{13} $, $ m_{22} $, $ m_{23} $ and $ m_{33} $ for th
    baselinestretch=0.94,framesep=2mm                                  ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
 
    \verm{Function} \azul{d} = \laranja{0.3} + (x+\laranja{0.3})*(x+\laranja{0.3}) + (y-\laranja{0.9})*(y-\laranja{0.9});
    RR2 .set_metric ( \laranja{1.} + \laranja{1.}/d, \laranja{-3.}/d, \laranja{1.} + \laranja{9.}/d );

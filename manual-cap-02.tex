@@ -170,7 +170,7 @@ The code below introduces a one-dimensional submanifold of $ \mathbb{R}^2 $ (a h
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
    
    \verm{Manifold} \azul{hiperbola} = RR2 .implicit ( x*y == \laranja{1.} );
    
@@ -300,7 +300,7 @@ Let's look at a surface in $ \mathbb{R}^3 $ :
    baselinestretch=0.94,framesep=2mm                                            ]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
+   \verm{Function} \azul{x} = xyz[\laranja{0}], \azul{y} = xyz[\laranja{1}], \azul{z} = xyz[\laranja{2}];
 
    \verm{Manifold} \azul{sphere} = RR3 .implicit ( x*x + y*y + z*z == \laranja{1.} );
 
@@ -472,7 +472,7 @@ Method {\small\tt set\_\,as\_\,working\_\,manifold} allows us to do that.
    baselinestretch=0.94,framesep=2mm                                             ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
    
    \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    
@@ -553,7 +553,7 @@ this time with four arcs of hiperbola.
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
    \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x (N) =  \laranja{0.};  y (N) =  \laranja{1.};
    \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};  y (W) =  \laranja{0.};
    \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) =  \laranja{0.};  y (S) = \laranja{-1.};
@@ -644,6 +644,14 @@ performs, under the curtains, a projection on the current working {\small\tt\ver
 
 Here is a three-dimensional version of the diamond.
 
+In figure \ref{\numb section 2.\numb fig 13}, some layers have been removed so that the reader
+can see inner cells.
+This was done using the following options of {\small\tt gmsh}: {\small\tt Tools} $\to$
+{\small\tt Clipping} $\to$ {\small\tt Mesh} $\to$ {\small\tt Planes} $\to$
+{\small\tt Keep whole elements}, $ A = 1, B = 0.2, C = 0.3, D = 0.6 $.
+
+Comments in paragraph \ref{\numb section 1.\numb parag 7} apply.
+
 \begin{figure}[ht] \centering
   \psfrag{S}{\small\tt\textcolor{textindraw}{S}}
   \psfrag{N}{\small\tt\textcolor{textindraw}{N}}
@@ -653,14 +661,6 @@ Here is a three-dimensional version of the diamond.
   \caption{A 3D diamond}
   \label{\numb section 2.\numb fig 13}
 \end{figure}
-
-In figure \ref{\numb section 2.\numb fig 13}, some layers have been removed so that the reader
-can see inner cells.
-This was done using the following options of {\small\tt gmsh}: {\small\tt Tools} $\to$
-{\small\tt Clipping} $\to$ {\small\tt Mesh} $\to$ {\small\tt Planes} $\to$
-{\small\tt Keep whole elements}, $ A = 1, B = 0.2, C = 0.3, D = 0.6 $.
-
-Comments in paragraph \ref{\numb section 1.\numb parag 7} apply.
 
 
           %----------------%
@@ -822,7 +822,7 @@ We can define a one-dimensional submanifold of $ \mathbb{R}^3 $ by two implicit 
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR3} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{3} );
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
+   \verm{Function} \azul{x} = xyz[\laranja{0}], \azul{y} = xyz[\laranja{1}], \azul{z} = xyz[\laranja{2}];
    \verm{Manifold} \azul{circle_manifold} = RR3 .implicit ( x*x + y*y == \laranja{1.}, x*y == \laranja{4.}*z );
 
    \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) =  \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};

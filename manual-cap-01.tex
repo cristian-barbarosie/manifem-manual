@@ -43,7 +43,7 @@ int main ()
    \verm{Function} \azul{xyz} = RR3 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
 
    \cinza{// we can extract components of xyz using the [] operator}
-   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
+   \verm{Function} \azul{x} = xyz[\laranja{0}], \azul{y} = xyz[\laranja{1}], \azul{z} = xyz[\laranja{2}];
 
    \cinza{// Let's build a rectangular mesh. First, the four corners :}
    \verm{Cell} \azul{SW} ( \textcolor{tag}{tag}::vertex );  x (SW) = \laranja{-1.};  y (SW) = \laranja{0.};  z (SW) = \laranja{0.};
@@ -341,7 +341,7 @@ here {\small\tt RR3}) for each new vertex.
 The components of {\small\tt xyz} can be extracted like in
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Function} \azul{x} = xyz [\laranja{0}], \azul{y} = xyz [\laranja{1}], \azul{z} = xyz [\laranja{2}];
+   \verm{Function} \azul{x} = xyz[\laranja{0}], \azul{y} = xyz[\laranja{1}], \azul{z} = xyz[\laranja{2}];
 \end{Verbatim}
 
 \noindent They are mere handlers through which we access the above referred \ {\small\tt double}
@@ -399,7 +399,7 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
    baselinestretch=0.94,framesep=2mm]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{0.} \} );
    \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{0.} \} );
    \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.},  \laranja{0.} \} );

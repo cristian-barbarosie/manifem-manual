@@ -15,14 +15,22 @@ Euclidian {\small\tt\verm{Manifold}} and then go on by building a coordinate sys
    baselinestretch=0.94,framesep=2mm                     ]
    \verm{Manifold} RR2 ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
 \end{Verbatim}
 
 See paragraph \ref{\numb section 11.\numb parag 3} for more details about tags.
 
 In the above, {\small\tt\verm{xy}} is a vector-valued {\small\tt\verm{Function}}
 with two components, {\small\tt x} and {\small\tt y}.
-The declaration of {\small\tt\azul{xy}} starts a complex process; behind the curtains,
+The method {\small\tt\verm{Manifold}::build\_\,coordinate\_\,system} invokes, invisibly to the user,
+statemets similar to
+
+\begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
+   baselinestretch=0.94,framesep=2mm                     ]
+   \verm{Function} \azul{xy} ( \textcolor{tag}{tag}::lives_on, \textcolor{tag}{tag}::vertices, \textcolor{tag}{tag}::has_size, \laranja{2} );
+\end{Verbatim}
+
+The above declaration of {\small\tt\azul{xy}} starts a complex process; behind the curtains,
 {\maniFEM} builds a {\small\tt\verm{Field}} object associated to {\small\tt xy}.
 The {\small\tt\verm{Field}} object changes the behaviour of {\maniFEM} in what regards
 initialization of {\small\tt\verm{Cell}}s.

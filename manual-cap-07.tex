@@ -201,7 +201,7 @@ Here is the classical example of $ \mathbb{R}^2/{\mathbb Z}^2 $.
    \cinza{// begin with the usual two-dimensional space}
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
 
    \cinza{// define two actions on RR2 (translations)}
    \verm{Manifold}::Action \azul{g_horiz} ( \textcolor{tag}{tag}::transforms, xy, \textcolor{tag}{tag}::into, (x+\laranja{1.}) && y ),
@@ -654,7 +654,7 @@ which fills the entire three-dimensional space :
 \end{figure}
 
 One may ask : why do we declare the {\small\tt\verm{Manifold}} {\small\tt\azul{torus\_\,manif}} first,
-then we buld the 2D meshes on the inner sphere (the boundary of the hole) with no winding ?
+then we build the 2D meshes on the inner sphere (the boundary of the hole) with no winding ?
 Since these segments have no winding, couldn't we postpone the declaration of
 {\small\tt\azul{torus\_\,manif}} for later, after having meshed the six quadrangles composing the sphere ?
 
@@ -956,7 +956,7 @@ The mesh may have many other details (like the circular hole shown in figure
    baselinestretch=0.94,framesep=2mm                                             ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
 
    size_t \azul{n} = \laranja{20};
    double \azul{d} = \laranja{2.6} / double(n);
@@ -1188,7 +1188,7 @@ We use one-dimensional submanifolds of the Euclidian plane $ \mathbb{R}^2 $.
    rulecolor=\color{moldura},baselinestretch=0.94,framesep=2mm         ]
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
-   \verm{Function} \azul{x} = xy [\laranja{0}], \azul{y} = xy [\laranja{1}];
+   \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
 
    const double \azul{e} = \laranja{1.5};
    \verm{Manifold} \azul{curve1} = RR2 .implicit 
@@ -1405,7 +1405,9 @@ $$ A = \left(\begin{array}{rr} x & y \\ y & -x \end{array}\right)
 = \left(\begin{array}{rr} \cos\theta & \sin\theta \\ \sin\theta & -\cos\theta \end{array}\right) $$
 
 This time, the {\small\tt\verm{Function}}s {\small\tt u} and {\small\tt v} will not be arithmetic
-expressions involving {\small\tt theta} (like in previous paragraps).
+expressions involving {\small\tt x} and {\small\tt y} (like in paragraph
+\ref{\numb section 7.\numb parag 24}) or involving {\small\tt theta} (like in paragraph
+\ref{\numb section 7.\numb parag 25}).
 They will be {\small\tt\verm{Function}}s holding {\small\tt double} values at each vertex :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
@@ -1420,6 +1422,7 @@ This declaration changes the behaviour of constructors of zero-dimensional posit
 {\small\tt\verm{Cell}}s;
 from now on, space for two more {\small\tt double} values will be reserved for each vertex,
 besides the space for the coordinate {\small\tt theta}.
+Paragraph \ref{\numb section 5.\numb parag 1} gives more details.
 
 For a given $ 2\times 2 $ matrix, choosing an eigenvector implies two arbitrary choices :
 one between the eigenvectors, the second one between the signs
@@ -1447,7 +1450,7 @@ $$ A = \left(\begin{array}{cc} 1+x & y \\ y & -1-x \end{array}\right)
 \end{figure}
 
 The eigenvectors of this matrix rotate more slowly than the ones in paragraph
-\ref{\numb section 7.\numb parag 26}.
+\ref{\numb section 7.\numb parag 26} (see figure \ref{\numb section 7.\numb fig 23}).
 This matrix is null at $ (x,y) = (-1,0) $, so it has a double eigenvalue;
 this makes it possible for the eigenvectors to swap places.
 
