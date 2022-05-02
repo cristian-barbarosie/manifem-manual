@@ -52,10 +52,10 @@ and adding triangles, one by one, until the disk is completely covered :
    
    \verm{Manifold} \azul{circle_manif} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    
-   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x (N) =  \laranja{0.};   y (N) =  \laranja{1.};
-   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};   y (W) =  \laranja{0.};
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) =  \laranja{0.};   y (S) = \laranja{-1.};
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{1.};   y (E) =  \laranja{0.};
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x(N) =  \laranja{0.};   y(N) =  \laranja{1.};
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x(W) = \laranja{-1.};   y(W) =  \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  \laranja{0.};   y(S) = \laranja{-1.};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{1.};   y(E) =  \laranja{0.};
    \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N .reverse(), W, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W .reverse(), S, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    \verm{Mesh} \azul{SE} ( \textcolor{tag}{tag}::segment, S .reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{10} );
@@ -116,7 +116,7 @@ by providing a starting point :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{1.};  y (A) = \laranja{0.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{1.};  y(A) = \laranja{0.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, A, \textcolor{tag}{tag}::desired_length, \laranja{0.2} );
 \end{Verbatim}
 
@@ -229,8 +229,8 @@ spiral with a slightly different look and switch to frontal mesh generation.
    \cinza{// the Manifold constructor sets the manifold it builds as working manifold}
    \cinza{// after that, many methods use this working manifold by default}
    
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) =     pi*pi;   y (A) = \laranja{0.};
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{81.}*pi*pi;   y (B) = \laranja{0.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) =     pi*pi;   y(A) = \laranja{0.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = \laranja{81.}*pi*pi;   y(B) = \laranja{0.};
    \verm{Mesh} \azul{spiral} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, A, \textcolor{tag}{tag}::stop_at, B,
                  \textcolor{tag}{tag}::desired_length, \laranja{1.}, \textcolor{tag}{tag}::shortest_path     );
 \end{Verbatim}
@@ -322,7 +322,7 @@ We can alleviate this burden simply by providing a starting point on the sphere 
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{1.};  y (A) = \laranja{0.};  z (A) = \laranja{0.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{1.};  y(A) = \laranja{0.};  z(A) = \laranja{0.};
    \verm{Mesh} \azul{sphere} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, A, \textcolor{tag}{tag}::desired_length, \laranja{0.1} );
 \end{Verbatim}
 
@@ -485,8 +485,8 @@ can be changed as below.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) =    pi*pi;  y (A) = \laranja{0.};
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{81}*pi*pi;  y (B) = \laranja{0.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) =    pi*pi;  y(A) = \laranja{0.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = \laranja{81}*pi*pi;  y(B) = \laranja{0.};
    std::vector < double > \azul{direc} = \{ \laranja{0.}, \laranja{1.} \};
    \verm{Mesh} \azul{spiral} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, A, \textcolor{tag}{tag}::towards, direc,
                  \textcolor{tag}{tag}::stop_at, B, \textcolor{tag}{tag}::desired_length, \laranja{1.}            );
@@ -507,7 +507,7 @@ We could specify in a similar fashion the orientation of {\small\tt circle} in p
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{1.};  y (A) = \laranja{0.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{1.};  y(A) = \laranja{0.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, A,
                  \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{1.} \}, \textcolor{tag}{tag}::desired_length, \laranja{0.2} );
 \end{Verbatim}
@@ -520,7 +520,7 @@ The same technique can be used for building the {\small\tt circle} in paragraph
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) = \laranja{0.};  y(S) = \laranja{-1.};  z(S) = \laranja{0.};
    \verm{Manifold} \azul{circle_manif} = RR3 .implicit ( x*x + y*y == \laranja{1.}, x*y == \laranja{4.}*z );
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, S,
                  \textcolor{tag}{tag}::towards, \{ \laranja{1.}, \laranja{0.}, \laranja{0.} \}, \textcolor{tag}{tag}::desired_length, \laranja{0.2} );
@@ -670,7 +670,7 @@ Thus, in the code below we will obtain the upper hemisphere.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) = \laranja{0.};  y(S) = \laranja{-1.};  z(S) = \laranja{0.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, \{ \laranja{1.}, \laranja{0.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                                     );
    nut .set_as_working_manifold();
@@ -682,7 +682,7 @@ Code below will produce the lower hemisphere.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                      ]
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) = \laranja{0.};  y(S) = \laranja{-1.};  z(S) = \laranja{0.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, \{ \laranja{-1.},\laranja{ 0.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                                      );
    nut .set_as_working_manifold();
@@ -698,7 +698,7 @@ Here, the word ``upwards'' is used in the sense of the right hand rule
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) = \laranja{0.};  y(S) = \laranja{-1.};  z(S) = \laranja{0.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, \{ \laranja{1.}, \laranja{0.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                                     );
    nut .set_as_working_manifold();
@@ -710,7 +710,7 @@ in either case, the produced mesh will be oriented downwards.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,
    baselinestretch=0.94,framesep=2mm                     ]
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) = \laranja{0.};  y(S) = \laranja{-1.};  z(S) = \laranja{0.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, \{ \laranja{-1.}, \laranja{0.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                                      );
    nut .set_as_working_manifold();
@@ -748,7 +748,7 @@ in paragraphs \ref{\numb section 2.\numb parag 17}, \ref{\numb section 3.\numb p
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 3.\numb parag 15}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm                                            ]
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) = \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) = \laranja{0.};  y(S) = \laranja{-1.};  z(S) = \laranja{0.};
    std::vector < double > \azul{tau} \{ \laranja{1.}, \laranja{0.}, \laranja{0.} \};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, S, \textcolor{tag}{tag}::towards, tau,
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}                          );
@@ -1127,13 +1127,13 @@ A typical example is the vertex of a cone.
    \verm{Manifold} \azul{cone_manif} = RR3 .implicit ( x*x + y*x == z*z );
 
    cone_manif .implicit ( z == \laranja{1.} );
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{1.};  y (A) = \laranja{0.};  z (A) = \laranja{1.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{1.};  y(A) = \laranja{0.};  z(A) = \laranja{1.};
    \verm{Mesh} \azul{circle} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::start_at, A,
                  \textcolor{tag}{tag}::towards, \{ \laranja{0.}, \laranja{-1.}, \laranja{0.} \},
                  \textcolor{tag}{tag}::desired_length, \laranja{0.1}       );
 
    cone_manif .set_as_working_manifold();
-   \verm{Cell} \azul{V} ( \textcolor{tag}{tag}::vertex );  x (V) = \laranja{0.};  y (V) = \laranja{0.};  z (V) = \laranja{0.};
+   \verm{Cell} \azul{V} ( \textcolor{tag}{tag}::vertex );  x(V) = \laranja{0.};  y(V) = \laranja{0.};  z(V) = \laranja{0.};
    \verm{Mesh} \azul{cone} ( \textcolor{tag}{tag}::frontal, \textcolor{tag}{tag}::boundary, circle,
                \textcolor{tag}{tag}::start_at, A, \textcolor{tag}{tag}::towards, \{ \laranja{-1.}, \laranja{0.}, \laranja{-1.} \},
                \textcolor{tag}{tag}::singular, V, \textcolor{tag}{tag}::desired_length, \laranja{0.1}       );
@@ -1162,7 +1162,7 @@ We focus on the piece of cylinder from paragraph \ref{\numb section 3.\numb para
    \verm{Manifold} \azul{cylinder} = RR3 .implicit ( y*y + (z-\laranja{0.5})*(z-\laranja{0.5}) == \laranja{0.25} );
    \verm{Manifold} \azul{infinity} = cylinder .implicit ( x*x + y*y + z*z == \laranja{1.} );
 
-   \verm{Cell} \azul{V} ( \textcolor{tag}{tag}::vertex );  x (V) = \laranja{0.};  y (V) = \laranja{0.};  z (V) = \laranja{1.};
+   \verm{Cell} \azul{V} ( \textcolor{tag}{tag}::vertex );  x(V) = \laranja{0.};  y(V) = \laranja{0.};  z(V) = \laranja{1.};
    \verm{Mesh} \azul{circle_1} ( \textcolor{tag}{tag}::frontal,
                    \textcolor{tag}{tag}:: start_at, V, \textcolor{tag}{tag}::towards, \{ \laranja{1.}, \laranja{1.}, \laranja{0.} \},
                    \textcolor{tag}{tag}::singular, V, \textcolor{tag}{tag}::desired_length, \laranja{0.1}      );

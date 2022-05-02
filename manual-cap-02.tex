@@ -174,8 +174,8 @@ The code below introduces a one-dimensional submanifold of $ \mathbb{R}^2 $ (a h
    
    \verm{Manifold} \azul{hiperbola} = RR2 .implicit ( x*y == \laranja{1.} );
    
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{0.5};   y (A) = \laranja{2.};
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{3.};    y (B) = \laranja{0.333333333333};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{0.5};   y(A) = \laranja{2.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = \laranja{3.};    y(B) = \laranja{0.333333333333};
 
    \verm{Mesh} \azul{arc_of_hiperbola} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{7} );
 
@@ -217,7 +217,7 @@ the {\small\tt hiperbola} manifold.
 As an alternative, we might explicitly project them onto the {\small\tt hiperbola} like this :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Cell} \azul{P} ( \textcolor{tag}{tag}::vertex );  x (P) = \laranja{0.6};  y (P) = \laranja{2.1};
+   \verm{Cell} \azul{P} ( \textcolor{tag}{tag}::vertex );  x(P) = \laranja{0.6};  y(P) = \laranja{2.1};
    hiperbola .project (P);
 \end{Verbatim}
 
@@ -255,10 +255,10 @@ We can define several arcs of curve and {\small\tt join} them, thus obtaining a 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 5}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x (N) =  \laranja{0.};  y (N) =  \laranja{1.};
-   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};  y (W) =  \laranja{0.};
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) =  \laranja{0.};  y (S) = \laranja{-1.};
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{1.};  y (E) =  \laranja{0.};
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x(N) =  \laranja{0.};  y(N) =  \laranja{1.};
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x(W) = \laranja{-1.};  y(W) =  \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  \laranja{0.};  y(S) = \laranja{-1.};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{1.};  y(E) =  \laranja{0.};
 
    \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N .reverse(), W, \textcolor{tag}{tag}::divided_in, \laranja{5} );
    \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W .reverse(), S, \textcolor{tag}{tag}::divided_in, \laranja{5} );
@@ -305,11 +305,11 @@ Let's look at a surface in $ \mathbb{R}^3 $ :
    \verm{Manifold} \azul{sphere} = RR3 .implicit ( x*x + y*y + z*z == \laranja{1.} );
 
    \cinza{// let's mesh half of a sphere}
-   \verm{Cell} \azul{E}  ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{1.};  y (E) =  \laranja{0.};  z (E) = \laranja{0.};
-   \verm{Cell} \azul{N}  ( \textcolor{tag}{tag}::vertex );  x (N) =  \laranja{0.};  y (N) =  \laranja{1.};  z (N) = \laranja{0.};
-   \verm{Cell} \azul{W}  ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};  y (W) =  \laranja{0.};  z (W) = \laranja{0.};
-   \verm{Cell} \azul{S}  ( \textcolor{tag}{tag}::vertex );  x (W) =  \laranja{0.};  y (W) = \laranja{-1.};  z (W) = \laranja{0.};
-   \verm{Cell} \azul{up} ( \textcolor{tag}{tag}::vertex );  x (up)=  \laranja{0.};  y (up)=  \laranja{0.};  z (up)= \laranja{1.};
+   \verm{Cell} \azul{E}  ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{1.};  y(E) =  \laranja{0.};  z(E) = \laranja{0.};
+   \verm{Cell} \azul{N}  ( \textcolor{tag}{tag}::vertex );  x(N) =  \laranja{0.};  y(N) =  \laranja{1.};  z(N) = \laranja{0.};
+   \verm{Cell} \azul{W}  ( \textcolor{tag}{tag}::vertex );  x(W) = \laranja{-1.};  y(W) =  \laranja{0.};  z(W) = \laranja{0.};
+   \verm{Cell} \azul{S}  ( \textcolor{tag}{tag}::vertex );  x(W) =  \laranja{0.};  y(W) = \laranja{-1.};  z(W) = \laranja{0.};
+   \verm{Cell} \azul{up} ( \textcolor{tag}{tag}::vertex );  x(up)=  \laranja{0.};  y(up)=  \laranja{0.};  z(up)= \laranja{1.};
 
    int \azul{n} = \laranja{15};
    \verm{Mesh} \azul{EN} ( \textcolor{tag}{tag}::segment, E .reverse(), N, \textcolor{tag}{tag}::divided_in, n );
@@ -368,11 +368,11 @@ Below we use twelve rectangles to get a bumpy hemisphere.
    \verm{Manifold} nut = RR3 .implicit ( x*x + y*y + z*z + \laranja{1.5}*x*y*z == \laranja{1.} );
 
    \cinza{// let's mesh a hemisphere (much deformed)}
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );   x (S)  =  \laranja{0.};  y (S)  = \laranja{-1.};  z (S)  =  \laranja{0.};
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );   x (E)  =  \laranja{1.};  y (E)  =  \laranja{0.};  z (E)  =  \laranja{0.};
-   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );   x (N)  =  \laranja{0.};  y (N)  =  \laranja{1.};  z (N)  =  \laranja{0.};
-   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );   x (W)  = \laranja{-1.};  y (W)  =  \laranja{0.};  z (W)  =  \laranja{0.};
-   \verm{Cell} \azul{up} ( \textcolor{tag}{tag}::vertex );  x (up) =  \laranja{0.};  y (up) =  \laranja{0.};  z (up) =  \laranja{1.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );   x(S)  =  \laranja{0.};  y(S)  = \laranja{-1.};  z(S)  =  \laranja{0.};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );   x(E)  =  \laranja{1.};  y(E)  =  \laranja{0.};  z(E)  =  \laranja{0.};
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );   x(N)  =  \laranja{0.};  y(N)  =  \laranja{1.};  z(N)  =  \laranja{0.};
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );   x(W)  = \laranja{-1.};  y(W)  =  \laranja{0.};  z(W)  =  \laranja{0.};
+   \verm{Cell} \azul{up} ( \textcolor{tag}{tag}::vertex );  x(up) =  \laranja{0.};  y(up) =  \laranja{0.};  z(up) =  \laranja{1.};
    \cinza{// no need to project these}
 
    \verm{Cell} \azul{mSW} ( \textcolor{tag}{tag}::vertex );  x (mSW) = \laranja{-1.};   y (mSW) = \laranja{-1.};   z (mSW) = \laranja{0.};
@@ -476,10 +476,10 @@ Method {\small\tt set\_\,as\_\,working\_\,manifold} allows us to do that.
    
    \verm{Manifold} \azul{circle} = RR2 .implicit ( x*x + y*y == \laranja{1.} );
    
-   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x (N) =  \laranja{0.};  y (N) =  \laranja{1.};
-   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};  y (W) =  \laranja{0.};
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) =  \laranja{0.};  y (S) = \laranja{-1.};
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{1.};  y (E) =  \laranja{0.};
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x(N) =  \laranja{0.};  y(N) =  \laranja{1.};
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x(W) = \laranja{-1.};  y(W) =  \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  \laranja{0.};  y(S) = \laranja{-1.};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{1.};  y(E) =  \laranja{0.};
 
    \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N .reverse(), W, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    \verm{Mesh} \azul{WS} ( \textcolor{tag}{tag}::segment, W .reverse(), S, \textcolor{tag}{tag}::divided_in, \laranja{10} );
@@ -554,10 +554,10 @@ this time with four arcs of hiperbola.
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
-   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x (N) =  \laranja{0.};  y (N) =  \laranja{1.};
-   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};  y (W) =  \laranja{0.};
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) =  \laranja{0.};  y (S) = \laranja{-1.};
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{1.};  y (E) =  \laranja{0.};
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x(N) =  \laranja{0.};  y(N) =  \laranja{1.};
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x(W) = \laranja{-1.};  y(W) =  \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  \laranja{0.};  y(S) = \laranja{-1.};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{1.};  y(E) =  \laranja{0.};
 
    \verm{Manifold} \azul{first_arc}  = RR2 .implicit ( x*y + x - y == \laranja{-1.} );
    \verm{Mesh} \azul{NW} ( \textcolor{tag}{tag}::segment, N .reverse(), W, \textcolor{tag}{tag}::divided_in, \laranja{10} );
@@ -612,7 +612,7 @@ Of course, it is better to give initial positions close to the desired point;
 this way the projection algorithm will find more easily its target.
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{-1.};  y (A) = \laranja{-1.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{-1.};  y(A) = \laranja{-1.};
    four_points .project (A);
 \end{Verbatim}
 
@@ -711,11 +711,11 @@ Instead of meshing the {\small\tt apple} surface, we just build eight curves imm
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 14}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{0.};  y (A) = \laranja{0.};  z (A) = std::sqrt ( \laranja{2.}*pi/\laranja{3.} );
-   \verm{Cell} \azul{B1} ( \textcolor{tag}{tag}::vertex );  x (B1) = \laranja{1.};  y (B1) = \laranja{0.};  z (B1) = \laranja{1.};
-   \verm{Cell} \azul{C1} ( \textcolor{tag}{tag}::vertex );  x (C1) = \laranja{1.};  y (C1) = \laranja{0.};  z (C1) = \laranja{0.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{0.};  y(A) = \laranja{0.};  z(A) = std::sqrt ( \laranja{2.}*pi/\laranja{3.} );
+   \verm{Cell} \azul{B1} ( \textcolor{tag}{tag}::vertex );  x(B1) = \laranja{1.};  y(B1) = \laranja{0.};  z(B1) = \laranja{1.};
+   \verm{Cell} \azul{C1} ( \textcolor{tag}{tag}::vertex );  x(C1) = \laranja{1.};  y(C1) = \laranja{0.};  z(C1) = \laranja{0.};
    apple .project (B1);  apple .project (C1);
-   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = \laranja{0.};  y (D) = \laranja{0.};  z (D) = \laranja{0.};
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = \laranja{0.};  y(D) = \laranja{0.};  z(D) = \laranja{0.};
 
    \verm{Mesh} \azul{AB1} ( \textcolor{tag}{tag}::segment, A .reverse(), B1, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    \verm{Mesh} \azul{B1C1} ( \textcolor{tag}{tag}::segment, B1 .reverse(), C1, \textcolor{tag}{tag}::divided_in, \laranja{10} );
@@ -825,10 +825,10 @@ We can define a one-dimensional submanifold of $ \mathbb{R}^3 $ by two implicit 
    \verm{Function} \azul{x} = xyz[\laranja{0}], \azul{y} = xyz[\laranja{1}], \azul{z} = xyz[\laranja{2}];
    \verm{Manifold} \azul{circle_manifold} = RR3 .implicit ( x*x + y*y == \laranja{1.}, x*y == \laranja{4.}*z );
 
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) =  \laranja{0.};  y (S) = \laranja{-1.};  z (S) = \laranja{0.};
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{1.};  y (E) =  \laranja{0.};  z (E) = \laranja{0.};
-   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x (N) =  \laranja{0.};  y (N) =  \laranja{1.};  z (N) = \laranja{0.};
-   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};  y (W) =  \laranja{0.};  z (W) = \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  \laranja{0.};  y(S) = \laranja{-1.};  z(S) = \laranja{0.};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{1.};  y(E) =  \laranja{0.};  z(E) = \laranja{0.};
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x(N) =  \laranja{0.};  y(N) =  \laranja{1.};  z(N) = \laranja{0.};
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x(W) = \laranja{-1.};  y(W) =  \laranja{0.};  z(W) = \laranja{0.};
    \cinza{// these four points already belong to 'circle_manifold', no projection needed}
 
    \verm{Mesh} \azul{SE} ( \textcolor{tag}{tag}::segment, S .reverse(), E, \textcolor{tag}{tag}::divided_in, \laranja{5} );
@@ -891,10 +891,10 @@ For the rest of the surface, we switch back to the two-dimensional manifold {\sm
    \verm{Manifold} \azul{base} = nut .implicit ( x*x + \laranja{3.}*z == \laranja{0.} );
 
    \cinza{// define some points :}
-   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x (S) =  \laranja{0.};  y (S) = \laranja{-1.};  z (S) =  \laranja{0.};
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{1.};  y (E) =  \laranja{0.};  z (E) =  \laranja{0.};
-   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x (N) =  \laranja{0.};  y (N) =  \laranja{1.};  z (N) =  \laranja{0.};
-   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x (W) = \laranja{-1.};  y (W) =  \laranja{0.};  z (W) =  \laranja{0.};
+   \verm{Cell} \azul{S} ( \textcolor{tag}{tag}::vertex );  x(S) =  \laranja{0.};  y(S) = \laranja{-1.};  z(S) =  \laranja{0.};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{1.};  y(E) =  \laranja{0.};  z(E) =  \laranja{0.};
+   \verm{Cell} \azul{N} ( \textcolor{tag}{tag}::vertex );  x(N) =  \laranja{0.};  y(N) =  \laranja{1.};  z(N) =  \laranja{0.};
+   \verm{Cell} \azul{W} ( \textcolor{tag}{tag}::vertex );  x(W) = \laranja{-1.};  y(W) =  \laranja{0.};  z(W) =  \laranja{0.};
    \cinza{// no need to project S and N, they are already on 'base'}
    base .project (E);  base .project (W);
    \verm{Cell} \azul{mSW} ( \textcolor{tag}{tag}::vertex );  x (mSW) = \laranja{-1.};  y (mSW) = \laranja{-1.};  z (mSW) = \laranja{0.};

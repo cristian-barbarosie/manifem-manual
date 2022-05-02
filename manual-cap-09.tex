@@ -116,9 +116,9 @@ paragraph \ref{\numb section 11.\numb parag 4}.
    \{  double \azul{theta} = i * step_theta;
       \cinza{// we build two new points}
       \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );
-      x (C) =    std::cos(theta);  y (C) =    std::sin(theta);
+      x(C) =    std::cos(theta);  y(C) =    std::sin(theta);
       \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );
-      x (D) = \laranja{2.}*std::cos(theta);  y (D) = \laranja{2.}*std::sin(theta);
+      x(D) = \laranja{2.}*std::cos(theta);  y(D) = \laranja{2.}*std::sin(theta);
       \cinza{// and three new segments}
       \verm{Mesh} \azul{BD} ( \textcolor{tag}{tag}::segment, B .reverse(), D, \textcolor{tag}{tag}::divided_in, rot_divisions );
       \verm{Mesh} \azul{DC} ( \textcolor{tag}{tag}::segment, D .reverse(), C, \textcolor{tag}{tag}::divided_in, radial_divisions );

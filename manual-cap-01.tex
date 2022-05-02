@@ -46,10 +46,10 @@ int main ()
    \verm{Function} \azul{x} = xyz[\laranja{0}], \azul{y} = xyz[\laranja{1}], \azul{z} = xyz[\laranja{2}];
 
    \cinza{// Let's build a rectangular mesh. First, the four corners :}
-   \verm{Cell} \azul{SW} ( \textcolor{tag}{tag}::vertex );  x (SW) = \laranja{-1.};  y (SW) = \laranja{0.};  z (SW) = \laranja{0.};
-   \verm{Cell} \azul{SE} ( \textcolor{tag}{tag}::vertex );  x (SE) =  \laranja{1.};  y (SE) = \laranja{0.};  z (SE) = \laranja{0.};
-   \verm{Cell} \azul{NE} ( \textcolor{tag}{tag}::vertex );  x (NE) =  \laranja{1.};  y (NE) = \laranja{1.};  z (NE) = \laranja{0.};
-   \verm{Cell} \azul{NW} ( \textcolor{tag}{tag}::vertex );  x (NW) = \laranja{-1.};  y (NW) = \laranja{1.};  z (NW) = \laranja{1.};
+   \verm{Cell} \azul{SW} ( \textcolor{tag}{tag}::vertex );  x(SW) = \laranja{-1.};  y(SW) = \laranja{0.};  z(SW) = \laranja{0.};
+   \verm{Cell} \azul{SE} ( \textcolor{tag}{tag}::vertex );  x(SE) =  \laranja{1.};  y(SE) = \laranja{0.};  z(SE) = \laranja{0.};
+   \verm{Cell} \azul{NE} ( \textcolor{tag}{tag}::vertex );  x(NE) =  \laranja{1.};  y(NE) = \laranja{1.};  z(NE) = \laranja{0.};
+   \verm{Cell} \azul{NW} ( \textcolor{tag}{tag}::vertex );  x(NW) = \laranja{-1.};  y(NW) = \laranja{1.};  z(NW) = \laranja{1.};
    \cinza{// alternative syntax for declaring vertices :}
    \cinza{// Cell SW ( tag::vertex, tag::of_coords, \{ -1., 0., 0. \} )}
    \cinza{// Cell SE ( tag::vertex, tag::of_coords, \{  1., 0., 0. \} )}
@@ -540,11 +540,11 @@ We can also build meshes on triangular domains and {\small\tt join} them as we w
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 1.\numb parag 5}.cpp,rulecolor=\color{moldura},
    baselinestretch=0.94,framesep=2mm]
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{-1.} ;  y (A) = \laranja{0.};
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) =  \laranja{0.} ;  y (B) = \laranja{0.};
-   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) =  \laranja{1.} ;  y (C) = \laranja{0.};
-   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = \laranja{-0.5};  y (D) = \laranja{1.};
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x (E) =  \laranja{0.5};  y (E) = \laranja{1.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{-1.} ;  y(A) = \laranja{0.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) =  \laranja{0.} ;  y(B) = \laranja{0.};
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) =  \laranja{1.} ;  y(C) = \laranja{0.};
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = \laranja{-0.5};  y(D) = \laranja{1.};
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex );  x(E) =  \laranja{0.5};  y(E) = \laranja{1.};
 
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{8} );
    \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{8} );
@@ -682,7 +682,8 @@ One of the goals of {\maniFEM} is to make remeshing easy for end users.
 Thus, meshes can be manipulated (cells can be added and removed) using intuitive commands
 (section \ref{\numb section 10}).
 
-In {\maniFEM}, the user defines finite elements using a clear and intuitive syntax.
+In {\maniFEM}, the user defines finite elements using a clear and intuitive syntax
+(section \ref{\numb section 6}).
 Some types of finite elements are rather slow; they are interesting for dydactic purposes.
 Fast versions are available; they use a slightly less clear syntax.
 
@@ -700,6 +701,8 @@ Some finite elements are slow (but fast versions are available).
 Since {\maniFEM} is under heavy development, some features are still missing,
 e.g.\ 3D frontal meshing, many types of finite elements, compact syntax for abstract variational
 formulations.
+See the changelog at the end of this manual (just before the index), especially the ``To do''
+paragraph.
 
 {\ManiFEM} relies on oriented cells and meshes.
 Some people may find it confusing (the distinction between positive cells and negative cells).

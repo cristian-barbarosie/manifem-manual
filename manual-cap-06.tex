@@ -173,10 +173,10 @@ boundary conditions.
    \verm{Integrator} \azul{integ} = fe .set_integrator ( \textcolor{tag}{tag}::Gauss, \textcolor{tag}{tag}::quad_4 );
 
    \cinza{// build a 10x12 mesh on a square domain}
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x (A) = \laranja{0.};   y (A) = \laranja{0.};
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x (B) = \laranja{1.};   y (B) = \laranja{0.};
-   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x (C) = \laranja{1.};   y (C) = \laranja{1.};
-   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x (D) = \laranja{0.};   y (D) = \laranja{1.};
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex );  x(A) = \laranja{0.};   y(A) = \laranja{0.};
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex );  x(B) = \laranja{1.};   y(B) = \laranja{0.};
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex );  x(C) = \laranja{1.};   y(C) = \laranja{1.};
+   \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex );  x(D) = \laranja{0.};   y(D) = \laranja{1.};
 
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in, \laranja{12} );
