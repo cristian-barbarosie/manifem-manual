@@ -400,15 +400,15 @@ For instance, one can build an L-shaped mesh by joining three rectangular meshes
    \verm{Manifold} \azul{RR2} ( \textcolor{tag}{tag}::Euclid, \textcolor{tag}{tag}::of_dim, \laranja{2} );
    \verm{Function} \azul{xy} = RR2 .build_coordinate_system ( \textcolor{tag}{tag}::Lagrange, \textcolor{tag}{tag}::of_degree, \laranja{1} );
    \verm{Function} \azul{x} = xy[\laranja{0}], \azul{y} = xy[\laranja{1}];
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{0.} \} );
-   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{0.} \} );
-   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.},  \laranja{0.} \} );
-   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.},  \laranja{0.5} \} );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{0.}  \} );
+   \verm{Cell} \azul{A} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{0.}  \} );
+   \verm{Cell} \azul{B} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{  \laranja{0.}, \laranja{0.}  \} );
+   \verm{Cell} \azul{C} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{  \laranja{0.}, \laranja{0.5} \} );
    \verm{Cell} \azul{D} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{0.5} \} );
-   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.},  \laranja{1.} \} );
-   \verm{Cell} \azul{F} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{1.} \} );
-   \verm{Cell} \azul{G} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{1.},  \laranja{0.} \} );
-   \verm{Cell} \azul{H} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{1.},  \laranja{0.5} \} );
+   \verm{Cell} \azul{E} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{  \laranja{0.}, \laranja{1.}  \} );
+   \verm{Cell} \azul{F} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{-1.}, \laranja{1.}  \} );
+   \verm{Cell} \azul{G} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{  \laranja{1.}, \laranja{0.}  \} );
+   \verm{Cell} \azul{H} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{  \laranja{1.}, \laranja{0.5} \} );
 
    \verm{Mesh} \azul{AB} ( \textcolor{tag}{tag}::segment, A .reverse(), B, \textcolor{tag}{tag}::divided_in, \laranja{10} );
    \verm{Mesh} \azul{BC} ( \textcolor{tag}{tag}::segment, B .reverse(), C, \textcolor{tag}{tag}::divided_in,  \laranja{8} );

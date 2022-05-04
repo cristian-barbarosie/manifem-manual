@@ -194,7 +194,7 @@ The code below introduces a one-dimensional submanifold of $ \mathbb{R}^2 $ (a h
 In {\tt gmsh}, you must select {\small\tt Tools} $\to$ {\small\tt Options} $\to$
 {\small\tt Mesh} $\to$ {\small\tt 1D Elements} in order to see this mesh.
 
-In \maniFEM, there is a global variable {\small\tt\verm{Manifold}::working}.
+In {\maniFEM} there is a global variable {\small\tt\verm{Manifold}::working}.
 Any {\small\tt\verm{Manifold}} constructor sets this variable to the manifold
 being defined.
 Subsequently, most {\small\tt\verm{Mesh}} constructors, when building inner vertices,
@@ -223,8 +223,8 @@ As an alternative, we might explicitly project them onto the {\small\tt hiperbol
 
 There is also a {\small\tt\verm{Cell}} constructor with {\small\tt\textcolor{tag}{tag}::of\_\,coords}
 and {\small\tt\textcolor{tag}{tag}::project}.
-This constructor not only sets the values of {\small\tt x} and {\small\tt y} but also
-performs, under the curtains, a projection on the current working {\small\tt\verm{Manifold}} :
+This constructor first sets the values of {\small\tt x} and {\small\tt y} and then performs,
+under the curtains, a projection on the current working {\small\tt\verm{Manifold}} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,baselinestretch=0.94]
    \verm{Cell} \azul{P} ( \textcolor{tag}{tag}::vertex, \textcolor{tag}{tag}::of_coords, \{ \laranja{0.6}, \laranja{2.1} \}, \textcolor{tag}{tag}::project );
@@ -618,8 +618,8 @@ this way the projection algorithm will find more easily its target.
 
 Equivalently, we can use a constructor with {\small\tt\textcolor{tag}{tag}::of\_\,coords} and
 {\small\tt\textcolor{tag}{tag}::project}.
-This constructor not only sets the values of {\small\tt x} and {\small\tt y} but also
-performs, under the curtains, a projection on the current working {\small\tt\verm{Manifold}} :
+This constructor first sets the values of {\small\tt x} and {\small\tt y} and then performs,
+under the curtains, a projection on the current working {\small\tt\verm{Manifold}} :
 
 \begin{Verbatim}[commandchars=\\\{\},formatcom=\small\tt,frame=single,
    label=parag-\ref{\numb section 2.\numb parag 12}.cpp,rulecolor=\color{moldura},
@@ -642,7 +642,7 @@ performs, under the curtains, a projection on the current working {\small\tt\ver
 \section{~~A three-dimensional star-like shape}\label{\numb section 2.\numb parag 13}
           %-----------------------------------%
 
-Here is a three-dimensional version of the diamond.
+Here is a three-dimensional version of the diamond in paragraph \ref{\numb section 2.\numb parag 11}.
 
 In figure \ref{\numb section 2.\numb fig 13}, some layers have been removed so that the reader
 can see inner cells.
